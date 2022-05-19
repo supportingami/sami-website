@@ -1,5 +1,10 @@
 ## Overview
 
+**🚧 Under Development**  
+This will be the repo to support the new SAMI website
+
+---
+
 Adapted from [nextjs-strapi-boilerplate](https://github.com/ghoshnirmalya/nextjs-strapi-boilerplate)
 
 This boilerplate is built using the following technologies:
@@ -102,3 +107,32 @@ Click on the button below to deploy the frontend application on Vercel. You'll n
 This project code is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
 The project content is licensed under [CC BY-NC 4.0](http://creativecommons.org/licenses/by-nc/4.0/)
+
+## Links and Resources
+
+- https://docs.strapi.io/developer-docs/latest/getting-started/introduction.html
+- https://github.com/strapi/starters-and-templates/tree/main/packages/starters/next-blog
+
+## WiP - Tech Stack Decisions
+
+### Style system
+
+Template comes with chakra-ui, but may want to consider tailwind
+
+### CMS
+
+We need a content management system as a means of separating data that a developer will interact with and data that an author will interact with. This should allow authors to easily add things like new blog posts, and also enable provide linkages across data such as sami's projects, countries, people etc. This will allow richer experiences such as auto-updated map of upcoming maths camps
+
+Strapi vs Santity vs others...
+Likely opt for strapi as most starred and open source. Also interested in Ghost which could be linked with some of the content perhaps
+More available at https://jamstack.org/headless-cms/
+
+### DB
+
+Strapi supports sql and mongo, will likely stick to postgres as more widely known/used and stronger external integrations.
+
+This will likely be hosted in a docker container, but could also leverage google cloud sql if that provides easier management/better dev experience
+
+### Additional Integrations
+
+We may want to consider something like shopify/stripe if planning to include shop component
