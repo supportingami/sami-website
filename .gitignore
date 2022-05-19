@@ -1,0 +1,22 @@
+# cache
+.DS_STORE
+node_modules
+.next
+.env
+out
+.pem
+.vercel
+.cache
+
+# yarn
+**/.pnp.*
+**/.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# build
+backend/data
+backend/build

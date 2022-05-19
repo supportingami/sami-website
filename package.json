@@ -1,0 +1,34 @@
+{
+  "name": "sami-website",
+  "license": "see license.md",
+  "workspaces": [
+    "frontend"
+  ],
+  "scripts": {
+    "start": "yarn start:backend & yarn start:frontend",
+    "start:backend": "docker-compose -f backend/docker-compose.yml up",
+    "start:frontend": "yarn workspace frontend dev",
+    "dev:frontend": "yarn workspace frontend dev",
+    "build:frontend": "yarn workspace frontend build",
+    "export:frontend": "yarn workspace frontend export",
+    "release": "release-it"
+  },
+  "devDependencies": {
+    "@release-it/conventional-changelog": "^5.0.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^12.4.1",
+    "prettier": "^2.6.2",
+    "release-it": "^15.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,css,md,tsx,ts}": [
+      "prettier --write"
+    ]
+  },
+  "packageManager": "yarn@3.2.1"
+}
