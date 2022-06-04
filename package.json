@@ -7,8 +7,7 @@
   "scripts": {
     "start": "yarn start:backend & yarn start:frontend",
     "start:backend": "docker-compose -f backend/docker-compose.yml up",
-    "start:frontend": "yarn workspace frontend dev",
-    "dev:frontend": "yarn workspace frontend dev",
+    "start:frontend": "yarn workspace frontend start",
     "build:frontend": "yarn workspace frontend build",
     "export:frontend": "yarn workspace frontend export",
     "release": "release-it"
