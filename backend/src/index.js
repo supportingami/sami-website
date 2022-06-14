@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 module.exports = {
   /**
@@ -7,7 +7,14 @@ module.exports = {
    *
    * This gives you an opportunity to extend code.
    */
-  register(/*{ strapi }*/) {},
+  register({ strapi }) {
+    /**
+     * Example - disable graphql for endpoint
+     * https://docs.strapi.io/developer-docs/latest/plugins/graphql.html#customization
+     **/
+    // const extensionService = strapi.plugin("graphql").service("extension");
+    // extensionService.shadowCRUD("api::restaurant.restaurant").disable();
+  },
 
   /**
    * An asynchronous bootstrap function that runs before

@@ -2,11 +2,14 @@
   "name": "sami-website",
   "license": "see license.md",
   "workspaces": [
-    "frontend"
+    "frontend",
+    "backend",
+    "scripts"
   ],
   "scripts": {
     "start": "yarn start:backend & yarn start:frontend",
-    "start:backend": "docker-compose -f backend/docker-compose.yml up",
+    "start:backend": "yarn workspace backend start",
+    "start:backend:docker": "docker-compose --project-name sami-backend --file backend/docker-compose.yml up",
     "start:frontend": "yarn workspace frontend start",
     "build:frontend": "yarn workspace frontend build",
     "export:frontend": "yarn workspace frontend export",
