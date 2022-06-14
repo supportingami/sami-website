@@ -36,9 +36,16 @@ Frontend: http://localhost:3000
 
 ## Tech Stack
 
-Adapted from [nextjs-strapi-boilerplate](https://github.com/ghoshnirmalya/nextjs-strapi-boilerplate)
+The system is built on top of [NextJS](https://nextjs.org/), with a database backend and content management system powered by [Strapi](https://strapi.io/)
 
-This boilerplate is built using the following technologies:
+If you are new to either project it is recommended to first familiarise yourself with the introduction and welcome tutorials for both packages
+
+[NextJS Introduction](https://nextjs.org/learn/foundations/about-nextjs)
+[Strapi Introduction](https://docs.strapi.io/developer-docs/latest/getting-started/introduction.html)
+
+### Libraries
+
+Additional technologies used within the frontend code
 
 1. [Chakra UI](https://chakra-ui.com/)
 2. [Emotion](https://emotion.sh/)
@@ -49,5 +56,8 @@ This boilerplate is built using the following technologies:
 
 ## Links and Resources
 
+- https://nextjs.org/learn/foundations/about-nextjs
 - https://docs.strapi.io/developer-docs/latest/getting-started/introduction.html
 - https://github.com/strapi/starters-and-templates/tree/main/packages/starters/next-blog
+
+Adapted from [nextjs-strapi-boilerplate](https://github.com/ghoshnirmalya/nextjs-strapi-boilerplate)
