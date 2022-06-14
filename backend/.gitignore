@@ -113,3 +113,9 @@ exports
 build
 .strapi-updater.json
 data
+
+############################
+# SAMI
+############################
+*.db
+*.db.journal
