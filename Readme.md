@@ -59,5 +59,6 @@ Additional technologies used within the frontend code
 - https://nextjs.org/learn/foundations/about-nextjs
 - https://docs.strapi.io/developer-docs/latest/getting-started/introduction.html
 - https://github.com/strapi/starters-and-templates/tree/main/packages/starters/next-blog
+- https://www.apollographql.com/docs/react/get-started/
 
 Adapted from [nextjs-strapi-boilerplate](https://github.com/ghoshnirmalya/nextjs-strapi-boilerplate)
