@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/core";
 
 const Navbar: NextComponentType = () => {
-  const { data:session, status } = useSession();
+  const { data: session, status } = useSession();
   const { colorMode, toggleColorMode } = useColorMode();
   const bgColor = { light: "white", dark: "gray.800" };
   const color = { light: "gray.800", dark: "gray.100" };
@@ -28,6 +28,11 @@ const Navbar: NextComponentType = () => {
       id: "home",
       label: "Home",
       href: "/",
+    },
+    {
+      id: "members",
+      label: "Members",
+      href: "/members",
     },
   ];
 

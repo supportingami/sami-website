@@ -1,10 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import IAccount from "types/account";
-import iToken from "types/token";
-import IUser from "types/user";
-import ISession from "types/session";
 
 const options = {
   providers: [

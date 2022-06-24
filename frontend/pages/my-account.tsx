@@ -4,7 +4,7 @@ import Page from "components/pages/my-account";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import AccessDeniedIndicator from "components/access-denied-indicator";
 import { getSession } from "next-auth/react";
-import WithGraphQL from "lib/with-graphql";
+import { GraphQLProvider } from "lib/graphql";
 
 const MyAccountPage: InferGetServerSidePropsType<typeof getServerSideProps> = ({
   session,
@@ -14,12 +14,12 @@ const MyAccountPage: InferGetServerSidePropsType<typeof getServerSideProps> = ({
   }
 
   return (
-    <WithGraphQL session={session}>
+    <GraphQLProvider session={session}>
       <Head>
         <title>My Account Page</title>
       </Head>
       <Page />
-    </WithGraphQL>
+    </GraphQLProvider>
   );
 };
 
