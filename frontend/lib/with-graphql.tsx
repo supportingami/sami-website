@@ -10,6 +10,11 @@ const WithGraphQL = ({
   children: ReactNode;
 }) => {
   const token = session?.jwt?.toString();
+  const headers: any = {};
+
+  if (token) {
+    headers.authorization = `Bearer ${token}`;
+  }
 
   const client = new ApolloClient({
     uri:
@@ -17,9 +22,7 @@ const WithGraphQL = ({
       "http://localhost:1337/graphql",
     credentials: "same-origin",
     cache: new InMemoryCache(),
-    headers: {
-      authorization: `Bearer ${token}`,
-    },
+    headers,
   });
 
   return <ApolloProvider client={client}>{children}</ApolloProvider>;
