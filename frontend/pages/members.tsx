@@ -5,7 +5,32 @@ import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import { graphQLServerClient } from "lib/graphql";
 import { gql } from "@apollo/client";
 import { IMember } from "types/member";
-
+/**
+ * Use GraphQL to extract data from the datbase
+ * This is comparable to SQL
+ * `SELECT Name, Email from members`
+ * @example
+ * 
+  query getMembers {       // name of function
+    members {               // table to query
+      data {                // return from query data
+        id                  // primary key to use
+        attributes {        // what fields to return
+          Name
+          Email
+        }
+      }
+      meta {                // return from query meta
+        pagination {
+          page
+          pageSize
+          total
+          pageCount
+        }
+      }
+    }
+  }
+ */
 const membersQuery = gql`
   query getMembers {
     members {
@@ -13,6 +38,7 @@ const membersQuery = gql`
         id
         attributes {
           Name
+          Email
         }
       }
       meta {
@@ -28,7 +54,9 @@ const membersQuery = gql`
 `;
 
 interface IMembersQueryResult {
-  members: { data: { id: string; attributes: { Name: string } }[] };
+  members: {
+    data: { id: string; attributes: { Name: string; Email: string } }[];
+  };
   meta: {
     pagination: {
       page: number;

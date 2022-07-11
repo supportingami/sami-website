@@ -5,9 +5,8 @@ This will be the repo to support the new SAMI website
 
 ## Requirements
 
-1. [Node.js](https://nodejs.org/)
-2. [yarn](https://yarnpkg.com/getting-started/install)
-3. [Docker](https://www.docker.com/)
+1. [Node.js](https://nodejs.org/) v14 or v16
+2. [yarn](https://yarnpkg.com/getting-started/install) v2
 
 ## Installation
 
@@ -33,6 +32,12 @@ This will run both backend and frontend serve scripts
 
 Backend: http://localhost:1337/admin
 Frontend: http://localhost:3000
+
+### 4. Authorize data
+
+Any endpoints that are not publically accessible will not be available to the frontend unless a api token is generated and populated.
+
+See instructions in [docs/api-queries.md](docs\api-queries.md)
 
 ## Tech Stack
 

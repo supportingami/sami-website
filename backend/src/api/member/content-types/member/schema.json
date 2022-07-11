@@ -4,7 +4,8 @@
   "info": {
     "singularName": "member",
     "pluralName": "members",
-    "displayName": "Member"
+    "displayName": "Member",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -15,14 +16,15 @@
       "type": "string"
     },
     "Photo": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
     },
     "Organisation": {
       "type": "enumeration",
@@ -33,6 +35,12 @@
     },
     "Bio": {
       "type": "richtext"
+    },
+    "Email": {
+      "type": "email"
+    },
+    "LinkedIn": {
+      "type": "string"
     }
   }
 }

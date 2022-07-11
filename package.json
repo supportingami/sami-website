@@ -32,5 +32,8 @@
       "prettier --write"
     ]
   },
-  "packageManager": "yarn@3.2.1"
+  "packageManager": "yarn@3.2.1",
+  "engines": {
+    "node": ">=14.x <=16.x"
+  }
 }

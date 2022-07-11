@@ -6,6 +6,9 @@ export const MembersListItemComponent: React.FC<{
   member: IMember;
 }> = ({ member }) => (
   <Box>
-    <div>{member.Name}</div>
+    <div>
+      <div>Name{member.Name}</div>
+      <div>Email {member.Email}</div>
+    </div>
   </Box>
 );
