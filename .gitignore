@@ -20,3 +20,6 @@ out
 # build
 backend/data
 backend/build
+
+scripts/input
+scripts/output
