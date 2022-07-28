@@ -11,8 +11,8 @@ const outputDir = path.resolve(__dirname, "../output/uploads");
  *
  * @example
  * 1. Export the wp_content folder from and wordpress installation and copy the _uploads_ folder to ../input/uploads
- * 2. Run the script via npx ts-node scripts\src\wp-uploads.ts
- * 3. View the
+ * 2. Run the script via `npx ts-node scripts\src\wp-uploads.ts`
+ * 3. View the flat files output in the ../output/uploads folder
  *
  */
 function wpUploads() {
