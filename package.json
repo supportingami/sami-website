@@ -4,13 +4,15 @@
   "workspaces": [
     "frontend",
     "backend",
-    "scripts"
+    "scripts",
+    "shared"
   ],
   "scripts": {
     "start": "yarn start:backend & yarn start:frontend",
     "start:backend": "yarn workspace backend start",
     "start:backend:docker": "docker-compose --project-name sami-backend --file backend/docker-compose.yml up",
     "start:frontend": "yarn workspace frontend start",
+    "scripts": "yarn workspace scripts start",
     "build:frontend": "yarn workspace frontend build",
     "export:frontend": "yarn workspace frontend export",
     "release": "release-it"

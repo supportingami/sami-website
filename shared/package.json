@@ -1,0 +1,7 @@
+{
+  "name": "shared",
+  "private": true,
+  "devDependencies": {
+    "@strapi/strapi": "4.3.0"
+  }
+}
