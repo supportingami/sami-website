@@ -1,6 +1,7 @@
 {
-  "name": "shared",
+  "name": "@sami/shared",
   "private": true,
+  "main": "src/index.ts",
   "devDependencies": {
     "@strapi/strapi": "4.3.0"
   }
