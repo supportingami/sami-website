@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import { spawnSync } from "child_process";
 import { Command } from "commander";
-import { PATHS } from "../paths";
+import { PATHS } from "../../paths";
 
 /***************************************************************************************
  * CLI
