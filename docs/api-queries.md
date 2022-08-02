@@ -8,9 +8,14 @@ Depending on whether request is being made server-side or client-side authentica
 
 **Using API tokens**
 
-- Generate from admin panel
-- Create a file in frontend `frontend/.env.local`
-- Populate as environment variable
+API tokens can be generated and used when making requests from the frontend server.
+These can manually be generated from the admin panel and populated to the frontend env, or automatically via the script:
+
+```
+yarn scripts strapi bootstrap
+```
+
+This will generate a new admin readonly token and populate to `frontend/.env.local`
 
 ```
 STRAPI_API_TOKEN=my_generated_api_token
