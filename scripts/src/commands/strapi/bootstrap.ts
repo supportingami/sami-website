@@ -39,7 +39,6 @@ class StrapiBootstrap {
     this.app = await createStrapiInstance();
     await this.app.start();
     await this.checkAccessTokens();
-
     this.app.stop();
   }
 

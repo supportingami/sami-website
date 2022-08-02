@@ -1,4 +1,5 @@
 import axios from "axios";
+import chalk from "chalk";
 import crypto from "crypto";
 import dotenv from "dotenv";
 import path from "path";
@@ -49,6 +50,7 @@ export async function createStrapiInstance(
   serveAdminPanel = false,
   autoReload = false
 ) {
+  console.log(chalk.green("Starting Strapi..."));
   loadDevEnvironment();
   // create instance
   const app: IStrapi = await strapi({

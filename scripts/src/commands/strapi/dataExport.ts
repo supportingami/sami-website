@@ -2,6 +2,7 @@ import { Command } from "commander";
 import { emptyDirSync, ensureDirSync, writeFileSync } from "fs-extra";
 import path from "path";
 import { PATHS } from "../../paths";
+import { logOutput } from "../../utils";
 import { createStrapiInstance } from "./common";
 
 /***************************************************************************************
@@ -60,5 +61,7 @@ async function dataExport(options: IProgramOptions) {
     });
     writeFileSync(path.resolve(outputDir, `${tableName}.csv`), csvString);
   }
+  logOutput({ msg1: "DB data exported successfully", msg2: outputDir });
+
   app.stop();
 }
