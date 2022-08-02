@@ -1,9 +1,11 @@
+# Connect to graphql server running on localhost, passing api token from env
 schema:
   - http://localhost:1337/graphql:
       headers:
         Authorization: "Bearer ${STRAPI_API_TOKEN}"
 documents: "./queries"
 generates:
+  # Generate typescript definitions for queries
   ./graphql/generated.ts:
     plugins:
       - typescript
@@ -11,3 +13,7 @@ generates:
       - typed-document-node
     config:
       fetcher: fetch
+  # Generate collated graphql file for autocomplete
+  ./graphql/generated.graphql:
+    plugins:
+      - schema-ast
