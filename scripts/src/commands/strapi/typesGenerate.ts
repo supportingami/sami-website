@@ -10,7 +10,7 @@ import { PATHS } from "../../paths";
 interface IProgramOptions {
   outDir: string;
 }
-const program = new Command("generate:types");
+const program = new Command("types:generate");
 export default program
   .description("Generate types")
   .option("-o --out-dir <string>", "Directory to output type defintions")
@@ -19,14 +19,23 @@ export default program
       outDir: PATHS.sharedDir,
       ...options,
     };
-    generateTypes(optionsWithDefaults);
+    generateQueryTypes();
+    generateSchemaTypes(optionsWithDefaults);
   });
 
 /***************************************************************************************
  * Main Methods
  *************************************************************************************/
+
+/** Use graphql-codegen to generate query types **/
+function generateQueryTypes() {
+  const cmd = `yarn generate`;
+  console.log(chalk.gray(cmd));
+  spawnSync(cmd, { cwd: PATHS.frontendDir, shell: true, stdio: "inherit" });
+}
+
 /** Use the strapi cli method to generate typescript types **/
-function generateTypes(options: IProgramOptions) {
+function generateSchemaTypes(options: IProgramOptions) {
   const { outDir } = options;
   const cmd = `yarn strapi ts:generate-types --out-dir ${outDir}`;
   console.log(chalk.gray(cmd));
