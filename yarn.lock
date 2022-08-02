@@ -7033,6 +7033,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"axios@npm:^0.27.2":
+  version: 0.27.2
+  resolution: "axios@npm:0.27.2"
+  dependencies:
+    follow-redirects: ^1.14.9
+    form-data: ^4.0.0
+  checksum: 38cb7540465fe8c4102850c4368053c21683af85c5fdf0ea619f9628abbcb59415d1e22ebc8a6390d2bbc9b58a9806c874f139767389c862ec9b772235f06854
+  languageName: node
+  linkType: hard
+
 "babel-loader@npm:8.2.5":
   version: 8.2.5
   resolution: "babel-loader@npm:8.2.5"
@@ -7225,7 +7235,7 @@ __metadata:
     knex: ^2.2.0
     pg: ^8.7.3
     strapi-connector-bookshelf: ^3.6.10
-    strapi-plugin-import-export-entries: ^1.4.1
+    strapi-plugin-import-export-entries: ^1.7.1
   languageName: unknown
   linkType: soft
 
@@ -11211,7 +11221,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.14.4, follow-redirects@npm:^1.14.7":
+"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.14.4, follow-redirects@npm:^1.14.7, follow-redirects@npm:^1.14.9":
   version: 1.15.1
   resolution: "follow-redirects@npm:1.15.1"
   peerDependenciesMeta:
@@ -11300,7 +11310,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"form-data@npm:4.0.0":
+"form-data@npm:4.0.0, form-data@npm:^4.0.0":
   version: 4.0.0
   resolution: "form-data@npm:4.0.0"
   dependencies:
@@ -14759,7 +14769,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"loader-utils@npm:^2.0.0":
+"loader-utils@npm:^2.0.0, loader-utils@npm:^2.0.2":
   version: 2.0.2
   resolution: "loader-utils@npm:2.0.2"
   dependencies:
@@ -15758,6 +15768,25 @@ __metadata:
   version: 1.0.1
   resolution: "modify-values@npm:1.0.1"
   checksum: 8296610c608bc97b03c2cf889c6cdf4517e32fa2d836440096374c2209f6b7b3e256c209493a0b32584b9cb32d528e99d0dd19dcd9a14d2d915a312d391cc7e9
+  languageName: node
+  linkType: hard
+
+"monaco-editor-webpack-plugin@npm:7.0.1":
+  version: 7.0.1
+  resolution: "monaco-editor-webpack-plugin@npm:7.0.1"
+  dependencies:
+    loader-utils: ^2.0.2
+  peerDependencies:
+    monaco-editor: ">= 0.31.0"
+    webpack: ^4.5.0 || 5.x
+  checksum: 436814c724d5033254519ef8203f0df600d15c6bf0a3bf48a42ea678086becb56ed5685df2bca4cd4107855ecf8cea73722e52b63573edba5c020ff51b4f2d31
+  languageName: node
+  linkType: hard
+
+"monaco-editor@npm:0.33.0":
+  version: 0.33.0
+  resolution: "monaco-editor@npm:0.33.0"
+  checksum: f88fd1c9be0d6845436aa92ee7f7bcc49f9e9bf452f73bb5efbbe52e50678d1c2aec4d612a943310f5e2282c1d9fcc41b792b65a5b9008e6054908e7e10311ea
   languageName: node
   linkType: hard
 
@@ -19370,6 +19399,7 @@ __metadata:
     "@types/fs-extra": ^9.0.4
     "@types/inquirer": ^7.3.1
     "@types/node": ^18.6.3
+    axios: ^0.27.2
     boxen: ^5.0.1
     chalk: ^4.1.0
     chokidar: ^3.5.3
@@ -20181,16 +20211,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"strapi-plugin-import-export-entries@npm:^1.4.1":
-  version: 1.4.1
-  resolution: "strapi-plugin-import-export-entries@npm:1.4.1"
+"strapi-plugin-import-export-entries@npm:^1.7.1":
+  version: 1.7.1
+  resolution: "strapi-plugin-import-export-entries@npm:1.7.1"
   dependencies:
     "@monaco-editor/react": 4.4.5
     csvtojson: 2.0.10
+    lodash: 4.17.21
+    monaco-editor: 0.33.0
+    monaco-editor-webpack-plugin: 7.0.1
     react-singleton-hook: 3.3.0
   peerDependencies:
     "@strapi/strapi": ^4.0.0
-  checksum: 633acb9db932ea76bbd16fc7fdef3d5c3c6661421a04491e91db4746bfe982ecaa62ab2240ff8eadfc11d7a81a406801a20547cab9be35c7775cd83627cc44a2
+  checksum: 7f04afe6ca02a535a9813569b3d8e3b3794849766cc793cdbcb4773ed2170307ecb8ff33e8547dfcba0e4e6269a4e11bed30312333db54edc5fc396f958591f7
   languageName: node
   linkType: hard
 

@@ -18,7 +18,7 @@ yarn scripts strapi bootstrap
 This will generate a new admin readonly token and populate to `frontend/.env.local`
 
 ```
-STRAPI_API_TOKEN=my_generated_api_token
+STRAPI_READONLY_TOKEN=my_generated_api_token
 ```
 
 - Optionally assign in [graphql playground](http://localhost:1337/graphql) `HTTP Headers`
