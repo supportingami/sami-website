@@ -1,0 +1,13 @@
+schema:
+  - http://localhost:1337/graphql:
+      headers:
+        Authorization: "Bearer ${STRAPI_API_TOKEN}"
+documents: "./queries"
+generates:
+  ./graphql/generated.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typed-document-node
+    config:
+      fetcher: fetch
