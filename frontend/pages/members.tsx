@@ -4,15 +4,15 @@ import { MembersPageComponent } from "components/pages/members";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import { IMember } from "types/member";
 import { MembersQuery, MembersDocument } from "../graphql/generated";
-import { graphQLServerClient } from "lib/graphql";
+import { serverQuery } from "lib/graphql";
 
 export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
-  const client = graphQLServerClient();
-  const query = MembersDocument;
-  const { data } = await client.query<MembersQuery>({ query });
-
-  const members: IMember[] =
-    data.members.data.map((m) => ({ ...m.attributes, id: m.id })) || [];
+  let members: IMember[] = [];
+  const res = await serverQuery<MembersQuery>(MembersDocument);
+  if (res) {
+    members =
+      res.data.members.data.map((m) => ({ ...m.attributes, id: m.id })) || [];
+  }
   return {
     props: {
       members,
