@@ -48,7 +48,7 @@ This will populate query objects and response types to the `frontend/graphql/gen
 
 E.g. Using the _Members_ query defined above to get a list of members, populated with their Name and Email, and merged with their database id
 
-```
+```ts
 import { MembersQuery, MembersDocument } from "../graphql/generated";
 import { serverQuery } from "lib/graphql";
 
