@@ -1,15 +1,9 @@
 import { TypedDocumentNode as DocumentNode } from "@graphql-typed-document-node/core";
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K];
-};
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]?: Maybe<T[SubKey]>;
-};
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]: Maybe<T[SubKey]>;
-};
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -1163,21 +1157,11 @@ export type MembersQuery = {
     data: Array<{
       __typename?: "MemberEntity";
       id?: string | null;
-      attributes?: {
-        __typename?: "Member";
-        Name?: string | null;
-        Email?: string | null;
-      } | null;
+      attributes?: { __typename?: "Member"; Name?: string | null; Email?: string | null } | null;
     }>;
     meta: {
       __typename?: "ResponseCollectionMeta";
-      pagination: {
-        __typename?: "Pagination";
-        page: number;
-        pageSize: number;
-        total: number;
-        pageCount: number;
-      };
+      pagination: { __typename?: "Pagination"; page: number; pageSize: number; total: number; pageCount: number };
     };
   } | null;
 };
@@ -1211,14 +1195,8 @@ export const MembersDocument = {
                         selectionSet: {
                           kind: "SelectionSet",
                           selections: [
-                            {
-                              kind: "Field",
-                              name: { kind: "Name", value: "Name" },
-                            },
-                            {
-                              kind: "Field",
-                              name: { kind: "Name", value: "Email" },
-                            },
+                            { kind: "Field", name: { kind: "Name", value: "Name" } },
+                            { kind: "Field", name: { kind: "Name", value: "Email" } },
                           ],
                         },
                       },
@@ -1237,22 +1215,10 @@ export const MembersDocument = {
                         selectionSet: {
                           kind: "SelectionSet",
                           selections: [
-                            {
-                              kind: "Field",
-                              name: { kind: "Name", value: "page" },
-                            },
-                            {
-                              kind: "Field",
-                              name: { kind: "Name", value: "pageSize" },
-                            },
-                            {
-                              kind: "Field",
-                              name: { kind: "Name", value: "total" },
-                            },
-                            {
-                              kind: "Field",
-                              name: { kind: "Name", value: "pageCount" },
-                            },
+                            { kind: "Field", name: { kind: "Name", value: "page" } },
+                            { kind: "Field", name: { kind: "Name", value: "pageSize" } },
+                            { kind: "Field", name: { kind: "Name", value: "total" } },
+                            { kind: "Field", name: { kind: "Name", value: "pageCount" } },
                           ],
                         },
                       },
