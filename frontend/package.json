@@ -9,7 +9,8 @@
     "build:analyze": "ANALYZE=true next build && tsc --project tsconfig.server.json",
     "build": "next build",
     "export": "next export",
-    "lint": "tsc"
+    "lint": "tsc",
+    "generate": "graphql-codegen --require dotenv/config --config codegen.yml dotenv_config_path=./.env.local"
   },
   "dependencies": {
     "@apollo/client": "^3.6.4",
@@ -27,10 +28,16 @@
     "react-dom": "18.1.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^2.11.3",
+    "@graphql-codegen/schema-ast": "^2.5.0",
+    "@graphql-codegen/typed-document-node": "^2.3.2",
+    "@graphql-codegen/typescript": "^2.7.2",
+    "@graphql-codegen/typescript-operations": "^2.5.2",
     "@types/next": "^9.0.0",
     "@types/node": "^17.0.34",
     "@types/react": "^17.0.43",
     "@types/react-dom": "^18.0.4",
+    "dotenv": "^16.0.1",
     "tslint": "^6.1.3",
     "tslint-react": "^5.0.0",
     "typescript": "^4.6.4"
