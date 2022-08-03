@@ -38,10 +38,10 @@ interface IResourceQueryResult {
         data: { 
             id: string; 
             attributes: { 
-                title: string; 
-                image: any; 
-                description: string; 
-                download_link:string 
+                Title: string; 
+                Image: any; 
+                Description: string; 
+                Media:string 
             } 
         }[];
     };
