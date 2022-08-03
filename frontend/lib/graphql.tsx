@@ -1,4 +1,9 @@
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import {
+  ApolloClient,
+  ApolloProvider,
+  DocumentNode,
+  InMemoryCache,
+} from "@apollo/client";
 import { ReactNode } from "react";
 import session from "types/session";
 
@@ -18,6 +23,29 @@ export const GraphQLProvider = ({
   const client = getClient(headers);
   return <ApolloProvider client={client}>{children}</ApolloProvider>;
 };
+
+export async function serverQuery<T>(graphqlQuery: DocumentNode) {
+  const client = graphQLServerClient();
+  const res = await client
+    .query<T>({
+      query: graphqlQuery,
+    })
+    .catch((err) => {
+      // Network errors such as graphql schema errors are nested within
+      // general error document. Extract and throw if exists
+      const networkErrors: any[] = err?.networkError?.result?.errors;
+      if (networkErrors) {
+        console.error(networkErrors);
+        const messages = networkErrors.map((n) => n.message).join("\n");
+        throw new Error("Network error\n" + messages);
+      }
+      // Throw regular error
+      else {
+        throw err;
+      }
+    });
+  return res;
+}
 
 /** When calling client from server include strapi api token */
 export const graphQLServerClient = () => {
