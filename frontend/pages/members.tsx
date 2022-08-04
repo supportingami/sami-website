@@ -2,78 +2,17 @@ import React from "react";
 import Head from "next/head";
 import { MembersPageComponent } from "components/pages/members";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
-import { graphQLServerClient } from "lib/graphql";
-import { gql } from "@apollo/client";
 import { IMember } from "types/member";
-/**
- * Use GraphQL to extract data from the datbase
- * This is comparable to SQL
- * `SELECT Name, Email from members`
- * @example
- * 
-  query getMembers {       // name of function
-    members {               // table to query
-      data {                // return from query data
-        id                  // primary key to use
-        attributes {        // what fields to return
-          Name
-          Email
-        }
-      }
-      meta {                // return from query meta
-        pagination {
-          page
-          pageSize
-          total
-          pageCount
-        }
-      }
-    }
-  }
- */
-const membersQuery = gql`
-  query getMembers {
-    members {
-      data {
-        id
-        attributes {
-          Name
-          Email
-        }
-      }
-      meta {
-        pagination {
-          page
-          pageSize
-          total
-          pageCount
-        }
-      }
-    }
-  }
-`;
-
-interface IMembersQueryResult {
-  members: {
-    data: { id: string; attributes: { Name: string; Email: string } }[];
-  };
-  meta: {
-    pagination: {
-      page: number;
-      pageSize: number;
-      total: number;
-      pageCount: number;
-    };
-  };
-}
+import { MembersQuery, MembersDocument } from "../graphql/generated";
+import { serverQuery } from "lib/graphql";
 
 export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
-  const client = graphQLServerClient();
-  const { data } = await client.query<IMembersQueryResult>({
-    query: membersQuery,
-  });
-  const members: IMember[] =
-    data.members.data.map((m) => ({ ...m.attributes, id: m.id })) || [];
+  let members: IMember[] = [];
+  const res = await serverQuery<MembersQuery>(MembersDocument);
+  if (res) {
+    members =
+      res.data.members.data.map((m) => ({ ...m.attributes, id: m.id })) || [];
+  }
   return {
     props: {
       members,

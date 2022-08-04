@@ -1,0 +1,2 @@
+schema: "frontend/graphql/generated.graphql"
+documents: "frontend/queries/**/*.graphql"
