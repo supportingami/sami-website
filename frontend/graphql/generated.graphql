@@ -501,7 +501,7 @@ type Query {
 type Resource {
   Description: String
   Image: UploadFileEntityResponse
-  Media: String
+  Media: UploadFileEntityResponse
   Title: String
   createdAt: DateTime
   publishedAt: DateTime
@@ -524,7 +524,6 @@ type ResourceEntityResponseCollection {
 
 input ResourceFiltersInput {
   Description: StringFilterInput
-  Media: StringFilterInput
   Title: StringFilterInput
   and: [ResourceFiltersInput]
   createdAt: DateTimeFilterInput
@@ -538,7 +537,7 @@ input ResourceFiltersInput {
 input ResourceInput {
   Description: String
   Image: ID
-  Media: String
+  Media: ID
   Title: String
   publishedAt: DateTime
 }
