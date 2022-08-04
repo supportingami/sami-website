@@ -10,11 +10,21 @@ query resources {
             attributes {
               name
               url
+              size
             }
           }
         }
         Description
-        Media
+        Media {
+          data {
+            id
+            attributes {
+              name
+              url
+              size
+            }
+          }
+        }
       }
     }
     meta {

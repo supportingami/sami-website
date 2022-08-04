@@ -1183,7 +1183,7 @@ export type ResourcesQuery = {
           data?: {
             __typename?: "UploadFileEntity";
             id?: string | null;
-            attributes?: { __typename?: "UploadFile"; name: string; url: string } | null;
+            attributes?: { __typename?: "UploadFile"; name: string; url: string; size: number } | null;
           } | null;
         } | null;
         Media?: {
@@ -1191,7 +1191,7 @@ export type ResourcesQuery = {
           data?: {
             __typename?: "UploadFileEntity";
             id?: string | null;
-            attributes?: { __typename?: "UploadFile"; name: string; url: string } | null;
+            attributes?: { __typename?: "UploadFile"; name: string; url: string; size: number } | null;
           } | null;
         } | null;
       } | null;
@@ -1321,6 +1321,7 @@ export const ResourcesDocument = {
                                             selections: [
                                               { kind: "Field", name: { kind: "Name", value: "name" } },
                                               { kind: "Field", name: { kind: "Name", value: "url" } },
+                                              { kind: "Field", name: { kind: "Name", value: "size" } },
                                             ],
                                           },
                                         },
@@ -1352,6 +1353,7 @@ export const ResourcesDocument = {
                                             selections: [
                                               { kind: "Field", name: { kind: "Name", value: "name" } },
                                               { kind: "Field", name: { kind: "Name", value: "url" } },
+                                              { kind: "Field", name: { kind: "Name", value: "size" } },
                                             ],
                                           },
                                         },
