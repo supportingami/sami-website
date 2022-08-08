@@ -703,12 +703,12 @@ export type QueryUsersPermissionsUsersArgs = {
 
 export type Resource = {
   __typename?: "Resource";
+  Description?: Maybe<Scalars["String"]>;
+  Image?: Maybe<UploadFileEntityResponse>;
+  Media?: Maybe<UploadFileEntityResponse>;
+  Title?: Maybe<Scalars["String"]>;
   createdAt?: Maybe<Scalars["DateTime"]>;
-  description?: Maybe<Scalars["String"]>;
-  download_link?: Maybe<Scalars["String"]>;
-  image?: Maybe<UploadFileEntityResponse>;
   publishedAt?: Maybe<Scalars["DateTime"]>;
-  title?: Maybe<Scalars["String"]>;
   updatedAt?: Maybe<Scalars["DateTime"]>;
 };
 
@@ -730,24 +730,23 @@ export type ResourceEntityResponseCollection = {
 };
 
 export type ResourceFiltersInput = {
+  Description?: InputMaybe<StringFilterInput>;
+  Title?: InputMaybe<StringFilterInput>;
   and?: InputMaybe<Array<InputMaybe<ResourceFiltersInput>>>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
-  description?: InputMaybe<StringFilterInput>;
-  download_link?: InputMaybe<StringFilterInput>;
   id?: InputMaybe<IdFilterInput>;
   not?: InputMaybe<ResourceFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<ResourceFiltersInput>>>;
   publishedAt?: InputMaybe<DateTimeFilterInput>;
-  title?: InputMaybe<StringFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
 
 export type ResourceInput = {
-  description?: InputMaybe<Scalars["String"]>;
-  download_link?: InputMaybe<Scalars["String"]>;
-  image?: InputMaybe<Scalars["ID"]>;
+  Description?: InputMaybe<Scalars["String"]>;
+  Image?: InputMaybe<Scalars["ID"]>;
+  Media?: InputMaybe<Scalars["ID"]>;
+  Title?: InputMaybe<Scalars["String"]>;
   publishedAt?: InputMaybe<Scalars["DateTime"]>;
-  title?: InputMaybe<Scalars["String"]>;
 };
 
 export type ResponseCollectionMeta = {
@@ -1166,6 +1165,44 @@ export type MembersQuery = {
   } | null;
 };
 
+export type ResourcesQueryVariables = Exact<{ [key: string]: never }>;
+
+export type ResourcesQuery = {
+  __typename?: "Query";
+  resources?: {
+    __typename?: "ResourceEntityResponseCollection";
+    data: Array<{
+      __typename?: "ResourceEntity";
+      id?: string | null;
+      attributes?: {
+        __typename?: "Resource";
+        Title?: string | null;
+        Description?: string | null;
+        Image?: {
+          __typename?: "UploadFileEntityResponse";
+          data?: {
+            __typename?: "UploadFileEntity";
+            id?: string | null;
+            attributes?: { __typename?: "UploadFile"; name: string; url: string; size: number } | null;
+          } | null;
+        } | null;
+        Media?: {
+          __typename?: "UploadFileEntityResponse";
+          data?: {
+            __typename?: "UploadFileEntity";
+            id?: string | null;
+            attributes?: { __typename?: "UploadFile"; name: string; url: string; size: number } | null;
+          } | null;
+        } | null;
+      } | null;
+    }>;
+    meta: {
+      __typename?: "ResponseCollectionMeta";
+      pagination: { __typename?: "Pagination"; page: number; pageSize: number; total: number; pageCount: number };
+    };
+  } | null;
+};
+
 export const MembersDocument = {
   kind: "Document",
   definitions: [
@@ -1233,3 +1270,132 @@ export const MembersDocument = {
     },
   ],
 } as unknown as DocumentNode<MembersQuery, MembersQueryVariables>;
+export const ResourcesDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "resources" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "resources" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "data" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "attributes" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "Title" } },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "Image" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "data" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        { kind: "Field", name: { kind: "Name", value: "id" } },
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "attributes" },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              { kind: "Field", name: { kind: "Name", value: "name" } },
+                                              { kind: "Field", name: { kind: "Name", value: "url" } },
+                                              { kind: "Field", name: { kind: "Name", value: "size" } },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                            { kind: "Field", name: { kind: "Name", value: "Description" } },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "Media" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "data" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        { kind: "Field", name: { kind: "Name", value: "id" } },
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "attributes" },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              { kind: "Field", name: { kind: "Name", value: "name" } },
+                                              { kind: "Field", name: { kind: "Name", value: "url" } },
+                                              { kind: "Field", name: { kind: "Name", value: "size" } },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "meta" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "pagination" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "page" } },
+                            { kind: "Field", name: { kind: "Name", value: "pageSize" } },
+                            { kind: "Field", name: { kind: "Name", value: "total" } },
+                            { kind: "Field", name: { kind: "Name", value: "pageCount" } },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<ResourcesQuery, ResourcesQueryVariables>;

@@ -1,0 +1,39 @@
+query resources {
+  resources {
+    data {
+      id
+      attributes {
+        Title
+        Image {
+          data {
+            id
+            attributes {
+              name
+              url
+              size
+            }
+          }
+        }
+        Description
+        Media {
+          data {
+            id
+            attributes {
+              name
+              url
+              size
+            }
+          }
+        }
+      }
+    }
+    meta {
+      pagination {
+        page
+        pageSize
+        total
+        pageCount
+      }
+    }
+  }
+}
