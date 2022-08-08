@@ -5,6 +5,17 @@ __metadata:
   version: 6
   cacheKey: 8
 
+"@_sh/strapi-plugin-ckeditor@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "@_sh/strapi-plugin-ckeditor@npm:1.1.1"
+  dependencies:
+    "@ckeditor/ckeditor5-react": 5.0.0
+  peerDependencies:
+    "@strapi/strapi": ^4.0.0
+  checksum: ed22d472a2f3e8ba1dbea9c4f799a956b8f83c3a645ccb8786ee4674c5736b388d264e955b474c5af6ad2d6b82e279ca403e62793e1b0f7e105ac48312401dd0
+  languageName: node
+  linkType: hard
+
 "@ampproject/remapping@npm:^2.1.0":
   version: 2.2.0
   resolution: "@ampproject/remapping@npm:2.2.0"
@@ -1649,6 +1660,17 @@ __metadata:
     react: ">= 16.8"
     react-dom: ">= 16.8"
   checksum: a2995c4354888d401a0b4ae30f293dcad4eb17744a914102ec0e199b8c54ad2e30f5da5af1298d84492ad83e683a5bf50d8894ee6b93fe483110701b47fc3154
+  languageName: node
+  linkType: hard
+
+"@ckeditor/ckeditor5-react@npm:5.0.0":
+  version: 5.0.0
+  resolution: "@ckeditor/ckeditor5-react@npm:5.0.0"
+  dependencies:
+    prop-types: ^15.7.2
+  peerDependencies:
+    react: ^16.13.1 || ^17.0.0 || ^18.0.0
+  checksum: 184e04bee9fa67ff2ff4816049f9e041c3c4e085adca7e9388a80fbd31ad4bcaa3bea43637781aba94f7b8685c99b0d38eabdfa6b11ea1044a55d5f67ca878de
   languageName: node
   linkType: hard
 
@@ -5958,6 +5980,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "backend@workspace:backend"
   dependencies:
+    "@_sh/strapi-plugin-ckeditor": ^1.1.1
     "@strapi/plugin-graphql": 4.3.1
     "@strapi/plugin-i18n": 4.3.1
     "@strapi/plugin-users-permissions": 4.3.1
