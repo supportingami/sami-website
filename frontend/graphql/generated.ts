@@ -115,6 +115,50 @@ export enum Enum_Member_Organisation {
   Sami = "SAMI",
 }
 
+export type Faq = {
+  __typename?: "Faq";
+  Question?: Maybe<Scalars["String"]>;
+  Response?: Maybe<Scalars["String"]>;
+  createdAt?: Maybe<Scalars["DateTime"]>;
+  publishedAt?: Maybe<Scalars["DateTime"]>;
+  updatedAt?: Maybe<Scalars["DateTime"]>;
+};
+
+export type FaqEntity = {
+  __typename?: "FaqEntity";
+  attributes?: Maybe<Faq>;
+  id?: Maybe<Scalars["ID"]>;
+};
+
+export type FaqEntityResponse = {
+  __typename?: "FaqEntityResponse";
+  data?: Maybe<FaqEntity>;
+};
+
+export type FaqEntityResponseCollection = {
+  __typename?: "FaqEntityResponseCollection";
+  data: Array<FaqEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type FaqFiltersInput = {
+  Question?: InputMaybe<StringFilterInput>;
+  Response?: InputMaybe<StringFilterInput>;
+  and?: InputMaybe<Array<InputMaybe<FaqFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  not?: InputMaybe<FaqFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<FaqFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type FaqInput = {
+  Question?: InputMaybe<Scalars["String"]>;
+  Response?: InputMaybe<Scalars["String"]>;
+  publishedAt?: InputMaybe<Scalars["DateTime"]>;
+};
+
 export type FileInfoInput = {
   alternativeText?: InputMaybe<Scalars["String"]>;
   caption?: InputMaybe<Scalars["String"]>;
@@ -147,6 +191,7 @@ export type FloatFilterInput = {
 
 export type GenericMorph =
   | BlogPost
+  | Faq
   | I18NLocale
   | Member
   | Project
@@ -155,7 +200,8 @@ export type GenericMorph =
   | UploadFolder
   | UsersPermissionsPermission
   | UsersPermissionsRole
-  | UsersPermissionsUser;
+  | UsersPermissionsUser
+  | Volunteer;
 
 export type I18NLocale = {
   __typename?: "I18NLocale";
@@ -329,6 +375,7 @@ export type MemberInput = {
 export type Mutation = {
   __typename?: "Mutation";
   createBlogPost?: Maybe<BlogPostEntityResponse>;
+  createFaq?: Maybe<FaqEntityResponse>;
   createMember?: Maybe<MemberEntityResponse>;
   createProject?: Maybe<ProjectEntityResponse>;
   createResource?: Maybe<ResourceEntityResponse>;
@@ -338,7 +385,9 @@ export type Mutation = {
   createUsersPermissionsRole?: Maybe<UsersPermissionsCreateRolePayload>;
   /** Create a new user */
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
+  createVolunteer?: Maybe<VolunteerEntityResponse>;
   deleteBlogPost?: Maybe<BlogPostEntityResponse>;
+  deleteFaq?: Maybe<FaqEntityResponse>;
   deleteMember?: Maybe<MemberEntityResponse>;
   deleteProject?: Maybe<ProjectEntityResponse>;
   deleteResource?: Maybe<ResourceEntityResponse>;
@@ -348,6 +397,7 @@ export type Mutation = {
   deleteUsersPermissionsRole?: Maybe<UsersPermissionsDeleteRolePayload>;
   /** Delete an existing user */
   deleteUsersPermissionsUser: UsersPermissionsUserEntityResponse;
+  deleteVolunteer?: Maybe<VolunteerEntityResponse>;
   /** Confirm an email users email address */
   emailConfirmation?: Maybe<UsersPermissionsLoginPayload>;
   /** Request a reset password token */
@@ -360,6 +410,7 @@ export type Mutation = {
   /** Reset user password. Confirm with a code (resetToken from forgotPassword) */
   resetPassword?: Maybe<UsersPermissionsLoginPayload>;
   updateBlogPost?: Maybe<BlogPostEntityResponse>;
+  updateFaq?: Maybe<FaqEntityResponse>;
   updateFileInfo: UploadFileEntityResponse;
   updateMember?: Maybe<MemberEntityResponse>;
   updateProject?: Maybe<ProjectEntityResponse>;
@@ -370,11 +421,16 @@ export type Mutation = {
   updateUsersPermissionsRole?: Maybe<UsersPermissionsUpdateRolePayload>;
   /** Update an existing user */
   updateUsersPermissionsUser: UsersPermissionsUserEntityResponse;
+  updateVolunteer?: Maybe<VolunteerEntityResponse>;
   upload: UploadFileEntityResponse;
 };
 
 export type MutationCreateBlogPostArgs = {
   data: BlogPostInput;
+};
+
+export type MutationCreateFaqArgs = {
+  data: FaqInput;
 };
 
 export type MutationCreateMemberArgs = {
@@ -405,7 +461,15 @@ export type MutationCreateUsersPermissionsUserArgs = {
   data: UsersPermissionsUserInput;
 };
 
+export type MutationCreateVolunteerArgs = {
+  data: VolunteerInput;
+};
+
 export type MutationDeleteBlogPostArgs = {
+  id: Scalars["ID"];
+};
+
+export type MutationDeleteFaqArgs = {
   id: Scalars["ID"];
 };
 
@@ -434,6 +498,10 @@ export type MutationDeleteUsersPermissionsRoleArgs = {
 };
 
 export type MutationDeleteUsersPermissionsUserArgs = {
+  id: Scalars["ID"];
+};
+
+export type MutationDeleteVolunteerArgs = {
   id: Scalars["ID"];
 };
 
@@ -475,6 +543,11 @@ export type MutationUpdateBlogPostArgs = {
   id: Scalars["ID"];
 };
 
+export type MutationUpdateFaqArgs = {
+  data: FaqInput;
+  id: Scalars["ID"];
+};
+
 export type MutationUpdateFileInfoArgs = {
   id: Scalars["ID"];
   info?: InputMaybe<FileInfoInput>;
@@ -512,6 +585,11 @@ export type MutationUpdateUsersPermissionsRoleArgs = {
 
 export type MutationUpdateUsersPermissionsUserArgs = {
   data: UsersPermissionsUserInput;
+  id: Scalars["ID"];
+};
+
+export type MutationUpdateVolunteerArgs = {
+  data: VolunteerInput;
   id: Scalars["ID"];
 };
 
@@ -588,6 +666,8 @@ export type Query = {
   __typename?: "Query";
   blogPost?: Maybe<BlogPostEntityResponse>;
   blogPosts?: Maybe<BlogPostEntityResponseCollection>;
+  faq?: Maybe<FaqEntityResponse>;
+  faqs?: Maybe<FaqEntityResponseCollection>;
   i18NLocale?: Maybe<I18NLocaleEntityResponse>;
   i18NLocales?: Maybe<I18NLocaleEntityResponseCollection>;
   me?: Maybe<UsersPermissionsMe>;
@@ -605,6 +685,8 @@ export type Query = {
   usersPermissionsRoles?: Maybe<UsersPermissionsRoleEntityResponseCollection>;
   usersPermissionsUser?: Maybe<UsersPermissionsUserEntityResponse>;
   usersPermissionsUsers?: Maybe<UsersPermissionsUserEntityResponseCollection>;
+  volunteer?: Maybe<VolunteerEntityResponse>;
+  volunteers?: Maybe<VolunteerEntityResponseCollection>;
 };
 
 export type QueryBlogPostArgs = {
@@ -613,6 +695,17 @@ export type QueryBlogPostArgs = {
 
 export type QueryBlogPostsArgs = {
   filters?: InputMaybe<BlogPostFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+};
+
+export type QueryFaqArgs = {
+  id?: InputMaybe<Scalars["ID"]>;
+};
+
+export type QueryFaqsArgs = {
+  filters?: InputMaybe<FaqFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
@@ -698,6 +791,17 @@ export type QueryUsersPermissionsUserArgs = {
 export type QueryUsersPermissionsUsersArgs = {
   filters?: InputMaybe<UsersPermissionsUserFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+};
+
+export type QueryVolunteerArgs = {
+  id?: InputMaybe<Scalars["ID"]>;
+};
+
+export type QueryVolunteersArgs = {
+  filters?: InputMaybe<VolunteerFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
 };
 
@@ -1147,6 +1251,67 @@ export type UsersPermissionsUserRelationResponseCollection = {
   data: Array<UsersPermissionsUserEntity>;
 };
 
+export type Volunteer = {
+  __typename?: "Volunteer";
+  ApplicationLink?: Maybe<Scalars["String"]>;
+  Content?: Maybe<Scalars["String"]>;
+  Title?: Maybe<Scalars["String"]>;
+  createdAt?: Maybe<Scalars["DateTime"]>;
+  publishedAt?: Maybe<Scalars["DateTime"]>;
+  updatedAt?: Maybe<Scalars["DateTime"]>;
+};
+
+export type VolunteerEntity = {
+  __typename?: "VolunteerEntity";
+  attributes?: Maybe<Volunteer>;
+  id?: Maybe<Scalars["ID"]>;
+};
+
+export type VolunteerEntityResponse = {
+  __typename?: "VolunteerEntityResponse";
+  data?: Maybe<VolunteerEntity>;
+};
+
+export type VolunteerEntityResponseCollection = {
+  __typename?: "VolunteerEntityResponseCollection";
+  data: Array<VolunteerEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type VolunteerFiltersInput = {
+  ApplicationLink?: InputMaybe<StringFilterInput>;
+  Content?: InputMaybe<StringFilterInput>;
+  Title?: InputMaybe<StringFilterInput>;
+  and?: InputMaybe<Array<InputMaybe<VolunteerFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  not?: InputMaybe<VolunteerFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<VolunteerFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type VolunteerInput = {
+  ApplicationLink?: InputMaybe<Scalars["String"]>;
+  Content?: InputMaybe<Scalars["String"]>;
+  Title?: InputMaybe<Scalars["String"]>;
+  publishedAt?: InputMaybe<Scalars["DateTime"]>;
+};
+
+export type FaqsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type FaqsQuery = {
+  __typename?: "Query";
+  faqs?: {
+    __typename?: "FaqEntityResponseCollection";
+    data: Array<{
+      __typename?: "FaqEntity";
+      id?: string | null;
+      attributes?: { __typename?: "Faq"; Question?: string | null; Response?: string | null } | null;
+    }>;
+  } | null;
+};
+
 export type MembersQueryVariables = Exact<{ [key: string]: never }>;
 
 export type MembersQuery = {
@@ -1203,6 +1368,70 @@ export type ResourcesQuery = {
   } | null;
 };
 
+export type VolunteersQueryVariables = Exact<{ [key: string]: never }>;
+
+export type VolunteersQuery = {
+  __typename?: "Query";
+  volunteers?: {
+    __typename?: "VolunteerEntityResponseCollection";
+    data: Array<{
+      __typename?: "VolunteerEntity";
+      id?: string | null;
+      attributes?: {
+        __typename?: "Volunteer";
+        Content?: string | null;
+        ApplicationLink?: string | null;
+        Title?: string | null;
+      } | null;
+    }>;
+  } | null;
+};
+
+export const FaqsDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "faqs" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "faqs" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "data" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "attributes" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "Question" } },
+                            { kind: "Field", name: { kind: "Name", value: "Response" } },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<FaqsQuery, FaqsQueryVariables>;
 export const MembersDocument = {
   kind: "Document",
   definitions: [
@@ -1399,3 +1628,49 @@ export const ResourcesDocument = {
     },
   ],
 } as unknown as DocumentNode<ResourcesQuery, ResourcesQueryVariables>;
+export const VolunteersDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "volunteers" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "volunteers" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "data" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "attributes" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "Content" } },
+                            { kind: "Field", name: { kind: "Name", value: "ApplicationLink" } },
+                            { kind: "Field", name: { kind: "Name", value: "Title" } },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<VolunteersQuery, VolunteersQueryVariables>;

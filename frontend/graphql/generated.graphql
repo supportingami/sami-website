@@ -98,6 +98,46 @@ enum ENUM_MEMBER_ORGANISATION {
   SAMI
 }
 
+type Faq {
+  Question: String
+  Response: String
+  createdAt: DateTime
+  publishedAt: DateTime
+  updatedAt: DateTime
+}
+
+type FaqEntity {
+  attributes: Faq
+  id: ID
+}
+
+type FaqEntityResponse {
+  data: FaqEntity
+}
+
+type FaqEntityResponseCollection {
+  data: [FaqEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input FaqFiltersInput {
+  Question: StringFilterInput
+  Response: StringFilterInput
+  and: [FaqFiltersInput]
+  createdAt: DateTimeFilterInput
+  id: IDFilterInput
+  not: FaqFiltersInput
+  or: [FaqFiltersInput]
+  publishedAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+}
+
+input FaqInput {
+  Question: String
+  Response: String
+  publishedAt: DateTime
+}
+
 input FileInfoInput {
   alternativeText: String
   caption: String
@@ -130,6 +170,7 @@ input FloatFilterInput {
 
 union GenericMorph =
     BlogPost
+  | Faq
   | I18NLocale
   | Member
   | Project
@@ -139,6 +180,7 @@ union GenericMorph =
   | UsersPermissionsPermission
   | UsersPermissionsRole
   | UsersPermissionsUser
+  | Volunteer
 
 type I18NLocale {
   code: String
@@ -306,6 +348,7 @@ input MemberInput {
 
 type Mutation {
   createBlogPost(data: BlogPostInput!): BlogPostEntityResponse
+  createFaq(data: FaqInput!): FaqEntityResponse
   createMember(data: MemberInput!): MemberEntityResponse
   createProject(data: ProjectInput!): ProjectEntityResponse
   createResource(data: ResourceInput!): ResourceEntityResponse
@@ -321,7 +364,9 @@ type Mutation {
   Create a new user
   """
   createUsersPermissionsUser(data: UsersPermissionsUserInput!): UsersPermissionsUserEntityResponse!
+  createVolunteer(data: VolunteerInput!): VolunteerEntityResponse
   deleteBlogPost(id: ID!): BlogPostEntityResponse
+  deleteFaq(id: ID!): FaqEntityResponse
   deleteMember(id: ID!): MemberEntityResponse
   deleteProject(id: ID!): ProjectEntityResponse
   deleteResource(id: ID!): ResourceEntityResponse
@@ -337,6 +382,7 @@ type Mutation {
   Delete an existing user
   """
   deleteUsersPermissionsUser(id: ID!): UsersPermissionsUserEntityResponse!
+  deleteVolunteer(id: ID!): VolunteerEntityResponse
 
   """
   Confirm an email users email address
@@ -361,6 +407,7 @@ type Mutation {
   """
   resetPassword(code: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
   updateBlogPost(data: BlogPostInput!, id: ID!): BlogPostEntityResponse
+  updateFaq(data: FaqInput!, id: ID!): FaqEntityResponse
   updateFileInfo(id: ID!, info: FileInfoInput): UploadFileEntityResponse!
   updateMember(data: MemberInput!, id: ID!): MemberEntityResponse
   updateProject(data: ProjectInput!, id: ID!): ProjectEntityResponse
@@ -377,6 +424,7 @@ type Mutation {
   Update an existing user
   """
   updateUsersPermissionsUser(data: UsersPermissionsUserInput!, id: ID!): UsersPermissionsUserEntityResponse!
+  updateVolunteer(data: VolunteerInput!, id: ID!): VolunteerEntityResponse
   upload(field: String, file: Upload!, info: FileInfoInput, ref: String, refId: ID): UploadFileEntityResponse!
 }
 
@@ -444,6 +492,13 @@ type Query {
     publicationState: PublicationState = LIVE
     sort: [String] = []
   ): BlogPostEntityResponseCollection
+  faq(id: ID): FaqEntityResponse
+  faqs(
+    filters: FaqFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): FaqEntityResponseCollection
   i18NLocale(id: ID): I18NLocaleEntityResponse
   i18NLocales(
     filters: I18NLocaleFiltersInput
@@ -496,6 +551,13 @@ type Query {
     pagination: PaginationArg = {}
     sort: [String] = []
   ): UsersPermissionsUserEntityResponseCollection
+  volunteer(id: ID): VolunteerEntityResponse
+  volunteers(
+    filters: VolunteerFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): VolunteerEntityResponseCollection
 }
 
 type Resource {
@@ -905,4 +967,47 @@ input UsersPermissionsUserInput {
 
 type UsersPermissionsUserRelationResponseCollection {
   data: [UsersPermissionsUserEntity!]!
+}
+
+type Volunteer {
+  ApplicationLink: String
+  Content: String
+  Title: String
+  createdAt: DateTime
+  publishedAt: DateTime
+  updatedAt: DateTime
+}
+
+type VolunteerEntity {
+  attributes: Volunteer
+  id: ID
+}
+
+type VolunteerEntityResponse {
+  data: VolunteerEntity
+}
+
+type VolunteerEntityResponseCollection {
+  data: [VolunteerEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input VolunteerFiltersInput {
+  ApplicationLink: StringFilterInput
+  Content: StringFilterInput
+  Title: StringFilterInput
+  and: [VolunteerFiltersInput]
+  createdAt: DateTimeFilterInput
+  id: IDFilterInput
+  not: VolunteerFiltersInput
+  or: [VolunteerFiltersInput]
+  publishedAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+}
+
+input VolunteerInput {
+  ApplicationLink: String
+  Content: String
+  Title: String
+  publishedAt: DateTime
 }
