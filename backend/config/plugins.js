@@ -1,7 +1,5 @@
 module.exports = ({ env }) => ({
-  "import-export-entries": {
-    enabled: true,
-  },
+  ckeditor: true,
   graphql: {
     config: {
       endpoint: "/graphql",
@@ -13,5 +11,8 @@ module.exports = ({ env }) => ({
         tracing: false,
       },
     },
+  },
+  "import-export-entries": {
+    enabled: true,
   },
 });
