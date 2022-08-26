@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { IFaq } from "types/faq";
 
 export const FAQS: React.FC<{
@@ -6,16 +6,11 @@ export const FAQS: React.FC<{
 }> = ({ faq }) => {
   return (
     <>
-      <div className="dropdown">
-        <button className="dropdown-btn">
-          <span id="question">
-            <i> {">"}</i>
-            <span>{'  '}{faq.Question}</span>
-          </span>
-        </button>
-        <ul id="response" className="faq-dropdown" style={{display:'none'}}>
-          {faq.Response}
-        </ul>
+      <div className="Faqs" style={{ border: "1px solid #dee", margin: "8px 0", cursor: "pointer" }}>
+        <details style={{ padding: "10px 16px" }}>
+          <summary style={{ fontSize: "18px", fontWeight: "400" }}>{faq.Question}</summary>
+          <div style={{ fontSize: "15px", fontWeight: "400", padding: "10px 10px 0 20px" }}>{faq.Response}</div>
+        </details>
       </div>
     </>
   );

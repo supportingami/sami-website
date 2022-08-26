@@ -1,4 +1,3 @@
-import Link from "next/link";
 import React from "react";
 import { IFaq } from "types/faq";
 import { IVolunteer } from "types/volunteer";
@@ -14,7 +13,7 @@ export const VolunteerPageComponent: React.FC<{ volunteerPageContent: IVolunteer
         <div key={volunteer.id}>
           <h1 style={{ fontSize: "25px", fontWeight: "600", marginBottom: "30px" }}>{volunteer.Title}</h1>
           <div dangerouslySetInnerHTML={{ __html: volunteer.Content }}></div>
-          <Link href={volunteer.ApplicationLink}>
+          <a href={volunteer.ApplicationLink} target="_blank" rel="noopener noreferrer">
             <button
               style={{
                 margin: "30px 0",
@@ -26,12 +25,15 @@ export const VolunteerPageComponent: React.FC<{ volunteerPageContent: IVolunteer
             >
               Apply Now
             </button>
-          </Link>
+          </a>
         </div>
       ))}
-      {faqs.map((f) => (
-        <FAQS key={f.id} faq={f} />
-      ))}
+      <div style={{ margin: "20px 0" }}>
+        <h3 style={{ fontSize: "25px", fontWeight: "600", marginBottom: "5px" }}>Volunteer FAQS</h3>
+        {faqs.map((f) => (
+          <FAQS key={f.id} faq={f} />
+        ))}
+      </div>
     </>
   );
 };

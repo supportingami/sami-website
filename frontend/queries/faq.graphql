@@ -7,5 +7,13 @@ query faqs {
         Response
       }
     }
+    meta {
+      pagination {
+        page
+        pageSize
+        total
+        pageCount
+      }
+    }
   }
 }
