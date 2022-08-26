@@ -64,6 +64,53 @@ input BooleanFilterInput {
   startsWith: Boolean
 }
 
+type Country {
+  Content: String
+  Name: String
+  Project: ProjectEntityResponse
+  createdAt: DateTime
+  publishedAt: DateTime
+  updatedAt: DateTime
+}
+
+type CountryEntity {
+  attributes: Country
+  id: ID
+}
+
+type CountryEntityResponse {
+  data: CountryEntity
+}
+
+type CountryEntityResponseCollection {
+  data: [CountryEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input CountryFiltersInput {
+  Content: StringFilterInput
+  Name: StringFilterInput
+  Project: ProjectFiltersInput
+  and: [CountryFiltersInput]
+  createdAt: DateTimeFilterInput
+  id: IDFilterInput
+  not: CountryFiltersInput
+  or: [CountryFiltersInput]
+  publishedAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+}
+
+input CountryInput {
+  Content: String
+  Name: String
+  Project: ID
+  publishedAt: DateTime
+}
+
+type CountryRelationResponseCollection {
+  data: [CountryEntity!]!
+}
+
 """
 A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
 """
@@ -130,9 +177,11 @@ input FloatFilterInput {
 
 union GenericMorph =
     BlogPost
+  | Country
   | I18NLocale
   | Member
   | Project
+  | ProjectType
   | Resource
   | UploadFile
   | UploadFolder
@@ -306,8 +355,10 @@ input MemberInput {
 
 type Mutation {
   createBlogPost(data: BlogPostInput!): BlogPostEntityResponse
+  createCountry(data: CountryInput!): CountryEntityResponse
   createMember(data: MemberInput!): MemberEntityResponse
   createProject(data: ProjectInput!): ProjectEntityResponse
+  createProjectType(data: ProjectTypeInput!): ProjectTypeEntityResponse
   createResource(data: ResourceInput!): ResourceEntityResponse
   createUploadFile(data: UploadFileInput!): UploadFileEntityResponse
   createUploadFolder(data: UploadFolderInput!): UploadFolderEntityResponse
@@ -322,8 +373,10 @@ type Mutation {
   """
   createUsersPermissionsUser(data: UsersPermissionsUserInput!): UsersPermissionsUserEntityResponse!
   deleteBlogPost(id: ID!): BlogPostEntityResponse
+  deleteCountry(id: ID!): CountryEntityResponse
   deleteMember(id: ID!): MemberEntityResponse
   deleteProject(id: ID!): ProjectEntityResponse
+  deleteProjectType(id: ID!): ProjectTypeEntityResponse
   deleteResource(id: ID!): ResourceEntityResponse
   deleteUploadFile(id: ID!): UploadFileEntityResponse
   deleteUploadFolder(id: ID!): UploadFolderEntityResponse
@@ -361,9 +414,11 @@ type Mutation {
   """
   resetPassword(code: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
   updateBlogPost(data: BlogPostInput!, id: ID!): BlogPostEntityResponse
+  updateCountry(data: CountryInput!, id: ID!): CountryEntityResponse
   updateFileInfo(id: ID!, info: FileInfoInput): UploadFileEntityResponse!
   updateMember(data: MemberInput!, id: ID!): MemberEntityResponse
   updateProject(data: ProjectInput!, id: ID!): ProjectEntityResponse
+  updateProjectType(data: ProjectTypeInput!, id: ID!): ProjectTypeEntityResponse
   updateResource(data: ResourceInput!, id: ID!): ResourceEntityResponse
   updateUploadFile(data: UploadFileInput!, id: ID!): UploadFileEntityResponse
   updateUploadFolder(data: UploadFolderInput!, id: ID!): UploadFolderEntityResponse
@@ -395,9 +450,22 @@ input PaginationArg {
 }
 
 type Project {
+  Country(
+    filters: CountryFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): CountryRelationResponseCollection
+  ProjectTypes(
+    filters: ProjectTypeFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): ProjectTypeRelationResponseCollection
+  Summary: String
+  Title: String
   createdAt: DateTime
   publishedAt: DateTime
-  title: String
   updatedAt: DateTime
 }
 
@@ -416,19 +484,75 @@ type ProjectEntityResponseCollection {
 }
 
 input ProjectFiltersInput {
+  Country: CountryFiltersInput
+  ProjectTypes: ProjectTypeFiltersInput
+  Summary: StringFilterInput
+  Title: StringFilterInput
   and: [ProjectFiltersInput]
   createdAt: DateTimeFilterInput
   id: IDFilterInput
   not: ProjectFiltersInput
   or: [ProjectFiltersInput]
   publishedAt: DateTimeFilterInput
-  title: StringFilterInput
   updatedAt: DateTimeFilterInput
 }
 
 input ProjectInput {
+  Country: [ID]
+  ProjectTypes: [ID]
+  Summary: String
+  Title: String
   publishedAt: DateTime
-  title: String
+}
+
+type ProjectType {
+  Content: String
+  Name: String
+  Project: ProjectEntityResponse
+  Summary: String
+  createdAt: DateTime
+  publishedAt: DateTime
+  updatedAt: DateTime
+}
+
+type ProjectTypeEntity {
+  attributes: ProjectType
+  id: ID
+}
+
+type ProjectTypeEntityResponse {
+  data: ProjectTypeEntity
+}
+
+type ProjectTypeEntityResponseCollection {
+  data: [ProjectTypeEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input ProjectTypeFiltersInput {
+  Content: StringFilterInput
+  Name: StringFilterInput
+  Project: ProjectFiltersInput
+  Summary: StringFilterInput
+  and: [ProjectTypeFiltersInput]
+  createdAt: DateTimeFilterInput
+  id: IDFilterInput
+  not: ProjectTypeFiltersInput
+  or: [ProjectTypeFiltersInput]
+  publishedAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+}
+
+input ProjectTypeInput {
+  Content: String
+  Name: String
+  Project: ID
+  Summary: String
+  publishedAt: DateTime
+}
+
+type ProjectTypeRelationResponseCollection {
+  data: [ProjectTypeEntity!]!
 }
 
 enum PublicationState {
@@ -444,6 +568,13 @@ type Query {
     publicationState: PublicationState = LIVE
     sort: [String] = []
   ): BlogPostEntityResponseCollection
+  countries(
+    filters: CountryFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): CountryEntityResponseCollection
+  country(id: ID): CountryEntityResponse
   i18NLocale(id: ID): I18NLocaleEntityResponse
   i18NLocales(
     filters: I18NLocaleFiltersInput
@@ -459,6 +590,13 @@ type Query {
     sort: [String] = []
   ): MemberEntityResponseCollection
   project(id: ID): ProjectEntityResponse
+  projectType(id: ID): ProjectTypeEntityResponse
+  projectTypes(
+    filters: ProjectTypeFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): ProjectTypeEntityResponseCollection
   projects(
     filters: ProjectFiltersInput
     pagination: PaginationArg = {}
