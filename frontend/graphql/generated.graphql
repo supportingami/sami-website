@@ -1,3 +1,42 @@
+type AnnualReport {
+  File: UploadFileEntityResponse
+  Year: Int
+  createdAt: DateTime
+  publishedAt: DateTime
+  updatedAt: DateTime
+}
+
+type AnnualReportEntity {
+  attributes: AnnualReport
+  id: ID
+}
+
+type AnnualReportEntityResponse {
+  data: AnnualReportEntity
+}
+
+type AnnualReportEntityResponseCollection {
+  data: [AnnualReportEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input AnnualReportFiltersInput {
+  Year: IntFilterInput
+  and: [AnnualReportFiltersInput]
+  createdAt: DateTimeFilterInput
+  id: IDFilterInput
+  not: AnnualReportFiltersInput
+  or: [AnnualReportFiltersInput]
+  publishedAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+}
+
+input AnnualReportInput {
+  File: ID
+  Year: Int
+  publishedAt: DateTime
+}
+
 type BlogPost {
   content: String
   createdAt: DateTime
@@ -129,7 +168,8 @@ input FloatFilterInput {
 }
 
 union GenericMorph =
-    BlogPost
+    AnnualReport
+  | BlogPost
   | I18NLocale
   | Member
   | Project
@@ -305,6 +345,7 @@ input MemberInput {
 }
 
 type Mutation {
+  createAnnualReport(data: AnnualReportInput!): AnnualReportEntityResponse
   createBlogPost(data: BlogPostInput!): BlogPostEntityResponse
   createMember(data: MemberInput!): MemberEntityResponse
   createProject(data: ProjectInput!): ProjectEntityResponse
@@ -321,6 +362,7 @@ type Mutation {
   Create a new user
   """
   createUsersPermissionsUser(data: UsersPermissionsUserInput!): UsersPermissionsUserEntityResponse!
+  deleteAnnualReport(id: ID!): AnnualReportEntityResponse
   deleteBlogPost(id: ID!): BlogPostEntityResponse
   deleteMember(id: ID!): MemberEntityResponse
   deleteProject(id: ID!): ProjectEntityResponse
@@ -360,6 +402,7 @@ type Mutation {
   Reset user password. Confirm with a code (resetToken from forgotPassword)
   """
   resetPassword(code: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
+  updateAnnualReport(data: AnnualReportInput!, id: ID!): AnnualReportEntityResponse
   updateBlogPost(data: BlogPostInput!, id: ID!): BlogPostEntityResponse
   updateFileInfo(id: ID!, info: FileInfoInput): UploadFileEntityResponse!
   updateMember(data: MemberInput!, id: ID!): MemberEntityResponse
@@ -437,6 +480,13 @@ enum PublicationState {
 }
 
 type Query {
+  annualReport(id: ID): AnnualReportEntityResponse
+  annualReports(
+    filters: AnnualReportFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): AnnualReportEntityResponseCollection
   blogPost(id: ID): BlogPostEntityResponse
   blogPosts(
     filters: BlogPostFiltersInput

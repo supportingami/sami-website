@@ -16,6 +16,49 @@ export type Scalars = {
   Upload: any;
 };
 
+export type AnnualReport = {
+  __typename?: "AnnualReport";
+  File?: Maybe<UploadFileEntityResponse>;
+  Year?: Maybe<Scalars["Int"]>;
+  createdAt?: Maybe<Scalars["DateTime"]>;
+  publishedAt?: Maybe<Scalars["DateTime"]>;
+  updatedAt?: Maybe<Scalars["DateTime"]>;
+};
+
+export type AnnualReportEntity = {
+  __typename?: "AnnualReportEntity";
+  attributes?: Maybe<AnnualReport>;
+  id?: Maybe<Scalars["ID"]>;
+};
+
+export type AnnualReportEntityResponse = {
+  __typename?: "AnnualReportEntityResponse";
+  data?: Maybe<AnnualReportEntity>;
+};
+
+export type AnnualReportEntityResponseCollection = {
+  __typename?: "AnnualReportEntityResponseCollection";
+  data: Array<AnnualReportEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type AnnualReportFiltersInput = {
+  Year?: InputMaybe<IntFilterInput>;
+  and?: InputMaybe<Array<InputMaybe<AnnualReportFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  not?: InputMaybe<AnnualReportFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<AnnualReportFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type AnnualReportInput = {
+  File?: InputMaybe<Scalars["ID"]>;
+  Year?: InputMaybe<Scalars["Int"]>;
+  publishedAt?: InputMaybe<Scalars["DateTime"]>;
+};
+
 export type BlogPost = {
   __typename?: "BlogPost";
   content?: Maybe<Scalars["String"]>;
@@ -146,6 +189,7 @@ export type FloatFilterInput = {
 };
 
 export type GenericMorph =
+  | AnnualReport
   | BlogPost
   | I18NLocale
   | Member
@@ -328,6 +372,7 @@ export type MemberInput = {
 
 export type Mutation = {
   __typename?: "Mutation";
+  createAnnualReport?: Maybe<AnnualReportEntityResponse>;
   createBlogPost?: Maybe<BlogPostEntityResponse>;
   createMember?: Maybe<MemberEntityResponse>;
   createProject?: Maybe<ProjectEntityResponse>;
@@ -338,6 +383,7 @@ export type Mutation = {
   createUsersPermissionsRole?: Maybe<UsersPermissionsCreateRolePayload>;
   /** Create a new user */
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
+  deleteAnnualReport?: Maybe<AnnualReportEntityResponse>;
   deleteBlogPost?: Maybe<BlogPostEntityResponse>;
   deleteMember?: Maybe<MemberEntityResponse>;
   deleteProject?: Maybe<ProjectEntityResponse>;
@@ -359,6 +405,7 @@ export type Mutation = {
   removeFile?: Maybe<UploadFileEntityResponse>;
   /** Reset user password. Confirm with a code (resetToken from forgotPassword) */
   resetPassword?: Maybe<UsersPermissionsLoginPayload>;
+  updateAnnualReport?: Maybe<AnnualReportEntityResponse>;
   updateBlogPost?: Maybe<BlogPostEntityResponse>;
   updateFileInfo: UploadFileEntityResponse;
   updateMember?: Maybe<MemberEntityResponse>;
@@ -371,6 +418,10 @@ export type Mutation = {
   /** Update an existing user */
   updateUsersPermissionsUser: UsersPermissionsUserEntityResponse;
   upload: UploadFileEntityResponse;
+};
+
+export type MutationCreateAnnualReportArgs = {
+  data: AnnualReportInput;
 };
 
 export type MutationCreateBlogPostArgs = {
@@ -403,6 +454,10 @@ export type MutationCreateUsersPermissionsRoleArgs = {
 
 export type MutationCreateUsersPermissionsUserArgs = {
   data: UsersPermissionsUserInput;
+};
+
+export type MutationDeleteAnnualReportArgs = {
+  id: Scalars["ID"];
 };
 
 export type MutationDeleteBlogPostArgs = {
@@ -468,6 +523,11 @@ export type MutationResetPasswordArgs = {
   code: Scalars["String"];
   password: Scalars["String"];
   passwordConfirmation: Scalars["String"];
+};
+
+export type MutationUpdateAnnualReportArgs = {
+  data: AnnualReportInput;
+  id: Scalars["ID"];
 };
 
 export type MutationUpdateBlogPostArgs = {
@@ -586,6 +646,8 @@ export enum PublicationState {
 
 export type Query = {
   __typename?: "Query";
+  annualReport?: Maybe<AnnualReportEntityResponse>;
+  annualReports?: Maybe<AnnualReportEntityResponseCollection>;
   blogPost?: Maybe<BlogPostEntityResponse>;
   blogPosts?: Maybe<BlogPostEntityResponseCollection>;
   i18NLocale?: Maybe<I18NLocaleEntityResponse>;
@@ -605,6 +667,17 @@ export type Query = {
   usersPermissionsRoles?: Maybe<UsersPermissionsRoleEntityResponseCollection>;
   usersPermissionsUser?: Maybe<UsersPermissionsUserEntityResponse>;
   usersPermissionsUsers?: Maybe<UsersPermissionsUserEntityResponseCollection>;
+};
+
+export type QueryAnnualReportArgs = {
+  id?: InputMaybe<Scalars["ID"]>;
+};
+
+export type QueryAnnualReportsArgs = {
+  filters?: InputMaybe<AnnualReportFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
 };
 
 export type QueryBlogPostArgs = {
@@ -1147,6 +1220,24 @@ export type UsersPermissionsUserRelationResponseCollection = {
   data: Array<UsersPermissionsUserEntity>;
 };
 
+export type AnnualReportsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type AnnualReportsQuery = {
+  __typename?: "Query";
+  annualReports?: {
+    __typename?: "AnnualReportEntityResponseCollection";
+    data: Array<{
+      __typename?: "AnnualReportEntity";
+      id?: string | null;
+      attributes?: { __typename?: "AnnualReport"; Year?: number | null } | null;
+    }>;
+    meta: {
+      __typename?: "ResponseCollectionMeta";
+      pagination: { __typename?: "Pagination"; page: number; pageSize: number; total: number; pageCount: number };
+    };
+  } | null;
+};
+
 export type MembersQueryVariables = Exact<{ [key: string]: never }>;
 
 export type MembersQuery = {
@@ -1203,6 +1294,70 @@ export type ResourcesQuery = {
   } | null;
 };
 
+export const AnnualReportsDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "annualReports" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "annualReports" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "data" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "attributes" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [{ kind: "Field", name: { kind: "Name", value: "Year" } }],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "meta" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "pagination" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "page" } },
+                            { kind: "Field", name: { kind: "Name", value: "pageSize" } },
+                            { kind: "Field", name: { kind: "Name", value: "total" } },
+                            { kind: "Field", name: { kind: "Name", value: "pageCount" } },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<AnnualReportsQuery, AnnualReportsQueryVariables>;
 export const MembersDocument = {
   kind: "Document",
   definitions: [
