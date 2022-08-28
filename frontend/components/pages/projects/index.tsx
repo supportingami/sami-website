@@ -14,12 +14,15 @@ export const ProjectsPageComponent: React.FC<{ projectPageContent: IProject[] }>
             <div>
               <aside style={{ margin: "10px 0 0 0" }}>
                 {p.ProjectTypes.data.map((type) => (
-                  <div key={type.id} style={{padding:"2px 0"}}>
-                    <a href={`/projects/${type.id}/${type.attributes.Name}`} style={{fontSize:"15px"}}> {type.attributes.Name} </a>
+                  <div key={type.id} style={{ padding: "2px 0" }}>
+                    <a href={`/projects/${type.id}/${type.attributes.Name}`} style={{ fontSize: "15px" }}>
+                      {" "}
+                      {type.attributes.Name}{" "}
+                    </a>
                   </div>
                 ))}
               </aside>
-              <aside style={{ width: "30%", float: "left" }}>
+              <aside style={{ margin: "10px 0 0 0" }}>
                 {p.Country.data.map((country) => (
                   <div key={country.id}>{country.attributes.Name}</div>
                 ))}
