@@ -1,4 +1,5 @@
 import React from "react";
+import { Heading } from "@chakra-ui/core"; 
 import { AReport } from "types/annualreport";
 import { IMember } from "types/member";
 import { AnnualReportsListItemComponent } from "./list-item";
@@ -8,7 +9,7 @@ export const AnnualReportPageComponent: React.FC<{ areports: AReport[] }> = ({
 }) => {
   return (
     <>
-      <h1>Annual Reports</h1>
+      <Heading size="md">Annual Reports</Heading>
       {areports.map((areport) => (
         <AnnualReportsListItemComponent key={areport.id} areport={areport} />
       ))}

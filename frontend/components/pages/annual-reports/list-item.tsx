@@ -7,7 +7,7 @@ export const AnnualReportsListItemComponent: React.FC<{
 }> = ({ areport }) => (
   <Box>
     <div>
-      <div>Year{areport.Year}</div>
+      <div>{areport.Year} Annual Report</div>
     </div>
   </Box>
 );
