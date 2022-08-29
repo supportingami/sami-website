@@ -1,0 +1,19 @@
+query faqs {
+  faqs {
+    data {
+      id
+      attributes {
+        Question
+        Response
+      }
+    }
+    meta {
+      pagination {
+        page
+        pageSize
+        total
+        pageCount
+      }
+    }
+  }
+}
