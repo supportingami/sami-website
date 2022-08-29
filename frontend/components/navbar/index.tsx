@@ -32,12 +32,17 @@ const Navbar: NextComponentType = () => {
       label: "Resources",
       href: "/resources",
     },
-
     {
       id: "projects",
       label: "Projects",
       href: "/projects",
     },
+    {
+      id: "volunteer",
+      label: "Volunteer",
+      href: "/volunteer",
+    },
+    ,
   ];
 
   const linksForAuthenticatedUsers = [

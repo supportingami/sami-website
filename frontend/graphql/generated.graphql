@@ -145,6 +145,46 @@ enum ENUM_MEMBER_ORGANISATION {
   SAMI
 }
 
+type Faq {
+  Question: String
+  Response: String
+  createdAt: DateTime
+  publishedAt: DateTime
+  updatedAt: DateTime
+}
+
+type FaqEntity {
+  attributes: Faq
+  id: ID
+}
+
+type FaqEntityResponse {
+  data: FaqEntity
+}
+
+type FaqEntityResponseCollection {
+  data: [FaqEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input FaqFiltersInput {
+  Question: StringFilterInput
+  Response: StringFilterInput
+  and: [FaqFiltersInput]
+  createdAt: DateTimeFilterInput
+  id: IDFilterInput
+  not: FaqFiltersInput
+  or: [FaqFiltersInput]
+  publishedAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+}
+
+input FaqInput {
+  Question: String
+  Response: String
+  publishedAt: DateTime
+}
+
 input FileInfoInput {
   alternativeText: String
   caption: String
@@ -175,19 +215,7 @@ input FloatFilterInput {
   startsWith: Float
 }
 
-union GenericMorph =
-    BlogPost
-  | Country
-  | I18NLocale
-  | Member
-  | Project
-  | ProjectType
-  | Resource
-  | UploadFile
-  | UploadFolder
-  | UsersPermissionsPermission
-  | UsersPermissionsRole
-  | UsersPermissionsUser
+union GenericMorph = BlogPost | Country | Faq | I18NLocale | Member | Project | ProjectType | Resource | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Volunteer
 
 type I18NLocale {
   code: String
@@ -304,11 +332,7 @@ type Member {
   LinkedIn: String
   Name: String
   Organisation: ENUM_MEMBER_ORGANISATION
-  Photo(
-    filters: UploadFileFiltersInput
-    pagination: PaginationArg = {}
-    sort: [String] = []
-  ): UploadFileRelationResponseCollection
+  Photo(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFileRelationResponseCollection
   createdAt: DateTime
   publishedAt: DateTime
   updatedAt: DateTime
@@ -356,6 +380,7 @@ input MemberInput {
 type Mutation {
   createBlogPost(data: BlogPostInput!): BlogPostEntityResponse
   createCountry(data: CountryInput!): CountryEntityResponse
+  createFaq(data: FaqInput!): FaqEntityResponse
   createMember(data: MemberInput!): MemberEntityResponse
   createProject(data: ProjectInput!): ProjectEntityResponse
   createProjectType(data: ProjectTypeInput!): ProjectTypeEntityResponse
@@ -363,17 +388,15 @@ type Mutation {
   createUploadFile(data: UploadFileInput!): UploadFileEntityResponse
   createUploadFolder(data: UploadFolderInput!): UploadFolderEntityResponse
 
-  """
-  Create a new role
-  """
+  """Create a new role"""
   createUsersPermissionsRole(data: UsersPermissionsRoleInput!): UsersPermissionsCreateRolePayload
 
-  """
-  Create a new user
-  """
+  """Create a new user"""
   createUsersPermissionsUser(data: UsersPermissionsUserInput!): UsersPermissionsUserEntityResponse!
+  createVolunteer(data: VolunteerInput!): VolunteerEntityResponse
   deleteBlogPost(id: ID!): BlogPostEntityResponse
   deleteCountry(id: ID!): CountryEntityResponse
+  deleteFaq(id: ID!): FaqEntityResponse
   deleteMember(id: ID!): MemberEntityResponse
   deleteProject(id: ID!): ProjectEntityResponse
   deleteProjectType(id: ID!): ProjectTypeEntityResponse
@@ -381,31 +404,22 @@ type Mutation {
   deleteUploadFile(id: ID!): UploadFileEntityResponse
   deleteUploadFolder(id: ID!): UploadFolderEntityResponse
 
-  """
-  Delete an existing role
-  """
+  """Delete an existing role"""
   deleteUsersPermissionsRole(id: ID!): UsersPermissionsDeleteRolePayload
 
-  """
-  Delete an existing user
-  """
+  """Delete an existing user"""
   deleteUsersPermissionsUser(id: ID!): UsersPermissionsUserEntityResponse!
+  deleteVolunteer(id: ID!): VolunteerEntityResponse
 
-  """
-  Confirm an email users email address
-  """
+  """Confirm an email users email address"""
   emailConfirmation(confirmation: String!): UsersPermissionsLoginPayload
 
-  """
-  Request a reset password token
-  """
+  """Request a reset password token"""
   forgotPassword(email: String!): UsersPermissionsPasswordPayload
   login(input: UsersPermissionsLoginInput!): UsersPermissionsLoginPayload!
   multipleUpload(field: String, files: [Upload]!, ref: String, refId: ID): [UploadFileEntityResponse]!
 
-  """
-  Register a user
-  """
+  """Register a user"""
   register(input: UsersPermissionsRegisterInput!): UsersPermissionsLoginPayload!
   removeFile(id: ID!): UploadFileEntityResponse
 
@@ -415,6 +429,7 @@ type Mutation {
   resetPassword(code: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
   updateBlogPost(data: BlogPostInput!, id: ID!): BlogPostEntityResponse
   updateCountry(data: CountryInput!, id: ID!): CountryEntityResponse
+  updateFaq(data: FaqInput!, id: ID!): FaqEntityResponse
   updateFileInfo(id: ID!, info: FileInfoInput): UploadFileEntityResponse!
   updateMember(data: MemberInput!, id: ID!): MemberEntityResponse
   updateProject(data: ProjectInput!, id: ID!): ProjectEntityResponse
@@ -423,15 +438,12 @@ type Mutation {
   updateUploadFile(data: UploadFileInput!, id: ID!): UploadFileEntityResponse
   updateUploadFolder(data: UploadFolderInput!, id: ID!): UploadFolderEntityResponse
 
-  """
-  Update an existing role
-  """
+  """Update an existing role"""
   updateUsersPermissionsRole(data: UsersPermissionsRoleInput!, id: ID!): UsersPermissionsUpdateRolePayload
 
-  """
-  Update an existing user
-  """
+  """Update an existing user"""
   updateUsersPermissionsUser(data: UsersPermissionsUserInput!, id: ID!): UsersPermissionsUserEntityResponse!
+  updateVolunteer(data: VolunteerInput!, id: ID!): VolunteerEntityResponse
   upload(field: String, file: Upload!, info: FileInfoInput, ref: String, refId: ID): UploadFileEntityResponse!
 }
 
@@ -450,18 +462,8 @@ input PaginationArg {
 }
 
 type Project {
-  Country(
-    filters: CountryFiltersInput
-    pagination: PaginationArg = {}
-    publicationState: PublicationState = LIVE
-    sort: [String] = []
-  ): CountryRelationResponseCollection
-  ProjectTypes(
-    filters: ProjectTypeFiltersInput
-    pagination: PaginationArg = {}
-    publicationState: PublicationState = LIVE
-    sort: [String] = []
-  ): ProjectTypeRelationResponseCollection
+  Country(filters: CountryFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): CountryRelationResponseCollection
+  ProjectTypes(filters: ProjectTypeFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): ProjectTypeRelationResponseCollection
   Summary: String
   Title: String
   createdAt: DateTime
@@ -562,78 +564,32 @@ enum PublicationState {
 
 type Query {
   blogPost(id: ID): BlogPostEntityResponse
-  blogPosts(
-    filters: BlogPostFiltersInput
-    pagination: PaginationArg = {}
-    publicationState: PublicationState = LIVE
-    sort: [String] = []
-  ): BlogPostEntityResponseCollection
-  countries(
-    filters: CountryFiltersInput
-    pagination: PaginationArg = {}
-    publicationState: PublicationState = LIVE
-    sort: [String] = []
-  ): CountryEntityResponseCollection
+  blogPosts(filters: BlogPostFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): BlogPostEntityResponseCollection
+  countries(filters: CountryFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): CountryEntityResponseCollection
   country(id: ID): CountryEntityResponse
+  faq(id: ID): FaqEntityResponse
+  faqs(filters: FaqFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): FaqEntityResponseCollection
   i18NLocale(id: ID): I18NLocaleEntityResponse
-  i18NLocales(
-    filters: I18NLocaleFiltersInput
-    pagination: PaginationArg = {}
-    sort: [String] = []
-  ): I18NLocaleEntityResponseCollection
+  i18NLocales(filters: I18NLocaleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): I18NLocaleEntityResponseCollection
   me: UsersPermissionsMe
   member(id: ID): MemberEntityResponse
-  members(
-    filters: MemberFiltersInput
-    pagination: PaginationArg = {}
-    publicationState: PublicationState = LIVE
-    sort: [String] = []
-  ): MemberEntityResponseCollection
+  members(filters: MemberFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): MemberEntityResponseCollection
   project(id: ID): ProjectEntityResponse
   projectType(id: ID): ProjectTypeEntityResponse
-  projectTypes(
-    filters: ProjectTypeFiltersInput
-    pagination: PaginationArg = {}
-    publicationState: PublicationState = LIVE
-    sort: [String] = []
-  ): ProjectTypeEntityResponseCollection
-  projects(
-    filters: ProjectFiltersInput
-    pagination: PaginationArg = {}
-    publicationState: PublicationState = LIVE
-    sort: [String] = []
-  ): ProjectEntityResponseCollection
+  projectTypes(filters: ProjectTypeFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): ProjectTypeEntityResponseCollection
+  projects(filters: ProjectFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): ProjectEntityResponseCollection
   resource(id: ID): ResourceEntityResponse
-  resources(
-    filters: ResourceFiltersInput
-    pagination: PaginationArg = {}
-    publicationState: PublicationState = LIVE
-    sort: [String] = []
-  ): ResourceEntityResponseCollection
+  resources(filters: ResourceFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): ResourceEntityResponseCollection
   uploadFile(id: ID): UploadFileEntityResponse
-  uploadFiles(
-    filters: UploadFileFiltersInput
-    pagination: PaginationArg = {}
-    sort: [String] = []
-  ): UploadFileEntityResponseCollection
+  uploadFiles(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFileEntityResponseCollection
   uploadFolder(id: ID): UploadFolderEntityResponse
-  uploadFolders(
-    filters: UploadFolderFiltersInput
-    pagination: PaginationArg = {}
-    sort: [String] = []
-  ): UploadFolderEntityResponseCollection
+  uploadFolders(filters: UploadFolderFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFolderEntityResponseCollection
   usersPermissionsRole(id: ID): UsersPermissionsRoleEntityResponse
-  usersPermissionsRoles(
-    filters: UsersPermissionsRoleFiltersInput
-    pagination: PaginationArg = {}
-    sort: [String] = []
-  ): UsersPermissionsRoleEntityResponseCollection
+  usersPermissionsRoles(filters: UsersPermissionsRoleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsRoleEntityResponseCollection
   usersPermissionsUser(id: ID): UsersPermissionsUserEntityResponse
-  usersPermissionsUsers(
-    filters: UsersPermissionsUserFiltersInput
-    pagination: PaginationArg = {}
-    sort: [String] = []
-  ): UsersPermissionsUserEntityResponseCollection
+  usersPermissionsUsers(filters: UsersPermissionsUserFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsUserEntityResponseCollection
+  volunteer(id: ID): VolunteerEntityResponse
+  volunteers(filters: VolunteerFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): VolunteerEntityResponseCollection
 }
 
 type Resource {
@@ -708,9 +664,7 @@ input StringFilterInput {
   startsWith: String
 }
 
-"""
-The `Upload` scalar type represents a file upload.
-"""
+"""The `Upload` scalar type represents a file upload."""
 scalar Upload
 
 type UploadFile {
@@ -796,17 +750,9 @@ type UploadFileRelationResponseCollection {
 }
 
 type UploadFolder {
-  children(
-    filters: UploadFolderFiltersInput
-    pagination: PaginationArg = {}
-    sort: [String] = []
-  ): UploadFolderRelationResponseCollection
+  children(filters: UploadFolderFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFolderRelationResponseCollection
   createdAt: DateTime
-  files(
-    filters: UploadFileFiltersInput
-    pagination: PaginationArg = {}
-    sort: [String] = []
-  ): UploadFileRelationResponseCollection
+  files(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFileRelationResponseCollection
   name: String!
   parent: UploadFolderEntityResponse
   path: String!
@@ -932,18 +878,10 @@ type UsersPermissionsRole {
   createdAt: DateTime
   description: String
   name: String!
-  permissions(
-    filters: UsersPermissionsPermissionFiltersInput
-    pagination: PaginationArg = {}
-    sort: [String] = []
-  ): UsersPermissionsPermissionRelationResponseCollection
+  permissions(filters: UsersPermissionsPermissionFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsPermissionRelationResponseCollection
   type: String
   updatedAt: DateTime
-  users(
-    filters: UsersPermissionsUserFiltersInput
-    pagination: PaginationArg = {}
-    sort: [String] = []
-  ): UsersPermissionsUserRelationResponseCollection
+  users(filters: UsersPermissionsUserFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsUserRelationResponseCollection
 }
 
 type UsersPermissionsRoleEntity {
@@ -1043,4 +981,47 @@ input UsersPermissionsUserInput {
 
 type UsersPermissionsUserRelationResponseCollection {
   data: [UsersPermissionsUserEntity!]!
+}
+
+type Volunteer {
+  ApplicationLink: String
+  Content: String
+  Title: String
+  createdAt: DateTime
+  publishedAt: DateTime
+  updatedAt: DateTime
+}
+
+type VolunteerEntity {
+  attributes: Volunteer
+  id: ID
+}
+
+type VolunteerEntityResponse {
+  data: VolunteerEntity
+}
+
+type VolunteerEntityResponseCollection {
+  data: [VolunteerEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input VolunteerFiltersInput {
+  ApplicationLink: StringFilterInput
+  Content: StringFilterInput
+  Title: StringFilterInput
+  and: [VolunteerFiltersInput]
+  createdAt: DateTimeFilterInput
+  id: IDFilterInput
+  not: VolunteerFiltersInput
+  or: [VolunteerFiltersInput]
+  publishedAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+}
+
+input VolunteerInput {
+  ApplicationLink: String
+  Content: String
+  Title: String
+  publishedAt: DateTime
 }
