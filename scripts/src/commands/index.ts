@@ -5,6 +5,7 @@ import { logProgramHelp } from "../utils";
 // Commands
 import strapiCmd from "./strapi";
 import wpCmd from "./wp";
+import docsCmd from "./docs";
 
 const program = new Command();
 
@@ -13,6 +14,7 @@ program.version("1.0.0").description("SAMI Website Scripts");
 /** add sub-commands from child folders */
 program.addCommand(strapiCmd);
 program.addCommand(wpCmd);
+program.addCommand(docsCmd);
 
 if (!process.argv.slice(2).length) {
   logProgramHelp(program);

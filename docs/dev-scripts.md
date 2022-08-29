@@ -22,6 +22,19 @@ yarn scripts strapi
 
 ## Command List
 
-<!-- auto-generated from scripts-->
+<!-- Generated via yarn scripts docs cli -->
+<!-- begin generated content -->
 
-<!-- end auto-generated -->
+| name | description |
+| ---- | ----------- |
+| strapi | Strapi management scripts |
+| strapi bootstrap | Bootstrap strapi for development |
+| strapi config:export | Export strapi config |
+| strapi data:export | Export strapi data |
+| strapi types:generate | Generate types |
+| wp | Wordpress management scripts |
+| wp assets:extract | Extract WP assets to flat folder structure |
+| docs | Documentation generator tools |
+| docs cli | Generate CLI docs |
+
+<!-- end generated content -->
