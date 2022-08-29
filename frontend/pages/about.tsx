@@ -1,30 +1,44 @@
 import React from "react";
 import Head from "next/head";
 import { AboutPageComponent} from "components/pages/about";
+import { MembersPageComponent } from "components/pages/members";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import {About } from "types/about"
-import { AboutQuery, AboutDocument } from "../graphql/generated";
+import { AboutQuery, AboutDocument, MembersQuery, MembersDocument } from "../graphql/generated";
+import { IMember } from "types/member";
 import { serverQuery } from "lib/graphql";
 
 export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
   let about: About[] = [];
+  let members: IMember[] = [];
   
-  const res = await serverQuery<AboutQuery>(AboutDocument);
-  console.log("Testing", res);
+  const aboutRes = await serverQuery<AboutQuery>(AboutDocument);
 
-  if (res) {
+  if (aboutRes) {
     about =
-      res.data.abouts.data.map((m) => ({ ...m.attributes, id: m.id })) || [];
+      aboutRes.data.abouts.data.map((m) => ({ ...m.attributes, id: m.id })) || [];
   }
-  return {
-    props: {
-      about,
-    },
-  };
+  
+  const membersRes = await serverQuery<MembersQuery>(MembersDocument);
+    if (membersRes) {
+        members =
+            membersRes.data.members.data.map((m) => ({ ...m.attributes, id: m.id })) || [];
+    }
+    return {
+        props: {
+            about,
+            members
+        },
+    };
 };
+
+
+
+
 
 const AboutPage = ({
   about,
+  members
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <>
@@ -32,6 +46,7 @@ const AboutPage = ({
         <title>About Us</title>
       </Head>
       <AboutPageComponent aboutPageContent={about} />
+      <MembersPageComponent members={members} />
     </>
   );
 };
