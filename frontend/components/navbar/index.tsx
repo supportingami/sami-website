@@ -30,11 +30,6 @@ const Navbar: NextComponentType = () => {
       href: "/",
     },
     {
-      id: "members",
-      label: "Members",
-      href: "/members",
-    },
-    {
       id: "resources",
       label:"Resources",
       href:"/resources"
