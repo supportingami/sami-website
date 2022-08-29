@@ -1,5 +1,7 @@
 import React from "react";
 import Head from "next/head";
+import Link from "next/link";
+import { Heading } from "@chakra-ui/core"; 
 import { AboutPageComponent} from "components/pages/about";
 import { MembersPageComponent } from "components/pages/members";
 import { AnnualReportPageComponent } from "components/pages/annual-reports";
@@ -60,6 +62,10 @@ const AboutPage = ({
       </Head>
       <AboutPageComponent aboutPageContent={about} />
       <MembersPageComponent members={members} />
+      <Heading size="md">SAMI Theory of Change</Heading>
+      <p>
+      At SAMI we’ve been working to build our thoughts on how everything we do can fit into a larger picture to create real change across Africa. We hope to use this section to communicate some of these ideas when they are slightly further developed. In the meantime you can see our current working document <a target="_blank" rel="noopener noreferrer" href="https://docs.google.com/document/d/1QC0zZ4h59NUzyEfO9x33baYukHwbfP1I4PUNGFjI4JM/edit?usp=sharing">here</a>
+        </p>
       <AnnualReportPageComponent areports={areports} />
     </>
   );

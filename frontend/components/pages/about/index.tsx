@@ -7,7 +7,7 @@ export const AboutPageComponent: React.FC<{aboutPageContent: About[]}> = ({about
     <>
     {aboutPageContent.map((aboutPageContentItem, index) => (
       <div key={index}>
-        <Heading size="md">{aboutPageContentItem.Title}</Heading>
+        <Heading size="md">{aboutPageContentItem.Title} and Volunteers</Heading>
         <p>{aboutPageContentItem.Content}</p>
       </div>
     ))}
