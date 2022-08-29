@@ -1,0 +1,38 @@
+query projects {
+  projects {
+    data {
+      id
+      attributes {
+        Title
+        Summary
+        ProjectTypes {
+          data {
+            id
+            attributes {
+              Name
+              Content
+              Summary
+            }
+          }
+        }
+        Country {
+          data {
+            id
+            attributes {
+              Name
+              Content
+            }
+          }
+        }
+      }
+    }
+    meta {
+      pagination {
+        page
+        pageSize
+        total
+        pageCount
+      }
+    }
+  }
+}
