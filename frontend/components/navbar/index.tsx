@@ -2,7 +2,7 @@ import React from "react";
 import { NextComponentType } from "next";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { Box, Stack, Link as _Link, Button, IconButton, useColorMode } from "@chakra-ui/core";
+import { Box, Stack, Link as ChakraLink, Button, IconButton, useColorMode } from "@chakra-ui/core";
 
 const Navbar: NextComponentType = () => {
   const { data: session, status } = useSession();
@@ -33,10 +33,16 @@ const Navbar: NextComponentType = () => {
       href: "/resources",
     },
     {
+      id: "projects",
+      label: "Projects",
+      href: "/projects",
+    },
+    {
       id: "volunteer",
       label: "Volunteer",
       href: "/volunteer",
     },
+    ,
   ];
 
   const linksForAuthenticatedUsers = [
@@ -116,7 +122,7 @@ const Navbar: NextComponentType = () => {
                   return (
                     <Box key={link.id}>
                       <Link href={link.href}>
-                        <_Link>{link.label}</_Link>
+                        <ChakraLink>{link.label}</ChakraLink>
                       </Link>
                     </Box>
                   );
@@ -126,7 +132,7 @@ const Navbar: NextComponentType = () => {
                     return (
                       <Box key={link.id}>
                         <Link href={link.href}>
-                          <_Link>{link.label}</_Link>
+                          <ChakraLink>{link.label}</ChakraLink>
                         </Link>
                       </Box>
                     );
