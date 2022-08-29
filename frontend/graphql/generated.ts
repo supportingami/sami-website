@@ -1309,6 +1309,10 @@ export type FaqsQuery = {
       id?: string | null;
       attributes?: { __typename?: "Faq"; Question?: string | null; Response?: string | null } | null;
     }>;
+    meta: {
+      __typename?: "ResponseCollectionMeta";
+      pagination: { __typename?: "Pagination"; page: number; pageSize: number; total: number; pageCount: number };
+    };
   } | null;
 };
 
@@ -1418,6 +1422,28 @@ export const FaqsDocument = {
                           selections: [
                             { kind: "Field", name: { kind: "Name", value: "Question" } },
                             { kind: "Field", name: { kind: "Name", value: "Response" } },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "meta" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "pagination" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "page" } },
+                            { kind: "Field", name: { kind: "Name", value: "pageSize" } },
+                            { kind: "Field", name: { kind: "Name", value: "total" } },
+                            { kind: "Field", name: { kind: "Name", value: "pageCount" } },
                           ],
                         },
                       },
