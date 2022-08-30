@@ -11,6 +11,16 @@ query annualReports {
       # what fields to return
       attributes {
         Year
+        File{
+          data{
+            id
+            attributes{
+              name
+              url
+              size
+            }
+          }
+        }
       }
     }
     # return from query meta
