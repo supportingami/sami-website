@@ -2,14 +2,7 @@ import React from "react";
 import { NextComponentType } from "next";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
-import {
-  Box,
-  Stack,
-  Link as _Link,
-  Button,
-  IconButton,
-  useColorMode,
-} from "@chakra-ui/core";
+import { Box, Stack, Link as ChakraLink, Button, IconButton, useColorMode } from "@chakra-ui/core";
 
 const Navbar: NextComponentType = () => {
   const { data: session, status } = useSession();
@@ -31,14 +24,25 @@ const Navbar: NextComponentType = () => {
     },
     {
       id: "resources",
-      label:"Resources",
-      href:"/resources"
+      label: "Resources",
+      href: "/resources",
     },
     {
-      id:"about", 
-      label:"About",
-      href:"/about"
-    }
+      id: "projects",
+      label: "Projects",
+      href: "/projects",
+    },
+    {
+      id: "about",
+      label: "About",
+      href: "/about",
+    },
+    {
+      id: "volunteer",
+      label: "Volunteer",
+      href: "/volunteer",
+    },
+    ,
   ];
 
   const linksForAuthenticatedUsers = [
@@ -111,20 +115,14 @@ const Navbar: NextComponentType = () => {
     <Box bg={bgColor[colorMode]}>
       <Box p={4} color={color[colorMode]} shadow="lg" pos="relative">
         <Box maxW="xl" mx="auto" w="full">
-          <Stack
-            isInline
-            spacing={4}
-            align="center"
-            justifyContent="space-between"
-            w="full"
-          >
+          <Stack isInline spacing={4} align="center" justifyContent="space-between" w="full">
             <Box>
               <Stack isInline spacing={4} align="center" fontWeight="semibold">
                 {linksForAllUsers.map((link) => {
                   return (
                     <Box key={link.id}>
                       <Link href={link.href}>
-                        <_Link>{link.label}</_Link>
+                        <ChakraLink>{link.label}</ChakraLink>
                       </Link>
                     </Box>
                   );
@@ -134,7 +132,7 @@ const Navbar: NextComponentType = () => {
                     return (
                       <Box key={link.id}>
                         <Link href={link.href}>
-                          <_Link>{link.label}</_Link>
+                          <ChakraLink>{link.label}</ChakraLink>
                         </Link>
                       </Box>
                     );
