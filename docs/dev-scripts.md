@@ -25,16 +25,33 @@ yarn scripts strapi
 <!-- Generated via yarn scripts docs cli -->
 <!-- begin generated content -->
 
-| name | description |
-| ---- | ----------- |
-| strapi | Strapi management scripts |
-| strapi bootstrap | Bootstrap strapi for development |
-| strapi config:export | Export strapi config |
-| strapi data:export | Export strapi data |
-| strapi types:generate | Generate types |
-| wp | Wordpress management scripts |
-| wp assets:extract | Extract WP assets to flat folder structure |
-| docs | Documentation generator tools |
-| docs cli | Generate CLI docs |
+| name                  | description                                |
+| --------------------- | ------------------------------------------ |
+| strapi                | Strapi management scripts                  |
+| strapi bootstrap      | Bootstrap strapi for development           |
+| strapi config:export  | Export strapi config                       |
+| strapi data:export    | Export strapi data                         |
+| strapi types:generate | Generate types                             |
+| wp                    | Wordpress management scripts               |
+| wp assets:extract     | Extract WP assets to flat folder structure |
+| docs                  | Documentation generator tools              |
+| docs cli              | Generate CLI docs                          |
 
 <!-- end generated content -->
+
+## Troubleshooting
+
+```
+strapi boostrap
+error: The port 1337 is already used by another application
+```
+
+Some strapi scripts like `data:export` create their own strapi instance and so can only be executed whilst the default server is not running (e.g. following `yarn start`)
+
+```
+strapi types:generate
+
+✖ Failed to load schema
+```
+
+Other scripts require the main strapi instance to be running, i.e. via `yarn start`
