@@ -11,7 +11,7 @@ export const VolunteerPageComponent: React.FC<{ volunteerPageContent: IVolunteer
     <>
       {volunteerPageContent.map((volunteer) => (
         <div key={volunteer.id}>
-          <h1 className="my-5 font-bold text-primary">{volunteer.Title}</h1>
+          <h1>{volunteer.Title}</h1>
           <div className="prose" dangerouslySetInnerHTML={{ __html: volunteer.Content }}></div>
           <a href={volunteer.ApplicationLink} target="_blank" rel="noopener noreferrer">
             <button
