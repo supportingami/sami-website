@@ -1321,7 +1321,18 @@ export type AnnualReportsQuery = {
     data: Array<{
       __typename?: "AnnualReportEntity";
       id?: string | null;
-      attributes?: { __typename?: "AnnualReport"; Year?: number | null } | null;
+      attributes?: {
+        __typename?: "AnnualReport";
+        Year?: number | null;
+        File?: {
+          __typename?: "UploadFileEntityResponse";
+          data?: {
+            __typename?: "UploadFileEntity";
+            id?: string | null;
+            attributes?: { __typename?: "UploadFile"; name: string; url: string; size: number } | null;
+          } | null;
+        } | null;
+      } | null;
     }>;
     meta: {
       __typename?: "ResponseCollectionMeta";
@@ -1481,7 +1492,40 @@ export const AnnualReportsDocument = {
                         name: { kind: "Name", value: "attributes" },
                         selectionSet: {
                           kind: "SelectionSet",
-                          selections: [{ kind: "Field", name: { kind: "Name", value: "Year" } }],
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "Year" } },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "File" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "data" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        { kind: "Field", name: { kind: "Name", value: "id" } },
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "attributes" },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              { kind: "Field", name: { kind: "Name", value: "name" } },
+                                              { kind: "Field", name: { kind: "Name", value: "url" } },
+                                              { kind: "Field", name: { kind: "Name", value: "size" } },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
                         },
                       },
                     ],

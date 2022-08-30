@@ -6,17 +6,21 @@ import { getStrapiMedia } from "lib/media";
 export const AnnualReportsListItemComponent: React.FC<{
   areport: AReport;
 }> = ({ areport }) => (
-  <Box>
-    <div>
-      <div>{areport.Year} Annual Report</div>
-
-      {areport.File && (
-        <a href={getStrapiMedia(areport.File)} target="_blank" download rel="noopener noreferrer">
-          <Button size="md" backgroundColor="#0ff">
-            Download
-          </Button>
-        </a>
-      )}
-    </div>
-  </Box>
+  //add console.log to see if the areport is working
+  console.log("areport", areport),
+  (
+    <Box p="2">
+      <div>
+        {areport.File && (
+          <a href={getStrapiMedia(areport.File)} target="_blank" download rel="noopener noreferrer">
+            
+            <strong>{areport.Year} Annual Report </strong>
+            <Button size="sm" backgroundColor="grey">
+              Download
+            </Button>
+          </a>
+        )}
+      </div>
+    </Box>
+  )
 );
