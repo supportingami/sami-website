@@ -6,8 +6,6 @@ import { getStrapiMedia } from "lib/media";
 export const AnnualReportsListItemComponent: React.FC<{
   areport: AReport;
 }> = ({ areport }) => (
-  //add console.log to see if the areport is working
-  console.log("areport", areport),
   (
     <Box p="2">
       <div>
