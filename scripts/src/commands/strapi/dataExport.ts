@@ -43,23 +43,20 @@ async function dataExport(options: IProgramOptions) {
 
   // List all custom db endpoints for export (e.g. api::members.members)
   const db = app.db;
-  const metadata: Map<string, { uid: string; tableName: string }> = (db as any)
-    .metadata;
-  const dataKeys = [...metadata.keys()].filter((key) =>
-    key.startsWith("api::")
-  );
+  const metadata: Map<string, { uid: string; tableName: string }> = (db as any).metadata;
+  const dataKeys = [...metadata.keys()].filter((key) => key.startsWith("api::"));
 
   // Export data
   const service = app.plugin("import-export-entries").service("export");
   for (const key of dataKeys) {
     const { uid, tableName } = metadata.get(key);
     const entries = await app.entityService.findMany(uid);
-    const csvString = await service.exportData(entries, {
+    const data = await service.exportData(entries, {
       slug: uid,
-      dataFormat: "csv",
+      dataFormat: "json",
       relationsAsId: false,
     });
-    writeFileSync(path.resolve(outputDir, `${tableName}.csv`), csvString);
+    writeFileSync(path.resolve(outputDir, `${tableName}.json`), data);
   }
   logOutput({ msg1: "DB data exported successfully", msg2: outputDir });
 
