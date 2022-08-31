@@ -16,6 +16,12 @@ This will be the repo to support the new SAMI website
 git clone https://github.com/supportingami/sami-website
 ```
 
+Checkout files stored with git large file system
+
+```
+git lfs checkout
+```
+
 ### 2. Install necessary dependencies for the frontend application
 
 ```sh
