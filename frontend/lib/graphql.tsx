@@ -38,7 +38,7 @@ export async function serverQuery<T>(graphqlQuery: DocumentNode) {
 
 /** When calling client from server include strapi api token */
 export const graphQLServerClient = () => {
-  const serverToken = process.env.STRAPI_API_TOKEN;
+  const serverToken = process.env.STRAPI_READONLY_TOKEN;
   const headers: any = {};
   if (serverToken) {
     headers.authorization = `Bearer ${serverToken}`;

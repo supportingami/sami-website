@@ -2,7 +2,7 @@
 schema:
   - http://localhost:1337/graphql:
       headers:
-        Authorization: "Bearer ${STRAPI_API_TOKEN}"
+        Authorization: "Bearer ${STRAPI_READONLY_TOKEN}"
 documents: "./queries"
 generates:
   # Generate typescript definitions for queries
