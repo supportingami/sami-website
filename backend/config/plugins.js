@@ -7,6 +7,7 @@ module.exports = ({ env }) => ({
       playgroundAlways: false,
       depthLimit: 7,
       amountLimit: 100,
+      defaultLimit: -1, // default do not paginate and return all results
       apolloServer: {
         tracing: false,
       },

@@ -22,7 +22,13 @@ git clone https://github.com/supportingami/sami-website
 yarn install
 ```
 
-### 3. Start the backend and frontend
+### 3. Create access token and admin user for the backend
+
+```sh
+yarn scripts strapi bootstrap
+```
+
+### 4. Start the backend and frontend
 
 ```sh
 yarn start
