@@ -16,6 +16,93 @@ export type Scalars = {
   Upload: any;
 };
 
+export type About = {
+  __typename?: "About";
+  Content?: Maybe<Scalars["String"]>;
+  Title?: Maybe<Scalars["String"]>;
+  createdAt?: Maybe<Scalars["DateTime"]>;
+  publishedAt?: Maybe<Scalars["DateTime"]>;
+  updatedAt?: Maybe<Scalars["DateTime"]>;
+};
+
+export type AboutEntity = {
+  __typename?: "AboutEntity";
+  attributes?: Maybe<About>;
+  id?: Maybe<Scalars["ID"]>;
+};
+
+export type AboutEntityResponse = {
+  __typename?: "AboutEntityResponse";
+  data?: Maybe<AboutEntity>;
+};
+
+export type AboutEntityResponseCollection = {
+  __typename?: "AboutEntityResponseCollection";
+  data: Array<AboutEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type AboutFiltersInput = {
+  Content?: InputMaybe<StringFilterInput>;
+  Title?: InputMaybe<StringFilterInput>;
+  and?: InputMaybe<Array<InputMaybe<AboutFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  not?: InputMaybe<AboutFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<AboutFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type AboutInput = {
+  Content?: InputMaybe<Scalars["String"]>;
+  Title?: InputMaybe<Scalars["String"]>;
+  publishedAt?: InputMaybe<Scalars["DateTime"]>;
+};
+
+export type AnnualReport = {
+  __typename?: "AnnualReport";
+  File?: Maybe<UploadFileEntityResponse>;
+  Year?: Maybe<Scalars["Int"]>;
+  createdAt?: Maybe<Scalars["DateTime"]>;
+  publishedAt?: Maybe<Scalars["DateTime"]>;
+  updatedAt?: Maybe<Scalars["DateTime"]>;
+};
+
+export type AnnualReportEntity = {
+  __typename?: "AnnualReportEntity";
+  attributes?: Maybe<AnnualReport>;
+  id?: Maybe<Scalars["ID"]>;
+};
+
+export type AnnualReportEntityResponse = {
+  __typename?: "AnnualReportEntityResponse";
+  data?: Maybe<AnnualReportEntity>;
+};
+
+export type AnnualReportEntityResponseCollection = {
+  __typename?: "AnnualReportEntityResponseCollection";
+  data: Array<AnnualReportEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type AnnualReportFiltersInput = {
+  Year?: InputMaybe<IntFilterInput>;
+  and?: InputMaybe<Array<InputMaybe<AnnualReportFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  not?: InputMaybe<AnnualReportFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<AnnualReportFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type AnnualReportInput = {
+  File?: InputMaybe<Scalars["ID"]>;
+  Year?: InputMaybe<Scalars["Int"]>;
+  publishedAt?: InputMaybe<Scalars["DateTime"]>;
+};
+
 export type BlogPost = {
   __typename?: "BlogPost";
   content?: Maybe<Scalars["String"]>;
@@ -242,6 +329,8 @@ export type FloatFilterInput = {
 };
 
 export type GenericMorph =
+  | About
+  | AnnualReport
   | BlogPost
   | Country
   | Faq
@@ -428,6 +517,8 @@ export type MemberInput = {
 
 export type Mutation = {
   __typename?: "Mutation";
+  createAbout?: Maybe<AboutEntityResponse>;
+  createAnnualReport?: Maybe<AnnualReportEntityResponse>;
   createBlogPost?: Maybe<BlogPostEntityResponse>;
   createCountry?: Maybe<CountryEntityResponse>;
   createFaq?: Maybe<FaqEntityResponse>;
@@ -442,6 +533,8 @@ export type Mutation = {
   /** Create a new user */
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
   createVolunteer?: Maybe<VolunteerEntityResponse>;
+  deleteAbout?: Maybe<AboutEntityResponse>;
+  deleteAnnualReport?: Maybe<AnnualReportEntityResponse>;
   deleteBlogPost?: Maybe<BlogPostEntityResponse>;
   deleteCountry?: Maybe<CountryEntityResponse>;
   deleteFaq?: Maybe<FaqEntityResponse>;
@@ -467,6 +560,8 @@ export type Mutation = {
   removeFile?: Maybe<UploadFileEntityResponse>;
   /** Reset user password. Confirm with a code (resetToken from forgotPassword) */
   resetPassword?: Maybe<UsersPermissionsLoginPayload>;
+  updateAbout?: Maybe<AboutEntityResponse>;
+  updateAnnualReport?: Maybe<AnnualReportEntityResponse>;
   updateBlogPost?: Maybe<BlogPostEntityResponse>;
   updateCountry?: Maybe<CountryEntityResponse>;
   updateFaq?: Maybe<FaqEntityResponse>;
@@ -483,6 +578,14 @@ export type Mutation = {
   updateUsersPermissionsUser: UsersPermissionsUserEntityResponse;
   updateVolunteer?: Maybe<VolunteerEntityResponse>;
   upload: UploadFileEntityResponse;
+};
+
+export type MutationCreateAboutArgs = {
+  data: AboutInput;
+};
+
+export type MutationCreateAnnualReportArgs = {
+  data: AnnualReportInput;
 };
 
 export type MutationCreateBlogPostArgs = {
@@ -531,6 +634,14 @@ export type MutationCreateUsersPermissionsUserArgs = {
 
 export type MutationCreateVolunteerArgs = {
   data: VolunteerInput;
+};
+
+export type MutationDeleteAboutArgs = {
+  id: Scalars["ID"];
+};
+
+export type MutationDeleteAnnualReportArgs = {
+  id: Scalars["ID"];
 };
 
 export type MutationDeleteBlogPostArgs = {
@@ -612,6 +723,16 @@ export type MutationResetPasswordArgs = {
   code: Scalars["String"];
   password: Scalars["String"];
   passwordConfirmation: Scalars["String"];
+};
+
+export type MutationUpdateAboutArgs = {
+  data: AboutInput;
+  id: Scalars["ID"];
+};
+
+export type MutationUpdateAnnualReportArgs = {
+  data: AnnualReportInput;
+  id: Scalars["ID"];
 };
 
 export type MutationUpdateBlogPostArgs = {
@@ -828,6 +949,10 @@ export enum PublicationState {
 
 export type Query = {
   __typename?: "Query";
+  about?: Maybe<AboutEntityResponse>;
+  abouts?: Maybe<AboutEntityResponseCollection>;
+  annualReport?: Maybe<AnnualReportEntityResponse>;
+  annualReports?: Maybe<AnnualReportEntityResponseCollection>;
   blogPost?: Maybe<BlogPostEntityResponse>;
   blogPosts?: Maybe<BlogPostEntityResponseCollection>;
   countries?: Maybe<CountryEntityResponseCollection>;
@@ -855,6 +980,28 @@ export type Query = {
   usersPermissionsUsers?: Maybe<UsersPermissionsUserEntityResponseCollection>;
   volunteer?: Maybe<VolunteerEntityResponse>;
   volunteers?: Maybe<VolunteerEntityResponseCollection>;
+};
+
+export type QueryAboutArgs = {
+  id?: InputMaybe<Scalars["ID"]>;
+};
+
+export type QueryAboutsArgs = {
+  filters?: InputMaybe<AboutFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+};
+
+export type QueryAnnualReportArgs = {
+  id?: InputMaybe<Scalars["ID"]>;
+};
+
+export type QueryAnnualReportsArgs = {
+  filters?: InputMaybe<AnnualReportFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
 };
 
 export type QueryBlogPostArgs = {
@@ -1488,6 +1635,53 @@ export type VolunteerInput = {
   publishedAt?: InputMaybe<Scalars["DateTime"]>;
 };
 
+export type AboutQueryVariables = Exact<{ [key: string]: never }>;
+
+export type AboutQuery = {
+  __typename?: "Query";
+  abouts?: {
+    __typename?: "AboutEntityResponseCollection";
+    data: Array<{
+      __typename?: "AboutEntity";
+      id?: string | null;
+      attributes?: { __typename?: "About"; Title?: string | null; Content?: string | null } | null;
+    }>;
+    meta: {
+      __typename?: "ResponseCollectionMeta";
+      pagination: { __typename?: "Pagination"; page: number; pageSize: number; total: number; pageCount: number };
+    };
+  } | null;
+};
+
+export type AnnualReportsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type AnnualReportsQuery = {
+  __typename?: "Query";
+  annualReports?: {
+    __typename?: "AnnualReportEntityResponseCollection";
+    data: Array<{
+      __typename?: "AnnualReportEntity";
+      id?: string | null;
+      attributes?: {
+        __typename?: "AnnualReport";
+        Year?: number | null;
+        File?: {
+          __typename?: "UploadFileEntityResponse";
+          data?: {
+            __typename?: "UploadFileEntity";
+            id?: string | null;
+            attributes?: { __typename?: "UploadFile"; name: string; url: string; size: number } | null;
+          } | null;
+        } | null;
+      } | null;
+    }>;
+    meta: {
+      __typename?: "ResponseCollectionMeta";
+      pagination: { __typename?: "Pagination"; page: number; pageSize: number; total: number; pageCount: number };
+    };
+  } | null;
+};
+
 export type FaqsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type FaqsQuery = {
@@ -1624,6 +1818,170 @@ export type VolunteersQuery = {
   } | null;
 };
 
+export const AboutDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "about" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "abouts" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "data" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "attributes" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "Title" } },
+                            { kind: "Field", name: { kind: "Name", value: "Content" } },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "meta" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "pagination" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "page" } },
+                            { kind: "Field", name: { kind: "Name", value: "pageSize" } },
+                            { kind: "Field", name: { kind: "Name", value: "total" } },
+                            { kind: "Field", name: { kind: "Name", value: "pageCount" } },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<AboutQuery, AboutQueryVariables>;
+export const AnnualReportsDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "annualReports" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "annualReports" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "data" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "attributes" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "Year" } },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "File" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "data" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        { kind: "Field", name: { kind: "Name", value: "id" } },
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "attributes" },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              { kind: "Field", name: { kind: "Name", value: "name" } },
+                                              { kind: "Field", name: { kind: "Name", value: "url" } },
+                                              { kind: "Field", name: { kind: "Name", value: "size" } },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "meta" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "pagination" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "page" } },
+                            { kind: "Field", name: { kind: "Name", value: "pageSize" } },
+                            { kind: "Field", name: { kind: "Name", value: "total" } },
+                            { kind: "Field", name: { kind: "Name", value: "pageCount" } },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<AnnualReportsQuery, AnnualReportsQueryVariables>;
 export const FaqsDocument = {
   kind: "Document",
   definitions: [
