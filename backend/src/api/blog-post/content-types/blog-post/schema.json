@@ -4,28 +4,31 @@
   "info": {
     "singularName": "blog-post",
     "pluralName": "blog-posts",
-    "displayName": "Blog Post"
+    "displayName": "Blog Post",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "content": {
+    "Content": {
       "type": "richtext"
     },
-    "feature_image": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
+    "FeatureImage": {
       "type": "media",
-      "multiple": false
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images", "files", "videos", "audios"]
     },
-    "title": {
+    "Title": {
       "type": "string"
+    },
+    "Summary": {
+      "type": "string"
+    },
+    "DateWritten": {
+      "type": "date"
     }
   }
 }

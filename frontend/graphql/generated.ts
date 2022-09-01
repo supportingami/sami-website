@@ -11,6 +11,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  Date: any;
   DateTime: any;
   JSON: any;
   Upload: any;
@@ -105,11 +106,13 @@ export type AnnualReportInput = {
 
 export type BlogPost = {
   __typename?: "BlogPost";
-  content?: Maybe<Scalars["String"]>;
+  Content?: Maybe<Scalars["String"]>;
+  DateWritten?: Maybe<Scalars["Date"]>;
+  FeatureImage?: Maybe<UploadFileEntityResponse>;
+  Summary?: Maybe<Scalars["String"]>;
+  Title?: Maybe<Scalars["String"]>;
   createdAt?: Maybe<Scalars["DateTime"]>;
-  feature_image?: Maybe<UploadFileEntityResponse>;
   publishedAt?: Maybe<Scalars["DateTime"]>;
-  title?: Maybe<Scalars["String"]>;
   updatedAt?: Maybe<Scalars["DateTime"]>;
 };
 
@@ -131,22 +134,26 @@ export type BlogPostEntityResponseCollection = {
 };
 
 export type BlogPostFiltersInput = {
+  Content?: InputMaybe<StringFilterInput>;
+  DateWritten?: InputMaybe<DateFilterInput>;
+  Summary?: InputMaybe<StringFilterInput>;
+  Title?: InputMaybe<StringFilterInput>;
   and?: InputMaybe<Array<InputMaybe<BlogPostFiltersInput>>>;
-  content?: InputMaybe<StringFilterInput>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
   id?: InputMaybe<IdFilterInput>;
   not?: InputMaybe<BlogPostFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<BlogPostFiltersInput>>>;
   publishedAt?: InputMaybe<DateTimeFilterInput>;
-  title?: InputMaybe<StringFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
 
 export type BlogPostInput = {
-  content?: InputMaybe<Scalars["String"]>;
-  feature_image?: InputMaybe<Scalars["ID"]>;
+  Content?: InputMaybe<Scalars["String"]>;
+  DateWritten?: InputMaybe<Scalars["Date"]>;
+  FeatureImage?: InputMaybe<Scalars["ID"]>;
+  Summary?: InputMaybe<Scalars["String"]>;
+  Title?: InputMaybe<Scalars["String"]>;
   publishedAt?: InputMaybe<Scalars["DateTime"]>;
-  title?: InputMaybe<Scalars["String"]>;
 };
 
 export type BooleanFilterInput = {
@@ -223,6 +230,30 @@ export type CountryInput = {
 export type CountryRelationResponseCollection = {
   __typename?: "CountryRelationResponseCollection";
   data: Array<CountryEntity>;
+};
+
+export type DateFilterInput = {
+  and?: InputMaybe<Array<InputMaybe<Scalars["Date"]>>>;
+  between?: InputMaybe<Array<InputMaybe<Scalars["Date"]>>>;
+  contains?: InputMaybe<Scalars["Date"]>;
+  containsi?: InputMaybe<Scalars["Date"]>;
+  endsWith?: InputMaybe<Scalars["Date"]>;
+  eq?: InputMaybe<Scalars["Date"]>;
+  eqi?: InputMaybe<Scalars["Date"]>;
+  gt?: InputMaybe<Scalars["Date"]>;
+  gte?: InputMaybe<Scalars["Date"]>;
+  in?: InputMaybe<Array<InputMaybe<Scalars["Date"]>>>;
+  lt?: InputMaybe<Scalars["Date"]>;
+  lte?: InputMaybe<Scalars["Date"]>;
+  ne?: InputMaybe<Scalars["Date"]>;
+  not?: InputMaybe<DateFilterInput>;
+  notContains?: InputMaybe<Scalars["Date"]>;
+  notContainsi?: InputMaybe<Scalars["Date"]>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars["Date"]>>>;
+  notNull?: InputMaybe<Scalars["Boolean"]>;
+  null?: InputMaybe<Scalars["Boolean"]>;
+  or?: InputMaybe<Array<InputMaybe<Scalars["Date"]>>>;
+  startsWith?: InputMaybe<Scalars["Date"]>;
 };
 
 export type DateTimeFilterInput = {
@@ -1682,6 +1713,34 @@ export type AnnualReportsQuery = {
   } | null;
 };
 
+export type BlogPostsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type BlogPostsQuery = {
+  __typename?: "Query";
+  blogPosts?: {
+    __typename?: "BlogPostEntityResponseCollection";
+    data: Array<{
+      __typename?: "BlogPostEntity";
+      id?: string | null;
+      attributes?: {
+        __typename?: "BlogPost";
+        Title?: string | null;
+        Summary?: string | null;
+        Content?: string | null;
+        DateWritten?: any | null;
+        FeatureImage?: {
+          __typename?: "UploadFileEntityResponse";
+          data?: {
+            __typename?: "UploadFileEntity";
+            id?: string | null;
+            attributes?: { __typename?: "UploadFile"; name: string; url: string; size: number } | null;
+          } | null;
+        } | null;
+      } | null;
+    }>;
+  } | null;
+};
+
 export type FaqsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type FaqsQuery = {
@@ -1982,6 +2041,84 @@ export const AnnualReportsDocument = {
     },
   ],
 } as unknown as DocumentNode<AnnualReportsQuery, AnnualReportsQueryVariables>;
+export const BlogPostsDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "blogPosts" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "blogPosts" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "data" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "attributes" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "Title" } },
+                            { kind: "Field", name: { kind: "Name", value: "Summary" } },
+                            { kind: "Field", name: { kind: "Name", value: "Content" } },
+                            { kind: "Field", name: { kind: "Name", value: "DateWritten" } },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "FeatureImage" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "data" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        { kind: "Field", name: { kind: "Name", value: "id" } },
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "attributes" },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              { kind: "Field", name: { kind: "Name", value: "name" } },
+                                              { kind: "Field", name: { kind: "Name", value: "url" } },
+                                              { kind: "Field", name: { kind: "Name", value: "size" } },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<BlogPostsQuery, BlogPostsQueryVariables>;
 export const FaqsDocument = {
   kind: "Document",
   definitions: [

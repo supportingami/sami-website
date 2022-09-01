@@ -78,11 +78,13 @@ input AnnualReportInput {
 }
 
 type BlogPost {
-  content: String
+  Content: String
+  DateWritten: Date
+  FeatureImage: UploadFileEntityResponse
+  Summary: String
+  Title: String
   createdAt: DateTime
-  feature_image: UploadFileEntityResponse
   publishedAt: DateTime
-  title: String
   updatedAt: DateTime
 }
 
@@ -101,22 +103,26 @@ type BlogPostEntityResponseCollection {
 }
 
 input BlogPostFiltersInput {
+  Content: StringFilterInput
+  DateWritten: DateFilterInput
+  Summary: StringFilterInput
+  Title: StringFilterInput
   and: [BlogPostFiltersInput]
-  content: StringFilterInput
   createdAt: DateTimeFilterInput
   id: IDFilterInput
   not: BlogPostFiltersInput
   or: [BlogPostFiltersInput]
   publishedAt: DateTimeFilterInput
-  title: StringFilterInput
   updatedAt: DateTimeFilterInput
 }
 
 input BlogPostInput {
-  content: String
-  feature_image: ID
+  Content: String
+  DateWritten: Date
+  FeatureImage: ID
+  Summary: String
+  Title: String
   publishedAt: DateTime
-  title: String
 }
 
 input BooleanFilterInput {
@@ -188,6 +194,35 @@ input CountryInput {
 
 type CountryRelationResponseCollection {
   data: [CountryEntity!]!
+}
+
+"""
+A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar Date
+
+input DateFilterInput {
+  and: [Date]
+  between: [Date]
+  contains: Date
+  containsi: Date
+  endsWith: Date
+  eq: Date
+  eqi: Date
+  gt: Date
+  gte: Date
+  in: [Date]
+  lt: Date
+  lte: Date
+  ne: Date
+  not: DateFilterInput
+  notContains: Date
+  notContainsi: Date
+  notIn: [Date]
+  notNull: Boolean
+  null: Boolean
+  or: [Date]
+  startsWith: Date
 }
 
 """

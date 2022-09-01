@@ -1,0 +1,23 @@
+query blogPosts {
+  blogPosts {
+    data {
+      id
+      attributes {
+        Title
+        Summary
+        Content
+        DateWritten
+        FeatureImage {
+          data {
+            id
+            attributes {
+              name
+              url
+              size
+            }
+          }
+        }
+      }
+    }
+  }
+}
