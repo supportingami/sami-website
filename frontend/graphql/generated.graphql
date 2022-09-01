@@ -82,6 +82,12 @@ type BlogPost {
   DateWritten: Date
   FeatureImage: UploadFileEntityResponse
   Summary: String
+  Tags(
+    filters: BlogTagFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): BlogTagRelationResponseCollection
   Title: String
   createdAt: DateTime
   publishedAt: DateTime
@@ -106,6 +112,7 @@ input BlogPostFiltersInput {
   Content: StringFilterInput
   DateWritten: DateFilterInput
   Summary: StringFilterInput
+  Tags: BlogTagFiltersInput
   Title: StringFilterInput
   and: [BlogPostFiltersInput]
   createdAt: DateTimeFilterInput
@@ -121,8 +128,53 @@ input BlogPostInput {
   DateWritten: Date
   FeatureImage: ID
   Summary: String
+  Tags: [ID]
   Title: String
   publishedAt: DateTime
+}
+
+type BlogTag {
+  BlogPost: BlogPostEntityResponse
+  Tag: String
+  createdAt: DateTime
+  publishedAt: DateTime
+  updatedAt: DateTime
+}
+
+type BlogTagEntity {
+  attributes: BlogTag
+  id: ID
+}
+
+type BlogTagEntityResponse {
+  data: BlogTagEntity
+}
+
+type BlogTagEntityResponseCollection {
+  data: [BlogTagEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input BlogTagFiltersInput {
+  BlogPost: BlogPostFiltersInput
+  Tag: StringFilterInput
+  and: [BlogTagFiltersInput]
+  createdAt: DateTimeFilterInput
+  id: IDFilterInput
+  not: BlogTagFiltersInput
+  or: [BlogTagFiltersInput]
+  publishedAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+}
+
+input BlogTagInput {
+  BlogPost: ID
+  Tag: String
+  publishedAt: DateTime
+}
+
+type BlogTagRelationResponseCollection {
+  data: [BlogTagEntity!]!
 }
 
 input BooleanFilterInput {
@@ -333,6 +385,7 @@ union GenericMorph =
     About
   | AnnualReport
   | BlogPost
+  | BlogTag
   | Country
   | Faq
   | I18NLocale
@@ -515,6 +568,7 @@ type Mutation {
   createAbout(data: AboutInput!): AboutEntityResponse
   createAnnualReport(data: AnnualReportInput!): AnnualReportEntityResponse
   createBlogPost(data: BlogPostInput!): BlogPostEntityResponse
+  createBlogTag(data: BlogTagInput!): BlogTagEntityResponse
   createCountry(data: CountryInput!): CountryEntityResponse
   createFaq(data: FaqInput!): FaqEntityResponse
   createMember(data: MemberInput!): MemberEntityResponse
@@ -537,6 +591,7 @@ type Mutation {
   deleteAbout(id: ID!): AboutEntityResponse
   deleteAnnualReport(id: ID!): AnnualReportEntityResponse
   deleteBlogPost(id: ID!): BlogPostEntityResponse
+  deleteBlogTag(id: ID!): BlogTagEntityResponse
   deleteCountry(id: ID!): CountryEntityResponse
   deleteFaq(id: ID!): FaqEntityResponse
   deleteMember(id: ID!): MemberEntityResponse
@@ -582,6 +637,7 @@ type Mutation {
   updateAbout(data: AboutInput!, id: ID!): AboutEntityResponse
   updateAnnualReport(data: AnnualReportInput!, id: ID!): AnnualReportEntityResponse
   updateBlogPost(data: BlogPostInput!, id: ID!): BlogPostEntityResponse
+  updateBlogTag(data: BlogTagInput!, id: ID!): BlogTagEntityResponse
   updateCountry(data: CountryInput!, id: ID!): CountryEntityResponse
   updateFaq(data: FaqInput!, id: ID!): FaqEntityResponse
   updateFileInfo(id: ID!, info: FileInfoInput): UploadFileEntityResponse!
@@ -752,6 +808,13 @@ type Query {
     publicationState: PublicationState = LIVE
     sort: [String] = []
   ): BlogPostEntityResponseCollection
+  blogTag(id: ID): BlogTagEntityResponse
+  blogTags(
+    filters: BlogTagFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): BlogTagEntityResponseCollection
   countries(
     filters: CountryFiltersInput
     pagination: PaginationArg = {}

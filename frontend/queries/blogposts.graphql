@@ -17,6 +17,14 @@ query blogPosts {
             }
           }
         }
+        Tags {
+          data {
+            id
+            attributes {
+              Tag
+            }
+          }
+        }
       }
     }
   }

@@ -7,6 +7,7 @@ import {
   TwitterIcon,
   TwitterShareButton,
 } from "react-share";
+import dayjs from "dayjs";
 
 export const BlogPostComponent: React.FC<{ blogPosts: IBlogPost[]; title }> = ({ blogPosts, title }) => {
   const size = "28px";
@@ -18,7 +19,14 @@ export const BlogPostComponent: React.FC<{ blogPosts: IBlogPost[]; title }> = ({
         .map((blogPost) => (
           <div>
             <h1 style={{ margin: "5px 0px 15px 0", fontSize: "25px", fontWeight: "600" }}>{blogPost.Title}</h1>
-            <div dangerouslySetInnerHTML={{ __html: blogPost.Content }}></div>
+            <span>{dayjs(blogPost.DateWritten).format("MMM D, YYYY")} </span>
+            <span>
+              {" | "}
+              {blogPost.Tags.data.map((tag) => (
+                <span style={{ opacity: "0.7" }}>{tag.attributes.Tag} </span>
+              ))}
+            </span>
+            <div dangerouslySetInnerHTML={{ __html: blogPost.Content }} style={{ margin: "10px 0 " }}></div>
             <div style={{ margin: "20px 0" }}>
               <div>Share this Blog with your community:</div>
               <hr />

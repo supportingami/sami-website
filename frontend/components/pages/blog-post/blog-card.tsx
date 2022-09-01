@@ -5,6 +5,7 @@ import React from "react";
 import { IBlogPost } from "types/blogpost";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import dayjs from "dayjs";
+
 export const BlogCardComponent: React.FC<{
   blog: IBlogPost;
 }> = ({ blog }) => (
