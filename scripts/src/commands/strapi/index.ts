@@ -3,6 +3,7 @@ import { logProgramHelp } from "../../utils";
 import bootstrapCmd from "./bootstrap";
 import configExportCmd from "./configExport";
 import dataExportCmd from "./dataExport";
+import mediaUploadCmd from "./mediaUpload";
 import typesGenerateCmd from "./typesGenerate";
 
 /***************************************************************************************
@@ -15,6 +16,7 @@ program.description("Strapi management scripts");
 program.addCommand(bootstrapCmd);
 program.addCommand(configExportCmd);
 program.addCommand(dataExportCmd);
+program.addCommand(mediaUploadCmd);
 program.addCommand(typesGenerateCmd);
 
 export default program;
