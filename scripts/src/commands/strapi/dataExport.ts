@@ -2,26 +2,27 @@ import { Command } from "commander";
 import { emptyDirSync, ensureDirSync, writeFileSync } from "fs-extra";
 import path from "path";
 import { PATHS } from "../../paths";
-import { logOutput } from "../../utils";
+import { logOutput, logWarning } from "../../utils";
 import { createStrapiInstance } from "./common";
 
 /***************************************************************************************
- * CLI
- * @example yarn
+ * DEPRECATED - CC 2022-09-03 (recommend remove 2022-12-03)
+ * Strapi export plugin doesn't support file referneces in a useful way,
+ * deprecating in favour of core db methods. Code reatined for reference
  *************************************************************************************/
 interface IProgramOptions {
   outDir: string;
 }
 const program = new Command("data:export");
 export default program
-  .description("Export strapi data")
+  .description("DEPRECATED - Export strapi data via plugin")
   .option("-o --out-dir <string>", "Directory to output type defintions")
   .action(async (options: Partial<IProgramOptions>) => {
     const optionsWithDefaults: IProgramOptions = {
       outDir: PATHS.sharedDir,
       ...options,
     };
-    dataExport(optionsWithDefaults);
+    logWarning({ msg1: "data:export is deprecated, use db:export instead" });
   });
 
 /***************************************************************************************
