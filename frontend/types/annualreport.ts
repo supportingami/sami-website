@@ -1,7 +1,5 @@
 import { AnnualReport } from "../graphql/generated";
 
-export interface AReport extends AnnualReport {
-    id: string;
-  
-  }
-  
+export interface IAnnualReport extends AnnualReport {
+  id: string;
+}
