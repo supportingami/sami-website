@@ -1,0 +1,9 @@
+[
+  {
+    "field": "Media",
+    "file_id": 30,
+    "order": 1,
+    "related_id": 1,
+    "related_type": "api::resource.resource"
+  }
+]
