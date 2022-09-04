@@ -511,15 +511,13 @@ input JSONFilterInput {
 
 type Member {
   Bio: String
+  BioImage: UploadFileEntityResponse
   Email: String
   LinkedIn: String
   Name: String
+  Order: Int
   Organisation: ENUM_MEMBER_ORGANISATION
-  Photo(
-    filters: UploadFileFiltersInput
-    pagination: PaginationArg = {}
-    sort: [String] = []
-  ): UploadFileRelationResponseCollection
+  Photo: UploadFileEntityResponse
   createdAt: DateTime
   publishedAt: DateTime
   updatedAt: DateTime
@@ -544,6 +542,7 @@ input MemberFiltersInput {
   Email: StringFilterInput
   LinkedIn: StringFilterInput
   Name: StringFilterInput
+  Order: IntFilterInput
   Organisation: StringFilterInput
   and: [MemberFiltersInput]
   createdAt: DateTimeFilterInput
@@ -556,11 +555,13 @@ input MemberFiltersInput {
 
 input MemberInput {
   Bio: String
+  BioImage: ID
   Email: String
   LinkedIn: String
   Name: String
+  Order: Int
   Organisation: ENUM_MEMBER_ORGANISATION
-  Photo: [ID]
+  Photo: ID
   publishedAt: DateTime
 }
 
