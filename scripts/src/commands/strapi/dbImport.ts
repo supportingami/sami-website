@@ -98,8 +98,7 @@ class DBImport {
   private generateSummary(table: string, importData: any[], localData: any[]) {
     const ops = { table, INSERT: 0, REPLACE: 0, DELETE: 0, SKIP: 0 };
 
-    let primaryKey = "id";
-    if (table === "sqlite_sequence") primaryKey = "name";
+    const primaryKey = this.getTablePrimaryKey(table);
     const importHashmap = arrayToHashmap(importData, primaryKey);
     const localHashmap = arrayToHashmap(localData, primaryKey);
 
@@ -133,6 +132,14 @@ class DBImport {
     if (totalOps > 0) {
       return ops;
     }
+  }
+
+  private getTablePrimaryKey(table: string) {
+    const customKeys = {
+      sqlite_sequence: "name",
+      files_related_morphs: "file_id",
+    };
+    return customKeys[table] ?? "id";
   }
 
   private compareEntries(a: any, b: any) {
