@@ -90,7 +90,9 @@ class DBImport {
         } else {
           console.log(table);
           this.truncateTable(table);
-          this.insertRows(table, importData, Object.keys(importData[0]));
+          if (importData.length > 0) {
+            this.insertRows(table, importData, Object.keys(importData[0]));
+          }
         }
       }
     }
