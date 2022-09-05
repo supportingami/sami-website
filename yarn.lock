@@ -4874,6 +4874,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/better-sqlite3@npm:^7.6.0":
+  version: 7.6.0
+  resolution: "@types/better-sqlite3@npm:7.6.0"
+  dependencies:
+    "@types/node": "*"
+  checksum: 778b7d082b4b1f661572b7f945a4f42442a7d07a07ede9b56f8c4f2c613dbeb546a969f169c2e1a2fb989c838363705366b1f9780e583989cd3d7264e597500c
+  languageName: node
+  linkType: hard
+
 "@types/body-parser@npm:*":
   version: 1.19.2
   resolution: "@types/body-parser@npm:1.19.2"
@@ -5294,6 +5303,13 @@ __metadata:
   version: 4.0.0
   resolution: "@types/parse-json@npm:4.0.0"
   checksum: fd6bce2b674b6efc3db4c7c3d336bd70c90838e8439de639b909ce22f3720d21344f52427f1d9e57b265fcb7f6c018699b99e5e0c208a1a4823014269a6bf35b
+  languageName: node
+  linkType: hard
+
+"@types/prompts@npm:^2.0.14":
+  version: 2.4.0
+  resolution: "@types/prompts@npm:2.4.0"
+  checksum: ec75655f07fbc3cb2df60a3e3bdd13bfda0554a16f5541285c4b1cc0610756838a2863dccfc911cbb1385492054c07210512164e3dbef272ec638d631783b278
   languageName: node
   linkType: hard
 
@@ -6838,7 +6854,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"better-sqlite3@npm:7.6.2":
+"better-sqlite3@npm:7.6.2, better-sqlite3@npm:^7.6.2":
   version: 7.6.2
   resolution: "better-sqlite3@npm:7.6.2"
   dependencies:
@@ -13692,6 +13708,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"kleur@npm:^3.0.3":
+  version: 3.0.3
+  resolution: "kleur@npm:3.0.3"
+  checksum: df82cd1e172f957bae9c536286265a5cdbd5eeca487cb0a3b2a7b41ef959fc61f8e7c0e9aeea9c114ccf2c166b6a8dd45a46fd619c1c569d210ecd2765ad5169
+  languageName: node
+  linkType: hard
+
 "knex@npm:1.0.4":
   version: 1.0.4
   resolution: "knex@npm:1.0.4"
@@ -17047,6 +17070,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"prompts@npm:^2.4.2":
+  version: 2.4.2
+  resolution: "prompts@npm:2.4.2"
+  dependencies:
+    kleur: ^3.0.3
+    sisteransi: ^1.0.5
+  checksum: d8fd1fe63820be2412c13bfc5d0a01909acc1f0367e32396962e737cb2fc52d004f3302475d5ce7d18a1e8a79985f93ff04ee03007d091029c3f9104bffc007d
+  languageName: node
+  linkType: hard
+
 "prop-types@npm:^15.5.8, prop-types@npm:^15.6.0, prop-types@npm:^15.6.1, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
@@ -18630,10 +18663,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "scripts@workspace:scripts"
   dependencies:
+    "@types/better-sqlite3": ^7.6.0
     "@types/fs-extra": ^9.0.4
     "@types/inquirer": ^7.3.1
     "@types/node": ^18.6.3
+    "@types/prompts": ^2.0.14
     axios: ^0.27.2
+    better-sqlite3: ^7.6.2
     boxen: ^5.0.1
     chalk: ^4.1.0
     chokidar: ^3.5.3
@@ -18642,6 +18678,7 @@ __metadata:
     fs-extra: ^9.0.1
     glob: ^7.2.0
     inquirer: ^7.3.3
+    prompts: ^2.4.2
     ts-node: ~7.0.0
     ts-node-dev: ^1.0.0
     typescript: ^4.1.2
@@ -18992,6 +19029,13 @@ __metadata:
   dependencies:
     is-arrayish: ^0.3.1
   checksum: a7f3f2ab5c76c4472d5c578df892e857323e452d9f392e1b5cf74b74db66e6294a1e1b8b390b519fa1b96b5b613f2a37db6cffef52c3f1f8f3c5ea64eb2d54c0
+  languageName: node
+  linkType: hard
+
+"sisteransi@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "sisteransi@npm:1.0.5"
+  checksum: aba6438f46d2bfcef94cf112c835ab395172c75f67453fe05c340c770d3c402363018ae1ab4172a1026a90c47eaccf3af7b6ff6fa749a680c2929bd7fa2b37a4
   languageName: node
   linkType: hard
 

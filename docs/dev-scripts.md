@@ -25,17 +25,19 @@ yarn scripts strapi
 <!-- Generated via yarn scripts docs cli -->
 <!-- begin generated content -->
 
-| name                  | description                                |
-| --------------------- | ------------------------------------------ |
-| strapi                | Strapi management scripts                  |
-| strapi bootstrap      | Bootstrap strapi for development           |
-| strapi config:export  | Export strapi config                       |
-| strapi data:export    | Export strapi data                         |
-| strapi types:generate | Generate types                             |
-| wp                    | Wordpress management scripts               |
-| wp assets:extract     | Extract WP assets to flat folder structure |
-| docs                  | Documentation generator tools              |
-| docs cli              | Generate CLI docs                          |
+| name | description |
+| ---- | ----------- |
+| strapi | Strapi management scripts |
+| strapi bootstrap | Bootstrap strapi for development |
+| strapi config:export | Export strapi config |
+| strapi data:export | DEPRECATED - Export strapi data via plugin |
+| strapi db:export | Export strapi data |
+| strapi db:import | Import strapi data |
+| strapi types:generate | Generate types |
+| wp | Wordpress management scripts |
+| wp assets:extract | Extract WP assets to flat folder structure |
+| docs | Documentation generator tools |
+| docs cli | Generate CLI docs |
 
 <!-- end generated content -->
 

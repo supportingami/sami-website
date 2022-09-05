@@ -1,4 +1,5 @@
 import axios from "axios";
+import sqLite3 from "better-sqlite3";
 import chalk from "chalk";
 import crypto from "crypto";
 import dotenv from "dotenv";
@@ -19,22 +20,21 @@ export interface IAdminToken {
   type: string;
   accessKey: string;
 }
-export const ADMIN_TOKENS: { [key in "fullaccess" | "readonly"]: IAdminToken } =
-  {
-    fullaccess: {
-      name: `admin-readonly`,
-      description: "admin read-only token",
-      type: "read-only",
-      // This will change every time script run, stored token can be accessed from file
-      accessKey: crypto.randomBytes(128).toString("hex"),
-    },
-    readonly: {
-      name: `admin-fullaccess`,
-      description: "admin full-access token",
-      type: "full-access",
-      accessKey: crypto.randomBytes(128).toString("hex"),
-    },
-  };
+export const ADMIN_TOKENS: { [key in "fullaccess" | "readonly"]: IAdminToken } = {
+  fullaccess: {
+    name: `admin-readonly`,
+    description: "admin read-only token",
+    type: "read-only",
+    // This will change every time script run, stored token can be accessed from file
+    accessKey: crypto.randomBytes(128).toString("hex"),
+  },
+  readonly: {
+    name: `admin-fullaccess`,
+    description: "admin full-access token",
+    type: "full-access",
+    accessKey: crypto.randomBytes(128).toString("hex"),
+  },
+};
 
 /**
  * Create a standalone server instance for strapi
@@ -46,10 +46,7 @@ export const ADMIN_TOKENS: { [key in "fullaccess" | "readonly"]: IAdminToken } =
  * app.stop()
  * ```
  * */
-export async function createStrapiInstance(
-  serveAdminPanel = false,
-  autoReload = false
-) {
+export async function createStrapiInstance(serveAdminPanel = false, autoReload = false) {
   console.log(chalk.green("Starting Strapi..."));
   loadDevEnvironment();
   // create instance
@@ -67,7 +64,7 @@ export async function createStrapiInstance(
   return app;
 }
 
-function loadDevEnvironment() {
+export function loadDevEnvironment() {
   // configure environment in same way as when running from backend
   const envPath = path.resolve(PATHS.backendDir, ".env.development");
   process.env.ENV_PATH = envPath;
@@ -83,6 +80,18 @@ export function getFrontendEnv() {
   const parsed = dotenv.parse(envData);
   const envString = envData.toString("utf8");
   return { envString, parsed, envFile };
+}
+
+export function getSqliteDb() {
+  loadDevEnvironment();
+  const { DATABASE_FILENAME } = process.env;
+  if (!DATABASE_FILENAME) {
+    throw new Error("No SQLiteDB file in environment");
+  }
+
+  const dbFile = path.resolve(PATHS.backendDir, DATABASE_FILENAME);
+  const db = sqLite3(dbFile, { fileMustExist: true });
+  return db;
 }
 
 /**
