@@ -46,10 +46,12 @@ class DBImport {
 
     // query list of all tables
     this.db = getSqliteDb();
-    let importTableNames = readdirSync(importDir).map((name) => ({
-      filePath: path.resolve(importDir, name),
-      table: name.replace(".json", ""),
-    }));
+    let importTableNames = readdirSync(importDir)
+      .map((name) => ({
+        filePath: path.resolve(importDir, name),
+        table: name.replace(".json", ""),
+      }))
+      .sort(this.sortImports);
     // filter if single table option provided
     if (options.table) {
       importTableNames = importTableNames.filter(({ table }) => options.table === table);
@@ -67,6 +69,17 @@ class DBImport {
     if (confirmed) {
       this.handleImport(data);
     }
+  }
+
+  /** Process imports so that sqlite sequenc and linked tables last */
+  private sortImports(a: { table: string }, b: { table: string }) {
+    if (a.table === "sqlite_sequence") return 1;
+    if (b.table === "sqlite_sequence") return -1;
+    if (a.table === "files_related_morphs") return 1;
+    if (b.table === "files_related_morphs") return -1;
+    if (a.table.endsWith("links")) return 1;
+    if (b.table.endsWith("links")) return -1;
+    return a.table > b.table ? 1 : -1;
   }
 
   private async confirmImport(data: ImportSummary[]) {
