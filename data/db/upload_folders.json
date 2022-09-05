@@ -8,5 +8,15 @@
     "path_id": 1,
     "updated_at": 1662375303201,
     "updated_by_id": 1
+  },
+  {
+    "created_at": 1662385096181,
+    "created_by_id": 1,
+    "id": 2,
+    "name": "Annual Reports",
+    "path": "/2",
+    "path_id": 2,
+    "updated_at": 1662385096181,
+    "updated_by_id": 1
   }
 ]
