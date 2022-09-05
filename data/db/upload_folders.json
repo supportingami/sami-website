@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "created_at": 1662150260639,
+    "created_by_id": 1,
+    "id": 1,
+    "name": "Members",
+    "path": "/1",
+    "path_id": 1,
+    "updated_at": 1662150260639,
+    "updated_by_id": 1
+  }
+]

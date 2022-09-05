@@ -1,30 +1,37 @@
 [
   {
-    "field": "Image",
-    "file_id": 35,
+    "field": "FeatureImage",
+    "file_id": 1,
     "order": 1,
     "related_id": 1,
-    "related_type": "api::resource.resource"
+    "related_type": "api::blog-post.blog-post"
   },
   {
-    "field": "Media",
-    "file_id": 36,
-    "order": 1,
-    "related_id": 1,
-    "related_type": "api::resource.resource"
-  },
-  {
-    "field": "File",
-    "file_id": 31,
-    "order": 1,
-    "related_id": 1,
-    "related_type": "api::annual-report.annual-report"
-  },
-  {
-    "field": "File",
-    "file_id": 32,
+    "field": "FeatureImage",
+    "file_id": 2,
     "order": 1,
     "related_id": 2,
-    "related_type": "api::annual-report.annual-report"
+    "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "Photo",
+    "file_id": 3,
+    "order": 1,
+    "related_id": 1,
+    "related_type": "api::member.member"
+  },
+  {
+    "field": "BioImage",
+    "file_id": 3,
+    "order": 1,
+    "related_id": 1,
+    "related_type": "api::member.member"
+  },
+  {
+    "field": "Photo",
+    "file_id": 4,
+    "order": 1,
+    "related_id": 2,
+    "related_type": "api::member.member"
   }
 ]
