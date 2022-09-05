@@ -19,5 +19,26 @@
     "order": 1,
     "related_id": 1,
     "related_type": "api::resource.resource"
+  },
+  {
+    "field": "File",
+    "file_id": 32,
+    "order": 1,
+    "related_id": 2,
+    "related_type": "api::annual-report.annual-report"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 34,
+    "order": 1,
+    "related_id": 1,
+    "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 33,
+    "order": 1,
+    "related_id": 2,
+    "related_type": "api::blog-post.blog-post"
   }
 ]
