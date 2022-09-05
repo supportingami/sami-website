@@ -1,0 +1,29 @@
+# Basic test to ensure PRs pass build. Default runner except when preview deployment already generated
+name: Test Build
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  build:
+    if: "!contains(github.event.pull_request.labels.*.name, 'Test - preview')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          lfs: true
+      - name: Setup Node 16
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: ./.yarn/cache
+          # If cachebusting required (e.g. breaking yarn changes on update) change `v1` to another number
+          key: ${{ runner.os }}-node-modules-yarn-v1-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-v1-
+      - run: yarn install
+      - name: Build frontend
+        run: yarn build:frontend
