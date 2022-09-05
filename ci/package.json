@@ -1,0 +1,9 @@
+{
+  "name": "@sami/ci",
+  "private": true,
+  "main": "src/index.ts",
+  "devDependencies": {
+    "@vercel/node": "^2.5.13",
+    "scripts": "workspace:*"
+  }
+}
