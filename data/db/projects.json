@@ -1,34 +1,42 @@
 [
-	{
-		"id": 1,
-		"Title": null,
-		"Summary": "<p><span style=\"color:hsl(0,0%,0%);font-family:&quot;Open Sans&quot;, Helvetica, Arial, Lucida, sans-serif;\">Student-led activities run in schools to promote a joy of maths throughout the year</span></p>",
-		"createdAt": "2022-08-28T07:29:46.724Z",
-		"updatedAt": "2022-08-30T07:01:26.668Z",
-		"publishedAt": "2022-08-28T07:29:50.775Z"
-	},
-	{
-		"id": 2,
-		"Title": null,
-		"Summary": "<p><span style=\"color:hsl(0,0%,0%);font-family:&quot;Open Sans&quot;, Helvetica, Arial, Lucida, sans-serif;\">Week-long camps of games, puzzles and activities to inspire students outside the curriculum</span></p>",
-		"createdAt": "2022-08-28T07:30:04.743Z",
-		"updatedAt": "2022-08-30T07:01:26.675Z",
-		"publishedAt": "2022-08-28T07:30:07.550Z"
-	},
-	{
-		"id": 3,
-		"Title": null,
-		"Summary": "<p><span style=\"color:hsl(0,0%,0%);font-family:&quot;Open Sans&quot;, Helvetica, Arial, Lucida, sans-serif;\">Using technology to improve livelihoods throughout entire communities</span></p>",
-		"createdAt": "2022-08-28T07:30:25.006Z",
-		"updatedAt": "2022-08-30T07:01:26.681Z",
-		"publishedAt": "2022-08-28T07:34:27.691Z"
-	},
-	{
-		"id": 4,
-		"Title": null,
-		"Summary": "<p><span style=\"color:hsl(0,0%,0%);font-family:&quot;Open Sans&quot;, Helvetica, Arial, Lucida, sans-serif;\">Open software being made in Africa to help people make better use of data</span></p>",
-		"createdAt": "2022-08-28T07:30:41.839Z",
-		"updatedAt": "2022-08-30T07:01:26.685Z",
-		"publishedAt": "2022-08-28T07:30:48.434Z"
-	}
+  {
+    "created_at": 1661537285287,
+    "created_by_id": null,
+    "id": 1,
+    "published_at": 1661537540228,
+    "summary": "<h2 style=\"margin-left:0px;\"><strong>Maths Camps</strong></h2><p style=\"margin-left:0px;\">In 2011 educators based at Maseno University in Kenya set out to revolutionise how mathematics was taught and perceived within African contexts. Establishing AMI, they started projects such as undergraduate mathematics electronic courseware, new lecturer training, community education through e-learning and the Maseno Maths Camp.</p><p style=\"margin-left:0px;\">The first Maseno Maths Camp was run in August 2011 by a mixture of local and international volunteers. The camp was aimed at secondary pupils in Kenyan schools and was an incredible success; students were taken outside of their normal school curriculum, many were introduced to computers for the first time, and were given the opportunity to start thinking about maths as a dynamic subject, rather than just a list of formulae and methods to be memorised. Sessions were designed to give students insights into new areas of mathematics, rather that teach small topics thoroughly.</p><p style=\"margin-left:0px;\">The Maseno Maths Camp has been held every year since. In 2012 whilst attending the second camp, a group of educators, mathematicians and enthusiasts based in the UK established SAMI. Apart from the maths camps, one of SAMI’s main aims is to test scalable solutions to improve the mathematics education in the countries in which we operate. We have extended our camps and clubs projects to include Ethiopia in 2013, Ghana in 2014 and London as a fundraiser in 2014, and this summer we are setting up the first camp in Tanzania.</p><p style=\"margin-left:0px;\">&nbsp;</p><h2 style=\"margin-left:0px;\"><strong>Maths Clubs</strong></h2><p style=\"margin-left:0px;\">The Maths Clubs initiative was founded in Kenya and has been implemented over the last year. At the end of the maths camp, alongside all the software used, students are given a year’s worth of resources for a weekly maths club. All students who attend the maths camp are encouraged to set up or improve maths clubs in the schools on their return, using these resources. Organisers of the camp undertake follow up visits to students in their schools and support the students until they are able to run the clubs in an effective way.</p><p style=\"margin-left:0px;\">This initiative is not limited to students who have attended one of the camps; many schools have been visited and benefitted from “mini maths camps”, half or full day sessions that replicate the Maseno Maths camp, and then received resources and training to start maths clubs.</p><p style=\"margin-left:0px;\">This initiative is building a large community of maths educators, maths enthusiasts and mathematicians, and is an opportunity to empower students to take responsibility for their own learning process inside and outside of school. It is however still in its infancy, when compared to the established maths camps which have been running for five years, and different ideas and implementations are being experimented with. It is hoped that it will develop into a sustainable, established programme which helps students not just across Kenya but more globally.</p><p style=\"margin-left:0px;\">The Maths Clubs initiative is already being tested in Tanzania and Ghana and the resources are currently being translated to put to use in schools in Costa Rica. It shows early signs of being a highly scalable low cost model that can be used in different environments.</p><h2 style=\"margin-left:0px;\">&nbsp;</h2><h2 style=\"margin-left:0px;\"><strong>African Data Initiative</strong></h2><p style=\"margin-left:0px;\">There is a problem with statistical literacy throughout the world and we are keen to address it in Africa. This skill is invaluable in enabling informed decision making which is so vital in creating a stable and sustainable society. This requires a combination of better training and suitable statistical software. We’ve identified a gap in the statistical software available. We need software that is easy to use, even with low computer literacy. It should encourage good statistical practices and learning. It should also be free and open source, so that it is adaptable and sustainable.</p><p style=\"margin-left:0px;\">Without the software the training is usually too theoretical. The appropriate software opens the door to training that can emphasize concepts rather than theory.</p><p style=\"margin-left:0px;\">We have raised over £30,000 during a crowdsourcing campaign and are currently using the money to develop&nbsp;a statistical software tool in Africa by Africans by adapting two existing packages: Instat+ and R.</p><p style=\"margin-left:0px;\">Our next round of funding will aim to raise money to:</p><ol><li>Train lecturers in educational institutions to adopt a more practical approach to statistics training.</li><li>Make the training resources and software available in multiple languages.</li><li>Change statistics training across all academic levels, not just universities. In particular we want to enhance teaching of statistical basics in schools.</li></ol><h2 style=\"margin-left:0px;\">&nbsp;</h2><h2 style=\"margin-left:0px;\"><strong>Digital Communities</strong></h2><p style=\"margin-left:0px;\">SAMI has been working in the Kitale region of Western Kenya, on an initiative to improve livelihoods through the use of technology. We currently have over 60 tablets on the ground, being used in schools, with farmers and local enterprising women. Below you can see our latest project updates as of May 2017.</p><p style=\"margin-left:auto;\">&nbsp;</p><p style=\"margin-left:0px;\">Page <span style=\"background-color:transparent;\">1</span> / <span style=\"background-color:transparent;\">26</span></p><p style=\"margin-left:0px;\">&nbsp;</p><p style=\"margin-left:0px;\">Zoom <span style=\"background-color:transparent;\">100%</span></p><p style=\"margin-left:0px;\">&nbsp;</p><p style=\"margin-left:0px;\">SAMI would like to extend a huge thanks to the Economist Charitable Trust for their support of this&nbsp;project.</p>",
+    "title": "SAMI Projects",
+    "updated_at": 1662318199104,
+    "updated_by_id": null
+  },
+  {
+    "created_at": 1661671804743,
+    "created_by_id": 1,
+    "id": 2,
+    "published_at": 1661671807550,
+    "summary": "<p><span style=\"color:hsl(0,0%,0%);font-family:&quot;Open Sans&quot;, Helvetica, Arial, Lucida, sans-serif;\">Week-long camps of games, puzzles and activities to inspire students outside the curriculum</span></p>",
+    "title": null,
+    "updated_at": 1661842886675,
+    "updated_by_id": 1
+  },
+  {
+    "created_at": 1661671825006,
+    "created_by_id": 1,
+    "id": 3,
+    "published_at": 1661672067691,
+    "summary": "<p><span style=\"color:hsl(0,0%,0%);font-family:&quot;Open Sans&quot;, Helvetica, Arial, Lucida, sans-serif;\">Using technology to improve livelihoods throughout entire communities</span></p>",
+    "title": null,
+    "updated_at": 1661842886681,
+    "updated_by_id": 1
+  },
+  {
+    "created_at": 1661671841839,
+    "created_by_id": 1,
+    "id": 4,
+    "published_at": 1661671848434,
+    "summary": "<p><span style=\"color:hsl(0,0%,0%);font-family:&quot;Open Sans&quot;, Helvetica, Arial, Lucida, sans-serif;\">Open software being made in Africa to help people make better use of data</span></p>",
+    "title": null,
+    "updated_at": 1661842886685,
+    "updated_by_id": 1
+  }
 ]

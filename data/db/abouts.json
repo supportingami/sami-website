@@ -1,10 +1,12 @@
 [
-	{
-		"id": 1,
-		"Title": "About",
-		"Content": "_There are huge divides in terms of access and quality of education across Africa. Mathematics in particular proves problematic for students and teachers alike, falling far short of global standards. There is however no shortage of passionate, enthusiastic and talented individuals in these countries with powerful ideas to improve the current state of education. SAMI was founded in 2013 as a means to support these local initiatives, and provide the expertise and funding necessary to implement, sustain and scale these ideas. By working directly with local people and organisations that have support and contacts within mathematics education, SAMI is well positioned to help deliver high impact solutions where they are needed most. All projects live by the following principles:_\n\n- WORKING WITH PARTNERS: Supporting charities and NGOs to implement local and pan-African Maths Initiatives\n\n- MATHEMATICAL EDUCATION: Scaling projects in African countries at primary, secondary and university levels\n\n- EMPOWERMENT: Providing support for grass-root initiatives to develop into sustainable solutions\n\n- RESEARCH AND DEVELOPMENT: Assist research and development projects to access mathematics and statistical expertise\n\n- LEAPFROGGING: Creating awareness of cutting edge technology, methodologies and ideas that provide the opportunity for local initiatives to become world leaders\n\n- USE OF TECHNOLOGY: Assisting in the provision and effective evaluation of the use of new technologies in the classroom to motivate and engage learners for improved outcomes",
-		"createdAt": "2022-08-27T06:13:24.701Z",
-		"updatedAt": "2022-08-31T08:17:59.996Z",
-		"publishedAt": "2022-08-27T06:13:28.412Z"
-	}
+  {
+    "content": "_There are huge divides in terms of access and quality of education across Africa. Mathematics in particular proves problematic for students and teachers alike, falling far short of global standards. There is however no shortage of passionate, enthusiastic and talented individuals in these countries with powerful ideas to improve the current state of education. SAMI was founded in 2013 as a means to support these local initiatives, and provide the expertise and funding necessary to implement, sustain and scale these ideas. By working directly with local people and organisations that have support and contacts within mathematics education, SAMI is well positioned to help deliver high impact solutions where they are needed most. All projects live by the following principles:_\n\n- WORKING WITH PARTNERS: Supporting charities and NGOs to implement local and pan-African Maths Initiatives\n\n- MATHEMATICAL EDUCATION: Scaling projects in African countries at primary, secondary and university levels\n\n- EMPOWERMENT: Providing support for grass-root initiatives to develop into sustainable solutions\n\n- RESEARCH AND DEVELOPMENT: Assist research and development projects to access mathematics and statistical expertise\n\n- LEAPFROGGING: Creating awareness of cutting edge technology, methodologies and ideas that provide the opportunity for local initiatives to become world leaders\n\n- USE OF TECHNOLOGY: Assisting in the provision and effective evaluation of the use of new technologies in the classroom to motivate and engage learners for improved outcomes",
+    "created_at": 1661580804701,
+    "created_by_id": null,
+    "id": 1,
+    "published_at": 1661580808412,
+    "title": "About",
+    "updated_at": 1662318074749,
+    "updated_by_id": null
+  }
 ]

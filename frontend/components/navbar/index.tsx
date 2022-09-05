@@ -37,7 +37,11 @@ const Navbar: NextComponentType = () => {
       label: "Volunteer",
       href: "/volunteer",
     },
-    ,
+    {
+      id: "news",
+      label: "News",
+      href: "/blog-posts",
+    },
   ];
 
   const linksForAuthenticatedUsers = [

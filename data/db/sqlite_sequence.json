@@ -1,0 +1,54 @@
+[
+  {
+    "name": "files",
+    "seq": 36
+  },
+  {
+    "name": "upload_folders",
+    "seq": 0
+  },
+  {
+    "name": "abouts",
+    "seq": 1
+  },
+  {
+    "name": "annual_reports",
+    "seq": 2
+  },
+  {
+    "name": "blog_posts",
+    "seq": 2
+  },
+  {
+    "name": "blog_tags",
+    "seq": 0
+  },
+  {
+    "name": "countries",
+    "seq": 0
+  },
+  {
+    "name": "faqs",
+    "seq": 17
+  },
+  {
+    "name": "members",
+    "seq": 0
+  },
+  {
+    "name": "projects",
+    "seq": 5
+  },
+  {
+    "name": "project_types",
+    "seq": 4
+  },
+  {
+    "name": "resources",
+    "seq": 1
+  },
+  {
+    "name": "volunteers",
+    "seq": 1
+  }
+]
