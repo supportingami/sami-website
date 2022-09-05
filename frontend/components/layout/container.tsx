@@ -1,7 +1,6 @@
-import React, { FC } from "react";
 import { Box, useColorMode } from "@chakra-ui/core";
 
-const Container: FC<{ children }> = ({ children }) => {
+const Container = ({ children }) => {
   const { colorMode } = useColorMode();
   const bgColor = { light: "gray.100", dark: "gray.900" };
   const heightOfNavbar: string = "74px";

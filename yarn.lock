@@ -26,7 +26,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@apollo/client@npm:^3.6.4":
+"@apollo/client@npm:^3.6.9":
   version: 3.6.9
   resolution: "@apollo/client@npm:3.6.9"
   dependencies:
@@ -5417,14 +5417,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^18.0.17":
-  version: 18.0.17
-  resolution: "@types/react@npm:18.0.17"
+"@types/react@npm:^18.0.18":
+  version: 18.0.18
+  resolution: "@types/react@npm:18.0.18"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: 18cae64f5bfd6bb58fbd8ee2ba52ec82de844f114254e26de7b513e4b86621f643f9b71d7066958cd571b0d78cb86cbceda449c5289f9349ca573df29ab69252
+  checksum: 6d72d35ab3eecf382a5e0f225923f5a2c753045fce02e4e29713f36c99a24f0f770666a49dde96167f37c86271f93339d1b7e2b8969d011b137a9ebd24ee6806
   languageName: node
   linkType: hard
 
@@ -11099,7 +11099,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "frontend@workspace:frontend"
   dependencies:
-    "@apollo/client": ^3.6.4
+    "@apollo/client": ^3.6.9
     "@chakra-ui/core": ^0.8.0
     "@emotion/core": ^10.3.1
     "@emotion/react": ^11.10.4
@@ -11115,20 +11115,20 @@ __metadata:
     "@tailwindcss/typography": ^0.5.4
     "@types/next": ^9.0.0
     "@types/node": ^16.11.56
-    "@types/react": ^18.0.17
+    "@types/react": ^18.0.18
     "@types/react-dom": ^18.0.4
     autoprefixer: ^10.4.8
     daisyui: ^2.24.0
     dayjs: ^1.11.2
     dotenv: ^16.0.1
     emotion-theming: ^10.3.0
-    graphql: ^16.5.0
-    next: ^12.2.4
-    next-auth: ^4.3.4
+    graphql: ^16.6.0
+    next: ^12.2.5
+    next-auth: ^4.10.3
     pg: ^8.7.3
     postcss: ^8.4.16
     react: 18.2.0
-    react-dom: 18.1.0
+    react-dom: 18.2.0
     react-share: ^4.4.0
     sass: ^1.54.6
     tailwindcss: ^3.1.8
@@ -11888,10 +11888,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql@npm:^16.5.0":
-  version: 16.5.0
-  resolution: "graphql@npm:16.5.0"
-  checksum: a82a926d085818934d04fdf303a269af170e79de943678bd2726370a96194f9454ade9d6d76c2de69afbd7b9f0b4f8061619baecbbddbe82125860e675ac219e
+"graphql@npm:^16.6.0":
+  version: 16.6.0
+  resolution: "graphql@npm:16.6.0"
+  checksum: bf1d9e3c1938ce3c1a81e909bd3ead1ae4707c577f91cff1ca2eca474bfbc7873d5d7b942e1e9777ff5a8304421dba57a4b76d7a29eb19de8711cb70e3c2415e
   languageName: node
   linkType: hard
 
@@ -15484,7 +15484,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-auth@npm:^4.3.4":
+"next-auth@npm:^4.10.3":
   version: 4.10.3
   resolution: "next-auth@npm:4.10.3"
   dependencies:
@@ -15577,7 +15577,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next@npm:^12.2.4":
+"next@npm:^12.2.5":
   version: 12.2.5
   resolution: "next@npm:12.2.5"
   dependencies:
@@ -17708,15 +17708,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:18.1.0":
-  version: 18.1.0
-  resolution: "react-dom@npm:18.1.0"
+"react-dom@npm:18.2.0":
+  version: 18.2.0
+  resolution: "react-dom@npm:18.2.0"
   dependencies:
     loose-envify: ^1.1.0
-    scheduler: ^0.22.0
+    scheduler: ^0.23.0
   peerDependencies:
-    react: ^18.1.0
-  checksum: bb0d48eeb0b297c79c2a03978baa29f5b3ff7ba3d070b21e34c9af1a6e7fdf0ca8b8d73e41f9214d91ad40eeb6d1f3559f884cbbc338713374a51320637c23df
+    react: ^18.2.0
+  checksum: 7d323310bea3a91be2965f9468d552f201b1c27891e45ddc2d6b8f717680c95a75ae0bc1e3f5cf41472446a2589a75aed4483aee8169287909fcd59ad149e8cc
   languageName: node
   linkType: hard
 
@@ -18911,12 +18911,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"scheduler@npm:^0.22.0":
-  version: 0.22.0
-  resolution: "scheduler@npm:0.22.0"
+"scheduler@npm:^0.23.0":
+  version: 0.23.0
+  resolution: "scheduler@npm:0.23.0"
   dependencies:
     loose-envify: ^1.1.0
-  checksum: a8ef5cab769c020cd6382ad9ecc3f72dbde56a50a36639b3a42ad9c11f7724f03700bcad373044059b8067d4a6365154dc7c0ca8027ef20ff4900cf58a0fc2c5
+  checksum: d79192eeaa12abef860c195ea45d37cbf2bbf5f66e3c4dcd16f54a7da53b17788a70d109ee3d3dde1a0fd50e6a8fc171f4300356c5aee4fc0171de526bf35f8a
   languageName: node
   linkType: hard
 

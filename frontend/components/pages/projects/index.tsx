@@ -1,7 +1,7 @@
 import React from "react";
 import { IProject } from "types/project";
 
-export const ProjectsPageComponent: React.FC<{ projectPageContent: IProject[] }> = ({
+export const ProjectsPageComponent: React.FC<{ projectPageContent: IProject[]; children?: any }> = ({
   projectPageContent,
   children,
 }) => {
