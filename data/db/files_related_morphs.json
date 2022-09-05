@@ -1,37 +1,16 @@
 [
   {
-    "field": "FeatureImage",
-    "file_id": 1,
-    "order": 1,
-    "related_id": 1,
-    "related_type": "api::blog-post.blog-post"
-  },
-  {
-    "field": "FeatureImage",
-    "file_id": 2,
-    "order": 1,
-    "related_id": 2,
-    "related_type": "api::blog-post.blog-post"
-  },
-  {
-    "field": "Photo",
-    "file_id": 3,
-    "order": 1,
-    "related_id": 1,
-    "related_type": "api::member.member"
-  },
-  {
-    "field": "BioImage",
-    "file_id": 3,
-    "order": 1,
-    "related_id": 1,
-    "related_type": "api::member.member"
-  },
-  {
     "field": "Photo",
     "file_id": 4,
     "order": 1,
     "related_id": 2,
+    "related_type": "api::member.member"
+  },
+  {
+    "field": "Photo",
+    "file_id": 3,
+    "order": 1,
+    "related_id": 1,
     "related_type": "api::member.member"
   }
 ]

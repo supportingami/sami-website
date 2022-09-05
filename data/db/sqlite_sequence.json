@@ -1,31 +1,11 @@
 [
   {
     "name": "files",
-    "seq": 4
+    "seq": 36
   },
   {
     "name": "upload_folders",
     "seq": 1
-  },
-  {
-    "name": "blog_posts",
-    "seq": 2
-  },
-  {
-    "name": "resources",
-    "seq": 0
-  },
-  {
-    "name": "countries",
-    "seq": 0
-  },
-  {
-    "name": "projects",
-    "seq": 1
-  },
-  {
-    "name": "project_types",
-    "seq": 4
   },
   {
     "name": "abouts",
@@ -36,19 +16,39 @@
     "seq": 2
   },
   {
+    "name": "blog_posts",
+    "seq": 2
+  },
+  {
+    "name": "blog_tags",
+    "seq": 0
+  },
+  {
+    "name": "countries",
+    "seq": 0
+  },
+  {
     "name": "faqs",
     "seq": 17
   },
   {
-    "name": "volunteers",
+    "name": "members",
+    "seq": 2
+  },
+  {
+    "name": "projects",
+    "seq": 5
+  },
+  {
+    "name": "project_types",
+    "seq": 4
+  },
+  {
+    "name": "resources",
     "seq": 1
   },
   {
-    "name": "blog_tags",
-    "seq": 3
-  },
-  {
-    "name": "members",
-    "seq": 2
+    "name": "volunteers",
+    "seq": 1
   }
 ]
