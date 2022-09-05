@@ -548,20 +548,16 @@ export type JsonFilterInput = {
 export type Member = {
   __typename?: "Member";
   Bio?: Maybe<Scalars["String"]>;
+  BioImage?: Maybe<UploadFileEntityResponse>;
   Email?: Maybe<Scalars["String"]>;
   LinkedIn?: Maybe<Scalars["String"]>;
   Name?: Maybe<Scalars["String"]>;
+  Order?: Maybe<Scalars["Int"]>;
   Organisation?: Maybe<Enum_Member_Organisation>;
-  Photo?: Maybe<UploadFileRelationResponseCollection>;
+  Photo?: Maybe<UploadFileEntityResponse>;
   createdAt?: Maybe<Scalars["DateTime"]>;
   publishedAt?: Maybe<Scalars["DateTime"]>;
   updatedAt?: Maybe<Scalars["DateTime"]>;
-};
-
-export type MemberPhotoArgs = {
-  filters?: InputMaybe<UploadFileFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
 };
 
 export type MemberEntity = {
@@ -586,6 +582,7 @@ export type MemberFiltersInput = {
   Email?: InputMaybe<StringFilterInput>;
   LinkedIn?: InputMaybe<StringFilterInput>;
   Name?: InputMaybe<StringFilterInput>;
+  Order?: InputMaybe<IntFilterInput>;
   Organisation?: InputMaybe<StringFilterInput>;
   and?: InputMaybe<Array<InputMaybe<MemberFiltersInput>>>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
@@ -598,11 +595,13 @@ export type MemberFiltersInput = {
 
 export type MemberInput = {
   Bio?: InputMaybe<Scalars["String"]>;
+  BioImage?: InputMaybe<Scalars["ID"]>;
   Email?: InputMaybe<Scalars["String"]>;
   LinkedIn?: InputMaybe<Scalars["String"]>;
   Name?: InputMaybe<Scalars["String"]>;
+  Order?: InputMaybe<Scalars["Int"]>;
   Organisation?: InputMaybe<Enum_Member_Organisation>;
-  Photo?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  Photo?: InputMaybe<Scalars["ID"]>;
   publishedAt?: InputMaybe<Scalars["DateTime"]>;
 };
 
@@ -1865,7 +1864,31 @@ export type MembersQuery = {
     data: Array<{
       __typename?: "MemberEntity";
       id?: string | null;
-      attributes?: { __typename?: "Member"; Name?: string | null; Email?: string | null } | null;
+      attributes?: {
+        __typename?: "Member";
+        Name?: string | null;
+        Email?: string | null;
+        Organisation?: Enum_Member_Organisation | null;
+        Bio?: string | null;
+        LinkedIn?: string | null;
+        Order?: number | null;
+        Photo?: {
+          __typename?: "UploadFileEntityResponse";
+          data?: {
+            __typename?: "UploadFileEntity";
+            id?: string | null;
+            attributes?: { __typename?: "UploadFile"; url: string; name: string; size: number } | null;
+          } | null;
+        } | null;
+        BioImage?: {
+          __typename?: "UploadFileEntityResponse";
+          data?: {
+            __typename?: "UploadFileEntity";
+            id?: string | null;
+            attributes?: { __typename?: "UploadFile"; url: string; name: string; size: number } | null;
+          } | null;
+        } | null;
+      } | null;
     }>;
     meta: {
       __typename?: "ResponseCollectionMeta";
@@ -2341,6 +2364,72 @@ export const MembersDocument = {
                           selections: [
                             { kind: "Field", name: { kind: "Name", value: "Name" } },
                             { kind: "Field", name: { kind: "Name", value: "Email" } },
+                            { kind: "Field", name: { kind: "Name", value: "Organisation" } },
+                            { kind: "Field", name: { kind: "Name", value: "Bio" } },
+                            { kind: "Field", name: { kind: "Name", value: "LinkedIn" } },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "Photo" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "data" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        { kind: "Field", name: { kind: "Name", value: "id" } },
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "attributes" },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              { kind: "Field", name: { kind: "Name", value: "url" } },
+                                              { kind: "Field", name: { kind: "Name", value: "name" } },
+                                              { kind: "Field", name: { kind: "Name", value: "size" } },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "BioImage" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "data" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        { kind: "Field", name: { kind: "Name", value: "id" } },
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "attributes" },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              { kind: "Field", name: { kind: "Name", value: "url" } },
+                                              { kind: "Field", name: { kind: "Name", value: "name" } },
+                                              { kind: "Field", name: { kind: "Name", value: "size" } },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                            { kind: "Field", name: { kind: "Name", value: "Order" } },
                           ],
                         },
                       },

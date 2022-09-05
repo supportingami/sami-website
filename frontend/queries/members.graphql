@@ -1,4 +1,4 @@
-# Use GraphQL to extract data from the datbase
+# Use GraphQL to extract data from the database
 # This is comparable to SQL
 # `SELECT Name, Email from members`
 query members {
@@ -12,6 +12,30 @@ query members {
       attributes {
         Name
         Email
+        Organisation
+        Bio
+        LinkedIn
+        Photo {
+          data {
+            id
+            attributes {
+              url
+              name
+              size
+            }
+          }
+        }
+        BioImage {
+          data {
+            id
+            attributes {
+              url
+              name
+              size
+            }
+          }
+        }
+        Order
       }
     }
     # return from query meta

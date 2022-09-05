@@ -4,7 +4,7 @@
   "info": {
     "singularName": "member",
     "pluralName": "members",
-    "displayName": "Member",
+    "displayName": "Members",
     "description": ""
   },
   "options": {
@@ -17,21 +17,13 @@
     },
     "Photo": {
       "type": "media",
-      "multiple": true,
+      "multiple": false,
       "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+      "allowedTypes": ["images", "files", "videos", "audios"]
     },
     "Organisation": {
       "type": "enumeration",
-      "enum": [
-        "AMI",
-        "SAMI"
-      ]
+      "enum": ["AMI", "SAMI"]
     },
     "Bio": {
       "type": "richtext"
@@ -41,6 +33,15 @@
     },
     "LinkedIn": {
       "type": "string"
+    },
+    "BioImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images", "files", "videos", "audios"]
+    },
+    "Order": {
+      "type": "integer"
     }
   }
 }
