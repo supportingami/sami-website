@@ -8,7 +8,9 @@ export const MembersListItemComponent: React.FC<{
 }> = ({ member }) => (
   <div style={{ border: "0.8px solid #ddd", margin: "0 3px" }}>
     <div>
-      {member.Photo && <Image src={getStrapiMedia(member.Photo)} alt={`${member.Name}`} style={{objectFit:'cover'}} height={300} width={300} />}
+      {member.Photo && (
+        <Image src={getStrapiMedia(member.Photo)} alt={`${member.Name}`} height={300} width={300} objectFit="cover" />
+      )}
     </div>
     {member.Organisation === "SAMI" ? (
       <div style={{ fontSize: "14px", backgroundColor: "#4a8eff", color: "white", padding: "3px 5px" }}>
