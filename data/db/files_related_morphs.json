@@ -14,13 +14,6 @@
     "related_type": "api::member.member"
   },
   {
-    "field": "Image",
-    "file_id": 35,
-    "order": 1,
-    "related_id": 1,
-    "related_type": "api::resource.resource"
-  },
-  {
     "field": "File",
     "file_id": 32,
     "order": 1,
@@ -40,5 +33,19 @@
     "order": 1,
     "related_id": 2,
     "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "Image",
+    "file_id": 35,
+    "order": 1,
+    "related_id": 1,
+    "related_type": "api::resource.resource"
+  },
+  {
+    "field": "Media",
+    "file_id": 36,
+    "order": 1,
+    "related_id": 1,
+    "related_type": "api::resource.resource"
   }
 ]

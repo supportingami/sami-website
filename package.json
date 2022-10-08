@@ -13,6 +13,7 @@
     "start:backend:docker": "docker-compose --project-name sami-backend --file backend/docker-compose.yml up",
     "start:frontend": "yarn workspace frontend start",
     "scripts": "yarn workspace scripts start",
+    "build": "yarn workspace backend start & yarn workspace frontend build",
     "build:frontend": "yarn workspace frontend build",
     "export:frontend": "yarn workspace frontend export",
     "release": "release-it",
