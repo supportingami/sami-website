@@ -9,7 +9,7 @@ export const ProjectsPageComponent: React.FC<{ projectPageContent: IProject[] }>
     <>
       {projectPageContent.map((p) => (
         <div key={p.id}>
-          <h1 style={{ fontSize: "25px", fontWeight: "600" }}>{p.Title}</h1>
+          <h1>{p.Title}</h1>
           <div style={{ display: "grid", gridTemplateColumns: "2fr 5fr" }}>
             <div>
               <aside style={{ margin: "10px 0 0 0" }}>

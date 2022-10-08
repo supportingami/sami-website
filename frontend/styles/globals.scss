@@ -1,0 +1,24 @@
+@tailwind base;
+
+// Set default heading sizes which are reset by default
+// https://tailwindcss.com/docs/preflight#headings-are-unstyled
+@layer base {
+  h1 {
+    @apply text-2xl;
+    @apply text-primary;
+    @apply my-4;
+    @apply font-bold;
+  }
+  h2 {
+    @apply text-xl;
+    @apply text-primary;
+    @apply my-2;
+    @apply font-normal;
+  }
+  h3 {
+    @apply text-lg;
+  }
+}
+
+@tailwind components;
+@tailwind utilities;

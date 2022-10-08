@@ -2,19 +2,14 @@ import React from "react";
 import { NextComponentType } from "next";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { Box, Stack, Link as ChakraLink, Button, IconButton, useColorMode } from "@chakra-ui/core";
+import { Box, Stack, Link as ChakraLink, Button, useColorMode } from "@chakra-ui/core";
+import ThemeToggle from "./theme-toggle";
 
 const Navbar: NextComponentType = () => {
   const { data: session, status } = useSession();
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { colorMode } = useColorMode();
   const bgColor = { light: "white", dark: "gray.800" };
   const color = { light: "gray.800", dark: "gray.100" };
-
-  const handleToggleTheme = () => {
-    console.log("hello");
-
-    toggleColorMode();
-  };
 
   const linksForAllUsers = [
     {
@@ -68,7 +63,7 @@ const Navbar: NextComponentType = () => {
     }
 
     return (
-      <Box>
+      <Box className="ml-1">
         <Link href="/api/auth/signin">
           <Button
             onClick={(e) => {
@@ -89,7 +84,7 @@ const Navbar: NextComponentType = () => {
     }
 
     return (
-      <Box>
+      <Box className="ml-1">
         <Link href="/api/auth/signout">
           <Button
             onClick={(e) => {
@@ -101,17 +96,6 @@ const Navbar: NextComponentType = () => {
           </Button>
         </Link>
       </Box>
-    );
-  };
-
-  const themeToggleButtonNode = () => {
-    return (
-      <IconButton
-        aria-label="Toggle theme"
-        fontSize="20px"
-        icon={colorMode === "dark" ? "sun" : "moon"}
-        onClick={handleToggleTheme}
-      />
     );
   };
 
@@ -145,7 +129,7 @@ const Navbar: NextComponentType = () => {
             </Box>
             <Box>
               <Stack isInline spacing={4} align="center">
-                {themeToggleButtonNode()}
+                <ThemeToggle />
                 {signInButtonNode()}
                 {signOutButtonNode()}
               </Stack>

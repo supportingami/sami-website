@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { ColorModeProvider, LightMode } from "@chakra-ui/core";
 import Container from "components/layout/container";
 import Navbar from "components/navbar";
