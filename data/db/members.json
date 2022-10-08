@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "bio": "<p><span style=\"color:hsl(0,0%,0%);font-family:Marvel, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;font-size:13px;\">Emily Fleming has been a teacher since 2003, after gaining a BSc in Mathematics from Edinburgh and a PGCE from Oxford. She has taught at Edinburgh Academy, Bexley Grammar School and is currently working at the LyceeFrancais Charles de Gaulle. Emily had a three year break from teaching to travel and study for an MA in Mathematics Education at King's College London. During this time she became heavily involved in educational projects in Kenya and this is the reason for her involvement in the set up of SAMI. Emily is currently acting as a SAMI trustee.</span></p>",
+    "created_at": 1662150497362,
+    "created_by_id": 1,
+    "email": "Emily@supportingami.org",
+    "id": 1,
+    "linked_in": "https://uk.linkedin.com/in/emily-hobbs-9a996a45",
+    "name": "Emily Fleming",
+    "order": null,
+    "organisation": "SAMI",
+    "published_at": 1662150505359,
+    "updated_at": 1662375714455,
+    "updated_by_id": 1
+  },
+  {
+    "bio": "<p><span style=\"color:hsl(0,0%,0%);font-family:Marvel, &quot;Helvetica Neue&quot;, Helvetica, sans-serif;font-size:13px;\">Chris is an app developer, maths teacher, and trainer from the UK. He first became involved with projects in Africa whilst studying mathematics at the University of Warwick, through their Warwick in Africa scheme. Since then he has spent time working in education in South Africa and Kenya, as well as the in the UK. He completed his Master's in Mathematics Education, specializing in the use of games and technology for learning, and is a keen mobile app developer. Since then he has worked as part of the University of Reading Statistical Services Centre to use technology for development.</span></p>",
+    "created_at": 1662311859386,
+    "created_by_id": 1,
+    "email": "Chris@supportingami.org",
+    "id": 2,
+    "linked_in": "https://uk.linkedin.com/in/chrisclarke87",
+    "name": "Chris Clarke",
+    "order": null,
+    "organisation": "AMI",
+    "published_at": 1662311867332,
+    "updated_at": 1662375703782,
+    "updated_by_id": 1
+  }
+]
