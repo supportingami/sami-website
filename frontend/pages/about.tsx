@@ -2,10 +2,8 @@ import React from "react";
 import Head from "next/head";
 import { Heading } from "@chakra-ui/core";
 import { AboutPageComponent } from "components/pages/about";
-import { MembersPageComponent } from "components/pages/members";
 import { AnnualReportPageComponent } from "components/pages/annual-reports";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
-import { IAbout } from "types/about";
 import { IAnnualReport } from "types/annualreport";
 import { IMember } from "types/member";
 
@@ -16,9 +14,10 @@ import {
   MembersDocument,
   AnnualReportsQuery,
   AnnualReportsDocument,
-  AnnualReport,
 } from "../graphql/generated";
 import { serverQuery } from "lib/graphql";
+import { IAbout } from "types/about";
+import { MembersComponent } from "components/pages/members";
 
 export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
   let about: IAbout[] = [];
@@ -33,12 +32,12 @@ export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
 
   const membersRes = await serverQuery<MembersQuery>(MembersDocument);
   if (membersRes) {
-    members = membersRes.data.members.data.map((m) => ({ ...m.attributes, id: m.id })) || [];
+    members = membersRes.data.members.data.map((m) => ({ ...m.attributes, id: m.id } as IMember)) || [];
   }
 
-  const reportsRes = await serverQuery<AnnualReportsQuery>(AnnualReportsDocument);
-  if (reportsRes) {
-    reports = reportsRes.data.annualReports.data.map((m) => ({ ...(m.attributes as AnnualReport), id: m.id })) || [];
+  const areportsRes = await serverQuery<AnnualReportsQuery>(AnnualReportsDocument);
+  if (areportsRes) {
+    reports = areportsRes.data.annualReports.data.map((m) => ({ ...m.attributes, id: m.id } as IAnnualReport)) || [];
   }
 
   return {
@@ -57,7 +56,7 @@ const AboutPage = ({ about, members, reports }: InferGetServerSidePropsType<type
         <title>About Us</title>
       </Head>
       <AboutPageComponent aboutPageContent={about} />
-      <MembersPageComponent members={members} />
+      <MembersComponent members={members} />
       <Heading size="md">SAMI Theory of Change</Heading>
       <p>
         At SAMI we’ve been working to build our thoughts on how everything we do can fit into a larger picture to create

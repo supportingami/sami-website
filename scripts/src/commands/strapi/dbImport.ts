@@ -11,11 +11,16 @@ import { getSqliteDb } from "./common";
  * CLI
  * @example yarn
  *************************************************************************************/
-
+interface IProgramOptions {
+  table?: string;
+}
 const program = new Command("db:import");
-export default program.description("Import strapi data").action(async () => {
-  new DBImport().run();
-});
+export default program
+  .description("Import strapi data")
+  .option("-t --table <string>", "Single table to import (omit to include all)")
+  .action(async (options: IProgramOptions) => {
+    new DBImport().run(options);
+  });
 
 /***************************************************************************************
  * Main Methods
@@ -34,17 +39,23 @@ class DBImport {
   /**
    *
    **/
-  public async run() {
+  public async run(options: IProgramOptions) {
     // setup folders
     const importDir = path.resolve(PATHS.dataDir, "db");
     ensureDirSync(importDir);
 
     // query list of all tables
     this.db = getSqliteDb();
-    const importTableNames = readdirSync(importDir).map((name) => ({
-      filePath: path.resolve(importDir, name),
-      table: name.replace(".json", ""),
-    }));
+    let importTableNames = readdirSync(importDir)
+      .map((name) => ({
+        filePath: path.resolve(importDir, name),
+        table: name.replace(".json", ""),
+      }))
+      .sort(this.sortImports);
+    // filter if single table option provided
+    if (options.table) {
+      importTableNames = importTableNames.filter(({ table }) => options.table === table);
+    }
     // get summary of local and import data
     const data: ImportSummary[] = importTableNames.map(({ filePath, table }) => {
       const importData = readJSONSync(filePath);
@@ -58,6 +69,17 @@ class DBImport {
     if (confirmed) {
       this.handleImport(data);
     }
+  }
+
+  /** Process imports so that sqlite sequenc and linked tables last */
+  private sortImports(a: { table: string }, b: { table: string }) {
+    if (a.table === "sqlite_sequence") return 1;
+    if (b.table === "sqlite_sequence") return -1;
+    if (a.table === "files_related_morphs") return 1;
+    if (b.table === "files_related_morphs") return -1;
+    if (a.table.endsWith("links")) return 1;
+    if (b.table.endsWith("links")) return -1;
+    return a.table > b.table ? 1 : -1;
   }
 
   private async confirmImport(data: ImportSummary[]) {
@@ -81,7 +103,9 @@ class DBImport {
         } else {
           console.log(table);
           this.truncateTable(table);
-          this.insertRows(table, importData, Object.keys(importData[0]));
+          if (importData.length > 0) {
+            this.insertRows(table, importData, Object.keys(importData[0]));
+          }
         }
       }
     }

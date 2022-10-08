@@ -5,7 +5,7 @@
   },
   {
     "name": "upload_folders",
-    "seq": 0
+    "seq": 2
   },
   {
     "name": "abouts",
@@ -33,7 +33,7 @@
   },
   {
     "name": "members",
-    "seq": 0
+    "seq": 2
   },
   {
     "name": "projects",
