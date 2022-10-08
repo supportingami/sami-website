@@ -1,9 +1,8 @@
-import { FC } from "react";
 import { ColorModeProvider, LightMode } from "@chakra-ui/core";
 import Container from "components/layout/container";
 import Navbar from "components/navbar";
 
-const Layout: FC = ({ children }) => {
+const Layout = ({ children }) => {
   return (
     <ColorModeProvider>
       <LightMode>

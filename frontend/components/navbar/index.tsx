@@ -1,11 +1,9 @@
-import React from "react";
-import { NextComponentType } from "next";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Box, Stack, Link as ChakraLink, Button, useColorMode } from "@chakra-ui/core";
 import ThemeToggle from "./theme-toggle";
 
-const Navbar: NextComponentType = () => {
+const Navbar = () => {
   const { data: session, status } = useSession();
   const { colorMode } = useColorMode();
   const bgColor = { light: "white", dark: "gray.800" };

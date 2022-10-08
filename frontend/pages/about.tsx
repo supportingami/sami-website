@@ -2,10 +2,8 @@ import React from "react";
 import Head from "next/head";
 import { Heading } from "@chakra-ui/core";
 import { AboutPageComponent } from "components/pages/about";
-import { MembersComponent } from "components/pages/members";
 import { AnnualReportPageComponent } from "components/pages/annual-reports";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
-import { IAbout } from "types/about";
 import { IAnnualReport } from "types/annualreport";
 import { IMember } from "types/member";
 
@@ -18,47 +16,46 @@ import {
   AnnualReportsDocument,
 } from "../graphql/generated";
 import { serverQuery } from "lib/graphql";
+import { IAbout } from "types/about";
+import { MembersComponent } from "components/pages/members";
 
 export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
-  let aboutPageContent: IAbout[] = [];
+  let about: IAbout[] = [];
   let members: IMember[] = [];
-  let annualReports: IAnnualReport[] = [];
+  let reports: IAnnualReport[] = [];
 
   const aboutRes = await serverQuery<AboutQuery>(AboutDocument);
+
   if (aboutRes) {
-    aboutPageContent = aboutRes.data.abouts.data.map((content) => ({ ...content.attributes, id: content.id })) || [];
+    about = aboutRes.data.abouts.data.map((m) => ({ ...m.attributes, id: m.id })) || [];
   }
 
   const membersRes = await serverQuery<MembersQuery>(MembersDocument);
   if (membersRes) {
-    members = membersRes.data.members.data.map((m) => ({ ...m.attributes, id: m.id })) || [];
+    members = membersRes.data.members.data.map((m) => ({ ...m.attributes, id: m.id } as IMember)) || [];
   }
 
   const areportsRes = await serverQuery<AnnualReportsQuery>(AnnualReportsDocument);
   if (areportsRes) {
-    annualReports = areportsRes.data.annualReports.data.map((r) => ({ ...r.attributes, id: r.id })) || [];
+    reports = areportsRes.data.annualReports.data.map((m) => ({ ...m.attributes, id: m.id } as IAnnualReport)) || [];
   }
 
   return {
     props: {
-      aboutPageContent,
+      about,
       members,
-      annualReports,
+      reports,
     },
   };
 };
 
-const AboutPage = ({
-  aboutPageContent,
-  members,
-  annualReports,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const AboutPage = ({ about, members, reports }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <>
       <Head>
         <title>About Us</title>
       </Head>
-      <AboutPageComponent aboutPageContent={aboutPageContent} />
+      <AboutPageComponent aboutPageContent={about} />
       <MembersComponent members={members} />
       <Heading size="md">SAMI Theory of Change</Heading>
       <p>
@@ -73,7 +70,7 @@ const AboutPage = ({
           here
         </a>
       </p>
-      <AnnualReportPageComponent areports={annualReports} />
+      <AnnualReportPageComponent reports={reports} />
     </>
   );
 };

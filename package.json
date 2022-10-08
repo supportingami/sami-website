@@ -2,8 +2,8 @@
   "name": "sami-website",
   "license": "see license.md",
   "workspaces": [
-    "frontend",
     "backend",
+    "frontend",
     "scripts",
     "shared"
   ],

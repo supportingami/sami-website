@@ -13,7 +13,7 @@
     "generate": "graphql-codegen --require dotenv/config --config codegen.yml dotenv_config_path=./.env.local"
   },
   "dependencies": {
-    "@apollo/client": "^3.6.4",
+    "@apollo/client": "^3.6.9",
     "@chakra-ui/core": "^0.8.0",
     "@emotion/core": "^10.3.1",
     "@emotion/react": "^11.10.4",
@@ -23,12 +23,12 @@
     "@sami/shared": "workspace:*",
     "dayjs": "^1.11.2",
     "emotion-theming": "^10.3.0",
-    "graphql": "^16.5.0",
-    "next": "^12.2.4",
-    "next-auth": "^4.3.4",
+    "graphql": "^16.6.0",
+    "next": "^12.2.5",
+    "next-auth": "^4.10.3",
     "pg": "^8.7.3",
     "react": "18.2.0",
-    "react-dom": "18.1.0",
+    "react-dom": "18.2.0",
     "react-share": "^4.4.0"
   },
   "devDependencies": {
@@ -40,7 +40,7 @@
     "@tailwindcss/typography": "^0.5.4",
     "@types/next": "^9.0.0",
     "@types/node": "^16.11.56",
-    "@types/react": "^18.0.17",
+    "@types/react": "^18.0.18",
     "@types/react-dom": "^18.0.4",
     "autoprefixer": "^10.4.8",
     "daisyui": "^2.24.0",
