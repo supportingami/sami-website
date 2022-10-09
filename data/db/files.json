@@ -126,7 +126,7 @@
     "provider": "local",
     "provider_metadata": null,
     "size": 72.56,
-    "updated_at": 1662319292863,
+    "updated_at": 1665323236903,
     "updated_by_id": 1,
     "url": "/uploads/SAMI_Digital_Communities_ad7bc0bbf9.png",
     "width": 1526
@@ -174,5 +174,27 @@
     "updated_by_id": 1,
     "url": "/uploads/SAMI_Maths_Club_Pack_f7556e926f.pdf",
     "width": null
+  },
+  {
+    "alternative_text": "happy-classrooms-cover.jpg",
+    "caption": "happy-classrooms-cover.jpg",
+    "created_at": 1665323277723,
+    "created_by_id": 1,
+    "ext": ".jpg",
+    "folder_path": "/4",
+    "formats": "{\"thumbnail\":{\"name\":\"thumbnail_happy-classrooms-cover.jpg\",\"hash\":\"thumbnail_happy_classrooms_cover_08e8225f02\",\"ext\":\".jpg\",\"mime\":\"image/jpeg\",\"path\":null,\"width\":245,\"height\":132,\"size\":8.78,\"url\":\"/uploads/thumbnail_happy_classrooms_cover_08e8225f02.jpg\"}}",
+    "hash": "happy_classrooms_cover_08e8225f02",
+    "height": 1080,
+    "id": 37,
+    "mime": "image/jpeg",
+    "name": "happy-classrooms-cover.jpg",
+    "preview_url": null,
+    "provider": "local",
+    "provider_metadata": null,
+    "size": 200.73,
+    "updated_at": 1665336017524,
+    "updated_by_id": 1,
+    "url": "/uploads/happy_classrooms_cover_08e8225f02.jpg",
+    "width": 2003
   }
 ]

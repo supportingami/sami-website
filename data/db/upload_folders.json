@@ -28,5 +28,15 @@
     "path_id": 3,
     "updated_at": 1665273276245,
     "updated_by_id": 1
+  },
+  {
+    "created_at": 1665323271316,
+    "created_by_id": 1,
+    "id": 5,
+    "name": "Cover Images",
+    "path": "/4",
+    "path_id": 4,
+    "updated_at": 1665323271316,
+    "updated_by_id": 1
   }
 ]

@@ -1,0 +1,10 @@
+[
+  {
+    "component_id": 1,
+    "component_type": "home.hero-image",
+    "entity_id": 1,
+    "field": "HeroImages",
+    "id": 3,
+    "order": 1
+  }
+]
