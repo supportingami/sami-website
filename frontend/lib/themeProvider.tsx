@@ -52,7 +52,11 @@ export default function ThemeProvider(props: CustomProps) {
 
   return (
     <ThemeContext.Provider value={{ theme, updateTheme }}>
-      {loading ? null : <div data-theme={theme}>{props.children}</div>}
+      {loading ? null : (
+        <div className="contents" data-theme={theme}>
+          {props.children}
+        </div>
+      )}
     </ThemeContext.Provider>
   );
 }
