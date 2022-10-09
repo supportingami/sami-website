@@ -47,5 +47,12 @@
     "order": 1,
     "related_id": 1,
     "related_type": "api::resource.resource"
+  },
+  {
+    "field": "File",
+    "file_id": 31,
+    "order": 1,
+    "related_id": 1,
+    "related_type": "api::annual-report.annual-report"
   }
 ]
