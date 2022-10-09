@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { signIn, signOut, useSession } from "next-auth/react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import ThemeToggle from "./theme-toggle";
@@ -12,7 +11,6 @@ interface ILink {
 }
 
 const Navbar = () => {
-  const { data: session, status } = useSession();
   const pageLinks: ILink[] = [
     {
       id: "home",
@@ -42,13 +40,6 @@ const Navbar = () => {
       href: "/resources",
     },
   ];
-
-  const MobileLinks = () => (
-    <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-      <PageLinks />
-      <ThemeToggle btnClass="mr-1" />
-    </ul>
-  );
 
   const ArrowRight = () => (
     <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
@@ -87,8 +78,18 @@ const Navbar = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
         </svg>
       </label>
-      {/* Mobile navbar */}
-      <MobileLinks />
+      <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+        <PageLinks />
+        <ThemeToggle btnClass="mr-1" />
+      </ul>
+    </div>
+  );
+
+  const DesktopNavbar = () => (
+    <div className="navbar-center hidden lg:flex">
+      <ul className="menu menu-horizontal p-0">
+        <PageLinks />
+      </ul>
     </div>
   );
 
@@ -111,11 +112,7 @@ const Navbar = () => {
         <MobileNavbar />
         <a className="btn btn-ghost normal-case text-xl">SAMI</a>
       </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal p-0">
-          <PageLinks />
-        </ul>
-      </div>
+      <DesktopNavbar />
       <div className="navbar-end">
         <ThemeToggle btnClass="mr-1 hidden lg:block" />
         <a className="btn rounded-none rounded-l-lg mr-1">Volunteer</a>
@@ -132,6 +129,10 @@ export default Navbar;
 
 /** Deprecated CC 2022-10-09 - Retained in case we want to implement similar sign in in short term
  
+import { signIn, signOut, useSession } from "next-auth/react";
+  const { data: session, status } = useSession();
+
+
   const signInButtonNode = () => {
     if (session) {
       return false;
