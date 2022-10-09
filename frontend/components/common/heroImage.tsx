@@ -22,7 +22,7 @@ export const HeroImageComponent: React.FC<{ heroImage: ComponentHomeHeroImage }>
   const { bgColor, boxShadow } = getTextStyles();
 
   return (
-    <div className="hero min-h-[75vh]">
+    <div className="hero min-h-[75vh] relative">
       <div className="hero-overlay bg-opacity-60"></div>
       <Image src={getStrapiMedia(ImageData)} layout="fill" objectFit="cover" objectPosition="center" alt={Text} />
       <div className="hero-content text-center text-neutral-content">
@@ -43,4 +43,3 @@ export const HeroImageComponent: React.FC<{ heroImage: ComponentHomeHeroImage }>
     </div>
   );
 };
-// 0.5em 0 0 #343132, -0.5em 0 0 #343132;
