@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_home_hero_images",
+  "info": {
+    "displayName": "HeroImage",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images", "files", "videos", "audios"]
+    },
+    "Text": {
+      "type": "string",
+      "required": true
+    },
+    "ActionButtons": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.action-button"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_common_action_buttons",
+  "info": {
+    "displayName": "ActionButton",
+    "description": "",
+    "icon": "ad"
+  },
+  "options": {},
+  "attributes": {
+    "Text": {
+      "type": "string",
+      "required": true
+    },
+    "Link": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

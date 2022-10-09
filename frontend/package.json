@@ -32,11 +32,11 @@
     "react-share": "^4.4.0"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^2.11.3",
-    "@graphql-codegen/schema-ast": "^2.5.0",
-    "@graphql-codegen/typed-document-node": "^2.3.2",
-    "@graphql-codegen/typescript": "^2.7.2",
-    "@graphql-codegen/typescript-operations": "^2.5.2",
+    "@graphql-codegen/cli": "^2.13.5",
+    "@graphql-codegen/schema-ast": "^2.5.1",
+    "@graphql-codegen/typed-document-node": "^2.3.3",
+    "@graphql-codegen/typescript": "^2.7.3",
+    "@graphql-codegen/typescript-operations": "^2.5.3",
     "@tailwindcss/typography": "^0.5.4",
     "@types/next": "^9.0.0",
     "@types/node": "^16.11.56",
