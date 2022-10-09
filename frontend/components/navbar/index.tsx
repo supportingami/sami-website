@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import ThemeToggle from "./theme-toggle";
 
@@ -19,15 +20,16 @@ const Navbar = () => {
       href: "/home",
     },
     {
-      id: "resources",
-      label: "Resources",
-      href: "/resources",
-    },
-    {
       id: "projects",
       label: "Projects",
       href: "/projects",
+      // TODO - add support for nested nav (see daisyui examples)
       subLinks: [{ id: "mathsCamps", label: "Maths Camps", href: "/camps" }],
+    },
+    {
+      id: "news",
+      label: "News",
+      href: "/blog-posts",
     },
     {
       id: "about",
@@ -35,89 +37,16 @@ const Navbar = () => {
       href: "/about",
     },
     {
-      id: "volunteer",
-      label: "Volunteer",
-      href: "/volunteer",
-    },
-    {
-      id: "news",
-      label: "News",
-      href: "/blog-posts",
+      id: "resources",
+      label: "Resources",
+      href: "/resources",
     },
   ];
 
-  const signInButtonNode = () => {
-    if (session) {
-      return false;
-    }
-
-    return (
-      <Link href="/api/auth/signin">
-        {/* <Button
-          onClick={(e) => {
-            e.preventDefault();
-            signIn();
-          }}
-        >
-          Sign In
-        </Button> */}
-      </Link>
-    );
-  };
-
-  const signOutButtonNode = () => {
-    if (!session) {
-      return false;
-    }
-
-    return (
-      <div></div>
-      // <Box className="ml-1">
-      //   <Link href="/api/auth/signout">
-      //     <Button
-      //       onClick={(e) => {
-      //         e.preventDefault();
-      //         signOut();
-      //       }}
-      //     >
-      //       Sign Out
-      //     </Button>
-      //   </Link>
-      // </Box>
-    );
-  };
-
-  const MobileNavbar = () => (
+  const MobileLinks = () => (
     <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-      {pageLinks.map(({ href, label, id, subLinks }) => (
-        <li key={id}>
-          <Link href={href}>
-            <a>{label}</a>
-          </Link>
-        </li>
-      ))}
-      {/* <li>
-        <a>Item 1</a>
-      </li>
-      <li tabIndex={0}>
-        <a className="justify-between">
-          Parent
-          <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
-          </svg>
-        </a>
-        <ul className="p-2">
-          <li>
-            <a>Submenu 1</a>
-          </li>
-          <li>
-            <a>Submenu 2</a>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <a>Item 3</a>
-      </li> */}
+      <PageLinks />
+      <ThemeToggle btnClass="mr-1" />
     </ul>
   );
 
@@ -145,91 +74,102 @@ const Navbar = () => {
     );
   };
 
+  const MobileNavbar = () => (
+    <div className="dropdown">
+      <label tabIndex={0} className="btn btn-ghost lg:hidden">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
+        </svg>
+      </label>
+      {/* Mobile navbar */}
+      <MobileLinks />
+    </div>
+  );
+
+  const PageLinks = () => (
+    <>
+      {pageLinks.map(({ href, label, id, subLinks }) => (
+        <li key={id}>
+          <Link href={href}>
+            <a>{label}</a>
+          </Link>
+        </li>
+      ))}
+    </>
+  );
+
   return (
     <div data-cy="navbar" className="navbar bg-base-100 z-10 h-16">
       <LogoNotch />
       <div className="navbar-start">
-        <div className="dropdown">
-          <label tabIndex={0} className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
-            </svg>
-          </label>
-          {/* Mobile navbar */}
-          <MobileNavbar />
-        </div>
+        <MobileNavbar />
         <a className="btn btn-ghost normal-case text-xl">SAMI</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal p-0">
-          <li>
-            <a>Item 1</a>
-          </li>
-          <li tabIndex={0}>
-            <a>
-              Parent <ArrowRight />
-            </a>
-            <ul className="p-2">
-              <li>
-                <a>Submenu 1</a>
-              </li>
-              <li>
-                <a>Submenu 2</a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a>Item 3</a>
-          </li>
+          <PageLinks />
         </ul>
       </div>
       <div className="navbar-end">
-        <ThemeToggle btnClass="mr-1" />
+        <ThemeToggle btnClass="mr-1 hidden lg:block" />
         <a className="btn rounded-none rounded-l-lg mr-1">Volunteer</a>
-        <a className="btn rounded-none rounded-r-lg">Donate</a>
+        <a className="btn rounded-none rounded-r-lg gap-2">
+          Donate
+          <FavoriteIcon />
+        </a>
       </div>
     </div>
-    // <div data-cy="navbar" className="z-10">
-    //   <Box p={4} color={color[colorMode]} shadow="lg" pos="relative">
-    //     <Box maxW="xl" mx="auto" w="full">
-    //       <Box>
-    //         <Stack isInline spacing={4} align="center" fontWeight="semibold">
-    //           {linksForAllUsers.map((link) => {
-    //             return (
-    //               <Box key={link.id}>
-    //                 <Link href={link.href}>
-    //                   <ChakraLink>{link.label}</ChakraLink>
-    //                 </Link>
-    //               </Box>
-    //             );
-    //           })}
-    //           {session &&
-    //             linksForAuthenticatedUsers.map((link) => {
-    //               return (
-    //                 <Box key={link.id}>
-    //                   <Link href={link.href}>
-    //                     <ChakraLink>{link.label}</ChakraLink>
-    //                   </Link>
-    //                 </Box>
-    //               );
-    //             })}
-    //         </Stack>
-    //       </Box>
-    //       <Box>
-    //         <ThemeToggle />
-    //         {signInButtonNode()}
-    //         {signOutButtonNode()}
-    //       </Box>
-    //     </Box>
-    //   </Box>
-    // </div>
   );
 };
 
 export default Navbar;
+
+/** Deprecated CC 2022-10-09 - Retained in case we want to implement similar sign in in short term
+ 
+  const signInButtonNode = () => {
+    if (session) {
+      return false;
+    }
+
+    return (
+      <Link href="/api/auth/signin">
+         <Button
+          onClick={(e) => {
+            e.preventDefault();
+            signIn();
+          }}
+        >
+          Sign In
+        </Button> }
+        </Link>
+        );
+      };
+    
+      const signOutButtonNode = () => {
+        if (!session) {
+          return false;
+        }
+    
+        return (
+           <Box className="ml-1">
+             <Link href="/api/auth/signout">
+               <Button
+                 onClick={(e) => {
+                   e.preventDefault();
+                   signOut();
+                 }}
+               >
+                 Sign Out
+               </Button>
+             </Link>
+           </Box>
+        );
+      };
+
+ */
