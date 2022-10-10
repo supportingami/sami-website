@@ -1,30 +1,23 @@
-import { FC } from "react";
-import { IconButton, useColorMode } from "@chakra-ui/core";
 import { useThemeContext } from "lib/themeProvider";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 
-const ThemeToggle: FC<{}> = () => {
-  // Chakra theme
-  const { colorMode, toggleColorMode } = useColorMode();
-  const handleToggleTheme = () => {
-    toggleColorMode();
-    toggleDaisyTheme();
-  };
-
-  // Tailwind theme
+const ThemeToggle = (props: { btnclass?: string }) => {
   const { theme, updateTheme } = useThemeContext();
   function toggleDaisyTheme() {
-    const targetTheme = colorMode === "dark" ? "light" : "dark";
-    console.log("toggle daisy theme", theme);
+    const targetTheme = theme === "dark" ? "light" : "dark";
     updateTheme(targetTheme);
   }
 
   return (
-    <IconButton
+    <button
       aria-label="Toggle theme"
-      fontSize="20px"
-      icon={colorMode === "dark" ? "sun" : "moon"}
-      onClick={handleToggleTheme}
-    />
+      className={`btn btn-ghost ${props.btnclass}`}
+      onClick={toggleDaisyTheme}
+      {...props}
+    >
+      {theme === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
+    </button>
   );
 };
 

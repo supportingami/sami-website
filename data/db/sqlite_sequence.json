@@ -1,11 +1,11 @@
 [
   {
     "name": "files",
-    "seq": 36
+    "seq": 37
   },
   {
     "name": "upload_folders",
-    "seq": 4
+    "seq": 5
   },
   {
     "name": "abouts",
@@ -49,6 +49,26 @@
   },
   {
     "name": "volunteers",
+    "seq": 1
+  },
+  {
+    "name": "home_contents",
+    "seq": 1
+  },
+  {
+    "name": "home_contents_components",
+    "seq": 4
+  },
+  {
+    "name": "components_home_hero_images_components",
+    "seq": 3
+  },
+  {
+    "name": "components_common_action_buttons",
+    "seq": 2
+  },
+  {
+    "name": "components_home_hero_images",
     "seq": 1
   }
 ]

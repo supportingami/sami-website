@@ -54,5 +54,26 @@
     "order": 1,
     "related_id": 1,
     "related_type": "api::annual-report.annual-report"
+  },
+  {
+    "field": "Image",
+    "file_id": 37,
+    "order": 1,
+    "related_id": 2,
+    "related_type": "page-content.cover-image"
+  },
+  {
+    "field": "Image",
+    "file_id": 37,
+    "order": 1,
+    "related_id": 1,
+    "related_type": "components.hero-image"
+  },
+  {
+    "field": "Image",
+    "file_id": 37,
+    "order": 1,
+    "related_id": 1,
+    "related_type": "home.hero-image"
   }
 ]

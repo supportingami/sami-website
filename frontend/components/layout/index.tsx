@@ -1,15 +1,11 @@
-import { ColorModeProvider, LightMode } from "@chakra-ui/core";
-import Container from "components/layout/container";
 import Navbar from "components/navbar";
 
 const Layout = ({ children }) => {
   return (
-    <ColorModeProvider>
-      <LightMode>
-        <Navbar />
-        <Container>{children}</Container>
-      </LightMode>
-    </ColorModeProvider>
+    <div data-cy="layout-container" className="flex flex-col h-screen w-100">
+      <Navbar />
+      <div className="flex-1">{children}</div>
+    </div>
   );
 };
 

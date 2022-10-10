@@ -1,0 +1,21 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_contents",
+  "info": {
+    "singularName": "home-content",
+    "pluralName": "home-contents",
+    "displayName": "HomeContent",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "HeroImages": {
+      "type": "component",
+      "repeatable": true,
+      "component": "home.hero-image"
+    }
+  }
+}

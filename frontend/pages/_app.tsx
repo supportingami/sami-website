@@ -2,7 +2,7 @@ import React from "react";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import { SessionProvider } from "next-auth/react";
-import { ThemeProvider, CSSReset, theme } from "@chakra-ui/core";
+import { ThemeProvider } from "@chakra-ui/core";
 import Layout from "components/layout";
 import "../styles/globals.scss";
 import DaisyThemeProvider from "lib/themeProvider";

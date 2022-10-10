@@ -1,7 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
-  theme: {},
+  theme: {
+    extend: {
+      backgroundImage: {
+        "sami-logo": "url('/images/sami-logo.svg') ",
+        "sami-logo-no-text": "url('/images/sami-logo-no-text.png')",
+      },
+    },
+  },
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
   daisyui: {
     themes: [
@@ -11,7 +18,6 @@ module.exports = {
         light: {
           ...require("daisyui/src/colors/themes")["[data-theme=light]"],
           primary: "#53b4f4",
-          "primary-focus": "mediumblue",
         },
       },
       {
