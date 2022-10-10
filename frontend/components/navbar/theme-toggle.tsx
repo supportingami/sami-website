@@ -2,7 +2,7 @@ import { useThemeContext } from "lib/themeProvider";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 
-const ThemeToggle = (props: { btnClass?: string }) => {
+const ThemeToggle = (props: { btnclass?: string }) => {
   const { theme, updateTheme } = useThemeContext();
   function toggleDaisyTheme() {
     const targetTheme = theme === "dark" ? "light" : "dark";
@@ -12,7 +12,7 @@ const ThemeToggle = (props: { btnClass?: string }) => {
   return (
     <button
       aria-label="Toggle theme"
-      className={`btn btn-ghost ${props.btnClass}`}
+      className={`btn btn-ghost ${props.btnclass}`}
       onClick={toggleDaisyTheme}
       {...props}
     >

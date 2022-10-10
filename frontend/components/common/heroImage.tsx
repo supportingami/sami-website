@@ -19,6 +19,10 @@ export const HeroImageComponent: React.FC<{ heroImage: ComponentHomeHeroImage }>
     return { boxShadow, bgColor };
   };
 
+  const getButtonColor = (index: number) => {
+    return index % 2 === 0 ? "primary" : "secondary";
+  };
+
   const { bgColor, boxShadow } = getTextStyles();
 
   return (
@@ -31,9 +35,9 @@ export const HeroImageComponent: React.FC<{ heroImage: ComponentHomeHeroImage }>
             <span style={{ lineHeight: "2em", padding: "6px", boxShadow, background: bgColor }}>{Text}</span>
           </h1>
           {ActionButtons &&
-            ActionButtons.map(({ id, Link: ButtonLink, Text: ButtonText }) => (
+            ActionButtons.map(({ id, Link: ButtonLink, Text: ButtonText }, index) => (
               <Link key={id} href={ButtonLink}>
-                <button className="btn btn-primary" key={id}>
+                <button className={`btn btn-${getButtonColor(index)} mx-2`} key={id}>
                   {ButtonText}
                 </button>
               </Link>

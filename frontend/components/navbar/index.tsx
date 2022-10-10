@@ -2,6 +2,8 @@ import Link from "next/link";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import ThemeToggle from "./theme-toggle";
+import Image from "next/image";
+import { useRouter } from "next/router";
 
 interface ILink {
   id: string;
@@ -53,6 +55,9 @@ const Navbar = () => {
     const height = 50;
     const navbarOffset = "calc(2 * var(--navbar-padding, 0.5rem) - 2px)";
     const svgFill = "hsl(var(--b1) / var(--tw-bg-opacity))";
+    const router = useRouter();
+    // make logo larger on home screen
+    const logoSizeClass = router.asPath === "/home" ? "w-[200px] h-[70px]" : "w-[100px] h-[35px] -mt-2 no-animation";
     return (
       <div data-cy="logo-container" style={{ height, marginTop: navbarOffset }} className="relative -ml-2">
         <div style={{ height, bottom: -height }} className="absolute flex ">
@@ -61,6 +66,11 @@ const Navbar = () => {
             <path d="M 0,0 H 100 C 45,0 70,100 0,100 Z" />
           </svg>
         </div>
+        <Link href="/home">
+          <div className={`btn btn-link absolute inset-0 m-2  ${logoSizeClass}`}>
+            <Image src="/images/sami-logo-no-text.svg" layout="fill"></Image>
+          </div>
+        </Link>
       </div>
     );
   };
@@ -80,7 +90,7 @@ const Navbar = () => {
       </label>
       <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
         <PageLinks />
-        <ThemeToggle btnClass="mr-1" />
+        <ThemeToggle btnclass="mr-1" />
       </ul>
     </div>
   );
@@ -110,11 +120,10 @@ const Navbar = () => {
       <LogoNotch />
       <div className="navbar-start">
         <MobileNavbar />
-        <a className="btn btn-ghost normal-case text-xl">SAMI</a>
       </div>
       <DesktopNavbar />
       <div className="navbar-end">
-        <ThemeToggle btnClass="mr-1 hidden lg:block" />
+        <ThemeToggle btnclass="mr-1 hidden lg:block" />
         <a className="btn rounded-none rounded-l-lg mr-1">Volunteer</a>
         <a className="btn rounded-none rounded-r-lg gap-2">
           Donate
