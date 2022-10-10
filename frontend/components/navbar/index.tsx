@@ -49,22 +49,34 @@ const Navbar = () => {
     </svg>
   );
 
-  /** Create a curved notch to display logo overlapping with header */
+  /** Create a curved notch to display logo overlapping with header (desktop only) */
   const LogoNotch = () => {
     const width = 200;
     const height = 50;
     const navbarOffset = "calc(2 * var(--navbar-padding, 0.5rem) - 2px)";
     const svgFill = "hsl(var(--b1) / var(--tw-bg-opacity))";
     const router = useRouter();
+    const isHomePage = router.asPath === "/home";
     // make logo larger on home screen
-    const logoSizeClass = router.asPath === "/home" ? "w-[200px] h-[70px]" : "w-[100px] h-[35px] -mt-2 no-animation";
+    const logoSizeClass = isHomePage ? "w-[200px] h-[70px] mt-0" : "w-[100px] h-[35px] -mt-2 no-animation";
     return (
-      <div data-cy="logo-container" style={{ height, marginTop: navbarOffset }} className="relative -ml-2">
+      <div
+        data-cy="logo-container"
+        style={{ height, marginTop: navbarOffset }}
+        className="relative -ml-2 hidden lg:block"
+      >
         <div style={{ height, bottom: -height }} className="absolute flex ">
-          <div style={{ width, height }} className="bg-base-100"></div>
-          <svg preserveAspectRatio="none" viewBox="0 0 100 100" fill={svgFill}>
-            <path d="M 0,0 H 100 C 45,0 70,100 0,100 Z" />
-          </svg>
+          {
+            // Notch
+            isHomePage && (
+              <>
+                <div style={{ width, height }} className="bg-base-100"></div>
+                <svg preserveAspectRatio="none" viewBox="0 0 100 100" fill={svgFill}>
+                  <path d="M 0,0 H 100 C 45,0 70,100 0,100 Z" />
+                </svg>
+              </>
+            )
+          }
         </div>
         <Link href="/home">
           <div className={`btn btn-link absolute inset-0 m-2  ${logoSizeClass}`}>
