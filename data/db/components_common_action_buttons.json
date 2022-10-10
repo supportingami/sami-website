@@ -3,5 +3,10 @@
     "id": 1,
     "link": "/projects",
     "text": "Projects"
+  },
+  {
+    "id": 2,
+    "link": "/volunteer",
+    "text": "Ways To Help"
   }
 ]
