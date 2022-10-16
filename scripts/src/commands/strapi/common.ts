@@ -140,6 +140,26 @@ export function getDBInspector(db: Awaited<ReturnType<typeof getDB>>) {
   return inspector;
 }
 
+/** Iterate over all db rows and map fields as specified in mapping */
+export function mapDBData(rows: any[], mappings: Record<string, (v: any) => any>) {
+  if (rows.length > 0) {
+    const columnsToMap = Object.keys(rows[0]).filter((c) => c in mappings);
+    if (columnsToMap.length > 0) {
+      rows = rows.map((row) => {
+        for (const column of columnsToMap) {
+          if (row.hasOwnProperty(column)) {
+            const value = row[column];
+            const mapping = mappings[column];
+            row[column] = mapping(value);
+          }
+        }
+        return row;
+      });
+    }
+  }
+  return rows;
+}
+
 /************************************************************************************************
  * REST
  ***********************************************************************************************/

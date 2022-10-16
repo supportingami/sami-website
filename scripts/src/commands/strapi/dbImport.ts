@@ -1,11 +1,10 @@
-import { Database } from "better-sqlite3";
 import { Command } from "commander";
 import { readdirSync, ensureDirSync, readJSONSync } from "fs-extra";
 import path from "path";
 import prompts from "prompts";
 import { PATHS } from "../../paths";
-import { arrayToHashmap, sortJSONObjectByKey } from "../../utils/object.utils";
-import { getSqliteDb } from "./common";
+import { arrayToHashmap } from "../../utils/object.utils";
+import { getDB, getDBInspector, mapDBData } from "./common";
 
 /***************************************************************************************
  * CLI
@@ -19,7 +18,7 @@ export default program
   .description("Import strapi data")
   .option("-t --table <string>", "Single table to import (omit to include all)")
   .action(async (options: IProgramOptions) => {
-    new DBImport().run(options);
+    new DBImport().run(options).then(() => process.exit(0));
   });
 
 /***************************************************************************************
@@ -34,7 +33,11 @@ interface ImportSummary {
   importData: any[];
 }
 class DBImport {
-  private db: Database;
+  private db: Awaited<ReturnType<typeof getDB>>;
+  private dbInspector: ReturnType<typeof getDBInspector>;
+  private get client(): "postgres" | "sqlite" {
+    return this.db.client.config.client;
+  }
 
   /**
    *
@@ -45,7 +48,9 @@ class DBImport {
     ensureDirSync(importDir);
 
     // query list of all tables
-    this.db = getSqliteDb();
+    this.db = await getDB();
+    this.dbInspector = getDBInspector(this.db);
+    const dbTables = await this.dbInspector.tables();
     let importTableNames = readdirSync(importDir)
       .map((name) => ({
         filePath: path.resolve(importDir, name),
@@ -57,17 +62,26 @@ class DBImport {
       importTableNames = importTableNames.filter(({ table }) => options.table === table);
     }
     // get summary of local and import data
-    const data: ImportSummary[] = importTableNames.map(({ filePath, table }) => {
+    let data = [];
+    for (const { filePath, table } of importTableNames) {
       const importData = readJSONSync(filePath);
-      const localData = this.getTableData(table);
+      console.log(table);
+      let localData = [];
+      if (dbTables.includes(table)) {
+        localData = await this.getTableData(table);
+      }
       let summary: any;
       summary = this.generateSummary(table, importData, localData);
-      return { importData, localData, filePath, table, summary };
-    });
+      data.push({ importData, localData, filePath, table, summary });
+    }
+    // const data: ImportSummary[] = importTableNames.map(({ filePath, table }) => {
+
+    //   // return { importData, localData, filePath, table, summary };
+    // });
     // confirm and process
     const confirmed = await this.confirmImport(data);
     if (confirmed) {
-      this.handleImport(data);
+      await this.handleImport(data);
     }
   }
 
@@ -93,7 +107,7 @@ class DBImport {
     return confirmed;
   }
 
-  private handleImport(data: ImportSummary[]) {
+  private async handleImport(data: ImportSummary[]) {
     let sequenceData: ImportSummary;
     for (const { table, summary, importData } of data) {
       if (summary) {
@@ -102,15 +116,16 @@ class DBImport {
           sequenceData = { table, summary, importData } as any;
         } else {
           console.log(table);
-          this.truncateTable(table);
-          if (importData.length > 0) {
-            this.insertRows(table, importData, Object.keys(importData[0]));
+          const rows = this.normaliseImportData(table, importData);
+          await this.truncateTable(table);
+          if (rows.length > 0) {
+            await this.insertRows(table, rows);
           }
         }
       }
     }
-    if (sequenceData) {
-      this.updateSqliteSequence(sequenceData.importData);
+    if (sequenceData && this.client === "sqlite") {
+      await this.updateSqliteSequence(sequenceData.importData);
     }
   }
 
@@ -176,37 +191,47 @@ class DBImport {
    * @param table
    * https://stackoverflow.com/questions/4280041/truncate-a-sqlite-table-if-it-exists
    */
-  private truncateTable(table: string) {
-    const stmt = this.db.prepare(`DELETE FROM ${table}`);
-    return stmt.run();
+  private async truncateTable(table: string) {
+    return this.db.raw(`DELETE FROM ${table}`);
   }
 
-  private insertRows(table: string, rows: any[], columns: string[]) {
-    const columnRefs = columns.map((column) => `'${column}'`).join(", ");
-    const valueRefs = columns.map((column) => `@${column}`).join(", ");
-    const sql = `INSERT INTO ${table} (${columnRefs}) VALUES (${valueRefs})`;
-    const stmt = this.db.prepare(sql);
-    const insertMany = this.db.transaction((rows) => {
-      for (const row of rows) {
-        // console.log(row);
-        stmt.run(row);
-      }
-    });
-    return insertMany(rows);
+  private async insertRows(table: string, rows: any[]) {
+    return this.db.batchInsert(table, rows);
   }
 
-  private updateSqliteSequence(values: { name: string; seq: number }[]) {
+  /** Update local sqlite sequence to match latest seq ids applied to data tables */
+  private async updateSqliteSequence(values: { name: string; seq: number }[]) {
     const table = "sqlite_sequence";
     for (const { name, seq } of values) {
       const sql = `UPDATE ${table} SET 'seq' = ${seq} WHERE name = '${name}'`;
-      const stmt = this.db.prepare(sql);
-      stmt.run();
+      await this.db.raw(sql);
     }
   }
 
   private getTableData(table: string) {
-    const stmt = this.db.prepare(`SELECT * FROM ${table}`);
-    const rows = stmt.all();
+    return this.db(table).select("*");
+  }
+
+  /** Handle discrepencies between datatypes in postgres and sqlite dbs */
+  private normaliseImportData(table: string, rows: any[]) {
+    if (this.client === "postgres" && rows.length > 0) {
+      // ignore sqlite_sequence data
+      if (table === "sqlite_sequence") {
+        return [];
+      }
+      rows = this.normalisePostgresImport(rows);
+    }
     return rows;
+  }
+
+  /** Convert postgres data to sqlite-compatible formats */
+  private normalisePostgresImport(rows: any[]) {
+    const mappings = {
+      // sqlite stores epoch milliseconds, postgres date string
+      created_at: (v: string) => new Date(v),
+      updated_at: (v: string) => new Date(v),
+      published_at: (v: string) => new Date(v),
+    };
+    return mapDBData(rows, mappings);
   }
 }
