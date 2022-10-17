@@ -3,6 +3,7 @@
   "license": "see license.md",
   "workspaces": [
     "backend",
+    "ci",
     "frontend",
     "scripts",
     "shared"

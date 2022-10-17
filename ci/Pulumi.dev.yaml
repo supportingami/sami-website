@@ -1,0 +1,3 @@
+config:
+  gcp:project: sami-website-365718
+  gcp:region: europe-west2
