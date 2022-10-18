@@ -12,21 +12,22 @@ import dayjs from "dayjs";
 export const BlogPostComponent: React.FC<{ blogPosts: IBlogPost[]; title }> = ({ blogPosts, title }) => {
   const size = "28px";
   const url = global.window && window.location.href;
+  console.log(blogPosts);
   return (
     <>
       {blogPosts
         .filter((blogPost) => blogPost.Title === title)
         .map((blogPost) => (
-          <div>
-            <h1 style={{ margin: "5px 0px 15px 0", fontSize: "25px", fontWeight: "600" }}>{blogPost.Title}</h1>
-            <span>{dayjs(blogPost.DateWritten).format("MMM D, YYYY")} </span>
+          <div className="font-serif px-32">
+            <h1 className="font-semibold text-4xl capitalize font-sans">{blogPost.Title}</h1>
+            <span className="font-semibold text-sm">{dayjs(blogPost.DateWritten).format("MMM D, YYYY")} </span>
             <span>
               {" | "}
               {blogPost.Tags.data.map((tag) => (
-                <span style={{ opacity: "0.7" }}>{tag.attributes.Tag} </span>
+                <span className="text-gray-500 text-sm">{tag.attributes.Tag} </span>
               ))}
             </span>
-            <div dangerouslySetInnerHTML={{ __html: blogPost.Content }} style={{ margin: "10px 0 " }}></div>
+            <div dangerouslySetInnerHTML={{ __html: blogPost.Content }} className="text-base pr-20 text-justify py-5"></div>
             <div style={{ margin: "20px 0" }}>
               <div>Share this Blog with your community:</div>
               <hr />
