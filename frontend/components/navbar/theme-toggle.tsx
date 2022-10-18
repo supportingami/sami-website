@@ -1,6 +1,6 @@
 import { useThemeContext } from "lib/themeProvider";
-import LightModeIcon from "@mui/icons-material/LightMode";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
+import { MdLightMode } from "react-icons/md";
+import { MdDarkMode } from "react-icons/md";
 
 const ThemeToggle = (props: { btnclass?: string }) => {
   const { theme, updateTheme } = useThemeContext();
@@ -16,7 +16,7 @@ const ThemeToggle = (props: { btnclass?: string }) => {
       onClick={toggleDaisyTheme}
       {...props}
     >
-      {theme === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
+      {theme === "dark" ? <MdLightMode /> : <MdDarkMode />}
     </button>
   );
 };
