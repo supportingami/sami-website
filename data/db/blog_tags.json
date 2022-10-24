@@ -1,1 +1,29 @@
-[]
+[
+  {
+    "created_at": 1666081830228,
+    "created_by_id": 1,
+    "id": 1,
+    "published_at": 1666081831934,
+    "tag": "NewsFeed",
+    "updated_at": 1666081831937,
+    "updated_by_id": 1
+  },
+  {
+    "created_at": 1666081841681,
+    "created_by_id": 1,
+    "id": 2,
+    "published_at": 1666081842609,
+    "tag": "Presentation",
+    "updated_at": 1666081842610,
+    "updated_by_id": 1
+  },
+  {
+    "created_at": 1666081851360,
+    "created_by_id": 1,
+    "id": 3,
+    "published_at": 1666081852447,
+    "tag": "Digital Communities",
+    "updated_at": 1666081852448,
+    "updated_by_id": 1
+  }
+]

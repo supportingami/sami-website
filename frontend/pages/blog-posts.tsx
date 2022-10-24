@@ -7,6 +7,7 @@ import { BlogPostsQuery } from "../graphql/generated";
 import { BlogPostsDocument } from "../graphql/generated";
 import { BlogPost } from "../graphql/generated";
 import { BlogPageComponent } from "components/pages/blog-post";
+import PageLayout from "components/layout/page-layout";
 
 export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
   let blogs: IBlogPost[] = [];
@@ -30,7 +31,9 @@ const VolunteerPage = ({ blogs }: InferGetServerSidePropsType<typeof getServerSi
       <Head>
         <title>News Page</title>
       </Head>
-      <BlogPageComponent blogs={blogs} />
+      <PageLayout>
+        <BlogPageComponent blogs={blogs} />
+      </PageLayout>
     </>
   );
 };

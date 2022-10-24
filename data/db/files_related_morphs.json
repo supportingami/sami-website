@@ -21,20 +21,6 @@
     "related_type": "api::annual-report.annual-report"
   },
   {
-    "field": "FeatureImage",
-    "file_id": 34,
-    "order": 1,
-    "related_id": 1,
-    "related_type": "api::blog-post.blog-post"
-  },
-  {
-    "field": "FeatureImage",
-    "file_id": 33,
-    "order": 1,
-    "related_id": 2,
-    "related_type": "api::blog-post.blog-post"
-  },
-  {
     "field": "Image",
     "file_id": 35,
     "order": 1,
@@ -75,5 +61,117 @@
     "order": 1,
     "related_id": 1,
     "related_type": "home.hero-image"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 38,
+    "order": 1,
+    "related_id": 7,
+    "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 40,
+    "order": 1,
+    "related_id": 9,
+    "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 39,
+    "order": 1,
+    "related_id": 8,
+    "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 41,
+    "order": 1,
+    "related_id": 10,
+    "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 42,
+    "order": 1,
+    "related_id": 11,
+    "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 43,
+    "order": 1,
+    "related_id": 13,
+    "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 44,
+    "order": 1,
+    "related_id": 14,
+    "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 45,
+    "order": 1,
+    "related_id": 15,
+    "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 47,
+    "order": 1,
+    "related_id": 16,
+    "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 48,
+    "order": 1,
+    "related_id": 17,
+    "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 49,
+    "order": 1,
+    "related_id": 5,
+    "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 49,
+    "order": 1,
+    "related_id": 12,
+    "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 49,
+    "order": 1,
+    "related_id": 4,
+    "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 49,
+    "order": 1,
+    "related_id": 3,
+    "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 49,
+    "order": 1,
+    "related_id": 6,
+    "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 50,
+    "order": 1,
+    "related_id": 1,
+    "related_type": "api::blog-post.blog-post"
   }
 ]

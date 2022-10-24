@@ -29,7 +29,9 @@ export const ProjectsPageComponent: React.FC<{ projectPageContent: IProject[]; c
               </aside>
             </div>
             <div>
-              <section>{children || <div dangerouslySetInnerHTML={{ __html: p.Summary }}></div>}</section>
+              <section>
+                {children || <div dangerouslySetInnerHTML={{ __html: p.Summary }} className="prose"></div>}
+              </section>
             </div>
           </div>
         </div>

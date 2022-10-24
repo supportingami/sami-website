@@ -7,8 +7,8 @@ import { IBlogPost } from "types/blogpost";
 import { BlogPostsQuery } from "../../graphql/generated";
 import { BlogPostsDocument } from "../../graphql/generated";
 import { BlogPost } from "../../graphql/generated";
-import { BlogPageComponent } from "components/pages/blog-post";
 import { BlogPostComponent } from "components/pages/blog-post/post";
+import PageLayout from "components/layout/page-layout";
 
 export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
   let blogs: IBlogPost[] = [];
@@ -34,7 +34,9 @@ const BlogPostPage = ({ blogs }: InferGetServerSidePropsType<typeof getServerSid
       <Head>
         <title>{postTitle}</title>
       </Head>
-      <BlogPostComponent blogPosts={blogs} title={postTitle} />
+      <PageLayout>
+        <BlogPostComponent blogPosts={blogs} title={postTitle} />
+      </PageLayout>
     </>
   );
 };

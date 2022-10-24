@@ -1,11 +1,11 @@
 [
   {
     "name": "files",
-    "seq": 37
+    "seq": 50
   },
   {
     "name": "upload_folders",
-    "seq": 5
+    "seq": 6
   },
   {
     "name": "abouts",
@@ -17,11 +17,11 @@
   },
   {
     "name": "blog_posts",
-    "seq": 2
+    "seq": 17
   },
   {
     "name": "blog_tags",
-    "seq": 0
+    "seq": 3
   },
   {
     "name": "countries",
@@ -30,6 +30,10 @@
   {
     "name": "faqs",
     "seq": 17
+  },
+  {
+    "name": "home_contents",
+    "seq": 1
   },
   {
     "name": "members",
@@ -49,10 +53,6 @@
   },
   {
     "name": "volunteers",
-    "seq": 1
-  },
-  {
-    "name": "home_contents",
     "seq": 1
   },
   {
