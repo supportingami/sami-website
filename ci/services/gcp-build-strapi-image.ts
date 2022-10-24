@@ -35,9 +35,5 @@ export function GCPBuildStrapiImage() {
     imageName,
   });
 
-  // Export the resuling base name in addition to the specific version pushed.
-  const baseImageName = image.baseImageName;
-  const fullImageName = image.imageName;
-
   return image;
 }
