@@ -8,7 +8,7 @@ export const AboutPageComponent: React.FC<{ aboutPageContent: IAbout[] }> = ({ a
       {aboutPageContent.map((aboutPageContentItem, index) => (
         <div key={index}>
           <Heading size="md">{aboutPageContentItem.Title}</Heading>
-          <p dangerouslySetInnerHTML={{ __html: aboutPageContentItem.Content }}></p>
+          <p dangerouslySetInnerHTML={{ __html: aboutPageContentItem.Content }} className="prose"></p>
         </div>
       ))}
     </>
