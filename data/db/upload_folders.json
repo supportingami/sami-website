@@ -38,5 +38,15 @@
     "path_id": 4,
     "updated_at": 1665323271316,
     "updated_by_id": 1
+  },
+  {
+    "created_at": 1666080929556,
+    "created_by_id": 1,
+    "id": 6,
+    "name": "Blog Posts",
+    "path": "/5",
+    "path_id": 5,
+    "updated_at": 1666080929556,
+    "updated_by_id": 1
   }
 ]

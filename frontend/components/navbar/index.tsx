@@ -1,5 +1,5 @@
 import Link from "next/link";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import { MdFavorite } from "react-icons/md";
 
 import ThemeToggle from "./theme-toggle";
 import Image from "next/image";
@@ -139,7 +139,7 @@ const Navbar = () => {
         <a className="btn rounded-none rounded-l-lg mr-1">Volunteer</a>
         <a className="btn rounded-none rounded-r-lg gap-2">
           Donate
-          <FavoriteIcon />
+          <MdFavorite />
         </a>
       </div>
     </div>

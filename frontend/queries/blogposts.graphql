@@ -1,5 +1,5 @@
 query blogPosts {
-  blogPosts {
+  blogPosts(sort: "DateWritten:DESC") {
     data {
       id
       attributes {

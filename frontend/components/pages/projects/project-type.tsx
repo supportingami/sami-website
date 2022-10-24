@@ -8,7 +8,9 @@ export const ProjectTypeComponent: React.FC<{ projectType: IProject[]; id }> = (
         {projectType.map((p) =>
           p.ProjectTypes.data
             .filter((type) => type.id === id)
-            .map((t) => <div key={t.id} dangerouslySetInnerHTML={{ __html: t.attributes.Content }}></div>)
+            .map((t) => (
+              <div key={t.id} className="prose" dangerouslySetInnerHTML={{ __html: t.attributes.Content }}></div>
+            ))
         )}
       </ProjectsPageComponent>
     </>
