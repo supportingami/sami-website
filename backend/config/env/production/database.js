@@ -20,7 +20,7 @@ module.exports = ({ env }) => {
       },
       pool: {
         min: 2,
-        max: 5,
+        max: 4,
       },
       debug: false,
     },

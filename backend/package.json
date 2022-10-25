@@ -4,14 +4,17 @@
   "version": "0.1.0",
   "description": "A Strapi application",
   "scripts": {
-    "start": "ENV_PATH=\"./.env.development\" NODE_ENV=development strapi develop",
-    "start:staging": "ENV_PATH=\"./.env.staging\" NODE_ENV=staging strapi develop",
+    "start": "ENV_PATH=\"./environments/development.env\" NODE_ENV=development strapi develop",
+    "start:staging": "ENV_PATH=\"./environments/staging.env\" NODE_ENV=staging strapi develop",
     "start:prod": "strapi start",
-    "build": "strapi build",
+    "build": "ENV_PATH=\"./environments/production.env\" strapi build",
+    "docker:build": "docker compose build",
+    "docker:start": "docker compose --project-name sami-backend up",
     "strapi": "strapi"
   },
   "dependencies": {
     "@_sh/strapi-plugin-ckeditor": "^1.1.1",
+    "@strapi-community/strapi-provider-upload-google-cloud-storage": "^4.3.6",
     "@strapi/plugin-graphql": "4.3.1",
     "@strapi/plugin-i18n": "4.3.1",
     "@strapi/plugin-users-permissions": "4.3.1",
@@ -33,6 +36,5 @@
   "engines": {
     "node": ">=14.x.x <=16.x.x"
   },
-  "license": "MIT",
-  "packageManager": "yarn@3.2.1"
+  "license": "MIT"
 }
