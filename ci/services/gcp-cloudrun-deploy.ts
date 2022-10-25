@@ -9,7 +9,7 @@ type IEnvVars = Record<string, pulumi.Output<string> | string>;
  * @input image - generated docker image to deploy to cloud run
  * https://www.pulumi.com/blog/google-cloud-run-serverless-containers/
  */
-export function GCPCloudRunDeploy(image: docker.Image, envVars: IEnvVars) {
+export function GCPCloudRunDeploy(image: docker.Image, envName: string, envVars: IEnvVars) {
   const enableCloudRun = new gcp.projects.Service("EnableCloudRun", {
     service: "run.googleapis.com",
   });
@@ -19,17 +19,18 @@ export function GCPCloudRunDeploy(image: docker.Image, envVars: IEnvVars) {
   const fullImageName = image.imageName;
 
   // Environment variables
-  const envs: { name: string; value: string | pulumi.Output<string> }[] = Object.entries(envVars).map(
+  const envs: { name: string; value: pulumi.Output<string> | string }[] = Object.entries(envVars).map(
     ([name, value]) => ({
       name,
       value,
     })
   );
 
-  const helloService = new gcp.cloudrun.Service(
+  const cloudrunService = new gcp.cloudrun.Service(
     "strapi-cloudrun",
     {
       location,
+      name: `sami-website-backend-${envName}`,
       template: {
         metadata: {
           // https://cloud.google.com/run/docs/configuring/min-instances
@@ -71,11 +72,11 @@ export function GCPCloudRunDeploy(image: docker.Image, envVars: IEnvVars) {
   );
 
   const iamHello = new gcp.cloudrun.IamMember("hello-everyone", {
-    service: helloService.name,
+    service: cloudrunService.name,
     location,
     role: "roles/run.invoker",
     member: "allUsers",
   });
-  const helloUrl = helloService.statuses[0].url;
+  const helloUrl = cloudrunService.statuses[0].url;
   return helloUrl;
 }

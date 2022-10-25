@@ -1,4 +1,4 @@
 config:
   gcp:project: sami-website-365718
   gcp:region: europe-west2
-  sami-website:GCS_STORAGE_BUCKET: sami_website_uploads_staging
+  sami-website:GCS_STORAGE_BUCKET: sami_website_uploads

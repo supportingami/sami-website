@@ -13,9 +13,9 @@ import { PATHS } from "../utils";
  *
  * https://github.com/pulumi/pulumi-docker/blob/master/examples/container-registries/gcp/ts/index.ts
  */
-export function DockerStrapiImageBuild() {
+export function DockerStrapiImageBuild(envName: string) {
   const location = gcp.config.region || "europe-west2";
-  const repositoryId = "sami-website";
+  const repositoryId = `sami-website-${envName}`;
   const project = gcp.config.project;
 
   // Create a private artifact registry.
@@ -33,7 +33,12 @@ export function DockerStrapiImageBuild() {
 
   // Build and publish the image.
   const image = new docker.Image("strapi-backend-image", {
-    build: PATHS.backendDir,
+    build: {
+      context: PATHS.backendDir,
+      args: {
+        NODE_ENV: envName,
+      },
+    },
     imageName,
   });
 

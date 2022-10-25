@@ -7,8 +7,8 @@ export const PATHS = {
   backendDir,
 };
 
-export const getBackendEnv = (envFilename: string) => {
-  const envFilePath = resolve(backendDir, "environments", envFilename);
+export const getBackendEnv = (envName: string) => {
+  const envFilePath = resolve(backendDir, "environments", `${envName}.env`);
   const envData = readFileSync(envFilePath);
   const parsed = dotenv.parse(envData);
   return parsed;
