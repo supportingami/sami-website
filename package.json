@@ -11,7 +11,6 @@
   "scripts": {
     "start": "yarn start:backend & yarn start:frontend",
     "start:backend": "yarn workspace backend start",
-    "start:backend:docker": "docker-compose --project-name sami-backend --file backend/docker-compose.yml up",
     "start:frontend": "yarn workspace frontend start",
     "scripts": "yarn workspace scripts start",
     "build": "yarn workspace backend start & yarn workspace frontend build",
@@ -38,7 +37,7 @@
       "prettier --write"
     ]
   },
-  "packageManager": "yarn@3.2.1",
+  "packageManager": "yarn@3.2.4",
   "engines": {
     "node": ">=14.x <=16.x"
   },
