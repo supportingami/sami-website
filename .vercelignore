@@ -1,0 +1,11 @@
+# Ignore everything (folders and files) on root only
+/*
+!frontend
+!shared
+!package.json
+!.yarn
+.yarn/cache
+.yarn/install-state.gz
+!yarn.lock
+!vercel.json
+!.yarnrc.yml

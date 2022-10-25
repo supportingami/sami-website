@@ -9,7 +9,7 @@ module.exports = withBundleAnalyzer({
   reactStrictMode: true,
   images: {
     loader: "default",
-    domains: ["localhost"],
+    domains: ["localhost", "storage.googleapis.com"],
   },
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],
