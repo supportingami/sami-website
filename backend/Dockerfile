@@ -17,13 +17,16 @@ ENV PATH /opt/node_modules/.bin:$PATH
 RUN yarn config set network-timeout 600000 -g && yarn install --ignore-engines
 WORKDIR /opt/app
 COPY ./ .
+# TODO - allow staging build (how to pass env to yarn build script?)
 RUN yarn build
 
 
 FROM node:16-alpine
 RUN apk add vips-dev
 RUN rm -rf /var/cache/apk/*
-ARG NODE_ENV=production
+
+# TODO - ideally log current env
+ARG NODE_ENV=production 
 ENV NODE_ENV=${NODE_ENV}
 WORKDIR /opt/app
 COPY --from=build /opt/node_modules ./node_modules

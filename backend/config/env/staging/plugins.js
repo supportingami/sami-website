@@ -1,19 +1,5 @@
-const { existsSync } = require("fs");
-const { resolve } = require("path");
-
 module.exports = ({ env }) => {
   //   gcloud auth application-default login
-  //   const serviceAccountPath = env("GOOGLE_APPLICATION_CREDENTIALS");
-  //   if (!serviceAccountPath || !existsSync(serviceAccountPath)) {
-  //     // try to use application default credentials
-  //     // process.exitCode = 1;
-  //     // throw new Error("GCP_SERVICE_ACCOUNT not found", serviceAccountPath);
-  //   }
-  //   const bucketName = env("GCP_BUCKET_NAME");
-  //   if (!bucketName) {
-  //     process.exitCode = 1;
-  //     throw new Error("GCP_BUCKET_NAME not provided");
-  //   }
 
   // const serviceAccount = JSON.parse(resolve(serviceAccountPath));
   const bucketName = env("GCS_BUCKET_NAME");
@@ -29,7 +15,8 @@ module.exports = ({ env }) => {
           bucketName: `${bucketName}`,
           // Auth for non-GCP environments
           //   serviceAccount,
-          baseUrl: `https://storage.googleapis.com/${bucketName}`,
+          //  `https://storage.cloud.google.com/${bucketName}`
+          baseUrl: "https://storage.googleapis.com/{bucket-name}",
           basePath: env("GCS_BASE_PATH"),
           baseUrl: env("GCS_BASE_URL"),
           publicFiles: env("GCS_PUBLIC_FILES"),
