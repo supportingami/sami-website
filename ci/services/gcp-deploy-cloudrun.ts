@@ -1,12 +1,15 @@
+import * as pulumi from "@pulumi/pulumi";
 import * as docker from "@pulumi/docker";
 import * as gcp from "@pulumi/gcp";
+
+type IEnvVars = Record<string, pulumi.Output<string> | string>;
 
 /**
  *
  * @input image - generated docker image to deploy to cloud run
  * https://www.pulumi.com/blog/google-cloud-run-serverless-containers/
  */
-export function GCPDeployCloudRun(image: docker.Image) {
+export function GCPDeployCloudRun(image: docker.Image, envVars: IEnvVars) {
   const enableCloudRun = new gcp.projects.Service("EnableCloudRun", {
     service: "run.googleapis.com",
   });
@@ -14,6 +17,15 @@ export function GCPDeployCloudRun(image: docker.Image) {
   // Location to deploy Cloud Run services
   const location = gcp.config.region || "europe-west2";
   const fullImageName = image.imageName;
+
+  // Environment variables
+  const envs: { name: string; value: string | pulumi.Output<string> }[] = Object.entries(envVars).map(
+    ([name, value]) => ({
+      name,
+      value,
+    })
+  );
+
   const helloService = new gcp.cloudrun.Service(
     "strapi-cloudrun",
     {
@@ -21,9 +33,10 @@ export function GCPDeployCloudRun(image: docker.Image) {
       template: {
         metadata: {
           // https://cloud.google.com/run/docs/configuring/min-instances
+          // NOTE - will need to ensure max db connections not reached
           annotations: {
             "autoscaling.knative.dev/minScale": "0",
-            "autoscaling.knative.dev/maxScale": "3",
+            "autoscaling.knative.dev/maxScale": "1",
           },
         },
         // https://cloud.google.com/run/docs/reference/rest/v1/RevisionSpec
@@ -32,7 +45,9 @@ export function GCPDeployCloudRun(image: docker.Image) {
           containers: [
             {
               image: fullImageName,
-              envs: [{ name: "TEST_ENV_VAR", value: "TEST_ENV_VALUE" }],
+              envs,
+              ports: [{ containerPort: 1337 }],
+
               /**
                * Default cloudrun listens on port 8080. expose additional here
                * https://cloud.google.com/run/docs/container-contract
@@ -48,6 +63,7 @@ export function GCPDeployCloudRun(image: docker.Image) {
               },
             },
           ],
+          timeoutSeconds: 120,
         },
       },
     },

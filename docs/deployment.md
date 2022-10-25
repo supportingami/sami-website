@@ -13,6 +13,11 @@ The backend stack is deployed as 3 micro-entities to allow for efficient runtime
 
 ## Stack Deployment
 
+**Prerequisites**
+
+[Pulumi](https://www.pulumi.com/docs/get-started/install/)
+[Docker](https://www.docker.com/products/docker-desktop/)
+
 ```
 cd ci
 npm i

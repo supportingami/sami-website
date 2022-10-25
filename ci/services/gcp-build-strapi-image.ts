@@ -1,5 +1,6 @@
 import * as gcp from "@pulumi/gcp";
 import * as docker from "@pulumi/docker";
+import { PATHS } from "../utils";
 
 /**
  *
@@ -31,7 +32,7 @@ export function GCPBuildStrapiImage() {
 
   // Build and publish the image.
   const image = new docker.Image("strapi-backend-image", {
-    build: "./docker",
+    build: PATHS.backendDir,
     imageName,
   });
 

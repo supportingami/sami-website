@@ -36,6 +36,6 @@ function configExport(options: IProgramOptions) {
     cwd: PATHS.backendDir,
     shell: true,
     stdio: "inherit",
-    env: { ENV_PATH: "./.env.development" },
+    env: { ENV_PATH: "./environments/development.env" },
   });
 }

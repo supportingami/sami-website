@@ -104,7 +104,7 @@ class StrapiBootstrap {
       stdio: "inherit",
       cwd: PATHS.backendDir,
       shell: true,
-      env: { ENV_PATH: "./.env.development" },
+      env: { ENV_PATH: "./environments/development" },
     });
   }
 }

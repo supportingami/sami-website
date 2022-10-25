@@ -1,19 +1,26 @@
 import * as pulumi from "@pulumi/pulumi";
-import * as gcp from "@pulumi/gcp";
 
 import { GCPDeployCloudRun } from "./services/gcp-deploy-cloudrun";
 import { GCPBuildStrapiImage } from "./services/gcp-build-strapi-image";
+import { GCPCStorageCreate } from "./services/gcp-storage-create";
+import { getBackendEnv } from "./utils";
 
-// Create a GCP resource (Storage Bucket)
-const bucket = new gcp.storage.Bucket("uploads-dev", {
-  location: "europe-west2",
-});
+const config = new pulumi.Config();
+const GCS_STORAGE_BUCKET = config.require("GCS_STORAGE_BUCKET");
 
-// Export the DNS name of the bucket
+// Storage Bucket
+const bucket = GCPCStorageCreate(GCS_STORAGE_BUCKET);
 export const bucketName = bucket.url;
 
+// Docker Image
 const image = GCPBuildStrapiImage();
-export const helloUrl = GCPDeployCloudRun(image);
 
-// TODO - manage secrets
-const config = new pulumi.Config();
+// Cloudrun Instance
+const dockerEnv = getBackendEnv();
+console.log("dockerEnv", dockerEnv);
+
+export const cloudRunUrl = GCPDeployCloudRun(image, {
+  ...dockerEnv, // populate default env vars stored locally
+  GCS_BUCKET_NAME: bucketName, // populate storage bucket created above
+  STRAPI_HOST: "0.0.0.0", // expose to docker host
+});
