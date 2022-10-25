@@ -19,8 +19,8 @@ module.exports = ({ env }) => {
         password,
       },
       pool: {
-        min: 2,
-        max: 4,
+        min: 1,
+        max: 2, // TODO - should expose/increase if using dedicated db instance
       },
       debug: false,
     },

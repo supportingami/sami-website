@@ -3,6 +3,7 @@ import * as docker from "@pulumi/docker";
 import { PATHS } from "../utils";
 
 /**
+ * Build docker image from backend strapi workspace and submit to google artifact registry
  *
  * Prerequisites
  * ```
@@ -12,7 +13,7 @@ import { PATHS } from "../utils";
  *
  * https://github.com/pulumi/pulumi-docker/blob/master/examples/container-registries/gcp/ts/index.ts
  */
-export function GCPBuildStrapiImage() {
+export function DockerStrapiImageBuild() {
   const location = gcp.config.region || "europe-west2";
   const repositoryId = "sami-website";
   const project = gcp.config.project;

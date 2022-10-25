@@ -19,8 +19,8 @@ module.exports = ({ env }) => {
         password,
       },
       pool: {
-        min: 2,
-        max: 5,
+        min: 1,
+        max: 2,
       },
       debug: false,
     },

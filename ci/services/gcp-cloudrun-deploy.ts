@@ -9,7 +9,7 @@ type IEnvVars = Record<string, pulumi.Output<string> | string>;
  * @input image - generated docker image to deploy to cloud run
  * https://www.pulumi.com/blog/google-cloud-run-serverless-containers/
  */
-export function GCPDeployCloudRun(image: docker.Image, envVars: IEnvVars) {
+export function GCPCloudRunDeploy(image: docker.Image, envVars: IEnvVars) {
   const enableCloudRun = new gcp.projects.Service("EnableCloudRun", {
     service: "run.googleapis.com",
   });

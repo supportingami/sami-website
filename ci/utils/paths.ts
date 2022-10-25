@@ -2,15 +2,14 @@ import { resolve } from "path";
 import * as dotenv from "dotenv";
 import { readFileSync } from "fs";
 const backendDir = resolve(__dirname, "../../backend");
-const backendProdEnvFile = resolve(backendDir, "environments", "production.env");
 
 export const PATHS = {
   backendDir,
-  backendProdEnvFile,
 };
 
-export const getBackendEnv = () => {
-  const envData = readFileSync(backendProdEnvFile);
+export const getBackendEnv = (envFilename: string) => {
+  const envFilePath = resolve(backendDir, "environments", envFilename);
+  const envData = readFileSync(envFilePath);
   const parsed = dotenv.parse(envData);
   return parsed;
 };
