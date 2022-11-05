@@ -1,21 +1,36 @@
 import { Box, Button } from "@chakra-ui/core";
+import Image from "next/image";
 import React from "react";
 import { IAnnualReport } from "types/annualreport";
 import { getStrapiMedia } from "lib/media";
+import bg from "public/images/AnnualReport.png";
+
+const style={
+  backgroundImage: `url(${bg.src})`,
+  width: "100%",
+  height: "100%", 
+}
 
 export const AnnualReportsListItemComponent: React.FC<{
   report: IAnnualReport;
 }> = ({ report }) => (
-  <Box p="2">
-    <div>
+ 
+  
+  <div>
+  <div className="relative w-[200px] h-[150px]">
+  <div className="absolute w-[200px] h-[150px]" style={style}>
+  
       {report.File && (
+
         <a href={getStrapiMedia(report.File)} target="_blank" download rel="noopener noreferrer">
-          <strong>{report.Year} Annual Report </strong>
-          <Button size="sm" backgroundColor="grey">
-            Download
-          </Button>
         </a>
       )}
+      <p className="text-xl inline bottom-0 absolute leading-[1.6] w-[200px] h-[2px] inset-x-0">
+        {report.Year} Annual Report
+      </p>
     </div>
-  </Box>
+  </div>
+ </div>
+
+ 
 );

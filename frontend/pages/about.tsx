@@ -18,6 +18,8 @@ import {
 import { serverQuery } from "lib/graphql";
 import { IAbout } from "types/about";
 import { MembersComponent } from "components/pages/members";
+import PageLayout from "components/layout/page-layout";
+import ToC from "components/pages/ToC";
 
 export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
   let about: IAbout[] = [];
@@ -55,22 +57,12 @@ const AboutPage = ({ about, members, reports }: InferGetServerSidePropsType<type
       <Head>
         <title>About Us</title>
       </Head>
+      <PageLayout>
       <AboutPageComponent aboutPageContent={about} />
       <MembersComponent members={members} />
-      <Heading size="md">SAMI Theory of Change</Heading>
-      <p>
-        At SAMI we’ve been working to build our thoughts on how everything we do can fit into a larger picture to create
-        real change across Africa. We hope to use this section to communicate some of these ideas when they are slightly
-        further developed. In the meantime you can see our current working document{" "}
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://docs.google.com/document/d/1QC0zZ4h59NUzyEfO9x33baYukHwbfP1I4PUNGFjI4JM/edit?usp=sharing"
-        >
-          here
-        </a>
-      </p>
+      <ToC></ToC>
       <AnnualReportPageComponent reports={reports} />
+      </PageLayout>
     </>
   );
 };

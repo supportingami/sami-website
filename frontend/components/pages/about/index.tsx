@@ -1,13 +1,12 @@
 import React from "react";
 import { IAbout } from "types/about";
 import { Heading } from "@chakra-ui/core";
-import PageLayout from "components/layout/page-layout";
-import Header from "components/layout/header";
+import Header from "components/layout/Header";
 
 
 export const AboutPageComponent: React.FC<{ aboutPageContent: IAbout[] }> = ({ aboutPageContent }) => {
   return (
-    <PageLayout>
+    <>
       <Header />
       <div
       className={`relative text-center w-[1148px] h-[227.89px] font-['Roboto'] text-[rgba(29,33,48,1)]`}>
@@ -147,7 +146,7 @@ export const AboutPageComponent: React.FC<{ aboutPageContent: IAbout[] }> = ({ a
         All projects live by the following principles:
       </p>
     </div>
-    </PageLayout>
+    </>
   );
 };
 
