@@ -2,10 +2,11 @@ import React from "react";
 import Head from "next/head";
 import { Heading } from "@chakra-ui/core";
 import { AboutPageComponent } from "components/pages/about";
-import { AnnualReportPageComponent } from "components/pages/annual-reports";
+import { AnnualReportPageComponent } from "components/pages/about/annual-reports";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import { IAnnualReport } from "types/annualreport";
 import { IMember } from "types/member";
+
 
 import {
   AboutQuery,
@@ -17,9 +18,10 @@ import {
 } from "../graphql/generated";
 import { serverQuery } from "lib/graphql";
 import { IAbout } from "types/about";
-import { MembersComponent } from "components/pages/members";
+import { MembersComponent } from "components/pages/about/members";
 import PageLayout from "components/layout/page-layout";
-import ToC from "components/pages/ToC";
+import ToC from "components/pages/about/ToC";
+import Testimonials from "components/pages/about/testmonials/Testmonials";
 
 export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
   let about: IAbout[] = [];
@@ -62,6 +64,7 @@ const AboutPage = ({ about, members, reports }: InferGetServerSidePropsType<type
       <MembersComponent members={members} />
       <ToC></ToC>
       <AnnualReportPageComponent reports={reports} />
+      <Testimonials/>
       </PageLayout>
     </>
   );
