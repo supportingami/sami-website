@@ -30,7 +30,7 @@
       "type": "string"
     },
     "Summary": {
-      "type": "string"
+      "type": "text"
     },
     "DateWritten": {
       "type": "date"
