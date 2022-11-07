@@ -1,6 +1,5 @@
 import React from "react";
 import { IAbout } from "types/about";
-import { Heading } from "@chakra-ui/core";
 import Header from "components/layout/Header";
 
 
@@ -9,7 +8,7 @@ export const AboutPageComponent: React.FC<{ aboutPageContent: IAbout[] }> = ({ a
     <>
       <Header />
       <div
-      className={`relative text-center w-[1148px] h-[227.89px] font-['Roboto'] text-[rgba(29,33,48,1)]`}>
+      className={`relative text-center w-[1148px] h-[227.89px] font-['Roboto'] text-[rgba(29,33,48,1)] mt-8`}>
       <p className="left-0 bottom-0 absolute text-xl font-bold leading-normal inline m-0 h-[76.89px] w-[1088.88px] right-[5.15%] top-[66.26%]">
         {
           "By working directly with local people and organisations that have support and contacts within mathematics education, "
