@@ -4,8 +4,8 @@ import { readdirSync, ensureDirSync, readJSONSync } from "fs-extra";
 import path from "path";
 import prompts from "prompts";
 import { PATHS } from "../../paths";
-import { arrayToHashmap } from "../../utils/object.utils";
-import { getDB, getLoadedEnvironment, listDBTables, mapDBData } from "./common";
+import { arrayToHashmap, getLoadedEnvironment } from "../../utils";
+import { getDB, listDBTables, mapDBData } from "./common";
 
 /***************************************************************************************
  * CLI

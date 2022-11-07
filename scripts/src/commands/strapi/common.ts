@@ -1,11 +1,8 @@
 import axios from "axios";
 import chalk from "chalk";
 import crypto from "crypto";
-import dotenv from "dotenv";
-import { createFileSync, existsSync, readFileSync, readdirSync } from "fs-extra";
 import schemaInspector from "knex-schema-inspector";
 import path from "path";
-import { prompt } from "inquirer";
 
 import { loadDb } from "backend/scripts/db";
 
@@ -14,6 +11,7 @@ import strapi from "../../../../backend/node_modules/@strapi/strapi";
 import type { Strapi } from "../../../../backend/node_modules/@strapi/strapi";
 
 import { PATHS } from "../../paths";
+import { getFrontendEnv, loadEnvironment } from "../../utils";
 
 export type IStrapi = Strapi;
 
@@ -68,58 +66,6 @@ export async function createStrapiInstance(serveAdminPanel = false, autoReload =
 }
 
 /************************************************************************************************
- * Environments
- *
- * By default Strapi allows population of .env files specific to a given NODE_ENV
- * It also allows environment-specific configuration files, such as config/env/production/database.js
- *
- * The methods below mimic environment handling as strapi
- ***********************************************************************************************/
-interface ILoadedEnv {
-  name: string;
-  envPath: string;
-  dbConfigPath: string;
-}
-let loadedEnv: ILoadedEnv;
-
-async function loadEnvironment() {
-  if (!loadedEnv) {
-    // configure environment in same way as when running from backend
-    // select env from env files
-    const envDir = path.resolve(PATHS.backendDir, "environments");
-    const envFiles = readdirSync(envDir)
-      .filter((filename) => filename.endsWith(".env"))
-      .map((filename) => {
-        const [name] = filename.split(".");
-        const envPath = path.resolve(PATHS.backendDir, "environments", filename);
-        const dbConfigPath = path.resolve(PATHS.backendDir, "config", "env", name, "database.js");
-        const value: ILoadedEnv = { name, envPath, dbConfigPath };
-        return { name, value };
-      });
-    const { selected } = await prompt([
-      { type: "list", choices: envFiles, message: "Select environment", name: "selected" },
-    ]);
-    loadedEnv = selected;
-    const { envPath } = loadedEnv;
-    // populate selected .env to global environment
-    process.env.ENV_PATH = envPath;
-    dotenv.config({ path: process.env.ENV_PATH });
-  }
-  return loadedEnv;
-}
-
-export function getFrontendEnv() {
-  const envFile = path.resolve(PATHS.frontendDir, ".env.local");
-  if (!existsSync(envFile)) {
-    createFileSync(envFile);
-  }
-  const envData = readFileSync(envFile);
-  const parsed = dotenv.parse(envData);
-  const envString = envData.toString("utf8");
-  return { envString, parsed, envFile };
-}
-
-/************************************************************************************************
  * DB
  ***********************************************************************************************/
 
@@ -135,9 +81,7 @@ export async function getDB() {
   const db = await loadDb(dbConfigPath);
   return db;
 }
-export function getLoadedEnvironment() {
-  return loadedEnv;
-}
+
 /** Load knex schema inspector to allow schema queries such as listing all tables */
 export function getDBInspector(db: Awaited<ReturnType<typeof getDB>>) {
   const inspector = schemaInspector(db as any);
