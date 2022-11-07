@@ -7,14 +7,35 @@ import { PATHS } from "../paths";
 /************************************************************************************************
  * Environments
  *
- * By default Strapi allows population of .env files specific to a given NODE_ENV
- * It also allows environment-specific configuration files, such as config/env/production/database.js
- *
- * The methods below mimic environment handling as strapi
+ * Strapi and NextJS both have support for .env files, handled in slightly different ways
+ * The methods below provide access to read and parse env configuration for both frontend and backend
  ***********************************************************************************************/
 
-export interface ILoadedEnv {
-  /** local name prefix of .env file */
+export interface IFrontendEnv {
+  /** local name suffix of .env file, e.g. .env.local */
+  name: string;
+  /** full path to .env file */
+  envPath: string;
+  /** raw string representing env prior to key-value pair parse */
+  envString: string;
+  /** key-value pairs of variables processed from .env file */
+  parsed: any;
+}
+
+export function getFrontendEnv(): IFrontendEnv {
+  const name = "local";
+  const envPath = path.resolve(PATHS.frontendDir, `.env.${name}`);
+  if (!existsSync(envPath)) {
+    createFileSync(envPath);
+  }
+  const envData = readFileSync(envPath);
+  const parsed: IFrontendEnv = dotenv.parse(envData) as any;
+  const envString = envData.toString("utf8");
+  return { parsed, envPath, name, envString };
+}
+
+export interface IBackendEnv {
+  /** local name prefix of .env file, e.g. development.env */
   name: string;
   /** full path to .env file */
   envPath: string;
@@ -23,23 +44,12 @@ export interface ILoadedEnv {
   /** key-value pairs of variables processed from .env file */
   parsed: any;
 }
-let loadedEnv: ILoadedEnv;
-
-export function getFrontendEnv() {
-  const envFile = path.resolve(PATHS.frontendDir, ".env.local");
-  if (!existsSync(envFile)) {
-    createFileSync(envFile);
-  }
-  const envData = readFileSync(envFile);
-  const parsed = dotenv.parse(envData);
-  const envString = envData.toString("utf8");
-  return { envString, parsed, envFile };
-}
+let loadedEnv: IBackendEnv;
 
 /**
  *
  */
-export async function loadEnvironment() {
+export async function getBackendEnv() {
   if (!loadedEnv) {
     // configure environment in same way as when running from backend
     // select env from env files
@@ -50,7 +60,7 @@ export async function loadEnvironment() {
         const [name] = filename.split(".");
         const envPath = path.resolve(PATHS.backendDir, "environments", filename);
         const dbConfigPath = path.resolve(PATHS.backendDir, "config", "env", name, "database.js");
-        const value: ILoadedEnv = { name, envPath, dbConfigPath, parsed: {} };
+        const value: IBackendEnv = { name, envPath, dbConfigPath, parsed: {} };
         return { name, value };
       });
     if (envFiles.length === 0) {

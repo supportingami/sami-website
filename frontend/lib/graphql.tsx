@@ -28,8 +28,17 @@ export async function serverQuery<T>(graphqlQuery: DocumentNode) {
         const messages = networkErrors.map((n) => n.message).join("\n");
         throw new Error("Network error\n" + messages);
       }
+      if (err.message === "Forbidden access") {
+        const { STRAPI_READONLY_TOKEN } = process.env;
+        if (!STRAPI_READONLY_TOKEN) {
+          console.log("no token", process.env);
+          throw new Error("No STRAPI_READONLY_TOKEN provided, please set one");
+        }
+        throw new Error("Invalid access token:" + STRAPI_READONLY_TOKEN);
+      }
       // Throw regular error
       else {
+        console.log("err", err.message);
         throw err;
       }
     });

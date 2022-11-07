@@ -11,7 +11,7 @@ import strapi from "../../../../backend/node_modules/@strapi/strapi";
 import type { Strapi } from "../../../../backend/node_modules/@strapi/strapi";
 
 import { PATHS } from "../../paths";
-import { getFrontendEnv, loadEnvironment } from "../../utils";
+import { getFrontendEnv, getBackendEnv } from "../../utils";
 
 export type IStrapi = Strapi;
 
@@ -22,17 +22,17 @@ export interface IAdminToken {
   accessKey: string;
 }
 export const ADMIN_TOKENS: { [key in "fullaccess" | "readonly"]: IAdminToken } = {
-  fullaccess: {
-    name: `admin-readonly`,
+  readonly: {
+    name: `STRAPI_READONLY_TOKEN`,
     description: "admin read-only token",
     type: "read-only",
-    // This will change every time script run, stored token can be accessed from file
     accessKey: crypto.randomBytes(128).toString("hex"),
   },
-  readonly: {
-    name: `admin-fullaccess`,
+  fullaccess: {
+    name: `STRAPI_FULLACCESS_TOKEN`,
     description: "admin full-access token",
     type: "full-access",
+    // This will change every time script run, stored token can be accessed from file
     accessKey: crypto.randomBytes(128).toString("hex"),
   },
 };
@@ -49,7 +49,7 @@ export const ADMIN_TOKENS: { [key in "fullaccess" | "readonly"]: IAdminToken } =
  * */
 export async function createStrapiInstance(serveAdminPanel = false, autoReload = false) {
   console.log(chalk.green("Starting Strapi..."));
-  await loadEnvironment();
+  await getBackendEnv();
   // create instance
   const app: IStrapi = await strapi({
     appDir: PATHS.backendDir,
@@ -77,7 +77,7 @@ export async function createStrapiInstance(serveAdminPanel = false, autoReload =
  *
  */
 export async function getDB() {
-  const { dbConfigPath } = await loadEnvironment();
+  const { dbConfigPath } = await getBackendEnv();
   const db = await loadDb(dbConfigPath);
   return db;
 }
@@ -129,7 +129,7 @@ export function mapDBData(rows: any[], mappings: Record<string, (v: any) => any>
  * NOTE - most admin operations will not work with token (only logged in user cookie)
  */
 async function getAxiosInstance() {
-  await loadEnvironment();
+  await getBackendEnv();
 
   const instance = axios.create({
     baseURL: process.env.STRAPI_ADMIN_BACKEND_URL || "http://localhost:1337",
