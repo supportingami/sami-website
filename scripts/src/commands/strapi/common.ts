@@ -1,16 +1,17 @@
 import axios from "axios";
-import sqLite3 from "better-sqlite3";
 import chalk from "chalk";
 import crypto from "crypto";
-import dotenv from "dotenv";
+import schemaInspector from "knex-schema-inspector";
 import path from "path";
+
+import { loadDb } from "backend/scripts/db";
 
 // Import from backend folders to ensure plugins resolved correctly
 import strapi from "../../../../backend/node_modules/@strapi/strapi";
 import type { Strapi } from "../../../../backend/node_modules/@strapi/strapi";
 
 import { PATHS } from "../../paths";
-import { createFileSync, existsSync, readFileSync } from "fs-extra";
+import { getFrontendEnv, loadEnvironment } from "../../utils";
 
 export type IStrapi = Strapi;
 
@@ -48,7 +49,7 @@ export const ADMIN_TOKENS: { [key in "fullaccess" | "readonly"]: IAdminToken } =
  * */
 export async function createStrapiInstance(serveAdminPanel = false, autoReload = false) {
   console.log(chalk.green("Starting Strapi..."));
-  loadDevEnvironment();
+  await loadEnvironment();
   // create instance
   const app: IStrapi = await strapi({
     appDir: PATHS.backendDir,
@@ -64,35 +65,62 @@ export async function createStrapiInstance(serveAdminPanel = false, autoReload =
   return app;
 }
 
-export function loadDevEnvironment() {
-  // configure environment in same way as when running from backend
-  const envPath = path.resolve(PATHS.backendDir, ".env.development");
-  process.env.ENV_PATH = envPath;
-  dotenv.config({ path: process.env.ENV_PATH });
-}
+/************************************************************************************************
+ * DB
+ ***********************************************************************************************/
 
-export function getFrontendEnv() {
-  const envFile = path.resolve(PATHS.frontendDir, ".env.local");
-  if (!existsSync(envFile)) {
-    createFileSync(envFile);
-  }
-  const envData = readFileSync(envFile);
-  const parsed = dotenv.parse(envData);
-  const envString = envData.toString("utf8");
-  return { envString, parsed, envFile };
-}
-
-export function getSqliteDb() {
-  loadDevEnvironment();
-  const { DATABASE_FILENAME } = process.env;
-  if (!DATABASE_FILENAME) {
-    throw new Error("No SQLiteDB file in environment");
-  }
-
-  const dbFile = path.resolve(PATHS.backendDir, DATABASE_FILENAME);
-  const db = sqLite3(dbFile, { fileMustExist: true });
+/**
+ * Connect to the same db as strapi for a given environment
+ *
+ * TODO - schema inspector doesn't support better-sqlite3 so using sqlite3
+ * https://github.com/knex/knex-schema-inspector/issues/94
+ *
+ */
+export async function getDB() {
+  const { dbConfigPath } = await loadEnvironment();
+  const db = await loadDb(dbConfigPath);
   return db;
 }
+
+/** Load knex schema inspector to allow schema queries such as listing all tables */
+export function getDBInspector(db: Awaited<ReturnType<typeof getDB>>) {
+  const inspector = schemaInspector(db as any);
+  return inspector;
+}
+
+export async function listDBTables(db: Awaited<ReturnType<typeof getDB>>) {
+  const inspector = getDBInspector(db);
+  const allTables = await inspector.tables();
+  // manually add sqlite_sequence as not included by knex
+  if (db.client.config.client === "sqlite") {
+    allTables.push("sqlite_sequence");
+  }
+  return allTables;
+}
+
+/** Iterate over all db rows and map fields as specified in mapping */
+export function mapDBData(rows: any[], mappings: Record<string, (v: any) => any>) {
+  if (rows.length > 0) {
+    const columnsToMap = Object.keys(rows[0]).filter((c) => c in mappings);
+    if (columnsToMap.length > 0) {
+      rows = rows.map((row) => {
+        for (const column of columnsToMap) {
+          if (row.hasOwnProperty(column)) {
+            const value = row[column];
+            const mapping = mappings[column];
+            row[column] = mapping(value);
+          }
+        }
+        return row;
+      });
+    }
+  }
+  return rows;
+}
+
+/************************************************************************************************
+ * REST
+ ***********************************************************************************************/
 
 /**
  * Create an axios rest client instance configured with baseUrl and auth headers
@@ -100,8 +128,8 @@ export function getSqliteDb() {
  *
  * NOTE - most admin operations will not work with token (only logged in user cookie)
  */
-export function getAxiosInstance() {
-  loadDevEnvironment();
+async function getAxiosInstance() {
+  await loadEnvironment();
 
   const instance = axios.create({
     baseURL: process.env.STRAPI_ADMIN_BACKEND_URL || "http://localhost:1337",
@@ -122,8 +150,4 @@ export function getAxiosInstance() {
     }
   );
   return instance;
-}
-
-export function hash(accessKey: string, salt: string) {
-  return crypto.createHmac("sha512", salt).update(accessKey).digest("hex");
 }

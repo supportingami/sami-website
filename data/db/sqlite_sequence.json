@@ -1,13 +1,5 @@
 [
   {
-    "name": "files",
-    "seq": 50
-  },
-  {
-    "name": "upload_folders",
-    "seq": 6
-  },
-  {
     "name": "abouts",
     "seq": 1
   },
@@ -24,6 +16,18 @@
     "seq": 3
   },
   {
+    "name": "components_common_action_buttons",
+    "seq": 2
+  },
+  {
+    "name": "components_home_hero_images",
+    "seq": 1
+  },
+  {
+    "name": "components_home_hero_images_components",
+    "seq": 3
+  },
+  {
     "name": "countries",
     "seq": 0
   },
@@ -32,27 +36,11 @@
     "seq": 17
   },
   {
+    "name": "files",
+    "seq": 50
+  },
+  {
     "name": "home_contents",
-    "seq": 1
-  },
-  {
-    "name": "members",
-    "seq": 2
-  },
-  {
-    "name": "projects",
-    "seq": 5
-  },
-  {
-    "name": "project_types",
-    "seq": 4
-  },
-  {
-    "name": "resources",
-    "seq": 1
-  },
-  {
-    "name": "volunteers",
     "seq": 1
   },
   {
@@ -60,15 +48,27 @@
     "seq": 4
   },
   {
-    "name": "components_home_hero_images_components",
-    "seq": 3
-  },
-  {
-    "name": "components_common_action_buttons",
+    "name": "members",
     "seq": 2
   },
   {
-    "name": "components_home_hero_images",
+    "name": "project_types",
+    "seq": 4
+  },
+  {
+    "name": "projects",
+    "seq": 5
+  },
+  {
+    "name": "resources",
+    "seq": 1
+  },
+  {
+    "name": "upload_folders",
+    "seq": 6
+  },
+  {
+    "name": "volunteers",
     "seq": 1
   }
 ]

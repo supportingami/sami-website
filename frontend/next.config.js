@@ -1,11 +1,15 @@
 const path = require("path");
 
-module.exports = {
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
+
+module.exports = withBundleAnalyzer({
   // https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode
   reactStrictMode: true,
   images: {
     loader: "default",
-    domains: ["localhost"],
+    domains: ["localhost", "storage.googleapis.com"],
   },
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],
@@ -19,4 +23,4 @@ module.exports = {
       },
     ];
   },
-};
+});
