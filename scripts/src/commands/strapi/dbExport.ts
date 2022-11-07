@@ -35,9 +35,12 @@ class DBExport {
     const inspector = getDBInspector(this.db);
     const allTables = await inspector.tables();
 
+    // manually add sqlite_sequence as not included by knex
+    if (this.client === "sqlite") {
+      allTables.push("sqlite_sequence");
+    }
     // filter only to include content-generated tables
     const exportedTables = allTables.filter((name) => shouldIncludeTableInExport(name)).sort();
-
     // export
     for (const name of exportedTables) {
       await this.exportTableData(name, outputDir);
@@ -76,20 +79,20 @@ class DBExport {
       rows = this.normalisePostgresExport(table, rows);
     }
     if (rows.length > 0) {
-      rows = this.sortRows(rows);
+      rows = this.sortRows(table, rows);
     }
     return rows;
   }
 
   /** Sort export data by preferred key (most use id, file_id or seq) */
-  private sortRows(rows: any[]) {
+  private sortRows(table: string, rows: any[]) {
     const columns = Object.keys(rows[0]);
     const sortKey = getSortKey();
     return rows.sort((a, b) => (a[sortKey] > b[sortKey] ? 1 : -1));
     function getSortKey() {
+      if (table === "sqlite_sequence") return "name";
       if (columns.includes("id")) return "id";
       if (columns.includes("file_id")) return "file_id";
-      if (columns.includes("seq")) return "seq";
       return columns[0];
     }
   }
