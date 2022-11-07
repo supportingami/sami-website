@@ -1,6 +1,6 @@
-import PrimaryButton from "./primaryButton";
+import PrimaryButton from "./PrimaryButton";
 
-export default function ToC(props: ToCProps) {
+export default function ToC() {
   return (
     <div
       className={`relative text-center w-[1500px] h-[340px] font-['Roboto'] bg-slate-200 top-[129px]`}
@@ -27,9 +27,4 @@ export default function ToC(props: ToCProps) {
       </p>
     </div>
   );
-}
-
-
-interface ToCProps {
-  style: Object;
 }

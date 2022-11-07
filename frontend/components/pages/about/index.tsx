@@ -32,7 +32,7 @@ export const AboutPageComponent: React.FC<{ aboutPageContent: IAbout[] }> = ({ a
         </p>
       </div>
       <p
-        className="flex flex-row min-h-screen justify-center items-center inset-x-0 top-0 absolute text-2xl font-bold leading-normal inline m-0 h-[38px] w-[1148px] bottom-[83.33%]"
+        className="inset-x-0 top-0 absolute text-2xl font-bold leading-normal inline m-0 h-[38px] w-[1148px] bottom-[83.33%]"
       >
         There are huge divides in terms of access and quality of education across Africa.
       </p>

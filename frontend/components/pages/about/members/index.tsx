@@ -1,9 +1,7 @@
 import React from "react";
 import { IMember } from "types/member";
 import { MembersListItemComponent } from "./list-item";
-import SecondaryButton from "./SecondaryButton";
-import VectorTriangle7 from "./assets/VectorTriangle7";
-import OutlineButton from "./OutlineButton";
+
 
 export const MembersComponent: React.FC<{ members: IMember[] }> = ({ members }) => {
   return (
@@ -21,7 +19,7 @@ export const MembersComponent: React.FC<{ members: IMember[] }> = ({ members }) 
     </p>
 
       <div>
-      <div className="grid grid-cols-6 gap-3">
+      <div className="grid grid-cols-6 gap-1">
         {members.map((member) => (
           <MembersListItemComponent key={member.id} member={member} />
         ))}

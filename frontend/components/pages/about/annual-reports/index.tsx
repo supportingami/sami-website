@@ -1,5 +1,4 @@
 import React from "react";
-import { Heading } from "@chakra-ui/core";
 import { IAnnualReport } from "types/annualreport";
 import { AnnualReportsListItemComponent } from "./list-item";
 
