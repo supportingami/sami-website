@@ -12,10 +12,16 @@ import { PATHS } from "../paths";
  *
  * The methods below mimic environment handling as strapi
  ***********************************************************************************************/
-interface ILoadedEnv {
+
+export interface ILoadedEnv {
+  /** local name prefix of .env file */
   name: string;
+  /** full path to .env file */
   envPath: string;
+  /** path to related backend database config file */
   dbConfigPath: string;
+  /** key-value pairs of variables processed from .env file */
+  parsed: any;
 }
 let loadedEnv: ILoadedEnv;
 
@@ -44,17 +50,25 @@ export async function loadEnvironment() {
         const [name] = filename.split(".");
         const envPath = path.resolve(PATHS.backendDir, "environments", filename);
         const dbConfigPath = path.resolve(PATHS.backendDir, "config", "env", name, "database.js");
-        const value: ILoadedEnv = { name, envPath, dbConfigPath };
+        const value: ILoadedEnv = { name, envPath, dbConfigPath, parsed: {} };
         return { name, value };
       });
-    const { selected } = await prompt([
-      { type: "list", choices: envFiles, message: "Select environment", name: "selected" },
-    ]);
-    loadedEnv = selected;
+    if (envFiles.length === 0) {
+      throw new Error("No .env files populated\n" + envDir);
+    }
+    // Pick the .env file to use. Will prompt selection if more than 1 file available
+    loadedEnv = envFiles[0].value;
+    if (envFiles.length > 1) {
+      const { selected } = await prompt([
+        { type: "list", choices: envFiles, message: "Select environment", name: "selected" },
+      ]);
+      loadedEnv = selected;
+    }
     const { envPath } = loadedEnv;
     // populate selected .env to global environment
     process.env.ENV_PATH = envPath;
-    dotenv.config({ path: process.env.ENV_PATH });
+    const parsed = dotenv.config({ path: process.env.ENV_PATH });
+    loadedEnv.parsed = parsed;
   }
   return loadedEnv;
 }

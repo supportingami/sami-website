@@ -9,15 +9,14 @@
     "shared"
   ],
   "scripts": {
-    "start": "yarn start:backend & yarn start:frontend",
-    "start:backend": "yarn workspace backend start",
-    "start:frontend": "yarn workspace frontend start",
+    "start": "yarn scripts dev start",
     "scripts": "yarn workspace scripts start",
     "build": "yarn workspace backend start & yarn workspace frontend build",
     "build:frontend": "yarn workspace frontend build",
     "export:frontend": "yarn workspace frontend export",
     "release": "release-it",
-    "generate": "yarn workspace frontend generate && yarn pretty-quick"
+    "generate": "yarn workspace frontend generate && yarn pretty-quick",
+    "deploy": "npx vercel"
   },
   "devDependencies": {
     "@release-it/conventional-changelog": "^5.0.0",
