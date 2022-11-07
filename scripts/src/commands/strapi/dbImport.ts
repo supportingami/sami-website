@@ -1,10 +1,11 @@
 import { Command } from "commander";
+import { existsSync, writeFileSync } from "fs";
 import { readdirSync, ensureDirSync, readJSONSync } from "fs-extra";
 import path from "path";
 import prompts from "prompts";
 import { PATHS } from "../../paths";
 import { arrayToHashmap } from "../../utils/object.utils";
-import { getDB, getDBInspector, mapDBData } from "./common";
+import { getDB, getLoadedEnvironment, listDBTables, mapDBData } from "./common";
 
 /***************************************************************************************
  * CLI
@@ -29,12 +30,11 @@ interface ImportSummary {
   table: string;
   filePath: string;
   summary?: any;
-  localData: any[];
+  existingData: any[];
   importData: any[];
 }
 class DBImport {
   private db: Awaited<ReturnType<typeof getDB>>;
-  private dbInspector: ReturnType<typeof getDBInspector>;
   private get client(): "postgres" | "sqlite" {
     return this.db.client.config.client;
   }
@@ -47,11 +47,35 @@ class DBImport {
     const importDir = path.resolve(PATHS.dataDir, "db");
     ensureDirSync(importDir);
 
-    // query list of all tables
+    // query list of local and remote data tables
     this.db = await getDB();
-    this.dbInspector = getDBInspector(this.db);
-    const dbTables = await this.dbInspector.tables();
-    let importTableNames = readdirSync(importDir)
+    const dbTables = await listDBTables(this.db);
+    const localDataTables = this.listLocalDataTables(importDir, options);
+
+    // get summary of local and import data
+    let data: ImportSummary[] = [];
+    for (const { filePath, table } of localDataTables) {
+      const importData = readJSONSync(filePath);
+      let existingData = [];
+      if (dbTables.includes(table)) {
+        existingData = await this.getTableData(table);
+      }
+      let summary: any;
+      summary = this.generateSummary(table, importData, existingData);
+      data.push({ importData, existingData, filePath, table, summary });
+    }
+
+    // process import
+    const confirmed = await this.confirmImport(data);
+    if (confirmed) {
+      this.backupData(data);
+      await this.handleImport(data);
+    }
+  }
+
+  /** Retrieve a list of data tables represented in local json data files */
+  private listLocalDataTables(importDir: string, options: IProgramOptions) {
+    let localDataTables = readdirSync(importDir)
       .map((name) => ({
         filePath: path.resolve(importDir, name),
         table: name.replace(".json", ""),
@@ -59,30 +83,35 @@ class DBImport {
       .sort(this.sortImports);
     // filter if single table option provided
     if (options.table) {
-      importTableNames = importTableNames.filter(({ table }) => options.table === table);
+      localDataTables = localDataTables.filter(({ table }) => options.table === table);
     }
-    // get summary of local and import data
-    let data = [];
-    for (const { filePath, table } of importTableNames) {
-      const importData = readJSONSync(filePath);
-      console.log(table);
-      let localData = [];
-      if (dbTables.includes(table)) {
-        localData = await this.getTableData(table);
-      }
-      let summary: any;
-      summary = this.generateSummary(table, importData, localData);
-      data.push({ importData, localData, filePath, table, summary });
-    }
-    // const data: ImportSummary[] = importTableNames.map(({ filePath, table }) => {
+    return localDataTables;
+  }
 
-    //   // return { importData, localData, filePath, table, summary };
-    // });
-    // confirm and process
-    const confirmed = await this.confirmImport(data);
-    if (confirmed) {
-      await this.handleImport(data);
+  /** Write a copy of db data to json file for use in recovery in case of accidental overwrite */
+  private backupData(data: ImportSummary[]) {
+    const backup: Record<string, any[]> = {};
+    for (const { table, existingData } of data) {
+      backup[table] = existingData;
     }
+    const backupFilepath = this.getBackupFilepath();
+    writeFileSync(backupFilepath, JSON.stringify(backup, null, 2));
+  }
+  /** Generate a name for the backup, using environment name and timestamp (with suffix in case of duplicates) */
+  private getBackupFilepath(suffix = 0) {
+    const backupDir = path.resolve(PATHS.dataDir, "backups");
+    ensureDirSync(backupDir);
+    const { name } = getLoadedEnvironment();
+    const d = new Date();
+    let baseName = `${name}-${d.toISOString().substring(0, 10)}`;
+    if (suffix) {
+      baseName += `-${suffix}`;
+    }
+    const backupPath = path.resolve(backupDir, `${baseName}.json`);
+    if (existsSync(backupPath)) {
+      return this.getBackupFilepath(suffix + 1);
+    }
+    return backupPath;
   }
 
   /** Process imports so that sqlite sequenc and linked tables last */

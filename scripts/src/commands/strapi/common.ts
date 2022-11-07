@@ -135,10 +135,23 @@ export async function getDB() {
   const db = await loadDb(dbConfigPath);
   return db;
 }
+export function getLoadedEnvironment() {
+  return loadedEnv;
+}
 /** Load knex schema inspector to allow schema queries such as listing all tables */
 export function getDBInspector(db: Awaited<ReturnType<typeof getDB>>) {
   const inspector = schemaInspector(db as any);
   return inspector;
+}
+
+export async function listDBTables(db: Awaited<ReturnType<typeof getDB>>) {
+  const inspector = getDBInspector(db);
+  const allTables = await inspector.tables();
+  // manually add sqlite_sequence as not included by knex
+  if (db.client.config.client === "sqlite") {
+    allTables.push("sqlite_sequence");
+  }
+  return allTables;
 }
 
 /** Iterate over all db rows and map fields as specified in mapping */

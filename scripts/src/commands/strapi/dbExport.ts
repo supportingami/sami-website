@@ -3,7 +3,7 @@ import { emptyDirSync, ensureDirSync, writeFileSync } from "fs-extra";
 import path from "path";
 import { PATHS } from "../../paths";
 import { sortJSONObjectByKey } from "../../utils/object.utils";
-import { getDB, getDBInspector, mapDBData } from "./common";
+import { getDB, listDBTables, mapDBData } from "./common";
 
 /***************************************************************************************
  * CLI
@@ -32,13 +32,8 @@ class DBExport {
 
     // query list of all tables
     this.db = await getDB();
-    const inspector = getDBInspector(this.db);
-    const allTables = await inspector.tables();
+    const allTables = await listDBTables(this.db);
 
-    // manually add sqlite_sequence as not included by knex
-    if (this.client === "sqlite") {
-      allTables.push("sqlite_sequence");
-    }
     // filter only to include content-generated tables
     const exportedTables = allTables.filter((name) => shouldIncludeTableInExport(name)).sort();
     // export
