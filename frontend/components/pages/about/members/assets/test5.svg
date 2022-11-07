@@ -1,9 +1,4 @@
-export default function VectorTriangle5(props: VectorTriangle5Props) {
-    return (
-      <div
-        className="left-0 top-0 absolute w-[52px] right-[75.24%] bottom-[78.66%]"
-      >
-        <svg
+<svg
           width="100%"
           height="100%"
           preserveAspectRatio="none"
@@ -16,10 +11,3 @@ export default function VectorTriangle5(props: VectorTriangle5Props) {
             fill="#02B1E9"
            />
         </svg>
-      </div>
-    );
-  }
-  
-  VectorTriangle5.defaultProps = {};
-  
-  interface VectorTriangle5Props {}

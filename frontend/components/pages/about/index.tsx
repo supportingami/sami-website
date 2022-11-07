@@ -9,7 +9,10 @@ export const AboutPageComponent: React.FC<{ aboutPageContent: IAbout[] }> = ({ a
       <Header />
       <div
       className={`relative text-center w-[1148px] h-[227.89px] font-['Roboto'] text-[rgba(29,33,48,1)] mt-8`}>
-      <p className="left-0 bottom-0 absolute text-xl font-bold leading-normal inline m-0 h-[76.89px] w-[1088.88px] right-[5.15%] top-[66.26%]">
+        <div
+       
+        >
+        <p className="left-0 bottom-0 absolute text-xl font-bold leading-normal inline m-0 h-[76.89px] w-[1088.88px] right-[5.15%] top-[66.26%]">
         {
           "By working directly with local people and organisations that have support and contacts within mathematics education, "
         }
@@ -29,10 +32,12 @@ export const AboutPageComponent: React.FC<{ aboutPageContent: IAbout[] }> = ({ a
         </p>
       </div>
       <p
-        className="inset-x-0 top-0 absolute text-2xl font-bold leading-normal inline m-0 h-[38px] w-[1148px] bottom-[83.33%]"
+        className="flex flex-row min-h-screen justify-center items-center inset-x-0 top-0 absolute text-2xl font-bold leading-normal inline m-0 h-[38px] w-[1148px] bottom-[83.33%]"
       >
         There are huge divides in terms of access and quality of education across Africa.
       </p>
+        </div>
+     
     </div>
 
       {/*Principles Section*/}
