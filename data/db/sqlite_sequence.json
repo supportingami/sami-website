@@ -1,7 +1,7 @@
 [
   {
     "name": "files",
-    "seq": 50
+    "seq": 67
   },
   {
     "name": "upload_folders",
@@ -13,7 +13,7 @@
   },
   {
     "name": "annual_reports",
-    "seq": 2
+    "seq": 6
   },
   {
     "name": "blog_posts",
@@ -37,7 +37,7 @@
   },
   {
     "name": "members",
-    "seq": 2
+    "seq": 15
   },
   {
     "name": "projects",
