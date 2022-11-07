@@ -177,6 +177,7 @@ class DBImport {
     const customKeys = {
       sqlite_sequence: "name",
       files_related_morphs: "file_id",
+      files_folder_links: "file_id",
     };
     return customKeys[table] ?? "id";
   }

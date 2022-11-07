@@ -1,17 +1,24 @@
 [
   {
     "field": "Photo",
+    "file_id": 3,
+    "order": 1,
+    "related_id": 1,
+    "related_type": "api::member.member"
+  },
+  {
+    "field": "Photo",
     "file_id": 4,
     "order": 1,
     "related_id": 2,
     "related_type": "api::member.member"
   },
   {
-    "field": "Photo",
-    "file_id": 3,
+    "field": "File",
+    "file_id": 31,
     "order": 1,
     "related_id": 1,
-    "related_type": "api::member.member"
+    "related_type": "api::annual-report.annual-report"
   },
   {
     "field": "File",
@@ -35,18 +42,11 @@
     "related_type": "api::resource.resource"
   },
   {
-    "field": "File",
-    "file_id": 31,
-    "order": 1,
-    "related_id": 1,
-    "related_type": "api::annual-report.annual-report"
-  },
-  {
     "field": "Image",
     "file_id": 37,
     "order": 1,
-    "related_id": 2,
-    "related_type": "page-content.cover-image"
+    "related_id": 1,
+    "related_type": "home.hero-image"
   },
   {
     "field": "Image",
@@ -59,8 +59,8 @@
     "field": "Image",
     "file_id": 37,
     "order": 1,
-    "related_id": 1,
-    "related_type": "home.hero-image"
+    "related_id": 2,
+    "related_type": "page-content.cover-image"
   },
   {
     "field": "FeatureImage",
@@ -71,16 +71,16 @@
   },
   {
     "field": "FeatureImage",
-    "file_id": 40,
+    "file_id": 39,
     "order": 1,
-    "related_id": 9,
+    "related_id": 8,
     "related_type": "api::blog-post.blog-post"
   },
   {
     "field": "FeatureImage",
-    "file_id": 39,
+    "file_id": 40,
     "order": 1,
-    "related_id": 8,
+    "related_id": 9,
     "related_type": "api::blog-post.blog-post"
   },
   {
@@ -136,21 +136,7 @@
     "field": "FeatureImage",
     "file_id": 49,
     "order": 1,
-    "related_id": 5,
-    "related_type": "api::blog-post.blog-post"
-  },
-  {
-    "field": "FeatureImage",
-    "file_id": 49,
-    "order": 1,
-    "related_id": 12,
-    "related_type": "api::blog-post.blog-post"
-  },
-  {
-    "field": "FeatureImage",
-    "file_id": 49,
-    "order": 1,
-    "related_id": 4,
+    "related_id": 6,
     "related_type": "api::blog-post.blog-post"
   },
   {
@@ -164,7 +150,21 @@
     "field": "FeatureImage",
     "file_id": 49,
     "order": 1,
-    "related_id": 6,
+    "related_id": 4,
+    "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 49,
+    "order": 1,
+    "related_id": 12,
+    "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 49,
+    "order": 1,
+    "related_id": 5,
     "related_type": "api::blog-post.blog-post"
   },
   {

@@ -86,11 +86,12 @@ async function loadEnvironment() {
   if (!loadedEnv) {
     // configure environment in same way as when running from backend
     // select env from env files
-    const envFiles = readdirSync(PATHS.backendDir)
-      .filter((filename) => filename.startsWith(".env"))
+    const envDir = path.resolve(PATHS.backendDir, "environments");
+    const envFiles = readdirSync(envDir)
+      .filter((filename) => filename.endsWith(".env"))
       .map((filename) => {
-        const name = filename.split(".").pop();
-        const envPath = path.resolve(PATHS.backendDir, filename);
+        const [name] = filename.split(".");
+        const envPath = path.resolve(PATHS.backendDir, "environments", filename);
         const dbConfigPath = path.resolve(PATHS.backendDir, "config", "env", name, "database.js");
         const value: ILoadedEnv = { name, envPath, dbConfigPath };
         return { name, value };
