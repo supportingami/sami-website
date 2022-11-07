@@ -1,15 +1,10 @@
 import { spawnSync } from "child_process";
 import { Command } from "commander";
+import crypto from "crypto";
 import { PATHS } from "../../paths";
 import * as fs from "fs-extra";
-import {
-  ADMIN_TOKENS,
-  createStrapiInstance,
-  getFrontendEnv,
-  hash,
-  IAdminToken,
-  IStrapi,
-} from "./common";
+import { ADMIN_TOKENS, createStrapiInstance, IAdminToken, IStrapi } from "./common";
+import { getFrontendEnv } from "../../utils";
 
 /***************************************************************************************
  * CLI
@@ -110,9 +105,13 @@ class StrapiBootstrap {
       stdio: "inherit",
       cwd: PATHS.backendDir,
       shell: true,
-      env: { ENV_PATH: "./.env.development" },
+      env: { ENV_PATH: "./environments/development" },
     });
   }
 }
 
 const adminTokenFields = ["id", "name", "description", "type", "createdAt"];
+
+function hash(accessKey: string, salt: string) {
+  return crypto.createHmac("sha512", salt).update(accessKey).digest("hex");
+}
