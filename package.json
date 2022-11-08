@@ -17,7 +17,7 @@
     "format:code": "eslint . --ext .js,.jsx,.ts,.tsx --color --fix",
     "format:style": "prettier --write '**/*.{md,json,js,tsx,ts}'",
     "generate": "yarn workspace frontend generate && yarn pretty-quick",
-    "lint": "yarn lint:style && yarn lint:code",
+    "lint": "yarn lint:code && yarn lint:style",
     "lint:code": "eslint . --ext .js,.jsx,.ts,.tsx --color",
     "lint:spell:TODO": "npx cspell \"**/*.md\" --config ./.cspell.json",
     "lint:style": "prettier --check '**/*.{md,json,js,tsx,ts}'",

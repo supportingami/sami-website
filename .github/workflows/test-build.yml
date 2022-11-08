@@ -1,4 +1,4 @@
-# Basic test to ensure PRs pass build. Default runner except when preview deployment already generated
+# Basic test to ensure PRs pass lint build. Default runner except when preview deployment already generated
 name: Test Build
 on:
   pull_request:
@@ -25,5 +25,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-v1-
       - run: yarn install
+      - name: Lint Code
+        run: yarn lint
       - name: Build frontend
         run: yarn build:frontend
