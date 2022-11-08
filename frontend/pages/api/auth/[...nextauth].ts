@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from "next";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
@@ -41,7 +41,6 @@ const options = {
   },
 };
 
-const Auth = (req: NextApiRequest, res: NextApiResponse) =>
-  NextAuth(req, res, options);
+const Auth = (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res, options);
 
 export default Auth;

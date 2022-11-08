@@ -1,18 +1,10 @@
 import React from "react";
-import {
-  Box,
-  Heading,
-  Stack,
-  Text,
-  Button,
-  Flex,
-  useColorMode,
-} from "@chakra-ui/core";
+import { Box, Heading, Stack, Text, Button, Flex, useColorMode } from "@chakra-ui/core";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
 const IndexPageComponent = () => {
-  const { data:session, status } = useSession();
+  const { data: session, status } = useSession();
   const heightOfNavbar: string = "74px";
   const containerPadding: string = "1rem";
   const { colorMode } = useColorMode();
@@ -71,9 +63,8 @@ const IndexPageComponent = () => {
         <Stack spacing={4} maxW="xl" mx="auto">
           <Heading textAlign="center">Nextjs Strapi Boilerplate</Heading>
           <Text fontSize="xl" lineHeight="tall" textAlign="center">
-            Boilerplate for building applications using Strapi and Next.js. This
-            demo application has been built using Chakra UI, NextAuth.js and
-            Apollo.
+            Boilerplate for building applications using Strapi and Next.js. This demo application has been built using
+            Chakra UI, NextAuth.js and Apollo.
           </Text>
           <Box>
             <Stack isInline align="center" justifyContent="center">

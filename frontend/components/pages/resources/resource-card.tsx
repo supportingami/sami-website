@@ -2,7 +2,7 @@ import { Box, Button } from "@chakra-ui/core";
 import Image from "next/image";
 import { getStrapiMedia } from "lib/media";
 import React from "react";
-import { IResource } from "types/resource";
+import type { IResource } from "types/resource";
 
 export const ResourceCardComponent: React.FC<{
   resource: IResource;

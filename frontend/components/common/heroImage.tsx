@@ -1,7 +1,7 @@
 import { getStrapiMedia } from "lib/media";
 import Image from "next/image";
 import Link from "next/link";
-import { ComponentHomeHeroImage } from "../../graphql/generated";
+import type { ComponentHomeHeroImage } from "../../graphql/generated";
 
 export const HeroImageComponent: React.FC<{ heroImage: ComponentHomeHeroImage }> = ({ heroImage }) => {
   const { Image: ImageData, Text, ActionButtons } = heroImage;

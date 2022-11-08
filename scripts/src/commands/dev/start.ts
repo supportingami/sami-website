@@ -1,8 +1,10 @@
 import { Command } from "commander";
-import concurrently, { ConcurrentlyCommandInput } from "concurrently";
+import type { ConcurrentlyCommandInput } from "concurrently";
+import concurrently from "concurrently";
 import path from "path";
 import { PATHS } from "../../paths";
-import { IBackendEnv, getBackendEnv, getFrontendEnv, IFrontendEnv } from "../../utils";
+import type { IBackendEnv, IFrontendEnv } from "../../utils";
+import { getBackendEnv, getFrontendEnv } from "../../utils";
 
 /***************************************************************************************
  * CLI

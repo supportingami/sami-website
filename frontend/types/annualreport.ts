@@ -1,4 +1,4 @@
-import { AnnualReport } from "../graphql/generated";
+import type { AnnualReport } from "../graphql/generated";
 
 export interface IAnnualReport extends AnnualReport {
   id: string;

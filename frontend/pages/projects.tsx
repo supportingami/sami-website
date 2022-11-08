@@ -1,9 +1,10 @@
 import React from "react";
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
-import { Project, ProjectsDocument, ProjectsQuery } from "../graphql/generated";
+import type { Project, ProjectsQuery } from "../graphql/generated";
+import { ProjectsDocument } from "../graphql/generated";
 import { serverQuery } from "lib/graphql";
-import { IProject } from "types/project";
+import type { IProject } from "types/project";
 import { ProjectsPageComponent } from "components/pages/projects";
 
 export const getServerSideProps = async ({}: GetServerSidePropsContext) => {

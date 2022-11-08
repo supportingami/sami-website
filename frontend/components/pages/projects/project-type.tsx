@@ -1,4 +1,4 @@
-import { IProject } from "types/project";
+import type { IProject } from "types/project";
 import { ProjectsPageComponent } from ".";
 
 export const ProjectTypeComponent: React.FC<{ projectType: IProject[]; id }> = ({ projectType, id }) => {

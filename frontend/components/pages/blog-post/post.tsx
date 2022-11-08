@@ -1,4 +1,4 @@
-import { IBlogPost } from "types/blogpost";
+import type { IBlogPost } from "types/blogpost";
 import {
   FacebookIcon,
   FacebookShareButton,

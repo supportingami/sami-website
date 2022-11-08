@@ -1,6 +1,6 @@
 import boxen from "boxen";
 import chalk from "chalk";
-import { Command } from "commander";
+import type { Command } from "commander";
 
 /** Record a 2-line error message in a box with additional optional logging and exit */
 export function logError(opts: Partial<ILogOptions> = {}) {

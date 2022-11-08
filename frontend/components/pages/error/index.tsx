@@ -1,4 +1,5 @@
-import React, { FC } from "react";
+import type { FC } from "react";
+import React from "react";
 import { Box, Heading, Stack, Text, Button, Flex } from "@chakra-ui/core";
 import Link from "next/link";
 
@@ -30,9 +31,7 @@ const IndexPageComponent: FC<IProps> = ({ statusCode }) => {
         <Stack spacing={4} maxW="xl" mx="auto">
           <Heading textAlign="center">Nextjs Strapi Boilerplate</Heading>
           <Text fontSize="xl" lineHeight="tall" textAlign="center">
-            {statusCode
-              ? `An error ${statusCode} occurred on server`
-              : "An error occurred on client"}
+            {statusCode ? `An error ${statusCode} occurred on server` : "An error occurred on client"}
           </Text>
           <Box>
             <Stack isInline align="center" justifyContent="center">

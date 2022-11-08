@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { getStrapiMedia } from "lib/media";
 import React from "react";
-import { IBlogPost } from "types/blogpost";
+import type { IBlogPost } from "types/blogpost";
 import { BiCalendar } from "react-icons/bi";
 import dayjs from "dayjs";
 

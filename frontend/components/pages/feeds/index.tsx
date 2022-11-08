@@ -4,7 +4,7 @@ import Loader from "components/loader";
 import AddNewFeedForm from "components/pages/feeds/add-new-feed-form";
 import Feed from "components/pages/feeds/feed";
 import React from "react";
-import IFeed from "types/feed";
+import type IFeed from "types/feed";
 
 const feedsQuery = gql`
   query fetchFeeds {

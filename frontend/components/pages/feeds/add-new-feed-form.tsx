@@ -1,4 +1,5 @@
-import React, { useState, FormEvent } from "react";
+import type { FormEvent } from "react";
+import React, { useState } from "react";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import {
   Box,
@@ -32,18 +33,13 @@ const AddNewFeedForm = () => {
   const bgColor = { light: "white", dark: "gray.800" };
   const color = { light: "gray.800", dark: "gray.100" };
   const [body, setBody] = useState("");
-  const { data:session, status } = useSession();
+  const { data: session, status } = useSession();
 
   if (!session) {
-    return (
-      <AccessDeniedIndicator message="You need to be signed in to add a new feed!" />
-    );
+    return <AccessDeniedIndicator message="You need to be signed in to add a new feed!" />;
   }
 
-  const [
-    insertFeed,
-    { loading: insertFeedFetching, error: insertFeedError },
-  ] = useMutation(insertFeedMutation);
+  const [insertFeed, { loading: insertFeedFetching, error: insertFeedError }] = useMutation(insertFeedMutation);
 
   const handleSubmit = async () => {
     await insertFeed({ variables: { userId: session.id, body } });
@@ -68,22 +64,14 @@ const AddNewFeedForm = () => {
   return (
     <Stack spacing={4}>
       {errorNode()}
-      <Box
-        p={4}
-        bg={bgColor[colorMode]}
-        color={color[colorMode]}
-        shadow="lg"
-        rounded="lg"
-      >
+      <Box p={4} bg={bgColor[colorMode]} color={color[colorMode]} shadow="lg" rounded="lg">
         <Stack spacing={4}>
           <FormControl isRequired>
             <FormLabel htmlFor="body">What's on your mind?</FormLabel>
             <Textarea
               id="body"
               value={body}
-              onChange={(e: FormEvent<HTMLInputElement>) =>
-                setBody(e.currentTarget.value)
-              }
+              onChange={(e: FormEvent<HTMLInputElement>) => setBody(e.currentTarget.value)}
               isDisabled={insertFeedFetching}
             />
           </FormControl>

@@ -1,6 +1,6 @@
 import { Box, Flex, FormControl, IconButton, Input } from "@chakra-ui/core";
 import React from "react";
-import { IResource } from "types/resource";
+import type { IResource } from "types/resource";
 import { ResourceCardComponent } from "./resource-card";
 
 export const ResourcesPageComponent: React.FC<{ resources: IResource[] }> = ({ resources }) => {

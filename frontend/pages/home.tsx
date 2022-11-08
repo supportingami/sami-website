@@ -1,8 +1,9 @@
 import React from "react";
 import Head from "next/head";
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import { serverQuery } from "lib/graphql";
-import { HomeContentDocument, HomeContentQuery } from "../graphql/generated";
+import type { HomeContentQuery } from "../graphql/generated";
+import { HomeContentDocument } from "../graphql/generated";
 import { HeroImageComponent } from "components/common/heroImage";
 
 export const getServerSideProps = async ({}: GetServerSidePropsContext) => {

@@ -80,10 +80,7 @@ class AssetsExtract {
 
   private cleanContentDirs(pathname: string) {
     const { outputDir } = this.options;
-    const prefix = path
-      .relative(this.options.inputDir, pathname)
-      .split(path.sep)
-      .join("_");
+    const prefix = path.relative(this.options.inputDir, pathname).split(path.sep).join("_");
     let contents = fs.readdirSync(pathname, { withFileTypes: true });
     const files = contents.filter((f) => f.isFile());
     const regex = /-[0-9]{2,4}x[0-9]{2,4}( \([0-9]\))*\.(jpg|png|jpeg|gif)/i;

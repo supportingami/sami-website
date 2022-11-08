@@ -1,5 +1,5 @@
 import React from "react";
-import { AppProps } from "next/app";
+import type { AppProps } from "next/app";
 import Head from "next/head";
 // import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "@chakra-ui/core";

@@ -1,6 +1,7 @@
-import React, { FC } from "react";
+import type { FC } from "react";
+import React from "react";
 import { Box, Stack, Text, Avatar, useColorMode } from "@chakra-ui/core";
-import IFeed from "types/feed";
+import type IFeed from "types/feed";
 import timeFromNow from "lib/time-from-now";
 
 interface IProps {
@@ -15,15 +16,8 @@ const Feed: FC<IProps> = ({ feed }) => {
 
   const authorNode = () => {
     return (
-      <Stack
-        spacing={4}
-        isInline
-        alignItems="center"
-        p={4}
-        borderBottomWidth={1}
-        borderColor={borderColor[colorMode]}
-      >
-      <Avatar name={feed.author === null ? "anonymous" : feed.author.username} />
+      <Stack spacing={4} isInline alignItems="center" p={4} borderBottomWidth={1} borderColor={borderColor[colorMode]}>
+        <Avatar name={feed.author === null ? "anonymous" : feed.author.username} />
         <Stack>
           <Text fontWeight="bold">{feed.author === null ? "anonymous" : feed.author.username}</Text>
           <Text>{timeFromNow(feed.created_at)}</Text>
@@ -41,12 +35,7 @@ const Feed: FC<IProps> = ({ feed }) => {
   };
 
   return (
-    <Box
-      bg={bgColor[colorMode]}
-      color={color[colorMode]}
-      shadow="lg"
-      rounded="lg"
-    >
+    <Box bg={bgColor[colorMode]} color={color[colorMode]} shadow="lg" rounded="lg">
       <Stack spacing={0}>
         {authorNode()}
         {bodyNode()}

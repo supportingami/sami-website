@@ -1,9 +1,10 @@
 import React from "react";
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
-import { IResource } from "types/resource";
+import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import type { IResource } from "types/resource";
 import Head from "next/head";
 import { ResourcesPageComponent } from "components/pages/resources";
-import { ResourcesQuery, ResourcesDocument, Resource } from "../graphql/generated";
+import type { ResourcesQuery, Resource } from "../graphql/generated";
+import { ResourcesDocument } from "../graphql/generated";
 import { serverQuery } from "lib/graphql";
 
 export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
