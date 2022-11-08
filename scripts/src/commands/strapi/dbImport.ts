@@ -53,15 +53,14 @@ class DBImport {
     const localDataTables = this.listLocalDataTables(importDir, options);
 
     // get summary of local and import data
-    let data: ImportSummary[] = [];
+    const data: ImportSummary[] = [];
     for (const { filePath, table } of localDataTables) {
       const importData = readJSONSync(filePath);
       let existingData = [];
       if (dbTables.includes(table)) {
         existingData = await this.getTableData(table);
       }
-      let summary: any;
-      summary = this.generateSummary(table, importData, existingData);
+      const summary = this.generateSummary(table, importData, existingData);
       data.push({ importData, existingData, filePath, table, summary });
     }
 

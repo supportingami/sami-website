@@ -1,6 +1,5 @@
 import { useThemeContext } from "lib/themeProvider";
-import { MdLightMode } from "react-icons/md";
-import { MdDarkMode } from "react-icons/md";
+import { MdLightMode, MdDarkMode } from "react-icons/md";
 
 const ThemeToggle = (props: { btnclass?: string }) => {
   const { theme, updateTheme } = useThemeContext();

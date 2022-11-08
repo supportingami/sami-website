@@ -45,6 +45,7 @@ class CLIDocsGenerator {
 
   /** Iterate through all commands and subcommands to generate a list of names and descriptions */
   private listCLICommandsRecursively(parent: ICommandWithMeta, prefix = "") {
+    // eslint-disable-next-line prefer-const
     let { _description: description, _name, commands } = parent;
     // Ignore name of main index command
     if (_name === "index") {
