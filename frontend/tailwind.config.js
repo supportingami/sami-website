@@ -6,6 +6,7 @@ module.exports = {
       backgroundImage: {
         "sami-logo": "url('/images/sami-logo.svg') ",
         "sami-logo-no-text": "url('/images/sami-logo-no-text.png')",
+        "math-1": "url('/images/bg-math-1.svg')",
       },
     },
   },

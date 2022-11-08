@@ -23,7 +23,7 @@
     },
     "Organisation": {
       "type": "enumeration",
-      "enum": ["AMI", "SAMI"]
+      "enum": ["AMI", "SAMI","SAMI Trustees"]
     },
     "Bio": {
       "type": "richtext"
