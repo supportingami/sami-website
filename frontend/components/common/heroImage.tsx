@@ -13,7 +13,7 @@ export const HeroImageComponent: React.FC<{ heroImage: ComponentHomeHeroImage }>
   const getTextStyles = () => {
     // Retrieve primary colour and modify to be slightly darker for use with text
     const primaryColorVar = window.getComputedStyle(document.documentElement).getPropertyValue("--p");
-    const [h, s, l] = primaryColorVar.trim().split(" ");
+    const [h, s] = primaryColorVar.trim().split(" ");
     const bgColor = `hsla(${h} ${s} 40% / 80%)`;
     const boxShadow = `0.5em 0 0 ${bgColor},-0.5em 0 0 ${bgColor}`;
     return { boxShadow, bgColor };

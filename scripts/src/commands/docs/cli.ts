@@ -9,11 +9,8 @@ import { writeFileSync } from "fs";
  * CLI
  * @example yarn
  *************************************************************************************/
-interface IProgramOptions {
-  outDir: string;
-}
 const program = new Command("cli");
-export default program.description("Generate CLI docs").action(async (options: Partial<IProgramOptions>) => {
+export default program.description("Generate CLI docs").action(async () => {
   return new CLIDocsGenerator().run();
 });
 

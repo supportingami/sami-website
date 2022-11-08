@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { MdFavorite } from "react-icons/md";
 
-import ThemeToggle from "./theme-toggle";
+import ThemeToggle from "./themeToggle";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
@@ -43,6 +43,7 @@ const Navbar = () => {
     },
   ];
 
+  // TODO - might need arrow for nested nav, TBC
   const ArrowRight = () => (
     <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
       <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
@@ -117,7 +118,7 @@ const Navbar = () => {
 
   const PageLinks = () => (
     <>
-      {pageLinks.map(({ href, label, id, subLinks }) => (
+      {pageLinks.map(({ href, label, id }) => (
         <li key={id}>
           <Link href={href}>
             <a>{label}</a>
@@ -147,51 +148,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-/** Deprecated CC 2022-10-09 - Retained in case we want to implement similar sign in in short term
- 
-import { signIn, signOut, useSession } from "next-auth/react";
-  const { data: session, status } = useSession();
-
-
-  const signInButtonNode = () => {
-    if (session) {
-      return false;
-    }
-
-    return (
-      <Link href="/api/auth/signin">
-         <Button
-          onClick={(e) => {
-            e.preventDefault();
-            signIn();
-          }}
-        >
-          Sign In
-        </Button> }
-        </Link>
-        );
-      };
-    
-      const signOutButtonNode = () => {
-        if (!session) {
-          return false;
-        }
-    
-        return (
-           <Box className="ml-1">
-             <Link href="/api/auth/signout">
-               <Button
-                 onClick={(e) => {
-                   e.preventDefault();
-                   signOut();
-                 }}
-               >
-                 Sign Out
-               </Button>
-             </Link>
-           </Box>
-        );
-      };
-
- */

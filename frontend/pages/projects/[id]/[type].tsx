@@ -4,7 +4,7 @@ import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "nex
 import Head from "next/head";
 import { serverQuery } from "lib/graphql";
 import type { IProject } from "types/project";
-import { ProjectTypeComponent } from "components/pages/projects/project-type";
+import { ProjectTypeComponent } from "components/pages/projects/projectType";
 import type { Project, ProjectsQuery } from "../../../graphql/generated";
 import { ProjectsDocument } from "../../../graphql/generated";
 

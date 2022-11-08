@@ -10,15 +10,11 @@ import { getBackendEnv, getFrontendEnv } from "../../utils";
  * CLI
  * @example yarn
  *************************************************************************************/
-interface IProgramOptions {
-  env: string;
-}
+
 const program = new Command("start");
-export default program
-  .description("Start local development server")
-  .action(async (options: Partial<IProgramOptions>) => {
-    return new StartCmd().run().then(() => process.exit(0));
-  });
+export default program.description("Start local development server").action(async () => {
+  return new StartCmd().run().then(() => process.exit(0));
+});
 
 /***************************************************************************************
  * Main Methods

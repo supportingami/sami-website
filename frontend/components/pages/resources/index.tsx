@@ -1,6 +1,6 @@
 import React from "react";
 import type { IResource } from "types/resource";
-import { ResourceCardComponent } from "./resource-card";
+import { ResourceCardComponent } from "./resourceCard";
 
 export const ResourcesPageComponent: React.FC<{ resources: IResource[] }> = ({ resources }) => {
   return (

@@ -11,7 +11,7 @@ import { AboutDocument, MembersDocument, AnnualReportsDocument } from "../graphq
 import { serverQuery } from "lib/graphql";
 import type { IAbout } from "types/about";
 import { MembersComponent } from "components/pages/about/members";
-import PageLayout from "components/layout/page-layout";
+import PageLayout from "components/layout/pageLayout";
 import ToC from "components/pages/about/ToC";
 import Testimonials from "components/pages/about/testmonials/Testmonials";
 
