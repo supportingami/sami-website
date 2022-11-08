@@ -1,12 +1,11 @@
 import { useRouter } from "next/router";
 import React from "react";
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
 import { serverQuery } from "lib/graphql";
-import { IBlogPost } from "types/blogpost";
-import { BlogPostsQuery } from "../../graphql/generated";
+import type { IBlogPost } from "types/blogpost";
+import type { BlogPost, BlogPostsQuery } from "../../graphql/generated";
 import { BlogPostsDocument } from "../../graphql/generated";
-import { BlogPost } from "../../graphql/generated";
 import { BlogPostComponent } from "components/pages/blog-post/post";
 import PageLayout from "components/layout/page-layout";
 
