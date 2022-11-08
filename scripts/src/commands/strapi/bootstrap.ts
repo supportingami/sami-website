@@ -4,7 +4,7 @@ import crypto from "crypto";
 import { PATHS } from "../../paths";
 import * as fs from "fs-extra";
 import type { IAdminToken, IStrapi } from "./common";
-import { ADMIN_TOKENS, createStrapiInstance, getDB } from "./common";
+import { ADMIN_TOKENS, createStrapiInstance } from "./common";
 import { getFrontendEnv } from "../../utils";
 import chalk from "chalk";
 

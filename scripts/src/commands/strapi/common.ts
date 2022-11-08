@@ -128,6 +128,7 @@ export function mapDBData(rows: any[], mappings: Record<string, (v: any) => any>
  *
  * NOTE - most admin operations will not work with token (only logged in user cookie)
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function getAxiosInstance() {
   await getBackendEnv();
 
