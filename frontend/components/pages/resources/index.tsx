@@ -1,4 +1,3 @@
-import { Box, Flex, FormControl, IconButton, Input } from "@chakra-ui/core";
 import React from "react";
 import type { IResource } from "types/resource";
 import { ResourceCardComponent } from "./resource-card";
@@ -7,21 +6,14 @@ export const ResourcesPageComponent: React.FC<{ resources: IResource[] }> = ({ r
   return (
     <>
       <h1>Resources</h1>
-      <Box borderWidth="1px" mt="30px">
-        <FormControl>
-          <Flex>
-            <Input placeholder="Search" />
-            <IconButton aria-label="Search resources" />
-          </Flex>
-        </FormControl>
-      </Box>
-      <Box mt="100px">
-        <Flex justifyContent="space-between" flexWrap="wrap">
+
+      <div>
+        <div className="flex justify-between wrap">
           {resources.map((resource) => (
             <ResourceCardComponent key={resource.id} resource={resource} />
           ))}
-        </Flex>
-      </Box>
+        </div>
+      </div>
     </>
   );
 };

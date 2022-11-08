@@ -4,9 +4,9 @@
 // https://tailwindcss.com/docs/preflight#headings-are-unstyled
 @layer base {
   h1 {
-    @apply text-8xl;
+    @apply text-7xl;
     @apply text-primary;
-    @apply py-8;
+    @apply py-7;
     @apply font-bold;
   }
   h2 {
