@@ -1,19 +1,34 @@
-import HeaderButton from "./HeaderButton";
-import BgImage from "components/common/BgImage";
-
-export default function Header() {
-  return (
-    <div className={`h-64 relative text-white text-center font-bold w-[1500px]`}>
-      <div className="inset-0 absolute w-[1500px] bg-[rgba(0,177,233,1)]" />
-      <div className="inset-x-0 absolute -top-1/4 bottom-1/4 w-[1500px] left-[6%]">
-        <HeaderButton type="TYPE" text="Theory of Change" />
-        <HeaderButton type="TYPE1" text="Members & Volunteers" />
-        <HeaderButton type="TYPE2" text="Annual Reports" />
-      </div>
-      <BgImage />
-      <p className="absolute inline m-0 h-[70px] w-[395px] left-[35.13%] right-[38.53%] top-[29.3%] bottom-[43.36%] text-[56px] leading-[1.2]">
-        Our Work
-      </p>
-    </div>
-  );
+interface IBackgroundImageProps {
+  /** name of image to display as defined in `tailwind.config.ts` */
+  imageName: string;
+  /** css backgroundSize to stretch image to (will repeat if smaller) */
+  size?: string;
+  /** css backgroundPosition used to offset or center */
+  position?: string;
 }
+
+/** Render a div with background image and nested child content */
+export const SectionHeader = ({
+  background,
+  children,
+}: {
+  children: JSX.Element[];
+  background: IBackgroundImageProps;
+}) => (
+  <div className="h-64 relative text-white text-center font-bold w-100 bg-primary">
+    <BackgroundImage {...background} />
+    <div className="z-10 relative flex flex-col h-full">{children}</div>
+  </div>
+);
+
+/** Render a stretched div with background image  */
+const BackgroundImage = ({ imageName = "bg-math-1", size = "200px", position = "0px 0px" }) => (
+  <div
+    data-cy="background-image"
+    className={`${imageName} absolute left-0 top-0 w-full h-full z-0 opacity-50`}
+    style={{
+      backgroundSize: size,
+      backgroundPosition: position,
+    }}
+  ></div>
+);

@@ -1,11 +1,37 @@
 import React from "react";
 import type { IAbout } from "types/about";
-import Header from "components/layout/Header";
+import { SectionHeader } from "components/layout/Header";
+
+const headerButtons = [
+  {
+    id: 0,
+    text: "Theory of Change",
+  },
+  {
+    id: 1,
+    text: "Members & Volunteers",
+  },
+  {
+    id: 2,
+    text: "Annual Reports",
+  },
+];
 
 export const AboutPageComponent: React.FC<{ aboutPageContent: IAbout[] }> = ({ aboutPageContent }) => {
   return (
     <>
-      <Header />
+      <SectionHeader background={{ imageName: "bg-math-1", size: "1560px", position: "-150px -58px" }}>
+        <h1 className="text-white">Our Work</h1>
+        <div className="flex gap-2 justify-center flex-1">
+          {headerButtons.map(({ text, id }) => (
+            <a key={id} className="btn btn-outline btn-primary bg-white">
+              {text}
+            </a>
+          ))}
+        </div>
+      </SectionHeader>
+
+      {/* TODO - remove fixed sizes and colours, remove absolute positioning */}
       <div className={`relative text-center w-[1148px] h-[227.89px] text-[rgba(29,33,48,1)] mt-8`}>
         <div>
           <p className="left-0 bottom-0 absolute text-xl font-bold leading-normal inline m-0 h-[76.89px] w-[1088.88px] right-[5.15%] top-[66.26%]">
