@@ -13,11 +13,11 @@ jobs:
         with:
           lfs: true
       - name: Setup Node 16
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: 16.x
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ./.yarn/cache
           # If cachebusting required (e.g. breaking yarn changes on update) change `v1` to another number
