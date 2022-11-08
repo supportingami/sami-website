@@ -3,8 +3,9 @@ import { Command } from "commander";
 import crypto from "crypto";
 import { PATHS } from "../../paths";
 import * as fs from "fs-extra";
-import { ADMIN_TOKENS, createStrapiInstance, IAdminToken, IStrapi } from "./common";
+import { ADMIN_TOKENS, createStrapiInstance, getDB, IAdminToken, IStrapi } from "./common";
 import { getFrontendEnv } from "../../utils";
+import chalk from "chalk";
 
 /***************************************************************************************
  * CLI
@@ -44,17 +45,20 @@ class StrapiBootstrap {
       console.error("no salt provided");
       process.exit(1);
     }
-    for (const [key, token] of Object.entries(ADMIN_TOKENS)) {
-      const existingToken = await this.app.query("admin::api-token").findOne({
-        select: ["name", "accessKey"],
-        where: { name: token.name },
-      });
-      if (!existingToken) {
-        await this.addAdminToken(token);
-        const envTokenName = `STRAPI_${key.toUpperCase()}_TOKEN`;
-        this.writeFrontendEnvToken(token, envTokenName);
-      }
+    // clear any old access tokens
+    const ref = this.app.query("admin::api-token");
+    const dbTokens: IAdminToken[] = await ref.findMany({ where: { id: { $gte: 0 } } });
+    if (dbTokens.length > 0) {
+      console.log("clearing old access tokens");
+      await ref.deleteMany({ where: { id: { $gte: 0 } } });
     }
+    // write new
+    for (const adminToken of Object.values(ADMIN_TOKENS)) {
+      await this.addAdminToken(adminToken);
+      this.writeFrontendEnvToken(adminToken, adminToken.name);
+    }
+    const { envPath } = getFrontendEnv();
+    console.log("tokens written to\n", envPath);
   }
 
   /**
@@ -68,26 +72,24 @@ class StrapiBootstrap {
       console.error("no salt provided");
       process.exit(1);
     }
-
     // create new token
     await this.app.query("admin::api-token").create({
       select: adminTokenFields,
       data: { ...token, accessKey: hash(token.accessKey, salt) },
     });
-    console.log("apiToken created", token);
+    console.log(chalk.yellow("apiToken created", JSON.stringify(token, null, 2)));
   }
 
   /** Populate frontend local.env with api token */
-  private writeFrontendEnvToken(token: IAdminToken, envName: string) {
-    const { envFile, envString, parsed } = getFrontendEnv();
-    const envToken = parsed[envName];
-    if (envToken) {
-      const updatedEnv = envString.replace(envToken, token.accessKey);
-      fs.writeFileSync(envFile, updatedEnv);
+  private writeFrontendEnvToken(token: IAdminToken, envTokenName: string) {
+    const { envPath, envString, parsed } = getFrontendEnv();
+    const existingToken = parsed[envTokenName];
+    if (existingToken) {
+      const updatedEnv = envString.replace(existingToken, token.accessKey);
+      fs.writeFileSync(envPath, updatedEnv);
     } else {
-      fs.appendFileSync(envFile, `\n${envName}=${token.accessKey}`);
+      fs.appendFileSync(envPath, `\n${envTokenName}=${token.accessKey}`);
     }
-    console.log("token written to\n", envFile);
   }
 
   private async deleteAdminToken(token: IAdminToken) {
