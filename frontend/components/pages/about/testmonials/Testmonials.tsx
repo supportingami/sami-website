@@ -11,7 +11,7 @@ const cabrineStyle = {
 
 export default function Testimonials(props: TestimonialsProps) {
   return (
-    <div className={`relative w-[1500px] h-[750px] font-['Roboto'] bg-slate-200`} style={props.style}>
+    <div className={`relative w-[1500px] h-[750px] bg-slate-200`} style={props.style}>
       <div className="absolute text-left w-[1063px] left-[13.53%] right-[15.6%] top-[57.07%] bottom-[12.27%] drop-shadow-lg">
         <div className="inset-0 absolute bg-white w-[1063px] rounded-[15px]" />
         <div className="opacity-70 absolute leading-none inline-block h-[30px] w-[769px] left-[6.87%] right-[20.79%] top-[74.78%] bottom-[12.17%] text-[rgba(29,33,48,1)]">

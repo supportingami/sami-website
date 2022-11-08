@@ -5,7 +5,7 @@ import { MembersListItemComponent } from "./ListItem";
 export const MembersComponent: React.FC<{ members: IMember[] }> = ({ members }) => {
   return (
     <>
-      <div className={`text-center font-['Roboto']`}>
+      <div className={`text-center`}>
         <p className="font-bold inline text-[40px]">Members & Volunteers</p>
 
         <p className="text-base font-normal m-0 h-[65px] leading-[1.6]">

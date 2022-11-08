@@ -1,7 +1,7 @@
 export default function PrimaryButton(props: PrimaryButtonProps) {
   return (
     <div
-      className={`[backdrop-filter:blur(80px)] px-8 py-4 absolute gap-2.5 inline-flex justify-center items-center rounded text-white text-right font-medium left-[40.93%] right-[40.87%] top-[70.29%] bottom-[14.71%] bg-[rgba(0,177,233,1)] font-['Roboto']`}
+      className={`[backdrop-filter:blur(80px)] px-8 py-4 absolute gap-2.5 inline-flex justify-center items-center rounded text-white text-right font-medium left-[40.93%] right-[40.87%] top-[70.29%] bottom-[14.71%] bg-[rgba(0,177,233,1)]`}
     >
       <a
         className="text-base m-0 leading-[normal]"

@@ -4,7 +4,7 @@ import OurWorkBGImage from "components/pages/about/OurWorkBGImage/OurWorkBGImage
 
 export default function Header() {
   return (
-    <div className={`h-64 relative text-white text-center font-bold w-[1500px] font-['Roboto']`}>
+    <div className={`h-64 relative text-white text-center font-bold w-[1500px]`}>
       <div className="inset-0 absolute w-[1500px] bg-[rgba(0,177,233,1)]" />
       <div className="inset-x-0 absolute -top-1/4 bottom-1/4 w-[1500px] left-[6%]">
         <HeaderButton type="TYPE" text="Theory of Change" />

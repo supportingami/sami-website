@@ -6,7 +6,7 @@ export const AboutPageComponent: React.FC<{ aboutPageContent: IAbout[] }> = ({ a
   return (
     <>
       <Header />
-      <div className={`relative text-center w-[1148px] h-[227.89px] font-['Roboto'] text-[rgba(29,33,48,1)] mt-8`}>
+      <div className={`relative text-center w-[1148px] h-[227.89px] text-[rgba(29,33,48,1)] mt-8`}>
         <div>
           <p className="left-0 bottom-0 absolute text-xl font-bold leading-normal inline m-0 h-[76.89px] w-[1088.88px] right-[5.15%] top-[66.26%]">
             {
@@ -34,7 +34,7 @@ export const AboutPageComponent: React.FC<{ aboutPageContent: IAbout[] }> = ({ a
 
       {/*Principles Section*/}
 
-      <div className={`relative w-[1500px] h-[367px] font-['Roboto'] text-[rgba(29,33,48,1)] bg-slate-200`}>
+      <div className={`relative w-[1500px] h-[367px] text-[rgba(29,33,48,1)] bg-slate-200`}>
         <div className="absolute text-left w-[340px] left-[68.93%] right-[8.4%] top-[59.13%] bottom-[13.08%]">
           <div className="inset-0 absolute w-[340px]">
             <p className="inset-x-0 opacity-70 bottom-0 absolute text-sm font-normal inline m-0 w-[340px] top-[35.29%] leading-[1.6]">

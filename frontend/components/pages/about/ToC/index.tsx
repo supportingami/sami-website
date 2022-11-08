@@ -2,7 +2,7 @@ import PrimaryButton from "./PrimaryButton";
 
 export default function ToC() {
   return (
-    <div className={`relative text-center w-[1500px] h-[340px] font-['Roboto'] bg-slate-200 top-[129px]`}>
+    <div className={`relative text-center w-[1500px] h-[340px] bg-slate-200 top-[129px]`}>
       <PrimaryButton />
       <p className="absolute text-base font-normal inline m-0 h-[87px] w-[1011px] left-[16.33%] right-[16.27%] top-[38.82%] bottom-[35.59%] leading-[1.6] text-[rgba(82,85,96,1)] ">
         {
