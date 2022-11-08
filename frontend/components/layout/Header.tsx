@@ -1,6 +1,5 @@
 import HeaderButton from "./HeaderButton";
-import test from "public/images/bgOurWork.svg";
-import OurWorkBGImage from "components/pages/about/OurWorkBGImage/OurWorkBGImage";
+import BgImage from "components/common/BgImage";
 
 export default function Header() {
   return (
@@ -11,21 +10,10 @@ export default function Header() {
         <HeaderButton type="TYPE1" text="Members & Volunteers" />
         <HeaderButton type="TYPE2" text="Annual Reports" />
       </div>
-      <OurWorkBGImage />
+      <BgImage />
       <p className="absolute inline m-0 h-[70px] w-[395px] left-[35.13%] right-[38.53%] top-[29.3%] bottom-[43.36%] text-[56px] leading-[1.2]">
         Our Work
       </p>
     </div>
   );
-}
-
-const style = {
-  backgroundImage: `url(${test.src})`,
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
-};
-
-interface HeaderProps {
-  style: any;
 }
