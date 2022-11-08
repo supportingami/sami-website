@@ -23,7 +23,7 @@ jobs:
           # If cachebusting required (e.g. breaking yarn changes on update) change `v1` to another number
           key: ${{ runner.os }}-node-modules-yarn-v1-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-v1-
+            ${{ runner.os }}-node-modules-yarn-v1-
       - run: yarn install
       - name: Lint Code
         run: yarn lint
