@@ -1,6 +1,6 @@
 import React from "react";
-import { IFaq } from "types/faq";
-import { IVolunteer } from "types/volunteer";
+import type { IFaq } from "types/faq";
+import type { IVolunteer } from "types/volunteer";
 import { FAQS } from "./faq";
 
 export const VolunteerPageComponent: React.FC<{ volunteerPageContent: IVolunteer[]; faqs: IFaq[] }> = ({

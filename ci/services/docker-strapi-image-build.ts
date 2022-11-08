@@ -19,6 +19,7 @@ export function DockerStrapiImageBuild(envName: string) {
   const project = gcp.config.project;
 
   // Create a private artifact registry.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const registry = new gcp.artifactregistry.Repository("sami-website-artifact-repo", {
     description: "SAMI Website Repository",
     format: "DOCKER",

@@ -1,5 +1,5 @@
 import React from "react";
-import { IProject } from "types/project";
+import type { IProject } from "types/project";
 
 export const ProjectsPageComponent: React.FC<{ projectPageContent: IProject[]; children?: any }> = ({
   projectPageContent,

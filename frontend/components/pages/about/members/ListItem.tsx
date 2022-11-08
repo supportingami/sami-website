@@ -1,7 +1,7 @@
 import { getStrapiMedia } from "lib/media";
 import Image from "next/image";
 import React from "react";
-import { IMember } from "types/member";
+import type { IMember } from "types/member";
 import VectorTriangle from "./assets/VectorTriangle";
 
 export const MembersListItemComponent: React.FC<{

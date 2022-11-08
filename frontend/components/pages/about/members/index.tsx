@@ -1,5 +1,5 @@
 import React from "react";
-import { IMember } from "types/member";
+import type { IMember } from "types/member";
 import { MembersListItemComponent } from "./ListItem";
 
 export const MembersComponent: React.FC<{ members: IMember[] }> = ({ members }) => {

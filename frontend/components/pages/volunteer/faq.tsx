@@ -1,5 +1,5 @@
 import React from "react";
-import { IFaq } from "types/faq";
+import type { IFaq } from "types/faq";
 
 export const FAQS: React.FC<{
   faq: IFaq;

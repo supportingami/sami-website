@@ -1,6 +1,6 @@
 import React from "react";
-import { IBlogPost } from "types/blogpost";
-import { BlogCardComponent } from "./blog-card";
+import type { IBlogPost } from "types/blogpost";
+import { BlogCardComponent } from "./blogCard";
 
 export const BlogPageComponent: React.FC<{ blogs: IBlogPost[] }> = ({ blogs }) => {
   return (

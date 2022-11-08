@@ -1,5 +1,5 @@
 import React from "react";
-import { IAnnualReport } from "types/annualreport";
+import type { IAnnualReport } from "types/annualreport";
 import { AnnualReportsListItemComponent } from "./ListItem";
 
 export const AnnualReportPageComponent: React.FC<{ reports: IAnnualReport[] }> = ({ reports }) => {

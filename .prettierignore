@@ -2,3 +2,4 @@
 build
 .next
 **/*.d.ts
+backend/.strapi-updater.json

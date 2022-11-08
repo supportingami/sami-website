@@ -1,11 +1,12 @@
 import React from "react";
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
-import { IVolunteer } from "types/volunteer";
+import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import type { IVolunteer } from "types/volunteer";
 import Head from "next/head";
-import { Volunteer, VolunteersQuery, VolunteersDocument, FaqsQuery, FaqsDocument, Faq } from "../graphql/generated";
+import type { Volunteer, VolunteersQuery, FaqsQuery, Faq } from "../graphql/generated";
+import { VolunteersDocument, FaqsDocument } from "../graphql/generated";
 import { serverQuery } from "lib/graphql";
 import { VolunteerPageComponent } from "components/pages/volunteer";
-import { IFaq } from "types/faq";
+import type { IFaq } from "types/faq";
 
 export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
   let volunteerPageContent: IVolunteer[] = [];

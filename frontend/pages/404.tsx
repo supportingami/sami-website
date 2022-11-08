@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import Page from "components/pages/error";
-import { NextPage } from "next";
+import type { NextPage } from "next";
 
 const Custom404Page: NextPage = () => {
   return (

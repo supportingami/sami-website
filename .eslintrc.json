@@ -66,6 +66,29 @@
         "selector": "classMethod",
         "format": ["camelCase"],
         "leadingUnderscore": "allow"
+      },
+      // ignore cases where have to quote property names
+      // https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/docs/rules/naming-convention.md#ignore-properties-that-require-quotes
+      {
+        "selector": [
+          "classProperty",
+          "objectLiteralProperty",
+          "typeProperty",
+          "classMethod",
+          "objectLiteralMethod",
+          "typeMethod",
+          "accessor",
+          "enumMember"
+        ],
+        "format": null,
+        "modifiers": ["requiresQuotes"]
+      },
+      // allow __html prop
+      // https://github.com/typescript-eslint/typescript-eslint/issues/1712
+      {
+        "selector": "property",
+        "filter": "__html",
+        "format": null
       }
     ],
     // Filenames - https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/filename-case.md
@@ -76,7 +99,7 @@
           "camelCase": true,
           "pascalCase": true
         },
-        "ignore": []
+        "ignore": ["ci/", ""]
       }
     ],
     "@typescript-eslint/no-empty-function": "off",

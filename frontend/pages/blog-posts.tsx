@@ -6,7 +6,7 @@ import type { IBlogPost } from "types/blogpost";
 import type { BlogPostsQuery, BlogPost } from "../graphql/generated";
 import { BlogPostsDocument } from "../graphql/generated";
 import { BlogPageComponent } from "components/pages/blog-post";
-import PageLayout from "components/layout/page-layout";
+import PageLayout from "components/layout/pageLayout";
 
 export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
   let blogs: IBlogPost[] = [];

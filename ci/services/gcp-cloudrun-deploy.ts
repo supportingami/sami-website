@@ -1,5 +1,5 @@
-import * as pulumi from "@pulumi/pulumi";
-import * as docker from "@pulumi/docker";
+import type * as pulumi from "@pulumi/pulumi";
+import type * as docker from "@pulumi/docker";
 import * as gcp from "@pulumi/gcp";
 
 type IEnvVars = Record<string, pulumi.Output<string> | string>;
@@ -71,7 +71,8 @@ export function GCPCloudRunDeploy(image: docker.Image, envName: string, envVars:
     { dependsOn: [enableCloudRun, image] }
   );
 
-  const iamHello = new gcp.cloudrun.IamMember("hello-everyone", {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const iam = new gcp.cloudrun.IamMember("hello-everyone", {
     service: cloudrunService.name,
     location,
     role: "roles/run.invoker",

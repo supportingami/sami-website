@@ -1,6 +1,7 @@
-import { ApolloClient, ApolloProvider, DocumentNode, InMemoryCache } from "@apollo/client";
-import { ReactNode } from "react";
-import session from "types/session";
+import type { DocumentNode } from "@apollo/client";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import type { ReactNode } from "react";
+import type session from "types/session";
 
 /** When calling graphql from browser include authenticated user credentials */
 export const GraphQLProvider = ({ session, children }: { session: session; children: ReactNode }) => {

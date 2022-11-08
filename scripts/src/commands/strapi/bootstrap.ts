@@ -3,7 +3,8 @@ import { Command } from "commander";
 import crypto from "crypto";
 import { PATHS } from "../../paths";
 import * as fs from "fs-extra";
-import { ADMIN_TOKENS, createStrapiInstance, getDB, IAdminToken, IStrapi } from "./common";
+import type { IAdminToken, IStrapi } from "./common";
+import { ADMIN_TOKENS, createStrapiInstance } from "./common";
 import { getFrontendEnv } from "../../utils";
 import chalk from "chalk";
 

@@ -1,11 +1,12 @@
 import { useRouter } from "next/router";
 import React from "react";
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
 import { serverQuery } from "lib/graphql";
-import { IProject } from "types/project";
-import { ProjectTypeComponent } from "components/pages/projects/project-type";
-import { Project, ProjectsDocument, ProjectsQuery } from "../../../graphql/generated";
+import type { IProject } from "types/project";
+import { ProjectTypeComponent } from "components/pages/projects/projectType";
+import type { Project, ProjectsQuery } from "../../../graphql/generated";
+import { ProjectsDocument } from "../../../graphql/generated";
 
 export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
   let projectData: IProject[] = [];

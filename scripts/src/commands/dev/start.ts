@@ -1,22 +1,20 @@
 import { Command } from "commander";
-import concurrently, { ConcurrentlyCommandInput } from "concurrently";
+import type { ConcurrentlyCommandInput } from "concurrently";
+import concurrently from "concurrently";
 import path from "path";
 import { PATHS } from "../../paths";
-import { IBackendEnv, getBackendEnv, getFrontendEnv, IFrontendEnv } from "../../utils";
+import type { IBackendEnv, IFrontendEnv } from "../../utils";
+import { getBackendEnv, getFrontendEnv } from "../../utils";
 
 /***************************************************************************************
  * CLI
  * @example yarn
  *************************************************************************************/
-interface IProgramOptions {
-  env: string;
-}
+
 const program = new Command("start");
-export default program
-  .description("Start local development server")
-  .action(async (options: Partial<IProgramOptions>) => {
-    return new StartCmd().run().then(() => process.exit(0));
-  });
+export default program.description("Start local development server").action(async () => {
+  return new StartCmd().run().then(() => process.exit(0));
+});
 
 /***************************************************************************************
  * Main Methods
