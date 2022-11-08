@@ -8,6 +8,20 @@
   },
   {
     "field": "Photo",
+    "file_id": 3,
+    "order": 1,
+    "related_id": 1,
+    "related_type": "api::member.member"
+  },
+  {
+    "field": "Photo",
+    "file_id": 4,
+    "order": 1,
+    "related_id": 2,
+    "related_type": "api::member.member"
+  },
+  {
+    "field": "Photo",
     "file_id": 4,
     "order": 1,
     "related_id": 2,
@@ -45,8 +59,8 @@
     "field": "Image",
     "file_id": 37,
     "order": 1,
-    "related_id": 1,
-    "related_type": "home.hero-image"
+    "related_id": 2,
+    "related_type": "page-content.cover-image"
   },
   {
     "field": "Image",
@@ -59,8 +73,8 @@
     "field": "Image",
     "file_id": 37,
     "order": 1,
-    "related_id": 2,
-    "related_type": "page-content.cover-image"
+    "related_id": 1,
+    "related_type": "home.hero-image"
   },
   {
     "field": "FeatureImage",
@@ -136,21 +150,7 @@
     "field": "FeatureImage",
     "file_id": 49,
     "order": 1,
-    "related_id": 6,
-    "related_type": "api::blog-post.blog-post"
-  },
-  {
-    "field": "FeatureImage",
-    "file_id": 49,
-    "order": 1,
-    "related_id": 3,
-    "related_type": "api::blog-post.blog-post"
-  },
-  {
-    "field": "FeatureImage",
-    "file_id": 49,
-    "order": 1,
-    "related_id": 4,
+    "related_id": 5,
     "related_type": "api::blog-post.blog-post"
   },
   {
@@ -164,7 +164,21 @@
     "field": "FeatureImage",
     "file_id": 49,
     "order": 1,
-    "related_id": 5,
+    "related_id": 4,
+    "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 49,
+    "order": 1,
+    "related_id": 3,
+    "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 49,
+    "order": 1,
+    "related_id": 6,
     "related_type": "api::blog-post.blog-post"
   },
   {
@@ -176,9 +190,37 @@
   },
   {
     "field": "Photo",
-    "file_id": 61,
+    "file_id": 51,
     "order": 1,
-    "related_id": 8,
+    "related_id": 5,
+    "related_type": "api::member.member"
+  },
+  {
+    "field": "Photo",
+    "file_id": 52,
+    "order": 1,
+    "related_id": 3,
+    "related_type": "api::member.member"
+  },
+  {
+    "field": "Photo",
+    "file_id": 53,
+    "order": 1,
+    "related_id": 4,
+    "related_type": "api::member.member"
+  },
+  {
+    "field": "Photo",
+    "file_id": 54,
+    "order": 1,
+    "related_id": 15,
+    "related_type": "api::member.member"
+  },
+  {
+    "field": "Photo",
+    "file_id": 55,
+    "order": 1,
+    "related_id": 9,
     "related_type": "api::member.member"
   },
   {
@@ -186,6 +228,48 @@
     "file_id": 56,
     "order": 1,
     "related_id": 10,
+    "related_type": "api::member.member"
+  },
+  {
+    "field": "Photo",
+    "file_id": 57,
+    "order": 1,
+    "related_id": 6,
+    "related_type": "api::member.member"
+  },
+  {
+    "field": "Photo",
+    "file_id": 58,
+    "order": 1,
+    "related_id": 11,
+    "related_type": "api::member.member"
+  },
+  {
+    "field": "Photo",
+    "file_id": 59,
+    "order": 1,
+    "related_id": 7,
+    "related_type": "api::member.member"
+  },
+  {
+    "field": "Photo",
+    "file_id": 60,
+    "order": 1,
+    "related_id": 14,
+    "related_type": "api::member.member"
+  },
+  {
+    "field": "Photo",
+    "file_id": 61,
+    "order": 1,
+    "related_id": 8,
+    "related_type": "api::member.member"
+  },
+  {
+    "field": "Photo",
+    "file_id": 62,
+    "order": 1,
+    "related_id": 12,
     "related_type": "api::member.member"
   },
   {
@@ -222,89 +306,5 @@
     "order": 1,
     "related_id": 6,
     "related_type": "api::annual-report.annual-report"
-  },
-  {
-    "field": "Photo",
-    "file_id": 52,
-    "order": 1,
-    "related_id": 3,
-    "related_type": "api::member.member"
-  },
-  {
-    "field": "Photo",
-    "file_id": 53,
-    "order": 1,
-    "related_id": 4,
-    "related_type": "api::member.member"
-  },
-  {
-    "field": "Photo",
-    "file_id": 51,
-    "order": 1,
-    "related_id": 5,
-    "related_type": "api::member.member"
-  },
-  {
-    "field": "Photo",
-    "file_id": 57,
-    "order": 1,
-    "related_id": 6,
-    "related_type": "api::member.member"
-  },
-  {
-    "field": "Photo",
-    "file_id": 59,
-    "order": 1,
-    "related_id": 7,
-    "related_type": "api::member.member"
-  },
-  {
-    "field": "Photo",
-    "file_id": 58,
-    "order": 1,
-    "related_id": 11,
-    "related_type": "api::member.member"
-  },
-  {
-    "field": "Photo",
-    "file_id": 62,
-    "order": 1,
-    "related_id": 12,
-    "related_type": "api::member.member"
-  },
-  {
-    "field": "Photo",
-    "file_id": 60,
-    "order": 1,
-    "related_id": 14,
-    "related_type": "api::member.member"
-  },
-  {
-    "field": "Photo",
-    "file_id": 54,
-    "order": 1,
-    "related_id": 15,
-    "related_type": "api::member.member"
-  },
-  {
-    "field": "Photo",
-    "file_id": 3,
-    "order": 1,
-    "related_id": 1,
-    "related_type": "api::member.member"
-  },
-  {
-    "field": "Photo",
-    "file_id": 4,
-    "order": 1,
-    "related_id": 2,
-    "related_type": "api::member.member"
-  },
-  {
-    "field": "Photo",
-    "file_id": 55,
-    "order": 1,
-    "related_id": 9,
-    "related_type": "api::member.member"
   }
 ]
