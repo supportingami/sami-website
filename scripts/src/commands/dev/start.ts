@@ -1,9 +1,8 @@
-import { spawnSync } from "child_process";
 import { Command } from "commander";
 import concurrently, { ConcurrentlyCommandInput } from "concurrently";
 import path from "path";
 import { PATHS } from "../../paths";
-import { ILoadedEnv, loadEnvironment } from "../../utils";
+import { IBackendEnv, getBackendEnv, getFrontendEnv, IFrontendEnv } from "../../utils";
 
 /***************************************************************************************
  * CLI
@@ -30,16 +29,17 @@ class StartCmd {
   allCommands = [];
 
   public async run() {
-    const env = await loadEnvironment();
-    const backendStart = this.getBackendStartCommand(env);
-    const frontendStart = this.getFrontendCommand(env);
+    const backendEnv = await getBackendEnv();
+    const frontendEnv = getFrontendEnv();
+    const backendStart = this.getBackendStartCommand(backendEnv);
+    const frontendStart = this.getFrontendCommand(backendEnv, frontendEnv);
     const { result } = concurrently([backendStart, frontendStart], {
       killOthers: ["failure", "success"],
     });
     await result;
   }
 
-  private getBackendStartCommand(env: ILoadedEnv): ConcurrentlyCommandInput {
+  private getBackendStartCommand(env: IBackendEnv): ConcurrentlyCommandInput {
     const { envPath, name } = env;
     const relativeEnvPath = path.relative(PATHS.backendDir, envPath);
     console.log("starting backend...");
@@ -54,14 +54,14 @@ class StartCmd {
       prefixColor: "#8F76FF",
     };
   }
-  private getFrontendCommand(env: ILoadedEnv) {
+  private getFrontendCommand(backendEnv: IBackendEnv, frontendEnv: IFrontendEnv) {
     // Set local environment to call next from local instance, and if available populate strapi token
-    let frontendEnv: any = {
-      NEXT_PUBLIC_API_URL: `http://localhost:1337`,
-    };
-    const { STRAPI_READONLY_TOKEN } = env.parsed;
+    const env = frontendEnv.parsed;
+    env.NEXT_PUBLIC_API_URL = "http://localhost:1337";
+    // allow override token from backend
+    const { STRAPI_READONLY_TOKEN } = backendEnv.parsed;
     if (STRAPI_READONLY_TOKEN) {
-      frontendEnv.STRAPI_READONLY_TOKEN = STRAPI_READONLY_TOKEN;
+      env.STRAPI_READONLY_TOKEN = STRAPI_READONLY_TOKEN;
     }
 
     // use wait-on to wait for backend server to be ready before starting frontend
@@ -70,7 +70,7 @@ class StartCmd {
       name: "nextJS",
       command: `${waitOnBinPath} http://localhost:1337 && yarn next dev`,
       cwd: PATHS.frontendDir,
-      env: frontendEnv,
+      env,
       prefixColor: "bgBlack.white",
     };
   }
