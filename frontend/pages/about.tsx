@@ -1,23 +1,15 @@
 import React from "react";
 import Head from "next/head";
-import { Heading } from "@chakra-ui/core";
 import { AboutPageComponent } from "components/pages/about";
 import { AnnualReportPageComponent } from "components/pages/about/annual-reports";
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
-import { IAnnualReport } from "types/annualreport";
-import { IMember } from "types/member";
+import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import type { IAnnualReport } from "types/annualreport";
+import type { IMember } from "types/member";
 
-
-import {
-  AboutQuery,
-  AboutDocument,
-  MembersQuery,
-  MembersDocument,
-  AnnualReportsQuery,
-  AnnualReportsDocument,
-} from "../graphql/generated";
+import type { AboutQuery, MembersQuery, AnnualReportsQuery } from "../graphql/generated";
+import { AboutDocument, MembersDocument, AnnualReportsDocument } from "../graphql/generated";
 import { serverQuery } from "lib/graphql";
-import { IAbout } from "types/about";
+import type { IAbout } from "types/about";
 import { MembersComponent } from "components/pages/about/members";
 import PageLayout from "components/layout/page-layout";
 import ToC from "components/pages/about/ToC";
@@ -60,11 +52,11 @@ const AboutPage = ({ about, members, reports }: InferGetServerSidePropsType<type
         <title>About Us</title>
       </Head>
       <PageLayout>
-      <AboutPageComponent aboutPageContent={about} />
-      <MembersComponent members={members} />
-      <ToC></ToC>
-      <AnnualReportPageComponent reports={reports} />
-      <Testimonials/>
+        <AboutPageComponent aboutPageContent={about} />
+        <MembersComponent members={members} />
+        <ToC></ToC>
+        <AnnualReportPageComponent reports={reports} />
+        <Testimonials />
       </PageLayout>
     </>
   );
