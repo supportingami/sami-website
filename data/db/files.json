@@ -834,5 +834,27 @@
     "updated_by_id": 1,
     "url": "/uploads/SAMI_Annual_Report_2016_00f6b000d5.pdf",
     "width": null
+  },
+  {
+    "alternative_text": "edison-robots.jpeg",
+    "caption": "edison-robots.jpeg",
+    "created_at": 1668455161178,
+    "created_by_id": 1,
+    "ext": ".jpeg",
+    "folder_path": "/6",
+    "formats": "{\"thumbnail\":{\"name\":\"thumbnail_edison-robots.jpeg\",\"hash\":\"thumbnail_edison_robots_b30a4fdba3\",\"ext\":\".jpeg\",\"mime\":\"image/jpeg\",\"path\":null,\"width\":180,\"height\":156,\"size\":9.54,\"url\":\"/uploads/thumbnail_edison_robots_b30a4fdba3.jpeg\"}}",
+    "hash": "edison_robots_b30a4fdba3",
+    "height": 1362,
+    "id": 68,
+    "mime": "image/jpeg",
+    "name": "edison-robots.jpeg",
+    "preview_url": null,
+    "provider": "local",
+    "provider_metadata": null,
+    "size": 1485.78,
+    "updated_at": 1668455161178,
+    "updated_by_id": 1,
+    "url": "/uploads/edison_robots_b30a4fdba3.jpeg",
+    "width": 1568
   }
 ]

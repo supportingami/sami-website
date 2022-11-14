@@ -1,0 +1,10 @@
+[
+  {
+    "component_id": 3,
+    "component_type": "common.action-button",
+    "entity_id": 1,
+    "field": "ActionButtons",
+    "id": 1,
+    "order": 1
+  }
+]

@@ -48,5 +48,15 @@
     "path_id": 5,
     "updated_at": 1666080929556,
     "updated_by_id": 1
+  },
+  {
+    "created_at": 1668455107219,
+    "created_by_id": 1,
+    "id": 7,
+    "name": "Home",
+    "path": "/6",
+    "path_id": 6,
+    "updated_at": 1668455107219,
+    "updated_by_id": 1
   }
 ]

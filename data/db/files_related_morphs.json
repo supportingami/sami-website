@@ -59,15 +59,15 @@
     "field": "Image",
     "file_id": 37,
     "order": 1,
-    "related_id": 2,
-    "related_type": "page-content.cover-image"
+    "related_id": 1,
+    "related_type": "components.hero-image"
   },
   {
     "field": "Image",
     "file_id": 37,
     "order": 1,
-    "related_id": 1,
-    "related_type": "components.hero-image"
+    "related_id": 2,
+    "related_type": "page-content.cover-image"
   },
   {
     "field": "Image",
@@ -150,21 +150,7 @@
     "field": "FeatureImage",
     "file_id": 49,
     "order": 1,
-    "related_id": 5,
-    "related_type": "api::blog-post.blog-post"
-  },
-  {
-    "field": "FeatureImage",
-    "file_id": 49,
-    "order": 1,
-    "related_id": 12,
-    "related_type": "api::blog-post.blog-post"
-  },
-  {
-    "field": "FeatureImage",
-    "file_id": 49,
-    "order": 1,
-    "related_id": 4,
+    "related_id": 6,
     "related_type": "api::blog-post.blog-post"
   },
   {
@@ -178,7 +164,21 @@
     "field": "FeatureImage",
     "file_id": 49,
     "order": 1,
-    "related_id": 6,
+    "related_id": 4,
+    "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 49,
+    "order": 1,
+    "related_id": 12,
+    "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 49,
+    "order": 1,
+    "related_id": 5,
     "related_type": "api::blog-post.blog-post"
   },
   {
@@ -306,5 +306,12 @@
     "order": 1,
     "related_id": 6,
     "related_type": "api::annual-report.annual-report"
+  },
+  {
+    "field": "Image",
+    "file_id": 68,
+    "order": 1,
+    "related_id": 1,
+    "related_type": "home.mission-statement"
   }
 ]

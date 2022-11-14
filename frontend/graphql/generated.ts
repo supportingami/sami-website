@@ -289,6 +289,31 @@ export type ComponentHomeHeroImageInput = {
   id?: InputMaybe<Scalars["ID"]>;
 };
 
+export type ComponentHomeMissionStatement = {
+  __typename?: "ComponentHomeMissionStatement";
+  ActionButtons?: Maybe<Array<Maybe<ComponentCommonActionButton>>>;
+  Description?: Maybe<Scalars["String"]>;
+  Heading?: Maybe<Scalars["String"]>;
+  Image?: Maybe<UploadFileEntityResponse>;
+  Text?: Maybe<Scalars["String"]>;
+  id: Scalars["ID"];
+};
+
+export type ComponentHomeMissionStatementActionButtonsArgs = {
+  filters?: InputMaybe<ComponentCommonActionButtonFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+};
+
+export type ComponentHomeMissionStatementInput = {
+  ActionButtons?: InputMaybe<Array<InputMaybe<ComponentCommonActionButtonInput>>>;
+  Description?: InputMaybe<Scalars["String"]>;
+  Heading?: InputMaybe<Scalars["String"]>;
+  Image?: InputMaybe<Scalars["ID"]>;
+  Text?: InputMaybe<Scalars["String"]>;
+  id?: InputMaybe<Scalars["ID"]>;
+};
+
 export type Country = {
   __typename?: "Country";
   Content?: Maybe<Scalars["String"]>;
@@ -392,6 +417,7 @@ export type DateTimeFilterInput = {
 export enum Enum_Member_Organisation {
   Ami = "AMI",
   Sami = "SAMI",
+  SamiTrustees = "SAMI_Trustees",
 }
 
 export type Faq = {
@@ -475,6 +501,7 @@ export type GenericMorph =
   | BlogTag
   | ComponentCommonActionButton
   | ComponentHomeHeroImage
+  | ComponentHomeMissionStatement
   | Country
   | Faq
   | HomeContent
@@ -493,6 +520,7 @@ export type GenericMorph =
 export type HomeContent = {
   __typename?: "HomeContent";
   HeroImages?: Maybe<Array<Maybe<ComponentHomeHeroImage>>>;
+  MissionStatement?: Maybe<ComponentHomeMissionStatement>;
   createdAt?: Maybe<Scalars["DateTime"]>;
   publishedAt?: Maybe<Scalars["DateTime"]>;
   updatedAt?: Maybe<Scalars["DateTime"]>;
@@ -517,6 +545,7 @@ export type HomeContentEntityResponse = {
 
 export type HomeContentInput = {
   HeroImages?: InputMaybe<Array<InputMaybe<ComponentHomeHeroImageInput>>>;
+  MissionStatement?: InputMaybe<ComponentHomeMissionStatementInput>;
   publishedAt?: InputMaybe<Scalars["DateTime"]>;
 };
 
@@ -1979,6 +2008,27 @@ export type HomeContentQuery = {
             Link: string;
           } | null> | null;
         } | null> | null;
+        MissionStatement?: {
+          __typename?: "ComponentHomeMissionStatement";
+          id: string;
+          Heading?: string | null;
+          Text?: string | null;
+          Description?: string | null;
+          Image?: {
+            __typename?: "UploadFileEntityResponse";
+            data?: {
+              __typename?: "UploadFileEntity";
+              id?: string | null;
+              attributes?: { __typename?: "UploadFile"; url: string; name: string; size: number } | null;
+            } | null;
+          } | null;
+          ActionButtons?: Array<{
+            __typename?: "ComponentCommonActionButton";
+            id: string;
+            Text: string;
+            Link: string;
+          } | null> | null;
+        } | null;
       } | null;
     } | null;
   } | null;
@@ -2537,6 +2587,62 @@ export const HomeContentDocument = {
                                     },
                                   },
                                   { kind: "Field", name: { kind: "Name", value: "Text" } },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "ActionButtons" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        { kind: "Field", name: { kind: "Name", value: "id" } },
+                                        { kind: "Field", name: { kind: "Name", value: "Text" } },
+                                        { kind: "Field", name: { kind: "Name", value: "Link" } },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "MissionStatement" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  { kind: "Field", name: { kind: "Name", value: "id" } },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "Image" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "data" },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              { kind: "Field", name: { kind: "Name", value: "id" } },
+                                              {
+                                                kind: "Field",
+                                                name: { kind: "Name", value: "attributes" },
+                                                selectionSet: {
+                                                  kind: "SelectionSet",
+                                                  selections: [
+                                                    { kind: "Field", name: { kind: "Name", value: "url" } },
+                                                    { kind: "Field", name: { kind: "Name", value: "name" } },
+                                                    { kind: "Field", name: { kind: "Name", value: "size" } },
+                                                  ],
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                  { kind: "Field", name: { kind: "Name", value: "Heading" } },
+                                  { kind: "Field", name: { kind: "Name", value: "Text" } },
+                                  { kind: "Field", name: { kind: "Name", value: "Description" } },
                                   {
                                     kind: "Field",
                                     name: { kind: "Name", value: "ActionButtons" },
