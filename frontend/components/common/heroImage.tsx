@@ -1,7 +1,7 @@
 import { getStrapiMedia } from "lib/media";
 import Image from "next/image";
-import Link from "next/link";
 import type { ComponentHomeHeroImage } from "../../graphql/generated";
+import { ActionButtonsComponent } from "./actionButtons";
 
 export const HeroImageComponent: React.FC<{ heroImage: ComponentHomeHeroImage }> = ({ heroImage }) => {
   const { Image: ImageData, Text, ActionButtons } = heroImage;
@@ -19,10 +19,6 @@ export const HeroImageComponent: React.FC<{ heroImage: ComponentHomeHeroImage }>
     return { boxShadow, bgColor };
   };
 
-  const getButtonColor = (index: number) => {
-    return index % 2 === 0 ? "primary" : "secondary";
-  };
-
   const { bgColor, boxShadow } = getTextStyles();
 
   return (
@@ -34,14 +30,7 @@ export const HeroImageComponent: React.FC<{ heroImage: ComponentHomeHeroImage }>
           <h1 className="mb-5 text-3xl font-bold text-white ">
             <span style={{ lineHeight: "2em", padding: "6px", boxShadow, background: bgColor }}>{Text}</span>
           </h1>
-          {ActionButtons &&
-            ActionButtons.map(({ id, Link: ButtonLink, Text: ButtonText }, index) => (
-              <Link key={id} href={ButtonLink}>
-                <button className={`btn btn-${getButtonColor(index)} mx-2`} key={id}>
-                  {ButtonText}
-                </button>
-              </Link>
-            ))}
+          {ActionButtons && <ActionButtonsComponent actionButtons={ActionButtons} className="justify-center" />}
         </div>
       </div>
     </div>
