@@ -4,7 +4,7 @@
   "author": "chris@c2dev.co.uk",
   "license": "MIT",
   "scripts": {
-    "start": "next dev",
+    "start": "next dev --turbo",
     "start:prod": "next start",
     "build:analyze": "ANALYZE=true next build && tsc --project tsconfig.server.json",
     "build": "next build",
@@ -17,7 +17,7 @@
     "@sami/shared": "workspace:*",
     "dayjs": "^1.11.2",
     "graphql": "^16.6.0",
-    "next": "^12.3.2",
+    "next": "^13.0.3",
     "pg": "^8.7.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
