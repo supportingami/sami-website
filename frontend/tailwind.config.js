@@ -1,3 +1,5 @@
+const { fontFamily } = require("tailwindcss/defaultTheme");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
@@ -7,6 +9,9 @@ module.exports = {
         "sami-logo": "url('/images/sami-logo.svg') ",
         "sami-logo-no-text": "url('/images/sami-logo-no-text.png')",
         "math-1": "url('/images/bg-math-1.svg')",
+      },
+      fontFamily: {
+        sans: ["var(--font-roboto)", ...fontFamily.sans],
       },
     },
   },

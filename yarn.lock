@@ -2870,6 +2870,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@next/font@npm:^13.0.3":
+  version: 13.0.3
+  resolution: "@next/font@npm:13.0.3"
+  checksum: 1e703a93b14129e147121589cdb3b6b19c2e473077b9fe611676d1913f5302333346cd5e7dcb1b9068aa899cb8386aa31259f58e52ee48ed5c6566ef04de0fec
+  languageName: node
+  linkType: hard
+
 "@next/swc-android-arm-eabi@npm:12.3.1":
   version: 12.3.1
   resolution: "@next/swc-android-arm-eabi@npm:12.3.1"
@@ -11512,6 +11519,7 @@ __metadata:
     "@graphql-codegen/typescript": ^2.7.3
     "@graphql-codegen/typescript-operations": ^2.5.3
     "@next/bundle-analyzer": ^12.3.1
+    "@next/font": ^13.0.3
     "@sami/shared": "workspace:*"
     "@tailwindcss/typography": ^0.5.4
     "@types/next": ^9.0.0
