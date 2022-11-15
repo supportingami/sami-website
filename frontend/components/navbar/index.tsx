@@ -82,7 +82,7 @@ const Navbar = () => {
         </div>
         <Link href="/home">
           <div className={`btn btn-link absolute inset-0 m-2  ${logoSizeClass}`}>
-            <Image src="/images/sami-logo-no-text.svg" layout="fill" alt="home-logo"></Image>
+            <Image sizes="200px, 100px" src="/images/sami-logo-no-text.svg" fill alt="home-logo"></Image>
           </div>
         </Link>
       </div>

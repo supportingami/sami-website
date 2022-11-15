@@ -13,7 +13,7 @@ export const MembersListItemComponent: React.FC<{
         <p className="inset-x-0 bottom-0 absolute text-xl inline w-[210px] leading-[1.6]">{member.Name}</p>
         <div className="inset-x-0 top-0 absolute rounded-lg w-[210px] h-[200px] bottom-[15.44%]">
           {member.Photo && (
-            <Image src={getStrapiMedia(member.Photo)} alt={`${member.Name}`} layout="fill" objectFit="cover" />
+            <Image src={getStrapiMedia(member.Photo)} alt={`${member.Name}`} fill className="object-cover" />
           )}
         </div>
 

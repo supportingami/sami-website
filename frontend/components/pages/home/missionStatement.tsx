@@ -30,5 +30,5 @@ export const MissionStatementComponent: React.FC<ComponentHomeMissionStatement> 
   </>
 );
 const MissionStatementImage = (ImageData: Partial<UploadFileEntityResponse>) => (
-  <Image src={getStrapiMedia(ImageData)} alt={"image"} layout="fill" placeholder="empty" objectFit="cover" />
+  <Image src={getStrapiMedia(ImageData)} alt={"image"} fill placeholder="empty" className="object-cover" />
 );
