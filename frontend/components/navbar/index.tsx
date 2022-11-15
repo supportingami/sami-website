@@ -82,7 +82,7 @@ const Navbar = () => {
         </div>
         <Link href="/home">
           <div className={`btn btn-link absolute inset-0 m-2  ${logoSizeClass}`}>
-            <Image src="/images/sami-logo-no-text.svg" layout="fill"></Image>
+            <Image src="/images/sami-logo-no-text.svg" layout="fill" alt="home-logo"></Image>
           </div>
         </Link>
       </div>
@@ -121,9 +121,7 @@ const Navbar = () => {
     <>
       {pageLinks.map(({ href, label, id }) => (
         <li key={id}>
-          <Link href={href}>
-            <a>{label}</a>
-          </Link>
+          <Link href={href}>{label}</Link>
         </li>
       ))}
     </>

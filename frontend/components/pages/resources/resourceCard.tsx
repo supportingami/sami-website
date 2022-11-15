@@ -7,7 +7,7 @@ export const ResourceCardComponent: React.FC<{
   resource: IResource;
 }> = ({ resource }) => (
   <div style={{ borderWidth: "1px", borderBottom: "1px solid #ddd", maxWidth: "300px" }}>
-    {resource.Image?.data && <Image src={getStrapiMedia(resource.Image)} alt={"image"} height="150px" width="300px" />}
+    {resource.Image?.data && <Image src={getStrapiMedia(resource.Image)} alt={"image"} height="150" width="300" />}
     <div>
       <div>{resource.Title}</div>
     </div>
