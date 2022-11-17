@@ -28,7 +28,7 @@ const HomePage = ({ content }: InferGetServerSidePropsType<typeof getServerSideP
         </PageSection>
       )}
 
-      <PageSection fullwidth className="bg-primary primary-content text-white p-0">
+      <PageSection fullwidth className="bg-primary primary-content text-white">
         (TODO - stats)
       </PageSection>
       <PageSection fullwidth>

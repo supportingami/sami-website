@@ -36,7 +36,7 @@ const ProjectItem = ({ Icon, Description, Title }: ComponentHomeProjectSummaryIt
     <Image src={getStrapiMedia(Icon)} alt={"image"} height={80} width={80} />
     <div className="flex-1">
       <h3>{Title}</h3>
-      <p className="w-96">{Description}</p>
+      <p className="max-w-96">{Description}</p>
     </div>
   </div>
 );
