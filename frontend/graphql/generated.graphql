@@ -221,6 +221,28 @@ input ComponentCommonActionButtonInput {
   id: ID
 }
 
+type ComponentHomeGetInvolved {
+  ActionButtons(
+    filters: ComponentCommonActionButtonFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): [ComponentCommonActionButton]
+  Description: String
+  Image: UploadFileEntityResponse
+  Text: String
+  Title: String
+  id: ID!
+}
+
+input ComponentHomeGetInvolvedInput {
+  ActionButtons: [ComponentCommonActionButtonInput]
+  Description: String
+  Image: ID
+  Text: String
+  Title: String
+  id: ID
+}
+
 type ComponentHomeHeroImage {
   ActionButtons(
     filters: ComponentCommonActionButtonFiltersInput
@@ -504,6 +526,7 @@ union GenericMorph =
   | BlogPost
   | BlogTag
   | ComponentCommonActionButton
+  | ComponentHomeGetInvolved
   | ComponentHomeHeroImage
   | ComponentHomeMissionStatement
   | ComponentHomeProjectSummary
@@ -524,6 +547,7 @@ union GenericMorph =
   | Volunteer
 
 type HomeContent {
+  GetInvolved: ComponentHomeGetInvolved
   HeroImages(
     filters: ComponentHomeHeroImageFiltersInput
     pagination: PaginationArg = {}
@@ -546,6 +570,7 @@ type HomeContentEntityResponse {
 }
 
 input HomeContentInput {
+  GetInvolved: ComponentHomeGetInvolvedInput
   HeroImages: [ComponentHomeHeroImageInput]
   MissionStatement: ComponentHomeMissionStatementInput
   ProjectSummary: ComponentHomeProjectSummaryInput

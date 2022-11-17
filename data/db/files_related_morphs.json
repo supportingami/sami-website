@@ -348,5 +348,12 @@
     "order": 1,
     "related_id": 1,
     "related_type": "home.project-summary"
+  },
+  {
+    "field": "Image",
+    "file_id": 74,
+    "order": 1,
+    "related_id": 1,
+    "related_type": "home.get-involved"
   }
 ]

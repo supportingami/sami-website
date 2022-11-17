@@ -966,5 +966,27 @@
     "updated_by_id": 1,
     "url": "/uploads/sami_projects_cover_50e244c98b.png",
     "width": 3024
+  },
+  {
+    "alternative_text": "sami-map-2020.webp",
+    "caption": "sami-map-2020.webp",
+    "created_at": 1668703904444,
+    "created_by_id": 1,
+    "ext": ".webp",
+    "folder_path": "/6",
+    "formats": "{\"thumbnail\":{\"name\":\"thumbnail_sami-map-2020.webp\",\"hash\":\"thumbnail_sami_map_2020_2ca1c86c5f\",\"ext\":\".webp\",\"mime\":\"image/webp\",\"path\":null,\"width\":154,\"height\":156,\"size\":4.78,\"url\":\"/uploads/thumbnail_sami_map_2020_2ca1c86c5f.webp\"}}",
+    "hash": "sami_map_2020_2ca1c86c5f",
+    "height": 539,
+    "id": 74,
+    "mime": "image/webp",
+    "name": "sami-map-2020.webp",
+    "preview_url": null,
+    "provider": "local",
+    "provider_metadata": null,
+    "size": 40.25,
+    "updated_at": 1668703904444,
+    "updated_by_id": 1,
+    "url": "/uploads/sami_map_2020_2ca1c86c5f.webp",
+    "width": 532
   }
 ]

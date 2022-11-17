@@ -26,6 +26,11 @@
       "type": "component",
       "repeatable": false,
       "component": "home.project-summary"
+    },
+    "GetInvolved": {
+      "type": "component",
+      "repeatable": false,
+      "component": "home.get-involved"
     }
   }
 }

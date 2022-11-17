@@ -4,7 +4,7 @@
     "component_type": "home.hero-image",
     "entity_id": 1,
     "field": "HeroImages",
-    "id": 12,
+    "id": 19,
     "order": 1
   },
   {
@@ -12,7 +12,7 @@
     "component_type": "home.mission-statement",
     "entity_id": 1,
     "field": "MissionStatement",
-    "id": 13,
+    "id": 20,
     "order": 1
   },
   {
@@ -20,7 +20,15 @@
     "component_type": "home.project-summary",
     "entity_id": 1,
     "field": "ProjectSummary",
-    "id": 14,
+    "id": 21,
+    "order": 1
+  },
+  {
+    "component_id": 1,
+    "component_type": "home.get-involved",
+    "entity_id": 1,
+    "field": "GetInvolved",
+    "id": 22,
     "order": 1
   }
 ]
