@@ -21,6 +21,11 @@
       "type": "component",
       "repeatable": false,
       "component": "home.mission-statement"
+    },
+    "ProjectSummary": {
+      "type": "component",
+      "repeatable": false,
+      "component": "home.project-summary"
     }
   }
 }

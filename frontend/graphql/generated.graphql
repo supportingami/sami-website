@@ -269,6 +269,54 @@ input ComponentHomeMissionStatementInput {
   id: ID
 }
 
+type ComponentHomeProjectSummary {
+  ActionButtons(
+    filters: ComponentCommonActionButtonFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): [ComponentCommonActionButton]
+  Image: UploadFileEntityResponse
+  Projects(
+    filters: ComponentHomeProjectSummaryItemFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): [ComponentHomeProjectSummaryItem]
+  Text: String
+  Title: String
+  id: ID!
+}
+
+input ComponentHomeProjectSummaryInput {
+  ActionButtons: [ComponentCommonActionButtonInput]
+  Image: ID
+  Projects: [ComponentHomeProjectSummaryItemInput]
+  Text: String
+  Title: String
+  id: ID
+}
+
+type ComponentHomeProjectSummaryItem {
+  Description: String
+  Icon: UploadFileEntityResponse
+  Title: String
+  id: ID!
+}
+
+input ComponentHomeProjectSummaryItemFiltersInput {
+  Description: StringFilterInput
+  Title: StringFilterInput
+  and: [ComponentHomeProjectSummaryItemFiltersInput]
+  not: ComponentHomeProjectSummaryItemFiltersInput
+  or: [ComponentHomeProjectSummaryItemFiltersInput]
+}
+
+input ComponentHomeProjectSummaryItemInput {
+  Description: String
+  Icon: ID
+  Title: String
+  id: ID
+}
+
 type Country {
   Content: String
   Name: String
@@ -458,6 +506,8 @@ union GenericMorph =
   | ComponentCommonActionButton
   | ComponentHomeHeroImage
   | ComponentHomeMissionStatement
+  | ComponentHomeProjectSummary
+  | ComponentHomeProjectSummaryItem
   | Country
   | Faq
   | HomeContent
@@ -480,6 +530,7 @@ type HomeContent {
     sort: [String] = []
   ): [ComponentHomeHeroImage]
   MissionStatement: ComponentHomeMissionStatement
+  ProjectSummary: ComponentHomeProjectSummary
   createdAt: DateTime
   publishedAt: DateTime
   updatedAt: DateTime
@@ -497,6 +548,7 @@ type HomeContentEntityResponse {
 input HomeContentInput {
   HeroImages: [ComponentHomeHeroImageInput]
   MissionStatement: ComponentHomeMissionStatementInput
+  ProjectSummary: ComponentHomeProjectSummaryInput
   publishedAt: DateTime
 }
 

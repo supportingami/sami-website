@@ -12,18 +12,18 @@ export const MissionStatementComponent: React.FC<ComponentHomeMissionStatement> 
   Image,
 }) => (
   <>
-    <h2 className="subtitle">{Heading}</h2>
-    <div className="flex align-center gap-6">
+    <div data-testid="missionStatement" className="flex align-center gap-32">
       <div className="flex-1">
+        <h2 className="subtitle">{Heading}</h2>
         <h3>{Text}</h3>
         {/* Mobile Image under text (dektop alongside) */}
-        <div className="relative mx-auto mb-6 md:hidden h-[300px] max-w-xs">
+        <div className="relative mx-auto mb-6 lg:hidden w-full h-96 max-w-lg ">
           <MissionStatementImage {...Image} />
         </div>
         <HTMLContent className="mb-6">{Description}</HTMLContent>
         {ActionButtons && <ActionButtonsComponent actionButtons={ActionButtons} />}
       </div>
-      <div className="basis-1/3 relative hidden md:block rounded-md overflow-hidden">
+      <div className="flex-1 relative hidden lg:block rounded-md overflow-hidden">
         <MissionStatementImage {...Image} />
       </div>
     </div>

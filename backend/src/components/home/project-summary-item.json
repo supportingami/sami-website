@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_home_project_summary_items",
+  "info": {
+    "displayName": "ProjectSummaryItem"
+  },
+  "options": {},
+  "attributes": {
+    "Icon": {
+      "allowedTypes": ["images", "files", "videos", "audios"],
+      "type": "media",
+      "multiple": false
+    },
+    "Title": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "text"
+    }
+  }
+}
