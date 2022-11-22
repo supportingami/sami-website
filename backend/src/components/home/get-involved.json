@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_home_get_involveds",
+  "info": {
+    "displayName": "GetInvolved",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Text": {
+      "type": "text"
+    },
+    "Description": {
+      "type": "richtext"
+    },
+    "Image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images", "files", "videos", "audios"]
+    },
+    "ActionButtons": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.action-button"
+    }
+  }
+}

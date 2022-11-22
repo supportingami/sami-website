@@ -18,5 +18,15 @@
     "id": 4,
     "link": "projects",
     "text": "Learn More"
+  },
+  {
+    "id": 5,
+    "link": "volunteer",
+    "text": "Learn More"
+  },
+  {
+    "id": 6,
+    "link": "donate",
+    "text": "Donate"
   }
 ]

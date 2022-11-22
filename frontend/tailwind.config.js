@@ -33,12 +33,17 @@ module.exports = {
         light: {
           ...require("daisyui/src/colors/themes")["[data-theme=light]"],
           primary: "#53b4f4",
+          accent: "#ed1164",
+          "base-200": "#ebf0f9", // off-white
+          "base-300": "#e2faff", // off-blue
         },
       },
       {
         dark: {
           ...require("daisyui/src/colors/themes")["[data-theme=dark]"],
           primary: "#89a9c5",
+          accent: "#9c8fa3",
+          "base-200": "#364359",
         },
       },
 

@@ -4,7 +4,7 @@
     "component_type": "home.project-summary-item",
     "entity_id": 1,
     "field": "Projects",
-    "id": 6,
+    "id": 16,
     "order": 1
   },
   {
@@ -12,7 +12,7 @@
     "component_type": "home.project-summary-item",
     "entity_id": 1,
     "field": "Projects",
-    "id": 7,
+    "id": 17,
     "order": 2
   },
   {
@@ -20,7 +20,7 @@
     "component_type": "home.project-summary-item",
     "entity_id": 1,
     "field": "Projects",
-    "id": 8,
+    "id": 18,
     "order": 3
   },
   {
@@ -28,7 +28,7 @@
     "component_type": "home.project-summary-item",
     "entity_id": 1,
     "field": "Projects",
-    "id": 9,
+    "id": 19,
     "order": 4
   },
   {
@@ -36,7 +36,7 @@
     "component_type": "common.action-button",
     "entity_id": 1,
     "field": "ActionButtons",
-    "id": 10,
+    "id": 20,
     "order": 1
   }
 ]
