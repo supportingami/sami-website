@@ -24,7 +24,7 @@ export const HeroImageComponent: React.FC<{ heroImage: ComponentHomeHeroImage }>
   return (
     <div className="hero min-h-[75vh] relative">
       <div className="hero-overlay bg-opacity-60"></div>
-      <Image src={getStrapiMedia(ImageData)} layout="fill" objectFit="cover" objectPosition="center" alt={Text} />
+      <Image src={getStrapiMedia(ImageData)} className="object-cover object-center" fill alt={Text} priority />
       <div className="hero-content text-center text-neutral-content">
         <div className="max-w-lg">
           <h1 className="mb-5 text-3xl font-bold text-white ">

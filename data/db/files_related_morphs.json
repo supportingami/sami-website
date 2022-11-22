@@ -60,6 +60,13 @@
     "file_id": 37,
     "order": 1,
     "related_id": 1,
+    "related_type": "home.hero-image"
+  },
+  {
+    "field": "Image",
+    "file_id": 37,
+    "order": 1,
+    "related_id": 1,
     "related_type": "components.hero-image"
   },
   {
@@ -68,13 +75,6 @@
     "order": 1,
     "related_id": 2,
     "related_type": "page-content.cover-image"
-  },
-  {
-    "field": "Image",
-    "file_id": 37,
-    "order": 1,
-    "related_id": 1,
-    "related_type": "home.hero-image"
   },
   {
     "field": "FeatureImage",
@@ -313,5 +313,40 @@
     "order": 1,
     "related_id": 1,
     "related_type": "home.mission-statement"
+  },
+  {
+    "field": "Icon",
+    "file_id": 69,
+    "order": 1,
+    "related_id": 1,
+    "related_type": "home.project-summary-item"
+  },
+  {
+    "field": "Icon",
+    "file_id": 70,
+    "order": 1,
+    "related_id": 3,
+    "related_type": "home.project-summary-item"
+  },
+  {
+    "field": "Icon",
+    "file_id": 71,
+    "order": 1,
+    "related_id": 4,
+    "related_type": "home.project-summary-item"
+  },
+  {
+    "field": "Icon",
+    "file_id": 72,
+    "order": 1,
+    "related_id": 2,
+    "related_type": "home.project-summary-item"
+  },
+  {
+    "field": "Image",
+    "file_id": 73,
+    "order": 1,
+    "related_id": 1,
+    "related_type": "home.project-summary"
   }
 ]

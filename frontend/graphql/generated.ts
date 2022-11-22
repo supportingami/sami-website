@@ -314,6 +314,60 @@ export type ComponentHomeMissionStatementInput = {
   id?: InputMaybe<Scalars["ID"]>;
 };
 
+export type ComponentHomeProjectSummary = {
+  __typename?: "ComponentHomeProjectSummary";
+  ActionButtons?: Maybe<Array<Maybe<ComponentCommonActionButton>>>;
+  Image?: Maybe<UploadFileEntityResponse>;
+  Projects?: Maybe<Array<Maybe<ComponentHomeProjectSummaryItem>>>;
+  Text?: Maybe<Scalars["String"]>;
+  Title?: Maybe<Scalars["String"]>;
+  id: Scalars["ID"];
+};
+
+export type ComponentHomeProjectSummaryActionButtonsArgs = {
+  filters?: InputMaybe<ComponentCommonActionButtonFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+};
+
+export type ComponentHomeProjectSummaryProjectsArgs = {
+  filters?: InputMaybe<ComponentHomeProjectSummaryItemFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+};
+
+export type ComponentHomeProjectSummaryInput = {
+  ActionButtons?: InputMaybe<Array<InputMaybe<ComponentCommonActionButtonInput>>>;
+  Image?: InputMaybe<Scalars["ID"]>;
+  Projects?: InputMaybe<Array<InputMaybe<ComponentHomeProjectSummaryItemInput>>>;
+  Text?: InputMaybe<Scalars["String"]>;
+  Title?: InputMaybe<Scalars["String"]>;
+  id?: InputMaybe<Scalars["ID"]>;
+};
+
+export type ComponentHomeProjectSummaryItem = {
+  __typename?: "ComponentHomeProjectSummaryItem";
+  Description?: Maybe<Scalars["String"]>;
+  Icon?: Maybe<UploadFileEntityResponse>;
+  Title?: Maybe<Scalars["String"]>;
+  id: Scalars["ID"];
+};
+
+export type ComponentHomeProjectSummaryItemFiltersInput = {
+  Description?: InputMaybe<StringFilterInput>;
+  Title?: InputMaybe<StringFilterInput>;
+  and?: InputMaybe<Array<InputMaybe<ComponentHomeProjectSummaryItemFiltersInput>>>;
+  not?: InputMaybe<ComponentHomeProjectSummaryItemFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ComponentHomeProjectSummaryItemFiltersInput>>>;
+};
+
+export type ComponentHomeProjectSummaryItemInput = {
+  Description?: InputMaybe<Scalars["String"]>;
+  Icon?: InputMaybe<Scalars["ID"]>;
+  Title?: InputMaybe<Scalars["String"]>;
+  id?: InputMaybe<Scalars["ID"]>;
+};
+
 export type Country = {
   __typename?: "Country";
   Content?: Maybe<Scalars["String"]>;
@@ -502,6 +556,8 @@ export type GenericMorph =
   | ComponentCommonActionButton
   | ComponentHomeHeroImage
   | ComponentHomeMissionStatement
+  | ComponentHomeProjectSummary
+  | ComponentHomeProjectSummaryItem
   | Country
   | Faq
   | HomeContent
@@ -521,6 +577,7 @@ export type HomeContent = {
   __typename?: "HomeContent";
   HeroImages?: Maybe<Array<Maybe<ComponentHomeHeroImage>>>;
   MissionStatement?: Maybe<ComponentHomeMissionStatement>;
+  ProjectSummary?: Maybe<ComponentHomeProjectSummary>;
   createdAt?: Maybe<Scalars["DateTime"]>;
   publishedAt?: Maybe<Scalars["DateTime"]>;
   updatedAt?: Maybe<Scalars["DateTime"]>;
@@ -546,6 +603,7 @@ export type HomeContentEntityResponse = {
 export type HomeContentInput = {
   HeroImages?: InputMaybe<Array<InputMaybe<ComponentHomeHeroImageInput>>>;
   MissionStatement?: InputMaybe<ComponentHomeMissionStatementInput>;
+  ProjectSummary?: InputMaybe<ComponentHomeProjectSummaryInput>;
   publishedAt?: InputMaybe<Scalars["DateTime"]>;
 };
 
@@ -2029,6 +2087,40 @@ export type HomeContentQuery = {
             Link: string;
           } | null> | null;
         } | null;
+        ProjectSummary?: {
+          __typename?: "ComponentHomeProjectSummary";
+          id: string;
+          Title?: string | null;
+          Text?: string | null;
+          Image?: {
+            __typename?: "UploadFileEntityResponse";
+            data?: {
+              __typename?: "UploadFileEntity";
+              id?: string | null;
+              attributes?: { __typename?: "UploadFile"; url: string; name: string; size: number } | null;
+            } | null;
+          } | null;
+          ActionButtons?: Array<{
+            __typename?: "ComponentCommonActionButton";
+            id: string;
+            Text: string;
+            Link: string;
+          } | null> | null;
+          Projects?: Array<{
+            __typename?: "ComponentHomeProjectSummaryItem";
+            id: string;
+            Title?: string | null;
+            Description?: string | null;
+            Icon?: {
+              __typename?: "UploadFileEntityResponse";
+              data?: {
+                __typename?: "UploadFileEntity";
+                id?: string | null;
+                attributes?: { __typename?: "UploadFile"; url: string; name: string; size: number } | null;
+              } | null;
+            } | null;
+          } | null> | null;
+        } | null;
       } | null;
     } | null;
   } | null;
@@ -2652,6 +2744,104 @@ export const HomeContentDocument = {
                                         { kind: "Field", name: { kind: "Name", value: "id" } },
                                         { kind: "Field", name: { kind: "Name", value: "Text" } },
                                         { kind: "Field", name: { kind: "Name", value: "Link" } },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "ProjectSummary" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  { kind: "Field", name: { kind: "Name", value: "id" } },
+                                  { kind: "Field", name: { kind: "Name", value: "Title" } },
+                                  { kind: "Field", name: { kind: "Name", value: "Text" } },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "Image" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "data" },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              { kind: "Field", name: { kind: "Name", value: "id" } },
+                                              {
+                                                kind: "Field",
+                                                name: { kind: "Name", value: "attributes" },
+                                                selectionSet: {
+                                                  kind: "SelectionSet",
+                                                  selections: [
+                                                    { kind: "Field", name: { kind: "Name", value: "url" } },
+                                                    { kind: "Field", name: { kind: "Name", value: "name" } },
+                                                    { kind: "Field", name: { kind: "Name", value: "size" } },
+                                                  ],
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "ActionButtons" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        { kind: "Field", name: { kind: "Name", value: "id" } },
+                                        { kind: "Field", name: { kind: "Name", value: "Text" } },
+                                        { kind: "Field", name: { kind: "Name", value: "Link" } },
+                                      ],
+                                    },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "Projects" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        { kind: "Field", name: { kind: "Name", value: "id" } },
+                                        { kind: "Field", name: { kind: "Name", value: "Title" } },
+                                        { kind: "Field", name: { kind: "Name", value: "Description" } },
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "Icon" },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              {
+                                                kind: "Field",
+                                                name: { kind: "Name", value: "data" },
+                                                selectionSet: {
+                                                  kind: "SelectionSet",
+                                                  selections: [
+                                                    { kind: "Field", name: { kind: "Name", value: "id" } },
+                                                    {
+                                                      kind: "Field",
+                                                      name: { kind: "Name", value: "attributes" },
+                                                      selectionSet: {
+                                                        kind: "SelectionSet",
+                                                        selections: [
+                                                          { kind: "Field", name: { kind: "Name", value: "url" } },
+                                                          { kind: "Field", name: { kind: "Name", value: "name" } },
+                                                          { kind: "Field", name: { kind: "Name", value: "size" } },
+                                                        ],
+                                                      },
+                                                    },
+                                                  ],
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
                                       ],
                                     },
                                   },

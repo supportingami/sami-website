@@ -17,7 +17,7 @@
   },
   {
     "name": "components_common_action_buttons",
-    "seq": 3
+    "seq": 4
   },
   {
     "name": "components_home_hero_images",
@@ -25,7 +25,7 @@
   },
   {
     "name": "components_home_hero_images_components",
-    "seq": 7
+    "seq": 11
   },
   {
     "name": "components_home_mission_statements",
@@ -33,7 +33,19 @@
   },
   {
     "name": "components_home_mission_statements_components",
+    "seq": 3
+  },
+  {
+    "name": "components_home_project_summaries",
     "seq": 1
+  },
+  {
+    "name": "components_home_project_summaries_components",
+    "seq": 10
+  },
+  {
+    "name": "components_home_project_summary_items",
+    "seq": 4
   },
   {
     "name": "countries",
@@ -45,7 +57,7 @@
   },
   {
     "name": "files",
-    "seq": 68
+    "seq": 73
   },
   {
     "name": "home_contents",
@@ -53,7 +65,7 @@
   },
   {
     "name": "home_contents_components",
-    "seq": 8
+    "seq": 14
   },
   {
     "name": "members",

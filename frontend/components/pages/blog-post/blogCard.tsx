@@ -10,14 +10,16 @@ export const BlogCardComponent: React.FC<{
 }> = ({ blog }) => (
   <div className="relative flex flex-col justify-start items-start min-h-full max-h-full font-sans rounded border-gray-200 shadow-md">
     {blog.FeatureImage && (
-      <Image
-        src={getStrapiMedia(blog.FeatureImage)}
-        alt={"image"}
-        height={200}
-        width={320}
-        placeholder="empty"
-        objectFit="cover"
-      />
+      <div className="relative h-48 w-full">
+        <Image
+          src={getStrapiMedia(blog.FeatureImage)}
+          alt={"image"}
+          fill
+          sizes="320"
+          placeholder="empty"
+          className="object-cover"
+        />
+      </div>
     )}
     <div className="capitalize text-left font-semibold p-2 pt-4 leading-4">
       <div className="text-lg">{blog.Title}</div>

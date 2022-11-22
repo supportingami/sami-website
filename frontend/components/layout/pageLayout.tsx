@@ -1,5 +1,9 @@
-const PageLayout = ({ children }) => {
-  return <div className="sm:container mx-auto flex-1 py-10">{children}</div>;
+const PageLayout = ({ children, className = "" }) => {
+  return (
+    <div data-testid="pageLayout" className={`container mx-auto py-10 ${className}`}>
+      {children}
+    </div>
+  );
 };
 
 export default PageLayout;

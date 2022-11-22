@@ -1,8 +1,8 @@
 import Navbar from "components/navbar";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, className = "" }) => {
   return (
-    <div data-cy="layout-container" className="flex flex-col w-100">
+    <div data-cy="layout-container" className={`flex flex-col w-100 ${className}`}>
       <Navbar />
       <div className="flex-1">{children}</div>
     </div>

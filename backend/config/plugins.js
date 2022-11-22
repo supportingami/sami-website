@@ -5,7 +5,7 @@ module.exports = ({ env }) => ({
       endpoint: "/graphql",
       shadowCRUD: true,
       playgroundAlways: false,
-      depthLimit: 7,
+      depthLimit: 9,
       amountLimit: 100,
       defaultLimit: -1, // default do not paginate and return all results
       apolloServer: {

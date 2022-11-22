@@ -43,6 +43,41 @@ query homeContent {
             Link
           }
         }
+        ProjectSummary {
+          id
+          Title
+          Text
+          Image {
+            data {
+              id
+              attributes {
+                url
+                name
+                size
+              }
+            }
+          }
+          ActionButtons {
+            id
+            Text
+            Link
+          }
+          Projects {
+            id
+            Title
+            Description
+            Icon {
+              data {
+                id
+                attributes {
+                  url
+                  name
+                  size
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
