@@ -4,7 +4,15 @@
     "component_type": "home.hero-image",
     "entity_id": 1,
     "field": "HeroImages",
-    "id": 4,
+    "id": 7,
+    "order": 1
+  },
+  {
+    "component_id": 1,
+    "component_type": "home.mission-statement",
+    "entity_id": 1,
+    "field": "MissionStatement",
+    "id": 8,
     "order": 1
   }
 ]

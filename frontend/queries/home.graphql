@@ -22,6 +22,27 @@ query homeContent {
             Link
           }
         }
+        MissionStatement {
+          id
+          Image {
+            data {
+              id
+              attributes {
+                url
+                name
+                size
+              }
+            }
+          }
+          Heading
+          Text
+          Description
+          ActionButtons {
+            id
+            Text
+            Link
+          }
+        }
       }
     }
   }

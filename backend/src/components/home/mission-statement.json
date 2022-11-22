@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_home_mission_statements",
+  "info": {
+    "displayName": "MissionStatement",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images", "files", "videos", "audios"]
+    },
+    "Text": {
+      "type": "text"
+    },
+    "Heading": {
+      "type": "string"
+    },
+    "ActionButtons": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.action-button"
+    },
+    "Description": {
+      "type": "richtext"
+    }
+  }
+}

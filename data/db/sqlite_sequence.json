@@ -17,7 +17,7 @@
   },
   {
     "name": "components_common_action_buttons",
-    "seq": 2
+    "seq": 3
   },
   {
     "name": "components_home_hero_images",
@@ -25,7 +25,15 @@
   },
   {
     "name": "components_home_hero_images_components",
-    "seq": 3
+    "seq": 7
+  },
+  {
+    "name": "components_home_mission_statements",
+    "seq": 1
+  },
+  {
+    "name": "components_home_mission_statements_components",
+    "seq": 1
   },
   {
     "name": "countries",
@@ -37,7 +45,7 @@
   },
   {
     "name": "files",
-    "seq": 50
+    "seq": 68
   },
   {
     "name": "home_contents",
@@ -45,7 +53,7 @@
   },
   {
     "name": "home_contents_components",
-    "seq": 4
+    "seq": 8
   },
   {
     "name": "members",
@@ -65,7 +73,7 @@
   },
   {
     "name": "upload_folders",
-    "seq": 6
+    "seq": 7
   },
   {
     "name": "volunteers",

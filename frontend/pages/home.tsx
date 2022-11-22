@@ -4,7 +4,9 @@ import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "nex
 import { serverQuery } from "lib/graphql";
 import type { HomeContentQuery } from "../graphql/generated";
 import { HomeContentDocument } from "../graphql/generated";
+import PageLayout from "components/layout/pageLayout";
 import { HeroImageComponent } from "components/common/heroImage";
+import { MissionStatementComponent } from "components/pages/home/missionStatement";
 
 export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
   const res = await serverQuery<HomeContentQuery>(HomeContentDocument);
@@ -18,7 +20,9 @@ const HomePage = ({ content }: InferGetServerSidePropsType<typeof getServerSideP
     </Head>
     <>
       {content.HeroImages?.[0] && <HeroImageComponent heroImage={content.HeroImages[0] as any} />}
-      <h2>Our Mission</h2>
+      <PageLayout>
+        {content.MissionStatement && <MissionStatementComponent {...(content.MissionStatement as any)} />}
+      </PageLayout>
     </>
   </>
 );

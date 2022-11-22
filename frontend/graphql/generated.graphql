@@ -247,6 +247,28 @@ input ComponentHomeHeroImageInput {
   id: ID
 }
 
+type ComponentHomeMissionStatement {
+  ActionButtons(
+    filters: ComponentCommonActionButtonFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): [ComponentCommonActionButton]
+  Description: String
+  Heading: String
+  Image: UploadFileEntityResponse
+  Text: String
+  id: ID!
+}
+
+input ComponentHomeMissionStatementInput {
+  ActionButtons: [ComponentCommonActionButtonInput]
+  Description: String
+  Heading: String
+  Image: ID
+  Text: String
+  id: ID
+}
+
 type Country {
   Content: String
   Name: String
@@ -355,6 +377,7 @@ input DateTimeFilterInput {
 enum ENUM_MEMBER_ORGANISATION {
   AMI
   SAMI
+  SAMI_Trustees
 }
 
 type Faq {
@@ -434,6 +457,7 @@ union GenericMorph =
   | BlogTag
   | ComponentCommonActionButton
   | ComponentHomeHeroImage
+  | ComponentHomeMissionStatement
   | Country
   | Faq
   | HomeContent
@@ -455,6 +479,7 @@ type HomeContent {
     pagination: PaginationArg = {}
     sort: [String] = []
   ): [ComponentHomeHeroImage]
+  MissionStatement: ComponentHomeMissionStatement
   createdAt: DateTime
   publishedAt: DateTime
   updatedAt: DateTime
@@ -471,6 +496,7 @@ type HomeContentEntityResponse {
 
 input HomeContentInput {
   HeroImages: [ComponentHomeHeroImageInput]
+  MissionStatement: ComponentHomeMissionStatementInput
   publishedAt: DateTime
 }
 

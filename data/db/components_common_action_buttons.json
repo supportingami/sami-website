@@ -8,5 +8,10 @@
     "id": 2,
     "link": "/volunteer",
     "text": "Ways To Help"
+  },
+  {
+    "id": 3,
+    "link": "#",
+    "text": "Learn More"
   }
 ]
