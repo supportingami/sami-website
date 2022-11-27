@@ -314,6 +314,46 @@ export type ComponentHomeHeroImageInput = {
   id?: InputMaybe<Scalars["ID"]>;
 };
 
+export type ComponentHomeImpactNumbers = {
+  __typename?: "ComponentHomeImpactNumbers";
+  Number?: Maybe<Scalars["String"]>;
+  Title?: Maybe<Scalars["String"]>;
+  id: Scalars["ID"];
+};
+
+export type ComponentHomeImpactNumbersFiltersInput = {
+  Number?: InputMaybe<StringFilterInput>;
+  Title?: InputMaybe<StringFilterInput>;
+  and?: InputMaybe<Array<InputMaybe<ComponentHomeImpactNumbersFiltersInput>>>;
+  not?: InputMaybe<ComponentHomeImpactNumbersFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ComponentHomeImpactNumbersFiltersInput>>>;
+};
+
+export type ComponentHomeImpactNumbersInput = {
+  Number?: InputMaybe<Scalars["String"]>;
+  Title?: InputMaybe<Scalars["String"]>;
+  id?: InputMaybe<Scalars["ID"]>;
+};
+
+export type ComponentHomeImpactSection = {
+  __typename?: "ComponentHomeImpactSection";
+  ImpactNumbers?: Maybe<Array<Maybe<ComponentHomeImpactNumbers>>>;
+  Statement?: Maybe<Scalars["String"]>;
+  id: Scalars["ID"];
+};
+
+export type ComponentHomeImpactSectionImpactNumbersArgs = {
+  filters?: InputMaybe<ComponentHomeImpactNumbersFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+};
+
+export type ComponentHomeImpactSectionInput = {
+  ImpactNumbers?: InputMaybe<Array<InputMaybe<ComponentHomeImpactNumbersInput>>>;
+  Statement?: InputMaybe<Scalars["String"]>;
+  id?: InputMaybe<Scalars["ID"]>;
+};
+
 export type ComponentHomeMissionStatement = {
   __typename?: "ComponentHomeMissionStatement";
   ActionButtons?: Maybe<Array<Maybe<ComponentCommonActionButton>>>;
@@ -581,6 +621,8 @@ export type GenericMorph =
   | ComponentCommonActionButton
   | ComponentHomeGetInvolved
   | ComponentHomeHeroImage
+  | ComponentHomeImpactNumbers
+  | ComponentHomeImpactSection
   | ComponentHomeMissionStatement
   | ComponentHomeProjectSummary
   | ComponentHomeProjectSummaryItem
@@ -603,6 +645,7 @@ export type HomeContent = {
   __typename?: "HomeContent";
   GetInvolved?: Maybe<ComponentHomeGetInvolved>;
   HeroImages?: Maybe<Array<Maybe<ComponentHomeHeroImage>>>;
+  ImpactSection?: Maybe<ComponentHomeImpactSection>;
   MissionStatement?: Maybe<ComponentHomeMissionStatement>;
   ProjectSummary?: Maybe<ComponentHomeProjectSummary>;
   createdAt?: Maybe<Scalars["DateTime"]>;
@@ -630,6 +673,7 @@ export type HomeContentEntityResponse = {
 export type HomeContentInput = {
   GetInvolved?: InputMaybe<ComponentHomeGetInvolvedInput>;
   HeroImages?: InputMaybe<Array<InputMaybe<ComponentHomeHeroImageInput>>>;
+  ImpactSection?: InputMaybe<ComponentHomeImpactSectionInput>;
   MissionStatement?: InputMaybe<ComponentHomeMissionStatementInput>;
   ProjectSummary?: InputMaybe<ComponentHomeProjectSummaryInput>;
   publishedAt?: InputMaybe<Scalars["DateTime"]>;
@@ -2170,6 +2214,17 @@ export type HomeContentQuery = {
             Link: string;
           } | null> | null;
         } | null;
+        ImpactSection?: {
+          __typename?: "ComponentHomeImpactSection";
+          id: string;
+          Statement?: string | null;
+          ImpactNumbers?: Array<{
+            __typename?: "ComponentHomeImpactNumbers";
+            id: string;
+            Number?: string | null;
+            Title?: string | null;
+          } | null> | null;
+        } | null;
       } | null;
     } | null;
   } | null;
@@ -2947,6 +3002,29 @@ export const HomeContentDocument = {
                                         { kind: "Field", name: { kind: "Name", value: "id" } },
                                         { kind: "Field", name: { kind: "Name", value: "Text" } },
                                         { kind: "Field", name: { kind: "Name", value: "Link" } },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "ImpactSection" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  { kind: "Field", name: { kind: "Name", value: "id" } },
+                                  { kind: "Field", name: { kind: "Name", value: "Statement" } },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "ImpactNumbers" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        { kind: "Field", name: { kind: "Name", value: "id" } },
+                                        { kind: "Field", name: { kind: "Name", value: "Number" } },
+                                        { kind: "Field", name: { kind: "Name", value: "Title" } },
                                       ],
                                     },
                                   },

@@ -9,6 +9,7 @@ import { MissionStatementComponent } from "components/pages/home/missionStatemen
 import PageSection from "components/layout/pageSection";
 import { ProjectSummaryComponent } from "components/pages/home/ProjectSummary";
 import { GetInvolvedComponent } from "components/pages/home/getInvolved";
+import { ImpactSectionComponent } from "components/pages/home/ImpactSection";
 
 export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
   const res = await serverQuery<HomeContentQuery>(HomeContentDocument);
@@ -28,9 +29,8 @@ const HomePage = ({ content }: InferGetServerSidePropsType<typeof getServerSideP
           <MissionStatementComponent {...(content.MissionStatement as any)} />
         </PageSection>
       )}
-
-      <PageSection fullwidth className="bg-primary primary-content text-white py-16">
-        (TODO - stats)
+      <PageSection fullwidth className="bg-primary primary-content text-white py-8">
+        {content.ImpactSection && <ImpactSectionComponent {...(content.ImpactSection as any)} />}
       </PageSection>
       <PageSection className="py-16">
         {content.ProjectSummary && <ProjectSummaryComponent {...(content.ProjectSummary as any)} />}
