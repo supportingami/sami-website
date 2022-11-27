@@ -8,9 +8,9 @@ import dayjs from "dayjs";
 export const BlogCardComponent: React.FC<{
   blog: IBlogPost;
 }> = ({ blog }) => (
-  <div className="relative flex flex-col justify-start items-start min-h-full max-h-full font-sans rounded border-gray-200 shadow-md">
+  <div className="relative flex flex-col justify-start items-start min-h-full max-h-full font-sans">
     {blog.FeatureImage && (
-      <div className="relative h-48 w-full">
+      <div className="relative h-48 w-full rounded-lg">
         <Image
           src={getStrapiMedia(blog.FeatureImage)}
           alt={"image"}
@@ -29,7 +29,9 @@ export const BlogCardComponent: React.FC<{
       </div>
     </div>
     <div data-cy="blog-summary" className="py-2 px-2 relative flex-1 flex flex-col">
-      <div className="pt-0 text-sm overflow-ellipsis overflow-hidden max-h-20 relative">{blog.Summary}</div>
+      <div className="pt-0 text-sm overflow-ellipsis overflow-hidden max-h-20 relative text-gray-500">
+        {blog.Summary}
+      </div>
       <div className="min-h-30 pt-2 mt-auto">
         <button className="text-center text-sm font-semibold bg-blue-600 py-2 px-4 rounded text-white ">
           <a href={`/blog-posts/${blog.Title}`}>Read More</a>
