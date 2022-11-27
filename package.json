@@ -9,7 +9,7 @@
     "shared"
   ],
   "scripts": {
-    "build": "yarn workspace backend start & yarn workspace frontend build",
+    "build": "yarn build:frontend",
     "build:frontend": "yarn workspace frontend build",
     "deploy": "npx vercel",
     "export:frontend": "yarn workspace frontend export",
