@@ -58,7 +58,7 @@ const HomePage = ({ content, blogs }: InferGetServerSidePropsType<typeof getServ
       </PageSection>
       <PageSection className="py-16">
         <div className="grid grid-cols-1 gap-5 2xl:grid-cols-3 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2">
-          {blogs && blogs.slice(0,3).map((blog) => <BlogCardComponent key={blog.id} blog={blog} />)}
+          {blogs && blogs.slice(0, 3).map((blog) => <BlogCardComponent key={blog.id} blog={blog} />)}
         </div>
       </PageSection>
       <PageSection fullwidth className="bg-accent text-white py-0">
