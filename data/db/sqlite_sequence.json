@@ -25,7 +25,7 @@
   },
   {
     "name": "components_home_get_involveds_components",
-    "seq": 3
+    "seq": 5
   },
   {
     "name": "components_home_hero_images",
@@ -33,7 +33,19 @@
   },
   {
     "name": "components_home_hero_images_components",
-    "seq": 15
+    "seq": 17
+  },
+  {
+    "name": "components_home_impact_numbers",
+    "seq": 4
+  },
+  {
+    "name": "components_home_impact_sections",
+    "seq": 1
+  },
+  {
+    "name": "components_home_impact_sections_components",
+    "seq": 4
   },
   {
     "name": "components_home_mission_statements",
@@ -41,7 +53,7 @@
   },
   {
     "name": "components_home_mission_statements_components",
-    "seq": 5
+    "seq": 6
   },
   {
     "name": "components_home_project_summaries",
@@ -49,7 +61,7 @@
   },
   {
     "name": "components_home_project_summaries_components",
-    "seq": 20
+    "seq": 25
   },
   {
     "name": "components_home_project_summary_items",
@@ -73,7 +85,7 @@
   },
   {
     "name": "home_contents_components",
-    "seq": 22
+    "seq": 27
   },
   {
     "name": "members",
