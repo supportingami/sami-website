@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_home_impact_sections",
+  "info": {
+    "displayName": "ImpactSection",
+    "icon": "medal"
+  },
+  "options": {},
+  "attributes": {
+    "Statement": {
+      "type": "text"
+    },
+    "ImpactNumbers": {
+      "displayName": "ImpactNumbers",
+      "type": "component",
+      "repeatable": true,
+      "component": "home.impact-numbers"
+    }
+  }
+}

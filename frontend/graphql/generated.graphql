@@ -269,6 +269,42 @@ input ComponentHomeHeroImageInput {
   id: ID
 }
 
+type ComponentHomeImpactNumbers {
+  Number: String
+  Title: String
+  id: ID!
+}
+
+input ComponentHomeImpactNumbersFiltersInput {
+  Number: StringFilterInput
+  Title: StringFilterInput
+  and: [ComponentHomeImpactNumbersFiltersInput]
+  not: ComponentHomeImpactNumbersFiltersInput
+  or: [ComponentHomeImpactNumbersFiltersInput]
+}
+
+input ComponentHomeImpactNumbersInput {
+  Number: String
+  Title: String
+  id: ID
+}
+
+type ComponentHomeImpactSection {
+  ImpactNumbers(
+    filters: ComponentHomeImpactNumbersFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): [ComponentHomeImpactNumbers]
+  Statement: String
+  id: ID!
+}
+
+input ComponentHomeImpactSectionInput {
+  ImpactNumbers: [ComponentHomeImpactNumbersInput]
+  Statement: String
+  id: ID
+}
+
 type ComponentHomeMissionStatement {
   ActionButtons(
     filters: ComponentCommonActionButtonFiltersInput
@@ -528,6 +564,8 @@ union GenericMorph =
   | ComponentCommonActionButton
   | ComponentHomeGetInvolved
   | ComponentHomeHeroImage
+  | ComponentHomeImpactNumbers
+  | ComponentHomeImpactSection
   | ComponentHomeMissionStatement
   | ComponentHomeProjectSummary
   | ComponentHomeProjectSummaryItem
@@ -553,6 +591,7 @@ type HomeContent {
     pagination: PaginationArg = {}
     sort: [String] = []
   ): [ComponentHomeHeroImage]
+  ImpactSection: ComponentHomeImpactSection
   MissionStatement: ComponentHomeMissionStatement
   ProjectSummary: ComponentHomeProjectSummary
   createdAt: DateTime
@@ -572,6 +611,7 @@ type HomeContentEntityResponse {
 input HomeContentInput {
   GetInvolved: ComponentHomeGetInvolvedInput
   HeroImages: [ComponentHomeHeroImageInput]
+  ImpactSection: ComponentHomeImpactSectionInput
   MissionStatement: ComponentHomeMissionStatementInput
   ProjectSummary: ComponentHomeProjectSummaryInput
   publishedAt: DateTime
