@@ -49,7 +49,7 @@ let loadedEnv: IBackendEnv;
 /**
  *
  */
-export async function getBackendEnv() {
+export async function getBackendEnv(envName?: string) {
   if (!loadedEnv) {
     // configure environment in same way as when running from backend
     // select env from env files
@@ -66,14 +66,20 @@ export async function getBackendEnv() {
     if (envFiles.length === 0) {
       throw new Error("No .env files populated\n" + envDir);
     }
-    // Pick the .env file to use. Will prompt selection if more than 1 file available
-    loadedEnv = envFiles[0].value;
-    if (envFiles.length > 1) {
-      const { selected } = await prompt([
-        { type: "list", choices: envFiles, message: "Select environment", name: "selected" },
-      ]);
-      loadedEnv = selected;
+    if (envName) {
+      loadedEnv = envFiles.find((f) => f.name === envName).value;
     }
+    // If envName not specified or found, prompt env selection
+    if (!loadedEnv) {
+      loadedEnv = envFiles[0].value;
+      if (envFiles.length > 1) {
+        const { selected } = await prompt([
+          { type: "list", choices: envFiles, message: "Select environment", name: "selected" },
+        ]);
+        loadedEnv = selected;
+      }
+    }
+
     const { envPath } = loadedEnv;
     // populate selected .env to global environment
     process.env.ENV_PATH = envPath;

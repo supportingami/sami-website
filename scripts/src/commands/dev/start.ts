@@ -10,11 +10,18 @@ import { getBackendEnv, getFrontendEnv } from "../../utils";
  * CLI
  * @example yarn
  *************************************************************************************/
+interface IProgramOptions {
+  /** Name of environment to use */
+  env?: string;
+}
 
 const program = new Command("start");
-export default program.description("Start local development server").action(async () => {
-  return new StartCmd().run().then(() => process.exit(0));
-});
+export default program
+  .description("Start local development server")
+  .option("-e --env <string>", "name of environment to use")
+  .action(async (options: IProgramOptions) => {
+    return new StartCmd(options).run().then(() => process.exit(0));
+  });
 
 /***************************************************************************************
  * Main Methods
@@ -26,8 +33,10 @@ export default program.description("Start local development server").action(asyn
 class StartCmd {
   allCommands = [];
 
+  constructor(private options: IProgramOptions = {}) {}
+
   public async run() {
-    const backendEnv = await getBackendEnv();
+    const backendEnv = await getBackendEnv(this.options.env);
     const frontendEnv = getFrontendEnv();
     const backendStart = this.getBackendStartCommand(backendEnv);
     const frontendStart = this.getFrontendCommand(backendEnv, frontendEnv);

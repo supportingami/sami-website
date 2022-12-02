@@ -54,3 +54,17 @@ Render backend with sqlite db
 https://github.com/render-examples/strapi-sqlite
 
 Alternatively a single vm could run all components together in a single docker container
+
+## Dokku
+
+```
+ssh dokku@dokku.c2dev.co.uk apps:create sami-website
+```
+
+```
+git remote add dokku dokku@dokku.c2dev.co.uk:sami-website
+```
+
+```
+git push dokku backend/dokku-build:master --no-verify
+```
