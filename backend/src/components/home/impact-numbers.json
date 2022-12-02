@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_home_impact_numbers",
+  "info": {
+    "displayName": "ImpactNumbers"
+  },
+  "options": {},
+  "attributes": {
+    "Number": {
+      "type": "string"
+    },
+    "Title": {
+      "type": "string"
+    }
+  }
+}

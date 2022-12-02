@@ -4,7 +4,7 @@
     "component_type": "common.action-button",
     "entity_id": 1,
     "field": "ActionButtons",
-    "id": 14,
+    "id": 16,
     "order": 1
   },
   {
@@ -12,7 +12,7 @@
     "component_type": "common.action-button",
     "entity_id": 1,
     "field": "ActionButtons",
-    "id": 15,
+    "id": 17,
     "order": 2
   }
 ]

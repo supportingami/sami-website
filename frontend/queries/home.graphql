@@ -99,6 +99,15 @@ query homeContent {
             Link
           }
         }
+        ImpactSection {
+          id
+          Statement
+          ImpactNumbers {
+            id
+            Number
+            Title
+          }
+        }
       }
     }
   }

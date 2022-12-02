@@ -1,3 +1,4 @@
+import { spawnSync } from "child_process";
 import { Command } from "commander";
 import { emptyDirSync, ensureDirSync, writeFileSync } from "fs-extra";
 import path from "path";
@@ -25,23 +26,25 @@ class DBExport {
   }
 
   public async run() {
-    // setup folders
-    const outputDir = path.resolve(PATHS.dataDir, "db");
-    ensureDirSync(outputDir);
-    emptyDirSync(outputDir);
-
     // query list of all tables
     this.db = await getDB();
     const allTables = await listDBTables(this.db);
 
     // filter only to include content-generated tables
     const exportedTables = allTables.filter((name) => shouldIncludeTableInExport(name)).sort();
+
+    // setup folders
+    const outputDir = path.resolve(PATHS.dataDir, "db");
+    ensureDirSync(outputDir);
+    emptyDirSync(outputDir);
+
     // export
     for (const name of exportedTables) {
       await this.exportTableData(name, outputDir);
     }
 
-    console.log("export complete");
+    console.log("export complete, cleaning outputs");
+    spawnSync(`yarn format:style`, { shell: true, stdio: "inherit", cwd: PATHS.rootDir });
   }
 
   private async exportTableData(name: string, outputDir: string) {
@@ -79,15 +82,28 @@ class DBExport {
     return rows;
   }
 
-  /** Sort export data by preferred key (most use id, file_id or seq) */
+  /**
+   * Sort export data by preferred key (most use id, file_id or seq)
+   * Optionally include secondary and tertiary keys for finer sorting
+   */
   private sortRows(table: string, rows: any[]) {
     const columns = Object.keys(rows[0]);
-    const sortKey = getSortKey();
-    return rows.sort((a, b) => (a[sortKey] > b[sortKey] ? 1 : -1));
-    function getSortKey() {
-      if (table === "sqlite_sequence") return "name";
-      if (columns.includes("id")) return "id";
-      if (columns.includes("file_id")) return "file_id";
+    const [primaryKey, secondaryKey, tertiaryKey] = getSortKeys();
+    return rows.sort((a, b) => {
+      if (a[primaryKey] === b[primaryKey] && secondaryKey) {
+        if (a[secondaryKey] === b[secondaryKey] && tertiaryKey) {
+          return a[tertiaryKey] > b[tertiaryKey] ? 1 : -1;
+        }
+        return a[secondaryKey] > b[secondaryKey] ? 1 : -1;
+      }
+      return a[primaryKey] > b[primaryKey] ? 1 : -1;
+    });
+
+    function getSortKeys() {
+      if (table === "sqlite_sequence") return ["name"];
+      if (table === "files_related_morphs") return ["file_id", "related_type", "related_id"];
+      if (columns.includes("id")) return ["id"];
+      if (columns.includes("file_id")) return ["file_id"];
       return columns[0];
     }
   }
