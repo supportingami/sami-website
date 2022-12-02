@@ -16,6 +16,7 @@ export const PATHS = {
   docsDir,
   frontendDir,
   scriptsDir,
+  rootDir,
   sharedDir,
   wpInputDir,
   wpOutputDir,

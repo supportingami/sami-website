@@ -1,3 +1,4 @@
+import { spawnSync } from "child_process";
 import { Command } from "commander";
 import { emptyDirSync, ensureDirSync, writeFileSync } from "fs-extra";
 import path from "path";
@@ -41,7 +42,8 @@ class DBExport {
       await this.exportTableData(name, outputDir);
     }
 
-    console.log("export complete");
+    console.log("export complete, cleaning outputs");
+    spawnSync(`yarn format:style`, { shell: true, stdio: "inherit", cwd: PATHS.rootDir });
   }
 
   private async exportTableData(name: string, outputDir: string) {
