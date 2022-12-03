@@ -1,26 +1,18 @@
 query projects {
-  projects {
+  projectTypes {
     data {
       id
       attributes {
-        Title
-        Summary
-        ProjectTypes {
+        Name
+        Content
+        HomeSummary
+        Icon {
           data {
             id
             attributes {
-              Name
-              Content
-              Summary
-            }
-          }
-        }
-        Country {
-          data {
-            id
-            attributes {
-              Name
-              Content
+              url
+              name
+              size
             }
           }
         }

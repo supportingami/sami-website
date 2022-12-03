@@ -5,13 +5,11 @@ function getStrapiURL(path = "") {
 }
 
 export function getStrapiMedia(media: Partial<UploadFileEntityResponse>): string {
-  if (media) {
-    if (media.data === null) {
-      console.error("Media not found", media);
-      return;
-    }
-    const { url } = media.data.attributes;
-    const imageUrl = url.startsWith("/") ? getStrapiURL(url) : url;
-    return imageUrl;
+  if (!media?.data?.attributes) {
+    console.error("Media missing");
+    return "";
   }
+  const { url } = media.data.attributes;
+  const imageUrl = url.startsWith("/") ? getStrapiURL(url) : url;
+  return imageUrl;
 }

@@ -334,11 +334,6 @@ type ComponentHomeProjectSummary {
     sort: [String] = []
   ): [ComponentCommonActionButton]
   Image: UploadFileEntityResponse
-  Projects(
-    filters: ComponentHomeProjectSummaryItemFiltersInput
-    pagination: PaginationArg = {}
-    sort: [String] = []
-  ): [ComponentHomeProjectSummaryItem]
   Text: String
   Title: String
   id: ID!
@@ -347,7 +342,6 @@ type ComponentHomeProjectSummary {
 input ComponentHomeProjectSummaryInput {
   ActionButtons: [ComponentCommonActionButtonInput]
   Image: ID
-  Projects: [ComponentHomeProjectSummaryItemInput]
   Text: String
   Title: String
   id: ID
@@ -360,25 +354,9 @@ type ComponentHomeProjectSummaryItem {
   id: ID!
 }
 
-input ComponentHomeProjectSummaryItemFiltersInput {
-  Description: StringFilterInput
-  Title: StringFilterInput
-  and: [ComponentHomeProjectSummaryItemFiltersInput]
-  not: ComponentHomeProjectSummaryItemFiltersInput
-  or: [ComponentHomeProjectSummaryItemFiltersInput]
-}
-
-input ComponentHomeProjectSummaryItemInput {
-  Description: String
-  Icon: ID
-  Title: String
-  id: ID
-}
-
 type Country {
   Content: String
   Name: String
-  Project: ProjectEntityResponse
   createdAt: DateTime
   publishedAt: DateTime
   updatedAt: DateTime
@@ -401,7 +379,6 @@ type CountryEntityResponseCollection {
 input CountryFiltersInput {
   Content: StringFilterInput
   Name: StringFilterInput
-  Project: ProjectFiltersInput
   and: [CountryFiltersInput]
   createdAt: DateTimeFilterInput
   id: IDFilterInput
@@ -414,12 +391,7 @@ input CountryFiltersInput {
 input CountryInput {
   Content: String
   Name: String
-  Project: ID
   publishedAt: DateTime
-}
-
-type CountryRelationResponseCollection {
-  data: [CountryEntity!]!
 }
 
 """
@@ -574,7 +546,6 @@ union GenericMorph =
   | HomeContent
   | I18NLocale
   | Member
-  | Project
   | ProjectType
   | Resource
   | UploadFile
@@ -790,7 +761,6 @@ type Mutation {
   createCountry(data: CountryInput!): CountryEntityResponse
   createFaq(data: FaqInput!): FaqEntityResponse
   createMember(data: MemberInput!): MemberEntityResponse
-  createProject(data: ProjectInput!): ProjectEntityResponse
   createProjectType(data: ProjectTypeInput!): ProjectTypeEntityResponse
   createResource(data: ResourceInput!): ResourceEntityResponse
   createUploadFile(data: UploadFileInput!): UploadFileEntityResponse
@@ -814,7 +784,6 @@ type Mutation {
   deleteFaq(id: ID!): FaqEntityResponse
   deleteHomeContent: HomeContentEntityResponse
   deleteMember(id: ID!): MemberEntityResponse
-  deleteProject(id: ID!): ProjectEntityResponse
   deleteProjectType(id: ID!): ProjectTypeEntityResponse
   deleteResource(id: ID!): ResourceEntityResponse
   deleteUploadFile(id: ID!): UploadFileEntityResponse
@@ -862,7 +831,6 @@ type Mutation {
   updateFileInfo(id: ID!, info: FileInfoInput): UploadFileEntityResponse!
   updateHomeContent(data: HomeContentInput!): HomeContentEntityResponse
   updateMember(data: MemberInput!, id: ID!): MemberEntityResponse
-  updateProject(data: ProjectInput!, id: ID!): ProjectEntityResponse
   updateProjectType(data: ProjectTypeInput!, id: ID!): ProjectTypeEntityResponse
   updateResource(data: ResourceInput!, id: ID!): ResourceEntityResponse
   updateUploadFile(data: UploadFileInput!, id: ID!): UploadFileEntityResponse
@@ -895,67 +863,11 @@ input PaginationArg {
   start: Int
 }
 
-type Project {
-  Country(
-    filters: CountryFiltersInput
-    pagination: PaginationArg = {}
-    publicationState: PublicationState = LIVE
-    sort: [String] = []
-  ): CountryRelationResponseCollection
-  ProjectTypes(
-    filters: ProjectTypeFiltersInput
-    pagination: PaginationArg = {}
-    publicationState: PublicationState = LIVE
-    sort: [String] = []
-  ): ProjectTypeRelationResponseCollection
-  Summary: String
-  Title: String
-  createdAt: DateTime
-  publishedAt: DateTime
-  updatedAt: DateTime
-}
-
-type ProjectEntity {
-  attributes: Project
-  id: ID
-}
-
-type ProjectEntityResponse {
-  data: ProjectEntity
-}
-
-type ProjectEntityResponseCollection {
-  data: [ProjectEntity!]!
-  meta: ResponseCollectionMeta!
-}
-
-input ProjectFiltersInput {
-  Country: CountryFiltersInput
-  ProjectTypes: ProjectTypeFiltersInput
-  Summary: StringFilterInput
-  Title: StringFilterInput
-  and: [ProjectFiltersInput]
-  createdAt: DateTimeFilterInput
-  id: IDFilterInput
-  not: ProjectFiltersInput
-  or: [ProjectFiltersInput]
-  publishedAt: DateTimeFilterInput
-  updatedAt: DateTimeFilterInput
-}
-
-input ProjectInput {
-  Country: [ID]
-  ProjectTypes: [ID]
-  Summary: String
-  Title: String
-  publishedAt: DateTime
-}
-
 type ProjectType {
   Content: String
+  HomeSummary: String
+  Icon: UploadFileEntityResponse
   Name: String
-  Project: ProjectEntityResponse
-  Summary: String
   createdAt: DateTime
   publishedAt: DateTime
   updatedAt: DateTime
@@ -977,9 +889,8 @@ type ProjectTypeEntityResponseCollection {
 
 input ProjectTypeFiltersInput {
   Content: StringFilterInput
+  HomeSummary: StringFilterInput
   Name: StringFilterInput
-  Project: ProjectFiltersInput
-  Summary: StringFilterInput
   and: [ProjectTypeFiltersInput]
   createdAt: DateTimeFilterInput
   id: IDFilterInput
@@ -991,14 +902,10 @@ input ProjectTypeFiltersInput {
 
 input ProjectTypeInput {
   Content: String
+  HomeSummary: String
+  Icon: ID
   Name: String
-  Project: ID
-  Summary: String
   publishedAt: DateTime
-}
-
-type ProjectTypeRelationResponseCollection {
-  data: [ProjectTypeEntity!]!
 }
 
 enum PublicationState {
@@ -1064,7 +971,6 @@ type Query {
     publicationState: PublicationState = LIVE
     sort: [String] = []
   ): MemberEntityResponseCollection
-  project(id: ID): ProjectEntityResponse
   projectType(id: ID): ProjectTypeEntityResponse
   projectTypes(
     filters: ProjectTypeFiltersInput
@@ -1072,12 +978,6 @@ type Query {
     publicationState: PublicationState = LIVE
     sort: [String] = []
   ): ProjectTypeEntityResponseCollection
-  projects(
-    filters: ProjectFiltersInput
-    pagination: PaginationArg = {}
-    publicationState: PublicationState = LIVE
-    sort: [String] = []
-  ): ProjectEntityResponseCollection
   resource(id: ID): ResourceEntityResponse
   resources(
     filters: ResourceFiltersInput
