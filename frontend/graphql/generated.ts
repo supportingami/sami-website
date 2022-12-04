@@ -14,6 +14,7 @@ export type Scalars = {
   Date: any;
   DateTime: any;
   JSON: any;
+  ProjectTypePageContentDynamicZoneInput: any;
   Upload: any;
 };
 
@@ -258,6 +259,12 @@ export type ComponentCommonActionButtonInput = {
   Link?: InputMaybe<Scalars["String"]>;
   Text?: InputMaybe<Scalars["String"]>;
   id?: InputMaybe<Scalars["ID"]>;
+};
+
+export type ComponentCommonTextBlock = {
+  __typename?: "ComponentCommonTextBlock";
+  Text?: Maybe<Scalars["String"]>;
+  id: Scalars["ID"];
 };
 
 export type ComponentHomeGetInvolved = {
@@ -508,6 +515,12 @@ export enum Enum_Member_Organisation {
   SamiTrustees = "SAMI_Trustees",
 }
 
+export type Error = {
+  __typename?: "Error";
+  code: Scalars["String"];
+  message?: Maybe<Scalars["String"]>;
+};
+
 export type Faq = {
   __typename?: "Faq";
   Question?: Maybe<Scalars["String"]>;
@@ -588,6 +601,7 @@ export type GenericMorph =
   | BlogPost
   | BlogTag
   | ComponentCommonActionButton
+  | ComponentCommonTextBlock
   | ComponentHomeGetInvolved
   | ComponentHomeHeroImage
   | ComponentHomeImpactNumbers
@@ -1132,9 +1146,12 @@ export type PaginationArg = {
 export type ProjectType = {
   __typename?: "ProjectType";
   Content?: Maybe<Scalars["String"]>;
+  FeatureImage?: Maybe<UploadFileEntityResponse>;
   HomeSummary?: Maybe<Scalars["String"]>;
   Icon?: Maybe<UploadFileEntityResponse>;
   Name?: Maybe<Scalars["String"]>;
+  PageContent?: Maybe<Array<Maybe<ProjectTypePageContentDynamicZone>>>;
+  PageSummary?: Maybe<Scalars["String"]>;
   createdAt?: Maybe<Scalars["DateTime"]>;
   publishedAt?: Maybe<Scalars["DateTime"]>;
   updatedAt?: Maybe<Scalars["DateTime"]>;
@@ -1161,6 +1178,7 @@ export type ProjectTypeFiltersInput = {
   Content?: InputMaybe<StringFilterInput>;
   HomeSummary?: InputMaybe<StringFilterInput>;
   Name?: InputMaybe<StringFilterInput>;
+  PageSummary?: InputMaybe<StringFilterInput>;
   and?: InputMaybe<Array<InputMaybe<ProjectTypeFiltersInput>>>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
   id?: InputMaybe<IdFilterInput>;
@@ -1172,11 +1190,16 @@ export type ProjectTypeFiltersInput = {
 
 export type ProjectTypeInput = {
   Content?: InputMaybe<Scalars["String"]>;
+  FeatureImage?: InputMaybe<Scalars["ID"]>;
   HomeSummary?: InputMaybe<Scalars["String"]>;
   Icon?: InputMaybe<Scalars["ID"]>;
   Name?: InputMaybe<Scalars["String"]>;
+  PageContent?: InputMaybe<Array<Scalars["ProjectTypePageContentDynamicZoneInput"]>>;
+  PageSummary?: InputMaybe<Scalars["String"]>;
   publishedAt?: InputMaybe<Scalars["DateTime"]>;
 };
+
+export type ProjectTypePageContentDynamicZone = ComponentCommonTextBlock | Error;
 
 export enum PublicationState {
   Live = "LIVE",
@@ -2186,7 +2209,16 @@ export type ProjectsQuery = {
         Name?: string | null;
         Content?: string | null;
         HomeSummary?: string | null;
+        PageSummary?: string | null;
         Icon?: {
+          __typename?: "UploadFileEntityResponse";
+          data?: {
+            __typename?: "UploadFileEntity";
+            id?: string | null;
+            attributes?: { __typename?: "UploadFile"; url: string; name: string; size: number } | null;
+          } | null;
+        } | null;
+        FeatureImage?: {
           __typename?: "UploadFileEntityResponse";
           data?: {
             __typename?: "UploadFileEntity";
@@ -3221,9 +3253,41 @@ export const ProjectsDocument = {
                             { kind: "Field", name: { kind: "Name", value: "Name" } },
                             { kind: "Field", name: { kind: "Name", value: "Content" } },
                             { kind: "Field", name: { kind: "Name", value: "HomeSummary" } },
+                            { kind: "Field", name: { kind: "Name", value: "PageSummary" } },
                             {
                               kind: "Field",
                               name: { kind: "Name", value: "Icon" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "data" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        { kind: "Field", name: { kind: "Name", value: "id" } },
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "attributes" },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              { kind: "Field", name: { kind: "Name", value: "url" } },
+                                              { kind: "Field", name: { kind: "Name", value: "name" } },
+                                              { kind: "Field", name: { kind: "Name", value: "size" } },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "FeatureImage" },
                               selectionSet: {
                                 kind: "SelectionSet",
                                 selections: [

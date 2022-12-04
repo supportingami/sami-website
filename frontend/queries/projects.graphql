@@ -6,7 +6,18 @@ query projects {
         Name
         Content
         HomeSummary
+        PageSummary
         Icon {
+          data {
+            id
+            attributes {
+              url
+              name
+              size
+            }
+          }
+        }
+        FeatureImage {
           data {
             id
             attributes {

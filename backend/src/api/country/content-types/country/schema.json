@@ -16,12 +16,6 @@
     },
     "Content": {
       "type": "richtext"
-    },
-    "Project": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::project.project",
-      "inversedBy": "Country"
     }
   }
 }

@@ -221,6 +221,11 @@ input ComponentCommonActionButtonInput {
   id: ID
 }
 
+type ComponentCommonTextBlock {
+  Text: String
+  id: ID!
+}
+
 type ComponentHomeGetInvolved {
   ActionButtons(
     filters: ComponentCommonActionButtonFiltersInput
@@ -458,6 +463,11 @@ enum ENUM_MEMBER_ORGANISATION {
   SAMI_Trustees
 }
 
+type Error {
+  code: String!
+  message: String
+}
+
 type Faq {
   Question: String
   Response: String
@@ -534,6 +544,7 @@ union GenericMorph =
   | BlogPost
   | BlogTag
   | ComponentCommonActionButton
+  | ComponentCommonTextBlock
   | ComponentHomeGetInvolved
   | ComponentHomeHeroImage
   | ComponentHomeImpactNumbers
@@ -865,9 +876,12 @@ input PaginationArg {
 
 type ProjectType {
   Content: String
+  FeatureImage: UploadFileEntityResponse
   HomeSummary: String
   Icon: UploadFileEntityResponse
   Name: String
+  PageContent: [ProjectTypePageContentDynamicZone]
+  PageSummary: String
   createdAt: DateTime
   publishedAt: DateTime
   updatedAt: DateTime
@@ -891,6 +905,7 @@ input ProjectTypeFiltersInput {
   Content: StringFilterInput
   HomeSummary: StringFilterInput
   Name: StringFilterInput
+  PageSummary: StringFilterInput
   and: [ProjectTypeFiltersInput]
   createdAt: DateTimeFilterInput
   id: IDFilterInput
@@ -902,11 +917,18 @@ input ProjectTypeFiltersInput {
 
 input ProjectTypeInput {
   Content: String
+  FeatureImage: ID
   HomeSummary: String
   Icon: ID
   Name: String
+  PageContent: [ProjectTypePageContentDynamicZoneInput!]
+  PageSummary: String
   publishedAt: DateTime
 }
+
+union ProjectTypePageContentDynamicZone = ComponentCommonTextBlock | Error
+
+scalar ProjectTypePageContentDynamicZoneInput
 
 enum PublicationState {
   LIVE
