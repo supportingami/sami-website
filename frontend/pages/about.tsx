@@ -51,13 +51,11 @@ const AboutPage = ({ about, members, reports }: InferGetServerSidePropsType<type
       <Head>
         <title>About Us</title>
       </Head>
-      <PageLayout>
-        <AboutPageComponent aboutPageContent={about} />
-        <MembersComponent members={members} />
-        <ToC></ToC>
-        <AnnualReportPageComponent reports={reports} />
-        <Testimonials />
-      </PageLayout>
+      <AboutPageComponent aboutPageContent={about} />
+      <MembersComponent members={members} />
+      <ToC></ToC>
+      <AnnualReportPageComponent reports={reports} />
+      <Testimonials />
     </>
   );
 };
