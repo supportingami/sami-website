@@ -318,29 +318,29 @@
     "field": "Icon",
     "file_id": 69,
     "order": 1,
-    "related_id": 1,
-    "related_type": "home.project-summary-item"
+    "related_id": 2,
+    "related_type": "api::project-type.project-type"
   },
   {
     "field": "Icon",
     "file_id": 70,
     "order": 1,
-    "related_id": 3,
-    "related_type": "home.project-summary-item"
+    "related_id": 4,
+    "related_type": "api::project-type.project-type"
   },
   {
     "field": "Icon",
     "file_id": 71,
     "order": 1,
-    "related_id": 4,
-    "related_type": "home.project-summary-item"
+    "related_id": 1,
+    "related_type": "api::project-type.project-type"
   },
   {
     "field": "Icon",
     "file_id": 72,
     "order": 1,
-    "related_id": 2,
-    "related_type": "home.project-summary-item"
+    "related_id": 3,
+    "related_type": "api::project-type.project-type"
   },
   {
     "field": "Image",
@@ -355,5 +355,33 @@
     "order": 1,
     "related_id": 1,
     "related_type": "home.get-involved"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 75,
+    "order": 1,
+    "related_id": 4,
+    "related_type": "api::project-type.project-type"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 76,
+    "order": 1,
+    "related_id": 1,
+    "related_type": "api::project-type.project-type"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 77,
+    "order": 1,
+    "related_id": 3,
+    "related_type": "api::project-type.project-type"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 78,
+    "order": 1,
+    "related_id": 2,
+    "related_type": "api::project-type.project-type"
   }
 ]

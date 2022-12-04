@@ -1,42 +1,10 @@
 [
   {
-    "component_id": 1,
-    "component_type": "home.project-summary-item",
-    "entity_id": 1,
-    "field": "Projects",
-    "id": 21,
-    "order": 1
-  },
-  {
-    "component_id": 2,
-    "component_type": "home.project-summary-item",
-    "entity_id": 1,
-    "field": "Projects",
-    "id": 22,
-    "order": 2
-  },
-  {
-    "component_id": 3,
-    "component_type": "home.project-summary-item",
-    "entity_id": 1,
-    "field": "Projects",
-    "id": 23,
-    "order": 3
-  },
-  {
-    "component_id": 4,
-    "component_type": "home.project-summary-item",
-    "entity_id": 1,
-    "field": "Projects",
-    "id": 24,
-    "order": 4
-  },
-  {
     "component_id": 4,
     "component_type": "common.action-button",
     "entity_id": 1,
     "field": "ActionButtons",
-    "id": 25,
+    "id": 27,
     "order": 1
   }
 ]
