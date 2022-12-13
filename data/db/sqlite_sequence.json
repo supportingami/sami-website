@@ -72,6 +72,14 @@
     "seq": 0
   },
   {
+    "name": "donate_contents",
+    "seq": 1
+  },
+  {
+    "name": "donate_contents_components",
+    "seq": 3
+  },
+  {
     "name": "faqs",
     "seq": 17
   },

@@ -480,6 +480,27 @@ input DateTimeFilterInput {
   startsWith: DateTime
 }
 
+type DonateContent {
+  DonateStatement: ComponentHomeMissionStatement
+  createdAt: DateTime
+  publishedAt: DateTime
+  updatedAt: DateTime
+}
+
+type DonateContentEntity {
+  attributes: DonateContent
+  id: ID
+}
+
+type DonateContentEntityResponse {
+  data: DonateContentEntity
+}
+
+input DonateContentInput {
+  DonateStatement: ComponentHomeMissionStatementInput
+  publishedAt: DateTime
+}
+
 enum ENUM_MEMBER_ORGANISATION {
   AMI
   SAMI
@@ -570,6 +591,7 @@ union GenericMorph =
   | ComponentHomeProjectSummary
   | ComponentHomeProjectSummaryItem
   | Country
+  | DonateContent
   | Faq
   | HomeContent
   | I18NLocale
@@ -811,6 +833,7 @@ type Mutation {
   deleteBlogPost(id: ID!): BlogPostEntityResponse
   deleteBlogTag(id: ID!): BlogTagEntityResponse
   deleteCountry(id: ID!): CountryEntityResponse
+  deleteDonateContent: DonateContentEntityResponse
   deleteFaq(id: ID!): FaqEntityResponse
   deleteHomeContent: HomeContentEntityResponse
   deleteMember(id: ID!): MemberEntityResponse
@@ -858,6 +881,7 @@ type Mutation {
   updateBlogPost(data: BlogPostInput!, id: ID!): BlogPostEntityResponse
   updateBlogTag(data: BlogTagInput!, id: ID!): BlogTagEntityResponse
   updateCountry(data: CountryInput!, id: ID!): CountryEntityResponse
+  updateDonateContent(data: DonateContentInput!): DonateContentEntityResponse
   updateFaq(data: FaqInput!, id: ID!): FaqEntityResponse
   updateFileInfo(id: ID!, info: FileInfoInput): UploadFileEntityResponse!
   updateHomeContent(data: HomeContentInput!): HomeContentEntityResponse
@@ -1042,6 +1066,7 @@ type Query {
     sort: [String] = []
   ): CountryEntityResponseCollection
   country(id: ID): CountryEntityResponse
+  donateContent(publicationState: PublicationState = LIVE): DonateContentEntityResponse
   faq(id: ID): FaqEntityResponse
   faqs(
     filters: FaqFiltersInput
