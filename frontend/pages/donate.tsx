@@ -64,8 +64,8 @@ const DonatePage = ({ content }: InferGetServerSidePropsType<typeof getServerSid
                   via the links below. Create an account and start raising money now!
                 </span>
                 <div className="flex flex-row flex-wrap lg:flex-nowrap justify-around items-center px-2 mt-6">
-                  <Image src={EFLogo} alt="" objectFit="contain" />
-                  <Image src={AmazonLogo} alt="" objectFit="contain" />
+                  <Image src={EFLogo} alt="" objectFit="contain" width={200} />
+                  <Image src={AmazonLogo} alt="" objectFit="contain" width={200}/>
                 </div>
               </div>
             </div>
@@ -95,11 +95,11 @@ const DonatePage = ({ content }: InferGetServerSidePropsType<typeof getServerSid
             <div className="grid grid-cols-1 lg:grid-cols-3 justify-items-center my-10 items-center">
               <Image src={PAHLogo} alt="" objectFit="contain" />
               <div className="grid grid-cols-1 my-10">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center items-center mb-10">
                   <Image src={IDEMSLogo} alt="" objectFit="contain" />
                   <Image src={LWFLogo} alt="" objectFit="contain" />
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 my-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center items-center my-10">
                   <Image src={HausdorffLogo} alt="" objectFit="contain" />
                   <Image src={InnodemsLogo} alt="" objectFit="contain" />
                 </div>
