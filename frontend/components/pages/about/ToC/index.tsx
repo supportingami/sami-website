@@ -1,8 +1,8 @@
 export default function ToC() {
   return (
-    <div className="mt-32 bg-blue-50 px-36 py-6 text-center">
+    <div className="mt-32 bg-blue-50 px-5 lg:px-36 py-6 text-center">
       <h2>SAMI Theory of Change</h2>
-      <p className="">
+      <p>
         At SAMI we’ve been working to build our thoughts on how everything we do can fit into a larger picture to create
         real change across Africa.
         <br />
@@ -14,7 +14,7 @@ export default function ToC() {
     </div>
   );
 }
-// TODO - this should use daisy components
+
 const PrimaryButton = () => {
   return (
     <div className="btn btn-primary mt-8 mb-6">

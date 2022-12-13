@@ -22,7 +22,7 @@ export const AboutPageComponent: React.FC<{ aboutPageContent: IAbout[] }> = ({ a
     <>
       <SectionHeader background={{ imageName: "bg-math-1", size: "1660px 480px", position: "-150px -58px" }}>
         <h1 className="text-white">Our Work</h1>
-        <div className="flex gap-2 justify-center flex-1">
+        <div className="flex gap-2 justify-center flex-1 flex-wrap">
           {headerButtons.map(({ text, id }) => (
             <a key={id} className="btn btn-outline btn-primary bg-white">
               {text}
@@ -30,7 +30,7 @@ export const AboutPageComponent: React.FC<{ aboutPageContent: IAbout[] }> = ({ a
           ))}
         </div>
       </SectionHeader>
-      <div className="px-28">
+      <div className="px-5 lg:px-28">
         <div className="text-center">
           <h4 className="font-bold text-lg mt-10 mb-5">
             There are huge divides in terms of access and quality of education across Africa.
@@ -53,9 +53,9 @@ export const AboutPageComponent: React.FC<{ aboutPageContent: IAbout[] }> = ({ a
 
       {/*Principles Section*/}
 
-      <div className="bg-blue-50 w-full px-20 py-10">
+      <div className="bg-blue-50 w-full px-5 lg:px-20 py-10">
         <p className=" text-center">All projects live by the following principles:</p>
-        <div className="grid grid-cols-3 gap-10 mt-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:gap-10 mt-10 gap-5 ml-5">
           <div className="w-11/12">
             <h4 className="font-bold text-lg mb-2">Working with Partners</h4>
             <p>Supporting charities and NGOs to implement local and pan-African Maths Initiatives</p>
@@ -69,7 +69,7 @@ export const AboutPageComponent: React.FC<{ aboutPageContent: IAbout[] }> = ({ a
             <p>Providing support for grass-root initiatives to develop into sustainable solutions</p>
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-10 mt-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-10 ml-5">
           <div className="w-11/12">
             <h4 className="font-bold text-lg mb-2">Research and Development</h4>
             <p>Assist research and development projects to access mathematics and statistical expertise</p>
