@@ -65,7 +65,7 @@ const DonatePage = ({ content }: InferGetServerSidePropsType<typeof getServerSid
                 </span>
                 <div className="flex flex-row flex-wrap lg:flex-nowrap justify-around items-center px-2 mt-6">
                   <Image src={EFLogo} alt="" objectFit="contain" width={200} />
-                  <Image src={AmazonLogo} alt="" objectFit="contain" width={200}/>
+                  <Image src={AmazonLogo} alt="" objectFit="contain" width={200} />
                 </div>
               </div>
             </div>

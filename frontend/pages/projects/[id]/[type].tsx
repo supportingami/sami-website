@@ -10,6 +10,7 @@ import { ProjectsDocument } from "../../../graphql/generated";
 export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
   const router = useRouter();
   const id = router.query.id as string;
+  console.log({ id });
   const projectRes = await serverQuery<ProjectsQuery>(ProjectsDocument);
 
   return {
@@ -26,7 +27,7 @@ const ProjectTypePage = ({ projectData }: InferGetServerSidePropsType<typeof get
   const router = useRouter();
   const projectId = router.query.id as string;
   const projectName = router.query.type as string;
-
+  console.log({ projectData, projectId });
   return (
     <>
       <Head>
