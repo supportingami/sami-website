@@ -7,32 +7,20 @@ import VectorTriangle from "./assets/VectorTriangle";
 export const MembersListItemComponent: React.FC<{
   member: IMember;
 }> = ({ member }) => (
-  <div>
-    <div className="relative w-[210px] h-[248px]">
-      <div className="absolute left-0 font-medium w-[210px] h-[248px] text-[rgba(29,33,48,1)]">
-        <p className="inset-x-0 bottom-0 absolute text-xl inline w-[210px] leading-[1.6]">{member.Name}</p>
-        <div className="inset-x-0 top-0 absolute rounded-lg w-[210px] h-[200px] bottom-[15.44%]">
-          {member.Photo && (
-            <Image
-              src={getStrapiMedia(member.Photo)}
-              alt={`${member.Name}`}
-              fill
-              sizes="200px"
-              className="object-cover"
-            />
-          )}
-        </div>
-
-        {member.Organisation === "AMI" ? (
-          <div className="inset-x-0 rounded-t-lg top-0 absolute w-[210px] bottom-[95.97%] bg-[rgba(237,17,100,1)]" />
-        ) : (
-          <div className="inset-x-0 top-[80.53%] bottom-[15.44%] rounded-b-lg absolute w-[210px] bg-[rgba(0,177,233,1)]" />
+  <>
+    <div className="relative flex flex-col min-h-full max-h-full">
+      {member.Organisation === "AMI" ? <div className="bg-pink-600 h-2 rounded-t-lg" /> : <div />}
+      {/*Blue Triangle*/}
+      {member.Organisation === "SAMI_Trustees" ? <VectorTriangle /> : null}
+      <div className="relative h-48 w-full">
+        {member.Photo && (
+          <Image src={getStrapiMedia(member.Photo)} alt={`${member.Name}`} fill sizes="200" className="object-cover" />
         )}
-
-        {/*Blue Triangle*/}
-
-        {/* {member.Organisation === "SAMI_Trustees" ? <VectorTriangle /> : null} */}
+      </div>
+      {member.Organisation === "SAMI" ? <div className="bg-blue-350 h-2 rounded-b-lg" /> : <div className="h-2" />}
+      <div className="mb-5">
+        <span className="text-base font-semibold">{member.Name}</span>
       </div>
     </div>
-  </div>
+  </>
 );

@@ -14,6 +14,11 @@ module.exports = {
       fontFamily: {
         sans: ["var(--font-roboto)", ...fontFamily.sans],
       },
+      colors: {
+        blue: {
+          350: "#02B1E9",
+        },
+      },
     },
     container: {
       padding: {

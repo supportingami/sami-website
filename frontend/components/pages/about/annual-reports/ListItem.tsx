@@ -5,6 +5,7 @@ import bg from "public/images/AnnualReport.png";
 
 const style = {
   backgroundImage: `url(${bg.src})`,
+  backgroundPosition: "center",
   width: "100%",
   height: "100%",
 };
@@ -12,21 +13,14 @@ const style = {
 export const AnnualReportsListItemComponent: React.FC<{
   report: IAnnualReport;
 }> = ({ report }) => (
-  <div>
-    <div className="relative w-[200px] h-[150px]">
+  <a href={getStrapiMedia(report.File)} target="_blank" download rel="noopener noreferrer">
+    <div className="h-40 flex justify-center align-center">
       {report.File && (
-        <div className="absolute w-[200px] h-[150px]" style={style}>
-          <a
-            className="text-xl inline bottom-0 absolute leading-[1.6] w-[200px] h-[2px] inset-x-0"
-            href={getStrapiMedia(report.File)}
-            target="_blank"
-            download
-            rel="noopener noreferrer"
-          >
-            {report.Year} Annual Report
-          </a>
+        <div className="flex flex-col">
+          <div style={style} className="bg-cover bg-bottom"></div>
+          <span className="text-lg font-semibold">{report.Year} Annual Report</span>
         </div>
       )}
     </div>
-  </div>
+  </a>
 );

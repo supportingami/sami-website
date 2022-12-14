@@ -2372,6 +2372,13 @@ export const AnnualReportsDocument = {
           {
             kind: "Field",
             name: { kind: "Name", value: "annualReports" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "sort" },
+                value: { kind: "StringValue", value: "Year:DESC", block: false },
+              },
+            ],
             selectionSet: {
               kind: "SelectionSet",
               selections: [
