@@ -8,7 +8,8 @@ module.exports = {
       backgroundImage: {
         "sami-logo": "url('/images/sami-logo.svg') ",
         "sami-logo-no-text": "url('/images/sami-logo-no-text.png')",
-        "math-1": "url('/images/bg-math-1.svg')",
+        "tiling-1": "url('/images/bg-tiling-1.svg')",
+        "tiling-2": "url('/images/bg-tiling-2.svg')",
       },
       fontFamily: {
         sans: ["var(--font-roboto)", ...fontFamily.sans],

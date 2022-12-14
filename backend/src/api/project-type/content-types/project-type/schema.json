@@ -18,14 +18,26 @@
     "Content": {
       "type": "richtext"
     },
-    "Project": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::project.project",
-      "inversedBy": "ProjectTypes"
+    "Icon": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images", "files", "videos", "audios"]
     },
-    "Summary": {
+    "HomeSummary": {
+      "type": "text"
+    },
+    "PageSummary": {
       "type": "richtext"
+    },
+    "PageContent": {
+      "type": "dynamiczone",
+      "components": ["common.text-block"]
+    },
+    "FeatureImage": {
+      "allowedTypes": ["images", "files", "videos", "audios"],
+      "type": "media",
+      "multiple": false
     }
   }
 }

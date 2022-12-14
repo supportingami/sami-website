@@ -20,12 +20,16 @@
     "seq": 6
   },
   {
+    "name": "components_common_text_blocks",
+    "seq": 2
+  },
+  {
     "name": "components_home_get_involveds",
     "seq": 1
   },
   {
     "name": "components_home_get_involveds_components",
-    "seq": 5
+    "seq": 9
   },
   {
     "name": "components_home_hero_images",
@@ -33,7 +37,7 @@
   },
   {
     "name": "components_home_hero_images_components",
-    "seq": 17
+    "seq": 21
   },
   {
     "name": "components_home_impact_numbers",
@@ -45,7 +49,7 @@
   },
   {
     "name": "components_home_impact_sections_components",
-    "seq": 4
+    "seq": 12
   },
   {
     "name": "components_home_mission_statements",
@@ -53,7 +57,7 @@
   },
   {
     "name": "components_home_mission_statements_components",
-    "seq": 6
+    "seq": 8
   },
   {
     "name": "components_home_project_summaries",
@@ -61,7 +65,7 @@
   },
   {
     "name": "components_home_project_summaries_components",
-    "seq": 25
+    "seq": 27
   },
   {
     "name": "components_home_project_summary_items",
@@ -77,7 +81,7 @@
   },
   {
     "name": "files",
-    "seq": 74
+    "seq": 78
   },
   {
     "name": "home_contents",
@@ -85,7 +89,7 @@
   },
   {
     "name": "home_contents_components",
-    "seq": 27
+    "seq": 37
   },
   {
     "name": "members",
@@ -96,8 +100,8 @@
     "seq": 4
   },
   {
-    "name": "projects",
-    "seq": 5
+    "name": "project_types_components",
+    "seq": 6
   },
   {
     "name": "resources",
@@ -105,7 +109,7 @@
   },
   {
     "name": "upload_folders",
-    "seq": 7
+    "seq": 8
   },
   {
     "name": "volunteers",

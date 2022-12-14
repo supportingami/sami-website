@@ -20,7 +20,7 @@ const headerButtons = [
 export const AboutPageComponent: React.FC<{ aboutPageContent: IAbout[] }> = ({ aboutPageContent }) => {
   return (
     <>
-      <SectionHeader background={{ imageName: "bg-math-1", size: "1660px 480px", position: "-150px -58px" }}>
+      <SectionHeader background={{ imageName: "bg-tiling-1", size: "1660px 480px", position: "-150px -58px" }}>
         <h1 className="text-white">Our Work</h1>
         <div className="flex gap-2 justify-center flex-1 flex-wrap">
           {headerButtons.map(({ text, id }) => (
