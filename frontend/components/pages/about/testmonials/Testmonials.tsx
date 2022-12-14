@@ -25,64 +25,39 @@ const MockData: ITestimonialItem[] = [
   },
 ];
 
-export default function Testimonials(props: TestimonialsProps) {
+export default function Testimonials() {
   return (
     <>
-      <div className="bg-blue-50 my-32 py-10 px-18">
-        <h2 className="mb-5">Improving Lives</h2>
-        {MockData.map((item, index) => (
-          <TestimonialItem key={item.id} item={item} avatarPosition={index % 2 === 0 ? "start" : "end"} />
-        ))}
-      </div>
+      <h2>Improving Lives</h2>
+      {MockData.map((item, index) => (
+        <TestimonialItem key={item.id} item={item} avatarPosition={index % 2 === 0 ? "start" : "end"} />
+      ))}
     </>
   );
 }
 
 const TestimonialItem = (props: { item: ITestimonialItem; avatarPosition: "start" | "end" }) => (
   <div className="card bg-base-100 shadow-xl mx-auto w-3/4 mb-8">
-    <div>
-      {props.avatarPosition === "start" && (
-        <div className="grid grid-cols-1 md:grid-cols-4 p-4 md:p-8 justify-start">
-          <TestimonialAvatar avatar={props.item.avatar} />
-          <div className="md:col-start-2 md:col-end-6">
-            <TestimonialText item={props.item} />
-          </div>
-        </div>
-      )}
-    </div>
-    <div>
-      {props.avatarPosition === "end" && (
-        <div className="grid grid-cols-1 md:grid-cols-4 p-5 md:p-8 justify-end">
-          <div className="md:col-start-1 md:col-end-4">
-            <TestimonialText item={props.item} />
-          </div>
-          <TestimonialAvatar avatar={props.item.avatar} />
-        </div>
-      )}
+    <div className="flex items-center p-8 gap-4 flex-wrap">
+      {props.avatarPosition === "start" && <TestimonialAvatar avatar={props.item.avatar} />}
+      <TestimonialText item={props.item} />
+      {props.avatarPosition === "end" && <TestimonialAvatar avatar={props.item.avatar} />}
     </div>
   </div>
 );
 const TestimonialAvatar = ({ avatar }: { avatar: string }) => (
-  <div className="avatar">
+  <div className="avatar basis-full lg:basis-0">
     <div className="w-32 mask mask-hexagon">
-      <Image src={avatar} alt="" objectFit="contain" width={300} height={300} />
+      <Image src={avatar} alt="" className="object-contain" width={300} height={300} />
     </div>
   </div>
 );
 const TestimonialText = ({ item }: { item: ITestimonialItem }) => (
-  <div className="w-11/12 px-5">
-    <q className="prose text-xl">{item.testimonial}</q>
+  <div className="flex-1 px-5">
+    <q className="prose text-lg">{item.testimonial}</q>
     <div className="mt-4 flex">
       <div className="mr-4 font-bold">{item.name}</div>
       <div>{item.affiliation}</div>
     </div>
   </div>
 );
-
-Testimonials.defaultProps = {
-  style: {},
-};
-
-interface TestimonialsProps {
-  style: any;
-}

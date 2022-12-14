@@ -14,6 +14,7 @@ import { MembersComponent } from "components/pages/about/members";
 import ToC from "components/pages/about/ToC";
 import Testimonials from "components/pages/about/testmonials/Testmonials";
 import Partners from "components/pages/about/partners";
+import PageSection from "components/layout/pageSection";
 
 export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
   let about: IAbout[] = [];
@@ -52,10 +53,18 @@ const AboutPage = ({ about, members, reports }: InferGetServerSidePropsType<type
         <title>About Us</title>
       </Head>
       <AboutPageComponent aboutPageContent={about} />
-      <MembersComponent members={members} />
-      <ToC></ToC>
-      <AnnualReportPageComponent reports={reports} />
-      <Testimonials />
+      <PageSection className="text-center mt-16">
+        <MembersComponent members={members} />
+      </PageSection>
+      <PageSection fullwidth className="bg-base-200 py-16">
+        <ToC />
+      </PageSection>
+      <PageSection className="text-center py-16">
+        <AnnualReportPageComponent reports={reports} />
+      </PageSection>
+      <PageSection fullwidth className="bg-base-200 py-16">
+        <Testimonials />
+      </PageSection>
       <Partners />
     </>
   );

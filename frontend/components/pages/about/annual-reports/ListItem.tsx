@@ -13,22 +13,14 @@ const style = {
 export const AnnualReportsListItemComponent: React.FC<{
   report: IAnnualReport;
 }> = ({ report }) => (
-  <div>
+  <a href={getStrapiMedia(report.File)} target="_blank" download rel="noopener noreferrer">
     <div className="h-40 flex justify-center align-center">
       {report.File && (
         <div className="flex flex-col">
           <div style={style} className="bg-cover bg-bottom"></div>
-          <a
-            className="text-lg font-semibold"
-            href={getStrapiMedia(report.File)}
-            target="_blank"
-            download
-            rel="noopener noreferrer"
-          >
-            {report.Year} Annual Report
-          </a>
+          <span className="text-lg font-semibold">{report.Year} Annual Report</span>
         </div>
       )}
     </div>
-  </div>
+  </a>
 );
