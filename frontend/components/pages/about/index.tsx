@@ -58,8 +58,10 @@ export const AboutPageComponent: React.FC<{ aboutPageContent: IAbout[] }> = () =
           ))}
         </div>
       </SectionHeader>
-      <PageSection className="prose max-w-screen-lg">
-        <h3 className="mt-2">There are huge divides in terms of access and quality of education across Africa.</h3>
+      <PageSection className="prose max-w-screen-lg py-8">
+        <h3 className="text-center">
+          There are huge divides in terms of access and quality of education across Africa
+        </h3>
         <p>
           Mathematics in particular proves problematic for students and teachers alike, falling far short of global
           standards. There is however no shortage of passionate, enthusiastic and talented individuals in these
