@@ -62,21 +62,6 @@ query homeContent {
             Text
             Link
           }
-          Projects {
-            id
-            Title
-            Description
-            Icon {
-              data {
-                id
-                attributes {
-                  url
-                  name
-                  size
-                }
-              }
-            }
-          }
         }
         GetInvolved {
           id
@@ -106,6 +91,53 @@ query homeContent {
             id
             Number
             Title
+          }
+        }
+      }
+    }
+  }
+  projectTypes {
+    data {
+      id
+      attributes {
+        Name
+        HomeSummary
+        Icon {
+          data {
+            id
+            attributes {
+              url
+              name
+              size
+            }
+          }
+        }
+      }
+    }
+    meta {
+      pagination {
+        page
+        pageSize
+        total
+        pageCount
+      }
+    }
+  }
+  blogPosts(sort: "DateWritten:DESC", pagination: { limit: 3 }) {
+    data {
+      id
+      attributes {
+        Title
+        Summary
+        DateWritten
+        FeatureImage {
+          data {
+            id
+            attributes {
+              name
+              url
+              size
+            }
           }
         }
       }

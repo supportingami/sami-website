@@ -11,9 +11,10 @@ import { AboutDocument, MembersDocument, AnnualReportsDocument } from "../graphq
 import { serverQuery } from "lib/graphql";
 import type { IAbout } from "types/about";
 import { MembersComponent } from "components/pages/about/members";
-import PageLayout from "components/layout/pageLayout";
 import ToC from "components/pages/about/ToC";
 import Testimonials from "components/pages/about/testmonials/Testmonials";
+import Partners from "components/pages/about/partners";
+import PageSection from "components/layout/pageSection";
 
 export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
   let about: IAbout[] = [];
@@ -51,13 +52,20 @@ const AboutPage = ({ about, members, reports }: InferGetServerSidePropsType<type
       <Head>
         <title>About Us</title>
       </Head>
-      <PageLayout>
-        <AboutPageComponent aboutPageContent={about} />
+      <AboutPageComponent aboutPageContent={about} />
+      <PageSection className="text-center mt-16">
         <MembersComponent members={members} />
-        <ToC></ToC>
+      </PageSection>
+      <PageSection fullwidth className="bg-base-200 py-16">
+        <ToC />
+      </PageSection>
+      <PageSection className="text-center py-16">
         <AnnualReportPageComponent reports={reports} />
+      </PageSection>
+      <PageSection fullwidth className="bg-base-200 py-16">
         <Testimonials />
-      </PageLayout>
+      </PageSection>
+      <Partners />
     </>
   );
 };

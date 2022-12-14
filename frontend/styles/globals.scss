@@ -15,22 +15,22 @@
     @apply leading-normal;
     @apply font-bold;
     @apply text-center;
-    // When used as a subtitle much smaller blue-italic version used
-    &.subtitle {
-      @apply text-lg;
-      @apply italic;
-      @apply text-left;
-      @apply font-normal;
-      @apply tracking-wide;
-      // @apply bg-primary;
-      color: hsl(var(--p));
-    }
   }
   h3 {
     @apply text-3xl;
     @apply py-3;
     @apply leading-normal;
     @apply font-bold;
+  }
+  // When used as a subtitle much smaller blue-italic version used
+  .subtitle {
+    @apply text-lg;
+    @apply italic;
+    @apply text-left;
+    @apply font-normal;
+    @apply tracking-wide;
+    // @apply bg-primary;
+    color: hsl(var(--p));
   }
 }
 

@@ -1,5 +1,5 @@
-import type { Project } from "../graphql/generated";
+import type { ProjectType } from "../graphql/generated";
 
-export interface IProject extends Project {
+export interface IProject extends Omit<ProjectType, "__typename"> {
   id: string;
 }

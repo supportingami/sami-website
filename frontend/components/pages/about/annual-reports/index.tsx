@@ -5,16 +5,12 @@ import { AnnualReportsListItemComponent } from "./ListItem";
 export const AnnualReportPageComponent: React.FC<{ reports: IAnnualReport[] }> = ({ reports }) => {
   return (
     <>
-      <div className="mt-16 py-16 text-center">
-        <p className="font-bold inline text-[40px]">Annual Reports</p>
-
-        <p className="text-base font-normal m-0 h-[65px] leading-[1.6]">{"Find below links to our annual reports. "}</p>
-
-        <div className="grid grid-cols-6 gap-5">
-          {reports.map((report) => (
-            <AnnualReportsListItemComponent key={report.id} report={report} />
-          ))}
-        </div>
+      <h2>Annual Reports</h2>
+      <p className="mb-10">Find below links to our annual report and other relevant documents</p>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5 px-5 lg:px-24">
+        {reports.map((report) => (
+          <AnnualReportsListItemComponent key={report.id} report={report} />
+        ))}
       </div>
     </>
   );

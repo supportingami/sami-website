@@ -1,20 +1,13 @@
-# Use GraphQL to extract data from the datbase
-# This is comparable to SQL
-# `SELECT Name, Email from members`
 query annualReports {
-  # table to query
-  annualReports {
-    # return from query data
+  annualReports(sort: "Year:DESC") {
     data {
-      # primary key to use
       id
-      # what fields to return
       attributes {
         Year
-        File{
-          data{
+        File {
+          data {
             id
-            attributes{
+            attributes {
               name
               url
               size
@@ -23,7 +16,6 @@ query annualReports {
         }
       }
     }
-    # return from query meta
     meta {
       pagination {
         page
