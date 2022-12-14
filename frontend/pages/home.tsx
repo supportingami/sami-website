@@ -64,19 +64,6 @@ const HomePage = ({ content, blogs, projects }: InferGetServerSidePropsType<type
       <PageSection fullwidth className="bg-base-200 py-16">
         (TODO - donate buttons)
       </PageSection>
-      <PageSection fullwidth className="bg-primary text-white text-center py-16">
-        <h3>Sign up to get latest updates</h3>
-        <p>
-          Be the first to hear about new projects and receive occasional updates about SAMI
-          <br></br>
-          <br></br>
-          (TODO - mailing list signup)
-        </p>
-      </PageSection>
-      <PageSection fullwidth className="bg-base-300 py-16">
-        (TODO - sitemap)
-      </PageSection>
-      <PageSection className="py-4">(TODO - footer)</PageSection>
     </>
   </>
 );
