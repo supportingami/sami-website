@@ -58,5 +58,15 @@
     "path_id": 6,
     "updated_at": 1668455107219,
     "updated_by_id": 1
+  },
+  {
+    "created_at": 1670036257627,
+    "created_by_id": 1,
+    "id": 8,
+    "name": "Projects",
+    "path": "/7",
+    "path_id": 7,
+    "updated_at": 1670036257627,
+    "updated_by_id": 1
   }
 ]

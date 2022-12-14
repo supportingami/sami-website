@@ -11,21 +11,26 @@ interface IBackgroundImageProps {
 export const SectionHeader = ({
   background,
   children,
+  className = "",
 }: {
   children: JSX.Element[];
   background: IBackgroundImageProps;
+  className?: string;
 }) => (
-  <div className="h-64 relative text-white text-center font-bold w-100 bg-primary">
+  <div
+    data-testid="sectionHeader"
+    className={`min-h-64 relative text-white text-center font-bold w-100 bg-primary ${className}`}
+  >
     <BackgroundImage {...background} />
     <div className="z-10 relative flex flex-col h-full">{children}</div>
   </div>
 );
 
 /** Render a stretched div with background image  */
-const BackgroundImage = ({ imageName = "bg-math-1", size = "200px", position = "0px 0px" }) => (
+const BackgroundImage = ({ imageName = "bg-tiling-1", size = "200px", position = "0px 0px" }) => (
   <div
     data-cy="background-image"
-    className={`${imageName} absolute left-0 top-0 w-full h-full z-0 opacity-50`}
+    className={`${imageName} absolute left-0 top-0 w-full h-full z-0 opacity-40`}
     style={{
       backgroundSize: size,
       backgroundPosition: position,

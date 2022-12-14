@@ -12,20 +12,16 @@
     "Text": {
       "type": "text"
     },
-    "Projects": {
-      "type": "component",
-      "repeatable": true,
-      "component": "home.project-summary-item"
-    },
     "ActionButtons": {
       "type": "component",
       "repeatable": true,
       "component": "common.action-button"
     },
     "Image": {
-      "allowedTypes": ["images", "files", "videos", "audios"],
       "type": "media",
-      "multiple": false
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images", "files", "videos", "audios"]
     }
   }
 }
