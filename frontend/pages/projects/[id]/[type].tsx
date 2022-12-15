@@ -3,13 +3,13 @@ import React from "react";
 import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
 import { serverQuery } from "lib/graphql";
-// import { ProjectTypeComponent } from "components/pages/projects/projectType";
+import { ProjectTypeComponent } from "components/pages/projects/projectType";
 import type { ProjectsQuery, ProjectType } from "../../../graphql/generated";
 import { ProjectsDocument } from "../../../graphql/generated";
 
 export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
-  const router = useRouter();
-  const id = router.query.id as string;
+  //const router = useRouter();
+  //const id = router.query.id as string;
   const projectRes = await serverQuery<ProjectsQuery>(ProjectsDocument);
 
   return {
@@ -32,7 +32,7 @@ const ProjectTypePage = ({ projectData }: InferGetServerSidePropsType<typeof get
       <Head>
         <title>{projectName}</title>
       </Head>
-      {/* <ProjectTypeComponent projectType={projectData} id={projectId} /> */}
+       <ProjectTypeComponent projectType={projectData} id={projectId} />
     </>
   );
 };
