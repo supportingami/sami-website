@@ -11,6 +11,7 @@ import { HTMLContent } from "components/common/htmlContent";
 import { ImageHeadingContentLayout } from "components/layout/columns";
 import { getStrapiMedia } from "lib/media";
 import Image from "next/image";
+import Link from "next/link";
 
 export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
   const projectRes = await serverQuery<ProjectsQuery>(ProjectsDocument);
@@ -34,9 +35,11 @@ const ProjectsPage = ({ projectData }: InferGetServerSidePropsType<typeof getSer
       <h1 className="text-white">SAMI Projects</h1>
       <div className="flex gap-2 justify-center flex-1 flex-wrap mb-8">
         {projectData.map(({ id, Name }) => (
-          <a key={id} className="btn btn-outline btn-primary bg-white">
-            {Name}
-          </a>
+          <Link href={`/projects/${id}/${Name}`} key={id}>
+          <button className="btn btn-outline btn-primary bg-white">
+              {Name}
+          </button>
+          </Link>
         ))}
       </div>
     </SectionHeader>
