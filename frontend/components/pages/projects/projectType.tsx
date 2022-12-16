@@ -1,7 +1,7 @@
 import React from "react";
-import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import type { GetServerSidePropsContext} from "next";
 import Head from "next/head";
-import type { ProjectType, ProjectsQuery, UploadFileEntityResponse } from "../../../graphql/generated";
+import type { ProjectType, ProjectsQuery} from "../../../graphql/generated";
 import { ProjectsDocument } from "../../../graphql/generated";
 import { serverQuery } from "lib/graphql";
 import { SectionHeader } from "components/layout/Header";
