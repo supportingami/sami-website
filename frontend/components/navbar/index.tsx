@@ -117,7 +117,7 @@ const Navbar = () => {
     </div>
   );
 
- const PageLinks = () => (
+  const PageLinks = () => (
     <>
       {pageLinks.map(({ href, label, id }) => (
         <li key={id}>
@@ -126,8 +126,6 @@ const Navbar = () => {
       ))}
     </>
   );
-
-  
 
   return (
     <div data-cy="navbar" className="navbar bg-base-100 z-10 h-16">
@@ -149,4 +147,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

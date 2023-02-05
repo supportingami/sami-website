@@ -28,14 +28,14 @@ const SmallPartners = () => {
   ];
   return (
     <PageSection fullwidth className="mb-5 grayscale">
-              <div className="grid grid-cols-2 md:grid-cols-4 my-6 md:my-6 items-center justify-items-center">
-                  {logos &&
-                      logos.map((logo) => (
-                          <div key={logo.id} className="mb-2">
-                              <Image src={logo.image} alt="" height={25}/>
-                          </div>
-                      ))}
-              </div>
+      <div className="grid grid-cols-2 md:grid-cols-4 my-6 md:my-6 items-center justify-items-center">
+        {logos &&
+          logos.map((logo) => (
+            <div key={logo.id} className="mb-2">
+              <Image src={logo.image} alt="" height={25} />
+            </div>
+          ))}
+      </div>
     </PageSection>
   );
 };

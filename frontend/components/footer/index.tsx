@@ -1,13 +1,13 @@
-import SmallPartners from "./smallPartners"
-import Sitemap from "./sitemap"
-import Newsletter from "./newsletter"
+import SmallPartners from "./smallPartners";
+import Sitemap from "./sitemap";
+import Newsletter from "./newsletter";
 
 export const Footer = () => (
-    <>
-    <Newsletter/>
+  <>
+    <Newsletter />
     <Sitemap />
     <SmallPartners />
-    </>
-)
+  </>
+);
 
-export default Footer
+export default Footer;
