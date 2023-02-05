@@ -26,7 +26,6 @@ const ProjectTypePage = ({ projectData }: InferGetServerSidePropsType<typeof get
   const router = useRouter();
   const projectId = router.query.id as string;
   const projectName = router.query.type as string;
-
   return (
     <>
       <Head>

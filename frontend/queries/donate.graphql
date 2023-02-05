@@ -1,0 +1,30 @@
+query donateContent {
+  donateContent {
+    data {
+      id
+      attributes {
+        DonateStatement {
+          id
+          Image {
+            data {
+              id
+              attributes {
+                url
+                name
+                size
+              }
+            }
+          }
+          Heading
+          Text
+          Description
+          ActionButtons {
+            id
+            Text
+            Link
+          }
+        }
+      }
+    }
+  }
+}

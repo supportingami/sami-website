@@ -17,7 +17,7 @@
   },
   {
     "name": "components_common_action_buttons",
-    "seq": 6
+    "seq": 7
   },
   {
     "name": "components_common_text_blocks",
@@ -53,11 +53,11 @@
   },
   {
     "name": "components_home_mission_statements",
-    "seq": 1
+    "seq": 2
   },
   {
     "name": "components_home_mission_statements_components",
-    "seq": 8
+    "seq": 10
   },
   {
     "name": "components_home_project_summaries",
@@ -76,12 +76,20 @@
     "seq": 0
   },
   {
+    "name": "donate_contents",
+    "seq": 1
+  },
+  {
+    "name": "donate_contents_components",
+    "seq": 6
+  },
+  {
     "name": "faqs",
     "seq": 17
   },
   {
     "name": "files",
-    "seq": 78
+    "seq": 79
   },
   {
     "name": "home_contents",
@@ -109,7 +117,7 @@
   },
   {
     "name": "upload_folders",
-    "seq": 8
+    "seq": 9
   },
   {
     "name": "volunteers",

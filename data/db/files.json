@@ -1076,5 +1076,27 @@
     "updated_by_id": 1,
     "url": "/uploads/maths_camps_1_fcee8aeac1.webp",
     "width": 2048
+  },
+  {
+    "alternative_text": "donate.png",
+    "caption": "donate.png",
+    "created_at": 1675636773046,
+    "created_by_id": 1,
+    "ext": ".png",
+    "folder_path": "/8",
+    "formats": "{\"thumbnail\":{\"name\":\"thumbnail_donate.png\",\"hash\":\"thumbnail_donate_7bc82adf88\",\"ext\":\".png\",\"mime\":\"image/png\",\"path\":null,\"width\":104,\"height\":156,\"size\":49.22,\"url\":\"/uploads/thumbnail_donate_7bc82adf88.png\"}}",
+    "hash": "donate_7bc82adf88",
+    "height": 1500,
+    "id": 79,
+    "mime": "image/png",
+    "name": "donate.png",
+    "preview_url": null,
+    "provider": "local",
+    "provider_metadata": null,
+    "size": 2121.96,
+    "updated_at": 1675636773046,
+    "updated_by_id": 1,
+    "url": "/uploads/donate_7bc82adf88.png",
+    "width": 1000
   }
 ]
