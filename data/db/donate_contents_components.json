@@ -1,0 +1,10 @@
+[
+  {
+    "component_id": 2,
+    "component_type": "home.mission-statement",
+    "entity_id": 1,
+    "field": "DonateStatement",
+    "id": 6,
+    "order": 1
+  }
+]

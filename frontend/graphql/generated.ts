@@ -509,6 +509,30 @@ export type DateTimeFilterInput = {
   startsWith?: InputMaybe<Scalars["DateTime"]>;
 };
 
+export type DonateContent = {
+  __typename?: "DonateContent";
+  DonateStatement?: Maybe<ComponentHomeMissionStatement>;
+  createdAt?: Maybe<Scalars["DateTime"]>;
+  publishedAt?: Maybe<Scalars["DateTime"]>;
+  updatedAt?: Maybe<Scalars["DateTime"]>;
+};
+
+export type DonateContentEntity = {
+  __typename?: "DonateContentEntity";
+  attributes?: Maybe<DonateContent>;
+  id?: Maybe<Scalars["ID"]>;
+};
+
+export type DonateContentEntityResponse = {
+  __typename?: "DonateContentEntityResponse";
+  data?: Maybe<DonateContentEntity>;
+};
+
+export type DonateContentInput = {
+  DonateStatement?: InputMaybe<ComponentHomeMissionStatementInput>;
+  publishedAt?: InputMaybe<Scalars["DateTime"]>;
+};
+
 export enum Enum_Member_Organisation {
   Ami = "AMI",
   Sami = "SAMI",
@@ -610,6 +634,7 @@ export type GenericMorph =
   | ComponentHomeProjectSummary
   | ComponentHomeProjectSummaryItem
   | Country
+  | DonateContent
   | Faq
   | HomeContent
   | I18NLocale
@@ -852,6 +877,7 @@ export type Mutation = {
   deleteBlogPost?: Maybe<BlogPostEntityResponse>;
   deleteBlogTag?: Maybe<BlogTagEntityResponse>;
   deleteCountry?: Maybe<CountryEntityResponse>;
+  deleteDonateContent?: Maybe<DonateContentEntityResponse>;
   deleteFaq?: Maybe<FaqEntityResponse>;
   deleteHomeContent?: Maybe<HomeContentEntityResponse>;
   deleteMember?: Maybe<MemberEntityResponse>;
@@ -880,6 +906,7 @@ export type Mutation = {
   updateBlogPost?: Maybe<BlogPostEntityResponse>;
   updateBlogTag?: Maybe<BlogTagEntityResponse>;
   updateCountry?: Maybe<CountryEntityResponse>;
+  updateDonateContent?: Maybe<DonateContentEntityResponse>;
   updateFaq?: Maybe<FaqEntityResponse>;
   updateFileInfo: UploadFileEntityResponse;
   updateHomeContent?: Maybe<HomeContentEntityResponse>;
@@ -1066,6 +1093,10 @@ export type MutationUpdateCountryArgs = {
   id: Scalars["ID"];
 };
 
+export type MutationUpdateDonateContentArgs = {
+  data: DonateContentInput;
+};
+
 export type MutationUpdateFaqArgs = {
   data: FaqInput;
   id: Scalars["ID"];
@@ -1218,6 +1249,7 @@ export type Query = {
   blogTags?: Maybe<BlogTagEntityResponseCollection>;
   countries?: Maybe<CountryEntityResponseCollection>;
   country?: Maybe<CountryEntityResponse>;
+  donateContent?: Maybe<DonateContentEntityResponse>;
   faq?: Maybe<FaqEntityResponse>;
   faqs?: Maybe<FaqEntityResponseCollection>;
   homeContent?: Maybe<HomeContentEntityResponse>;
@@ -1295,6 +1327,10 @@ export type QueryCountriesArgs = {
 
 export type QueryCountryArgs = {
   id?: InputMaybe<Scalars["ID"]>;
+};
+
+export type QueryDonateContentArgs = {
+  publicationState?: InputMaybe<PublicationState>;
 };
 
 export type QueryFaqArgs = {
@@ -1982,6 +2018,43 @@ export type BlogPostsQuery = {
   } | null;
 };
 
+export type DonateContentQueryVariables = Exact<{ [key: string]: never }>;
+
+export type DonateContentQuery = {
+  __typename?: "Query";
+  donateContent?: {
+    __typename?: "DonateContentEntityResponse";
+    data?: {
+      __typename?: "DonateContentEntity";
+      id?: string | null;
+      attributes?: {
+        __typename?: "DonateContent";
+        DonateStatement?: {
+          __typename?: "ComponentHomeMissionStatement";
+          id: string;
+          Heading?: string | null;
+          Text?: string | null;
+          Description?: string | null;
+          Image?: {
+            __typename?: "UploadFileEntityResponse";
+            data?: {
+              __typename?: "UploadFileEntity";
+              id?: string | null;
+              attributes?: { __typename?: "UploadFile"; url: string; name: string; size: number } | null;
+            } | null;
+          } | null;
+          ActionButtons?: Array<{
+            __typename?: "ComponentCommonActionButton";
+            id: string;
+            Text: string;
+            Link: string;
+          } | null> | null;
+        } | null;
+      } | null;
+    } | null;
+  } | null;
+};
+
 export type FaqsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type FaqsQuery = {
@@ -2575,6 +2648,105 @@ export const BlogPostsDocument = {
     },
   ],
 } as unknown as DocumentNode<BlogPostsQuery, BlogPostsQueryVariables>;
+export const DonateContentDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "donateContent" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "donateContent" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "data" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "attributes" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "DonateStatement" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  { kind: "Field", name: { kind: "Name", value: "id" } },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "Image" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "data" },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              { kind: "Field", name: { kind: "Name", value: "id" } },
+                                              {
+                                                kind: "Field",
+                                                name: { kind: "Name", value: "attributes" },
+                                                selectionSet: {
+                                                  kind: "SelectionSet",
+                                                  selections: [
+                                                    { kind: "Field", name: { kind: "Name", value: "url" } },
+                                                    { kind: "Field", name: { kind: "Name", value: "name" } },
+                                                    { kind: "Field", name: { kind: "Name", value: "size" } },
+                                                  ],
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                  { kind: "Field", name: { kind: "Name", value: "Heading" } },
+                                  { kind: "Field", name: { kind: "Name", value: "Text" } },
+                                  { kind: "Field", name: { kind: "Name", value: "Description" } },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "ActionButtons" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        { kind: "Field", name: { kind: "Name", value: "id" } },
+                                        { kind: "Field", name: { kind: "Name", value: "Text" } },
+                                        { kind: "Field", name: { kind: "Name", value: "Link" } },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<DonateContentQuery, DonateContentQueryVariables>;
 export const FaqsDocument = {
   kind: "Document",
   definitions: [
