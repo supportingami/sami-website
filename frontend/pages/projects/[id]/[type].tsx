@@ -31,7 +31,7 @@ const ProjectTypePage = ({ projectData }: InferGetServerSidePropsType<typeof get
       <Head>
         <title>{projectName}</title>
       </Head>
-       <ProjectTypeComponent projectType={projectData} id={projectId} />
+      <ProjectTypeComponent projectType={projectData} id={projectId} />
     </>
   );
 };

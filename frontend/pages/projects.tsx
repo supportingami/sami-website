@@ -36,9 +36,7 @@ const ProjectsPage = ({ projectData }: InferGetServerSidePropsType<typeof getSer
       <div className="flex gap-2 justify-center flex-1 flex-wrap mb-8">
         {projectData.map(({ id, Name }) => (
           <Link href={`/projects/${id}/${Name}`} key={id}>
-          <button className="btn btn-outline btn-primary bg-white">
-              {Name}
-          </button>
+            <button className="btn btn-outline btn-primary bg-white">{Name}</button>
           </Link>
         ))}
       </div>
