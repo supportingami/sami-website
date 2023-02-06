@@ -1,4 +1,4 @@
-export default function VectorTriangle(props: VectorTriangleProps) {
+export default function VectorTriangle() {
   return (
     <div className="left-0 top-0 absolute w-[52px] right-[75.24%] bottom-[79.06%]">
       <svg
@@ -14,7 +14,3 @@ export default function VectorTriangle(props: VectorTriangleProps) {
     </div>
   );
 }
-
-VectorTriangle.defaultProps = {};
-
-interface VectorTriangleProps {}

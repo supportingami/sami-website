@@ -1,0 +1,20 @@
+{
+  "kind": "singleType",
+  "collectionName": "donate_contents",
+  "info": {
+    "singularName": "donate-content",
+    "pluralName": "donate-contents",
+    "displayName": "DonateContent"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "DonateStatement": {
+      "type": "component",
+      "repeatable": false,
+      "component": "home.mission-statement"
+    }
+  }
+}

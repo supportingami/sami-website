@@ -137,7 +137,7 @@ const Navbar = () => {
       <div className="navbar-end">
         <ThemeToggle btnclass="mr-1 hidden lg:block" />
         <a className="btn rounded-none rounded-l-lg mr-1">Volunteer</a>
-        <a className="btn rounded-none rounded-r-lg gap-2">
+        <a className="btn rounded-none rounded-r-lg gap-2" href="/donate">
           Donate
           <MdFavorite />
         </a>
