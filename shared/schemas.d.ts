@@ -18,10 +18,11 @@ import {
   SetMinMax,
   RichTextAttribute,
   MediaAttribute,
-  DateAttribute,
   TextAttribute,
+  DateAttribute,
   SingleTypeSchema,
   ComponentAttribute,
+  DynamicZoneAttribute,
   ComponentSchema,
 } from "@strapi/strapi";
 
@@ -465,7 +466,7 @@ export interface ApiBlogPostBlogPost extends CollectionTypeSchema {
     Content: RichTextAttribute;
     FeatureImage: MediaAttribute;
     Title: StringAttribute;
-    Summary: StringAttribute;
+    Summary: TextAttribute;
     DateWritten: DateAttribute;
     Tags: RelationAttribute<"api::blog-post.blog-post", "oneToMany", "api::blog-tag.blog-tag">;
     createdAt: DateTimeAttribute;
@@ -509,12 +510,30 @@ export interface ApiCountryCountry extends CollectionTypeSchema {
   attributes: {
     Name: StringAttribute;
     Content: RichTextAttribute;
-    Project: RelationAttribute<"api::country.country", "manyToOne", "api::project.project">;
     createdAt: DateTimeAttribute;
     updatedAt: DateTimeAttribute;
     publishedAt: DateTimeAttribute;
     createdBy: RelationAttribute<"api::country.country", "oneToOne", "admin::user"> & PrivateAttribute;
     updatedBy: RelationAttribute<"api::country.country", "oneToOne", "admin::user"> & PrivateAttribute;
+  };
+}
+
+export interface ApiDonateContentDonateContent extends SingleTypeSchema {
+  info: {
+    singularName: "donate-content";
+    pluralName: "donate-contents";
+    displayName: "DonateContent";
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    DonateStatement: ComponentAttribute<"home.mission-statement">;
+    createdAt: DateTimeAttribute;
+    updatedAt: DateTimeAttribute;
+    publishedAt: DateTimeAttribute;
+    createdBy: RelationAttribute<"api::donate-content.donate-content", "oneToOne", "admin::user"> & PrivateAttribute;
+    updatedBy: RelationAttribute<"api::donate-content.donate-content", "oneToOne", "admin::user"> & PrivateAttribute;
   };
 }
 
@@ -550,7 +569,11 @@ export interface ApiHomeContentHomeContent extends SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    HeroImage: ComponentAttribute<"page-content.cover-image">;
+    HeroImages: ComponentAttribute<"home.hero-image", true>;
+    MissionStatement: ComponentAttribute<"home.mission-statement">;
+    ProjectSummary: ComponentAttribute<"home.project-summary">;
+    GetInvolved: ComponentAttribute<"home.get-involved">;
+    ImpactSection: ComponentAttribute<"home.impact-section">;
     createdAt: DateTimeAttribute;
     updatedAt: DateTimeAttribute;
     publishedAt: DateTimeAttribute;
@@ -572,7 +595,7 @@ export interface ApiMemberMember extends CollectionTypeSchema {
   attributes: {
     Name: StringAttribute;
     Photo: MediaAttribute;
-    Organisation: EnumerationAttribute<["AMI", "SAMI"]>;
+    Organisation: EnumerationAttribute<["AMI", "SAMI", "SAMI Trustees"]>;
     Bio: RichTextAttribute;
     Email: EmailAttribute;
     LinkedIn: StringAttribute;
@@ -583,29 +606,6 @@ export interface ApiMemberMember extends CollectionTypeSchema {
     publishedAt: DateTimeAttribute;
     createdBy: RelationAttribute<"api::member.member", "oneToOne", "admin::user"> & PrivateAttribute;
     updatedBy: RelationAttribute<"api::member.member", "oneToOne", "admin::user"> & PrivateAttribute;
-  };
-}
-
-export interface ApiProjectProject extends CollectionTypeSchema {
-  info: {
-    singularName: "project";
-    pluralName: "projects";
-    displayName: "Project Page";
-    description: "";
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Title: StringAttribute;
-    Summary: RichTextAttribute;
-    ProjectTypes: RelationAttribute<"api::project.project", "oneToMany", "api::project-type.project-type">;
-    Country: RelationAttribute<"api::project.project", "oneToMany", "api::country.country">;
-    createdAt: DateTimeAttribute;
-    updatedAt: DateTimeAttribute;
-    publishedAt: DateTimeAttribute;
-    createdBy: RelationAttribute<"api::project.project", "oneToOne", "admin::user"> & PrivateAttribute;
-    updatedBy: RelationAttribute<"api::project.project", "oneToOne", "admin::user"> & PrivateAttribute;
   };
 }
 
@@ -622,8 +622,12 @@ export interface ApiProjectTypeProjectType extends CollectionTypeSchema {
   attributes: {
     Name: StringAttribute;
     Content: RichTextAttribute;
-    Project: RelationAttribute<"api::project-type.project-type", "manyToOne", "api::project.project">;
-    Summary: RichTextAttribute;
+    Icon: MediaAttribute;
+    HomeSummary: TextAttribute;
+    PageSummary: RichTextAttribute;
+    PageContent: DynamicZoneAttribute<["common.text-block"]>;
+    FeatureImage: MediaAttribute;
+    Slug: StringAttribute & RequiredAttribute & UniqueAttribute;
     createdAt: DateTimeAttribute;
     updatedAt: DateTimeAttribute;
     publishedAt: DateTimeAttribute;
@@ -677,16 +681,109 @@ export interface ApiVolunteerVolunteer extends CollectionTypeSchema {
   };
 }
 
-export interface PageContentCoverImage extends ComponentSchema {
+export interface CommonActionButton extends ComponentSchema {
+  info: {
+    displayName: "ActionButton";
+    description: "";
+    icon: "ad";
+  };
+  attributes: {
+    Text: StringAttribute & RequiredAttribute;
+    Link: StringAttribute & RequiredAttribute;
+  };
+}
+
+export interface CommonTextBlock extends ComponentSchema {
+  info: {
+    displayName: "TextBlock";
+  };
+  attributes: {
+    Text: TextAttribute;
+  };
+}
+
+export interface HomeGetInvolved extends ComponentSchema {
+  info: {
+    displayName: "GetInvolved";
+    description: "";
+  };
+  attributes: {
+    Title: StringAttribute;
+    Text: TextAttribute;
+    Description: RichTextAttribute;
+    Image: MediaAttribute;
+    ActionButtons: ComponentAttribute<"common.action-button", true>;
+  };
+}
+
+export interface HomeHeroImage extends ComponentSchema {
   info: {
     displayName: "HeroImage";
     description: "";
   };
   attributes: {
+    Image: MediaAttribute & RequiredAttribute;
+    Text: StringAttribute & RequiredAttribute;
+    ActionButtons: ComponentAttribute<"common.action-button", true>;
+  };
+}
+
+export interface HomeImpactNumbers extends ComponentSchema {
+  info: {
+    displayName: "ImpactNumbers";
+  };
+  attributes: {
+    Number: StringAttribute;
+    Title: StringAttribute;
+  };
+}
+
+export interface HomeImpactSection extends ComponentSchema {
+  info: {
+    displayName: "ImpactSection";
+    icon: "medal";
+  };
+  attributes: {
+    Statement: TextAttribute;
+    ImpactNumbers: ComponentAttribute<"home.impact-numbers", true>;
+  };
+}
+
+export interface HomeMissionStatement extends ComponentSchema {
+  info: {
+    displayName: "MissionStatement";
+    description: "";
+  };
+  attributes: {
     Image: MediaAttribute;
-    ImageText: StringAttribute;
-    ButtonText: StringAttribute;
-    ButtonLink: StringAttribute;
+    Text: TextAttribute;
+    Heading: StringAttribute;
+    ActionButtons: ComponentAttribute<"common.action-button", true>;
+    Description: RichTextAttribute;
+  };
+}
+
+export interface HomeProjectSummaryItem extends ComponentSchema {
+  info: {
+    displayName: "ProjectSummaryItem";
+  };
+  attributes: {
+    Icon: MediaAttribute;
+    Title: StringAttribute;
+    Description: TextAttribute;
+  };
+}
+
+export interface HomeProjectSummary extends ComponentSchema {
+  info: {
+    displayName: "ProjectSummary";
+    description: "";
+  };
+  attributes: {
+    Title: StringAttribute;
+    Text: TextAttribute;
+    ActionButtons: ComponentAttribute<"common.action-button", true>;
+    Image: MediaAttribute;
   };
 }
 
@@ -708,14 +805,22 @@ declare global {
       "api::blog-post.blog-post": ApiBlogPostBlogPost;
       "api::blog-tag.blog-tag": ApiBlogTagBlogTag;
       "api::country.country": ApiCountryCountry;
+      "api::donate-content.donate-content": ApiDonateContentDonateContent;
       "api::faq.faq": ApiFaqFaq;
       "api::home-content.home-content": ApiHomeContentHomeContent;
       "api::member.member": ApiMemberMember;
-      "api::project.project": ApiProjectProject;
       "api::project-type.project-type": ApiProjectTypeProjectType;
       "api::resource.resource": ApiResourceResource;
       "api::volunteer.volunteer": ApiVolunteerVolunteer;
-      "page-content.cover-image": PageContentCoverImage;
+      "common.action-button": CommonActionButton;
+      "common.text-block": CommonTextBlock;
+      "home.get-involved": HomeGetInvolved;
+      "home.hero-image": HomeHeroImage;
+      "home.impact-numbers": HomeImpactNumbers;
+      "home.impact-section": HomeImpactSection;
+      "home.mission-statement": HomeMissionStatement;
+      "home.project-summary-item": HomeProjectSummaryItem;
+      "home.project-summary": HomeProjectSummary;
     }
   }
 }

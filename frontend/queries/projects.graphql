@@ -1,5 +1,6 @@
-query projects {
-  projectTypes {
+# Write your query or mutation here
+query projects($filters: ProjectTypeFiltersInput) {
+  projectTypes(filters: $filters) {
     data {
       id
       attributes {
@@ -27,6 +28,7 @@ query projects {
             }
           }
         }
+        Slug
       }
     }
     meta {
