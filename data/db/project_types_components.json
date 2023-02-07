@@ -4,7 +4,7 @@
     "component_type": "common.text-block",
     "entity_id": 3,
     "field": "PageContent",
-    "id": 5,
+    "id": 9,
     "order": 1
   },
   {
@@ -12,7 +12,7 @@
     "component_type": "common.text-block",
     "entity_id": 3,
     "field": "PageContent",
-    "id": 6,
+    "id": 10,
     "order": 2
   }
 ]

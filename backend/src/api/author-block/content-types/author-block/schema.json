@@ -13,11 +13,7 @@
   "attributes": {
     "blocks": {
       "type": "dynamiczone",
-      "components": [
-        "common.action-button",
-        "common.html",
-        "common.text-block"
-      ]
+      "components": ["common.action-button", "common.html", "common.text-block"]
     }
   }
 }

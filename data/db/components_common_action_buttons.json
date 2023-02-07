@@ -33,5 +33,10 @@
     "id": 7,
     "link": "#",
     "text": "Donate Now"
+  },
+  {
+    "id": 8,
+    "link": "https://docs.google.com/forms/d/e/1FAIpQLSdfyNymfN9xqJCfgBLKpwQqniJTd2mACY93wjmEP8y8TRZGXw/viewform",
+    "text": "Apply Now"
   }
 ]
