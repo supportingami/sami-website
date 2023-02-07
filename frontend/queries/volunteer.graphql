@@ -1,11 +1,23 @@
-query volunteers {
-  volunteers {
+query volunteerContent {
+  volunteerContent {
     data {
       id
+      __typename
       attributes {
-        Content
-        ApplicationLink
-        Title
+        __typename
+        Content {
+          ... on ComponentCommonHtml {
+            __typename
+            id
+            HTML
+          }
+          ... on ComponentCommonActionButton {
+            __typename
+            id
+            Link
+            Text
+          }
+        }
       }
     }
   }

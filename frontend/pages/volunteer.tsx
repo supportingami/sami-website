@@ -1,22 +1,21 @@
 import React from "react";
 import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
-import type { IVolunteer } from "types/volunteer";
 import Head from "next/head";
-import type { Volunteer, VolunteersQuery, FaqsQuery, Faq } from "../graphql/generated";
-import { VolunteersDocument, FaqsDocument } from "../graphql/generated";
+import type { VolunteerContentQuery, FaqsQuery, Faq, AuthorBlockBlocksDynamicZone } from "../graphql/generated";
+import { VolunteerContentDocument, FaqsDocument } from "../graphql/generated";
 import { serverQuery } from "lib/graphql";
-import { VolunteerPageComponent } from "components/pages/volunteer";
 import type { IFaq } from "types/faq";
+import { SectionHeader } from "components/layout/Header";
+import PageSection from "components/layout/pageSection";
+import { DynamicComponents } from "components/common/dynamic";
+import { FAQS } from "components/pages/volunteer/faq";
 
 export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
-  let volunteerPageContent: IVolunteer[] = [];
+  let volunteerPageContent: AuthorBlockBlocksDynamicZone[];
   let faqs: IFaq[] = [];
-  const volunteerRes = await serverQuery<VolunteersQuery>(VolunteersDocument);
+  const volunteerRes = await serverQuery<VolunteerContentQuery>(VolunteerContentDocument);
   if (volunteerRes) {
-    volunteerPageContent = volunteerRes.data.volunteers.data.map((v) => ({
-      ...(v.attributes as Volunteer),
-      id: v.id,
-    }));
+    volunteerPageContent = volunteerRes.data.volunteerContent.data.attributes.Content as AuthorBlockBlocksDynamicZone[];
   }
   const faqRes = await serverQuery<FaqsQuery>(FaqsDocument);
   if (faqRes) {
@@ -34,12 +33,26 @@ export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
 };
 
 const VolunteerPage = ({ volunteerPageContent, faqs }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  console.log({ volunteerPageContent, faqs });
   return (
     <>
       <Head>
-        <title>Volunteer Page</title>
+        <title>Volunteer</title>
       </Head>
-      <VolunteerPageComponent volunteerPageContent={volunteerPageContent} faqs={faqs} />
+      <SectionHeader background={{ imageName: "bg-tiling-2", size: "1500px 1500px", position: "70px -640px" }}>
+        <h1 className="text-white">Volunteer</h1>
+      </SectionHeader>
+      <PageSection className="py-8">
+        <DynamicComponents blocks={volunteerPageContent} />
+      </PageSection>
+      <PageSection fullwidth className="bg-base-200 py-6">
+        <h2>FAQs</h2>
+      </PageSection>
+      <PageSection className="py-8">
+        {faqs.map((f) => (
+          <FAQS key={f.id} faq={f} />
+        ))}
+      </PageSection>
     </>
   );
 };
