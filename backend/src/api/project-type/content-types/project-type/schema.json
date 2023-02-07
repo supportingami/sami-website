@@ -22,12 +22,7 @@
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+      "allowedTypes": ["images", "files", "videos", "audios"]
     },
     "HomeSummary": {
       "type": "text"
@@ -37,20 +32,13 @@
     },
     "PageContent": {
       "type": "dynamiczone",
-      "components": [
-        "common.text-block"
-      ]
+      "components": ["common.text-block"]
     },
     "FeatureImage": {
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+      "allowedTypes": ["images", "files", "videos", "audios"]
     },
     "Slug": {
       "type": "string",
