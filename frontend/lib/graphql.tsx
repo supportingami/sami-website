@@ -14,11 +14,24 @@ export const GraphQLProvider = ({ session, children }: { session: session; child
   return <ApolloProvider client={client}>{children}</ApolloProvider>;
 };
 
-export async function serverQuery<T>(graphqlQuery: DocumentNode) {
+/**
+ * Execute a graphql query
+ * @param graphqlQuery Document reference for query
+ * @param variables Additional variables to pass to query, e.g. if query supports filters
+ * ```
+ * {
+ *  filters: {
+ *    Slug: { eq: 'my-slug'}
+ *  }
+ * }
+ * ```
+ */
+export async function serverQuery<T>(graphqlQuery: DocumentNode, variables = {}) {
   const client = graphQLServerClient();
   const res = await client
     .query<T>({
       query: graphqlQuery,
+      variables,
     })
     .catch((err) => {
       // Network errors such as graphql schema errors are nested within

@@ -1183,6 +1183,7 @@ export type ProjectType = {
   Name?: Maybe<Scalars["String"]>;
   PageContent?: Maybe<Array<Maybe<ProjectTypePageContentDynamicZone>>>;
   PageSummary?: Maybe<Scalars["String"]>;
+  Slug: Scalars["String"];
   createdAt?: Maybe<Scalars["DateTime"]>;
   publishedAt?: Maybe<Scalars["DateTime"]>;
   updatedAt?: Maybe<Scalars["DateTime"]>;
@@ -1210,6 +1211,7 @@ export type ProjectTypeFiltersInput = {
   HomeSummary?: InputMaybe<StringFilterInput>;
   Name?: InputMaybe<StringFilterInput>;
   PageSummary?: InputMaybe<StringFilterInput>;
+  Slug?: InputMaybe<StringFilterInput>;
   and?: InputMaybe<Array<InputMaybe<ProjectTypeFiltersInput>>>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
   id?: InputMaybe<IdFilterInput>;
@@ -1227,6 +1229,7 @@ export type ProjectTypeInput = {
   Name?: InputMaybe<Scalars["String"]>;
   PageContent?: InputMaybe<Array<Scalars["ProjectTypePageContentDynamicZoneInput"]>>;
   PageSummary?: InputMaybe<Scalars["String"]>;
+  Slug?: InputMaybe<Scalars["String"]>;
   publishedAt?: InputMaybe<Scalars["DateTime"]>;
 };
 
@@ -2268,7 +2271,9 @@ export type MembersQuery = {
   } | null;
 };
 
-export type ProjectsQueryVariables = Exact<{ [key: string]: never }>;
+export type ProjectsQueryVariables = Exact<{
+  filters?: InputMaybe<ProjectTypeFiltersInput>;
+}>;
 
 export type ProjectsQuery = {
   __typename?: "Query";
@@ -2283,6 +2288,7 @@ export type ProjectsQuery = {
         Content?: string | null;
         HomeSummary?: string | null;
         PageSummary?: string | null;
+        Slug: string;
         Icon?: {
           __typename?: "UploadFileEntityResponse";
           data?: {
@@ -3407,12 +3413,26 @@ export const ProjectsDocument = {
       kind: "OperationDefinition",
       operation: "query",
       name: { kind: "Name", value: "projects" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "filters" } },
+          type: { kind: "NamedType", name: { kind: "Name", value: "ProjectTypeFiltersInput" } },
+        },
+      ],
       selectionSet: {
         kind: "SelectionSet",
         selections: [
           {
             kind: "Field",
             name: { kind: "Name", value: "projectTypes" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "filters" },
+                value: { kind: "Variable", name: { kind: "Name", value: "filters" } },
+              },
+            ],
             selectionSet: {
               kind: "SelectionSet",
               selections: [
@@ -3495,6 +3515,7 @@ export const ProjectsDocument = {
                                 ],
                               },
                             },
+                            { kind: "Field", name: { kind: "Name", value: "Slug" } },
                           ],
                         },
                       },
