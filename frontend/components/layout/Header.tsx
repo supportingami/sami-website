@@ -13,7 +13,7 @@ export const SectionHeader = ({
   children,
   className = "",
 }: {
-  children: JSX.Element[];
+  children: JSX.Element | JSX.Element[];
   background: IBackgroundImageProps;
   className?: string;
 }) => (

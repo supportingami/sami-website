@@ -18,11 +18,11 @@ import {
   SetMinMax,
   RichTextAttribute,
   MediaAttribute,
+  SingleTypeSchema,
+  DynamicZoneAttribute,
   TextAttribute,
   DateAttribute,
-  SingleTypeSchema,
   ComponentAttribute,
-  DynamicZoneAttribute,
   ComponentSchema,
 } from "@strapi/strapi";
 
@@ -452,6 +452,25 @@ export interface ApiAnnualReportAnnualReport extends CollectionTypeSchema {
   };
 }
 
+export interface ApiAuthorBlockAuthorBlock extends SingleTypeSchema {
+  info: {
+    singularName: "author-block";
+    pluralName: "author-blocks";
+    displayName: "AuthorBlock";
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    blocks: DynamicZoneAttribute<["common.action-button", "common.html", "common.text-block"]>;
+    createdAt: DateTimeAttribute;
+    updatedAt: DateTimeAttribute;
+    publishedAt: DateTimeAttribute;
+    createdBy: RelationAttribute<"api::author-block.author-block", "oneToOne", "admin::user"> & PrivateAttribute;
+    updatedBy: RelationAttribute<"api::author-block.author-block", "oneToOne", "admin::user"> & PrivateAttribute;
+  };
+}
+
 export interface ApiBlogPostBlogPost extends CollectionTypeSchema {
   info: {
     singularName: "blog-post";
@@ -659,25 +678,25 @@ export interface ApiResourceResource extends CollectionTypeSchema {
   };
 }
 
-export interface ApiVolunteerVolunteer extends CollectionTypeSchema {
+export interface ApiVolunteerContentVolunteerContent extends SingleTypeSchema {
   info: {
-    singularName: "volunteer";
-    pluralName: "volunteers";
-    displayName: "Volunteer Page";
+    singularName: "volunteer-content";
+    pluralName: "volunteer-contents";
+    displayName: "VolunteerContent";
     description: "";
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    Content: RichTextAttribute;
-    ApplicationLink: StringAttribute;
-    Title: StringAttribute;
+    Content: DynamicZoneAttribute<["common.html", "common.action-button", "common.text-block"]>;
     createdAt: DateTimeAttribute;
     updatedAt: DateTimeAttribute;
     publishedAt: DateTimeAttribute;
-    createdBy: RelationAttribute<"api::volunteer.volunteer", "oneToOne", "admin::user"> & PrivateAttribute;
-    updatedBy: RelationAttribute<"api::volunteer.volunteer", "oneToOne", "admin::user"> & PrivateAttribute;
+    createdBy: RelationAttribute<"api::volunteer-content.volunteer-content", "oneToOne", "admin::user"> &
+      PrivateAttribute;
+    updatedBy: RelationAttribute<"api::volunteer-content.volunteer-content", "oneToOne", "admin::user"> &
+      PrivateAttribute;
   };
 }
 
@@ -690,6 +709,16 @@ export interface CommonActionButton extends ComponentSchema {
   attributes: {
     Text: StringAttribute & RequiredAttribute;
     Link: StringAttribute & RequiredAttribute;
+  };
+}
+
+export interface CommonHtml extends ComponentSchema {
+  info: {
+    displayName: "HTML";
+    description: "";
+  };
+  attributes: {
+    HTML: RichTextAttribute & RequiredAttribute;
   };
 }
 
@@ -802,6 +831,7 @@ declare global {
       "plugin::users-permissions.user": PluginUsersPermissionsUser;
       "api::about.about": ApiAboutAbout;
       "api::annual-report.annual-report": ApiAnnualReportAnnualReport;
+      "api::author-block.author-block": ApiAuthorBlockAuthorBlock;
       "api::blog-post.blog-post": ApiBlogPostBlogPost;
       "api::blog-tag.blog-tag": ApiBlogTagBlogTag;
       "api::country.country": ApiCountryCountry;
@@ -811,8 +841,9 @@ declare global {
       "api::member.member": ApiMemberMember;
       "api::project-type.project-type": ApiProjectTypeProjectType;
       "api::resource.resource": ApiResourceResource;
-      "api::volunteer.volunteer": ApiVolunteerVolunteer;
+      "api::volunteer-content.volunteer-content": ApiVolunteerContentVolunteerContent;
       "common.action-button": CommonActionButton;
+      "common.html": CommonHtml;
       "common.text-block": CommonTextBlock;
       "home.get-involved": HomeGetInvolved;
       "home.hero-image": HomeHeroImage;
