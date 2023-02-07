@@ -1,0 +1,24 @@
+{
+  "kind": "singleType",
+  "collectionName": "volunteer_contents",
+  "info": {
+    "singularName": "volunteer-content",
+    "pluralName": "volunteer-contents",
+    "displayName": "VolunteerContent",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Content": {
+      "type": "dynamiczone",
+      "components": [
+        "common.html",
+        "common.action-button",
+        "common.text-block"
+      ]
+    }
+  }
+}
