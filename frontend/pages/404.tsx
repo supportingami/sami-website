@@ -1,15 +1,13 @@
 import React from "react";
-import Head from "next/head";
-import Page from "components/pages/error";
 import type { NextPage } from "next";
+import PageSection from "components/layout/pageSection";
 
 const Custom404Page: NextPage = () => {
   return (
     <>
-      <Head>
-        <title>Error Page</title>
-      </Head>
-      <Page statusCode={404} />
+      <PageSection className={`py-16 `} fullwidth>
+        <h3>Page not found</h3>
+      </PageSection>
     </>
   );
 };
