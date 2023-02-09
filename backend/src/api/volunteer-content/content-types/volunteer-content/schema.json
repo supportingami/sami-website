@@ -14,11 +14,7 @@
   "attributes": {
     "Content": {
       "type": "dynamiczone",
-      "components": [
-        "common.html",
-        "common.action-button",
-        "common.text-block"
-      ]
+      "components": ["common.html", "common.action-button", "common.text-block"]
     },
     "faqs": {
       "type": "relation",
