@@ -5,8 +5,7 @@
     "backend",
     "ci",
     "frontend",
-    "scripts",
-    "shared"
+    "scripts"
   ],
   "scripts": {
     "build": "yarn build:frontend",
