@@ -23,3 +23,6 @@ backend/build
 
 scripts/input
 scripts/output
+
+*.log
+.firebase

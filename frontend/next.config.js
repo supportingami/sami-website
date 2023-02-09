@@ -17,6 +17,8 @@ module.exports = withBundleAnalyzer({
   experimental: {
     scrollRestoration: true,
   },
+  // https://github.com/firebase/firebase-tools/issues/5421
+  distDir: ".next",
   async redirects() {
     return [
       {

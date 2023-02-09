@@ -8,8 +8,10 @@ The backend stack is deployed as 3 micro-entities to allow for efficient runtime
    This is hosted on GCP via elephantsql to allow use of their free tier
 
 2. File storage
+   Hosted on google cloud storage
 
 3. Strapi Server
+   Hosted on google cloud run
 
 ## Stack Deployment
 
@@ -19,9 +21,12 @@ The backend stack is deployed as 3 micro-entities to allow for efficient runtime
 [Docker](https://www.docker.com/products/docker-desktop/)
 
 ```
-cd ci
-npm i
-pulumi up
+gcloud auth login
+gcloud auth configure-docker europe-west2-docker.pkg.dev
+```
+
+```
+yarn workspace ci deploy
 ```
 
 0. Teardown/export old resources (?)
@@ -36,9 +41,17 @@ https://www.pulumi.com/docs/guides/organizing-projects-stacks/
 pulumi console
 ```
 
+```
+pulumi config
+```
+
 ## Frontend
 
-Vercel
+```
+npm i -g firebase-tools@11.18.0
+```
+
+https://github.com/firebase/firebase-tools/issues/5369
 
 ## Troubleshooting
 

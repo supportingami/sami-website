@@ -4722,24 +4722,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pulumi/docker@npm:^3.4.1":
-  version: 3.4.1
-  resolution: "@pulumi/docker@npm:3.4.1"
+"@pulumi/docker@npm:^3.6.1":
+  version: 3.6.1
+  resolution: "@pulumi/docker@npm:3.6.1"
   dependencies:
     "@pulumi/pulumi": ^3.0.0
     semver: ^5.4.0
-  checksum: 3c6c6fd124ab2fcb419634c505f45a7b409e5f7b851a765ca3a0543dbb263fd50163e3a49c6fa75c8a75cf312e10b7d7a32d1f3bbd00a1c7e6e4418acbd5b7fa
+  checksum: cf8302e65d43bfcc10da904e3f79c64fe397b8e3beca62b968693caeb3fbf4276619d67979da2eed644e47af9c04a8f54d8806006a51e893223eafc622a48a1f
   languageName: node
   linkType: hard
 
-"@pulumi/gcp@npm:^6.0.0":
-  version: 6.41.0
-  resolution: "@pulumi/gcp@npm:6.41.0"
+"@pulumi/gcp@npm:^6.49.0":
+  version: 6.49.0
+  resolution: "@pulumi/gcp@npm:6.49.0"
   dependencies:
     "@pulumi/pulumi": ^3.0.0
     "@types/express": ^4.16.0
     read-package-json: ^2.0.13
-  checksum: be28a8507ef9ea4bc947a9f6e6550fb1cce252c47281e811377b33c5cd7dca952695e35d1c382fcc6b3aba7bdbf327a41419f584a3a4e7b87adf9da40009f8a9
+  checksum: 4acb076bdf415b7c6825b2c2988b4da86ac349c32e13cfccafd9c4b4d9e05c2e80bf23d65f77e70673e4628f206cb45572ee0393a18f5e5a4d230e518355cc50
   languageName: node
   linkType: hard
 
@@ -4771,6 +4771,37 @@ __metadata:
     typescript: ~3.8.3
     upath: ^1.1.0
   checksum: 76bdbd1c2c87d797920122ca769ff0a3ab2bbda8b4afb3ebe5f7201a2594d1291140f9b813d308f909d8a3d2b6c8c85bd0522aade37726b7f22826b820ddb78b
+  languageName: node
+  linkType: hard
+
+"@pulumi/pulumi@npm:^3.54.0":
+  version: 3.54.0
+  resolution: "@pulumi/pulumi@npm:3.54.0"
+  dependencies:
+    "@grpc/grpc-js": ~1.3.8
+    "@logdna/tail-file": ^2.0.6
+    "@opentelemetry/api": ^1.2.0
+    "@opentelemetry/exporter-zipkin": ^1.6.0
+    "@opentelemetry/instrumentation-grpc": ^0.32.0
+    "@opentelemetry/resources": ^1.6.0
+    "@opentelemetry/sdk-trace-base": ^1.6.0
+    "@opentelemetry/sdk-trace-node": ^1.6.0
+    "@opentelemetry/semantic-conventions": ^1.6.0
+    "@pulumi/query": ^0.3.0
+    execa: ^5.1.0
+    google-protobuf: ^3.5.0
+    ini: ^2.0.0
+    js-yaml: ^3.14.0
+    minimist: ^1.2.6
+    normalize-package-data: ^2.4.0
+    read-package-tree: ^5.3.1
+    require-from-string: ^2.0.1
+    semver: ^6.1.0
+    source-map-support: ^0.5.6
+    ts-node: ^7.0.1
+    typescript: ~3.8.3
+    upath: ^1.1.0
+  checksum: 0ee833cf35923794a4c342ddcf1ea37c531466438cfa5dceb20573063d2bb6c124a9078f0375444795c5e4dc518048f6e311b5c3a302cd42edd2e31f1d1f1470
   languageName: node
   linkType: hard
 
@@ -6574,10 +6605,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^14":
-  version: 14.18.32
-  resolution: "@types/node@npm:14.18.32"
-  checksum: 45463114bf85d06dc12925d876dd90b7fff43d9ee10a40e48fd16aece3d0201c76426c128e41230b2818d386422be06c5be33b3d94d90ee924b6fa4d54574035
+"@types/node@npm:^16":
+  version: 16.18.12
+  resolution: "@types/node@npm:16.18.12"
+  checksum: fc3271182414f8593018ef8f00b4718116a92f463f619081bd399d9460e7861e1dd7eebc7cf94c23567e418ff397babed077011711aae8d47171b5a81c5bd71d
   languageName: node
   linkType: hard
 
@@ -9307,11 +9338,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "ci@workspace:ci"
   dependencies:
-    "@pulumi/docker": ^3.4.1
-    "@pulumi/gcp": ^6.0.0
-    "@pulumi/pulumi": ^3.0.0
-    "@types/node": ^14
-    dotenv: ^16.0.1
+    "@pulumi/docker": ^3.6.1
+    "@pulumi/gcp": ^6.49.0
+    "@pulumi/pulumi": ^3.54.0
+    "@types/node": ^16
+    dotenv: ^16.0.3
   languageName: unknown
   linkType: soft
 
@@ -11320,7 +11351,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:^16.0.0, dotenv@npm:^16.0.1":
+"dotenv@npm:^16.0.0, dotenv@npm:^16.0.1, dotenv@npm:^16.0.3":
   version: 16.0.3
   resolution: "dotenv@npm:16.0.3"
   checksum: afcf03f373d7a6d62c7e9afea6328e62851d627a4e73f2e12d0a8deae1cd375892004f3021883f8aec85932cd2834b091f568ced92b4774625b321db83b827f8
