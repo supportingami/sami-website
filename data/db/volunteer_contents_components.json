@@ -1,0 +1,34 @@
+[
+  {
+    "component_id": 1,
+    "component_type": "common.html",
+    "entity_id": 1,
+    "field": "Content",
+    "id": 31,
+    "order": 1
+  },
+  {
+    "component_id": 2,
+    "component_type": "common.html",
+    "entity_id": 1,
+    "field": "Content",
+    "id": 32,
+    "order": 2
+  },
+  {
+    "component_id": 3,
+    "component_type": "common.html",
+    "entity_id": 1,
+    "field": "Content",
+    "id": 33,
+    "order": 3
+  },
+  {
+    "component_id": 8,
+    "component_type": "common.action-button",
+    "entity_id": 1,
+    "field": "Content",
+    "id": 34,
+    "order": 4
+  }
+]

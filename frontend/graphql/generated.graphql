@@ -77,6 +77,31 @@ input AnnualReportInput {
   publishedAt: DateTime
 }
 
+type AuthorBlock {
+  blocks: [AuthorBlockBlocksDynamicZone]
+  createdAt: DateTime
+  publishedAt: DateTime
+  updatedAt: DateTime
+}
+
+union AuthorBlockBlocksDynamicZone = ComponentCommonActionButton | ComponentCommonHtml | ComponentCommonTextBlock | Error
+
+scalar AuthorBlockBlocksDynamicZoneInput
+
+type AuthorBlockEntity {
+  attributes: AuthorBlock
+  id: ID
+}
+
+type AuthorBlockEntityResponse {
+  data: AuthorBlockEntity
+}
+
+input AuthorBlockInput {
+  blocks: [AuthorBlockBlocksDynamicZoneInput!]
+  publishedAt: DateTime
+}
+
 type BlogPost {
   Content: String
   DateWritten: Date
@@ -214,6 +239,11 @@ input ComponentCommonActionButtonInput {
   Link: String
   Text: String
   id: ID
+}
+
+type ComponentCommonHtml {
+  HTML: String!
+  id: ID!
 }
 
 type ComponentCommonTextBlock {
@@ -534,7 +564,7 @@ input FloatFilterInput {
   startsWith: Float
 }
 
-union GenericMorph = About | AnnualReport | BlogPost | BlogTag | ComponentCommonActionButton | ComponentCommonTextBlock | ComponentHomeGetInvolved | ComponentHomeHeroImage | ComponentHomeImpactNumbers | ComponentHomeImpactSection | ComponentHomeMissionStatement | ComponentHomeProjectSummary | ComponentHomeProjectSummaryItem | Country | DonateContent | Faq | HomeContent | I18NLocale | Member | ProjectType | Resource | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Volunteer
+union GenericMorph = About | AnnualReport | AuthorBlock | BlogPost | BlogTag | ComponentCommonActionButton | ComponentCommonHtml | ComponentCommonTextBlock | ComponentHomeGetInvolved | ComponentHomeHeroImage | ComponentHomeImpactNumbers | ComponentHomeImpactSection | ComponentHomeMissionStatement | ComponentHomeProjectSummary | ComponentHomeProjectSummaryItem | Country | DonateContent | Faq | HomeContent | I18NLocale | Member | ProjectType | Resource | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | VolunteerContent
 
 type HomeContent {
   GetInvolved: ComponentHomeGetInvolved
@@ -748,9 +778,9 @@ type Mutation {
 
   """Create a new user"""
   createUsersPermissionsUser(data: UsersPermissionsUserInput!): UsersPermissionsUserEntityResponse!
-  createVolunteer(data: VolunteerInput!): VolunteerEntityResponse
   deleteAbout(id: ID!): AboutEntityResponse
   deleteAnnualReport(id: ID!): AnnualReportEntityResponse
+  deleteAuthorBlock: AuthorBlockEntityResponse
   deleteBlogPost(id: ID!): BlogPostEntityResponse
   deleteBlogTag(id: ID!): BlogTagEntityResponse
   deleteCountry(id: ID!): CountryEntityResponse
@@ -768,7 +798,7 @@ type Mutation {
 
   """Delete an existing user"""
   deleteUsersPermissionsUser(id: ID!): UsersPermissionsUserEntityResponse!
-  deleteVolunteer(id: ID!): VolunteerEntityResponse
+  deleteVolunteerContent: VolunteerContentEntityResponse
 
   """Confirm an email users email address"""
   emailConfirmation(confirmation: String!): UsersPermissionsLoginPayload
@@ -788,6 +818,7 @@ type Mutation {
   resetPassword(code: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
   updateAbout(data: AboutInput!, id: ID!): AboutEntityResponse
   updateAnnualReport(data: AnnualReportInput!, id: ID!): AnnualReportEntityResponse
+  updateAuthorBlock(data: AuthorBlockInput!): AuthorBlockEntityResponse
   updateBlogPost(data: BlogPostInput!, id: ID!): BlogPostEntityResponse
   updateBlogTag(data: BlogTagInput!, id: ID!): BlogTagEntityResponse
   updateCountry(data: CountryInput!, id: ID!): CountryEntityResponse
@@ -806,7 +837,7 @@ type Mutation {
 
   """Update an existing user"""
   updateUsersPermissionsUser(data: UsersPermissionsUserInput!, id: ID!): UsersPermissionsUserEntityResponse!
-  updateVolunteer(data: VolunteerInput!, id: ID!): VolunteerEntityResponse
+  updateVolunteerContent(data: VolunteerContentInput!): VolunteerContentEntityResponse
   upload(field: String, file: Upload!, info: FileInfoInput, ref: String, refId: ID): UploadFileEntityResponse!
 }
 
@@ -893,6 +924,7 @@ type Query {
   abouts(filters: AboutFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): AboutEntityResponseCollection
   annualReport(id: ID): AnnualReportEntityResponse
   annualReports(filters: AnnualReportFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): AnnualReportEntityResponseCollection
+  authorBlock(publicationState: PublicationState = LIVE): AuthorBlockEntityResponse
   blogPost(id: ID): BlogPostEntityResponse
   blogPosts(filters: BlogPostFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): BlogPostEntityResponseCollection
   blogTag(id: ID): BlogTagEntityResponse
@@ -920,8 +952,7 @@ type Query {
   usersPermissionsRoles(filters: UsersPermissionsRoleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsRoleEntityResponseCollection
   usersPermissionsUser(id: ID): UsersPermissionsUserEntityResponse
   usersPermissionsUsers(filters: UsersPermissionsUserFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsUserEntityResponseCollection
-  volunteer(id: ID): VolunteerEntityResponse
-  volunteers(filters: VolunteerFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): VolunteerEntityResponseCollection
+  volunteerContent(publicationState: PublicationState = LIVE): VolunteerContentEntityResponse
 }
 
 type Resource {
@@ -1315,45 +1346,27 @@ type UsersPermissionsUserRelationResponseCollection {
   data: [UsersPermissionsUserEntity!]!
 }
 
-type Volunteer {
-  ApplicationLink: String
-  Content: String
-  Title: String
+type VolunteerContent {
+  Content: [VolunteerContentContentDynamicZone]
   createdAt: DateTime
   publishedAt: DateTime
   updatedAt: DateTime
 }
 
-type VolunteerEntity {
-  attributes: Volunteer
+union VolunteerContentContentDynamicZone = ComponentCommonActionButton | ComponentCommonHtml | ComponentCommonTextBlock | Error
+
+scalar VolunteerContentContentDynamicZoneInput
+
+type VolunteerContentEntity {
+  attributes: VolunteerContent
   id: ID
 }
 
-type VolunteerEntityResponse {
-  data: VolunteerEntity
+type VolunteerContentEntityResponse {
+  data: VolunteerContentEntity
 }
 
-type VolunteerEntityResponseCollection {
-  data: [VolunteerEntity!]!
-  meta: ResponseCollectionMeta!
-}
-
-input VolunteerFiltersInput {
-  ApplicationLink: StringFilterInput
-  Content: StringFilterInput
-  Title: StringFilterInput
-  and: [VolunteerFiltersInput]
-  createdAt: DateTimeFilterInput
-  id: IDFilterInput
-  not: VolunteerFiltersInput
-  or: [VolunteerFiltersInput]
-  publishedAt: DateTimeFilterInput
-  updatedAt: DateTimeFilterInput
-}
-
-input VolunteerInput {
-  ApplicationLink: String
-  Content: String
-  Title: String
+input VolunteerContentInput {
+  Content: [VolunteerContentContentDynamicZoneInput!]
   publishedAt: DateTime
 }
