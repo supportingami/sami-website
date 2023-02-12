@@ -21,6 +21,8 @@ out
 backend/data
 backend/build
 
+dist
+
 scripts/input
 scripts/output
 

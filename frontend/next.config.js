@@ -1,10 +1,18 @@
+//@ts-check
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { withNx } = require("@nrwl/next/plugins/with-nx");
+
 const path = require("path");
 
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
 
-module.exports = withBundleAnalyzer({
+/**
+ * @type {import('@nrwl/next/plugins/with-nx').WithNxOptions}
+ **/
+const nextConfig = {
   // https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode
   reactStrictMode: true,
   images: {
@@ -18,7 +26,7 @@ module.exports = withBundleAnalyzer({
     scrollRestoration: true,
   },
   // https://github.com/firebase/firebase-tools/issues/5421
-  distDir: ".next",
+  // distDir: ".next",
   async redirects() {
     return [
       {
@@ -28,4 +36,11 @@ module.exports = withBundleAnalyzer({
       },
     ];
   },
-});
+  nx: {
+    // Set this to true if you would like to to use SVGR
+    // See: https://github.com/gregberge/svgr
+    svgr: true,
+  },
+};
+
+module.exports = withNx(withBundleAnalyzer(nextConfig));

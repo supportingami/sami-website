@@ -1,7 +1,6 @@
 import React from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-// import { SessionProvider } from "next-auth/react";
 import Layout from "components/layout";
 import "../styles/globals.scss";
 import DaisyThemeProvider from "lib/themeProvider";
@@ -17,14 +16,12 @@ const App = ({ Component, pageProps }: AppProps) => {
       <Head>
         <link rel="shortcut icon" href="/images/favicon.ico" />
       </Head>
-      {/* <SessionProvider session={session}> */}
       <DaisyThemeProvider>
         <Layout className={`${roboto.variable} font-sans`}>
           <Component {...pageProps} />
           <Footer />
         </Layout>
       </DaisyThemeProvider>
-      {/* </SessionProvider> */}
     </>
   );
 };
