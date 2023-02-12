@@ -37,6 +37,32 @@
         }
       }
     },
+
+    "generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "graphql-codegen --require dotenv/config --config codegen.yml dotenv_config_path=./.env.local",
+        "parallel": false,
+        "cwd": "frontend"
+      }
+    },
+    "analyze": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "set \"ANALYZE=true\" && next build frontend",
+        "parallel": false
+      },
+      "configurations": {
+        "unix": { "command": "ANALYZE=true next build frontend" }
+      }
+    },
+    "turbo": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "next dev frontend --turbo",
+        "parallel": false
+      }
+    },
     "export": {
       "executor": "@nrwl/next:export",
       "options": {

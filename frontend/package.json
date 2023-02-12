@@ -2,11 +2,5 @@
   "name": "frontend",
   "version": "0.0.0",
   "author": "chris@c2dev.co.uk",
-  "license": "MIT",
-  "scripts": {
-    "start": "next dev --turbo",
-    "start:prod": "next start",
-    "build:analyze": "ANALYZE=true next build && tsc --project tsconfig.server.json",
-    "generate": "graphql-codegen --require dotenv/config --config codegen.yml dotenv_config_path=./.env.local"
-  }
+  "license": "MIT"
 }

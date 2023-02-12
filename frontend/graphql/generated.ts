@@ -627,6 +627,11 @@ export type FaqInput = {
   publishedAt?: InputMaybe<Scalars["DateTime"]>;
 };
 
+export type FaqRelationResponseCollection = {
+  __typename?: "FaqRelationResponseCollection";
+  data: Array<FaqEntity>;
+};
+
 export type FileInfoInput = {
   alternativeText?: InputMaybe<Scalars["String"]>;
   caption?: InputMaybe<Scalars["String"]>;
@@ -896,6 +901,8 @@ export type MemberInput = {
 
 export type Mutation = {
   __typename?: "Mutation";
+  /** Change user password. Confirm with the current password. */
+  changePassword?: Maybe<UsersPermissionsLoginPayload>;
   createAbout?: Maybe<AboutEntityResponse>;
   createAnnualReport?: Maybe<AnnualReportEntityResponse>;
   createBlogPost?: Maybe<BlogPostEntityResponse>;
@@ -962,6 +969,12 @@ export type Mutation = {
   updateUsersPermissionsUser: UsersPermissionsUserEntityResponse;
   updateVolunteerContent?: Maybe<VolunteerContentEntityResponse>;
   upload: UploadFileEntityResponse;
+};
+
+export type MutationChangePasswordArgs = {
+  currentPassword: Scalars["String"];
+  password: Scalars["String"];
+  passwordConfirmation: Scalars["String"];
 };
 
 export type MutationCreateAboutArgs = {
@@ -1928,8 +1941,16 @@ export type VolunteerContent = {
   __typename?: "VolunteerContent";
   Content?: Maybe<Array<Maybe<VolunteerContentContentDynamicZone>>>;
   createdAt?: Maybe<Scalars["DateTime"]>;
+  faqs?: Maybe<FaqRelationResponseCollection>;
   publishedAt?: Maybe<Scalars["DateTime"]>;
   updatedAt?: Maybe<Scalars["DateTime"]>;
+};
+
+export type VolunteerContentFaqsArgs = {
+  filters?: InputMaybe<FaqFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
 };
 
 export type VolunteerContentContentDynamicZone =
@@ -1951,6 +1972,7 @@ export type VolunteerContentEntityResponse = {
 
 export type VolunteerContentInput = {
   Content?: InputMaybe<Array<Scalars["VolunteerContentContentDynamicZoneInput"]>>;
+  faqs?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
   publishedAt?: InputMaybe<Scalars["DateTime"]>;
 };
 
