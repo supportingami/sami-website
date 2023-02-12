@@ -7,8 +7,8 @@ import path from "path";
 import { loadDb } from "backend/scripts/db";
 
 // Import from backend folders to ensure plugins resolved correctly
-import strapi from "../../../../node_modules/@strapi/strapi";
-import type { Strapi } from "../../../../node_modules/@strapi/strapi";
+import strapi from "../../../../backend/node_modules/@strapi/strapi";
+import type { Strapi } from "../../../../backend/node_modules/@strapi/strapi";
 
 import { PATHS } from "../../paths";
 import { getFrontendEnv, getBackendEnv } from "../../utils";

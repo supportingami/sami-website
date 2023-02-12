@@ -64,10 +64,12 @@ class StartCmd {
 
     // use wait-on to wait for backend server to be ready before starting frontend
     const waitOnBinPath = path.resolve(PATHS.rootDir, "node_modules", ".bin", "wait-on");
+    const nxBinPath = path.resolve(PATHS.rootDir, "node_modules", ".bin", "nx");
     return {
       name: "nextJS",
-      command: `${waitOnBinPath} http://localhost:1337 && yarn nx serve frontend --configuration=development`,
+      command: `${waitOnBinPath} http://localhost:1337 && ${nxBinPath} run frontend:serve:development`,
       env,
+      cwd: PATHS.rootDir,
       prefixColor: "bgBlack.white",
     };
   }

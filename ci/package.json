@@ -6,9 +6,6 @@
     "console": "pulumi console",
     "pulumi": "pulumi"
   },
-  "devDependencies": {
-    "@types/node": "^16"
-  },
   "dependencies": {
     "@pulumi/docker": "^3.6.1",
     "@pulumi/gcp": "^6.49.0",

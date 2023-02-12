@@ -37,7 +37,6 @@
     "@nrwl/next": "^15.6.3",
     "@nrwl/nx-cloud": "latest",
     "@nrwl/react": "15.6.3",
-    "@nx-extend/strapi": "^3.4.0",
     "@release-it/conventional-changelog": "^5.0.0",
     "@tailwindcss/typography": "^0.5.4",
     "@testing-library/react": "13.4.0",
@@ -94,27 +93,17 @@
     "node": ">=14.x <=16.x"
   },
   "dependencies": {
-    "@_sh/strapi-plugin-ckeditor": "^1.1.1",
     "@apollo/client": "^3.7.7",
     "@next/font": "^13.1.6",
-    "@strapi-community/strapi-provider-upload-google-cloud-storage": "^4.5.6",
-    "@strapi/plugin-graphql": "4.6.0",
-    "@strapi/plugin-i18n": "4.6.0",
-    "@strapi/plugin-users-permissions": "4.6.0",
-    "@strapi/strapi": "4.6.0",
-    "better-sqlite3": "7.6.2",
     "dayjs": "^1.11.7",
     "graphql": "^16.6.0",
-    "knex": "^2.4.2",
     "next": "13.1.1",
     "pg": "^8.9.0",
-    "pg-connection-string": "^2.5.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.7.1",
     "react-share": "^4.4.1",
-    "strapi-connector-bookshelf": "^3.6.11",
-    "strapi-plugin-import-export-entries": "^1.18.0",
+    "sharp": "^0.31.3",
     "tslib": "^2.3.0"
   }
 }
