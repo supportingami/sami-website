@@ -1,5 +1,6 @@
 import { Command } from "commander";
 import { logProgramHelp } from "../../utils";
+import deployCmd from "./deploy";
 import startCmd from "./start";
 
 /***************************************************************************************
@@ -10,6 +11,7 @@ import startCmd from "./start";
 const program = new Command("dev");
 program.description("Local development scripts");
 program.addCommand(startCmd);
+program.addCommand(deployCmd);
 
 export default program;
 

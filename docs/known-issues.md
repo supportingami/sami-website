@@ -7,9 +7,13 @@ As well as manual scripts fix discussed at link below, a lot of issues of folder
 
 https://github.com/firebase/firebase-tools/issues/5369#issuecomment-1426958765
 
+Further issues also found at: https://github.com/FirebaseExtended/firebase-framework-tools/issues
+
+### Firebase "Could not determine the web framework in use."
+
 Additionally `next` must appear in the package.json folder as a listed dependency (not parent workspace)
 
-Potential workaround is to try and recreate the hosting/functions folders created during successful deploy and just manually deploy those instead
+Potential workaround to both above is to try and recreate the hosting/functions folders created during successful deploy and just manually deploy those instead
 
 ```
 firebase deploy --debug

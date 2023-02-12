@@ -2,5 +2,8 @@
   "name": "frontend",
   "version": "0.0.0",
   "author": "chris@c2dev.co.uk",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "next": "13.1.1"
+  }
 }

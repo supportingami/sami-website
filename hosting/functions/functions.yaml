@@ -1,0 +1,15 @@
+{
+  "endpoints": {
+    "ssrsamiwebsite365718": {
+      "platform": "gcfv2",
+      "region": [
+        "us-central1"
+      ],
+      "labels": {},
+      "httpsTrigger": {},
+      "entryPoint": "ssr"
+    }
+  },
+  "specVersion": "v1alpha1",
+  "requiredAPIs": []
+}
