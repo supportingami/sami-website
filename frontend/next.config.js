@@ -25,12 +25,11 @@ const nextConfig = {
   experimental: {
     scrollRestoration: true,
   },
-  // https://github.com/firebase/firebase-tools/issues/5421
-  // distDir: "../dist/frontend/.next",
 
   // HACK - default is local .next folder, however firebase needs explicitly defined (???)
-  // so self-assign to default from parent
-  distDir: "../.next",
+  // https://github.com/firebase/firebase-tools/issues/5421
+  // can self-assign if planning to use firebase's only deploy method instead of custom
+  // distDir: "../.next",
   async redirects() {
     return [
       {
@@ -45,6 +44,9 @@ const nextConfig = {
     // See: https://github.com/gregberge/svgr
     svgr: true,
   },
+  // Support for standalone server hosting
+  // https://nextjs.org/docs/advanced-features/output-file-tracing
+  output: "standalone",
 };
 
 module.exports = withNx(withBundleAnalyzer(nextConfig));
