@@ -48,9 +48,14 @@ pulumi config
 ## Frontend
 
 ```
-npm i -g firebase-tools@11.18.0
+npm i -g firebase-tools
 ```
 
+```
+firebase deploy --debug
+```
+
+Note - if deploying on windows may need to manually edit code
 https://github.com/firebase/firebase-tools/issues/5369
 
 ## Troubleshooting

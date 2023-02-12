@@ -26,7 +26,11 @@ const nextConfig = {
     scrollRestoration: true,
   },
   // https://github.com/firebase/firebase-tools/issues/5421
-  // distDir: ".next",
+  // distDir: "../dist/frontend/.next",
+
+  // HACK - default is local .next folder, however firebase needs explicitly defined (???)
+  // so self-assign to default from parent
+  distDir: "../.next",
   async redirects() {
     return [
       {
