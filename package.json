@@ -5,8 +5,7 @@
     "backend",
     "ci",
     "frontend",
-    "scripts",
-    "hosting/functions"
+    "scripts"
   ],
   "scripts": {
     "build": "nx run frontend:build",
