@@ -63,7 +63,7 @@ class StartCmd {
     }
 
     // use wait-on to wait for backend server to be ready before starting frontend
-    const waitOnBinPath = path.resolve(PATHS.rootDir, "node_modules", ".bin", "wait-on");
+    const waitOnBinPath = path.resolve(PATHS.scriptsDir, "node_modules", ".bin", "wait-on");
     const nxBinPath = path.resolve(PATHS.rootDir, "node_modules", ".bin", "nx");
     return {
       name: "nextJS",

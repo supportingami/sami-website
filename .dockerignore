@@ -6,3 +6,5 @@ README.md
 .next
 docker
 .git
+dist
+.yarn/install-state.gz

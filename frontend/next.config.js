@@ -46,7 +46,8 @@ const nextConfig = {
   },
   // Support for standalone server hosting
   // https://nextjs.org/docs/advanced-features/output-file-tracing
-  output: "standalone",
+  // output: "standalone",
+  // distDir: "dist",
 };
 
 module.exports = withNx(withBundleAnalyzer(nextConfig));

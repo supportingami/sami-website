@@ -4,37 +4,38 @@
   "sourceRoot": "frontend",
   "projectType": "application",
   "targets": {
-    "build": {
-      "executor": "@nrwl/next:build",
-      "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
+    "install": {
+      "executor": "nx:run-commands",
       "options": {
-        "root": "frontend",
-        "outputPath": "dist/frontend"
-      },
-      "configurations": {
-        "development": {
-          "outputPath": "frontend"
-        },
-        "production": {}
+        "commands": ["TODO - create local yarn.lock", "yarn install"],
+        "parallel": false,
+        "outputPath": "frontend/.yarn.lock",
+        "cwd": "frontend"
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn next build",
+        "parallel": false,
+        "outputPath": "frontend/.next",
+        "cwd": "frontend"
+      }
+    },
+    "start": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn next start",
+        "parallel": false,
+        "cwd": "frontend"
       }
     },
     "serve": {
-      "executor": "@nrwl/next:server",
-      "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "frontend:build",
-        "dev": true
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "frontend:build:development",
-          "dev": true
-        },
-        "production": {
-          "buildTarget": "frontend:build:production",
-          "dev": false
-        }
+        "command": "next dev",
+        "parallel": false,
+        "outputPath": "frontend/.next",
+        "cwd": "frontend"
       }
     },
 
