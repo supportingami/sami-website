@@ -23,7 +23,7 @@
     "knex": "^2.4.0",
     "pg": "^8.7.3",
     "pg-connection-string": "^2.5.0",
-    "sqlite3": "^5.1.2",
+    "sqlite3": "^5.1.5",
     "strapi-connector-bookshelf": "^3.6.10",
     "strapi-plugin-import-export-entries": "^1.7.1"
   },
