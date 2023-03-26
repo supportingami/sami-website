@@ -4,7 +4,7 @@ import crypto from "crypto";
 import { PATHS } from "../../paths";
 import type { IAdminToken, IStrapi } from "./common";
 import { ADMIN_TOKENS, createStrapiInstance } from "./common";
-import { getLoadedEnv, updateEnv } from "../../utils";
+import { getLoadedEnv, loadEnv, updateEnv } from "../../utils";
 import chalk from "chalk";
 
 /***************************************************************************************
@@ -32,6 +32,7 @@ class StrapiBootstrap {
   constructor(public options: IProgramOptions) {}
 
   public async run() {
+    await loadEnv();
     this.app = await createStrapiInstance();
     await this.app.start();
     await this.checkAccessTokens();
@@ -55,7 +56,7 @@ class StrapiBootstrap {
     // write new
     for (const adminToken of Object.values(ADMIN_TOKENS)) {
       await this.addAdminToken(adminToken);
-      await updateEnv({ [adminToken.name]: adminToken.accessKey });
+      await updateEnv({ [adminToken.name]: adminToken.accessKey }, { local: true });
     }
 
     const { envPath } = getLoadedEnv();

@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { appendFileSync, copyFileSync, existsSync, readFileSync, readdirSync, writeFileSync } from "fs-extra";
+import { ensureFileSync, existsSync, readFileSync, readdirSync, writeFileSync } from "fs-extra";
 import { prompt } from "inquirer";
 import path from "path";
 import { PATHS } from "../paths";
@@ -17,8 +17,6 @@ export interface IEnvLoaded {
   name: string;
   /** full path to .env file */
   envPath: string;
-  /** raw string representing env prior to key-value pair parse */
-  envString: string;
   /** key-value pairs of variables processed from .env file */
   parsed: Record<string, string>;
 }
@@ -38,34 +36,55 @@ export async function loadEnv(envName?: string) {
   }
   const envDir = path.resolve(PATHS.rootDir, "config");
   const envPath = path.resolve(envDir, `${envName}.env`);
+
   if (!existsSync(envPath)) {
     throw new Error("Environment config not found\n" + envPath);
   }
-  const envData = readFileSync(envPath);
-  const parsed = dotenv.parse(envData) as Record<string, string>;
-  const envString = envData.toString("utf8");
-  dotenv.config({ path: envPath });
+
+  // populate to process env
+  let { parsed } = dotenv.config({ path: envPath, override: true });
+
+  // add local env overrides
+  const envLocalOverridesPath = path.resolve(envDir, `${envName}.local.env`);
+  if (existsSync(envLocalOverridesPath)) {
+    parsed = {
+      ...parsed,
+      ...dotenv.config({ path: envLocalOverridesPath, override: true }).parsed,
+    };
+  }
+
   envLoaded = {
     name: envName,
     envPath,
-    envString,
     parsed,
   };
   // populate selected .env to global environment
   process.env.ENV_PATH = envPath;
-  // Duplicate loaded env to backend local env
+  // Write combined local and config env to local folder
+  const mergedEnv = Object.entries(parsed)
+    .map(([key, value]) => `${key}=${value}`)
+    .join("\n");
   const backendEnvPath = path.resolve(PATHS.backendDir, ".env");
   const frontendEnvPath = path.resolve(PATHS.frontendDir, ".env");
-  copyFileSync(envPath, backendEnvPath);
-  copyFileSync(envPath, frontendEnvPath);
+
+  writeFileSync(backendEnvPath, mergedEnv, "utf8");
+  writeFileSync(frontendEnvPath, mergedEnv, "utf8");
+
   return envLoaded;
 }
 
 /**
  *
+ * @param opts.local assign as local overrides to a .local.env file
  */
-export async function updateEnv(update: Record<string, string>) {
-  let { parsed, name, envPath, envString } = getLoadedEnv();
+export async function updateEnv(update: Record<string, string>, opts: { local?: boolean } = {}) {
+  let { parsed, name, envPath } = getLoadedEnv();
+  if (opts.local) {
+    envPath = envPath.replace(".env", ".local.env");
+    ensureFileSync(envPath);
+  }
+  const envData = readFileSync(envPath);
+  let envString = envData.toString("utf8");
   for (const [key, updatedValue] of Object.entries(update)) {
     if (key in parsed) {
       const replaceRegex = new RegExp(`${key}=.*`);
@@ -92,7 +111,7 @@ export function getLoadedEnv() {
 async function promptEnv() {
   const envDir = path.resolve(PATHS.rootDir, "config");
   const envFiles = readdirSync(envDir)
-    .filter((filename) => filename.endsWith(".env"))
+    .filter((filename) => filename.endsWith(".env") && !filename.includes(".local."))
     .map((filename) => {
       const [name] = filename.split(".");
       return name;
