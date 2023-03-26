@@ -28,7 +28,6 @@ class StartCmd {
 
   public async run() {
     const envLoaded = await loadEnv();
-
     const backendStart = this.getBackendStartCommand(envLoaded);
     // when running frontend always assume local config
     const frontendStart = this.getFrontendCommand(envLoaded);
