@@ -2,10 +2,9 @@ import { spawnSync } from "child_process";
 import { Command } from "commander";
 import crypto from "crypto";
 import { PATHS } from "../../paths";
-import * as fs from "fs-extra";
 import type { IAdminToken, IStrapi } from "./common";
 import { ADMIN_TOKENS, createStrapiInstance } from "./common";
-import { getFrontendEnv } from "../../utils";
+import { getLoadedEnv, updateEnv } from "../../utils";
 import chalk from "chalk";
 
 /***************************************************************************************
@@ -56,9 +55,10 @@ class StrapiBootstrap {
     // write new
     for (const adminToken of Object.values(ADMIN_TOKENS)) {
       await this.addAdminToken(adminToken);
-      this.writeFrontendEnvToken(adminToken, adminToken.name);
+      await updateEnv({ [adminToken.name]: adminToken.accessKey });
     }
-    const { envPath } = getFrontendEnv();
+
+    const { envPath } = getLoadedEnv();
     console.log("tokens written to\n", envPath);
   }
 
@@ -79,18 +79,6 @@ class StrapiBootstrap {
       data: { ...token, accessKey: hash(token.accessKey, salt) },
     });
     console.log(chalk.yellow("apiToken created", JSON.stringify(token, null, 2)));
-  }
-
-  /** Populate frontend local.env with api token */
-  private writeFrontendEnvToken(token: IAdminToken, envTokenName: string) {
-    const { envPath, envString, parsed } = getFrontendEnv();
-    const existingToken = parsed[envTokenName];
-    if (existingToken) {
-      const updatedEnv = envString.replace(existingToken, token.accessKey);
-      fs.writeFileSync(envPath, updatedEnv);
-    } else {
-      fs.appendFileSync(envPath, `\n${envTokenName}=${token.accessKey}`);
-    }
   }
 
   private async deleteAdminToken(token: IAdminToken) {

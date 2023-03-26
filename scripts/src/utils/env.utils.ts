@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { createFileSync, existsSync, readdirSync, readFileSync } from "fs-extra";
+import { appendFileSync, copyFileSync, existsSync, readFileSync, readdirSync, writeFileSync } from "fs-extra";
 import { prompt } from "inquirer";
 import path from "path";
 import { PATHS } from "../paths";
@@ -8,84 +8,105 @@ import { PATHS } from "../paths";
  * Environments
  *
  * Strapi and NextJS both have support for .env files, handled in slightly different ways
- * The methods below provide access to read and parse env configuration for both frontend and backend
+ * To make it easier to resolve a single set of env configuration is stored at the root config folder
+ * and passed to methods as required
  ***********************************************************************************************/
 
-export interface IFrontendEnv {
-  /** local name suffix of .env file, e.g. .env.local */
+export interface IEnvLoaded {
+  /** local name prefix of .env file, e.g. development.env */
   name: string;
   /** full path to .env file */
   envPath: string;
   /** raw string representing env prior to key-value pair parse */
   envString: string;
   /** key-value pairs of variables processed from .env file */
-  parsed: any;
+  parsed: Record<string, string>;
 }
+let envLoaded: IEnvLoaded;
 
-export function getFrontendEnv(): IFrontendEnv {
-  const name = "local";
-  const envPath = path.resolve(PATHS.frontendDir, `.env.${name}`);
+/**
+ * Load an environment configuration from root config env files
+ * and replicate to frontend and backend folders
+ */
+export async function loadEnv(envName?: string) {
+  if (!envName) {
+    envName = await promptEnv();
+  }
+  // Return if already processed
+  if (envLoaded && envLoaded.name === envName) {
+    return envLoaded;
+  }
+  const envDir = path.resolve(PATHS.rootDir, "config");
+  const envPath = path.resolve(envDir, `${envName}.env`);
   if (!existsSync(envPath)) {
-    createFileSync(envPath);
+    throw new Error("Environment config not found\n" + envPath);
   }
   const envData = readFileSync(envPath);
-  const parsed: IFrontendEnv = dotenv.parse(envData) as any;
+  const parsed = dotenv.parse(envData) as Record<string, string>;
   const envString = envData.toString("utf8");
-  return { parsed, envPath, name, envString };
+  dotenv.config({ path: envPath });
+  envLoaded = {
+    name: envName,
+    envPath,
+    envString,
+    parsed,
+  };
+  // populate selected .env to global environment
+  process.env.ENV_PATH = envPath;
+  // Duplicate loaded env to backend local env
+  const backendEnvPath = path.resolve(PATHS.backendDir, ".env");
+  const frontendEnvPath = path.resolve(PATHS.frontendDir, ".env");
+  copyFileSync(envPath, backendEnvPath);
+  copyFileSync(envPath, frontendEnvPath);
+  return envLoaded;
 }
-
-export interface IBackendEnv {
-  /** local name prefix of .env file, e.g. development.env */
-  name: string;
-  /** full path to .env file */
-  envPath: string;
-  /** path to related backend database config file */
-  dbConfigPath: string;
-  /** key-value pairs of variables processed from .env file */
-  parsed: any;
-}
-let loadedEnv: IBackendEnv;
 
 /**
  *
  */
-export async function getBackendEnv() {
-  if (!loadedEnv) {
-    // configure environment in same way as when running from backend
-    // select env from env files
-    const envDir = path.resolve(PATHS.backendDir, "environments");
-    const envFiles = readdirSync(envDir)
-      .filter((filename) => filename.endsWith(".env"))
-      .map((filename) => {
-        const [name] = filename.split(".");
-        const envPath = path.resolve(PATHS.backendDir, "environments", filename);
-        const dbConfigPath = path.resolve(PATHS.backendDir, "config", "env", name, "database.js");
-        const value: IBackendEnv = { name, envPath, dbConfigPath, parsed: {} };
-        return { name, value };
-      });
-    if (envFiles.length === 0) {
-      throw new Error("No .env files populated\n" + envDir);
+export async function updateEnv(update: Record<string, string>) {
+  let { parsed, name, envPath, envString } = getLoadedEnv();
+  for (const [key, updatedValue] of Object.entries(update)) {
+    if (key in parsed) {
+      const replaceRegex = new RegExp(`${key}=.*`);
+      envString = envString.replace(replaceRegex, `${key}=${updatedValue}`);
+    } else {
+      envString = envString + `\n${key}=${updatedValue}`;
     }
-    // Pick the .env file to use. Will prompt selection if more than 1 file available
-    loadedEnv = envFiles[0].value;
-    if (envFiles.length > 1) {
-      const { selected } = await prompt([
-        { type: "list", choices: envFiles, message: "Select environment", name: "selected" },
-      ]);
-      loadedEnv = selected;
-    }
-    const { envPath } = loadedEnv;
-    // populate selected .env to global environment
-    process.env.ENV_PATH = envPath;
-    const parsed = dotenv.config({ path: process.env.ENV_PATH });
-    loadedEnv.parsed = parsed;
   }
-  return loadedEnv;
+  writeFileSync(envPath, envString, "utf8");
+  // Clear cached env and reload
+  envLoaded = undefined;
+  await loadEnv(name);
 }
 
-/**
- *
- */
-export function getLoadedEnvironment() {
-  return loadedEnv;
+/** Utility to return globally loaded env */
+export function getLoadedEnv() {
+  if (!envLoaded) {
+    throw new Error("No env loaded, cannot call method until after loadEnv()");
+  }
+  return envLoaded;
+}
+
+/** Prompt selection of environment from a list */
+async function promptEnv() {
+  const envDir = path.resolve(PATHS.rootDir, "config");
+  const envFiles = readdirSync(envDir)
+    .filter((filename) => filename.endsWith(".env"))
+    .map((filename) => {
+      const [name] = filename.split(".");
+      return name;
+    });
+  if (envFiles.length === 0) {
+    throw new Error("No .env files populated\n" + envDir);
+  }
+  // Pick the .env file to use. Will prompt selection if more than 1 file available
+  let selectedEnv = envFiles[0];
+  if (envFiles.length > 1) {
+    const { selected } = await prompt([
+      { type: "list", choices: envFiles, message: "Select environment", name: "selected" },
+    ]);
+    selectedEnv = selected;
+  }
+  return selectedEnv;
 }

@@ -86,7 +86,8 @@ These can manually be generated from the admin panel and populated to the fronte
 yarn scripts strapi bootstrap
 ```
 
-This will generate a new admin readonly token and populate to `frontend/.env.local`
+This will generate a new admin readonly token and populate to loaded env file in the root `config`
+folder.
 
 ```
 STRAPI_READONLY_TOKEN=my_generated_api_token

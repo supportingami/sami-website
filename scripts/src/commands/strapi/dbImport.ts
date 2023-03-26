@@ -4,7 +4,7 @@ import { readdirSync, ensureDirSync, readJSONSync } from "fs-extra";
 import path from "path";
 import prompts from "prompts";
 import { PATHS } from "../../paths";
-import { arrayToHashmap, getLoadedEnvironment } from "../../utils";
+import { arrayToHashmap, getLoadedEnv } from "../../utils";
 import { getDB, listDBTables, mapDBData } from "./common";
 
 /***************************************************************************************
@@ -100,7 +100,7 @@ class DBImport {
   private getBackupFilepath(suffix = 0) {
     const backupDir = path.resolve(PATHS.dataDir, "backups");
     ensureDirSync(backupDir);
-    const { name } = getLoadedEnvironment();
+    const { name } = getLoadedEnv();
     const d = new Date();
     let baseName = `${name}-${d.toISOString().substring(0, 10)}`;
     if (suffix) {

@@ -3,8 +3,8 @@ import type { ConcurrentlyCommandInput } from "concurrently";
 import concurrently from "concurrently";
 import path from "path";
 import { PATHS } from "../../paths";
-import type { IBackendEnv, IFrontendEnv } from "../../utils";
-import { getBackendEnv, getFrontendEnv } from "../../utils";
+import type { IEnvLoaded } from "../../utils";
+import { loadEnv } from "../../utils";
 
 /***************************************************************************************
  * CLI
@@ -27,48 +27,36 @@ class StartCmd {
   allCommands = [];
 
   public async run() {
-    const backendEnv = await getBackendEnv();
-    const frontendEnv = getFrontendEnv();
-    const backendStart = this.getBackendStartCommand(backendEnv);
-    const frontendStart = this.getFrontendCommand(backendEnv, frontendEnv);
+    const envLoaded = await loadEnv();
+
+    const backendStart = this.getBackendStartCommand(envLoaded);
+    // when running frontend always assume local config
+    const frontendStart = this.getFrontendCommand();
     const { result } = concurrently([backendStart, frontendStart], {
       killOthers: ["failure", "success"],
     });
     await result;
   }
 
-  private getBackendStartCommand(env: IBackendEnv): ConcurrentlyCommandInput {
-    const { envPath, name } = env;
-    const relativeEnvPath = path.relative(PATHS.backendDir, envPath);
+  private getBackendStartCommand(envLoaded: IEnvLoaded): ConcurrentlyCommandInput {
     console.log("starting backend...");
     return {
       name: "strapi",
       command: "yarn strapi develop",
       cwd: PATHS.backendDir,
       env: {
-        ENV_PATH: relativeEnvPath,
-        NODE_ENV: name,
+        NODE_ENV: envLoaded.name === "development" ? "development" : "production",
       },
       prefixColor: "#8F76FF",
     };
   }
-  private getFrontendCommand(backendEnv: IBackendEnv, frontendEnv: IFrontendEnv) {
-    // Set local environment to call next from local instance, and if available populate strapi token
-    const env = frontendEnv.parsed;
-    env.NEXT_PUBLIC_API_URL = "http://localhost:1337";
-    // allow override token from backend
-    const { STRAPI_READONLY_TOKEN } = backendEnv.parsed;
-    if (STRAPI_READONLY_TOKEN) {
-      env.STRAPI_READONLY_TOKEN = STRAPI_READONLY_TOKEN;
-    }
-
+  private getFrontendCommand() {
     // use wait-on to wait for backend server to be ready before starting frontend
     const waitOnBinPath = path.resolve(PATHS.scriptsDir, "node_modules", ".bin", "wait-on");
     return {
       name: "nextJS",
       command: `${waitOnBinPath} http://localhost:1337 && yarn next dev`,
       cwd: PATHS.frontendDir,
-      env,
       prefixColor: "bgBlack.white",
     };
   }
