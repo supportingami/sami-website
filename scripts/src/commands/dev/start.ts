@@ -3,7 +3,7 @@ import type { ConcurrentlyCommandInput } from "concurrently";
 import concurrently from "concurrently";
 import path from "path";
 import { PATHS } from "../../paths";
-import type { IEnvLoaded } from "../../utils";
+import { IEnvLoaded, logError } from "../../utils";
 import { loadEnv } from "../../utils";
 
 /***************************************************************************************
@@ -31,7 +31,7 @@ class StartCmd {
 
     const backendStart = this.getBackendStartCommand(envLoaded);
     // when running frontend always assume local config
-    const frontendStart = this.getFrontendCommand();
+    const frontendStart = this.getFrontendCommand(envLoaded);
     const { result } = concurrently([backendStart, frontendStart], {
       killOthers: ["failure", "success"],
     });
@@ -39,6 +39,11 @@ class StartCmd {
   }
 
   private getBackendStartCommand(envLoaded: IEnvLoaded): ConcurrentlyCommandInput {
+    // ensure frontend bootstrapped
+    if (!envLoaded.parsed.STRAPI_READONLY_TOKEN) {
+      logError({ msg1: "Strapi must be bootstrapped first, run command:", msg2: `yarn scripts strapi bootstrap` });
+    }
+
     console.log("starting backend...");
     return {
       name: "strapi",
@@ -50,7 +55,7 @@ class StartCmd {
       prefixColor: "#8F76FF",
     };
   }
-  private getFrontendCommand() {
+  private getFrontendCommand(envLoaded: IEnvLoaded) {
     // use wait-on to wait for backend server to be ready before starting frontend
     const waitOnBinPath = path.resolve(PATHS.scriptsDir, "node_modules", ".bin", "wait-on");
     return {
