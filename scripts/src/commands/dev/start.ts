@@ -1,10 +1,11 @@
 import { Command } from "commander";
 import type { ConcurrentlyCommandInput } from "concurrently";
 import concurrently from "concurrently";
-import path from "path";
+import path, { resolve } from "path";
 import { PATHS } from "../../paths";
 import { IEnvLoaded, logError } from "../../utils";
 import { loadEnv } from "../../utils";
+import { existsSync } from "fs";
 
 /***************************************************************************************
  * CLI
@@ -38,9 +39,21 @@ class StartCmd {
   }
 
   private getBackendStartCommand(envLoaded: IEnvLoaded): ConcurrentlyCommandInput {
+    const { STRAPI_READONLY_TOKEN, GOOGLE_APPLICATION_CREDENTIALS } = envLoaded.parsed;
     // ensure frontend bootstrapped
-    if (!envLoaded.parsed.STRAPI_READONLY_TOKEN) {
+
+    if (!STRAPI_READONLY_TOKEN) {
       logError({ msg1: "Strapi must be bootstrapped first, run command:", msg2: `yarn scripts strapi bootstrap` });
+    }
+    // ensure external storage configured
+    if (GOOGLE_APPLICATION_CREDENTIALS) {
+      const serviceAccountPath = resolve(PATHS.backendDir, GOOGLE_APPLICATION_CREDENTIALS);
+      if (!existsSync(serviceAccountPath)) {
+        logError({
+          msg1: "Google application credentials not found",
+          msg2: serviceAccountPath,
+        });
+      }
     }
 
     console.log("starting backend...");
