@@ -1,31 +1,17 @@
-import { Command } from "commander";
 import { existsSync, writeFileSync } from "fs";
 import { readdirSync, ensureDirSync, readJSONSync } from "fs-extra";
 import path from "path";
 import prompts from "prompts";
-import { PATHS } from "../../paths";
-import { arrayToHashmap, getLoadedEnv } from "../../utils";
-import { getDB, listDBTables, mapDBData } from "./common";
-
-/***************************************************************************************
- * CLI
- * @example yarn
- *************************************************************************************/
-interface IProgramOptions {
-  table?: string;
-}
-const program = new Command("db:import");
-export default program
-  .description("Import strapi data")
-  .option("-t --table <string>", "Single table to import (omit to include all)")
-  .action(async (options: IProgramOptions) => {
-    new DBImport().run(options).then(() => process.exit(0));
-  });
+import { PATHS } from "../../../paths";
+import { arrayToHashmap, getLoadedEnv } from "../../../utils";
+import { getDB, listDBTables, mapDBData } from "../common";
 
 /***************************************************************************************
  * Main Methods
  *************************************************************************************/
-
+interface IProgramOptions {
+  table?: string;
+}
 interface ImportSummary {
   table: string;
   filePath: string;
@@ -33,7 +19,7 @@ interface ImportSummary {
   existingData: any[];
   importData: any[];
 }
-class DBImport {
+export class DBImport {
   private db: Awaited<ReturnType<typeof getDB>>;
   private get client(): "postgres" | "sqlite" {
     return this.db.client.config.client;

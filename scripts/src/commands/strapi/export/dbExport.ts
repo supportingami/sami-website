@@ -1,25 +1,15 @@
 import { spawnSync } from "child_process";
-import { Command } from "commander";
+
 import { emptyDirSync, ensureDirSync, writeFileSync } from "fs-extra";
 import path from "path";
-import { PATHS } from "../../paths";
-import { sortJSONObjectByKey } from "../../utils/object.utils";
-import { getDB, listDBTables, mapDBData } from "./common";
-
-/***************************************************************************************
- * CLI
- * @example yarn
- *************************************************************************************/
-
-const program = new Command("db:export");
-export default program.description("Export strapi data").action(async () => {
-  new DBExport().run().then(() => process.exit(0));
-});
+import { PATHS } from "../../../paths";
+import { sortJSONObjectByKey } from "../../../utils/object.utils";
+import { getDB, listDBTables, mapDBData } from "../common";
 
 /***************************************************************************************
  * Main Methods
  *************************************************************************************/
-class DBExport {
+export class DBExport {
   private db: Awaited<ReturnType<typeof getDB>>;
   private get client(): "postgres" | "sqlite" {
     return this.db.client.config.client;
