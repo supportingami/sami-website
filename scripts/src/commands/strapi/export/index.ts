@@ -1,12 +1,29 @@
 import { Command } from "commander";
-import { DBExport } from "./dbExport";
+import { DBExport } from "./db";
+import chalk from "chalk";
+import { StorageExport } from "./storage";
+import { loadEnv } from "../../../utils";
 
 /***************************************************************************************
  * CLI
  * @example yarn
  *************************************************************************************/
 
+interface IProgramOptions {
+  environment: string;
+}
+
 const program = new Command("export");
-export default program.description("Export strapi data").action(async () => {
-  new DBExport().run().then(() => process.exit(0));
-});
+export default program
+  .description("Export strapi data")
+  .option("-e --environment <string>", "Name of environment to use")
+  .action(async (options: IProgramOptions) => {
+    const { name, parsed } = await loadEnv(options.environment);
+    console.log(chalk.blue("Exporting DB..."));
+    await new DBExport().run(name);
+    console.log(chalk.green("DB exported successfully"));
+    console.log(chalk.blue("Exporting Storage..."));
+    await new StorageExport().run(parsed.GCS_BUCKET_NAME);
+    console.log(chalk.blue("Storage exported successfully"));
+    process.exit(0);
+  });

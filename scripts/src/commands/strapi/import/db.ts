@@ -9,9 +9,7 @@ import { getDB, listDBTables, mapDBData } from "../common";
 /***************************************************************************************
  * Main Methods
  *************************************************************************************/
-interface IProgramOptions {
-  table?: string;
-}
+
 interface ImportSummary {
   table: string;
   filePath: string;
@@ -28,15 +26,15 @@ export class DBImport {
   /**
    *
    **/
-  public async run(options: IProgramOptions) {
+  public async run(envName: string, table?: string) {
     // setup folders
     const importDir = path.resolve(PATHS.dataDir, "db");
     ensureDirSync(importDir);
 
     // query list of local and remote data tables
-    this.db = await getDB();
+    this.db = await getDB(envName);
     const dbTables = await listDBTables(this.db);
-    const localDataTables = this.listLocalDataTables(importDir, options);
+    const localDataTables = this.listLocalDataTables(importDir, table);
 
     // get summary of local and import data
     const data: ImportSummary[] = [];
@@ -59,7 +57,7 @@ export class DBImport {
   }
 
   /** Retrieve a list of data tables represented in local json data files */
-  private listLocalDataTables(importDir: string, options: IProgramOptions) {
+  private listLocalDataTables(importDir: string, table?: string) {
     let localDataTables = readdirSync(importDir)
       .map((name) => ({
         filePath: path.resolve(importDir, name),
@@ -67,8 +65,8 @@ export class DBImport {
       }))
       .sort(this.sortImports);
     // filter if single table option provided
-    if (options.table) {
-      localDataTables = localDataTables.filter(({ table }) => options.table === table);
+    if (table) {
+      localDataTables = localDataTables.filter(({ table }) => table === table);
     }
     return localDataTables;
   }

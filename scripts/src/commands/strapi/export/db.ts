@@ -15,9 +15,9 @@ export class DBExport {
     return this.db.client.config.client;
   }
 
-  public async run() {
+  public async run(envName: string) {
     // query list of all tables
-    this.db = await getDB();
+    this.db = await getDB(envName);
     const allTables = await listDBTables(this.db);
 
     // filter only to include content-generated tables

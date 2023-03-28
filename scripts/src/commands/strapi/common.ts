@@ -75,9 +75,8 @@ export async function createStrapiInstance(serveAdminPanel = false, autoReload =
  * https://github.com/knex/knex-schema-inspector/issues/94
  *
  */
-export async function getDB() {
-  const { name } = await loadEnv();
-  const dbConfigPath = path.resolve(PATHS.backendDir, "config", "env", name, "database.js");
+export async function getDB(envName: string) {
+  const dbConfigPath = path.resolve(PATHS.backendDir, "config", "env", envName, "database.js");
   const db = await loadDb(dbConfigPath);
   return db;
 }
