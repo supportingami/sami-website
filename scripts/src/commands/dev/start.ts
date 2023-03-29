@@ -12,10 +12,17 @@ import { existsSync } from "fs";
  * @example yarn
  *************************************************************************************/
 
+interface IProgramOptions {
+  environment?: string;
+}
+
 const program = new Command("start");
-export default program.description("Start local development server").action(async () => {
-  return new StartCmd().run().then(() => process.exit(0));
-});
+export default program
+  .description("Start local development server")
+  .option("-e --environment <string>", "Name of environment to use")
+  .action(async (options: IProgramOptions) => {
+    return new StartCmd().run(options.environment).then(() => process.exit(0));
+  });
 
 /***************************************************************************************
  * Main Methods
@@ -27,8 +34,8 @@ export default program.description("Start local development server").action(asyn
 class StartCmd {
   allCommands = [];
 
-  public async run() {
-    const envLoaded = await loadEnv();
+  public async run(envName?: string) {
+    const envLoaded = await loadEnv(envName);
     const backendStart = this.getBackendStartCommand(envLoaded);
     // when running frontend always assume local config
     const frontendStart = this.getFrontendCommand(envLoaded);
@@ -47,13 +54,15 @@ class StartCmd {
     }
     // ensure external storage configured
     if (GOOGLE_APPLICATION_CREDENTIALS) {
-      const serviceAccountPath = resolve(PATHS.backendDir, GOOGLE_APPLICATION_CREDENTIALS);
+      const serviceAccountPath = resolve(PATHS.configDir, GOOGLE_APPLICATION_CREDENTIALS);
       if (!existsSync(serviceAccountPath)) {
         logError({
           msg1: "Google application credentials not found",
           msg2: serviceAccountPath,
         });
       }
+      // rewrite as absolute path
+      process.env.GOOGLE_APPLICATION_CREDENTIALS = serviceAccountPath;
     }
 
     console.log("starting backend...");
@@ -67,6 +76,7 @@ class StartCmd {
       prefixColor: "#8F76FF",
     };
   }
+
   private getFrontendCommand(envLoaded: IEnvLoaded) {
     // use wait-on to wait for backend server to be ready before starting frontend
     const waitOnBinPath = path.resolve(PATHS.scriptsDir, "node_modules", ".bin", "wait-on");

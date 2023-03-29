@@ -5,6 +5,7 @@ import prompts from "prompts";
 import { PATHS } from "../../../paths";
 import { arrayToHashmap, getLoadedEnv } from "../../../utils";
 import { getDB, listDBTables, mapDBData } from "../common";
+import chalk from "chalk";
 
 /***************************************************************************************
  * Main Methods
@@ -111,7 +112,7 @@ export class DBImport {
   private async confirmImport(data: ImportSummary[]) {
     const summaries = data.map(({ summary }) => summary).filter((v) => v);
     if (summaries.length === 0) {
-      console.log("Up to date");
+      console.log(chalk.green("DB - Up to date"));
       return false;
     }
     console.table(summaries);

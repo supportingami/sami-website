@@ -10,7 +10,11 @@ import { loadEnv } from "../../../utils";
  *************************************************************************************/
 
 interface IProgramOptions {
-  environment: string;
+  // TODO - add support back for just a single table export
+  table?: string;
+  environment?: string;
+  /** specify to only import assets or db */
+  only?: "storage" | "db";
 }
 
 const program = new Command("export");
@@ -19,11 +23,16 @@ export default program
   .option("-e --environment <string>", "Name of environment to use")
   .action(async (options: IProgramOptions) => {
     const { name, parsed } = await loadEnv(options.environment);
-    console.log(chalk.blue("Exporting DB..."));
-    await new DBExport().run(name);
-    console.log(chalk.green("DB exported successfully"));
-    console.log(chalk.blue("Exporting Storage..."));
-    await new StorageExport().run(parsed.GCS_BUCKET_NAME);
-    console.log(chalk.blue("Storage exported successfully"));
+    if (options.only !== "storage") {
+      console.log(chalk.blue("Exporting DB..."));
+      await new DBExport().run(name);
+      console.log(chalk.green("DB exported successfully"));
+    }
+    if (options.only !== "db") {
+      console.log(chalk.blue("Exporting Storage..."));
+      await new StorageExport().run(parsed.GCS_BUCKET_NAME);
+      console.log(chalk.blue("Storage exported successfully"));
+    }
+
     process.exit(0);
   });

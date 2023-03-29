@@ -2,6 +2,7 @@ import path from "path";
 
 const rootDir = path.resolve(__dirname, "../../");
 const backendDir = path.resolve(rootDir, "backend");
+const configDir = path.resolve(rootDir, "config");
 const docsDir = path.resolve(rootDir, "docs");
 const dataDir = path.resolve(rootDir, "data");
 const frontendDir = path.resolve(rootDir, "frontend");
@@ -12,6 +13,7 @@ const wpOutputDir = path.resolve(scriptsDir, "output");
 
 export const PATHS = {
   backendDir,
+  configDir,
   dataDir,
   docsDir,
   frontendDir,
