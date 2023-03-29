@@ -1,6 +1,7 @@
 import { Command } from "commander";
 import { DBImport } from "./db";
 import { loadEnv } from "../../../utils";
+import { StorageImport } from "./storage";
 
 /***************************************************************************************
  * CLI
@@ -9,12 +10,22 @@ import { loadEnv } from "../../../utils";
 interface IProgramOptions {
   table?: string;
   environment?: string;
+  /** specify to only import assets or db */
+  only?: "storage" | "db";
 }
 const program = new Command("import");
 export default program
   .description("Import strapi data")
+  .option("-e --environment <string>", "Name of environment to use)")
+  .option("-o --only <string>", "Specify 'assets' or 'db' to only import")
   .option("-t --table <string>", "Single table to import (omit to include all)")
   .action(async (options: IProgramOptions) => {
-    const { name } = await loadEnv(options.environment);
-    new DBImport().run(name, options.table).then(() => process.exit(0));
+    const { name, parsed } = await loadEnv(options.environment);
+    if (options.only !== "storage") {
+      await new DBImport().run(name, options.table);
+    }
+    if (options.only !== "db") {
+      await new StorageImport().run(parsed);
+    }
+    process.exit(0);
   });

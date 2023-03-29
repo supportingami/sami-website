@@ -17,49 +17,44 @@ import path from "path";
  * Ignores unchanged files based on md5 hash and preserves src file stats
  * @param filter_fn optional filter function applied to src folder files
  * */
-export function replicateDir(src: string, target: string, filter_fn?: (entry: IContentsEntry) => boolean) {
+export function replicateDir(
+  src: string,
+  target: string,
+  options: {
+    filterFn?: (entry: IContentsEntry) => boolean;
+    dryRun?: boolean;
+  } = {}
+) {
   ensureDirSync(src);
   ensureDirSync(target);
   const srcFiles = generateFolderFlatMap(src);
   const targetFiles = generateFolderFlatMap(target);
 
+  const { filterFn, dryRun } = options;
+
   // omit src files via filter
-  if (filter_fn) {
+  if (filterFn) {
     Object.entries(srcFiles).forEach(([key, entry]) => {
-      if (!filter_fn(entry as IContentsEntry)) {
+      if (!filterFn(entry as IContentsEntry)) {
         delete srcFiles[key];
       }
     });
   }
 
-  const ops = { copy: [], delete: [], ignore: [] };
-  // remove target files that no longer exist in src
-  Object.keys(targetFiles).forEach((filepath) => {
-    if (!srcFiles.hasOwnProperty(filepath)) {
-      ops.delete.push(filepath);
-    }
-  });
-  // copy new and modified files from src
-  Object.entries(srcFiles).forEach(([filepath, entry]) => {
-    if (targetFiles.hasOwnProperty(filepath)) {
-      const srcFile = entry as IContentsEntry;
-      const targetFile = targetFiles[filepath] as IContentsEntry;
-      if (srcFile.md5Checksum !== targetFile.md5Checksum) {
-        ops.copy.push(entry);
-      } else {
-        ops.ignore.push(filepath);
-      }
-    } else {
-      ops.copy.push(entry);
-    }
-  });
+  const ops = compareFolderContents(srcFiles, targetFiles);
+
+  // Return summary only if running as dry run
+  if (dryRun) {
+    return ops;
+  }
 
   // process operations
-  ops.delete.forEach((filepath) => {
-    const targetPath = path.resolve(target, filepath);
+  ops.delete.forEach(({ relativePath }) => {
+    const targetPath = path.resolve(target, relativePath);
     removeSync(targetPath);
   });
-  ops.copy.forEach((entry) => {
+  const copyEntries = [...ops.create, ...ops.update];
+  copyEntries.forEach((entry) => {
     const { relativePath, modifiedTime } = entry as IContentsEntry;
     const srcPath = path.resolve(src, relativePath);
     const targetPath = path.resolve(target, relativePath);
@@ -73,6 +68,41 @@ export function replicateDir(src: string, target: string, filter_fn?: (entry: IC
   return ops;
 }
 
+/** Compare generated flatmaps of two directories to check differences */
+export function compareFolderContents(
+  srcFiles: { [relativePath: string]: IContentsEntry },
+  targetFiles: { [relativePath: string]: IContentsEntry }
+) {
+  const ops: IReplicateOps = { create: [], update: [], delete: [], ignore: [] };
+  // remove target files that no longer exist in src
+  Object.entries(targetFiles).forEach(([filepath, entry]) => {
+    if (!srcFiles.hasOwnProperty(filepath)) {
+      ops.delete.push(entry);
+    }
+  });
+  // copy new and modified files from src
+  Object.entries(srcFiles).forEach(([filepath, entry]) => {
+    if (targetFiles.hasOwnProperty(filepath)) {
+      const srcFile = entry as IContentsEntry;
+      const targetFile = targetFiles[filepath] as IContentsEntry;
+      if (srcFile.md5Checksum !== targetFile.md5Checksum) {
+        ops.update.push(entry);
+      } else {
+        ops.ignore.push(entry);
+      }
+    } else {
+      ops.create.push(entry);
+    }
+  });
+  return ops;
+}
+
+interface IReplicateOps {
+  create: IContentsEntry[];
+  update: IContentsEntry[];
+  delete: IContentsEntry[];
+  ignore: IContentsEntry[];
+}
 /**
  * Create a flat json representing nested folder structure of a given folder path.
  * Includes stats output that records file size and md5 checksum data
@@ -88,7 +118,7 @@ export function replicateDir(src: string, target: string, filter_fn?: (entry: IC
   },
  * ```
  */
-function generateFolderFlatMap(
+export function generateFolderFlatMap(
   folderPath: string,
   options: {
     filterFn?: (relativePath: string) => boolean;
@@ -172,7 +202,7 @@ function cleanupEmptyFolders(folder: string) {
   }
 }
 
-interface IContentsEntry {
+export interface IContentsEntry {
   relativePath: string;
   size_kb: number;
   modifiedTime: string;
