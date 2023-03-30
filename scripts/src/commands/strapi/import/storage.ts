@@ -45,25 +45,27 @@ export class StorageImport {
   }
 
   private async confirmImport(ops: ReturnType<typeof replicateDir>) {
-    console.log(chalk.blue("\nCreate"));
-    console.log(ops.create.length, "files");
     if (ops.create.length > 0) {
+      console.log(chalk.blue("\nCreate"));
+      console.log(ops.create.length, "files");
       console.table(ops.create.map(({ relativePath }) => trimText(relativePath, 50)));
     }
-    console.log(chalk.blue("\nUpdate"));
-    console.log(ops.update.length, "files");
+
     if (ops.update.length > 0) {
+      console.log(chalk.blue("\nUpdate"));
+      console.log(ops.update.length, "files");
       console.table(ops.update.map(({ relativePath }) => trimText(relativePath, 50)));
     }
 
-    console.log(chalk.blue("\nDelete"));
-    console.log(ops.delete.length, "files");
     if (ops.delete.length > 0) {
+      console.log(chalk.blue("\nDelete"));
+      console.log(ops.delete.length, "files");
       console.table(ops.delete.map(({ relativePath }) => trimText(relativePath, 50)));
     }
-
-    console.log(chalk.blue("\nIgnore"));
-    console.log(ops.ignore.length, "files\n");
+    if (ops.ignore.length > 0) {
+      console.log(chalk.blue("\nIgnore"));
+      console.log(ops.ignore.length, "files\n");
+    }
 
     const { confirmed } = await prompts({ type: "confirm", name: "confirmed", message: "Continue?" });
     return confirmed;

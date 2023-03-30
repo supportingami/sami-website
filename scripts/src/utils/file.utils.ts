@@ -1,4 +1,4 @@
-import { createHash } from "crypto";
+import { BinaryToTextEncoding, createHash } from "crypto";
 import {
   copyFileSync,
   ensureDirSync,
@@ -123,6 +123,7 @@ export function generateFolderFlatMap(
   options: {
     filterFn?: (relativePath: string) => boolean;
     includeLocalPath?: boolean;
+    md5Encoding?: BinaryToTextEncoding;
   } = {}
 ) {
   const allFiles = recursiveFindByExtension(folderPath);
@@ -136,7 +137,7 @@ export function generateFolderFlatMap(
       const modifiedTime = mtime.toISOString();
       // write size in kb to 1 dpclear
       const size_kb = Math.round(size / 102.4) / 10;
-      const md5Checksum = getFileMD5Checksum(filePath);
+      const md5Checksum = getFileMD5Checksum(filePath, options.md5Encoding);
       const entry: IContentsEntry = { relativePath, size_kb, md5Checksum, modifiedTime };
       if (options.includeLocalPath) {
         entry.localPath = filePath;
@@ -173,11 +174,11 @@ function recursiveFindByExtension(base: string, ext?: string, files?: string[], 
 }
 
 /** Generate md5 checksum for file */
-function getFileMD5Checksum(filePath: string) {
+function getFileMD5Checksum(filePath: string, encoding: BinaryToTextEncoding = "hex") {
   const hash = createHash("md5", {});
   const fileBuffer = readFileSync(filePath);
   hash.update(fileBuffer);
-  const checksum = hash.digest("hex");
+  const checksum = hash.digest(encoding);
   return checksum;
 }
 

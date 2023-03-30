@@ -1,9 +1,7 @@
 import { Storage, TransferManager, File as StorageFile, Bucket } from "@google-cloud/storage";
 import { logError } from "./logging.utils";
 import { IContentsEntry, compareFolderContents, generateFolderFlatMap } from "./file.utils";
-import { tmpdir } from "os";
-import { copyFileSync, emptyDirSync, ensureDirSync } from "fs-extra";
-import { basename, dirname, resolve } from "path";
+import { basename, extname } from "path";
 
 export class GcloudStorage {
   private storage: Storage;
@@ -20,8 +18,8 @@ export class GcloudStorage {
 
   async copyLocalToServer(localDir: string, opts: { dryRun?: boolean } = {}) {
     const serverContents = await this.generateContents();
-    const localContents = generateFolderFlatMap(localDir, { includeLocalPath: true });
-    console.log(serverContents);
+    // When comparing local with google drive ensure md5 checksum is base64 encoded
+    const localContents = generateFolderFlatMap(localDir, { includeLocalPath: true, md5Encoding: "base64" });
     const ops = compareFolderContents(localContents, serverContents);
     if (opts.dryRun) {
       return ops;
@@ -44,15 +42,12 @@ export class GcloudStorage {
     //
     // NOTE - avoids using transferManager bulk upload to allow more fine-grained changes
     for (const entry of localEntries) {
-      const serverFolder = basename(entry.relativePath, entry.relativePath.split(".").pop());
-      const destination = `${serverFolder}/${entry.relativePath}`;
+      const ext = extname(entry.relativePath);
+      const serverFolder = basename(entry.relativePath).replace(`${ext}`, "");
+      const destination = `${serverFolder}/${basename(entry.relativePath)}`;
       await this.bucket.upload(entry.localPath, {
         destination,
-        metadata: {
-          strapi: entry,
-        },
       });
-      await this.bucket.file(destination).setMetadata({});
       console.log(entry.relativePath);
     }
   }
