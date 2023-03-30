@@ -78,7 +78,9 @@ export async function loadEnv(envName?: string) {
  * @param opts.local assign as local overrides to a .local.env file
  */
 export async function updateEnv(update: Record<string, string>, opts: { local?: boolean } = {}) {
-  let { parsed, name, envPath } = getLoadedEnv();
+  const loadedEnv = getLoadedEnv();
+  const { parsed, name } = loadedEnv;
+  let { envPath } = loadedEnv;
   if (opts.local) {
     envPath = envPath.replace(".env", ".local.env");
     ensureFileSync(envPath);

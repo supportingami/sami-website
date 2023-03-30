@@ -1,6 +1,8 @@
-import { Storage, TransferManager, File as StorageFile, Bucket } from "@google-cloud/storage";
+import { Storage, TransferManager } from "@google-cloud/storage";
+import type { File as StorageFile, Bucket } from "@google-cloud/storage";
 import { logError } from "./logging.utils";
-import { IContentsEntry, compareFolderContents, generateFolderFlatMap } from "./file.utils";
+import type { IContentsEntry } from "./file.utils";
+import { compareFolderContents, generateFolderFlatMap } from "./file.utils";
 import { basename, extname } from "path";
 
 export class GcloudStorage {

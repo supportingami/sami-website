@@ -1,11 +1,11 @@
 import { Command } from "commander";
 import type { ConcurrentlyCommandInput } from "concurrently";
 import concurrently from "concurrently";
-import path, { resolve } from "path";
-import { PATHS } from "../../paths";
-import { IEnvLoaded, logError } from "../../utils";
-import { loadEnv } from "../../utils";
 import { existsSync } from "fs";
+import { resolve } from "path";
+import { PATHS } from "../../paths";
+import { logError, loadEnv } from "../../utils";
+import type { IEnvLoaded } from "../../utils";
 
 /***************************************************************************************
  * CLI
@@ -38,7 +38,7 @@ class StartCmd {
     const envLoaded = await loadEnv(envName);
     const backendStart = this.getBackendStartCommand(envLoaded);
     // when running frontend always assume local config
-    const frontendStart = this.getFrontendCommand(envLoaded);
+    const frontendStart = this.getFrontendCommand();
     const { result } = concurrently([backendStart, frontendStart], {
       killOthers: ["failure", "success"],
     });
@@ -77,9 +77,9 @@ class StartCmd {
     };
   }
 
-  private getFrontendCommand(envLoaded: IEnvLoaded) {
+  private getFrontendCommand() {
     // use wait-on to wait for backend server to be ready before starting frontend
-    const waitOnBinPath = path.resolve(PATHS.scriptsDir, "node_modules", ".bin", "wait-on");
+    const waitOnBinPath = resolve(PATHS.scriptsDir, "node_modules", ".bin", "wait-on");
     return {
       name: "nextJS",
       command: `${waitOnBinPath} http://localhost:1337 && yarn next dev`,

@@ -1,4 +1,5 @@
-import { BinaryToTextEncoding, createHash } from "crypto";
+import type { BinaryToTextEncoding } from "crypto";
+import { createHash } from "crypto";
 import {
   copyFileSync,
   ensureDirSync,
@@ -127,7 +128,7 @@ export function generateFolderFlatMap(
   } = {}
 ) {
   const allFiles = recursiveFindByExtension(folderPath);
-  let flatMap: { [relativePath: string]: IContentsEntry } = {};
+  const flatMap: { [relativePath: string]: IContentsEntry } = {};
   for (const filePath of allFiles) {
     const relativePath = path.relative(folderPath, filePath).split(path.sep).join("/");
     const shouldInclude = options.filterFn ? options.filterFn(relativePath) : true;

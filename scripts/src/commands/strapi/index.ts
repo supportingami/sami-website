@@ -1,11 +1,10 @@
 import { Command } from "commander";
-import { logProgramHelp, logWarning } from "../../utils";
+import { logProgramHelp } from "../../utils";
 import bootstrapCmd from "./bootstrap";
 import configExportCmd from "./configExport";
 import exportCmd from "./export";
 import importCmd from "./import";
 import typesGenerateCmd from "./typesGenerate";
-import chalk from "chalk";
 
 /***************************************************************************************
  * CLI

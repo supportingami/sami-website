@@ -1,5 +1,5 @@
 import { resolve } from "path";
-import { GcloudStorage, logError } from "../../../utils";
+import { GcloudStorage } from "../../../utils";
 import { PATHS } from "../../../paths";
 import { replicateDir } from "../../../utils/file.utils";
 import prompts from "prompts";
