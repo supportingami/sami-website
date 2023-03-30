@@ -21,6 +21,7 @@ const program = new Command("export");
 export default program
   .description("Export strapi data")
   .option("-e --environment <string>", "Name of environment to use")
+  .option("-o --only <string>", "Specify 'assets' or 'db' to only import")
   .action(async (options: IProgramOptions) => {
     const { name, parsed } = await loadEnv(options.environment);
     if (options.only !== "storage") {

@@ -21,11 +21,12 @@ export default program
   .option("-t --table <string>", "Single table to import (omit to include all)")
   .action(async (options: IProgramOptions) => {
     const { name, parsed } = await loadEnv(options.environment);
-    if (options.only !== "storage") {
-      await new DBImport().run(name, options.table);
-    }
+    // Import storage first as db references will be dropped if assets do not exist
     if (options.only !== "db") {
       await new StorageImport().run(parsed);
+    }
+    if (options.only !== "storage") {
+      await new DBImport().run(name, options.table);
     }
     process.exit(0);
   });
