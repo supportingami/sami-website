@@ -54,8 +54,8 @@ export function logWarning(opts: Partial<ILogOptions> = {}) {
   );
 }
 
-export function logProgramHelp(program: Command) {
-  console.log(chalk.yellow("No command specified. See help below:\n"));
+export function logProgramHelp(program: Command, msg = "No command specified. See help below:\n") {
+  console.log(chalk.yellow(msg));
   program.outputHelp();
   console.log("\n");
   process.exit(0);
