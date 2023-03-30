@@ -10,7 +10,7 @@ services:
     command: "yarn start:prod"
     restart: unless-stopped
     env_file:
-      - ./environments/production.env
+      - ./.env
 
     # Any variables set here take precedence over the .env file
     environment:

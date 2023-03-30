@@ -4,10 +4,9 @@
   "version": "0.1.0",
   "description": "A Strapi application",
   "scripts": {
-    "start": "ENV_PATH=\"./environments/development.env\" NODE_ENV=development strapi develop",
-    "start:staging": "ENV_PATH=\"./environments/staging.env\" NODE_ENV=staging strapi develop",
+    "start": "strapi develop",
     "start:prod": "strapi start",
-    "build": "ENV_PATH=\"./environments/production.env\" strapi build",
+    "build": "strapi build",
     "docker:build": "docker compose build",
     "docker:start": "docker compose --project-name sami-backend up",
     "strapi": "strapi"

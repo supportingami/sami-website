@@ -3,10 +3,14 @@ import * as pulumi from "@pulumi/pulumi";
 import { DockerStrapiImageBuild } from "./services/docker-strapi-image-build";
 import { GCPCloudRunDeploy } from "./services/gcp-cloudrun-deploy";
 import { GCPCStorageCreate } from "./utils/gcp-storage-create";
-import { getBackendEnv } from "./utils";
+import { setEnv } from "./utils";
 
 /** Use pulumi stack name throughout as env, e.g. 'staging' or 'production' */
 const envName = pulumi.getStack();
+
+// remove google_application_credentials as cloudrun will auto-provide
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const { GOOGLE_APPLICATION_CREDENTIALS, ...KEPT_ENV } = setEnv(envName);
 
 const config = new pulumi.Config();
 const GCS_STORAGE_BUCKET = config.require("GCS_STORAGE_BUCKET");
@@ -21,10 +25,6 @@ const image = DockerStrapiImageBuild(envName);
 // TODO - also want to ensure the docker build script matches correctly for strapi
 
 // Cloudrun Instance with backend environment variables
-
-// remove google_application_credentials as cloudrun will auto-provide
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const { GOOGLE_APPLICATION_CREDENTIALS, ...KEPT_ENV } = getBackendEnv(envName);
 
 export const cloudRunUrl = GCPCloudRunDeploy(image, envName, {
   ...KEPT_ENV,
