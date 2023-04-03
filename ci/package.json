@@ -1,9 +1,6 @@
 {
   "name": "ci",
   "main": "index.ts",
-  "installConfig": {
-    "hoistingLimits": "workspaces"
-  },
   "devDependencies": {
     "@types/node": "^14"
   },

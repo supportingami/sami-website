@@ -7,12 +7,12 @@ import { setEnv } from "./utils";
 
 /** Use pulumi stack name throughout as env, e.g. 'staging' or 'production' */
 const envName = pulumi.getStack();
+const config = new pulumi.Config();
 
 // remove google_application_credentials as cloudrun will auto-provide
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const { GOOGLE_APPLICATION_CREDENTIALS, ...KEPT_ENV } = setEnv(envName);
 
-const config = new pulumi.Config();
 const GCS_STORAGE_BUCKET = config.require("GCS_STORAGE_BUCKET");
 
 // Backend Storage Bucket

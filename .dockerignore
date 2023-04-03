@@ -1,0 +1,14 @@
+.github
+.vscode
+.yarn/install-state.gz
+node_modules
+
+backend/node_modules
+config
+data
+docker
+docs
+frontend/node_modules
+scripts/node_modules
+
+.dockerignore

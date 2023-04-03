@@ -5,7 +5,6 @@ node_modules
 .env
 out
 .pem
-.vercel
 .cache
 
 # yarn
