@@ -12,14 +12,16 @@ import chalk from "chalk";
 
 interface IProgramOptions {
   environment?: string;
+  only?: "base" | "backend" | "frontend";
 }
 
 const program = new Command("build");
 export default program
   .description("Build deployment images")
   .option("-e --environment <string>", "Name of environment to use")
+  .option("-o --only <string>", "Only build single step, allowed 'base', 'backend', 'frontend'")
   .action(async (options: IProgramOptions) => {
-    return new BuildCmd().run(options.environment).then(() => process.exit(0));
+    return new BuildCmd().run(options).then(() => process.exit(0));
   });
 
 /***************************************************************************************
@@ -32,27 +34,40 @@ export default program
 class BuildCmd {
   allCommands = [];
 
-  public async run(envName?: string) {
-    const envLoaded = await loadEnv(envName);
-    this.buildBase();
-    this.buildBackend();
-    this.buildFrontend();
+  public async run(options: IProgramOptions) {
+    const { environment, only } = options;
+    const envLoaded = await loadEnv(environment);
+    if (only === undefined || only === "base") {
+      this.buildBase();
+    }
+    if (only === undefined || only === "backend") {
+      this.buildBackend();
+    }
+    if (only === undefined || only === "frontend") {
+      this.buildFrontend();
+    }
   }
 
   private buildBase() {
     console.log(chalk.blue("Building base..."));
     const cmd = `docker build --file docker/base.dockerfile --tag sami/base .`;
+    console.log(chalk.gray(cmd));
     spawnSync(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
+    console.log(chalk.green("Built base"));
   }
 
   private buildBackend() {
     console.log(chalk.blue("Building backend..."));
     const cmd = `docker build --file docker/backend.dockerfile --tag sami/backend .`;
+    console.log(chalk.gray(cmd));
     spawnSync(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
+    console.log(chalk.green("Built backend"));
   }
   private buildFrontend() {
     console.log(chalk.blue("Building frontend..."));
     const cmd = `docker build --file docker/frontend.dockerfile --tag sami/frontend .`;
+    console.log(chalk.gray(cmd));
     spawnSync(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
+    console.log(chalk.green("Built frontend"));
   }
 }

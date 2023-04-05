@@ -17,6 +17,8 @@ module.exports = withBundleAnalyzer({
   experimental: {
     scrollRestoration: true,
   },
+  // Use if deploying to prod environment
+  output: "standalone",
   async redirects() {
     return [
       {
