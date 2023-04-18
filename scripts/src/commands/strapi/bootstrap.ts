@@ -60,7 +60,7 @@ class StrapiBootstrap {
     }
 
     const { envPath } = getLoadedEnv();
-    console.log("tokens written to\n", envPath);
+    console.log("tokens written to\n", envPath.replace(".env", ".local.env"));
   }
 
   /**
