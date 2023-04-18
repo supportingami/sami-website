@@ -5,7 +5,7 @@
 #### How should this be manually tested?
 
 - Please include the steps to be done inorder to setup and test this PR.
-- Ensure any data required has been exported via `yarn scripts strapi db:export`
+- Ensure any data required has been exported via `yarn scripts strapi export`
 
 #### What are the relevant github issues?
 

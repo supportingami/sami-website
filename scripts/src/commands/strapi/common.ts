@@ -11,7 +11,7 @@ import strapi from "../../../../backend/node_modules/@strapi/strapi";
 import type { Strapi } from "../../../../backend/node_modules/@strapi/strapi";
 
 import { PATHS } from "../../paths";
-import { getFrontendEnv, getBackendEnv } from "../../utils";
+import { loadEnv } from "../../utils";
 
 export type IStrapi = Strapi;
 
@@ -49,7 +49,6 @@ export const ADMIN_TOKENS: { [key in "fullaccess" | "readonly"]: IAdminToken } =
  * */
 export async function createStrapiInstance(serveAdminPanel = false, autoReload = false) {
   console.log(chalk.green("Starting Strapi..."));
-  await getBackendEnv();
   // create instance
   const app: IStrapi = await strapi({
     appDir: PATHS.backendDir,
@@ -76,8 +75,8 @@ export async function createStrapiInstance(serveAdminPanel = false, autoReload =
  * https://github.com/knex/knex-schema-inspector/issues/94
  *
  */
-export async function getDB() {
-  const { dbConfigPath } = await getBackendEnv();
+export async function getDB(envName: string) {
+  const dbConfigPath = path.resolve(PATHS.backendDir, "config", "env", envName, "database.js");
   const db = await loadDb(dbConfigPath);
   return db;
 }
@@ -130,13 +129,13 @@ export function mapDBData(rows: any[], mappings: Record<string, (v: any) => any>
  */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function getAxiosInstance() {
-  await getBackendEnv();
+  const { parsed } = await loadEnv();
 
   const instance = axios.create({
     baseURL: process.env.STRAPI_ADMIN_BACKEND_URL || "http://localhost:1337",
   });
-  const frontendEnv = getFrontendEnv();
-  const { STRAPI_READONLY_TOKEN } = frontendEnv.parsed;
+
+  const { STRAPI_READONLY_TOKEN } = parsed;
   instance.interceptors.request.use(
     async (config) => {
       config.headers = {
