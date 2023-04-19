@@ -1,9 +1,10 @@
+import chalk from "chalk";
 import { spawnSync } from "child_process";
 import { Command } from "commander";
+import execa from "execa";
 
 import { loadEnv } from "../../utils";
 import { PATHS } from "../../paths";
-import chalk from "chalk";
 
 /***************************************************************************************
  * CLI
@@ -36,38 +37,38 @@ class BuildCmd {
 
   public async run(options: IProgramOptions) {
     const { environment, only } = options;
-    const envLoaded = await loadEnv(environment);
+    await loadEnv(environment);
     if (only === undefined || only === "base") {
-      this.buildBase();
+      await this.buildBase();
     }
     if (only === undefined || only === "backend") {
-      this.buildBackend();
+      await this.buildBackend();
     }
     if (only === undefined || only === "frontend") {
-      this.buildFrontend();
+      await this.buildFrontend();
     }
   }
 
-  private buildBase() {
+  private async buildBase() {
     console.log(chalk.blue("Building base..."));
     const cmd = `docker build --file docker/base.dockerfile --tag sami/base .`;
     console.log(chalk.gray(cmd));
-    spawnSync(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
+    await execa(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
     console.log(chalk.green("Built base"));
   }
 
-  private buildBackend() {
+  private async buildBackend() {
     console.log(chalk.blue("Building backend..."));
     const cmd = `docker build --file docker/backend.dockerfile --tag sami/backend .`;
     console.log(chalk.gray(cmd));
-    spawnSync(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
+    await execa(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
     console.log(chalk.green("Built backend"));
   }
-  private buildFrontend() {
+  private async buildFrontend() {
     console.log(chalk.blue("Building frontend..."));
     const cmd = `docker build --file docker/frontend.dockerfile --tag sami/frontend .`;
     console.log(chalk.gray(cmd));
-    spawnSync(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
+    await execa(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
     console.log(chalk.green("Built frontend"));
   }
 }
