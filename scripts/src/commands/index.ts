@@ -3,7 +3,7 @@ import { Command } from "commander";
 import { logProgramHelp } from "../utils";
 
 // Commands
-import devCmd from "./dev";
+import cliCmd from "./cli";
 import docsCmd from "./docs";
 import strapiCmd from "./strapi";
 import wpCmd from "./wp";
@@ -13,7 +13,7 @@ const program = new Command();
 program.version("1.0.0").description("SAMI Website Scripts");
 
 /** add sub-commands from child folders */
-program.addCommand(devCmd);
+program.addCommand(cliCmd);
 program.addCommand(docsCmd);
 program.addCommand(strapiCmd);
 program.addCommand(wpCmd);

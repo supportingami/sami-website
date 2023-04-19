@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "target": "es2015",
+    "target": "ESNext",
     "noEmit": true,
     "moduleResolution": "node",
-    "module": "commonjs",
+    "module": "CommonJS",
     "esModuleInterop": true,
     // Global type definitions.
     "typeRoots": ["./node_modules/@types"]

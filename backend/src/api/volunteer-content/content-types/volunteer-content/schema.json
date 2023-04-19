@@ -15,6 +15,11 @@
     "Content": {
       "type": "dynamiczone",
       "components": ["common.html", "common.action-button", "common.text-block"]
+    },
+    "faqs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::faq.faq"
     }
   }
 }
