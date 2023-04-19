@@ -29,9 +29,10 @@ export default program
 class DeployCmd {
   public async run(envName?: string) {
     const envLoaded = await loadEnv(envName);
+    console.log("env", envLoaded);
   }
 
-  private deployBackend(envLoaded: IEnvLoaded) {}
+  private deployBackend() {}
 
   private deployFrontend() {}
 }
