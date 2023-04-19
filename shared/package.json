@@ -3,6 +3,6 @@
   "private": true,
   "main": "src/index.ts",
   "devDependencies": {
-    "@strapi/strapi": "4.3.0"
+    "@strapi/strapi": "4.8.0"
   }
 }
