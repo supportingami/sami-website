@@ -9,8 +9,8 @@ import startCmd from "./start";
  * @example yarn workspace scripts wp
  *************************************************************************************/
 
-const program = new Command("dev");
-program.description("Local development scripts");
+const program = new Command("cli");
+program.description("Local command line scripts");
 program.addCommand(buildCmd);
 program.addCommand(setEnvCmd);
 program.addCommand(startCmd);
