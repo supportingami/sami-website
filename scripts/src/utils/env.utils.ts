@@ -1,8 +1,9 @@
 import dotenv from "dotenv";
 import { ensureFileSync, existsSync, readFileSync, readdirSync, writeFileSync } from "fs-extra";
 import { prompt } from "inquirer";
-import path from "path";
+import { resolve } from "path";
 import { PATHS } from "../paths";
+import { logError } from "./logging.utils";
 
 /************************************************************************************************
  * Environments
@@ -34,8 +35,8 @@ export async function loadEnv(envName?: string) {
   if (envLoaded && envLoaded.name === envName) {
     return envLoaded;
   }
-  const envDir = path.resolve(PATHS.rootDir, "config");
-  const envPath = path.resolve(envDir, `${envName}.env`);
+  const envDir = resolve(PATHS.rootDir, "config");
+  const envPath = resolve(envDir, `${envName}.env`);
 
   if (!existsSync(envPath)) {
     throw new Error("Environment config not found\n" + envPath);
@@ -45,7 +46,7 @@ export async function loadEnv(envName?: string) {
   let { parsed } = dotenv.config({ path: envPath, override: true });
 
   // add local env overrides
-  const envLocalOverridesPath = path.resolve(envDir, `${envName}.local.env`);
+  const envLocalOverridesPath = resolve(envDir, `${envName}.local.env`);
   if (existsSync(envLocalOverridesPath)) {
     parsed = {
       ...parsed,
@@ -58,14 +59,18 @@ export async function loadEnv(envName?: string) {
     envPath,
     parsed,
   };
+
+  //ensure loaded env configured correctly
+  healthcheck();
+
   // populate selected .env to global environment
   process.env.ENV_PATH = envPath;
   // Write combined local and config env to local folder
   const mergedEnv = Object.entries(parsed)
     .map(([key, value]) => `${key}=${value}`)
     .join("\n");
-  const backendEnvPath = path.resolve(PATHS.backendDir, ".env");
-  const frontendEnvPath = path.resolve(PATHS.frontendDir, ".env");
+  const backendEnvPath = resolve(PATHS.backendDir, ".env");
+  const frontendEnvPath = resolve(PATHS.frontendDir, ".env");
 
   writeFileSync(backendEnvPath, mergedEnv, "utf8");
   writeFileSync(frontendEnvPath, mergedEnv, "utf8");
@@ -111,7 +116,7 @@ export function getLoadedEnv() {
 
 /** Prompt selection of environment from a list */
 async function promptEnv() {
-  const envDir = path.resolve(PATHS.rootDir, "config");
+  const envDir = resolve(PATHS.rootDir, "config");
   const envFiles = readdirSync(envDir)
     .filter((filename) => filename.endsWith(".env") && !filename.includes(".local."))
     .map((filename) => {
@@ -130,4 +135,25 @@ async function promptEnv() {
     selectedEnv = selected;
   }
   return selectedEnv;
+}
+
+async function healthcheck() {
+  const { STRAPI_READONLY_TOKEN, GOOGLE_APPLICATION_CREDENTIALS } = envLoaded.parsed;
+  // ensure frontend bootstrapped
+
+  if (!STRAPI_READONLY_TOKEN) {
+    logError({ msg1: "Strapi must be bootstrapped first, run command:", msg2: `yarn scripts strapi bootstrap` });
+  }
+  // ensure external storage configured
+  if (GOOGLE_APPLICATION_CREDENTIALS) {
+    const serviceAccountPath = resolve(PATHS.configDir, GOOGLE_APPLICATION_CREDENTIALS);
+    if (!existsSync(serviceAccountPath)) {
+      logError({
+        msg1: "Google application credentials not found",
+        msg2: serviceAccountPath,
+      });
+    }
+    // rewrite as absolute path
+    process.env.GOOGLE_APPLICATION_CREDENTIALS = serviceAccountPath;
+  }
 }
