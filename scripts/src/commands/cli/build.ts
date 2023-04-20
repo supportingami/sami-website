@@ -1,5 +1,4 @@
 import chalk from "chalk";
-import { spawnSync } from "child_process";
 import { Command } from "commander";
 import execa from "execa";
 
@@ -37,12 +36,12 @@ class BuildCmd {
 
   public async run(options: IProgramOptions) {
     const { environment, only } = options;
-    await loadEnv(environment);
+    const loadedEnv = await loadEnv(environment);
     if (only === undefined || only === "base") {
       await this.buildBase();
     }
     if (only === undefined || only === "backend") {
-      await this.buildBackend();
+      await this.buildBackend(loadedEnv.name);
     }
     if (only === undefined || only === "frontend") {
       await this.buildFrontend();
@@ -57,9 +56,10 @@ class BuildCmd {
     console.log(chalk.green("Built base"));
   }
 
-  private async buildBackend() {
+  private async buildBackend(envName: string) {
     console.log(chalk.blue("Building backend..."));
-    const cmd = `docker build --file docker/backend.dockerfile --tag sami/backend .`;
+    const args = `--build-arg ENV_NAME=${envName}`;
+    const cmd = `docker build --file docker/backend.dockerfile ${args} --tag sami/backend .`;
     console.log(chalk.gray(cmd));
     await execa(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
     console.log(chalk.green("Built backend"));

@@ -97,7 +97,7 @@ STRAPI_READONLY_TOKEN=my_generated_api_token
 
 ```
 {
-    "Authorization": "Bearer my_generated_api_token
+    "Authorization": "Bearer my_generated_api_token"
 }
 ```
 

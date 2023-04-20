@@ -8,7 +8,7 @@ config
 data
 docker
 docs
+frontend/.next
 frontend/node_modules
 scripts/node_modules
 
-.dockerignore

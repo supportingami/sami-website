@@ -25,12 +25,11 @@ COPY ./backend/package.json ./backend/package.json
 COPY ./frontend/package.json ./frontend/package.json
 COPY ./scripts/package.json ./scripts/package.json
 
-ENV PATH /opt/node_modules/.bin:$PATH
+ENV PATH /app/node_modules/.bin:$PATH
 
 RUN yarn install
 
 COPY . .
 
-# RUN yarn scripts dev setEnv --environment staging 
 
 

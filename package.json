@@ -21,7 +21,8 @@
     "lint:spell:TODO": "npx cspell \"**/*.md\" --config ./.cspell.json",
     "lint:style": "prettier --check '**/*.{md,json,js,tsx,ts}'",
     "scripts": "yarn workspace scripts start",
-    "start": "yarn scripts cli start"
+    "start": "yarn scripts cli start",
+    "start:docker": "docker compose -p sami-website -f docker/docker-compose.yml up"
   },
   "devDependencies": {
     "@release-it/conventional-changelog": "^5.0.0",
