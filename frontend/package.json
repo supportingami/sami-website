@@ -8,22 +8,23 @@
     "start:prod": "next start",
     "build:analyze": "ANALYZE=true next build && tsc --project tsconfig.server.json",
     "build": "next build",
+    "build:standalone":"next build && node ./postbuild.js",
     "export": "next export",
     "lint": "tsc",
     "generate": "graphql-codegen --require dotenv/config --config codegen.yml dotenv_config_path=./.env.local"
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
-    "@next/font": "^13.0.3",
-    "@sami/shared": "workspace:*",
+    "@next/font": "13.2.4",
     "dayjs": "^1.11.2",
     "graphql": "^16.6.0",
-    "next": "^13.0.3",
+    "next": "13.2.4",
     "pg": "^8.7.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.6.0",
-    "react-share": "^4.4.0"
+    "react-share": "^4.4.0",
+    "sharp": "^0.32.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.13.5",

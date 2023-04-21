@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "build": "yarn scripts cli build",
-    "deploy": "npx vercel",
+    "deploy:frontend": "vercel --cwd frontend",
     "export:frontend": "yarn workspace frontend export",
     "format": "yarn format:code && yarn format:style",
     "format:code": "eslint . --ext .js,.jsx,.ts,.tsx --color --fix",
@@ -21,7 +21,8 @@
     "lint:spell:TODO": "npx cspell \"**/*.md\" --config ./.cspell.json",
     "lint:style": "prettier --check '**/*.{md,json,js,tsx,ts}'",
     "scripts": "yarn workspace scripts start",
-    "start": "yarn scripts cli start"
+    "start": "yarn scripts cli start",
+    "start:docker": "docker compose -p sami-website -f docker/docker-compose.yml up"
   },
   "devDependencies": {
     "@release-it/conventional-changelog": "^5.0.0",
@@ -38,7 +39,8 @@
     "lint-staged": "^12.4.1",
     "prettier": "^2.7.1",
     "pretty-quick": "^3.1.3",
-    "typescript": "4.8.4"
+    "typescript": "4.8.4",
+    "vercel": "^28.18.3"
   },
   "husky": {
     "hooks": {

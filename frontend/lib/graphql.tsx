@@ -72,7 +72,7 @@ export const graphQLServerClient = () => {
 /** Common method used to generate graphQL client either on server or browser */
 const getClient = (headers: any) =>
   new ApolloClient({
-    uri: `${process.env.NEXT_PUBLIC_API_URL}/graphql` || "http://localhost:1337/graphql",
+    uri: `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337"}/graphql`,
     credentials: "same-origin",
     cache: new InMemoryCache(),
     headers,
