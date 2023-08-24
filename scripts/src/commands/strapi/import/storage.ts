@@ -17,10 +17,15 @@ export class StorageImport {
     return this.importLocalStorage();
   }
   private async importGoogleStorage(bucketname: string) {
+    console.log(chalk.gray("Google Storage Provider"));
     const gcloudStorage = new GcloudStorage(bucketname);
     const localDir = resolve(PATHS.dataDir, "uploads");
     const ops = await gcloudStorage.copyLocalToServer(localDir, { dryRun: true });
-
+    // Skip confirmation if all ignored
+    if (ops.create.length === 0 && ops.update.length === 0 && ops.delete.length === 0) {
+      console.log(chalk.green("Storage - Up to date"));
+      return;
+    }
     const confirmed = await this.confirmImport(ops);
     if (confirmed) {
       await gcloudStorage.copyLocalToServer(localDir);
@@ -28,6 +33,8 @@ export class StorageImport {
   }
 
   private async importLocalStorage() {
+    console.log(chalk.gray("Local Storage Provider"));
+
     const source = resolve(PATHS.dataDir, "uploads");
     const target = resolve(PATHS.backendDir, "public", "uploads");
 

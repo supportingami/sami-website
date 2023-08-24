@@ -13,14 +13,16 @@ import type { IEnvLoaded } from "../../utils";
 
 interface IProgramOptions {
   environment?: string;
+  only?: "frontend" | "backend";
 }
 
 const program = new Command("start");
 export default program
   .description("Start local development server")
   .option("-e --environment <string>", "Name of environment to use")
+  .option("-o --only <string>", "Specify only 'frontend' or 'backend'")
   .action(async (options: IProgramOptions) => {
-    return new StartCmd().run(options.environment).then(() => process.exit(0));
+    return new StartCmd().run(options).then(() => process.exit(0));
   });
 
 /***************************************************************************************
@@ -33,26 +35,34 @@ export default program
 class StartCmd {
   allCommands = [];
 
-  public async run(envName?: string) {
-    const envLoaded = await loadEnv(envName);
-    const backendStart = this.getBackendStartCommand(envLoaded);
-    // when running frontend always assume local config
-    const frontendStart = this.getFrontendCommand();
-    const { result } = concurrently([backendStart, frontendStart], {
+  public async run(options: IProgramOptions) {
+    const { environment, only } = options;
+    const envLoaded = await loadEnv(environment);
+    const cmds: ConcurrentlyCommandInput[] = [];
+    if (only !== "frontend") {
+      const backendStart = this.getBackendStartCommand(envLoaded);
+      cmds.push(backendStart);
+    }
+    if (only !== "backend") {
+      // when running frontend always assume local config
+      const frontendStart = this.getFrontendCommand();
+      cmds.push(frontendStart);
+    }
+    const { result } = concurrently(cmds, {
       ["killOthers" as any]: ["failure", "success"],
     });
     await result;
   }
 
   private getBackendStartCommand(envLoaded: IEnvLoaded): ConcurrentlyCommandInput {
-    console.log("starting backend...");
+    console.log("Starting backend...");
+    const NODE_ENV = envLoaded.name === "development" ? "development" : "production";
+    if (NODE_ENV === "production") console.log("Production start may take a minute to compile...");
     return {
       name: "strapi",
-      command: "yarn strapi develop",
+      command: "yarn start",
       cwd: PATHS.backendDir,
-      env: {
-        NODE_ENV: envLoaded.name === "development" ? "development" : "production",
-      },
+      env: { NODE_ENV },
       prefixColor: "#8F76FF",
     };
   }

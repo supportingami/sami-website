@@ -2,6 +2,7 @@ import { Command } from "commander";
 import { DBImport } from "./db";
 import { loadEnv } from "../../../utils";
 import { StorageImport } from "./storage";
+import chalk from "chalk";
 
 /***************************************************************************************
  * CLI
@@ -23,9 +24,11 @@ export default program
     const { name, parsed } = await loadEnv(options.environment);
     // Import storage first as db references will be dropped if assets do not exist
     if (options.only !== "db") {
+      console.log(chalk.magenta("=== Storage ==="));
       await new StorageImport().run(parsed);
     }
     if (options.only !== "storage") {
+      console.log(chalk.magenta("=== Database ==="));
       await new DBImport().run(name, options.table);
     }
     process.exit(0);
