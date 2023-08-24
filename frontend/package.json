@@ -8,7 +8,7 @@
     "start:prod": "next start",
     "build:analyze": "ANALYZE=true next build && tsc --project tsconfig.server.json",
     "build": "next build",
-    "build:standalone":"next build && node ./postbuild.js",
+    "build:standalone": "next build && node ./postbuild.js",
     "export": "next export",
     "lint": "tsc",
     "generate": "graphql-codegen --require dotenv/config --config codegen.yml dotenv_config_path=./.env.local"

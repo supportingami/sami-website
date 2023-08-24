@@ -45,7 +45,13 @@ This will run both backend and frontend serve scripts
 Backend: http://localhost:1337/admin
 Frontend: http://localhost:3000
 
-### 4. Authorize data
+### 5. Import data
+
+```
+yarn scripts strapi import
+```
+
+### 6. Authorize data
 
 Any endpoints that are not publically accessible will not be available to the frontend unless a api token is generated and populated.
 

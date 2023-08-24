@@ -21,7 +21,7 @@ module.exports = withBundleAnalyzer({
   // https://github.com/vercel/next.js/issues/27865
   // https://raphaelpralat.medium.com/system-environment-variables-in-next-js-with-docker-1f0754e04cde
   publicRuntimeConfig: {
-    NEXT_PUBLIC_API_URL: "process.env.NEXT_PUBLIC_API_URL",
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
   },
   experimental: {
     scrollRestoration: true,
