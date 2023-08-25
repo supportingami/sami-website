@@ -9,59 +9,55 @@ import {
 } from "react-share";
 import dayjs from "dayjs";
 
-export const BlogPostComponent: React.FC<{ blogPosts: IBlogPost[]; title }> = ({ blogPosts, title }) => {
+export const BlogPostComponent: React.FC<{ blogPost: IBlogPost }> = ({ blogPost }) => {
   const size = "28px";
   const url = global.window && window.location.href;
   return (
     <>
-      {blogPosts
-        .filter((blogPost) => blogPost.Title === title)
-        .map((blogPost) => (
-          <div key={blogPost.id} className="font-serif px-32">
-            <h1 className="font-semibold text-4xl capitalize font-sans">{blogPost.Title}</h1>
-            <span className="font-semibold text-sm">{dayjs(blogPost.DateWritten).format("MMM D, YYYY")} </span>
-            <span>
-              {" | "}
-              {blogPost.Tags.data.map((tag) => (
-                <span key={tag.id} className="text-gray-500 text-sm">
-                  {tag.attributes.Tag}{" "}
-                </span>
-              ))}
+      <div className="font-serif px-32">
+        <h1 className="font-semibold text-4xl capitalize font-sans">{blogPost.Title}</h1>
+        <span className="font-semibold text-sm">{dayjs(blogPost.DateWritten).format("MMM D, YYYY")} </span>
+        <span>
+          {" | "}
+          {blogPost.Tags.data.map((tag) => (
+            <span key={tag.id} className="text-gray-500 text-sm">
+              {tag.attributes.Tag}{" "}
             </span>
-            <div
-              dangerouslySetInnerHTML={{ __html: blogPost.Content }}
-              className="prose text-base pr-20 text-justify py-5"
-            ></div>
-            <div style={{ margin: "20px 0" }}>
-              <div>Share this Blog with your community:</div>
-              <hr />
-              <div style={{ margin: "10px 0" }}>
-                <FacebookShareButton
-                  quote={`${blogPost.Summary}`}
-                  hashtag={`${blogPost.Title}`}
-                  title={`${blogPost.Title}`}
-                  url={url}
-                  windowWidth={750}
-                  windowHeight={600}
-                >
-                  <FacebookIcon size={size} />
-                </FacebookShareButton>
-                <TwitterShareButton
-                  url={url}
-                  hashtags={[`${blogPost.Title}`, "SAMIBlogs"]}
-                  title={`${blogPost.Title}`}
-                  windowWidth={750}
-                  windowHeight={600}
-                >
-                  <TwitterIcon size={size} />
-                </TwitterShareButton>
-                <LinkedinShareButton url={url} title={`${blogPost.Title}`}>
-                  <LinkedinIcon size={size} />
-                </LinkedinShareButton>
-              </div>
-            </div>
+          ))}
+        </span>
+        <div
+          dangerouslySetInnerHTML={{ __html: blogPost.Content }}
+          className="prose text-base pr-20 text-justify py-5"
+        ></div>
+        <div style={{ margin: "20px 0" }}>
+          <div>Share this Blog with your community:</div>
+          <hr />
+          <div style={{ margin: "10px 0" }}>
+            <FacebookShareButton
+              quote={`${blogPost.Summary}`}
+              hashtag={`${blogPost.Title}`}
+              title={`${blogPost.Title}`}
+              url={url}
+              windowWidth={750}
+              windowHeight={600}
+            >
+              <FacebookIcon size={size} />
+            </FacebookShareButton>
+            <TwitterShareButton
+              url={url}
+              hashtags={[`${blogPost.Title}`, "SAMIBlogs"]}
+              title={`${blogPost.Title}`}
+              windowWidth={750}
+              windowHeight={600}
+            >
+              <TwitterIcon size={size} />
+            </TwitterShareButton>
+            <LinkedinShareButton url={url} title={`${blogPost.Title}`}>
+              <LinkedinIcon size={size} />
+            </LinkedinShareButton>
           </div>
-        ))}
+        </div>
+      </div>
     </>
   );
 };

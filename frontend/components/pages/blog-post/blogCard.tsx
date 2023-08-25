@@ -9,7 +9,7 @@ import Link from "next/link";
 export const BlogCardComponent: React.FC<{
   blog: IBlogPost;
 }> = ({ blog }) => (
-  <Link href={`/blog-posts/${blog.Title}`}>
+  <Link href={`/blog-posts/${blog.Slug}`}>
     <div
       className="
   relative flex flex-col justify-start items-start min-h-full max-h-full font-sans rounded 

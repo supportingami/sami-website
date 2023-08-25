@@ -84,7 +84,11 @@ type AuthorBlock {
   updatedAt: DateTime
 }
 
-union AuthorBlockBlocksDynamicZone = ComponentCommonActionButton | ComponentCommonHtml | ComponentCommonTextBlock | Error
+union AuthorBlockBlocksDynamicZone =
+    ComponentCommonActionButton
+  | ComponentCommonHtml
+  | ComponentCommonTextBlock
+  | Error
 
 scalar AuthorBlockBlocksDynamicZoneInput
 
@@ -106,9 +110,15 @@ type BlogPost {
   Content: String
   DateWritten: Date
   FeatureImage: UploadFileEntityResponse
+  Slug: String
   Summary: String
-  Tags(filters: BlogTagFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): BlogTagRelationResponseCollection
-  Title: String
+  Tags(
+    filters: BlogTagFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): BlogTagRelationResponseCollection
+  Title: String!
   createdAt: DateTime
   publishedAt: DateTime
   updatedAt: DateTime
@@ -131,6 +141,7 @@ type BlogPostEntityResponseCollection {
 input BlogPostFiltersInput {
   Content: StringFilterInput
   DateWritten: DateFilterInput
+  Slug: StringFilterInput
   Summary: StringFilterInput
   Tags: BlogTagFiltersInput
   Title: StringFilterInput
@@ -147,6 +158,7 @@ input BlogPostInput {
   Content: String
   DateWritten: Date
   FeatureImage: ID
+  Slug: String
   Summary: String
   Tags: [ID]
   Title: String
@@ -211,6 +223,7 @@ input BooleanFilterInput {
   lt: Boolean
   lte: Boolean
   ne: Boolean
+  nei: Boolean
   not: BooleanFilterInput
   notContains: Boolean
   notContainsi: Boolean
@@ -252,7 +265,11 @@ type ComponentCommonTextBlock {
 }
 
 type ComponentHomeGetInvolved {
-  ActionButtons(filters: ComponentCommonActionButtonFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentCommonActionButton]
+  ActionButtons(
+    filters: ComponentCommonActionButtonFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): [ComponentCommonActionButton]
   Description: String
   Image: UploadFileEntityResponse
   Text: String
@@ -270,7 +287,11 @@ input ComponentHomeGetInvolvedInput {
 }
 
 type ComponentHomeHeroImage {
-  ActionButtons(filters: ComponentCommonActionButtonFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentCommonActionButton]
+  ActionButtons(
+    filters: ComponentCommonActionButtonFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): [ComponentCommonActionButton]
   Image: UploadFileEntityResponse!
   Text: String!
   id: ID!
@@ -312,7 +333,11 @@ input ComponentHomeImpactNumbersInput {
 }
 
 type ComponentHomeImpactSection {
-  ImpactNumbers(filters: ComponentHomeImpactNumbersFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentHomeImpactNumbers]
+  ImpactNumbers(
+    filters: ComponentHomeImpactNumbersFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): [ComponentHomeImpactNumbers]
   Statement: String
   id: ID!
 }
@@ -324,7 +349,11 @@ input ComponentHomeImpactSectionInput {
 }
 
 type ComponentHomeMissionStatement {
-  ActionButtons(filters: ComponentCommonActionButtonFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentCommonActionButton]
+  ActionButtons(
+    filters: ComponentCommonActionButtonFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): [ComponentCommonActionButton]
   Description: String
   Heading: String
   Image: UploadFileEntityResponse
@@ -342,7 +371,11 @@ input ComponentHomeMissionStatementInput {
 }
 
 type ComponentHomeProjectSummary {
-  ActionButtons(filters: ComponentCommonActionButtonFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentCommonActionButton]
+  ActionButtons(
+    filters: ComponentCommonActionButtonFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): [ComponentCommonActionButton]
   Image: UploadFileEntityResponse
   Text: String
   Title: String
@@ -423,6 +456,7 @@ input DateFilterInput {
   lt: Date
   lte: Date
   ne: Date
+  nei: Date
   not: DateFilterInput
   notContains: Date
   notContainsi: Date
@@ -452,6 +486,7 @@ input DateTimeFilterInput {
   lt: DateTime
   lte: DateTime
   ne: DateTime
+  nei: DateTime
   not: DateTimeFilterInput
   notContains: DateTime
   notContainsi: DateTime
@@ -534,6 +569,10 @@ input FaqInput {
   publishedAt: DateTime
 }
 
+type FaqRelationResponseCollection {
+  data: [FaqEntity!]!
+}
+
 input FileInfoInput {
   alternativeText: String
   caption: String
@@ -554,6 +593,7 @@ input FloatFilterInput {
   lt: Float
   lte: Float
   ne: Float
+  nei: Float
   not: FloatFilterInput
   notContains: Float
   notContainsi: Float
@@ -564,11 +604,44 @@ input FloatFilterInput {
   startsWith: Float
 }
 
-union GenericMorph = About | AnnualReport | AuthorBlock | BlogPost | BlogTag | ComponentCommonActionButton | ComponentCommonHtml | ComponentCommonTextBlock | ComponentHomeGetInvolved | ComponentHomeHeroImage | ComponentHomeImpactNumbers | ComponentHomeImpactSection | ComponentHomeMissionStatement | ComponentHomeProjectSummary | ComponentHomeProjectSummaryItem | Country | DonateContent | Faq | HomeContent | I18NLocale | Member | ProjectType | Resource | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | VolunteerContent
+union GenericMorph =
+    About
+  | AnnualReport
+  | AuthorBlock
+  | BlogPost
+  | BlogTag
+  | ComponentCommonActionButton
+  | ComponentCommonHtml
+  | ComponentCommonTextBlock
+  | ComponentHomeGetInvolved
+  | ComponentHomeHeroImage
+  | ComponentHomeImpactNumbers
+  | ComponentHomeImpactSection
+  | ComponentHomeMissionStatement
+  | ComponentHomeProjectSummary
+  | ComponentHomeProjectSummaryItem
+  | Country
+  | DonateContent
+  | Faq
+  | HomeContent
+  | I18NLocale
+  | Member
+  | ProjectType
+  | Resource
+  | UploadFile
+  | UploadFolder
+  | UsersPermissionsPermission
+  | UsersPermissionsRole
+  | UsersPermissionsUser
+  | VolunteerContent
 
 type HomeContent {
   GetInvolved: ComponentHomeGetInvolved
-  HeroImages(filters: ComponentHomeHeroImageFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ComponentHomeHeroImage]
+  HeroImages(
+    filters: ComponentHomeHeroImageFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): [ComponentHomeHeroImage]
   ImpactSection: ComponentHomeImpactSection
   MissionStatement: ComponentHomeMissionStatement
   ProjectSummary: ComponentHomeProjectSummary
@@ -641,6 +714,7 @@ input IDFilterInput {
   lt: ID
   lte: ID
   ne: ID
+  nei: ID
   not: IDFilterInput
   notContains: ID
   notContainsi: ID
@@ -665,6 +739,7 @@ input IntFilterInput {
   lt: Int
   lte: Int
   ne: Int
+  nei: Int
   not: IntFilterInput
   notContains: Int
   notContainsi: Int
@@ -694,6 +769,7 @@ input JSONFilterInput {
   lt: JSON
   lte: JSON
   ne: JSON
+  nei: JSON
   not: JSONFilterInput
   notContains: JSON
   notContainsi: JSON
@@ -761,6 +837,14 @@ input MemberInput {
 }
 
 type Mutation {
+  """
+  Change user password. Confirm with the current password.
+  """
+  changePassword(
+    currentPassword: String!
+    password: String!
+    passwordConfirmation: String!
+  ): UsersPermissionsLoginPayload
   createAbout(data: AboutInput!): AboutEntityResponse
   createAnnualReport(data: AnnualReportInput!): AnnualReportEntityResponse
   createBlogPost(data: BlogPostInput!): BlogPostEntityResponse
@@ -773,10 +857,14 @@ type Mutation {
   createUploadFile(data: UploadFileInput!): UploadFileEntityResponse
   createUploadFolder(data: UploadFolderInput!): UploadFolderEntityResponse
 
-  """Create a new role"""
+  """
+  Create a new role
+  """
   createUsersPermissionsRole(data: UsersPermissionsRoleInput!): UsersPermissionsCreateRolePayload
 
-  """Create a new user"""
+  """
+  Create a new user
+  """
   createUsersPermissionsUser(data: UsersPermissionsUserInput!): UsersPermissionsUserEntityResponse!
   deleteAbout(id: ID!): AboutEntityResponse
   deleteAnnualReport(id: ID!): AnnualReportEntityResponse
@@ -793,22 +881,32 @@ type Mutation {
   deleteUploadFile(id: ID!): UploadFileEntityResponse
   deleteUploadFolder(id: ID!): UploadFolderEntityResponse
 
-  """Delete an existing role"""
+  """
+  Delete an existing role
+  """
   deleteUsersPermissionsRole(id: ID!): UsersPermissionsDeleteRolePayload
 
-  """Delete an existing user"""
+  """
+  Delete an existing user
+  """
   deleteUsersPermissionsUser(id: ID!): UsersPermissionsUserEntityResponse!
   deleteVolunteerContent: VolunteerContentEntityResponse
 
-  """Confirm an email users email address"""
+  """
+  Confirm an email users email address
+  """
   emailConfirmation(confirmation: String!): UsersPermissionsLoginPayload
 
-  """Request a reset password token"""
+  """
+  Request a reset password token
+  """
   forgotPassword(email: String!): UsersPermissionsPasswordPayload
   login(input: UsersPermissionsLoginInput!): UsersPermissionsLoginPayload!
   multipleUpload(field: String, files: [Upload]!, ref: String, refId: ID): [UploadFileEntityResponse]!
 
-  """Register a user"""
+  """
+  Register a user
+  """
   register(input: UsersPermissionsRegisterInput!): UsersPermissionsLoginPayload!
   removeFile(id: ID!): UploadFileEntityResponse
 
@@ -832,10 +930,14 @@ type Mutation {
   updateUploadFile(data: UploadFileInput!, id: ID!): UploadFileEntityResponse
   updateUploadFolder(data: UploadFolderInput!, id: ID!): UploadFolderEntityResponse
 
-  """Update an existing role"""
+  """
+  Update an existing role
+  """
   updateUsersPermissionsRole(data: UsersPermissionsRoleInput!, id: ID!): UsersPermissionsUpdateRolePayload
 
-  """Update an existing user"""
+  """
+  Update an existing user
+  """
   updateUsersPermissionsUser(data: UsersPermissionsUserInput!, id: ID!): UsersPermissionsUserEntityResponse!
   updateVolunteerContent(data: VolunteerContentInput!): VolunteerContentEntityResponse
   upload(field: String, file: Upload!, info: FileInfoInput, ref: String, refId: ID): UploadFileEntityResponse!
@@ -921,37 +1023,102 @@ enum PublicationState {
 
 type Query {
   about(id: ID): AboutEntityResponse
-  abouts(filters: AboutFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): AboutEntityResponseCollection
+  abouts(
+    filters: AboutFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): AboutEntityResponseCollection
   annualReport(id: ID): AnnualReportEntityResponse
-  annualReports(filters: AnnualReportFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): AnnualReportEntityResponseCollection
+  annualReports(
+    filters: AnnualReportFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): AnnualReportEntityResponseCollection
   authorBlock(publicationState: PublicationState = LIVE): AuthorBlockEntityResponse
   blogPost(id: ID): BlogPostEntityResponse
-  blogPosts(filters: BlogPostFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): BlogPostEntityResponseCollection
+  blogPosts(
+    filters: BlogPostFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): BlogPostEntityResponseCollection
   blogTag(id: ID): BlogTagEntityResponse
-  blogTags(filters: BlogTagFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): BlogTagEntityResponseCollection
-  countries(filters: CountryFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): CountryEntityResponseCollection
+  blogTags(
+    filters: BlogTagFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): BlogTagEntityResponseCollection
+  countries(
+    filters: CountryFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): CountryEntityResponseCollection
   country(id: ID): CountryEntityResponse
   donateContent(publicationState: PublicationState = LIVE): DonateContentEntityResponse
   faq(id: ID): FaqEntityResponse
-  faqs(filters: FaqFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): FaqEntityResponseCollection
+  faqs(
+    filters: FaqFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): FaqEntityResponseCollection
   homeContent(publicationState: PublicationState = LIVE): HomeContentEntityResponse
   i18NLocale(id: ID): I18NLocaleEntityResponse
-  i18NLocales(filters: I18NLocaleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): I18NLocaleEntityResponseCollection
+  i18NLocales(
+    filters: I18NLocaleFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): I18NLocaleEntityResponseCollection
   me: UsersPermissionsMe
   member(id: ID): MemberEntityResponse
-  members(filters: MemberFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): MemberEntityResponseCollection
+  members(
+    filters: MemberFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): MemberEntityResponseCollection
   projectType(id: ID): ProjectTypeEntityResponse
-  projectTypes(filters: ProjectTypeFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): ProjectTypeEntityResponseCollection
+  projectTypes(
+    filters: ProjectTypeFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): ProjectTypeEntityResponseCollection
   resource(id: ID): ResourceEntityResponse
-  resources(filters: ResourceFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): ResourceEntityResponseCollection
+  resources(
+    filters: ResourceFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): ResourceEntityResponseCollection
   uploadFile(id: ID): UploadFileEntityResponse
-  uploadFiles(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFileEntityResponseCollection
+  uploadFiles(
+    filters: UploadFileFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): UploadFileEntityResponseCollection
   uploadFolder(id: ID): UploadFolderEntityResponse
-  uploadFolders(filters: UploadFolderFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFolderEntityResponseCollection
+  uploadFolders(
+    filters: UploadFolderFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): UploadFolderEntityResponseCollection
   usersPermissionsRole(id: ID): UsersPermissionsRoleEntityResponse
-  usersPermissionsRoles(filters: UsersPermissionsRoleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsRoleEntityResponseCollection
+  usersPermissionsRoles(
+    filters: UsersPermissionsRoleFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): UsersPermissionsRoleEntityResponseCollection
   usersPermissionsUser(id: ID): UsersPermissionsUserEntityResponse
-  usersPermissionsUsers(filters: UsersPermissionsUserFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsUserEntityResponseCollection
+  usersPermissionsUsers(
+    filters: UsersPermissionsUserFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): UsersPermissionsUserEntityResponseCollection
   volunteerContent(publicationState: PublicationState = LIVE): VolunteerContentEntityResponse
 }
 
@@ -1017,6 +1184,7 @@ input StringFilterInput {
   lt: String
   lte: String
   ne: String
+  nei: String
   not: StringFilterInput
   notContains: String
   notContainsi: String
@@ -1027,7 +1195,9 @@ input StringFilterInput {
   startsWith: String
 }
 
-"""The `Upload` scalar type represents a file upload."""
+"""
+The `Upload` scalar type represents a file upload.
+"""
 scalar Upload
 
 type UploadFile {
@@ -1113,9 +1283,17 @@ type UploadFileRelationResponseCollection {
 }
 
 type UploadFolder {
-  children(filters: UploadFolderFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFolderRelationResponseCollection
+  children(
+    filters: UploadFolderFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): UploadFolderRelationResponseCollection
   createdAt: DateTime
-  files(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFileRelationResponseCollection
+  files(
+    filters: UploadFileFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): UploadFileRelationResponseCollection
   name: String!
   parent: UploadFolderEntityResponse
   path: String!
@@ -1241,10 +1419,18 @@ type UsersPermissionsRole {
   createdAt: DateTime
   description: String
   name: String!
-  permissions(filters: UsersPermissionsPermissionFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsPermissionRelationResponseCollection
+  permissions(
+    filters: UsersPermissionsPermissionFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): UsersPermissionsPermissionRelationResponseCollection
   type: String
   updatedAt: DateTime
-  users(filters: UsersPermissionsUserFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsUserRelationResponseCollection
+  users(
+    filters: UsersPermissionsUserFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): UsersPermissionsUserRelationResponseCollection
 }
 
 type UsersPermissionsRoleEntity {
@@ -1349,11 +1535,21 @@ type UsersPermissionsUserRelationResponseCollection {
 type VolunteerContent {
   Content: [VolunteerContentContentDynamicZone]
   createdAt: DateTime
+  faqs(
+    filters: FaqFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): FaqRelationResponseCollection
   publishedAt: DateTime
   updatedAt: DateTime
 }
 
-union VolunteerContentContentDynamicZone = ComponentCommonActionButton | ComponentCommonHtml | ComponentCommonTextBlock | Error
+union VolunteerContentContentDynamicZone =
+    ComponentCommonActionButton
+  | ComponentCommonHtml
+  | ComponentCommonTextBlock
+  | Error
 
 scalar VolunteerContentContentDynamicZoneInput
 
@@ -1368,5 +1564,6 @@ type VolunteerContentEntityResponse {
 
 input VolunteerContentInput {
   Content: [VolunteerContentContentDynamicZoneInput!]
+  faqs: [ID]
   publishedAt: DateTime
 }
