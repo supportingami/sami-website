@@ -1,5 +1,5 @@
-query blogPosts {
-  blogPosts(sort: "DateWritten:DESC") {
+query blogPosts($filters: BlogPostFiltersInput) {
+  blogPosts(sort: "DateWritten:DESC", filters: $filters) {
     data {
       id
       attributes {
@@ -25,6 +25,7 @@ query blogPosts {
             }
           }
         }
+        Slug
       }
     }
   }

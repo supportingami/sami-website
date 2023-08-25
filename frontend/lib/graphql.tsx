@@ -1,4 +1,4 @@
-import type { DocumentNode } from "@apollo/client";
+import type { DocumentNode, OperationVariables } from "@apollo/client";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import type { ReactNode } from "react";
 import type session from "types/session";
@@ -18,15 +18,16 @@ export const GraphQLProvider = ({ session, children }: { session: session; child
  * Execute a graphql query
  * @param graphqlQuery Document reference for query
  * @param variables Additional variables to pass to query, e.g. if query supports filters
- * ```
+ * ```ts
  * {
  *  filters: {
  *    Slug: { eq: 'my-slug'}
  *  }
  * }
  * ```
+ * NOTE - any variables passed must first be defined from within the corresponding .graphql query
  */
-export async function serverQuery<T>(graphqlQuery: DocumentNode, variables = {}) {
+export async function serverQuery<T>(graphqlQuery: DocumentNode, variables: OperationVariables = {}) {
   const client = graphQLServerClient();
   const res = await client
     .query<T>({

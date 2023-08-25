@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import { serverQuery } from "lib/graphql";
 import type { HomeContentQuery, ProjectType } from "../graphql/generated";
 import { HomeContentDocument } from "../graphql/generated";
@@ -12,7 +12,7 @@ import { GetInvolvedComponent } from "components/pages/home/getInvolved";
 import { ImpactSectionComponent } from "components/pages/home/ImpactSection";
 import { BlogCardComponent } from "components/pages/blog-post/blogCard";
 
-export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
+export const getStaticProps = async ({}: GetStaticPropsContext) => {
   const res = await serverQuery<HomeContentQuery>(HomeContentDocument);
   return {
     props: {
@@ -26,7 +26,7 @@ export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
   };
 };
 
-const HomePage = ({ content, blogs, projects }: InferGetServerSidePropsType<typeof getServerSideProps>) => (
+const HomePage = ({ content, blogs, projects }: InferGetStaticPropsType<typeof getStaticProps>) => (
   <>
     <Head>
       <title>SAMI</title>

@@ -1,5 +1,5 @@
 import React from "react";
-import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,7 +14,7 @@ import { ProjectSummaryItemAlt } from "components/pages/projects/projectSummaryI
 import { HTMLContent } from "components/common/htmlContent";
 import { ImageHeadingContentLayout } from "components/layout/columns";
 
-export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
+export const getStaticProps = async ({}: GetStaticPropsContext) => {
   const projectRes = await serverQuery<ProjectsQuery>(ProjectsDocument);
 
   return {
@@ -27,7 +27,7 @@ export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
   };
 };
 
-const ProjectsPage = ({ projectData }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const ProjectsPage = ({ projectData }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
   return (
     <>

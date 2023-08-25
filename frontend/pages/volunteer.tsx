@@ -1,5 +1,5 @@
 import React from "react";
-import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import type { VolunteerContentQuery, FaqsQuery, Faq, AuthorBlockBlocksDynamicZone } from "../graphql/generated";
 import { VolunteerContentDocument, FaqsDocument } from "../graphql/generated";
@@ -10,7 +10,7 @@ import PageSection from "components/layout/pageSection";
 import { DynamicComponents } from "components/common/dynamic";
 import { FAQS } from "components/pages/volunteer/faq";
 
-export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
+export const getStaticProps = async ({}: GetStaticPropsContext) => {
   let volunteerPageContent: AuthorBlockBlocksDynamicZone[];
   let faqs: IFaq[] = [];
   const volunteerRes = await serverQuery<VolunteerContentQuery>(VolunteerContentDocument);
@@ -32,7 +32,7 @@ export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
   };
 };
 
-const VolunteerPage = ({ volunteerPageContent, faqs }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const VolunteerPage = ({ volunteerPageContent, faqs }: InferGetStaticPropsType<typeof getStaticProps>) => {
   console.log({ volunteerPageContent, faqs });
   return (
     <>
