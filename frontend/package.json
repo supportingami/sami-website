@@ -4,17 +4,17 @@
   "author": "chris@c2dev.co.uk",
   "license": "MIT",
   "scripts": {
-    "start": "next dev --turbo",
+    "start": "next dev",
     "start:prod": "next start",
     "build:analyze": "ANALYZE=true next build && tsc --project tsconfig.server.json",
     "build": "next build",
     "build:standalone": "next build && node ./postbuild.js",
     "export": "next export",
     "lint": "tsc",
-    "generate": "graphql-codegen --require dotenv/config --config codegen.yml dotenv_config_path=./.env.local"
+    "generate": "graphql-codegen --require dotenv/config --config codegen.yml dotenv_config_path=./.env"
   },
   "dependencies": {
-    "@apollo/client": "^3.6.9",
+    "@apollo/client": "^3.8.1",
     "@next/font": "13.2.4",
     "dayjs": "^1.11.2",
     "graphql": "^16.6.0",

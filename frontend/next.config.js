@@ -4,14 +4,19 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
 
+// TODO - could also add NEXT_PUBLIC_API_DOMAIN
+const domains = ["localhost", "storage.googleapis.com", "backend"];
+const { NEXT_PUBLIC_API_URL } = process.env;
+
+// Include external source if included within public api (e.g. google cloud run)
+if (NEXT_PUBLIC_API_URL && NEXT_PUBLIC_API_URL.startsWith("https")) {
+  domains.push(new URL(NEXT_PUBLIC_API_URL).host);
+}
+
 module.exports = withBundleAnalyzer({
   // https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode
   reactStrictMode: true,
-  images: {
-    loader: "default",
-    // TODO - could also add NEXT_PUBLIC_API_DOMAIN
-    domains: ["localhost", "storage.googleapis.com", "backend"],
-  },
+
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],
   },
@@ -26,15 +31,31 @@ module.exports = withBundleAnalyzer({
   experimental: {
     scrollRestoration: true,
   },
-  // Use if deploying to prod environment
-  output: "standalone",
-  async redirects() {
-    return [
-      {
-        source: "/",
-        destination: "/home",
-        permanent: true,
-      },
-    ];
+
+  output: "export",
+
+  images: {
+    loader: "default",
+    domains,
+    unoptimized: true,
   },
+
+  // Use for non-static deployments
+
+  // output: "standalone",
+
+  // images: {
+  //   loader: "default",
+  //   domains,
+  // },
+
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: "/",
+  //       destination: "/home",
+  //       permanent: true,
+  //     },
+  //   ];
+  // },
 });
