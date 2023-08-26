@@ -85,10 +85,6 @@ const standaloneConfig = withBundleAnalyzer({
     loader: "default",
     domains,
   },
-  publicRuntimeConfig: {
-    // Load all images from the api
-    NEXT_PUBLIC_IMAGE_URL: NEXT_PUBLIC_API_URL,
-  },
   async redirects() {
     return [
       {
@@ -104,7 +100,9 @@ const standaloneConfig = withBundleAnalyzer({
   // https://github.com/vercel/next.js/issues/27865
   // https://raphaelpralat.medium.com/system-environment-variables-in-next-js-with-docker-1f0754e04cde
   publicRuntimeConfig: {
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+    NEXT_PUBLIC_API_URL,
+    // Load all images from the api
+    NEXT_PUBLIC_IMAGE_URL: NEXT_PUBLIC_API_URL,
   },
 });
 
