@@ -3,10 +3,15 @@ const path = require("path");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
+const withExportImages = require("next-export-optimize-images");
 
-const { NEXT_PUBLIC_API_URL, NEXT_PUBLIC_IMAGE_URL } = process.env;
+const { NEXT_PUBLIC_API_URL } = process.env;
 
-const standaloneConfig = withBundleAnalyzer({
+/**
+ * Shared config used on both export and standalone builds
+ * @type {import('next').NextConfig}
+ **/
+const commonConfig = {
   // https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode
   reactStrictMode: true,
   sassOptions: {
@@ -20,7 +25,6 @@ const standaloneConfig = withBundleAnalyzer({
   publicRuntimeConfig: {
     example: "publicRuntimeConfig",
     NEXT_PUBLIC_API_URL,
-    NEXT_PUBLIC_IMAGE_URL,
   },
   // Config available to frontend components via `getConfig().serverRuntimeConfig`
   serverRuntimeConfig: {
@@ -29,10 +33,33 @@ const standaloneConfig = withBundleAnalyzer({
   experimental: {
     scrollRestoration: true,
   },
-  output: "export",
   images: {
-    loader: "default",
-    unoptimized: true,
+    // avoid optimising images for larger hd devices (bandwidth intense)
+    // and add more smaller width options
+    deviceSizes: [375, 480, 640, 750, 828, 1080, 1200, 1920],
+  },
+};
+
+/***********************************************************************************
+ * Static Site Export
+ * Configuration used when creating static build (no NextJS server)
+ *
+ * Some features unsupported (e.g. image optimisation and redirects) *
+ * https://nextjs.org/docs/pages/building-your-application/deploying/static-exports#unsupported-features
+ ***********************************************************************************/
+
+/**
+ * Configuration changes for static-site export
+ * Image optimization handled with plugin https://next-export-optimize-images.vercel.app/
+ * (config loaded using local export-images.config.js)
+ * Redirects managed at server level (e.g. vercel.json)
+ * */
+const exportConfig = withExportImages({
+  ...commonConfig,
+  output: "export",
+  publicRuntimeConfig: {
+    // All images will be loaded from set of local folders
+    NEXT_PUBLIC_IMAGE_URL: "",
   },
 });
 
@@ -43,20 +70,24 @@ if (NEXT_PUBLIC_API_URL && NEXT_PUBLIC_API_URL.startsWith("https")) {
   domains.push(new URL(NEXT_PUBLIC_API_URL).host);
 }
 
-// Legacy config used when attempting to deploy as microservices
-const dockerBuildConfig = withBundleAnalyzer({
-  // https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode
-  reactStrictMode: true,
-  sassOptions: {
-    includePaths: [path.join(__dirname, "styles")],
-  },
-  experimental: {
-    scrollRestoration: true,
-  },
+/***********************************************************************************
+ * Standalone Build
+ * Configuration used when assumed running on a NextJS server
+ * (e.g. local development, staging site)
+ *
+ * Full NextJS functionality supported
+ ***********************************************************************************/
+
+const standaloneConfig = withBundleAnalyzer({
+  ...commonConfig,
   output: "standalone",
   images: {
     loader: "default",
     domains,
+  },
+  publicRuntimeConfig: {
+    // Load all images from the api
+    NEXT_PUBLIC_IMAGE_URL: NEXT_PUBLIC_API_URL,
   },
   async redirects() {
     return [
@@ -77,4 +108,8 @@ const dockerBuildConfig = withBundleAnalyzer({
   },
 });
 
-module.exports = withBundleAnalyzer(standaloneConfig);
+/** Use a custom NEXT_CONFIG_MODE environment variable to specify 'export' or 'standalone' */
+const config = process.env.NEXT_CONFIG_MODE === "export" ? exportConfig : standaloneConfig;
+console.log(`NextJS will run in ${config.output} mode`);
+
+module.exports = withBundleAnalyzer(config);

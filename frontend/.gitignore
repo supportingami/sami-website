@@ -29,3 +29,6 @@ yarn-error.log*
 .vercel
 
 dist
+
+# Files copied from backend uploads as part of build process
+public/uploads

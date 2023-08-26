@@ -9,7 +9,7 @@ import handler from "serve-handler";
 
 import { loadEnv } from "../../utils";
 import { PATHS } from "../../paths";
-import { copySync, mkdirSync } from "fs-extra";
+import { copySync, emptyDirSync, ensureDirSync } from "fs-extra";
 import { promptConfirm, waitForAnyInput } from "../../utils/cli.utils";
 import execa from "execa";
 
@@ -44,6 +44,10 @@ class BuildCmd {
     // Deployments will always read data from local development server
     // If wanting to use other data it must first be impoorted locally
     await loadEnv("development");
+
+    // Copy backend uploads to nextJS public directory
+    this.copyBackendUploads();
+
     // Start backend server and call build script once running
     const backendCmd = this.getBackendStartCommand();
     const buildCmd = this.getBuildCommand();
@@ -54,8 +58,6 @@ class BuildCmd {
     });
     await result;
 
-    // Copy backend uploads to build directory
-    this.copyBackendUploads();
     console.log(chalk.green("\nBuild Success\n"));
 
     // Optionally serve a preview of the built site
@@ -68,7 +70,7 @@ class BuildCmd {
     const shouldDeploy = await promptConfirm("Would you like to deploy the build?", true);
     if (shouldDeploy) {
       let cmd = `vercel`;
-      const isProduction = await promptConfirm("Use production deployment?", false);
+      const isProduction = false; // TODO - CI option
       if (isProduction) {
         cmd += ` --prod`;
       }
@@ -88,15 +90,15 @@ class BuildCmd {
 
   private getBuildCommand(): ConcurrentlyCommandInput {
     // use wait-on to wait for backend server to be ready before building
-    const waitOnBinPath = resolve(PATHS.scriptsDir, "node_modules", ".bin", "wait-on");
+    const waitOnBin = resolve(PATHS.scriptsDir, "node_modules", ".bin", "wait-on");
     return {
       name: "nextjs",
-      command: `${waitOnBinPath} http://localhost:1337 && yarn build:ssg`,
-      cwd: PATHS.rootDir,
+      command: `${waitOnBin} http://localhost:1337 && yarn next build && yarn next-export-optimize-images`,
+      cwd: PATHS.frontendDir,
       prefixColor: "bgBlack.white",
-      //   use local 'public' folder for image hosting where images will be copied to
+      //   use local folder for image hosting which will also use optimised folders
       env: {
-        NEXT_PUBLIC_IMAGE_URL: "public",
+        NEXT_CONFIG_MODE: "export",
       },
     };
   }
@@ -105,9 +107,11 @@ class BuildCmd {
    * Copy all public uploads from backend to build directory to include in static site
    */
   private copyBackendUploads() {
-    const srcDir = resolve(PATHS.backendDir, "public");
-    const targetDir = resolve(PATHS.frontendDir, "out", "public");
-    mkdirSync(targetDir);
+    const srcDir = resolve(PATHS.backendDir, "public", "uploads");
+    const targetDir = resolve(PATHS.frontendDir, "public", "uploads");
+    // TODO - ideally want to rsync for better caching
+    ensureDirSync(targetDir);
+    emptyDirSync(targetDir);
     copySync(srcDir, targetDir);
   }
 

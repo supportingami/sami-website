@@ -57,13 +57,14 @@ class StartCmd {
 
   private getBackendStartCommand(envLoaded: IEnvLoaded): ConcurrentlyCommandInput {
     console.log(chalk.blue("Starting backend..."));
+    const NEXT_CONFIG_MODE = "standalone";
     const NODE_ENV = envLoaded.name === "development" ? "development" : "production";
     if (NODE_ENV === "production") console.log("Production start may take a minute to compile...");
     return {
       name: "strapi",
       command: "yarn start",
       cwd: PATHS.backendDir,
-      env: { NODE_ENV },
+      env: { NODE_ENV, NEXT_CONFIG_MODE },
       prefixColor: "#8F76FF",
     };
   }
