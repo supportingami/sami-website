@@ -1,5 +1,29 @@
 # Deployment
 
+## Main Site
+
+The main website is setup to build and export as a static site, so that it can be hosted on any hosting platform without need for additional server infrastructure (e.g. Database, Cloud Functions)
+
+First, any content from the staging site should be imported locally
+
+```sh
+yarn scripts strapi import
+```
+
+Then there is e a single script that handles the process of generating static content, (optionally) preview locally, and upload to Vercel hosting platform
+
+```sh
+yarn build
+```
+
+## Staging Site
+
+A secondary staging site is setup to run a live strapi server and allow authors to add content and see live changes
+
+**TODO** - Link with docs below to explain how to deploy
+
+# Old Docs (To Review)
+
 ## Backend
 
 The backend stack is deployed as 3 micro-entities to allow for efficient runtime costs and scaling

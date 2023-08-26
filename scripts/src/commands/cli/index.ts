@@ -1,6 +1,7 @@
 import { Command } from "commander";
 import { logProgramHelp } from "../../utils";
-import buildCmd from "./build";
+import buildCmd from "./build-deploy-ssg";
+import buildStandaloneCmd from "./build-standalone";
 import deployCmd from "./deploy";
 import setEnvCmd from "./setEnv";
 import startCmd from "./start";

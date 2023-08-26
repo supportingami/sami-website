@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import { Command } from "commander";
 import type { ConcurrentlyCommandInput } from "concurrently";
 import concurrently from "concurrently";
@@ -55,7 +56,7 @@ class StartCmd {
   }
 
   private getBackendStartCommand(envLoaded: IEnvLoaded): ConcurrentlyCommandInput {
-    console.log("Starting backend...");
+    console.log(chalk.blue("Starting backend..."));
     const NODE_ENV = envLoaded.name === "development" ? "development" : "production";
     if (NODE_ENV === "production") console.log("Production start may take a minute to compile...");
     return {

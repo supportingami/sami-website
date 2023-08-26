@@ -1,13 +1,21 @@
 import getConfig from "next/config";
 import type { UploadFileEntityResponse } from "../graphql/generated";
 
-// Use public runtime config when running standalone (docker) as process.env not defined
-const { publicRuntimeConfig } = getConfig();
+/**
+ * Depending on environment use a different base url for images
+ * If a specific `NEXT_PUBLIC_IMAGE_URL` defined use that
+ *
+ * Otherwise fallback to `NEXT_PUBLIC_API_URL`
+ * NOTE - use of process.env vs publicRuntimeConfig will depend on server/build config
+ * public runtime config used when running standalone (docker) as process.env not defined
+ */
+function getBaseUrl() {
+  const { publicRuntimeConfig } = getConfig();
+  return publicRuntimeConfig.NEXT_PUBLIC_IMAGE_URL;
+}
 
 function getStrapiURL(path = "") {
-  return `${
-    process.env.NEXT_PUBLIC_API_URL || publicRuntimeConfig?.NEXT_PUBLIC_API_URL || "http://localhost:1337"
-  }${path}`;
+  return `${getBaseUrl()}${path}`;
 }
 
 export function getStrapiMedia(media: Partial<UploadFileEntityResponse>): string {
