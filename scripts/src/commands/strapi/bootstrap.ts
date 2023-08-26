@@ -37,7 +37,7 @@ class StrapiBootstrap {
     this.app = await createStrapiInstance();
     await this.app.start();
     await this.checkAccessTokens();
-    this.app.stop();
+    this.app.stop(0);
   }
 
   /** Query database to see if admin access tokens populated or not */
