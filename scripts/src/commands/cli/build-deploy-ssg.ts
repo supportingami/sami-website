@@ -5,30 +5,26 @@ import concurrently from "concurrently";
 import { createServer } from "http";
 import open from "open";
 import { resolve } from "path";
-import prompts from "prompts";
 import handler from "serve-handler";
 
 import { loadEnv } from "../../utils";
 import { PATHS } from "../../paths";
 import { copySync, mkdirSync } from "fs-extra";
+import { promptConfirm, waitForAnyInput } from "../../utils/cli.utils";
+import execa from "execa";
 
 /***************************************************************************************
  * CLI
  * @example yarn
  *************************************************************************************/
 
-interface IProgramOptions {
-  environment?: string;
-}
+interface IProgramOptions {}
 
 const program = new Command("build");
-export default program
-  .description("Build deployment images")
-  .option("-e --environment <string>", "Name of environment to use")
-  .action(async (options: IProgramOptions) => {
-    console.log("Creating static generated build");
-    return new BuildCmd().run(options).then(() => process.exit(0));
-  });
+export default program.description("Build deployment images").action(async (options: IProgramOptions) => {
+  console.log("Creating static generated build");
+  return new BuildCmd().run(options).then(() => process.exit(0));
+});
 
 /***************************************************************************************
  * Main Methods
@@ -45,11 +41,11 @@ export default program
  */
 class BuildCmd {
   public async run(options: IProgramOptions) {
-    const { environment } = options;
-    const { name } = await loadEnv(environment);
-
+    // Deployments will always read data from local development server
+    // If wanting to use other data it must first be impoorted locally
+    await loadEnv("development");
     // Start backend server and call build script once running
-    const backendCmd = this.getBackendStartCommand(name);
+    const backendCmd = this.getBackendStartCommand();
     const buildCmd = this.getBuildCommand();
     console.log(chalk.gray("\nThis command will start a backend server and then generate a static site export...\n"));
     const { result } = concurrently([backendCmd, buildCmd], {
@@ -57,39 +53,44 @@ class BuildCmd {
       successCondition: "first",
     });
     await result;
+
     // Copy backend uploads to build directory
     this.copyBackendUploads();
-
     console.log(chalk.green("\nBuild Success\n"));
 
     // Optionally serve a preview of the built site
-    const { preview } = await this.promptServePreview();
-    if (preview) {
+    const shouldPreview = await promptConfirm("Would you like to preview the build locally?", true);
+    if (shouldPreview) {
       await this.serveBuild();
     }
 
     // Optionally deploy to vercel
-    const { deploy } = await this.promptDeploy();
-    if (deploy) {
-      console.log("TODO - deploy dev/prod");
+    const shouldDeploy = await promptConfirm("Would you like to deploy the build?", true);
+    if (shouldDeploy) {
+      let cmd = `vercel`;
+      const isProduction = await promptConfirm("Use production deployment?", false);
+      if (isProduction) {
+        cmd += ` --prod`;
+      }
+      await execa(cmd, { stdio: "inherit", cwd: PATHS.rootDir });
     }
     // Wait for key press to terminate running preview server
-    if (preview) {
-      console.log(chalk.gray("Press any key to terminate preview server"));
-      await this.waitForAnyInput();
+    if (shouldPreview) {
+      await waitForAnyInput("Press any key to terminate preview server");
     }
   }
 
-  private getBackendStartCommand(environment: string): ConcurrentlyCommandInput {
-    const command = `yarn start --only backend -e ${environment}`;
-    return { name: "strapi", command, cwd: PATHS.rootDir, prefixColor: "#8F76FF" };
+  /** Run simple development backend server */
+  private getBackendStartCommand(): ConcurrentlyCommandInput {
+    const command = `yarn start`;
+    return { name: "strapi", command, cwd: PATHS.backendDir, prefixColor: "#8F76FF" };
   }
 
   private getBuildCommand(): ConcurrentlyCommandInput {
     // use wait-on to wait for backend server to be ready before building
     const waitOnBinPath = resolve(PATHS.scriptsDir, "node_modules", ".bin", "wait-on");
     return {
-      name: "",
+      name: "nextjs",
       command: `${waitOnBinPath} http://localhost:1337 && yarn build:ssg`,
       cwd: PATHS.rootDir,
       prefixColor: "bgBlack.white",
@@ -108,16 +109,6 @@ class BuildCmd {
     const targetDir = resolve(PATHS.frontendDir, "out", "public");
     mkdirSync(targetDir);
     copySync(srcDir, targetDir);
-  }
-
-  private async promptServePreview() {
-    const { preview } = await prompts({
-      type: "confirm",
-      name: "preview",
-      message: chalk.blue("Would you like to preview the build locally?"),
-      initial: true,
-    });
-    return { preview };
   }
 
   /**
@@ -142,22 +133,6 @@ class BuildCmd {
         open(serveTarget);
         promiseResolve(true);
       });
-    });
-  }
-
-  private async promptDeploy() {
-    const { deploy } = await prompts({
-      type: "confirm",
-      name: "deploy",
-      message: chalk.blue("Would you like to deploy the build?"),
-      initial: false,
-    });
-    return { deploy };
-  }
-
-  private async waitForAnyInput() {
-    return new Promise((resolve) => {
-      process.stdin.once("data", () => resolve(true));
     });
   }
 }

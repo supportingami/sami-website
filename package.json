@@ -10,10 +10,6 @@
   ],
   "scripts": {
     "build": "yarn scripts cli build",
-    "ssg:build": "TODO - start backend server and run frontend build, copy uploads, compress images",
-    "ssg:deploy": "vercel",
-    "ssg:deploy:prod": "vercel --prod",
-    "ssg:serve": "npx serve frontend/out",
     "format": "yarn format:code && yarn format:style",
     "format:code": "eslint . --ext .js,.jsx,.ts,.tsx --color --fix",
     "format:style": "prettier --write '**/*.{md,json,js,tsx,ts}'",
