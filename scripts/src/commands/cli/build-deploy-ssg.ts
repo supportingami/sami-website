@@ -18,13 +18,24 @@ import execa from "execa";
  * @example yarn
  *************************************************************************************/
 
-interface IProgramOptions {}
+interface IProgramOptions {
+  /** Specify whether to preview locally */
+  preview?: boolean;
+  /** Specify whether to deploy to server */
+  deploy?: boolean;
+}
 
 const program = new Command("build");
-export default program.description("Build deployment images").action(async (options: IProgramOptions) => {
-  console.log("Creating static generated build");
-  return new BuildCmd().run(options).then(() => process.exit(0));
-});
+export default program
+  .description("Build deployment images")
+  .option("-p --preview", "Preview build locally")
+  .option("--no-preview", "Do not preview build locally")
+  .option("-d --deploy", "Deploy build")
+  .option("--no-deploy", "Do not deploy build")
+  .action(async (options: IProgramOptions) => {
+    console.log("Creating static generated build");
+    return new BuildCmd().run(options).then(() => process.exit(0));
+  });
 
 /***************************************************************************************
  * Main Methods
@@ -41,6 +52,7 @@ export default program.description("Build deployment images").action(async (opti
  */
 class BuildCmd {
   public async run(options: IProgramOptions) {
+    console.log({ options });
     // Deployments will always read data from local development server
     // If wanting to use other data it must first be impoorted locally
     await loadEnv("development");
@@ -61,13 +73,19 @@ class BuildCmd {
     console.log(chalk.green("\nBuild Success\n"));
 
     // Optionally serve a preview of the built site
-    const shouldPreview = await promptConfirm("Would you like to preview the build locally?", true);
+    let shouldPreview = options.preview;
+    if (shouldPreview === undefined) {
+      shouldPreview = await promptConfirm("Would you like to preview the build locally?", true);
+    }
     if (shouldPreview) {
       await this.serveBuild();
     }
 
     // Optionally deploy to vercel
-    const shouldDeploy = await promptConfirm("Would you like to deploy the build?", true);
+    let shouldDeploy = options.deploy;
+    if (shouldDeploy === undefined) {
+      shouldDeploy = await promptConfirm("Would you like to deploy the build?", true);
+    }
     if (shouldDeploy) {
       let cmd = `vercel`;
       const isProduction = false; // TODO - CI option
