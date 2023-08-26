@@ -27,5 +27,9 @@ jobs:
       - run: yarn install
       - name: Lint Code
         run: yarn lint
+      - name: Bootstrap Strapi
+        run: |
+          yarn scripts strapi bootstrap
+          yarn scripts strapi import
       - name: Build
         run: yarn build --no-preview --no-deploy
