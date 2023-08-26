@@ -37,13 +37,13 @@ const pageLinks = [
 
 const Sitemap = () => {
   return (
-    <PageSection fullwidth className="bg-base-300 py-8">
-      <footer className="footer items-center p-4">
-        <div className="items-center grid-flow-col">
+    <PageSection fullwidth className="bg-base-300 py-8" data-cy="sitemap">
+      <div className="items-center p-4">
+        <div className="items-center flex flex-wrap">
           <Image src="/images/sami-logo-no-text.svg" alt="sitemap-logo" width={100} height={100}></Image>
         </div>
 
-        <div className="grid grid-flow-col gap-6">
+        <div className="flex flex-wrap gap-6">
           {pageLinks.map(({ href, label, id }) => (
             <li key={id} style={{ listStyleType: "none" }} className="font-medium">
               <Link href={href}>{label}</Link>
@@ -56,12 +56,12 @@ const Sitemap = () => {
           </button>
         </div>
 
-        <div className="grid-flow-col md:place-self-center md:justify-self-end gap-1">
+        <div className="flex flex-wrap md:place-self-center md:justify-self-end gap-1">
           Follow us:
           <FacebookIcon size={size} />
           <LinkedinIcon size={size} />
         </div>
-      </footer>
+      </div>
 
       <p className="flex items-center justify-center text-sm text-sky-600">
         © Supporting African Maths Initiatives | Registered Charity #1161994{" "}
