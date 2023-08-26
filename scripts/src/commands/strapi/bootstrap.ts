@@ -32,7 +32,8 @@ class StrapiBootstrap {
   constructor(public options: IProgramOptions) {}
 
   public async run() {
-    await loadEnv(this.options.environment);
+    // When bootstrapping for first time skip healthcheck which checks for bootstrap
+    await loadEnv(this.options.environment, { skipHealthcheck: true });
     this.app = await createStrapiInstance();
     await this.app.start();
     await this.checkAccessTokens();
