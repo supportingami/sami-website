@@ -46,7 +46,7 @@ export function areDBObjectsEqual(
       if (valA.constructor === {}.constructor) {
         const nestedEqual = areDBObjectsEqual(valA as any, valB as any);
         if (!nestedEqual) {
-          console.log("[M]", "parent", valA, valB);
+          // console.log("[M]", "parent", valA, valB);
         }
         return nestedEqual;
       }
@@ -62,8 +62,8 @@ export function areDBObjectsEqual(
   // ensure every key in a matches every key in b
   const diffKey = aKeys.find((key) => !areDBValuesEqual(a[key], b[key]));
   if (diffKey) {
-    console.log("[M]", diffKey, a[diffKey], b[diffKey]);
-    console.log(a, b);
+    // console.log("[M]", diffKey, a[diffKey], b[diffKey]);
+    // console.log(a, b);
     return false;
   }
   return true;

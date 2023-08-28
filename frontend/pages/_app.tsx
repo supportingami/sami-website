@@ -7,7 +7,7 @@ import "../styles/globals.scss";
 import DaisyThemeProvider from "lib/themeProvider";
 import { PageFooter } from "components/footer";
 
-import { Roboto } from "@next/font/google";
+import { Roboto } from "next/font/google";
 const roboto = Roboto({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-roboto" });
 
 const App = ({ Component, pageProps }: AppProps) => {
