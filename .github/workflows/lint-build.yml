@@ -44,10 +44,9 @@ jobs:
       #############################################################################
       - name: Lint Code
         run: yarn lint
-      # TODO - fix ci build
-      # - name: Bootstrap Strapi
-      #   run: |
-      #     yarn scripts strapi bootstrap --environment development
-      #     yarn scripts strapi import --environment development
-      # - name: Build
-      #   run: yarn build --no-preview --no-deploy
+      - name: Bootstrap Strapi
+        run: |
+          yarn scripts strapi bootstrap --environment development
+          yarn scripts strapi import --environment development
+      - name: Build
+        run: yarn build --no-preview --no-deploy
