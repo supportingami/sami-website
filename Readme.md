@@ -34,7 +34,13 @@ yarn install
 yarn scripts strapi bootstrap
 ```
 
-### 4. Start the backend and frontend
+### 4. Import data
+
+```
+yarn scripts strapi import
+```
+
+### 5. Start the backend and frontend
 
 ```sh
 yarn start
@@ -44,12 +50,6 @@ This will run both backend and frontend serve scripts
 
 Backend: http://localhost:1337/admin
 Frontend: http://localhost:3000
-
-### 5. Import data
-
-```
-yarn scripts strapi import
-```
 
 ### 6. Authorize data
 

@@ -6,6 +6,7 @@ import type { IAdminToken, IStrapi } from "./common";
 import { ADMIN_TOKENS, createStrapiInstance } from "./common";
 import { getLoadedEnv, loadEnv, updateEnv } from "../../utils";
 import chalk from "chalk";
+import execa from "execa";
 
 /***************************************************************************************
  * CLI
@@ -34,10 +35,21 @@ class StrapiBootstrap {
   public async run() {
     // When bootstrapping for first time skip healthcheck which checks for bootstrap
     await loadEnv(this.options.environment, { skipHealthcheck: true });
+    await this.buildStrapiAdminUI();
     this.app = await createStrapiInstance();
     await this.app.start();
     await this.checkAccessTokens();
     this.app.stop(0);
+  }
+
+  /**
+   * Run `strapi build` script to build backend dashboard code
+   * TODO - incremental/caching build (possibly via nx) - for now will just always build full
+   */
+  private async buildStrapiAdminUI() {
+    console.log(chalk.gray("\nBuilding Strapi Dashboard\n"));
+    const { exitCode } = await execa("yarn strapi build", { cwd: PATHS.backendDir, shell: true, stdio: "inherit" });
+    if (exitCode !== 0) process.exit(exitCode);
   }
 
   /** Query database to see if admin access tokens populated or not */
