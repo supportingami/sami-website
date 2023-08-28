@@ -11,16 +11,16 @@ import chalk from "chalk";
  * CLI
  * @example yarn
  *************************************************************************************/
-interface IProgramOptions {}
+interface IProgramOptions {
+  /** Name of environment to use */
+  environment?: string;
+}
 const program = new Command("bootstrap");
 export default program
   .description("Bootstrap strapi for development")
-  .action(async (options: Partial<IProgramOptions>) => {
-    const optionsWithDefaults: IProgramOptions = {
-      outDir: PATHS.sharedDir,
-      ...options,
-    };
-    await new StrapiBootstrap(optionsWithDefaults).run();
+  .option("-e --environment <string>", "Name of environment to use")
+  .action(async (options: IProgramOptions) => {
+    await new StrapiBootstrap(options).run();
   });
 
 /***************************************************************************************
@@ -32,11 +32,12 @@ class StrapiBootstrap {
   constructor(public options: IProgramOptions) {}
 
   public async run() {
-    await loadEnv();
+    // When bootstrapping for first time skip healthcheck which checks for bootstrap
+    await loadEnv(this.options.environment, { skipHealthcheck: true });
     this.app = await createStrapiInstance();
     await this.app.start();
     await this.checkAccessTokens();
-    this.app.stop();
+    this.app.stop(0);
   }
 
   /** Query database to see if admin access tokens populated or not */

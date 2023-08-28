@@ -1,5 +1,5 @@
 import React from "react";
-import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import type { IResource } from "types/resource";
 import Head from "next/head";
 import { ResourcesPageComponent } from "components/pages/resources";
@@ -7,7 +7,7 @@ import type { ResourcesQuery, Resource } from "../graphql/generated";
 import { ResourcesDocument } from "../graphql/generated";
 import { serverQuery } from "lib/graphql";
 
-export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
+export const getStaticProps = async ({}: GetStaticPropsContext) => {
   let resources: IResource[] = [];
   const res = await serverQuery<ResourcesQuery>(ResourcesDocument);
   if (res) {
@@ -23,7 +23,7 @@ export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
   };
 };
 
-const ResourcesPage = ({ resources }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const ResourcesPage = ({ resources }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
       <Head>

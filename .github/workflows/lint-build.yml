@@ -12,20 +12,41 @@ jobs:
       - uses: actions/checkout@v3
         with:
           lfs: true
-      - name: Setup Node 16
+      - name: Setup Node 18
         uses: actions/setup-node@v3
         with:
-          node-version: 16.x
-      - name: Cache node modules
-        uses: actions/cache@v3
+          node-version: 18.x
+
+      #############################################################################
+      #         Node Modules
+      # Manually restore any previous cache to speed install
+      # As immutable install will not change cache only save new cache if not hit
+      # Uses fine-grained methods from https://github.com/actions/cache
+      #############################################################################
+
+      - uses: actions/cache/restore@v3
+        id: cache
         with:
           path: ./.yarn/cache
-          # If cachebusting required (e.g. breaking yarn changes on update) change `v1` to another number
-          key: ${{ runner.os }}-node-modules-yarn-v1-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-node-modules-yarn-v1-${{ hashFiles('yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-node-modules-yarn-v1-
-      - run: yarn install
+      - name: Install node modules
+        run: yarn install --immutable
+      - uses: actions/cache/save@v3
+        if: steps.cache.outputs.cache-hit != 'true'
+        with:
+          path: ./.yarn/cache
+          key: ${{ runner.os }}-node-modules-yarn-v1-${{ hashFiles('yarn.lock') }}
+
+      #############################################################################
+      #         Lint, Setup and Build
+      #############################################################################
       - name: Lint Code
         run: yarn lint
+      - name: Bootstrap Strapi
+        run: |
+          yarn scripts strapi bootstrap --environment development
+          yarn scripts strapi import --environment development
       - name: Build
-        run: yarn build
+        run: yarn build --no-preview --no-deploy

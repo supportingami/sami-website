@@ -142,9 +142,10 @@ export type BlogPost = {
   Content?: Maybe<Scalars["String"]>;
   DateWritten?: Maybe<Scalars["Date"]>;
   FeatureImage?: Maybe<UploadFileEntityResponse>;
+  Slug?: Maybe<Scalars["String"]>;
   Summary?: Maybe<Scalars["String"]>;
   Tags?: Maybe<BlogTagRelationResponseCollection>;
-  Title?: Maybe<Scalars["String"]>;
+  Title: Scalars["String"];
   createdAt?: Maybe<Scalars["DateTime"]>;
   publishedAt?: Maybe<Scalars["DateTime"]>;
   updatedAt?: Maybe<Scalars["DateTime"]>;
@@ -177,6 +178,7 @@ export type BlogPostEntityResponseCollection = {
 export type BlogPostFiltersInput = {
   Content?: InputMaybe<StringFilterInput>;
   DateWritten?: InputMaybe<DateFilterInput>;
+  Slug?: InputMaybe<StringFilterInput>;
   Summary?: InputMaybe<StringFilterInput>;
   Tags?: InputMaybe<BlogTagFiltersInput>;
   Title?: InputMaybe<StringFilterInput>;
@@ -193,6 +195,7 @@ export type BlogPostInput = {
   Content?: InputMaybe<Scalars["String"]>;
   DateWritten?: InputMaybe<Scalars["Date"]>;
   FeatureImage?: InputMaybe<Scalars["ID"]>;
+  Slug?: InputMaybe<Scalars["String"]>;
   Summary?: InputMaybe<Scalars["String"]>;
   Tags?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
   Title?: InputMaybe<Scalars["String"]>;
@@ -262,6 +265,7 @@ export type BooleanFilterInput = {
   lt?: InputMaybe<Scalars["Boolean"]>;
   lte?: InputMaybe<Scalars["Boolean"]>;
   ne?: InputMaybe<Scalars["Boolean"]>;
+  nei?: InputMaybe<Scalars["Boolean"]>;
   not?: InputMaybe<BooleanFilterInput>;
   notContains?: InputMaybe<Scalars["Boolean"]>;
   notContainsi?: InputMaybe<Scalars["Boolean"]>;
@@ -513,6 +517,7 @@ export type DateFilterInput = {
   lt?: InputMaybe<Scalars["Date"]>;
   lte?: InputMaybe<Scalars["Date"]>;
   ne?: InputMaybe<Scalars["Date"]>;
+  nei?: InputMaybe<Scalars["Date"]>;
   not?: InputMaybe<DateFilterInput>;
   notContains?: InputMaybe<Scalars["Date"]>;
   notContainsi?: InputMaybe<Scalars["Date"]>;
@@ -537,6 +542,7 @@ export type DateTimeFilterInput = {
   lt?: InputMaybe<Scalars["DateTime"]>;
   lte?: InputMaybe<Scalars["DateTime"]>;
   ne?: InputMaybe<Scalars["DateTime"]>;
+  nei?: InputMaybe<Scalars["DateTime"]>;
   not?: InputMaybe<DateTimeFilterInput>;
   notContains?: InputMaybe<Scalars["DateTime"]>;
   notContainsi?: InputMaybe<Scalars["DateTime"]>;
@@ -627,6 +633,11 @@ export type FaqInput = {
   publishedAt?: InputMaybe<Scalars["DateTime"]>;
 };
 
+export type FaqRelationResponseCollection = {
+  __typename?: "FaqRelationResponseCollection";
+  data: Array<FaqEntity>;
+};
+
 export type FileInfoInput = {
   alternativeText?: InputMaybe<Scalars["String"]>;
   caption?: InputMaybe<Scalars["String"]>;
@@ -647,6 +658,7 @@ export type FloatFilterInput = {
   lt?: InputMaybe<Scalars["Float"]>;
   lte?: InputMaybe<Scalars["Float"]>;
   ne?: InputMaybe<Scalars["Float"]>;
+  nei?: InputMaybe<Scalars["Float"]>;
   not?: InputMaybe<FloatFilterInput>;
   notContains?: InputMaybe<Scalars["Float"]>;
   notContainsi?: InputMaybe<Scalars["Float"]>;
@@ -776,6 +788,7 @@ export type IdFilterInput = {
   lt?: InputMaybe<Scalars["ID"]>;
   lte?: InputMaybe<Scalars["ID"]>;
   ne?: InputMaybe<Scalars["ID"]>;
+  nei?: InputMaybe<Scalars["ID"]>;
   not?: InputMaybe<IdFilterInput>;
   notContains?: InputMaybe<Scalars["ID"]>;
   notContainsi?: InputMaybe<Scalars["ID"]>;
@@ -800,6 +813,7 @@ export type IntFilterInput = {
   lt?: InputMaybe<Scalars["Int"]>;
   lte?: InputMaybe<Scalars["Int"]>;
   ne?: InputMaybe<Scalars["Int"]>;
+  nei?: InputMaybe<Scalars["Int"]>;
   not?: InputMaybe<IntFilterInput>;
   notContains?: InputMaybe<Scalars["Int"]>;
   notContainsi?: InputMaybe<Scalars["Int"]>;
@@ -824,6 +838,7 @@ export type JsonFilterInput = {
   lt?: InputMaybe<Scalars["JSON"]>;
   lte?: InputMaybe<Scalars["JSON"]>;
   ne?: InputMaybe<Scalars["JSON"]>;
+  nei?: InputMaybe<Scalars["JSON"]>;
   not?: InputMaybe<JsonFilterInput>;
   notContains?: InputMaybe<Scalars["JSON"]>;
   notContainsi?: InputMaybe<Scalars["JSON"]>;
@@ -896,6 +911,8 @@ export type MemberInput = {
 
 export type Mutation = {
   __typename?: "Mutation";
+  /** Change user password. Confirm with the current password. */
+  changePassword?: Maybe<UsersPermissionsLoginPayload>;
   createAbout?: Maybe<AboutEntityResponse>;
   createAnnualReport?: Maybe<AnnualReportEntityResponse>;
   createBlogPost?: Maybe<BlogPostEntityResponse>;
@@ -962,6 +979,12 @@ export type Mutation = {
   updateUsersPermissionsUser: UsersPermissionsUserEntityResponse;
   updateVolunteerContent?: Maybe<VolunteerContentEntityResponse>;
   upload: UploadFileEntityResponse;
+};
+
+export type MutationChangePasswordArgs = {
+  currentPassword: Scalars["String"];
+  password: Scalars["String"];
+  passwordConfirmation: Scalars["String"];
 };
 
 export type MutationCreateAboutArgs = {
@@ -1545,6 +1568,7 @@ export type StringFilterInput = {
   lt?: InputMaybe<Scalars["String"]>;
   lte?: InputMaybe<Scalars["String"]>;
   ne?: InputMaybe<Scalars["String"]>;
+  nei?: InputMaybe<Scalars["String"]>;
   not?: InputMaybe<StringFilterInput>;
   notContains?: InputMaybe<Scalars["String"]>;
   notContainsi?: InputMaybe<Scalars["String"]>;
@@ -1928,8 +1952,16 @@ export type VolunteerContent = {
   __typename?: "VolunteerContent";
   Content?: Maybe<Array<Maybe<VolunteerContentContentDynamicZone>>>;
   createdAt?: Maybe<Scalars["DateTime"]>;
+  faqs?: Maybe<FaqRelationResponseCollection>;
   publishedAt?: Maybe<Scalars["DateTime"]>;
   updatedAt?: Maybe<Scalars["DateTime"]>;
+};
+
+export type VolunteerContentFaqsArgs = {
+  filters?: InputMaybe<FaqFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
 };
 
 export type VolunteerContentContentDynamicZone =
@@ -1951,6 +1983,7 @@ export type VolunteerContentEntityResponse = {
 
 export type VolunteerContentInput = {
   Content?: InputMaybe<Array<Scalars["VolunteerContentContentDynamicZoneInput"]>>;
+  faqs?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
   publishedAt?: InputMaybe<Scalars["DateTime"]>;
 };
 
@@ -2001,7 +2034,9 @@ export type AnnualReportsQuery = {
   } | null;
 };
 
-export type BlogPostsQueryVariables = Exact<{ [key: string]: never }>;
+export type BlogPostsQueryVariables = Exact<{
+  filters?: InputMaybe<BlogPostFiltersInput>;
+}>;
 
 export type BlogPostsQuery = {
   __typename?: "Query";
@@ -2012,10 +2047,11 @@ export type BlogPostsQuery = {
       id?: string | null;
       attributes?: {
         __typename?: "BlogPost";
-        Title?: string | null;
+        Title: string;
         Summary?: string | null;
         Content?: string | null;
         DateWritten?: any | null;
+        Slug?: string | null;
         FeatureImage?: {
           __typename?: "UploadFileEntityResponse";
           data?: {
@@ -2229,7 +2265,7 @@ export type HomeContentQuery = {
       id?: string | null;
       attributes?: {
         __typename?: "BlogPost";
-        Title?: string | null;
+        Title: string;
         Summary?: string | null;
         DateWritten?: any | null;
         FeatureImage?: {
@@ -2569,6 +2605,13 @@ export const BlogPostsDocument = {
       kind: "OperationDefinition",
       operation: "query",
       name: { kind: "Name", value: "blogPosts" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "filters" } },
+          type: { kind: "NamedType", name: { kind: "Name", value: "BlogPostFiltersInput" } },
+        },
+      ],
       selectionSet: {
         kind: "SelectionSet",
         selections: [
@@ -2580,6 +2623,11 @@ export const BlogPostsDocument = {
                 kind: "Argument",
                 name: { kind: "Name", value: "sort" },
                 value: { kind: "StringValue", value: "DateWritten:DESC", block: false },
+              },
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "filters" },
+                value: { kind: "Variable", name: { kind: "Name", value: "filters" } },
               },
             ],
             selectionSet: {
@@ -2660,6 +2708,7 @@ export const BlogPostsDocument = {
                                 ],
                               },
                             },
+                            { kind: "Field", name: { kind: "Name", value: "Slug" } },
                           ],
                         },
                       },

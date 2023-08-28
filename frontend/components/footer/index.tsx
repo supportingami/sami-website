@@ -2,7 +2,7 @@ import SmallPartners from "./smallPartners";
 import Sitemap from "./sitemap";
 import Newsletter from "./newsletter";
 
-export const Footer = () => (
+export const PageFooter = () => (
   <footer>
     <Newsletter />
     <Sitemap />
@@ -10,4 +10,4 @@ export const Footer = () => (
   </footer>
 );
 
-export default Footer;
+export default PageFooter;

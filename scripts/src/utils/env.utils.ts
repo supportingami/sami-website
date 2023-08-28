@@ -27,7 +27,7 @@ let envLoaded: IEnvLoaded;
  * Load an environment configuration from root config env files
  * and replicate to frontend and backend folders
  */
-export async function loadEnv(envName?: string) {
+export async function loadEnv(envName?: string, options: { skipHealthcheck?: boolean } = {}) {
   if (!envName) {
     envName = await promptEnv();
   }
@@ -61,7 +61,9 @@ export async function loadEnv(envName?: string) {
   };
 
   //ensure loaded env configured correctly
-  healthcheck();
+  if (!options.skipHealthcheck) {
+    healthcheck();
+  }
 
   // populate selected .env to global environment
   process.env.ENV_PATH = envPath;

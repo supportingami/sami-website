@@ -10,8 +10,6 @@
   ],
   "scripts": {
     "build": "yarn scripts cli build",
-    "deploy:frontend": "vercel --cwd frontend",
-    "export:frontend": "yarn workspace frontend export",
     "format": "yarn format:code && yarn format:style",
     "format:code": "eslint . --ext .js,.jsx,.ts,.tsx --color --fix",
     "format:style": "prettier --write '**/*.{md,json,js,tsx,ts}'",
@@ -40,7 +38,7 @@
     "prettier": "^2.7.1",
     "pretty-quick": "^3.1.3",
     "typescript": "4.8.4",
-    "vercel": "^28.18.3"
+    "vercel": "^32.1.0"
   },
   "husky": {
     "hooks": {

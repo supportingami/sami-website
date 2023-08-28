@@ -52,6 +52,7 @@ export class StorageImport {
   }
 
   private async confirmImport(ops: ReturnType<typeof replicateDir>) {
+    if (process.env.CI) return true;
     if (ops.create.length > 0) {
       console.log(chalk.blue("\nCreate"));
       console.log(ops.create.length, "files");

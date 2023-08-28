@@ -52,7 +52,7 @@ E.g. Using the _Members_ query defined above to get a list of members, populated
 import { MembersQuery, MembersDocument } from "../graphql/generated";
 import { serverQuery } from "lib/graphql";
 
-export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
+export const getStaticProps = async ({}: GetStaticPropsContext) => {
   let members: IMember[] = [];
   const res = await serverQuery<MembersQuery>(MembersDocument);
   if (res) {

@@ -15,13 +15,13 @@ interface IProgramOptions {
   only?: "base" | "backend" | "frontend";
 }
 
-const program = new Command("build");
+const program = new Command("build-standalone");
 export default program
-  .description("Build deployment images")
+  .description("Build standalone images")
   .option("-e --environment <string>", "Name of environment to use")
   .option("-o --only <string>", "Only build single step, allowed 'base', 'backend', 'frontend'")
   .action(async (options: IProgramOptions) => {
-    return new BuildCmd().run(options).then(() => process.exit(0));
+    return new BuildStandaloneCmd().run(options).then(() => process.exit(0));
   });
 
 /***************************************************************************************
@@ -31,7 +31,7 @@ export default program
  * Generate a list of all commands available in scripts workspace
  * and write as a markdown table in the docs folder
  */
-class BuildCmd {
+class BuildStandaloneCmd {
   allCommands = [];
 
   public async run(options: IProgramOptions) {

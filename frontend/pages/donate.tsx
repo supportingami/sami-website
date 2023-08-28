@@ -1,6 +1,6 @@
 import Head from "next/head";
 import React from "react";
-import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import { serverQuery } from "lib/graphql";
 import { DonateContentDocument } from "../graphql/generated";
 import type { DonateContentQuery } from "../graphql/generated";
@@ -18,7 +18,7 @@ import LWFLogo from "public/images/Donate/LWF.png";
 import HausdorffLogo from "public/images/Donate/hausdorff.png";
 import IDEMSLogo from "public/images/Donate/idems-international.png";
 
-export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
+export const getStaticProps = async ({}: GetStaticPropsContext) => {
   const res = await serverQuery<DonateContentQuery>(DonateContentDocument);
   return {
     props: {
@@ -27,7 +27,7 @@ export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
   };
 };
 
-const DonatePage = ({ content }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const DonatePage = ({ content }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
       <Head>

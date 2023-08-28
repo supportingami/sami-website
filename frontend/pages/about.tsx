@@ -2,7 +2,7 @@ import React from "react";
 import Head from "next/head";
 import { AboutPageComponent } from "components/pages/about";
 import { AnnualReportPageComponent } from "components/pages/about/annual-reports";
-import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import type { IAnnualReport } from "types/annualreport";
 import type { IMember } from "types/member";
 
@@ -16,7 +16,7 @@ import Testimonials from "components/pages/about/testmonials/Testmonials";
 import Partners from "components/pages/about/partners";
 import PageSection from "components/layout/pageSection";
 
-export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
+export const getStaticProps = async ({}: GetStaticPropsContext) => {
   let about: IAbout[] = [];
   let members: IMember[] = [];
   let reports: IAnnualReport[] = [];
@@ -46,7 +46,7 @@ export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
   };
 };
 
-const AboutPage = ({ about, members, reports }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const AboutPage = ({ about, members, reports }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
       <Head>

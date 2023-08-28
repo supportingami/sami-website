@@ -1,5 +1,5 @@
 import React from "react";
-import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import { serverQuery } from "lib/graphql";
 import type { IBlogPost } from "types/blogpost";
@@ -8,7 +8,7 @@ import { BlogPostsDocument } from "../graphql/generated";
 import { BlogPageComponent } from "components/pages/blog-post";
 import PageLayout from "components/layout/pageLayout";
 
-export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
+export const getStaticProps = async ({}: GetStaticPropsContext) => {
   let blogs: IBlogPost[] = [];
   const blogPostRes = await serverQuery<BlogPostsQuery>(BlogPostsDocument);
   if (blogPostRes) {
@@ -24,7 +24,7 @@ export const getServerSideProps = async ({}: GetServerSidePropsContext) => {
   };
 };
 
-const VolunteerPage = ({ blogs }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const VolunteerPage = ({ blogs }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
       <Head>

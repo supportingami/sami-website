@@ -22,7 +22,9 @@
       "allowedTypes": ["images", "files", "videos", "audios"]
     },
     "Title": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "unique": true
     },
     "Summary": {
       "type": "text"
@@ -35,6 +37,11 @@
       "relation": "oneToMany",
       "target": "api::blog-tag.blog-tag",
       "mappedBy": "BlogPost"
+    },
+    "Slug": {
+      "type": "uid",
+      "targetField": "Title",
+      "required": false
     }
   }
 }

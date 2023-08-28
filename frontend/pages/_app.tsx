@@ -5,7 +5,7 @@ import Head from "next/head";
 import Layout from "components/layout";
 import "../styles/globals.scss";
 import DaisyThemeProvider from "lib/themeProvider";
-import { Footer } from "components/footer";
+import { PageFooter } from "components/footer";
 
 import { Roboto } from "@next/font/google";
 const roboto = Roboto({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-roboto" });
@@ -21,7 +21,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       <DaisyThemeProvider>
         <Layout className={`${roboto.variable} font-sans`}>
           <Component {...pageProps} />
-          <Footer />
+          <PageFooter />
         </Layout>
       </DaisyThemeProvider>
       {/* </SessionProvider> */}

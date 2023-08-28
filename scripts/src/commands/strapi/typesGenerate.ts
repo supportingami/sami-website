@@ -2,6 +2,7 @@ import chalk from "chalk";
 import { spawnSync } from "child_process";
 import { Command } from "commander";
 import { PATHS } from "../../paths";
+import { relative } from "path";
 
 /***************************************************************************************
  * CLI
@@ -20,7 +21,7 @@ export default program
       ...options,
     };
     generateQueryTypes();
-    generateSchemaTypes(optionsWithDefaults);
+    // generateSchemaTypes(optionsWithDefaults);
   });
 
 /***************************************************************************************
@@ -34,10 +35,15 @@ function generateQueryTypes() {
   spawnSync(cmd, { cwd: PATHS.frontendDir, shell: true, stdio: "inherit" });
 }
 
-/** Use the strapi cli method to generate typescript types **/
+/**
+ * Use the strapi cli method to generate typescript types
+ * NOTE - Deprecated in favour of graphql gen methods
+ * **/
 function generateSchemaTypes(options: IProgramOptions) {
   const { outDir } = options;
-  const cmd = `yarn strapi ts:generate-types --out-dir ${outDir}`;
+  const relativeOutDir = relative(outDir, PATHS.backendDir);
+  console.log({ relativeOutDir });
+  const cmd = `yarn strapi ts:generate-types --out-dir ../backend/generated`;
   console.log(chalk.gray(cmd));
   spawnSync(cmd, { cwd: PATHS.backendDir, shell: true, stdio: "inherit" });
 }
