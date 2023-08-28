@@ -6,9 +6,10 @@
     "date_written": "2016-07-31",
     "id": 1,
     "published_at": 1662028968562,
+    "slug": "introducing-digital-communities-initiative",
     "summary": "SAMI is excited to announce the launch of its new Digital Communities Initiative, a year long programme to use technology to improve livelihoods of all people within rural communities.",
     "title": "Introducing: Digital Communities Initiative",
-    "updated_at": 1666092235729,
+    "updated_at": 1692919792326,
     "updated_by_id": 1
   },
   {
@@ -18,9 +19,10 @@
     "date_written": "2018-03-29",
     "id": 2,
     "published_at": 1662038523927,
+    "slug": "bcme-2018",
     "summary": null,
     "title": "BCME 2018",
-    "updated_at": 1665567872188,
+    "updated_at": 1692919747849,
     "updated_by_id": 1
   },
   {
@@ -30,9 +32,10 @@
     "date_written": "2018-06-19",
     "id": 3,
     "published_at": 1666077521081,
+    "slug": "oxford-2018",
     "summary": "Thank you to everyone who joined us at St. Peter’s College, Oxford. Find below a few links to the materials and resources used",
     "title": "Oxford 2018",
-    "updated_at": 1666083791475,
+    "updated_at": 1692919907544,
     "updated_by_id": 1
   },
   {
@@ -42,9 +45,10 @@
     "date_written": "2018-09-01",
     "id": 4,
     "published_at": 1666079990769,
+    "slug": "dobble-donation",
     "summary": "Asmodee have continued to support SAMI with with another donation of 5 sets of the brilliant game Dobble.",
     "title": "Dobble Donation",
-    "updated_at": 1666083775248,
+    "updated_at": 1692919760725,
     "updated_by_id": 1
   },
   {
@@ -54,9 +58,10 @@
     "date_written": "2019-03-14",
     "id": 5,
     "published_at": 1666080077769,
+    "slug": "pi-day",
     "summary": "Together with the charity Justice au Coeur, SAMI members ran a Pi Day treasure hunt at the Lycee Francais Charles de Gaulle.",
     "title": "Pi Day",
-    "updated_at": 1666083724192,
+    "updated_at": 1692919922550,
     "updated_by_id": 1
   },
   {
@@ -66,9 +71,10 @@
     "date_written": "2019-05-06",
     "id": 6,
     "published_at": 1666080467982,
+    "slug": "maths-marathon",
     "summary": "Teachers at the Lycee Francais ran a maths marathon at their school this weekend.",
     "title": "Maths Marathon",
-    "updated_at": 1666083806280,
+    "updated_at": 1692919898764,
     "updated_by_id": 1
   },
   {
@@ -78,9 +84,10 @@
     "date_written": "2019-07-10",
     "id": 7,
     "published_at": 1666081043259,
+    "slug": "updates-from-kenya-working-with-one-billion-apps",
     "summary": "When we started the project back in August 2016 there was lots of discussion about what would be the best apps to use if we really wanted to impact student’s learning in schools",
     "title": "Updates from Kenya – Working with ‘OneBillion’ Apps",
-    "updated_at": 1666081981993,
+    "updated_at": 1692919928999,
     "updated_by_id": 1
   },
   {
@@ -90,9 +97,10 @@
     "date_written": "2019-07-12",
     "id": 8,
     "published_at": 1666081211289,
+    "slug": "announcing-cameroon-maths-camp-2019",
     "summary": "Maths is the language of the universe and can offer elegant solutions to very complex problems which is why we believe improving mathematical literacy should be at the forefront of development efforts in Africa",
     "title": "Announcing – Cameroon Maths Camp 2019",
-    "updated_at": 1666082115167,
+    "updated_at": 1692919735997,
     "updated_by_id": 1
   },
   {
@@ -102,9 +110,10 @@
     "date_written": "2019-12-20",
     "id": 9,
     "published_at": 1666081653909,
+    "slug": "maths-camps-2019-report",
     "summary": "With over 250 pupils in attendance across 6 African countries, this was our biggest and most exciting year of camps to date.",
     "title": "Maths Camps 2019 Report",
-    "updated_at": 1666082044376,
+    "updated_at": 1692919802272,
     "updated_by_id": 1
   },
   {
@@ -114,9 +123,10 @@
     "date_written": "2020-01-28",
     "id": 10,
     "published_at": 1666082317625,
+    "slug": "highlight-locally-led-camps-in-ghana-and-uganda",
     "summary": "After an incredibly busy summer with camps in 6 countries, we’re amazed to see local teams keeping the momentum going and hosting two more camps to start 2020.",
     "title": "Highlight: Locally-led camps in Ghana and Uganda",
-    "updated_at": 1666082317626,
+    "updated_at": 1692919767560,
     "updated_by_id": 1
   },
   {
@@ -126,9 +136,10 @@
     "date_written": "2020-04-03",
     "id": 11,
     "published_at": 1666082494910,
+    "slug": "covid-19-and-maths-camps-2020",
     "summary": "Due to the evolving situation caused by the coronavirus (COVID-19), SAMI has put on hold its planning and recruitment for maths camps this summer.",
     "title": "Covid-19 and Maths Camps 2020",
-    "updated_at": 1666082494912,
+    "updated_at": 1692919754262,
     "updated_by_id": 1
   },
   {
@@ -138,9 +149,10 @@
     "date_written": "2020-05-01",
     "id": 12,
     "published_at": 1666082568174,
+    "slug": "the-power-of-technology-to-enable-learning",
     "summary": "These teams of trainers have been working hard to create Geogebra teacher training resources. GeoGebra is mathematics software for all levels of education that brings together geometry, algebra, spreadsheets, graphing, statistics and calculus in one easy-to-use package. ",
     "title": "The power of technology to enable learning.",
-    "updated_at": 1666083757301,
+    "updated_at": 1692919934929,
     "updated_by_id": 1
   },
   {
@@ -150,9 +162,10 @@
     "date_written": "2020-05-22",
     "id": 13,
     "published_at": 1666082675440,
+    "slug": "reaching-students-remotely",
     "summary": "According to data by UNESCO, COVID19 school closures have affected over 200 million learners in Pre-Primary, Primary, Secondary, and Tertiary institutions in Sub-Saharan Africa.",
     "title": "Reaching students remotely",
-    "updated_at": 1666082675442,
+    "updated_at": 1692919940342,
     "updated_by_id": 1
   },
   {
@@ -162,9 +175,10 @@
     "date_written": "2020-05-22",
     "id": 14,
     "published_at": 1666082825073,
+    "slug": "21st-century-skills",
     "summary": "We are living in unprecedented times. As I write this, the world is experiencing major societal shifts in work and education. Universities and other schools and industries are re-evaluating their roles now and what they can be in the future",
     "title": "21st Century Skills",
-    "updated_at": 1666082825075,
+    "updated_at": 1692919582172,
     "updated_by_id": 1
   },
   {
@@ -174,9 +188,10 @@
     "date_written": "2020-07-22",
     "id": 15,
     "published_at": 1666082935323,
+    "slug": "sami-virtual-maths-camp-2020",
     "summary": "We are now joining efforts across Africa and internationally to create a virtual maths camp experience, a collection of events and resources across different countries, platforms and delivery mechanisms with the potential to have long lasting impact.",
     "title": "SAMI Virtual Maths Camp 2020",
-    "updated_at": 1666083151611,
+    "updated_at": 1692919945655,
     "updated_by_id": 1
   },
   {
@@ -186,9 +201,10 @@
     "date_written": "2020-12-30",
     "id": 16,
     "published_at": 1666083095978,
+    "slug": "sami-maths-club-app-new-problems-in-french",
     "summary": null,
     "title": "SAMI Maths Club App – New Problems in French",
-    "updated_at": 1666083208820,
+    "updated_at": 1692919951194,
     "updated_by_id": 1
   },
   {
@@ -198,9 +214,10 @@
     "date_written": "2020-12-30",
     "id": 17,
     "published_at": 1666083345243,
+    "slug": "sami-newsletter-highlights-from-2020",
     "summary": "Welcome to the 2020 Supporting African Maths Initiatives Newsletter!",
     "title": "SAMI Newsletter – Highlights from 2020",
-    "updated_at": 1666083345244,
+    "updated_at": 1692919956977,
     "updated_by_id": 1
   }
 ]
