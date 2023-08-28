@@ -112,7 +112,7 @@ export class DBImport {
   }
 
   private async confirmImport(data: ImportSummary[]) {
-    if(process.env.CI) return true
+    if (process.env.CI) return true;
     const summaries = data.map(({ summary }) => summary).filter((v) => v);
     if (summaries.length === 0) {
       console.log(chalk.green("DB - Up to date"));
