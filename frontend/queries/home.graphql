@@ -130,6 +130,7 @@ query homeContent {
         Title
         Summary
         DateWritten
+        Slug
         FeatureImage {
           data {
             id
