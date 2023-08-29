@@ -52,7 +52,6 @@ export default program
  */
 class BuildCmd {
   public async run(options: IProgramOptions) {
-    console.log({ options });
     // Deployments will always read data from local development server
     // If wanting to use other data it must first be impoorted locally
     await loadEnv("development");
