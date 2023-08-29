@@ -1,8 +1,8 @@
-const PageSection = ({ children, className = "", fullwidth = false }) => {
+const PageSection = ({ children, className = "", childClassName = "", fullwidth = false, ...props }) => {
   if (fullwidth) {
     return (
-      <div data-testid="pageSectionFullwidth" className={`${className}`}>
-        <div data-testid="pageSection" className={`container mx-auto `}>
+      <div data-testid={props["data-testid" || "props"]} className={`${className}`}>
+        <div data-testid="pageSection" className={`container mx-auto ${childClassName}`}>
           {children}
         </div>
       </div>

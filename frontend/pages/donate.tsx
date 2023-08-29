@@ -3,20 +3,23 @@ import React from "react";
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import { serverQuery } from "lib/graphql";
 import { DonateContentDocument } from "../graphql/generated";
-import type { DonateContentQuery } from "../graphql/generated";
+import type { ComponentHomeMissionStatement, DonateContentQuery } from "../graphql/generated";
 import PageSection from "components/layout/pageSection";
-import { MissionStatementComponent } from "components/pages/home/missionStatement";
 import Image from "next/image";
 
-import CAFLogo from "public/images/Donate/caf-logo.png";
-import EFLogo from "public/images/Donate/easyfundraising.png";
-import AmazonLogo from "public/images/Donate/amazon-smile.png";
+// import CAFLogo from "public/images/Donate/caf-logo.png";
+// import EFLogo from "public/images/Donate/easyfundraising.png";
+// import AmazonLogo from "public/images/Donate/amazon-smile.png";
 import PAHLogo from "public/images/Donate/panafricanhub.png";
 import BDULogo from "public/images/Donate/BDU.png";
 import InnodemsLogo from "public/images/Donate/innodems.png";
 import LWFLogo from "public/images/Donate/LWF.png";
 import HausdorffLogo from "public/images/Donate/hausdorff.png";
 import IDEMSLogo from "public/images/Donate/idems-international.png";
+import { ImageHeadingContentLayout } from "components/layout/columns";
+import { HTMLContent } from "components/common/htmlContent";
+import { ActionButtonsComponent } from "components/common/actionButtons";
+import { getStrapiMedia } from "lib/media";
 
 export const getStaticProps = async ({}: GetStaticPropsContext) => {
   const res = await serverQuery<DonateContentQuery>(DonateContentDocument);
@@ -27,6 +30,31 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
   };
 };
 
+export const DonateContentComponent: React.FC<ComponentHomeMissionStatement> = ({
+  ActionButtons,
+  Description,
+  Heading,
+  Image: UploadedImage,
+  Text,
+}) => (
+  <>
+    <ImageHeadingContentLayout
+      imageSide="right"
+      Heading={<h2 className="subtitle">{Heading}</h2>}
+      Image={
+        <Image src={getStrapiMedia(UploadedImage)} alt={"image"} fill placeholder="empty" className="object-cover" />
+      }
+      Content={
+        <>
+          <h3>{Text}</h3>
+          <HTMLContent className="mb-6">{Description}</HTMLContent>
+          {ActionButtons && <ActionButtonsComponent actionButtons={ActionButtons} className="mt-8" />}
+        </>
+      }
+    />
+  </>
+);
+
 const DonatePage = ({ content }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
@@ -36,13 +64,14 @@ const DonatePage = ({ content }: InferGetStaticPropsType<typeof getStaticProps>)
       <>
         {content.DonateStatement && (
           <PageSection fullwidth className="py-16 bg-blue-50">
-            <MissionStatementComponent {...(content.DonateStatement as any)} />
+            <DonateContentComponent {...(content.DonateStatement as any)} />
           </PageSection>
         )}
         <PageSection fullwidth className="bg-primary-focus text-white py-0">
           <h3 className="text-center">You can help us make a difference - SUPPORT SAMI</h3>
         </PageSection>
-        <PageSection fullwidth className="py-16">
+        {/* TODO - CC 2023-08-29 - Confirm if still want custom section */}
+        {/* <PageSection fullwidth className="py-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
             <div className="px-2 mb-10">
               <h4 className="text-xl font-semibold">Donate Directly</h4>
@@ -70,8 +99,8 @@ const DonatePage = ({ content }: InferGetStaticPropsType<typeof getStaticProps>)
               </div>
             </div>
           </div>
-        </PageSection>
-        <PageSection fullwidth className="bg-blue-50 py-20 mt-6 mb-12">
+        </PageSection> */}
+        {/* <PageSection fullwidth className="bg-blue-50 py-20 mt-6 mb-12">
           <div className="grid grid-cols-1 lg:grid-cols-3 w-full gap-10">
             <div className="text-left">
               <h3>How we use your donation</h3>
@@ -86,7 +115,7 @@ const DonatePage = ({ content }: InferGetStaticPropsType<typeof getStaticProps>)
               Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet.
             </div>
           </div>
-        </PageSection>
+        </PageSection> */}
         <PageSection className="mt-6 mb-12 text-center">
           <div>
             <div>
