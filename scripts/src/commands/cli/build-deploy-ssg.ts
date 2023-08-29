@@ -32,6 +32,8 @@ export default program
   .option("--no-preview", "Do not preview build locally")
   .option("-d --deploy", "Deploy build")
   .option("--no-deploy", "Do not deploy build")
+  .option("-e --export", "Export local data")
+  .option("--no-export", "Do not export local data")
   .action(async (options: IProgramOptions) => {
     console.log("Creating static generated build");
     return new BuildCmd().run(options).then(() => process.exit(0));
@@ -55,6 +57,16 @@ class BuildCmd {
     // Deployments will always read data from local development server
     // If wanting to use other data it must first be impoorted locally
     await loadEnv("development");
+
+    // Ensure data exported
+    console.log(chalk.gray("Ensuring data exported"));
+    let shouldExport = options.preview;
+    if (shouldExport === undefined) {
+      shouldExport = await promptConfirm("Would you like to export local data first?", true);
+    }
+    if (shouldExport) {
+      await execa("yarn scripts strapi export -e development", { cwd: PATHS.rootDir, shell: true, stdio: "inherit" });
+    }
 
     // Copy backend uploads to nextJS public directory
     this.copyBackendUploads();
