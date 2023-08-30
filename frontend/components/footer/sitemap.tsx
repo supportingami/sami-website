@@ -34,6 +34,11 @@ const pageLinks = [
     label: "CONTACT US",
     href: "/contact-us",
   },
+  {
+    id: "donate",
+    label: "DONATE",
+    href: "/donate",
+  },
 ];
 
 const Sitemap = () => {
@@ -50,9 +55,6 @@ const Sitemap = () => {
                   {label}
                 </Link>
               ))}
-              <Link className="btn btn-secondary" href={"/donate"}>
-                Donate
-              </Link>
             </div>
           </div>
 

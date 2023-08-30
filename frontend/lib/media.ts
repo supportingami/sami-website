@@ -12,12 +12,13 @@ function getStrapiURL(path = "") {
   return `${NEXT_PUBLIC_IMAGE_URL}${path}`;
 }
 
-export function getStrapiMedia(media: Partial<UploadFileEntityResponse>): string {
-  if (!media?.data?.attributes) {
+export function getStrapiMedia(media: Partial<UploadFileEntityResponse> = {}): string {
+  if (media.data?.attributes) {
+    const { url } = media.data.attributes;
+    const imageUrl = url.startsWith("/") ? getStrapiURL(url) : url;
+    return imageUrl;
+  } else {
     console.error("Media missing");
     return "";
   }
-  const { url } = media.data.attributes;
-  const imageUrl = url.startsWith("/") ? getStrapiURL(url) : url;
-  return imageUrl;
 }

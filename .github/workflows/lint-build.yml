@@ -49,4 +49,4 @@ jobs:
           yarn scripts strapi bootstrap --environment development
           yarn scripts strapi import --environment development
       - name: Build
-        run: yarn build --no-preview --no-deploy
+        run: yarn build --no-export --no-preview --no-deploy

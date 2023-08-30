@@ -2268,6 +2268,7 @@ export type HomeContentQuery = {
         Title: string;
         Summary?: string | null;
         DateWritten?: any | null;
+        Slug?: string | null;
         FeatureImage?: {
           __typename?: "UploadFileEntityResponse";
           data?: {
@@ -3297,6 +3298,7 @@ export const HomeContentDocument = {
                             { kind: "Field", name: { kind: "Name", value: "Title" } },
                             { kind: "Field", name: { kind: "Name", value: "Summary" } },
                             { kind: "Field", name: { kind: "Name", value: "DateWritten" } },
+                            { kind: "Field", name: { kind: "Name", value: "Slug" } },
                             {
                               kind: "Field",
                               name: { kind: "Name", value: "FeatureImage" },
