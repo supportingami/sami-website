@@ -106,7 +106,8 @@ class BuildCmd {
       shouldDeploy = await promptConfirm("Would you like to deploy the build?", true);
     }
     if (shouldDeploy) {
-      const cmd = `yarn vercel deploy --prebuilt`;
+      // Use vercel build locally to copy next build and package functions, then deploy prebuilt
+      const cmd = `yarn vercel build && yarn vercel deploy --prebuilt`;
       await execa(cmd, { stdio: "inherit", cwd: PATHS.frontendDir });
     }
     // Wait for key press to terminate running preview server
@@ -129,10 +130,9 @@ class BuildCmd {
     const waitOnBin = resolve(PATHS.scriptsDir, "node_modules", ".bin", "wait-on");
     let buildScript: string;
 
-    // When building static export create nextJS build, optimize images and then use
-    // vercel builder to bundle with functions ready for deployment
+    // When building static export create nextJS build and optimize images
     if (NEXT_CONFIG_MODE === "export") {
-      buildScript = `yarn next build && yarn next-export-optimize-images && yarn vercel build`;
+      buildScript = `yarn next build && yarn next-export-optimize-images`;
     }
     // Standalone builder calls vercel
     // NOTE - this will require vercel.json having correct `nextJS` framework assigned
