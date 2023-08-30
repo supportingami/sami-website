@@ -24,6 +24,8 @@ interface IProgramOptions {
   /** Specify whether to deploy to server */
   deploy?: boolean;
 }
+/** Different build settings will resolve depending on next.config.js mode */
+const NEXT_CONFIG_MODE: "standalone" | "export" = "export";
 
 const program = new Command("build");
 export default program
@@ -51,6 +53,13 @@ export default program
  * - Export static build for deployment to static server
  * - Optionally preview build
  * - Optionally deploy to vercel
+ *
+ * NOTES
+ * Static site used instead of nextJS server as local build required (to pull from strapi)
+ * but deploy to vercel does not work from local (at least on windows, symlinks not uploaded)
+ *
+ * Vercel does support serverless functions, but folder structure slightly different than nextjs
+ * and a corresponding package.json to support imports
  */
 class BuildCmd {
   public async run(options: IProgramOptions) {
@@ -62,14 +71,13 @@ class BuildCmd {
     console.log(chalk.gray("Ensuring data exported"));
     let shouldExport = options.preview;
     if (shouldExport === undefined) {
-      shouldExport = await promptConfirm("Would you like to export local data first?", true);
+      shouldExport = await promptConfirm("Would you like to export local data first?", false);
     }
     if (shouldExport) {
       await execa("yarn scripts strapi export -e development", { cwd: PATHS.rootDir, shell: true, stdio: "inherit" });
     }
 
-    // Copy backend uploads to nextJS public directory
-    this.copyBackendUploads();
+    this.preBuild();
 
     // Start backend server and call build script once running
     const backendCmd = this.getBackendStartCommand();
@@ -98,12 +106,8 @@ class BuildCmd {
       shouldDeploy = await promptConfirm("Would you like to deploy the build?", true);
     }
     if (shouldDeploy) {
-      let cmd = `vercel`;
-      const isProduction = false; // TODO - CI option
-      if (isProduction) {
-        cmd += ` --prod`;
-      }
-      await execa(cmd, { stdio: "inherit", cwd: PATHS.rootDir });
+      const cmd = `yarn vercel deploy --prebuilt`;
+      await execa(cmd, { stdio: "inherit", cwd: PATHS.frontendDir });
     }
     // Wait for key press to terminate running preview server
     if (shouldPreview) {
@@ -117,17 +121,33 @@ class BuildCmd {
     return { name: "strapi", command, cwd: PATHS.backendDir, prefixColor: "#8F76FF" };
   }
 
+  /**
+   * Depending on nextjs build mode (standalone or export) prepare different scripts
+   */
   private getBuildCommand(): ConcurrentlyCommandInput {
     // use wait-on to wait for backend server to be ready before building
     const waitOnBin = resolve(PATHS.scriptsDir, "node_modules", ".bin", "wait-on");
+    let buildScript: string;
+
+    // When building static export create nextJS build, optimize images and then use
+    // vercel builder to bundle with functions ready for deployment
+    if (NEXT_CONFIG_MODE === "export") {
+      buildScript = `yarn next build && yarn next-export-optimize-images && yarn vercel build`;
+    }
+    // Standalone builder calls vercel
+    // NOTE - this will require vercel.json having correct `nextJS` framework assigned
+    // It also produces files with symlinks that fail to upload on windows
+    if (NEXT_CONFIG_MODE === "standalone") {
+      buildScript = `yarn next build && yarn vercel build`;
+    }
     return {
       name: "nextjs",
-      command: `${waitOnBin} http://localhost:1337 && yarn next build && yarn next-export-optimize-images`,
+      command: `${waitOnBin} http://localhost:1337 && ${buildScript}`,
       cwd: PATHS.frontendDir,
       prefixColor: "bgBlack.white",
       //   use local folder for image hosting which will also use optimised folders
       env: {
-        NEXT_CONFIG_MODE: "export",
+        NEXT_CONFIG_MODE,
       },
     };
   }
@@ -135,7 +155,8 @@ class BuildCmd {
   /**
    * Copy all public uploads from backend to build directory to include in static site
    */
-  private copyBackendUploads() {
+  private preBuild() {
+    // Copy all public uploads from backend to build directory to include in static site
     const srcDir = resolve(PATHS.backendDir, "public", "uploads");
     const targetDir = resolve(PATHS.frontendDir, "public", "uploads");
     // TODO - ideally want to rsync for better caching
@@ -147,6 +168,8 @@ class BuildCmd {
   /**
    * Use Vercel's `serve-handler` package to run a local webserver for generated content
    * Once running open user browser to view
+   * TODO - probably better to use vercel CLI instead with config
+   * `yarn vercel dev --cwd frontend/out`
    * */
   private async serveBuild() {
     return new Promise((promiseResolve) => {
