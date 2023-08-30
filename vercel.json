@@ -1,7 +1,0 @@
-{
-  "buildCommand": "mv frontend/out/* ./",
-  "installCommand": "",
-  "outputDirectory": ".",
-  "cleanUrls": true,
-  "redirects": [{ "source": "/", "destination": "/home", "permanent": true }]
-}

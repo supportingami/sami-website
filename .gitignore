@@ -19,6 +19,7 @@ out
 # build
 backend/data
 backend/build
+tsconfig.tsbuildinfo
 
 scripts/input
 scripts/output

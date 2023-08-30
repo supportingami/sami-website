@@ -110,4 +110,4 @@ const standaloneConfig = withBundleAnalyzer({
 const config = process.env.NEXT_CONFIG_MODE === "export" ? exportConfig : standaloneConfig;
 console.log(`NextJS will run in ${config.output} mode`);
 
-module.exports = withBundleAnalyzer(config);
+module.exports = config;

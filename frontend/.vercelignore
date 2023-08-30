@@ -1,6 +1,10 @@
 # Ignore everything (folders and files) on root only
 /*
-!frontend
-frontend/*
-!frontend/out
+
+
+!.vercel
 !vercel.json
+
+# Keep static output and api
+!out
+!api

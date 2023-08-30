@@ -1,0 +1,13 @@
+{
+  "buildCommand": "echo skipping build",
+  "outputDirectory": "out",
+  "installCommand": "echo skipping install",
+  "cleanUrls": true,
+  "redirects": [{ "source": "/", "destination": "/home", "permanent": true }],
+  "functions": {
+    "api/**/*.ts": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  }
+}
