@@ -5,7 +5,7 @@
   "cleanUrls": true,
   "redirects": [{ "source": "/", "destination": "/home", "permanent": true }],
   "functions": {
-    "api/**/*.ts": {
+    "api/**/*.mjs": {
       "memory": 1024,
       "maxDuration": 10
     }

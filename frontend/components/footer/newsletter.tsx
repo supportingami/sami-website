@@ -3,11 +3,11 @@ import React from "react";
 
 const FORM_ID = "sub-form";
 
-/** Expected format of paramters received by mailchimp endpoint **/
-interface IFormParams {
-  EMAIL: string;
+/** Fields expected  */
+interface ISignupData {
   FNAME: string;
   LNAME: string;
+  EMAIL: string;
 }
 
 const Newsletter = () => {
@@ -29,14 +29,20 @@ const Newsletter = () => {
     if (isValid) {
       setFormDisabled(true);
       const formData = new FormData(formEl);
+      const EMAIL = formData.get("EMAIL")?.toString() || "";
       // Hack - convert single 'NAME' field to separate first and last names for use in mailchimp
       const name = formData.get("NAME")?.toString() || "";
       const [FNAME, ...LNAMES] = name.split(" ");
       const LNAME = LNAMES.join(" ");
-      formData.set("FNAME", FNAME || "");
-      formData.set("LNAME", LNAME || "");
+      const bodyData: ISignupData = { EMAIL, FNAME, LNAME };
       // Send form to api
-      const res = await fetch(`/api/newsletter-signup`, { method: "POST", body: formData });
+      const res = await fetch(`/api/newsletter-signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bodyData),
+      });
       setFormDisabled(false);
       const data = await res.json();
       const { msg, result } = data as any;
