@@ -1,9 +1,9 @@
 import type {
+  Error,
   AuthorBlockBlocksDynamicZone,
   ComponentCommonActionButton,
   ComponentCommonHtml,
   ComponentCommonTextBlock,
-  Error,
 } from "../../graphql/generated";
 import { ActionButtonsComponent } from "./actionButtons";
 import { HTMLContent } from "./htmlContent";
@@ -13,24 +13,27 @@ import { HTMLContent } from "./htmlContent";
  * in strapi with exclusion of Error block which may also be passed
  **/
 type IAuthorBlock = Exclude<AuthorBlockBlocksDynamicZone, Error>;
+type IAuthorBlockType = NonNullable<IAuthorBlock["__typename"]>;
+
+const ComponentMapping: { [type in IAuthorBlockType]: (block: IAuthorBlock) => JSX.Element } = {
+  ComponentCommonActionButton: (block) => {
+    const actionButtonBlock = block as ComponentCommonActionButton;
+    return <ActionButtonsComponent key={block.id} actionButtons={[{ ...actionButtonBlock }]} />;
+  },
+  ComponentCommonHtml: (block) => {
+    const htmlBlock = block as ComponentCommonHtml;
+    return <HTMLContent key={block.id}>{htmlBlock.HTML}</HTMLContent>;
+  },
+  ComponentCommonTextBlock: (block) => {
+    const textBlock = block as ComponentCommonTextBlock;
+    return <p key={block.id}>{textBlock.Text}</p>;
+  },
+};
 
 /** Map author blocks to components */
 const generateBlockComponent = (block: IAuthorBlock) => {
-  switch (block.__typename) {
-    case "ComponentCommonActionButton":
-      const actionButtonBlock = block as ComponentCommonActionButton;
-      return <ActionButtonsComponent key={block.id} actionButtons={[{ ...actionButtonBlock }]} />;
-    case "ComponentCommonHtml":
-      const htmlBlock = block as ComponentCommonHtml;
-      return <HTMLContent key={block.id}>{htmlBlock.HTML}</HTMLContent>;
-    case "ComponentCommonTextBlock":
-      const textBlock = block as ComponentCommonTextBlock;
-      return <p key={block.id}>{textBlock.Text}</p>;
-    default:
-      // Force typescript to identify an error if any potential blocks are not defined
-      // https://basarat.gitbook.io/typescript/type-system/discriminated-unions
-      const _exhaustiveCheck: never = block;
-      return _exhaustiveCheck;
+  if (block.__typename) {
+    return ComponentMapping[block.__typename](block);
   }
 };
 

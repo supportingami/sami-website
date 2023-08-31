@@ -1,6 +1,7 @@
 import React from "react";
-import Head from "next/head";
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
+import Head from "next/head";
+
 import { serverQuery } from "lib/graphql";
 import type { HomeContentQuery, ProjectType } from "../graphql/generated";
 import { HomeContentDocument } from "../graphql/generated";
@@ -11,6 +12,7 @@ import { ProjectSummaryComponent } from "components/pages/home/ProjectSummary";
 import { GetInvolvedComponent } from "components/pages/home/getInvolved";
 import { ImpactSectionComponent } from "components/pages/home/ImpactSection";
 import { BlogCardComponent } from "components/pages/blog-post/blogCard";
+import { DonateSummary } from "components/pages/home/donateSummary";
 
 export const getStaticProps = async ({}: GetStaticPropsContext) => {
   const res = await serverQuery<HomeContentQuery>(HomeContentDocument);
@@ -58,12 +60,10 @@ const HomePage = ({ content, blogs, projects }: InferGetStaticPropsType<typeof g
           ))}
         </div>
       </PageSection>
-      <PageSection fullwidth className="bg-accent text-white py-0">
-        <h3 className="text-center">You can help us make a difference</h3>
+      <PageSection fullwidth className="bg-accent text-white py-4">
+        <DonateSummary />
       </PageSection>
-      <PageSection fullwidth className="bg-base-200 py-16">
-        (TODO - donate buttons)
-      </PageSection>
+      {/* <PageSection fullwidth className="bg-base-200 py-16"></PageSection> */}
     </>
   </>
 );
