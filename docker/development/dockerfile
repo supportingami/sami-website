@@ -1,0 +1,66 @@
+# yarn scripts cli docker-build --development --environment docker
+
+# docker run -it --rm --name sami-development -p 3000:3000 -p 1337:1337 -e STRAPI_HOST=0.0.0.0 sami/development
+# docker compose -p sami-development -f docker/development/docker-compose.yml up
+
+# Setup Buildx builder
+# syntax=docker/dockerfile:1
+FROM docker
+COPY --from=docker/buildx-bin /buildx /usr/libexec/docker/cli-plugins/docker-buildx
+RUN docker buildx version
+
+FROM sami/base as backend-builder
+
+COPY scripts ./scripts
+COPY backend ./backend
+
+# NOTE - only config not ignored is docker.env
+# Only copy 1 env file so that promptEnv will always select without user interaction
+COPY config/docker.env ./config/docker.env
+
+ENV NODE_ENV=development
+ENV CI=true
+
+RUN yarn scripts strapi bootstrap --environment docker
+
+# TODO - production build mode (rename this to dev)
+# Will require executable/compiled scripts (for data import/export)
+# Or perhaps import during build (would need to be careful not to delete existing volume)
+
+# Build frontend
+# FROM sami/base as frontend-builder
+COPY ./frontend ./frontend
+# RUN yarn workspace frontend build:standalone
+
+# FROM node:18-alpine
+
+# Backend
+# RUN apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev nasm bash vips-dev
+# RUN rm -rf /var/cache/apk/*
+
+# ARG ENV_NAME=production 
+# ENV NODE_ENV=${ENV_NAME}
+# WORKDIR /app
+# COPY --from=backend-builder /app/backend ./backend
+
+# Frontend
+# COPY --from=frontend-builder /app/frontend/public ./frontend/public
+# COPY --from=frontend-builder /app/frontend/.next/standalone/frontend ./frontend
+# COPY --from=frontend-builder /app/frontend/.next/static ./frontend/.next/static
+
+ENV PATH /app/node_modules/.bin:$PATH
+ENV HOST 0.0.0.0
+
+EXPOSE 1337
+EXPOSE 3000
+
+CMD ["yarn", "start", "--environment", "docker"]
+
+# debug cmd
+# --entrypoint "/bin/ash -c 'while sleep 3600; do :; done'"
+
+# docker run --entrypoint "exec sleep infinity" -it --rm --name sami-standalone -p 3000:3000 -p 1337:1337 -e STRAPI_HOST=0.0.0.0 sami/standalone
+
+
+# docker build --target frontend --tag sami/backend -f docker\Dockerfile .
+# docker run -it --rm --name sami-backend -p 1337:1337 sami/backend

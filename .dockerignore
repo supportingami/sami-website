@@ -4,7 +4,9 @@
 node_modules
 
 backend/node_modules
-config
+ci
+config/*
+!config/docker.env
 data
 docker
 docs

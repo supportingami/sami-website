@@ -13,6 +13,9 @@ import { logError } from "./logging.utils";
  * and passed to methods as required
  ***********************************************************************************************/
 
+const backendEnvPath = resolve(PATHS.backendDir, ".env");
+const frontendEnvPath = resolve(PATHS.frontendDir, ".env");
+
 export interface IEnvLoaded {
   /** local name prefix of .env file, e.g. development.env */
   name: string;
@@ -23,14 +26,34 @@ export interface IEnvLoaded {
 }
 let envLoaded: IEnvLoaded;
 
+/** Use local config files to retroactively set env config for CI operations (where config folder ignored) */
+// function loadEnvNameCI(): string {
+//   if (!existsSync(backendEnvPath)) {
+//     throw new Error("Failed to load current env");
+//   }
+//   // HACK - assumes frontend and backend env same - copy to config
+//   const { parsed } = dotenv.config({ path: backendEnvPath, override: true });
+//   const name = parsed.envName;
+//   const envPath = resolve(PATHS.configDir, `${name}.env`);
+//   ensureDirSync(PATHS.configDir);
+//   copyFileSync(backendEnvPath, envPath);
+//   return name;
+// }
+
 /**
  * Load an environment configuration from root config env files
  * and replicate to frontend and backend folders
  */
 export async function loadEnv(envName?: string, options: { skipHealthcheck?: boolean } = {}) {
   if (!envName) {
+    // If running on CI without interactive prompts attempt to use whatever env last loaded
+    // TODO - not needed if only 1 env configured in docker build
+    // if (process.env.CI) {
+    // envName = loadEnvNameCI();
+    // } else {
     envName = await promptEnv();
   }
+  // }
   // Return if already processed
   if (envLoaded && envLoaded.name === envName) {
     return envLoaded;
@@ -71,8 +94,6 @@ export async function loadEnv(envName?: string, options: { skipHealthcheck?: boo
   const mergedEnv = Object.entries(parsed)
     .map(([key, value]) => `${key}=${value}`)
     .join("\n");
-  const backendEnvPath = resolve(PATHS.backendDir, ".env");
-  const frontendEnvPath = resolve(PATHS.frontendDir, ".env");
 
   writeFileSync(backendEnvPath, mergedEnv, "utf8");
   writeFileSync(frontendEnvPath, mergedEnv, "utf8");

@@ -1,0 +1,31 @@
+# docker compose -p sami-development -f docker/development/docker-compose.yml up
+
+version: "3"
+services:
+  nginx:
+    container_name: webserver
+    image: nginx
+
+  sami_development:
+    container_name: sami_development
+    # NOTE - Built via `yarn build` script
+    # TODO - use versioned name and versioned db file to avoid accidental overwrite
+
+    image: sami/development:latest
+    # command: "/bin/ash -c 'while sleep 3600; do :; done'"
+    restart: unless-stopped
+    ports:
+      # Expose on 127.0.0.1 instead of default 0.0.0.0 as next.js rewrites localhost to this
+      # https://earthly.dev/blog/youre-using-docker-compose-wrong/
+      # https://github.com/vercel/next.js/issues/27865
+      # NOTE - might not work in WSL (?) https://github.com/docker/for-win/issues/13182
+      - "1337:1337"
+      - "3000:3000"
+    # TODO - map to versioned local volume (possibly with volumes)
+    # TODO - persist data
+    # volumes:
+    #   - ${PWD}/sami-db-1.db:/app/backend/sami-dev.db:ro
+
+    # TODO find a way to run nginx reverse proxy and dashboard on path
+    # https://docs.strapi.io/dev-docs/deployment/nginx-proxy
+    # https://forum.strapi.io/t/strapi-in-subfolder-issue/13401/4

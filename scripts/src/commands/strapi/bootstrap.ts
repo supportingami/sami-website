@@ -33,7 +33,6 @@ class StrapiBootstrap {
   constructor(public options: IProgramOptions) {}
 
   public async run() {
-    // When bootstrapping for first time skip healthcheck which checks for bootstrap
     await loadEnv(this.options.environment, { skipHealthcheck: true });
     await this.buildStrapiAdminUI();
     this.app = await createStrapiInstance();
@@ -48,7 +47,11 @@ class StrapiBootstrap {
    */
   private async buildStrapiAdminUI() {
     console.log(chalk.gray("\nBuilding Strapi Dashboard\n"));
-    const { exitCode } = await execa("yarn strapi build", { cwd: PATHS.backendDir, shell: true, stdio: "inherit" });
+    const { exitCode } = await execa("yarn strapi build", {
+      cwd: PATHS.backendDir,
+      shell: true,
+      stdio: "inherit",
+    });
     if (exitCode !== 0) process.exit(exitCode);
   }
 

@@ -66,8 +66,8 @@ const exportConfig = withExportImages({
 // TODO - could also add NEXT_PUBLIC_API_DOMAIN
 const domains = ["localhost", "storage.googleapis.com", "backend"];
 // Include external source if included within public api (e.g. google cloud run)
-if (NEXT_PUBLIC_API_URL && NEXT_PUBLIC_API_URL.startsWith("https")) {
-  domains.push(new URL(NEXT_PUBLIC_API_URL).host);
+if (NEXT_PUBLIC_API_URL && NEXT_PUBLIC_API_URL.startsWith("http")) {
+  domains.push(new URL(NEXT_PUBLIC_API_URL).hostname);
 }
 
 /***********************************************************************************

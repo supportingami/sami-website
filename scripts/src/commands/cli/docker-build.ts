@@ -13,13 +13,17 @@ import { PATHS } from "../../paths";
 interface IProgramOptions {
   environment?: string;
   only?: "base" | "backend" | "frontend";
+  standalone?: boolean;
+  development?: boolean;
 }
 
-const program = new Command("build-standalone");
+const program = new Command("docker-build");
 export default program
   .description("Build standalone images")
   .option("-e --environment <string>", "Name of environment to use")
   .option("-o --only <string>", "Only build single step, allowed 'base', 'backend', 'frontend'")
+  .option("-s --standalone", "Use standalone build configuration")
+  .option("-s --development", "Use development build configuration")
   .action(async (options: IProgramOptions) => {
     return new BuildStandaloneCmd().run(options).then(() => process.exit(0));
   });
@@ -39,6 +43,14 @@ class BuildStandaloneCmd {
     const loadedEnv = await loadEnv(environment);
     if (only === undefined || only === "base") {
       await this.buildBase();
+    }
+    if (options.standalone) {
+      await this.buildStandalone();
+      return;
+    }
+    if (options.development) {
+      await this.buildDevelopment();
+      return;
     }
     if (only === undefined || only === "backend") {
       await this.buildBackend(loadedEnv.name);
@@ -70,5 +82,19 @@ class BuildStandaloneCmd {
     console.log(chalk.gray(cmd));
     await execa(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
     console.log(chalk.green("Built frontend"));
+  }
+  private async buildStandalone() {
+    console.log(chalk.blue("Building standalone..."));
+    const cmd = `docker build --file docker/standalone/dockerfile --tag sami/standalone .`;
+    console.log(chalk.gray(cmd));
+    await execa(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
+    console.log(chalk.green("Built standalone"));
+  }
+  private async buildDevelopment() {
+    console.log(chalk.blue("Building development..."));
+    const cmd = `docker build --file docker/development/dockerfile --tag sami/development .`;
+    console.log(chalk.gray(cmd));
+    await execa(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
+    console.log(chalk.green("Built development"));
   }
 }
