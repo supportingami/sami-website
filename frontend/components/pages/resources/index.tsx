@@ -5,10 +5,10 @@ import { ResourceCardComponent } from "./resourceCard";
 export const ResourcesPageComponent: React.FC<{ resources: IResource[] }> = ({ resources }) => {
   return (
     <>
-      <h1>Resources</h1>
+      <h1 className="font-semibold text-4xl">Resources</h1>
 
       <div>
-        <div className="flex justify-between wrap">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4">
           {resources.map((resource) => (
             <ResourceCardComponent key={resource.id} resource={resource} />
           ))}
