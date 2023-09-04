@@ -2,6 +2,7 @@ import Image from "next/image";
 import { getStrapiMedia } from "lib/media";
 import React from "react";
 import type { IResource } from "types/resource";
+import { ExternalLink } from "components/common/externalLink";
 
 export const ResourceCardComponent: React.FC<{
   resource: IResource;
@@ -22,9 +23,9 @@ export const ResourceCardComponent: React.FC<{
     </div>
     <div>
       {resource.Media?.data && (
-        <a href={getStrapiMedia(resource.Media)} target="_blank" download rel="noopener noreferrer">
+        <ExternalLink href={getStrapiMedia(resource.Media)} download>
           <button className="btn btn-primary m-2">Download</button>
-        </a>
+        </ExternalLink>
       )}
     </div>
   </div>
