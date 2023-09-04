@@ -6,6 +6,7 @@ import { ResourcesPageComponent } from "components/pages/resources";
 import type { ResourcesQuery, Resource } from "../graphql/generated";
 import { ResourcesDocument } from "../graphql/generated";
 import { serverQuery } from "lib/graphql";
+import PageLayout from "components/layout/pageLayout";
 
 export const getStaticProps = async ({}: GetStaticPropsContext) => {
   let resources: IResource[] = [];
@@ -29,7 +30,9 @@ const ResourcesPage = ({ resources }: InferGetStaticPropsType<typeof getStaticPr
       <Head>
         <title>Resources Page</title>
       </Head>
-      <ResourcesPageComponent resources={resources} />
+      <PageLayout>
+        <ResourcesPageComponent resources={resources} />
+      </PageLayout>
     </>
   );
 };
