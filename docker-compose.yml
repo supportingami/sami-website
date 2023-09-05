@@ -1,0 +1,71 @@
+############# Run Via CLI #################
+# yarn scripts docker build -e docker
+# yarn scripts docker run
+
+services:
+  nginx:
+    container_name: sami_dev_server
+    image: nginx
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - webserver
+
+  backend:
+    container_name: sami_backend
+    image: sami/backend:${DOCKER_BUILD_VERSION}
+    # command: "/bin/ash -c 'while sleep 3600; do :; done'"
+    command: "strapi start"
+    restart: unless-stopped
+    ports:
+      - "1337:1337"
+    # TODO - map to versioned local volume (possibly with volumes)
+    # TODO - persist data
+    volumes:
+      - ./docker-data/env
+      - ./data:/app/data
+      # TODO - allow running scripts on container (probably from scripts not container)
+      # - ./scripts:/app/scripts
+      # Persist local config
+      - /app/config
+      # TODO - persist db data
+      # - /app/backend/sami-dev.db
+    networks:
+      - webserver
+
+  frontend:
+    container_name: sami_frontend
+    image: sami/frontend:${DOCKER_BUILD_VERSION}
+    command: "/bin/ash -c 'while sleep 3600; do :; done'"
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_API_URL: http://backend:1337
+    ports:
+      - "3000:3000"
+    networks:
+      - webserver
+
+networks:
+  webserver:
+
+  # TODO find a way to run nginx reverse proxy and dashboard on path
+  # https://docs.strapi.io/dev-docs/deployment/nginx-proxy
+  # https://forum.strapi.io/t/strapi-in-subfolder-issue/13401/4
+#######################################################################################
+# Legacy Notes - to confirm if still required
+#######################################################################################
+# Expose on 127.0.0.1 instead of default 0.0.0.0 as next.js rewrites localhost to this
+# https://earthly.dev/blog/youre-using-docker-compose-wrong/
+# https://github.com/vercel/next.js/issues/27865
+# NOTE - might not work in WSL (?) https://github.com/docker/for-win/issues/13182
+
+#######################################################################################
+# Deprecated - use build from cli instead of compose (to ensure base builds correctly)
+#######################################################################################
+# build:
+#   dockerfile: ./docker/base.dockerfile
+#   tags:
+#     - "sami/base:1.0.0"

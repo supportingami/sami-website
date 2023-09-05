@@ -23,9 +23,11 @@ interface IProgramOptions {
   preview?: boolean;
   /** Specify whether to deploy to server */
   deploy?: boolean;
+  /** Specify whether to export data prior to build */
+  export?: boolean;
+  /** Next config mode */
+  config: "standalone" | "export";
 }
-/** Different build settings will resolve depending on next.config.js mode */
-const NEXT_CONFIG_MODE: "standalone" | "export" = "export";
 
 const program = new Command("build");
 export default program
@@ -36,9 +38,10 @@ export default program
   .option("--no-deploy", "Do not deploy build")
   .option("-e --export", "Export local data")
   .option("--no-export", "Do not export local data")
+  .option("-c --config <string>", "Next config mode, 'standalone' or 'export'", "export")
   .action(async (options: IProgramOptions) => {
-    console.log("Creating static generated build");
-    return new BuildCmd().run(options).then(() => process.exit(0));
+    console.log("Creating static generated build", options);
+    return new BuildCmd(options).run().then(() => process.exit(0));
   });
 
 /***************************************************************************************
@@ -62,18 +65,19 @@ export default program
  * and a corresponding package.json to support imports
  */
 class BuildCmd {
-  public async run(options: IProgramOptions) {
+  constructor(private options: IProgramOptions) {}
+  public async run() {
+    let { export: shouldExport, preview: shouldPreview, deploy: shouldDeploy } = this.options;
     // Deployments will always read data from local development server
-    // If wanting to use other data it must first be impoorted locally
+    // If wanting to use other data it must first be imported locally
     await loadEnv("development");
 
     // Ensure data exported
-    console.log(chalk.gray("Ensuring data exported"));
-    let shouldExport = options.preview;
     if (shouldExport === undefined) {
       shouldExport = await promptConfirm("Would you like to export local data first?", false);
     }
     if (shouldExport) {
+      console.log(chalk.gray("Ensuring data exported"));
       await execa("yarn scripts strapi export -e development", { cwd: PATHS.rootDir, shell: true, stdio: "inherit" });
     }
 
@@ -92,7 +96,6 @@ class BuildCmd {
     console.log(chalk.green("\nBuild Success\n"));
 
     // Optionally serve a preview of the built site
-    let shouldPreview = options.preview;
     if (shouldPreview === undefined) {
       shouldPreview = await promptConfirm("Would you like to preview the build locally?", true);
     }
@@ -101,7 +104,6 @@ class BuildCmd {
     }
 
     // Optionally deploy to vercel
-    let shouldDeploy = options.deploy;
     if (shouldDeploy === undefined) {
       shouldDeploy = await promptConfirm("Would you like to deploy the build?", true);
     }
@@ -126,6 +128,7 @@ class BuildCmd {
    * Depending on nextjs build mode (standalone or export) prepare different scripts
    */
   private getBuildCommand(): ConcurrentlyCommandInput {
+    const { config: NEXT_CONFIG_MODE } = this.options;
     // use wait-on to wait for backend server to be ready before building
     const waitOnBin = resolve(PATHS.scriptsDir, "node_modules", ".bin", "wait-on");
     let buildScript: string;

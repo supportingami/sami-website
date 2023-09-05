@@ -4,6 +4,7 @@ import { logProgramHelp } from "../utils";
 
 // Commands
 import cliCmd from "./cli";
+import dockerCmd from "./docker";
 import docsCmd from "./docs";
 import strapiCmd from "./strapi";
 import wpCmd from "./wp";
@@ -14,6 +15,7 @@ program.version("1.0.0").description("SAMI Website Scripts");
 
 /** add sub-commands from child folders */
 program.addCommand(cliCmd);
+program.addCommand(dockerCmd);
 program.addCommand(docsCmd);
 program.addCommand(strapiCmd);
 program.addCommand(wpCmd);

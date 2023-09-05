@@ -3,6 +3,7 @@ import path from "path";
 const rootDir = path.resolve(__dirname, "../../");
 const backendDir = path.resolve(rootDir, "backend");
 const configDir = path.resolve(rootDir, "config");
+const dockerDataDir = path.resolve(rootDir, "docker-data");
 const docsDir = path.resolve(rootDir, "docs");
 const dataDir = path.resolve(rootDir, "data");
 const frontendDir = path.resolve(rootDir, "frontend");
@@ -15,6 +16,7 @@ export const PATHS = {
   backendDir,
   configDir,
   dataDir,
+  dockerDataDir,
   docsDir,
   frontendDir,
   scriptsDir,

@@ -11,9 +11,6 @@ FROM node:18-alpine as base
 
 # RUN apk update && apk add build-base gcc autoconf automake zlib-dev libpng-dev vips-dev && rm -rf /var/cache/apk/* > /dev/null 2>&1
 
-ARG NODE_ENV=production
-ENV NODE_ENV=${NODE_ENV}
-
 WORKDIR /app
 
 COPY ./.yarn ./.yarn

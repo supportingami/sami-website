@@ -7,8 +7,6 @@
     "start": "strapi develop",
     "start:prod": "strapi start",
     "build": "strapi build",
-    "docker:build": "docker compose build",
-    "docker:start": "docker compose --project-name sami-backend up",
     "strapi": "strapi"
   },
   "dependencies": {

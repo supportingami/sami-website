@@ -4,6 +4,8 @@ import { prompt } from "inquirer";
 import { resolve } from "path";
 import { PATHS } from "../paths";
 import { logError } from "./logging.utils";
+import execa from "execa";
+import chalk from "chalk";
 
 /************************************************************************************************
  * Environments
@@ -85,7 +87,7 @@ export async function loadEnv(envName?: string, options: { skipHealthcheck?: boo
 
   //ensure loaded env configured correctly
   if (!options.skipHealthcheck) {
-    healthcheck();
+    await healthcheck();
   }
 
   // populate selected .env to global environment
@@ -160,12 +162,16 @@ async function promptEnv() {
   return selectedEnv;
 }
 
-async function healthcheck() {
+async function healthcheck(isRetry = false) {
   const { STRAPI_READONLY_TOKEN, GOOGLE_APPLICATION_CREDENTIALS } = envLoaded.parsed;
   // ensure frontend bootstrapped
-
   if (!STRAPI_READONLY_TOKEN) {
-    logError({ msg1: "Strapi must be bootstrapped first, run command:", msg2: `yarn scripts strapi bootstrap` });
+    if (isRetry) {
+      logError({ msg1: "Failed to boostrap Strapi, retry manually", msg2: "yarn scripts strapi boostrap" });
+    }
+    const bootstrapCmd = `yarn scripts strapi bootstrap -e ${envLoaded.name}`;
+    console.log(chalk.gray(bootstrapCmd));
+    await execa(bootstrapCmd, { shell: true, cwd: PATHS.rootDir, stdio: "inherit" });
   }
   // ensure external storage configured
   if (GOOGLE_APPLICATION_CREDENTIALS) {

@@ -1,19 +1,17 @@
 import { Command } from "commander";
 import { logProgramHelp } from "../../utils";
-import buildCmd from "./build-deploy-ssg";
-import setEnvCmd from "./setEnv";
-import startCmd from "./start";
+import buildCmd from "./build";
+import runCmd from "./run";
 
 /***************************************************************************************
  * CLI
  * @example yarn workspace scripts wp
  *************************************************************************************/
 
-const program = new Command("cli");
-program.description("Local command line scripts");
+const program = new Command("docker");
+program.description("Local docker scripts");
 program.addCommand(buildCmd);
-program.addCommand(setEnvCmd);
-program.addCommand(startCmd);
+program.addCommand(runCmd);
 
 export default program;
 

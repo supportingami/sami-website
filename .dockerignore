@@ -3,14 +3,21 @@
 .yarn/install-state.gz
 node_modules
 
+# Backend
+backend/.cache
+backend/.tmp
 backend/node_modules
+backend/sami-dev.db
+
+# Frontend
+frontend/.next/cache
+
+
 ci
-config/*
-!config/docker.env
-data
+config
+data/backups
+data/sqlite
 docker
 docs
-frontend/.next
-frontend/node_modules
 scripts/node_modules
 
