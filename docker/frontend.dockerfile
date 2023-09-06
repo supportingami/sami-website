@@ -1,4 +1,4 @@
-# docker build --target frontend --tag sami-website-frontend -f docker\Dockerfile .
+# yarn build --only frontend
 
 # Global args (available to FROM statement also when defined this way)
 # https://github.com/docker/cli/issues/2762

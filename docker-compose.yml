@@ -16,14 +16,12 @@ services:
 
   backend:
     container_name: sami_backend
-    image: sami/backend:latest
+    image: samicharity/backend:latest
     # command: "/bin/ash -c 'while sleep 3600; do :; done'"
-    command: "strapi start"
     restart: unless-stopped
     ports:
       - "1337:1337"
     volumes:
-      - ./data:/app/data
       - ./docker/data/uploads:/app/public/uploads
       - ./docker/data/db:/app/db
       # TODO - persist db data (possibly just use db image to allow connect)
@@ -47,7 +45,7 @@ services:
 
   frontend:
     container_name: sami_frontend
-    image: sami/frontend:latest
+    image: samicharity/frontend:latest
     command: next dev
     # command: "/bin/ash -c 'while sleep 3600; do :; done'"
     restart: unless-stopped
@@ -111,4 +109,4 @@ volumes:
 # build:
 #   dockerfile: ./docker/base.dockerfile
 #   tags:
-#     - "sami/base:1.0.0"
+#     - "samicharity/base:1.0.0"

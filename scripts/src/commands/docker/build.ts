@@ -69,7 +69,7 @@ class DockerBuildCmd {
 
   private async buildBase() {
     console.log(chalk.blue("Building base..."));
-    const args = `--tag sami/base:latest --tag sami/base:${BASE_TAG} --build-arg "ENV_NAME=development"`;
+    const args = `--tag samicharity/base:latest --tag samicharity/base:${BASE_TAG} --build-arg "ENV_NAME=development"`;
     const cmd = `docker build --file docker/base.dockerfile ${args} .`;
     console.log(chalk.gray(cmd));
     await execa(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
@@ -78,7 +78,7 @@ class DockerBuildCmd {
 
   private async buildBackend() {
     console.log(chalk.blue("Building backend..."));
-    const args = `--tag sami/backend:latest --tag sami/backend:${BASE_TAG} --build-arg "ENV_NAME=development" --build-arg "BASE_TAG=${BASE_TAG}"`;
+    const args = `--tag samicharity/backend:latest --tag samicharity/backend:${BASE_TAG} --build-arg "ENV_NAME=development" --build-arg "BASE_TAG=${BASE_TAG}"`;
     const cmd = `docker build --file docker/backend.dockerfile ${args} .`;
     console.log(chalk.gray(cmd));
     await execa(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
@@ -86,7 +86,7 @@ class DockerBuildCmd {
   }
   private async buildFrontend() {
     console.log(chalk.blue("Building frontend..."));
-    const args = `--tag sami/frontend:latest --tag sami/frontend:${BASE_TAG} --build-arg "ENV_NAME=development" --build-arg "BASE_TAG=${BASE_TAG}"`;
+    const args = `--tag samicharity/frontend:latest --tag samicharity/frontend:${BASE_TAG} --build-arg "ENV_NAME=development" --build-arg "BASE_TAG=${BASE_TAG}"`;
     const cmd = `docker build --file docker/frontend.dockerfile ${args} .`;
     console.log(chalk.gray(cmd));
     await execa(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });

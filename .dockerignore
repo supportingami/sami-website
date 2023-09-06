@@ -10,6 +10,7 @@ backend/.tmp
 backend/node_modules
 backend/sami-dev.db
 backend/.env
+backend/public/uploads
 
 ci
 config
