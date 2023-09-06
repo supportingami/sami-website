@@ -10,7 +10,7 @@ COPY --from=docker/buildx-bin /buildx /usr/libexec/docker/cli-plugins/docker-bui
 RUN docker buildx version
 
 # Use extra step just to copy base image files as cannot pass variable to `COPY --from` statement
-FROM sami/base:${BASE_TAG} as builder
+FROM samicharity/base:${BASE_TAG} as builder
 WORKDIR /app
 # TODO - prune node_modules if not required at runtime
 COPY . .

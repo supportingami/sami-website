@@ -4,9 +4,10 @@ import execa from "execa";
 
 import { loadEnv } from "../../utils";
 import { PATHS } from "../../paths";
+import packageJson from "../../../../package.json";
 
 // version number to tag base image with
-export const BASE_TAG = "1.1.0";
+export const BASE_TAG = packageJson.version;
 
 /***************************************************************************************
  * CLI
