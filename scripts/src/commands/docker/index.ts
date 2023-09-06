@@ -1,6 +1,7 @@
 import { Command } from "commander";
 import { logProgramHelp } from "../../utils";
 import buildCmd from "./build";
+import pushCmd from "./push";
 import runCmd from "./run";
 
 /***************************************************************************************
@@ -11,6 +12,7 @@ import runCmd from "./run";
 const program = new Command("docker");
 program.description("Local docker scripts");
 program.addCommand(buildCmd);
+program.addCommand(pushCmd);
 program.addCommand(runCmd);
 
 export default program;
