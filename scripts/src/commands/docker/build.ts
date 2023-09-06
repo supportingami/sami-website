@@ -6,7 +6,7 @@ import { loadEnv } from "../../utils";
 import { PATHS } from "../../paths";
 
 // version number to tag base image with
-export const BASE_TAG = "1.0.2";
+export const BASE_TAG = "1.1.0";
 
 /***************************************************************************************
  * CLI

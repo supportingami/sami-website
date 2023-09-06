@@ -21,11 +21,10 @@ COPY . .
 # https://docs.strapi.io/dev-docs/installation/docker
 
 FROM node:18-alpine
-RUN apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev nasm bash vips-dev
+RUN apk add --no-cache vips-dev
 RUN rm -rf /var/cache/apk/*
 
-# Add pm2 to run backend
-RUN yarn global add pm2 && yarn cache clean
+
 ENV NODE_ENV=${ENV_NAME}
 
 WORKDIR /app
@@ -33,7 +32,13 @@ COPY --from=builder /app/backend/ ./
 ENV PATH /app/node_modules/.bin:$PATH
 ENV HOST 0.0.0.0
 EXPOSE 1337
-CMD ["pm2","start","strapi","--name","strapi","--attach","--","start"]
+CMD ["strapi","start"]
+
+
+# Alt - via pm2 to run backend
+
+# RUN yarn global add pm2 && yarn cache clean
+# CMD ["pm2","start","strapi","--name","strapi","--attach","--","start"]
 
 # debug cmd
 # "/bin/ash -c 'while sleep 3600; do :; done'"
