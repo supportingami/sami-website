@@ -2,9 +2,13 @@
 
 module.exports = ({ env }) => {
   const srcs = ["'self'", "https:"];
-  const subdomain = env("STRAPI_SUBDOMAIN");
-  if (subdomain) {
-    srcs.push(new URL(subdomain).host);
+  const hostDomain = env("STRAPI_HOST");
+  if (hostDomain) {
+    srcs.push(hostDomain);
+  }
+  const subDomain = env("STRAPI_SUBDOMAIN");
+  if (subDomain) {
+    srcs.push(`${subDomain}/${hostDomain}`);
   }
   console.log({ srcs });
   return [

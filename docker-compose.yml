@@ -45,25 +45,6 @@ services:
     networks:
       - webserver
 
-  db:
-    container_name: sami_db
-    platform: linux/amd64 #for platform error on Apple M1 chips
-    restart: unless-stopped
-    env_file:
-      - ./config/docker.env
-      - ./config/docker.local.env
-    image: postgres:12.0-alpine
-    environment:
-      POSTGRES_USER: ${DATABASE_USERNAME}
-      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
-      POSTGRES_DB: ${DATABASE_NAME}
-    volumes:
-      - db-data:/var/lib/postgresql/data/ #using a volume
-    # ports:
-    #   - "5432:5432"
-    networks:
-      - webserver
-
   frontend:
     container_name: sami_frontend
     image: sami/frontend:latest
@@ -87,6 +68,25 @@ services:
       - "3000:3000"
     networks:
       - webserver
+
+# If using Postgres
+
+# db:
+#   container_name: sami_db
+#   platform: linux/amd64 #for platform error on Apple M1 chips
+#   restart: unless-stopped
+#   env_file:
+#     - ./config/docker.env
+#     - ./config/docker.local.env
+#   image: postgres:12.0-alpine
+#   environment:
+#     POSTGRES_USER: ${DATABASE_USERNAME}
+#     POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+#     POSTGRES_DB: ${DATABASE_NAME}
+#   volumes:
+#     - db-data:/var/lib/postgresql/data/ #using a volume
+#   networks:
+#     - webserver
 
 networks:
   webserver:
