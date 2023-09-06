@@ -21,7 +21,7 @@ backend/data
 backend/build
 tsconfig.tsbuildinfo
 
-docker-data
+docker/data
 
 scripts/input
 scripts/output

@@ -5,7 +5,8 @@ import execa from "execa";
 import { loadEnv } from "../../utils";
 import { PATHS } from "../../paths";
 
-export const DOCKER_BUILD_VERSION = "1.0.0";
+// version number to tag base image with
+export const BASE_TAG = "1.0.2";
 
 /***************************************************************************************
  * CLI
@@ -19,7 +20,11 @@ interface IProgramOptions {
 const program = new Command("build");
 export default program
   .description("Build standalone images")
-  .option("-o --only <string>", "Only build single step, allowed 'base', 'backend', 'frontend'")
+  .option(
+    "-o --only <string>",
+    "Only build single step, allowed comma-separated 'base', 'backend', 'frontend'",
+    "base,backend,frontend"
+  )
   .action(async (options: IProgramOptions) => {
     return new DockerBuildCmd().run(options).then(() => process.exit(0));
   });
@@ -35,16 +40,24 @@ class DockerBuildCmd {
 
   public async run(options: IProgramOptions) {
     const { only } = options;
-    await loadEnv("docker");
-    const buildTargets = ["base", "backend", "frontend"].filter((target) => only && only.includes(target));
+    const buildTargets = ["base", "backend", "frontend"].filter((target) => only.includes(target));
 
+    // TODO - create `.env` in docker file instead of loading global config
+
+    await loadEnv("docker");
     if (buildTargets.includes("base")) {
       await this.buildBase();
     }
     if (buildTargets.includes("backend")) {
-      await execa(`yarn workspace backend build`, { cwd: PATHS.rootDir, shell: true, stdio: "inherit" });
+      await execa(`yarn workspace backend build`, {
+        cwd: PATHS.rootDir,
+        shell: true,
+        stdio: "inherit",
+        // ensure docker config files used
+        env: { NODE_ENV: "docker", DATABASE_URL: "will_populate_later" },
+      });
       await this.buildBackend();
-      // TODO - ensure backend bootstrapped
+      // TODO - ensure backend bootstrapped and populate keys to docker/data .env
     }
     if (buildTargets.includes("frontend")) {
       //  Build locally frontend and backend locally
@@ -56,7 +69,7 @@ class DockerBuildCmd {
 
   private async buildBase() {
     console.log(chalk.blue("Building base..."));
-    const args = `--tag sami/base:${DOCKER_BUILD_VERSION} --build-arg ENV_NAME=development`;
+    const args = `--tag sami/base:latest --tag sami/base:${BASE_TAG} --build-arg "ENV_NAME=development"`;
     const cmd = `docker build --file docker/base.dockerfile ${args} .`;
     console.log(chalk.gray(cmd));
     await execa(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
@@ -65,7 +78,7 @@ class DockerBuildCmd {
 
   private async buildBackend() {
     console.log(chalk.blue("Building backend..."));
-    const args = `--tag sami/backend:${DOCKER_BUILD_VERSION} --build-arg ENV_NAME=development`;
+    const args = `--tag sami/backend:latest --tag sami/backend:${BASE_TAG} --build-arg "ENV_NAME=development" --build-arg "BASE_TAG=${BASE_TAG}"`;
     const cmd = `docker build --file docker/backend.dockerfile ${args} .`;
     console.log(chalk.gray(cmd));
     await execa(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
@@ -73,7 +86,7 @@ class DockerBuildCmd {
   }
   private async buildFrontend() {
     console.log(chalk.blue("Building frontend..."));
-    const args = `--tag sami/frontend:${DOCKER_BUILD_VERSION} --build-arg ENV_NAME=development`;
+    const args = `--tag sami/frontend:latest --tag sami/frontend:${BASE_TAG} --build-arg "ENV_NAME=development" --build-arg "BASE_TAG=${BASE_TAG}"`;
     const cmd = `docker build --file docker/frontend.dockerfile ${args} .`;
     console.log(chalk.gray(cmd));
     await execa(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });

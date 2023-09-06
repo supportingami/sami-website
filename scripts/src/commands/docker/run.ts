@@ -2,7 +2,7 @@ import { Command } from "commander";
 import execa from "execa";
 
 import { PATHS } from "../../paths";
-import { DOCKER_BUILD_VERSION } from "./build";
+import { BASE_TAG } from "./build";
 import { ensureDirSync } from "fs-extra";
 
 /***************************************************************************************
@@ -34,12 +34,15 @@ class DockerRunCmd {
 
   public async run(options: IProgramOptions) {
     ensureDirSync(PATHS.dockerDataDir);
-    await execa("docker compose -p sami-development up", {
+    // variables are only interpolated for compose file when referenced by cli
+    // https://github.com/docker/compose/issues/3435
+    const envArgs = `--env-file ./config/docker.env --env-file ./config/docker.local.env`;
+    await execa(`docker compose -p sami-development ${envArgs} up`, {
       cwd: PATHS.rootDir,
       shell: true,
       stdio: "inherit",
       env: {
-        DOCKER_BUILD_VERSION,
+        BASE_TAG,
         NODE_ENV: "development",
       },
     });

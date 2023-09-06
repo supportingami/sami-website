@@ -4,7 +4,7 @@
 
 services:
   nginx:
-    container_name: sami_dev_server
+    container_name: sami_webserver
     image: nginx
     ports:
       - 80:80
@@ -16,33 +16,70 @@ services:
 
   backend:
     container_name: sami_backend
-    image: sami/backend:${DOCKER_BUILD_VERSION}
+    image: sami/backend:latest
     # command: "/bin/ash -c 'while sleep 3600; do :; done'"
     command: "strapi start"
     restart: unless-stopped
     ports:
       - "1337:1337"
-    # TODO - map to versioned local volume (possibly with volumes)
-    # TODO - persist data
     volumes:
-      - ./docker-data/env
       - ./data:/app/data
-      # TODO - allow running scripts on container (probably from scripts not container)
-      # - ./scripts:/app/scripts
-      # Persist local config
-      - /app/config
-      # TODO - persist db data
+      # TODO - persist db data (possibly just use db image to allow connect)
       # - /app/backend/sami-dev.db
+    env_file:
+      - ./config/docker.env
+      - ./config/docker.local.env
+    environment:
+      - DATABASE_URL=postgres://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@db:5432/${DATABASE_NAME}
+        # Load docker configuration
+      - NODE_ENV=docker
+    healthcheck:
+      test: "wget --no-verbose --tries=1 --spider http://localhost:1337 || exit 1"
+      interval: 30s
+      timeout: 30s
+      retries: 3
+      start_period: 30s
+    networks:
+      - webserver
+
+  db:
+    container_name: sami_db
+    platform: linux/amd64 #for platform error on Apple M1 chips
+    restart: unless-stopped
+    env_file:
+      - ./config/docker.env
+      - ./config/docker.local.env
+    image: postgres:12.0-alpine
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    volumes:
+      - db-data:/var/lib/postgresql/data/ #using a volume
+    # ports:
+    #   - "5432:5432"
     networks:
       - webserver
 
   frontend:
     container_name: sami_frontend
-    image: sami/frontend:${DOCKER_BUILD_VERSION}
-    command: "/bin/ash -c 'while sleep 3600; do :; done'"
+    image: sami/frontend:latest
+    command: next dev
+    # command: "/bin/ash -c 'while sleep 3600; do :; done'"
     restart: unless-stopped
-    environment:
-      NEXT_PUBLIC_API_URL: http://backend:1337
+    # Env inlined during build however when running `next dev` can use on start
+    # TODO - ensure populated correctly
+    env_file:
+      - ./config/docker.env
+      - ./config/docker.local.env
+    volumes:
+      - ./docker/data/uploads:/app/public/uploads
+
+    # Healthcheck can be slow, just start optimistically
+
+    # depends_on:
+    #   backend:
+    #     condition: service_healthy
     ports:
       - "3000:3000"
     networks:
@@ -50,6 +87,9 @@ services:
 
 networks:
   webserver:
+
+volumes:
+  db-data:
 
   # TODO find a way to run nginx reverse proxy and dashboard on path
   # https://docs.strapi.io/dev-docs/deployment/nginx-proxy

@@ -40,7 +40,7 @@ export default program
   .option("--no-export", "Do not export local data")
   .option("-c --config <string>", "Next config mode, 'standalone' or 'export'", "export")
   .action(async (options: IProgramOptions) => {
-    console.log("Creating static generated build", options);
+    console.log(`Generate ${options.config} build`);
     return new BuildCmd(options).run().then(() => process.exit(0));
   });
 

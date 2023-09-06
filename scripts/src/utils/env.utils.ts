@@ -27,6 +27,7 @@ export interface IEnvLoaded {
   parsed: Record<string, string>;
 }
 let envLoaded: IEnvLoaded;
+let isHealthcheckRetry = false;
 
 /** Use local config files to retroactively set env config for CI operations (where config folder ignored) */
 // function loadEnvNameCI(): string {
@@ -79,16 +80,16 @@ export async function loadEnv(envName?: string, options: { skipHealthcheck?: boo
     };
   }
 
+  //ensure loaded env configured correctly
+  if (!options.skipHealthcheck) {
+    await healthcheck({ envParsed: parsed, envName });
+  }
+
   envLoaded = {
     name: envName,
     envPath,
     parsed,
   };
-
-  //ensure loaded env configured correctly
-  if (!options.skipHealthcheck) {
-    await healthcheck();
-  }
 
   // populate selected .env to global environment
   process.env.ENV_PATH = envPath;
@@ -162,16 +163,19 @@ async function promptEnv() {
   return selectedEnv;
 }
 
-async function healthcheck(isRetry = false) {
-  const { STRAPI_READONLY_TOKEN, GOOGLE_APPLICATION_CREDENTIALS } = envLoaded.parsed;
+async function healthcheck(options: { envParsed?; envName?: string } = {}) {
+  const { envParsed, envName } = options;
+  const { STRAPI_READONLY_TOKEN, GOOGLE_APPLICATION_CREDENTIALS } = envParsed;
   // ensure frontend bootstrapped
   if (!STRAPI_READONLY_TOKEN) {
-    if (isRetry) {
+    if (isHealthcheckRetry) {
       logError({ msg1: "Failed to boostrap Strapi, retry manually", msg2: "yarn scripts strapi boostrap" });
     }
-    const bootstrapCmd = `yarn scripts strapi bootstrap -e ${envLoaded.name}`;
+    const bootstrapCmd = `yarn scripts strapi bootstrap -e ${envName}`;
     console.log(chalk.gray(bootstrapCmd));
     await execa(bootstrapCmd, { shell: true, cwd: PATHS.rootDir, stdio: "inherit" });
+    isHealthcheckRetry = true;
+    return loadEnv(envName);
   }
   // ensure external storage configured
   if (GOOGLE_APPLICATION_CREDENTIALS) {

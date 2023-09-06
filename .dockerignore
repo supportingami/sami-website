@@ -1,17 +1,15 @@
+**/node_modules
+
 .github
 .vscode
 .yarn/install-state.gz
-node_modules
 
 # Backend
 backend/.cache
 backend/.tmp
 backend/node_modules
 backend/sami-dev.db
-
-# Frontend
-frontend/.next/cache
-
+backend/.env
 
 ci
 config
@@ -19,5 +17,15 @@ data/backups
 data/sqlite
 docker
 docs
-scripts/node_modules
+
+# Frontend
+frontend/.next/cache
+frontend/.vercel
+frontend/out
+frontend/.env
+
+scripts
+
+.dockerignore
+docker-compose.yml
 
