@@ -23,6 +23,7 @@ export default program.description("Push images to dockerhub").action(async (opt
 /**
  * Push locally built images to docker hub
  * NOTE - assumes user logged into docker with access to repo
+ * https://hub.docker.com/repositories/samicharity
  */
 class DockerRunCmd {
   constructor(private options: IProgramOptions) {}
