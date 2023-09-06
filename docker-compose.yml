@@ -24,14 +24,17 @@ services:
       - "1337:1337"
     volumes:
       - ./data:/app/data
+      - ./docker/data/uploads:/app/public/uploads
+      - ./docker/data/db:/app/db
       # TODO - persist db data (possibly just use db image to allow connect)
       # - /app/backend/sami-dev.db
     env_file:
       - ./config/docker.env
       - ./config/docker.local.env
     environment:
-      - DATABASE_URL=postgres://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@db:5432/${DATABASE_NAME}
-        # Load docker configuration
+      # - DATABASE_URL=postgres://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@db:5432/${DATABASE_NAME}
+      - DATABASE_FILENAME=db/sami-docker.db
+      # Load docker configuration
       - NODE_ENV=docker
     healthcheck:
       test: "wget --no-verbose --tries=1 --spider http://localhost:1337 || exit 1"
