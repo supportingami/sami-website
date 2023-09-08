@@ -1,0 +1,148 @@
+############# Run Via CLI #################
+# yarn scripts docker build -e docker
+# yarn scripts docker run
+
+# TODO - add common logging methods
+
+services:
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy
+    container_name: sami_webserver
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      # Custom virtual host overrides
+      - ./docker/nginx/vhost.d:/etc/nginx/vhost.d:ro
+      # Generated default and global override conf
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+      # SSL Certs
+      - html:/usr/share/nginx/html
+      - dhparam:/etc/nginx/dhparam
+      - ./docker/nginx/certs:/etc/nginx/certs:ro
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    networks:
+      - webserver
+
+  acme-companion:
+    image: nginxproxy/acme-companion
+    container_name: nginx-proxy-acme
+    environment:
+      NGINX_PROXY_CONTAINER: sami_webserver
+      # Testing certs
+      ACME_CA_URI: https://acme-staging-v02.api.letsencrypt.org/directory
+    volumes:
+      - ./docker/nginx/certs:/etc/nginx/certs:rw
+      - acme:/etc/acme.sh
+      - html:/usr/share/nginx/html
+      - dhparam:/etc/nginx/dhparam
+      - ./docker/nginx/vhost.d:/etc/nginx/vhost.d
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  backend:
+    container_name: sami_backend
+    image: samicharity/backend:latest
+    # command: "/bin/ash -c 'while sleep 3600; do :; done'"
+    restart: unless-stopped
+    ports:
+      - "1337:1337"
+    volumes:
+      # Uploads folder shared between frontend and backend for easier access
+      - ./docker/data/uploads:/app/public/uploads
+      - ./docker/data/db:/app/db
+      # TODO - persist db data (possibly just use db image to allow connect)
+      # - /app/backend/sami-dev.db
+    env_file:
+      - ./config/docker.env
+      - ./config/docker.local.env
+    environment:
+      # - DATABASE_URL=postgres://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@db:5432/${DATABASE_NAME}
+      - DATABASE_FILENAME=db/sami-docker.db
+      # Load docker configuration
+      - NODE_ENV=docker
+    healthcheck:
+      test: "wget --no-verbose --tries=1 --spider http://localhost:1337 || exit 1"
+      interval: 30s
+      timeout: 30s
+      retries: 3
+      start_period: 30s
+    networks:
+      - webserver
+
+  frontend:
+    container_name: sami_frontend
+    image: samicharity/frontend:latest
+    command: next dev
+    # command: "/bin/ash -c 'while sleep 3600; do :; done'"
+    restart: unless-stopped
+    # Env inlined during build however when running `next dev` can use on start
+    # TODO - ensure populated correctly
+    env_file:
+      - ./config/docker.env
+      - ./config/docker.local.env
+    volumes:
+      # Uploads folder shared between frontend and backend for easier access
+      - ./docker/data/uploads:/app/public/uploads
+    environment:
+      VIRTUAL_HOST: ${PUBLIC_DOMAIN}
+      VIRTUAL_PORT: "3000"
+      # TODO - configure for production and env vars
+      LETSENCRYPT_HOST: ${PUBLIC_DOMAIN}
+      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
+
+    # Healthcheck can be slow, just start optimistically
+
+    # depends_on:
+    #   backend:
+    #     condition: service_healthy
+    ports:
+      - "3000:3000"
+    networks:
+      - webserver
+
+# If using Postgres
+
+# db:
+#   container_name: sami_db
+#   platform: linux/amd64 #for platform error on Apple M1 chips
+#   restart: unless-stopped
+#   env_file:
+#     - ./config/docker.env
+#     - ./config/docker.local.env
+#   image: postgres:12.0-alpine
+#   environment:
+#     POSTGRES_USER: ${DATABASE_USERNAME}
+#     POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+#     POSTGRES_DB: ${DATABASE_NAME}
+#   volumes:
+#     - db-data:/var/lib/postgresql/data/ #using a volume
+#   networks:
+#     - webserver
+
+networks:
+  webserver:
+
+volumes:
+  html:
+  dhparam:
+  certs:
+  acme:
+
+  # TODO find a way to run nginx reverse proxy and dashboard on path
+  # https://docs.strapi.io/dev-docs/deployment/nginx-proxy
+  # https://forum.strapi.io/t/strapi-in-subfolder-issue/13401/4
+#######################################################################################
+# Legacy Notes - to confirm if still required
+#######################################################################################
+# Expose on 127.0.0.1 instead of default 0.0.0.0 as next.js rewrites localhost to this
+# https://earthly.dev/blog/youre-using-docker-compose-wrong/
+# https://github.com/vercel/next.js/issues/27865
+# NOTE - might not work in WSL (?) https://github.com/docker/for-win/issues/13182
+
+#######################################################################################
+# Deprecated - use build from cli instead of compose (to ensure base builds correctly)
+#######################################################################################
+# build:
+#   dockerfile: ./docker/base.dockerfile
+#   tags:
+#     - "samicharity/base:1.0.0"

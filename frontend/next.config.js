@@ -5,7 +5,9 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 });
 const withExportImages = require("next-export-optimize-images");
 
-const { NEXT_PUBLIC_API_URL } = process.env;
+const { NEXT_PUBLIC_API_URL, NEXT_PUBLIC_IMAGE_URL } = process.env;
+
+// default fallback image to api url
 
 /**
  * Shared config used on both export and standalone builds
@@ -66,8 +68,11 @@ const exportConfig = withExportImages({
 // TODO - could also add NEXT_PUBLIC_API_DOMAIN
 const domains = ["localhost", "storage.googleapis.com", "backend"];
 // Include external source if included within public api (e.g. google cloud run)
-if (NEXT_PUBLIC_API_URL && NEXT_PUBLIC_API_URL.startsWith("https")) {
-  domains.push(new URL(NEXT_PUBLIC_API_URL).host);
+if (NEXT_PUBLIC_API_URL && NEXT_PUBLIC_API_URL.startsWith("http")) {
+  domains.push(new URL(NEXT_PUBLIC_API_URL).hostname);
+}
+if (NEXT_PUBLIC_IMAGE_URL && NEXT_PUBLIC_IMAGE_URL.startsWith("http")) {
+  domains.push(new URL(NEXT_PUBLIC_IMAGE_URL).hostname);
 }
 
 /***********************************************************************************
@@ -101,8 +106,7 @@ const standaloneConfig = withBundleAnalyzer({
   // https://raphaelpralat.medium.com/system-environment-variables-in-next-js-with-docker-1f0754e04cde
   publicRuntimeConfig: {
     NEXT_PUBLIC_API_URL,
-    // Load all images from the api
-    NEXT_PUBLIC_IMAGE_URL: NEXT_PUBLIC_API_URL,
+    NEXT_PUBLIC_IMAGE_URL,
   },
 });
 

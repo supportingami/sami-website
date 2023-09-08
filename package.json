@@ -1,5 +1,6 @@
 {
   "name": "sami-website",
+  "version": "1.2.0",
   "license": "see license.md",
   "workspaces": [
     "backend",

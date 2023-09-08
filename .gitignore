@@ -21,6 +21,8 @@ backend/data
 backend/build
 tsconfig.tsbuildinfo
 
+docker/data
+
 scripts/input
 scripts/output
 .vercel

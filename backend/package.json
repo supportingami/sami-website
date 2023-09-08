@@ -7,17 +7,15 @@
     "start": "strapi develop",
     "start:prod": "strapi start",
     "build": "strapi build",
-    "docker:build": "docker compose build",
-    "docker:start": "docker compose --project-name sami-backend up",
     "strapi": "strapi"
   },
   "dependencies": {
     "@_sh/strapi-plugin-ckeditor": "^1.1.1",
     "@strapi-community/strapi-provider-upload-google-cloud-storage": "^4.10.5",
-    "@strapi/plugin-graphql": "4.12.6",
-    "@strapi/plugin-i18n": "4.12.6",
-    "@strapi/plugin-users-permissions": "4.12.6",
-    "@strapi/strapi": "4.12.6",
+    "@strapi/plugin-graphql": "4.12.7",
+    "@strapi/plugin-i18n": "4.12.7",
+    "@strapi/plugin-users-permissions": "4.12.7",
+    "@strapi/strapi": "4.12.7",
     "better-sqlite3": "8.3.0",
     "knex": "^2.4.2",
     "pg": "^8.9.0",
@@ -33,7 +31,7 @@
     "uuid": "38bf5467-b827-407b-a353-257b69083b33"
   },
   "engines": {
-    "node": ">=14.x.x <=16.x.x"
+    "node": ">=14.x.x <=18.x.x"
   },
   "license": "MIT",
   "devDependencies": {

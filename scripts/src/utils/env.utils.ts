@@ -4,6 +4,8 @@ import { prompt } from "inquirer";
 import { resolve } from "path";
 import { PATHS } from "../paths";
 import { logError } from "./logging.utils";
+import execa from "execa";
+import chalk from "chalk";
 
 /************************************************************************************************
  * Environments
@@ -12,6 +14,9 @@ import { logError } from "./logging.utils";
  * To make it easier to resolve a single set of env configuration is stored at the root config folder
  * and passed to methods as required
  ***********************************************************************************************/
+
+const backendEnvPath = resolve(PATHS.backendDir, ".env");
+const frontendEnvPath = resolve(PATHS.frontendDir, ".env");
 
 export interface IEnvLoaded {
   /** local name prefix of .env file, e.g. development.env */
@@ -22,6 +27,21 @@ export interface IEnvLoaded {
   parsed: Record<string, string>;
 }
 let envLoaded: IEnvLoaded;
+let isHealthcheckRetry = false;
+
+/** Use local config files to retroactively set env config for CI operations (where config folder ignored) */
+// function loadEnvNameCI(): string {
+//   if (!existsSync(backendEnvPath)) {
+//     throw new Error("Failed to load current env");
+//   }
+//   // HACK - assumes frontend and backend env same - copy to config
+//   const { parsed } = dotenv.config({ path: backendEnvPath, override: true });
+//   const name = parsed.envName;
+//   const envPath = resolve(PATHS.configDir, `${name}.env`);
+//   ensureDirSync(PATHS.configDir);
+//   copyFileSync(backendEnvPath, envPath);
+//   return name;
+// }
 
 /**
  * Load an environment configuration from root config env files
@@ -29,8 +49,14 @@ let envLoaded: IEnvLoaded;
  */
 export async function loadEnv(envName?: string, options: { skipHealthcheck?: boolean } = {}) {
   if (!envName) {
+    // If running on CI without interactive prompts attempt to use whatever env last loaded
+    // TODO - not needed if only 1 env configured in docker build
+    // if (process.env.CI) {
+    // envName = loadEnvNameCI();
+    // } else {
     envName = await promptEnv();
   }
+  // }
   // Return if already processed
   if (envLoaded && envLoaded.name === envName) {
     return envLoaded;
@@ -54,16 +80,16 @@ export async function loadEnv(envName?: string, options: { skipHealthcheck?: boo
     };
   }
 
+  //ensure loaded env configured correctly
+  if (!options.skipHealthcheck) {
+    await healthcheck({ envParsed: parsed, envName });
+  }
+
   envLoaded = {
     name: envName,
     envPath,
     parsed,
   };
-
-  //ensure loaded env configured correctly
-  if (!options.skipHealthcheck) {
-    healthcheck();
-  }
 
   // populate selected .env to global environment
   process.env.ENV_PATH = envPath;
@@ -71,8 +97,6 @@ export async function loadEnv(envName?: string, options: { skipHealthcheck?: boo
   const mergedEnv = Object.entries(parsed)
     .map(([key, value]) => `${key}=${value}`)
     .join("\n");
-  const backendEnvPath = resolve(PATHS.backendDir, ".env");
-  const frontendEnvPath = resolve(PATHS.frontendDir, ".env");
 
   writeFileSync(backendEnvPath, mergedEnv, "utf8");
   writeFileSync(frontendEnvPath, mergedEnv, "utf8");
@@ -139,12 +163,19 @@ async function promptEnv() {
   return selectedEnv;
 }
 
-async function healthcheck() {
-  const { STRAPI_READONLY_TOKEN, GOOGLE_APPLICATION_CREDENTIALS } = envLoaded.parsed;
+async function healthcheck(options: { envParsed?; envName?: string } = {}) {
+  const { envParsed, envName } = options;
+  const { STRAPI_READONLY_TOKEN, GOOGLE_APPLICATION_CREDENTIALS } = envParsed;
   // ensure frontend bootstrapped
-
   if (!STRAPI_READONLY_TOKEN) {
-    logError({ msg1: "Strapi must be bootstrapped first, run command:", msg2: `yarn scripts strapi bootstrap` });
+    if (isHealthcheckRetry) {
+      logError({ msg1: "Failed to boostrap Strapi, retry manually", msg2: "yarn scripts strapi boostrap" });
+    }
+    const bootstrapCmd = `yarn scripts strapi bootstrap -e ${envName}`;
+    console.log(chalk.gray(bootstrapCmd));
+    await execa(bootstrapCmd, { shell: true, cwd: PATHS.rootDir, stdio: "inherit" });
+    isHealthcheckRetry = true;
+    return loadEnv(envName);
   }
   // ensure external storage configured
   if (GOOGLE_APPLICATION_CREDENTIALS) {

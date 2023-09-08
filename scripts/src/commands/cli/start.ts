@@ -58,8 +58,8 @@ class StartCmd {
   private getBackendStartCommand(envLoaded: IEnvLoaded): ConcurrentlyCommandInput {
     console.log(chalk.blue("Starting backend..."));
     const NEXT_CONFIG_MODE = "standalone";
-    const NODE_ENV = envLoaded.name === "development" ? "development" : "production";
-    if (NODE_ENV === "production") console.log("Production start may take a minute to compile...");
+    // use node_env as defined from env file, with development fallback
+    const NODE_ENV = envLoaded.parsed.NODE_ENV || "development";
     return {
       name: "strapi",
       command: "yarn start",
