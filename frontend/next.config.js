@@ -27,6 +27,7 @@ const commonConfig = {
   publicRuntimeConfig: {
     example: "publicRuntimeConfig",
     NEXT_PUBLIC_API_URL,
+    NEXT_PUBLIC_IMAGE_URL,
   },
   // Config available to frontend components via `getConfig().serverRuntimeConfig`
   serverRuntimeConfig: {
