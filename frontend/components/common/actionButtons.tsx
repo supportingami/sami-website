@@ -14,14 +14,15 @@ export const ActionButtonsComponent: React.FC<{ actionButtons: ComponentCommonAc
     <div data-testid="actionButtons" className={`flex gap-2 ${className}`}>
       {actionButtons?.map(({ id, Link: ButtonLink, Text: ButtonText }, index) => {
         const isExternalLink = ButtonLink.startsWith("http");
+        const key = `actionButton_${id}`;
         return isExternalLink ? (
-          <ExternalLink key={id} href={ButtonLink}>
+          <ExternalLink key={key} href={ButtonLink}>
             <button className={`btn btn-${getButtonColor(index)}`} key={id}>
               {ButtonText}
             </button>
           </ExternalLink>
         ) : (
-          <Link key={id} href={ButtonLink}>
+          <Link key={key} href={ButtonLink}>
             <button className={`btn btn-${getButtonColor(index)}`} key={id}>
               {ButtonText}
             </button>
