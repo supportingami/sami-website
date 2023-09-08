@@ -2,13 +2,13 @@
 
 module.exports = ({ env }) => {
   const srcs = ["'self'", "https:"];
-  const hostDomain = env("STRAPI_HOST");
+  const hostDomain = env("STRAPI_DOMAIN");
   if (hostDomain) {
     srcs.push(hostDomain);
   }
   const subDomain = env("STRAPI_SUBDOMAIN");
   if (subDomain) {
-    srcs.push(`${subDomain}/${hostDomain}`);
+    srcs.push(`${subDomain}.${hostDomain}`);
   }
   console.log({ srcs });
   return [
@@ -20,8 +20,8 @@ module.exports = ({ env }) => {
           useDefaults: true,
           directives: {
             "connect-src": srcs,
-            "img-src": ["'self'", "data:", "blob:"],
-            "media-src": ["'self'", "data:", "blob:"],
+            "img-src": [...srcs, "data:", "blob:"],
+            "media-src": [...srcs, "data:", "blob:"],
             upgradeInsecureRequests: null,
           },
         },

@@ -1,0 +1,4 @@
+logs
+data
+nginx/conf.d/default.conf
+nginx/certs

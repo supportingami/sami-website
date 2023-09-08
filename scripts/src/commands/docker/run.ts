@@ -37,7 +37,7 @@ class DockerRunCmd {
     // variables are only interpolated for compose file when referenced by cli
     // https://github.com/docker/compose/issues/3435
     const envArgs = `--env-file ./config/docker.env --env-file ./config/docker.local.env`;
-    await execa(`docker compose -p sami-development ${envArgs} up`, {
+    await execa(`docker compose -p sami-development ${envArgs} up -d`, {
       cwd: PATHS.rootDir,
       shell: true,
       stdio: "inherit",
