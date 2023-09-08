@@ -8,5 +8,15 @@
     "title": "Maths Club Pack",
     "updated_at": 1665273023376,
     "updated_by_id": 1
+  },
+  {
+    "created_at": 1694150242140,
+    "created_by_id": 1,
+    "description": "Anyone excited about playing maths games and learning from them could become a Maths Game Envoy. This could include a student, teacher, parent, out of\nschool youth, librarian etc. who, once trained, becomes an agent of change in their\ncommunity who challenges established views that \"maths is boring, hard and only for\nsome\" by showing that maths can be fun and accessible for everyone.",
+    "id": 2,
+    "published_at": 1694150242863,
+    "title": "Maths Games Youth Envoys Handbook",
+    "updated_at": 1694150319174,
+    "updated_by_id": 1
   }
 ]

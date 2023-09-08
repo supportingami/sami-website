@@ -17,7 +17,7 @@
   },
   {
     "name": "blog_posts",
-    "seq": 19
+    "seq": 22
   },
   {
     "name": "blog_tags",
@@ -101,7 +101,7 @@
   },
   {
     "name": "files",
-    "seq": 79
+    "seq": 90
   },
   {
     "name": "home_contents",
@@ -125,7 +125,7 @@
   },
   {
     "name": "resources",
-    "seq": 1
+    "seq": 2
   },
   {
     "name": "upload_folders",
