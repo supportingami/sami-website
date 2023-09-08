@@ -12,8 +12,10 @@ export const ResourceCardComponent: React.FC<{
   relative flex flex-col justify-start items-start min-h-full max-h-full font-sans rounded 
   border-gray-200 shadow-md hover:scale-105 transition-all duration-200 ease-in-out"
   >
-    <div className="relative max-h-40 lg:max-h-48 w-full flex justify-center">
-      {resource.Image?.data && <Image src={getStrapiMedia(resource.Image)} alt={"image"} height="150" width="300" />}
+    <div className="relative h-48 max-h-40 lg:max-h-48 w-full flex justify-center">
+      {resource.Image?.data && (
+        <Image src={getStrapiMedia(resource.Image)} alt={"image"} placeholder="empty" className="object-cover" fill />
+      )}
     </div>
     <div className="capitalize text-left font-semibold p-2 pt-3 leading-4">
       <div className="text-lg">{resource.Title}</div>
