@@ -20,7 +20,6 @@ export const BlogPostComponent: React.FC<{ blogPost: IBlogPost }> = ({ blogPost 
     const htmlBlock: ComponentCommonHtml = { HTML: blogPost.Content, id: "1", __typename: "ComponentCommonHtml" };
     contentBlocks = [htmlBlock];
   }
-  console.log({ contentBlocks });
   return (
     <>
       <div className="font-serif px-32">
