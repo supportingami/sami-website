@@ -12,9 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Content": {
-      "type": "richtext"
-    },
     "FeatureImage": {
       "type": "media",
       "multiple": false,
