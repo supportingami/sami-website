@@ -110,7 +110,6 @@ export type AnnualReportInput = {
 
 export type BlogPost = {
   __typename?: "BlogPost";
-  Content?: Maybe<Scalars["String"]>;
   ContentBlocks?: Maybe<Array<Maybe<BlogPostContentBlocksDynamicZone>>>;
   DateWritten?: Maybe<Scalars["Date"]>;
   FeatureImage?: Maybe<UploadFileEntityResponse>;
@@ -155,7 +154,6 @@ export type BlogPostEntityResponseCollection = {
 };
 
 export type BlogPostFiltersInput = {
-  Content?: InputMaybe<StringFilterInput>;
   DateWritten?: InputMaybe<DateFilterInput>;
   Slug?: InputMaybe<StringFilterInput>;
   Summary?: InputMaybe<StringFilterInput>;
@@ -171,7 +169,6 @@ export type BlogPostFiltersInput = {
 };
 
 export type BlogPostInput = {
-  Content?: InputMaybe<Scalars["String"]>;
   ContentBlocks?: InputMaybe<Array<Scalars["BlogPostContentBlocksDynamicZoneInput"]>>;
   DateWritten?: InputMaybe<Scalars["Date"]>;
   FeatureImage?: InputMaybe<Scalars["ID"]>;
@@ -2054,11 +2051,11 @@ export type AnnualReportsQuery = {
   } | null;
 };
 
-export type BlogPostsQueryVariables = Exact<{
+export type BlogPostContentQueryVariables = Exact<{
   filters?: InputMaybe<BlogPostFiltersInput>;
 }>;
 
-export type BlogPostsQuery = {
+export type BlogPostContentQuery = {
   __typename?: "Query";
   blogPosts?: {
     __typename?: "BlogPostEntityResponseCollection";
@@ -2068,18 +2065,8 @@ export type BlogPostsQuery = {
       attributes?: {
         __typename?: "BlogPost";
         Title: string;
-        Summary?: string | null;
-        Content?: string | null;
         DateWritten?: any | null;
         Slug?: string | null;
-        FeatureImage?: {
-          __typename?: "UploadFileEntityResponse";
-          data?: {
-            __typename?: "UploadFileEntity";
-            id?: string | null;
-            attributes?: { __typename?: "UploadFile"; name: string; url: string; size: number } | null;
-          } | null;
-        } | null;
         Tags?: {
           __typename?: "BlogTagRelationResponseCollection";
           data: Array<{
@@ -2108,6 +2095,42 @@ export type BlogPostsQuery = {
           | { __typename: "Error" }
           | null
         > | null;
+      } | null;
+    }>;
+  } | null;
+};
+
+export type BlogPostsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type BlogPostsQuery = {
+  __typename?: "Query";
+  blogPosts?: {
+    __typename?: "BlogPostEntityResponseCollection";
+    data: Array<{
+      __typename?: "BlogPostEntity";
+      id?: string | null;
+      attributes?: {
+        __typename?: "BlogPost";
+        Title: string;
+        Summary?: string | null;
+        DateWritten?: any | null;
+        Slug?: string | null;
+        FeatureImage?: {
+          __typename?: "UploadFileEntityResponse";
+          data?: {
+            __typename?: "UploadFileEntity";
+            id?: string | null;
+            attributes?: { __typename?: "UploadFile"; name: string; url: string; size: number } | null;
+          } | null;
+        } | null;
+        Tags?: {
+          __typename?: "BlogTagRelationResponseCollection";
+          data: Array<{
+            __typename?: "BlogTagEntity";
+            id?: string | null;
+            attributes?: { __typename?: "BlogTag"; Tag?: string | null } | null;
+          }>;
+        } | null;
       } | null;
     }>;
   } | null;
@@ -2639,13 +2662,13 @@ export const AnnualReportsDocument = {
     },
   ],
 } as unknown as DocumentNode<AnnualReportsQuery, AnnualReportsQueryVariables>;
-export const BlogPostsDocument = {
+export const BlogPostContentDocument = {
   kind: "Document",
   definitions: [
     {
       kind: "OperationDefinition",
       operation: "query",
-      name: { kind: "Name", value: "blogPosts" },
+      name: { kind: "Name", value: "blogPostContent" },
       variableDefinitions: [
         {
           kind: "VariableDefinition",
@@ -2688,40 +2711,7 @@ export const BlogPostsDocument = {
                           kind: "SelectionSet",
                           selections: [
                             { kind: "Field", name: { kind: "Name", value: "Title" } },
-                            { kind: "Field", name: { kind: "Name", value: "Summary" } },
-                            { kind: "Field", name: { kind: "Name", value: "Content" } },
                             { kind: "Field", name: { kind: "Name", value: "DateWritten" } },
-                            {
-                              kind: "Field",
-                              name: { kind: "Name", value: "FeatureImage" },
-                              selectionSet: {
-                                kind: "SelectionSet",
-                                selections: [
-                                  {
-                                    kind: "Field",
-                                    name: { kind: "Name", value: "data" },
-                                    selectionSet: {
-                                      kind: "SelectionSet",
-                                      selections: [
-                                        { kind: "Field", name: { kind: "Name", value: "id" } },
-                                        {
-                                          kind: "Field",
-                                          name: { kind: "Name", value: "attributes" },
-                                          selectionSet: {
-                                            kind: "SelectionSet",
-                                            selections: [
-                                              { kind: "Field", name: { kind: "Name", value: "name" } },
-                                              { kind: "Field", name: { kind: "Name", value: "url" } },
-                                              { kind: "Field", name: { kind: "Name", value: "size" } },
-                                            ],
-                                          },
-                                        },
-                                      ],
-                                    },
-                                  },
-                                ],
-                              },
-                            },
                             {
                               kind: "Field",
                               name: { kind: "Name", value: "Tags" },
@@ -2841,6 +2831,118 @@ export const BlogPostsDocument = {
                                 ],
                               },
                             },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<BlogPostContentQuery, BlogPostContentQueryVariables>;
+export const BlogPostsDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "blogPosts" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "blogPosts" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "sort" },
+                value: { kind: "StringValue", value: "DateWritten:DESC", block: false },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "data" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "attributes" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "Title" } },
+                            { kind: "Field", name: { kind: "Name", value: "Summary" } },
+                            { kind: "Field", name: { kind: "Name", value: "DateWritten" } },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "FeatureImage" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "data" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        { kind: "Field", name: { kind: "Name", value: "id" } },
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "attributes" },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              { kind: "Field", name: { kind: "Name", value: "name" } },
+                                              { kind: "Field", name: { kind: "Name", value: "url" } },
+                                              { kind: "Field", name: { kind: "Name", value: "size" } },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "Tags" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "data" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        { kind: "Field", name: { kind: "Name", value: "id" } },
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "attributes" },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [{ kind: "Field", name: { kind: "Name", value: "Tag" } }],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                            { kind: "Field", name: { kind: "Name", value: "Slug" } },
                           ],
                         },
                       },

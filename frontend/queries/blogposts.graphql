@@ -1,12 +1,11 @@
 # Write your query or mutation here
-query blogPosts($filters: BlogPostFiltersInput) {
-  blogPosts(sort: "DateWritten:DESC", filters: $filters) {
+query blogPosts {
+  blogPosts(sort: "DateWritten:DESC") {
     data {
       id
       attributes {
         Title
         Summary
-        Content
         DateWritten
         FeatureImage {
           data {
@@ -27,33 +26,6 @@ query blogPosts($filters: BlogPostFiltersInput) {
           }
         }
         Slug
-        ContentBlocks {
-          __typename
-          ... on ComponentCommonHtml {
-            HTML
-          }
-          ... on ComponentCommonImage {
-            AltText
-            Caption
-            Media {
-              data {
-                id
-                attributes {
-                  name
-                  url
-                  size
-                }
-              }
-            }
-          }
-          ... on ComponentCommonTextBlock {
-            Text
-          }
-          ... on ComponentCommonActionButton {
-            Text
-            Link
-          }
-        }
       }
     }
   }

@@ -8,18 +8,13 @@ import {
   TwitterShareButton,
 } from "react-share";
 import dayjs from "dayjs";
-import type { ComponentCommonHtml } from "../../../graphql/generated";
 import { DynamicComponents } from "components/common/dynamic";
 
 export const BlogPostComponent: React.FC<{ blogPost: IBlogPost }> = ({ blogPost }) => {
   const size = "28px";
   const url = global.window && window.location.href;
-  let contentBlocks = blogPost.ContentBlocks || [];
-  // If using legacy html content convert into a single block
-  if (blogPost.Content) {
-    const htmlBlock: ComponentCommonHtml = { HTML: blogPost.Content, id: "1", __typename: "ComponentCommonHtml" };
-    contentBlocks = [htmlBlock];
-  }
+  const contentBlocks = blogPost.ContentBlocks || [];
+
   return (
     <>
       <div className="font-serif px-32">
