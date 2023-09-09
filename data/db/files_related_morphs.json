@@ -90,7 +90,7 @@
   {
     "field": "FeatureImage",
     "file_id": 38,
-    "id": 67,
+    "id": 130,
     "order": 1,
     "related_id": 7,
     "related_type": "api::blog-post.blog-post"
@@ -98,7 +98,7 @@
   {
     "field": "FeatureImage",
     "file_id": 39,
-    "id": 58,
+    "id": 129,
     "order": 1,
     "related_id": 8,
     "related_type": "api::blog-post.blog-post"
@@ -106,7 +106,7 @@
   {
     "field": "FeatureImage",
     "file_id": 40,
-    "id": 63,
+    "id": 128,
     "order": 1,
     "related_id": 9,
     "related_type": "api::blog-post.blog-post"
@@ -114,7 +114,7 @@
   {
     "field": "FeatureImage",
     "file_id": 41,
-    "id": 61,
+    "id": 127,
     "order": 1,
     "related_id": 10,
     "related_type": "api::blog-post.blog-post"
@@ -122,7 +122,7 @@
   {
     "field": "FeatureImage",
     "file_id": 42,
-    "id": 59,
+    "id": 126,
     "order": 1,
     "related_id": 11,
     "related_type": "api::blog-post.blog-post"
@@ -130,7 +130,7 @@
   {
     "field": "FeatureImage",
     "file_id": 43,
-    "id": 69,
+    "id": 123,
     "order": 1,
     "related_id": 13,
     "related_type": "api::blog-post.blog-post"
@@ -138,7 +138,7 @@
   {
     "field": "FeatureImage",
     "file_id": 44,
-    "id": 57,
+    "id": 124,
     "order": 1,
     "related_id": 14,
     "related_type": "api::blog-post.blog-post"
@@ -146,7 +146,7 @@
   {
     "field": "FeatureImage",
     "file_id": 45,
-    "id": 70,
+    "id": 122,
     "order": 1,
     "related_id": 15,
     "related_type": "api::blog-post.blog-post"
@@ -154,7 +154,7 @@
   {
     "field": "FeatureImage",
     "file_id": 47,
-    "id": 71,
+    "id": 120,
     "order": 1,
     "related_id": 16,
     "related_type": "api::blog-post.blog-post"
@@ -162,7 +162,7 @@
   {
     "field": "FeatureImage",
     "file_id": 48,
-    "id": 72,
+    "id": 121,
     "order": 1,
     "related_id": 17,
     "related_type": "api::blog-post.blog-post"
@@ -170,7 +170,7 @@
   {
     "field": "FeatureImage",
     "file_id": 49,
-    "id": 65,
+    "id": 134,
     "order": 1,
     "related_id": 3,
     "related_type": "api::blog-post.blog-post"
@@ -178,7 +178,7 @@
   {
     "field": "FeatureImage",
     "file_id": 49,
-    "id": 60,
+    "id": 133,
     "order": 1,
     "related_id": 4,
     "related_type": "api::blog-post.blog-post"
@@ -186,7 +186,7 @@
   {
     "field": "FeatureImage",
     "file_id": 49,
-    "id": 66,
+    "id": 132,
     "order": 1,
     "related_id": 5,
     "related_type": "api::blog-post.blog-post"
@@ -194,7 +194,7 @@
   {
     "field": "FeatureImage",
     "file_id": 49,
-    "id": 64,
+    "id": 131,
     "order": 1,
     "related_id": 6,
     "related_type": "api::blog-post.blog-post"
@@ -202,7 +202,7 @@
   {
     "field": "FeatureImage",
     "file_id": 49,
-    "id": 68,
+    "id": 125,
     "order": 1,
     "related_id": 12,
     "related_type": "api::blog-post.blog-post"
@@ -210,7 +210,7 @@
   {
     "field": "FeatureImage",
     "file_id": 50,
-    "id": 62,
+    "id": 118,
     "order": 1,
     "related_id": 1,
     "related_type": "api::blog-post.blog-post"
@@ -450,7 +450,7 @@
   {
     "field": "FeatureImage",
     "file_id": 80,
-    "id": 74,
+    "id": 119,
     "order": 1,
     "related_id": 20,
     "related_type": "api::blog-post.blog-post"
@@ -458,10 +458,18 @@
   {
     "field": "FeatureImage",
     "file_id": 82,
-    "id": 80,
+    "id": 110,
     "order": 1,
     "related_id": 21,
     "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "Media",
+    "file_id": 82,
+    "id": 109,
+    "order": 1,
+    "related_id": 1,
+    "related_type": "common.image"
   },
   {
     "field": "Media",
@@ -480,11 +488,51 @@
     "related_type": "api::resource.resource"
   },
   {
+    "field": "Media",
+    "file_id": 86,
+    "id": 112,
+    "order": 1,
+    "related_id": 5,
+    "related_type": "common.image"
+  },
+  {
+    "field": "Media",
+    "file_id": 87,
+    "id": 113,
+    "order": 1,
+    "related_id": 6,
+    "related_type": "common.image"
+  },
+  {
+    "field": "Media",
+    "file_id": 88,
+    "id": 115,
+    "order": 1,
+    "related_id": 3,
+    "related_type": "common.image"
+  },
+  {
     "field": "FeatureImage",
     "file_id": 90,
-    "id": 79,
+    "id": 116,
     "order": 1,
     "related_id": 22,
     "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "Media",
+    "file_id": 90,
+    "id": 111,
+    "order": 1,
+    "related_id": 2,
+    "related_type": "common.image"
+  },
+  {
+    "field": "Media",
+    "file_id": 91,
+    "id": 114,
+    "order": 1,
+    "related_id": 4,
+    "related_type": "common.image"
   }
 ]

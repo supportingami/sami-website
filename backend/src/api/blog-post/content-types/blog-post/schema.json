@@ -42,6 +42,10 @@
       "type": "uid",
       "targetField": "Title",
       "required": false
+    },
+    "ContentBlocks": {
+      "type": "dynamiczone",
+      "components": ["common.action-button", "common.html", "common.text-block", "common.image"]
     }
   }
 }
