@@ -13,7 +13,8 @@ export const ActionButtonsComponent: React.FC<{ actionButtons: ComponentCommonAc
   return (
     <div data-testid="actionButtons" className={`flex gap-2 ${className}`}>
       {actionButtons?.map(({ id, Link: ButtonLink, Text: ButtonText }, index) => {
-        const isExternalLink = ButtonLink.startsWith("http");
+        // Open external links or file uploads in new tab
+        const isExternalLink = ButtonLink.startsWith("http") || ButtonLink.startsWith("/uploads");
         const key = `actionButton_${id}`;
         return isExternalLink ? (
           <ExternalLink key={key} href={ButtonLink}>
