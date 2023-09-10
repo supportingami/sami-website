@@ -86,12 +86,18 @@ export const DynamicComponent = (props: { block: DynamicContentContentDynamicZon
 
 export const DynamicComponents = (props: { blocks: DynamicContentContentDynamicZone[] }) => {
   const { blocks } = props;
-  return blocks
-    .filter((b) => b.__typename !== "Error")
-    .map((block, i) => {
-      const { props: ComponentProps, type: Component } = generateBlockComponent(block as unknown as IDynamicComponent);
-      // TODO - would be better to get unique id from block instead of counter
-      const key = `${block.__typename}_${i}`;
-      return <Component {...ComponentProps} key={key} data-key={key} />;
-    });
+  return (
+    <>
+      {blocks
+        .filter((b) => b.__typename !== "Error")
+        .map((block, i) => {
+          const { props: ComponentProps, type: Component } = generateBlockComponent(
+            block as unknown as IDynamicComponent
+          );
+          // TODO - would be better to get unique id from block instead of counter
+          const key = `${block.__typename}_${i}`;
+          return <Component {...ComponentProps} key={key} data-key={key} />;
+        })}
+    </>
+  );
 };
