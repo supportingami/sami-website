@@ -32,7 +32,7 @@
     "slug": "oxford-2018",
     "summary": "Thank you to everyone who joined us at St. Peter’s College, Oxford. Find below a few links to the materials and resources used",
     "title": "Oxford 2018",
-    "updated_at": 1694229240141,
+    "updated_at": 1694382185966,
     "updated_by_id": 1
   },
   {
@@ -44,7 +44,7 @@
     "slug": "dobble-donation",
     "summary": "Asmodee have continued to support SAMI with with another donation of 5 sets of the brilliant game Dobble.",
     "title": "Dobble Donation",
-    "updated_at": 1694229229604,
+    "updated_at": 1694381905923,
     "updated_by_id": 1
   },
   {
@@ -56,7 +56,7 @@
     "slug": "pi-day",
     "summary": "Together with the charity Justice au Coeur, SAMI members ran a Pi Day treasure hunt at the Lycee Francais Charles de Gaulle.",
     "title": "Pi Day",
-    "updated_at": 1694229220366,
+    "updated_at": 1694381837185,
     "updated_by_id": 1
   },
   {
@@ -212,7 +212,7 @@
     "slug": "kenya-math-camp-report-2022",
     "summary": "Report from the Math Camp hosted at Kongoni Community Library, Likuyani Constituency, Kenya.",
     "title": "Kenya Math Camp December 2022",
-    "updated_at": 1694214701418,
+    "updated_at": 1694380784026,
     "updated_by_id": 1
   },
   {
@@ -237,6 +237,18 @@
     "summary": "Feleria reflects on her experience as a SAMI intern",
     "title": "SAMI Intern Stories",
     "updated_at": 1694212549311,
+    "updated_by_id": 1
+  },
+  {
+    "created_at": 1694381300501,
+    "created_by_id": 1,
+    "date_written": "2023-01-20",
+    "id": 23,
+    "published_at": 1694381606977,
+    "slug": "kenya-math-camp-2023-jan",
+    "summary": "The team in Kenya hosted a maths camp at Akili STEMarts Academy, Kisumu County, Kenya.\n\nRead more about the themes, activities and ",
+    "title": "Kenya Math Camp January 2023",
+    "updated_at": 1694381618085,
     "updated_by_id": 1
   }
 ]

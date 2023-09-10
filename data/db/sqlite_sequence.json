@@ -9,11 +9,11 @@
   },
   {
     "name": "blog_posts",
-    "seq": 22
+    "seq": 23
   },
   {
     "name": "blog_posts_components",
-    "seq": 76
+    "seq": 105
   },
   {
     "name": "blog_tags",
@@ -21,15 +21,15 @@
   },
   {
     "name": "components_common_action_buttons",
-    "seq": 9
+    "seq": 11
   },
   {
     "name": "components_common_htmls",
-    "seq": 26
+    "seq": 29
   },
   {
     "name": "components_common_images",
-    "seq": 6
+    "seq": 8
   },
   {
     "name": "components_common_text_blocks",
@@ -109,7 +109,7 @@
   },
   {
     "name": "files",
-    "seq": 91
+    "seq": 97
   },
   {
     "name": "home_contents",
@@ -137,7 +137,7 @@
   },
   {
     "name": "upload_folders",
-    "seq": 10
+    "seq": 11
   },
   {
     "name": "volunteer_contents",

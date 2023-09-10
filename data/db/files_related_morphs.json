@@ -170,25 +170,9 @@
   {
     "field": "FeatureImage",
     "file_id": 49,
-    "id": 134,
+    "id": 147,
     "order": 1,
     "related_id": 3,
-    "related_type": "api::blog-post.blog-post"
-  },
-  {
-    "field": "FeatureImage",
-    "file_id": 49,
-    "id": 133,
-    "order": 1,
-    "related_id": 4,
-    "related_type": "api::blog-post.blog-post"
-  },
-  {
-    "field": "FeatureImage",
-    "file_id": 49,
-    "id": 132,
-    "order": 1,
-    "related_id": 5,
     "related_type": "api::blog-post.blog-post"
   },
   {
@@ -449,14 +433,6 @@
   },
   {
     "field": "FeatureImage",
-    "file_id": 80,
-    "id": 119,
-    "order": 1,
-    "related_id": 20,
-    "related_type": "api::blog-post.blog-post"
-  },
-  {
-    "field": "FeatureImage",
     "file_id": 82,
     "id": 110,
     "order": 1,
@@ -534,5 +510,53 @@
     "order": 1,
     "related_id": 4,
     "related_type": "common.image"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 92,
+    "id": 136,
+    "order": 1,
+    "related_id": 20,
+    "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "Media",
+    "file_id": 92,
+    "id": 135,
+    "order": 1,
+    "related_id": 7,
+    "related_type": "common.image"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 93,
+    "id": 144,
+    "order": 1,
+    "related_id": 23,
+    "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "Media",
+    "file_id": 93,
+    "id": 143,
+    "order": 1,
+    "related_id": 8,
+    "related_type": "common.image"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 94,
+    "id": 145,
+    "order": 1,
+    "related_id": 5,
+    "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 95,
+    "id": 146,
+    "order": 1,
+    "related_id": 4,
+    "related_type": "api::blog-post.blog-post"
   }
 ]

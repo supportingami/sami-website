@@ -36,7 +36,9 @@ export const BlogCardComponent: React.FC<{
         </div>
       </div>
       <div data-cy="blog-summary" className="py-2 px-2 relative flex-1 flex flex-col">
-        <div className="pt-0 text-sm overflow-ellipsis overflow-hidden max-h-20 relative">{blog.Summary}</div>
+        <div className="pt-0 text-sm overflow-ellipsis overflow-hidden max-h-20 relative whitespace-pre-line">
+          {blog.Summary}
+        </div>
       </div>
     </div>
   </Link>
