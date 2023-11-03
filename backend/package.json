@@ -14,7 +14,7 @@
     "@strapi-community/strapi-provider-upload-google-cloud-storage": "^4.10.5",
     "@strapi/plugin-graphql": "4.12.7",
     "@strapi/plugin-i18n": "4.12.7",
-    "@strapi/plugin-users-permissions": "4.12.7",
+    "@strapi/plugin-users-permissions": "4.13.1",
     "@strapi/strapi": "4.12.7",
     "better-sqlite3": "8.3.0",
     "knex": "^2.4.2",
