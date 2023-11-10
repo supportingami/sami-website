@@ -6769,6 +6769,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"axios@npm:^1.6.0":
+  version: 1.6.1
+  resolution: "axios@npm:1.6.1"
+  dependencies:
+    follow-redirects: ^1.15.0
+    form-data: ^4.0.0
+    proxy-from-env: ^1.1.0
+  checksum: 573f03f59b7487d54551b16f5e155d1d130ad4864ed32d1da93d522b78a57123b34e3bde37f822a65ee297e79f1db840f9ad6514addff50d3cbf5caeed39e8dc
+  languageName: node
+  linkType: hard
+
 "b4a@npm:^1.6.4":
   version: 1.6.4
   resolution: "b4a@npm:1.6.4"
@@ -19039,7 +19050,7 @@ __metadata:
     "@types/prompts": ^2.4.4
     "@types/serve-handler": ^6.1.1
     "@types/wait-on": ^5.3.1
-    axios: ^0.27.2
+    axios: ^1.6.0
     backend: "workspace:*"
     boxen: ^5.0.1
     chalk: ^4.1.0
