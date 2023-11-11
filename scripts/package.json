@@ -3,8 +3,11 @@
   "private": true,
   "main": "src/commands/index.ts",
   "scripts": {
-    "start": "ts-node-esm src/commands/index.ts",
+    "start": "ts-node src/commands/index.ts",
     "dev": "ts-node-dev --respawn --watch src/**/*.ts src/commands/index.ts"
+  },
+  "engines": {
+    "node": "^18 || ^20"
   },
   "dependencies": {
     "@google-cloud/storage": "^6.9.5",
@@ -35,7 +38,7 @@
     "@types/prompts": "^2.4.4",
     "@types/serve-handler": "^6.1.1",
     "@types/wait-on": "^5.3.1",
-    "ts-node": "~10.9.1",
+    "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0"
   }
 }

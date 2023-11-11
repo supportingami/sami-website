@@ -16,4 +16,8 @@ module.exports = ({ env }) => ({
   "import-export-entries": {
     enabled: true,
   },
+  "sami-website-deploy": {
+    enabled: true,
+    resolve: "./src/plugins/sami-website-deploy",
+  },
 });
