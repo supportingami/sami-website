@@ -1,4 +1,4 @@
-import myController from './my-controller';
+import myController from "./my-controller";
 
 export default {
   myController,
