@@ -540,6 +540,11 @@ enum ENUM_MEMBER_ORGANISATION {
   SAMI_Trustees
 }
 
+enum ENUM_PROJECTTYPE_STATUS {
+  Completed
+  Ongoing
+}
+
 type Error {
   code: String!
   message: String
@@ -975,7 +980,6 @@ input PaginationArg {
 }
 
 type ProjectType {
-  Content: String
   FeatureImage: UploadFileEntityResponse
   HomeSummary: String
   Icon: UploadFileEntityResponse
@@ -983,6 +987,7 @@ type ProjectType {
   PageContent: [ProjectTypePageContentDynamicZone]
   PageSummary: String
   Slug: String!
+  Status: ENUM_PROJECTTYPE_STATUS
   createdAt: DateTime
   publishedAt: DateTime
   updatedAt: DateTime
@@ -1003,11 +1008,11 @@ type ProjectTypeEntityResponseCollection {
 }
 
 input ProjectTypeFiltersInput {
-  Content: StringFilterInput
   HomeSummary: StringFilterInput
   Name: StringFilterInput
   PageSummary: StringFilterInput
   Slug: StringFilterInput
+  Status: StringFilterInput
   and: [ProjectTypeFiltersInput]
   createdAt: DateTimeFilterInput
   id: IDFilterInput
@@ -1018,7 +1023,6 @@ input ProjectTypeFiltersInput {
 }
 
 input ProjectTypeInput {
-  Content: String
   FeatureImage: ID
   HomeSummary: String
   Icon: ID
@@ -1026,10 +1030,16 @@ input ProjectTypeInput {
   PageContent: [ProjectTypePageContentDynamicZoneInput!]
   PageSummary: String
   Slug: String
+  Status: ENUM_PROJECTTYPE_STATUS
   publishedAt: DateTime
 }
 
-union ProjectTypePageContentDynamicZone = ComponentCommonTextBlock | Error
+union ProjectTypePageContentDynamicZone =
+    ComponentCommonActionButton
+  | ComponentCommonHtml
+  | ComponentCommonImage
+  | ComponentCommonTextBlock
+  | Error
 
 scalar ProjectTypePageContentDynamicZoneInput
 
