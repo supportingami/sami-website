@@ -1,5 +1,5 @@
 export default [
-  // http://localhost:1337/sami-website-deploy
+  // http://localhost:1337/sami-admin
   // {
   //   method: "GET",
   //   path: "/",
@@ -9,7 +9,7 @@ export default [
   //     auth: false,
   //   },
   // },
-  // http://localhost:1337/sami-website-deploy/deploy
+  // http://localhost:1337/sami-admin/deploy
   // {
   //   method: "GET",
   //   path: "/deploy",

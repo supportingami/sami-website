@@ -1,10 +1,10 @@
 {
-  "name": "sami-website-deploy",
+  "name": "sami-admin",
   "version": "0.0.0",
   "description": "This is the description of the plugin.",
   "strapi": {
-    "name": "sami-website-deploy",
-    "description": "Description of sami-website-deploy plugin",
+    "name": "sami-admin",
+    "description": "Description of sami-admin plugin",
     "kind": "plugin"
   },
   "dependencies": {

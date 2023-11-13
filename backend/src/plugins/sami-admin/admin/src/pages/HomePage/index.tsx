@@ -25,7 +25,7 @@ const HomePage = () => {
     setDeployDisabled(true);
     setUpdates([]);
     setShowOutput(true);
-    const io = socket("http://localhost:1337", { path: "/sami-website-deploy/" }); //Connecting to Socket.io backend
+    const io = socket("http://localhost:1337", { path: "/sami-admin/" }); //Connecting to Socket.io backend
 
     io.on("message", async (data: string, error) => {
       //Listening for a message connection
@@ -93,7 +93,7 @@ export default HomePage;
 
 // const triggerDeploy = () => {
 //   console.log("triggering deploy");
-//   fetch("/sami-website-deploy/deploy", {
+//   fetch("/sami-admin/deploy", {
 //     method: "GET", // default, so we can ignore
 //   })
 //     .then((response) => response.json())

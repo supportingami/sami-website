@@ -19,7 +19,7 @@ export default ({ strapi }: { strapi: Strapi }) => {
       allowedHeaders: ["my-custom-header"],
       credentials: true,
     },
-    path: "/sami-website-deploy/",
+    path: "/sami-admin/",
   });
   // register deployment service websocket handler
   new DeployWebsocketService(io).register();

@@ -7,8 +7,8 @@
     "start": "strapi develop",
     "start:prod": "strapi start",
     "build": "yarn plugins:build && strapi build",
-    "plugins:build": "cd src/plugins/sami-website-deploy && npm run build",
-    "plugins:dev": "cd src/plugins/sami-website-deploy && npm run develop",
+    "plugins:build": "cd src/plugins/sami-admin && npm run build",
+    "plugins:dev": "cd src/plugins/sami-admin && npm run develop",
     "strapi": "strapi"
   },
   "dependencies": {

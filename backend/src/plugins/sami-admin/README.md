@@ -1,6 +1,6 @@
-# Strapi plugin sami-website-deploy
+# Strapi plugin sami-admin
 
-A quick description of sami-website-deploy.
+A quick description of sami-admin.
 
 Build plugin and backend
 
