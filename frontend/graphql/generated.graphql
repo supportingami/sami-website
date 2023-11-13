@@ -1152,6 +1152,11 @@ type Query {
 type Resource {
   Description: String
   Image: UploadFileEntityResponse
+  Links(
+    filters: ComponentCommonActionButtonFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): [ComponentCommonActionButton]
   Media: UploadFileEntityResponse
   Title: String
   createdAt: DateTime
@@ -1175,6 +1180,7 @@ type ResourceEntityResponseCollection {
 
 input ResourceFiltersInput {
   Description: StringFilterInput
+  Links: ComponentCommonActionButtonFiltersInput
   Title: StringFilterInput
   and: [ResourceFiltersInput]
   createdAt: DateTimeFilterInput
@@ -1188,6 +1194,7 @@ input ResourceFiltersInput {
 input ResourceInput {
   Description: String
   Image: ID
+  Links: [ComponentCommonActionButtonInput]
   Media: ID
   Title: String
   publishedAt: DateTime

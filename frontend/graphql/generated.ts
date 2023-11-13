@@ -1532,11 +1532,18 @@ export type Resource = {
   __typename?: "Resource";
   Description?: Maybe<Scalars["String"]>;
   Image?: Maybe<UploadFileEntityResponse>;
+  Links?: Maybe<Array<Maybe<ComponentCommonActionButton>>>;
   Media?: Maybe<UploadFileEntityResponse>;
   Title?: Maybe<Scalars["String"]>;
   createdAt?: Maybe<Scalars["DateTime"]>;
   publishedAt?: Maybe<Scalars["DateTime"]>;
   updatedAt?: Maybe<Scalars["DateTime"]>;
+};
+
+export type ResourceLinksArgs = {
+  filters?: InputMaybe<ComponentCommonActionButtonFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
 };
 
 export type ResourceEntity = {
@@ -1558,6 +1565,7 @@ export type ResourceEntityResponseCollection = {
 
 export type ResourceFiltersInput = {
   Description?: InputMaybe<StringFilterInput>;
+  Links?: InputMaybe<ComponentCommonActionButtonFiltersInput>;
   Title?: InputMaybe<StringFilterInput>;
   and?: InputMaybe<Array<InputMaybe<ResourceFiltersInput>>>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
@@ -1571,6 +1579,7 @@ export type ResourceFiltersInput = {
 export type ResourceInput = {
   Description?: InputMaybe<Scalars["String"]>;
   Image?: InputMaybe<Scalars["ID"]>;
+  Links?: InputMaybe<Array<InputMaybe<ComponentCommonActionButtonInput>>>;
   Media?: InputMaybe<Scalars["ID"]>;
   Title?: InputMaybe<Scalars["String"]>;
   publishedAt?: InputMaybe<Scalars["DateTime"]>;
@@ -2481,6 +2490,12 @@ export type ResourcesQuery = {
             attributes?: { __typename?: "UploadFile"; name: string; url: string; size: number } | null;
           } | null;
         } | null;
+        Links?: Array<{
+          __typename?: "ComponentCommonActionButton";
+          id: string;
+          Link: string;
+          Text: string;
+        } | null> | null;
         Media?: {
           __typename?: "UploadFileEntityResponse";
           data?: {
@@ -4039,6 +4054,18 @@ export const ResourcesDocument = {
                               },
                             },
                             { kind: "Field", name: { kind: "Name", value: "Description" } },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "Links" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  { kind: "Field", name: { kind: "Name", value: "id" } },
+                                  { kind: "Field", name: { kind: "Name", value: "Link" } },
+                                  { kind: "Field", name: { kind: "Name", value: "Text" } },
+                                ],
+                              },
+                            },
                             {
                               kind: "Field",
                               name: { kind: "Name", value: "Media" },
