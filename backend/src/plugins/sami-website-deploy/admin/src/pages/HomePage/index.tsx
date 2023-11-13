@@ -82,7 +82,7 @@ const HomePage = () => {
               </Fragment>
             ))}
           </code>
-          <div ref={codeEndRef} style={{ marginBottom: "2rem" }} />
+          <div ref={codeEndRef} style={{ marginTop: "1rem" }} />
         </Box>
       )}
     </div>
