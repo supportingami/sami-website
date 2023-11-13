@@ -1,0 +1,19 @@
+{
+  "kind": "singleType",
+  "collectionName": "dynamic_contents",
+  "info": {
+    "singularName": "dynamic-content",
+    "pluralName": "dynamic-contents",
+    "displayName": "DynamicContent"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Content": {
+      "type": "dynamiczone",
+      "components": ["common.action-button", "common.html", "common.image", "common.text-block"]
+    }
+  }
+}

@@ -77,37 +77,8 @@ input AnnualReportInput {
   publishedAt: DateTime
 }
 
-type AuthorBlock {
-  blocks: [AuthorBlockBlocksDynamicZone]
-  createdAt: DateTime
-  publishedAt: DateTime
-  updatedAt: DateTime
-}
-
-union AuthorBlockBlocksDynamicZone =
-    ComponentCommonActionButton
-  | ComponentCommonHtml
-  | ComponentCommonTextBlock
-  | Error
-
-scalar AuthorBlockBlocksDynamicZoneInput
-
-type AuthorBlockEntity {
-  attributes: AuthorBlock
-  id: ID
-}
-
-type AuthorBlockEntityResponse {
-  data: AuthorBlockEntity
-}
-
-input AuthorBlockInput {
-  blocks: [AuthorBlockBlocksDynamicZoneInput!]
-  publishedAt: DateTime
-}
-
 type BlogPost {
-  Content: String
+  ContentBlocks: [BlogPostContentBlocksDynamicZone]
   DateWritten: Date
   FeatureImage: UploadFileEntityResponse
   Slug: String
@@ -124,6 +95,15 @@ type BlogPost {
   updatedAt: DateTime
 }
 
+union BlogPostContentBlocksDynamicZone =
+    ComponentCommonActionButton
+  | ComponentCommonHtml
+  | ComponentCommonImage
+  | ComponentCommonTextBlock
+  | Error
+
+scalar BlogPostContentBlocksDynamicZoneInput
+
 type BlogPostEntity {
   attributes: BlogPost
   id: ID
@@ -139,7 +119,6 @@ type BlogPostEntityResponseCollection {
 }
 
 input BlogPostFiltersInput {
-  Content: StringFilterInput
   DateWritten: DateFilterInput
   Slug: StringFilterInput
   Summary: StringFilterInput
@@ -155,7 +134,7 @@ input BlogPostFiltersInput {
 }
 
 input BlogPostInput {
-  Content: String
+  ContentBlocks: [BlogPostContentBlocksDynamicZoneInput!]
   DateWritten: Date
   FeatureImage: ID
   Slug: String
@@ -259,8 +238,15 @@ type ComponentCommonHtml {
   id: ID!
 }
 
+type ComponentCommonImage {
+  AltText: String
+  Caption: String
+  Media: UploadFileEntityResponse!
+  id: ID!
+}
+
 type ComponentCommonTextBlock {
-  Text: String
+  Text: String!
   id: ID!
 }
 
@@ -518,6 +504,36 @@ input DonateContentInput {
   publishedAt: DateTime
 }
 
+type DynamicContent {
+  Content: [DynamicContentContentDynamicZone]
+  createdAt: DateTime
+  publishedAt: DateTime
+  updatedAt: DateTime
+}
+
+union DynamicContentContentDynamicZone =
+    ComponentCommonActionButton
+  | ComponentCommonHtml
+  | ComponentCommonImage
+  | ComponentCommonTextBlock
+  | Error
+
+scalar DynamicContentContentDynamicZoneInput
+
+type DynamicContentEntity {
+  attributes: DynamicContent
+  id: ID
+}
+
+type DynamicContentEntityResponse {
+  data: DynamicContentEntity
+}
+
+input DynamicContentInput {
+  Content: [DynamicContentContentDynamicZoneInput!]
+  publishedAt: DateTime
+}
+
 enum ENUM_MEMBER_ORGANISATION {
   AMI
   SAMI
@@ -607,11 +623,11 @@ input FloatFilterInput {
 union GenericMorph =
     About
   | AnnualReport
-  | AuthorBlock
   | BlogPost
   | BlogTag
   | ComponentCommonActionButton
   | ComponentCommonHtml
+  | ComponentCommonImage
   | ComponentCommonTextBlock
   | ComponentHomeGetInvolved
   | ComponentHomeHeroImage
@@ -622,6 +638,7 @@ union GenericMorph =
   | ComponentHomeProjectSummaryItem
   | Country
   | DonateContent
+  | DynamicContent
   | Faq
   | HomeContent
   | I18NLocale
@@ -868,11 +885,11 @@ type Mutation {
   createUsersPermissionsUser(data: UsersPermissionsUserInput!): UsersPermissionsUserEntityResponse!
   deleteAbout(id: ID!): AboutEntityResponse
   deleteAnnualReport(id: ID!): AnnualReportEntityResponse
-  deleteAuthorBlock: AuthorBlockEntityResponse
   deleteBlogPost(id: ID!): BlogPostEntityResponse
   deleteBlogTag(id: ID!): BlogTagEntityResponse
   deleteCountry(id: ID!): CountryEntityResponse
   deleteDonateContent: DonateContentEntityResponse
+  deleteDynamicContent: DynamicContentEntityResponse
   deleteFaq(id: ID!): FaqEntityResponse
   deleteHomeContent: HomeContentEntityResponse
   deleteMember(id: ID!): MemberEntityResponse
@@ -916,11 +933,11 @@ type Mutation {
   resetPassword(code: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
   updateAbout(data: AboutInput!, id: ID!): AboutEntityResponse
   updateAnnualReport(data: AnnualReportInput!, id: ID!): AnnualReportEntityResponse
-  updateAuthorBlock(data: AuthorBlockInput!): AuthorBlockEntityResponse
   updateBlogPost(data: BlogPostInput!, id: ID!): BlogPostEntityResponse
   updateBlogTag(data: BlogTagInput!, id: ID!): BlogTagEntityResponse
   updateCountry(data: CountryInput!, id: ID!): CountryEntityResponse
   updateDonateContent(data: DonateContentInput!): DonateContentEntityResponse
+  updateDynamicContent(data: DynamicContentInput!): DynamicContentEntityResponse
   updateFaq(data: FaqInput!, id: ID!): FaqEntityResponse
   updateFileInfo(id: ID!, info: FileInfoInput): UploadFileEntityResponse!
   updateHomeContent(data: HomeContentInput!): HomeContentEntityResponse
@@ -1036,7 +1053,6 @@ type Query {
     publicationState: PublicationState = LIVE
     sort: [String] = []
   ): AnnualReportEntityResponseCollection
-  authorBlock(publicationState: PublicationState = LIVE): AuthorBlockEntityResponse
   blogPost(id: ID): BlogPostEntityResponse
   blogPosts(
     filters: BlogPostFiltersInput
@@ -1059,6 +1075,7 @@ type Query {
   ): CountryEntityResponseCollection
   country(id: ID): CountryEntityResponse
   donateContent(publicationState: PublicationState = LIVE): DonateContentEntityResponse
+  dynamicContent(publicationState: PublicationState = LIVE): DynamicContentEntityResponse
   faq(id: ID): FaqEntityResponse
   faqs(
     filters: FaqFiltersInput

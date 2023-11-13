@@ -1,11 +1,11 @@
-query blogPosts($filters: BlogPostFiltersInput) {
-  blogPosts(sort: "DateWritten:DESC", filters: $filters) {
+# Write your query or mutation here
+query blogPosts {
+  blogPosts(sort: "DateWritten:DESC") {
     data {
       id
       attributes {
         Title
         Summary
-        Content
         DateWritten
         FeatureImage {
           data {

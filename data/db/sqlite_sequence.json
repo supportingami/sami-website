@@ -8,16 +8,12 @@
     "seq": 6
   },
   {
-    "name": "author_blocks",
-    "seq": 0
-  },
-  {
-    "name": "author_blocks_components",
-    "seq": 0
-  },
-  {
     "name": "blog_posts",
     "seq": 23
+  },
+  {
+    "name": "blog_posts_components",
+    "seq": 105
   },
   {
     "name": "blog_tags",
@@ -30,6 +26,10 @@
   {
     "name": "components_common_htmls",
     "seq": 29
+  },
+  {
+    "name": "components_common_images",
+    "seq": 8
   },
   {
     "name": "components_common_text_blocks",
@@ -94,6 +94,14 @@
   {
     "name": "donate_contents_components",
     "seq": 7
+  },
+  {
+    "name": "dynamic_contents",
+    "seq": 0
+  },
+  {
+    "name": "dynamic_contents_components",
+    "seq": 0
   },
   {
     "name": "faqs",

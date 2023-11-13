@@ -8,10 +8,13 @@ import {
   TwitterShareButton,
 } from "react-share";
 import dayjs from "dayjs";
+import { DynamicComponents } from "components/common/dynamic";
 
 export const BlogPostComponent: React.FC<{ blogPost: IBlogPost }> = ({ blogPost }) => {
   const size = "28px";
   const url = global.window && window.location.href;
+  const contentBlocks = blogPost.ContentBlocks || [];
+
   return (
     <>
       <div className="font-serif px-32">
@@ -25,10 +28,7 @@ export const BlogPostComponent: React.FC<{ blogPost: IBlogPost }> = ({ blogPost 
             </span>
           ))}
         </span>
-        <div
-          dangerouslySetInnerHTML={{ __html: blogPost.Content }}
-          className="prose text-base pr-20 text-justify py-5"
-        ></div>
+        <DynamicComponents blocks={contentBlocks} />
         <div style={{ margin: "20px 0" }}>
           <div>Share this Blog with your community:</div>
           <hr />
