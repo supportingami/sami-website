@@ -5,6 +5,8 @@
  */
 
 import React, { Fragment, useRef, useState } from "react";
+import { GridLayout } from "@strapi/design-system";
+import { Link } from "@strapi/design-system";
 import socket from "socket.io-client";
 
 // https://design-system.strapi.io/components
@@ -14,6 +16,8 @@ const HomePage = () => {
   const [updates, setUpdates] = useState<string[]>([]);
   const [showOutput, setShowOutput] = useState(false);
   const [deployDisabled, setDeployDisabled] = useState(false);
+  const [inspectLink, setInspectLink] = useState("");
+  const [previewLink, setPreviewLink] = useState("");
 
   const codeEndRef = useRef<HTMLDivElement>(null);
 
@@ -23,10 +27,16 @@ const HomePage = () => {
     setShowOutput(true);
     const io = socket("http://localhost:1337", { path: "/sami-website-deploy/" }); //Connecting to Socket.io backend
 
-    io.on("message", async (data, error) => {
+    io.on("message", async (data: string, error) => {
       //Listening for a message connection
       setUpdates((existing) => [...existing, data]);
       codeEndRef.current?.scrollIntoView({ behavior: "smooth" });
+      if (data.startsWith("Inspect: https://vercel.com/")) {
+        setInspectLink(data.split(" ")[1]);
+      }
+      if (data.startsWith("https://sami-website")) {
+        setPreviewLink(data);
+      }
     });
     io.emit("deploy", (error) => {
       if (error) return alert(error);
@@ -36,15 +46,35 @@ const HomePage = () => {
   return (
     <div>
       <BaseHeaderLayout title="SAMI Admin" as="h2" />
-      <Box paddingLeft={10} paddingRight={10} background="neutral100">
+      <Box paddingLeft={10} paddingRight={10} background="neutral100" marginBottom={4}>
         {/* <Button onClick={() => triggerDeploy()}>Deploy to live site</Button> */}
-        <Button disabled={deployDisabled} onClick={() => websocketDeploy()}>
-          Deploy Content Changes
-        </Button>
+        <GridLayout style={{ gap: "8px" }}>
+          <Button disabled={deployDisabled} onClick={() => websocketDeploy()}>
+            Deploy Preview
+          </Button>
+          <Link
+            disabled={!inspectLink}
+            isExternal
+            href={inspectLink}
+            rel="noopener noreferrer"
+            style={{ margin: "auto", visibility: deployDisabled ? "visible" : "hidden" }}
+          >
+            Build Inspect
+          </Link>
+          <Link
+            disabled={!previewLink}
+            isExternal
+            href={previewLink}
+            rel="noopener noreferrer"
+            style={{ margin: "auto", visibility: deployDisabled ? "visible" : "hidden" }}
+          >
+            Site Preview
+          </Link>
+        </GridLayout>
       </Box>
       {showOutput && (
-        <Box paddingLeft={10} paddingRight={10} background="black" style={{ height: 400, overflow: "auto" }}>
-          <code style={{ color: "white" }}>
+        <Box margin={4} padding={4} background="black" style={{ height: 400, overflow: "auto" }}>
+          <code style={{ color: "white", fontFamily: "monospace", lineHeight: "1rem" }}>
             {updates.map((u) => (
               <Fragment key={u}>
                 {u}
@@ -52,7 +82,7 @@ const HomePage = () => {
               </Fragment>
             ))}
           </code>
-          <div ref={codeEndRef} />
+          <div ref={codeEndRef} style={{ marginBottom: "2rem" }} />
         </Box>
       )}
     </div>

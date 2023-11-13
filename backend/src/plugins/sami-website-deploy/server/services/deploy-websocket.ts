@@ -64,7 +64,7 @@ export class DeployWebsocketService {
       console.log("child exit", e);
     });
     child.on("close", () => {
-      console.log("close", { output, err });
+      console.log("close");
     });
   }
 }
