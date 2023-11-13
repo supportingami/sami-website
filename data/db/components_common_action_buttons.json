@@ -16,17 +16,17 @@
   },
   {
     "id": 4,
-    "link": "projects",
+    "link": "/projects",
     "text": "Learn More"
   },
   {
     "id": 5,
-    "link": "volunteer",
+    "link": "/volunteer",
     "text": "Learn More"
   },
   {
     "id": 6,
-    "link": "donate",
+    "link": "/donate",
     "text": "Donate"
   },
   {
@@ -38,5 +38,20 @@
     "id": 8,
     "link": "https://docs.google.com/forms/d/e/1FAIpQLSdfyNymfN9xqJCfgBLKpwQqniJTd2mACY93wjmEP8y8TRZGXw/viewform",
     "text": "Apply Now"
+  },
+  {
+    "id": 9,
+    "link": "/uploads/2022_08_togo_camp_report_4d689adf61.pdf",
+    "text": "Camp Report"
+  },
+  {
+    "id": 10,
+    "link": "/uploads/Oxford_presentation_pptx_e6978ea3a5.pdf",
+    "text": "Presentation Slides"
+  },
+  {
+    "id": 11,
+    "link": "/uploads/SAMI_info_f62cc828b3.pdf",
+    "text": "SAMI Info"
   }
 ]

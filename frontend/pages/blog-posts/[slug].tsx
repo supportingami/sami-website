@@ -3,14 +3,14 @@ import type { GetStaticPaths, GetStaticPropsContext, InferGetStaticPropsType } f
 import Head from "next/head";
 import { serverQuery } from "lib/graphql";
 import type { IBlogPost } from "types/blogpost";
-import type { BlogPost, BlogPostFiltersInput, BlogPostsQuery } from "../../graphql/generated";
-import { BlogPostsDocument } from "../../graphql/generated";
+import type { BlogPost, BlogPostFiltersInput, BlogPostContentQuery } from "../../graphql/generated";
+import { BlogPostContentDocument } from "../../graphql/generated";
 import { BlogPostComponent } from "components/pages/blog-post/post";
 import PageLayout from "components/layout/pageLayout";
 
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   const filters: BlogPostFiltersInput = { Slug: { eq: params.slug as string } };
-  const blogPostRes = await serverQuery<BlogPostsQuery>(BlogPostsDocument, {
+  const blogPostRes = await serverQuery<BlogPostContentQuery>(BlogPostContentDocument, {
     filters,
   });
   const matchedBlogPost = blogPostRes.data.blogPosts.data[0];
@@ -23,7 +23,7 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const blogPostRes = await serverQuery<BlogPostsQuery>(BlogPostsDocument);
+  const blogPostRes = await serverQuery<BlogPostContentQuery>(BlogPostContentDocument);
   let blogs: IBlogPost[] = [];
   if (blogPostRes) {
     blogs = blogPostRes.data.blogPosts.data.map((b) => ({

@@ -1,7 +1,7 @@
 import React from "react";
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import Head from "next/head";
-import type { VolunteerContentQuery, FaqsQuery, Faq, AuthorBlockBlocksDynamicZone } from "../graphql/generated";
+import type { VolunteerContentQuery, FaqsQuery, Faq, DynamicContentContentDynamicZone } from "../graphql/generated";
 import { VolunteerContentDocument, FaqsDocument } from "../graphql/generated";
 import { serverQuery } from "lib/graphql";
 import type { IFaq } from "types/faq";
@@ -11,11 +11,12 @@ import { DynamicComponents } from "components/common/dynamic";
 import { FAQS } from "components/pages/volunteer/faq";
 
 export const getStaticProps = async ({}: GetStaticPropsContext) => {
-  let volunteerPageContent: AuthorBlockBlocksDynamicZone[];
+  let volunteerPageContent: DynamicContentContentDynamicZone[];
   let faqs: IFaq[] = [];
   const volunteerRes = await serverQuery<VolunteerContentQuery>(VolunteerContentDocument);
   if (volunteerRes) {
-    volunteerPageContent = volunteerRes.data.volunteerContent.data.attributes.Content as AuthorBlockBlocksDynamicZone[];
+    volunteerPageContent = volunteerRes.data.volunteerContent.data.attributes
+      .Content as DynamicContentContentDynamicZone[];
   }
   const faqRes = await serverQuery<FaqsQuery>(FaqsDocument);
   if (faqRes) {
@@ -33,7 +34,6 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
 };
 
 const VolunteerPage = ({ volunteerPageContent, faqs }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  console.log({ volunteerPageContent, faqs });
   return (
     <>
       <Head>

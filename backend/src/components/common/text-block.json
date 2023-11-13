@@ -1,12 +1,14 @@
 {
   "collectionName": "components_common_text_blocks",
   "info": {
-    "displayName": "TextBlock"
+    "displayName": "TextBlock",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "Text": {
-      "type": "text"
+      "type": "text",
+      "required": true
     }
   }
 }
