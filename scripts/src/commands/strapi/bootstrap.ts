@@ -47,7 +47,7 @@ class StrapiBootstrap {
    */
   private async buildStrapiAdminUI() {
     console.log(chalk.gray("\nBuilding Strapi Dashboard\n"));
-    const { exitCode } = await execa("yarn strapi build", {
+    const { exitCode } = await execa("yarn build", {
       cwd: PATHS.backendDir,
       shell: true,
       stdio: "inherit",
