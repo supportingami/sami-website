@@ -27,6 +27,8 @@ interface IProgramOptions {
   export?: boolean;
   /** Next config mode */
   config: "standalone" | "export";
+  /** Specify whether to start the backend server during build (default: True)*/
+  backend?: boolean;
 }
 
 const program = new Command("build");
@@ -36,6 +38,8 @@ export default program
   .option("--no-preview", "Do not preview build locally")
   .option("-d --deploy", "Deploy build")
   .option("--no-deploy", "Do not deploy build")
+  .option("--backend", "Start backend server", true)
+  .option("--no-backend", "Skip starting backend server (if already running)")
   .option("-e --export", "Export local data")
   .option("--no-export", "Do not export local data")
   .option("-c --config <string>", "Next config mode, 'standalone' or 'export'", "export")
@@ -84,10 +88,14 @@ class BuildCmd {
     this.preBuild();
 
     // Start backend server and call build script once running
-    const backendCmd = this.getBackendStartCommand();
     const buildCmd = this.getBuildCommand();
-    console.log(chalk.gray("\nThis command will start a backend server and then generate a static site export...\n"));
-    const { result } = concurrently([backendCmd, buildCmd], {
+    const commands = [buildCmd];
+    if (this.options.backend) {
+      const backendCmd = this.getBackendStartCommand();
+      commands.push(backendCmd);
+    }
+    console.log(chalk.gray("\nGenerating a static site export...\n"));
+    const { result } = concurrently(commands, {
       ["killOthers" as any]: ["failure", "success"],
       successCondition: "first",
     });

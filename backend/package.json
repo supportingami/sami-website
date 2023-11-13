@@ -6,7 +6,9 @@
   "scripts": {
     "start": "strapi develop",
     "start:prod": "strapi start",
-    "build": "strapi build",
+    "build": "yarn plugins:build && strapi build",
+    "plugins:build": "cd src/plugins/sami-website-deploy && npm run build",
+    "plugins:dev": "cd src/plugins/sami-website-deploy && npm run develop",
     "strapi": "strapi"
   },
   "dependencies": {
@@ -20,6 +22,8 @@
     "knex": "^2.4.2",
     "pg": "^8.9.0",
     "pg-connection-string": "^2.5.0",
+    "socket.io": "^4.7.2",
+    "socket.io-client": "^4.7.2",
     "sqlite3": "5.1.6",
     "strapi-connector-bookshelf": "^3.6.11",
     "strapi-plugin-import-export-entries": "^1.18.1"
