@@ -36,7 +36,7 @@ yarn scripts strapi bootstrap
 
 ### 4. Import data
 
-```
+```sh
 yarn scripts strapi import
 ```
 
