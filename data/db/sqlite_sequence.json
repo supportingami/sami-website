@@ -13,7 +13,7 @@
   },
   {
     "name": "blog_posts_components",
-    "seq": 105
+    "seq": 114
   },
   {
     "name": "blog_tags",
@@ -21,15 +21,15 @@
   },
   {
     "name": "components_common_action_buttons",
-    "seq": 11
+    "seq": 17
   },
   {
     "name": "components_common_htmls",
-    "seq": 29
+    "seq": 36
   },
   {
     "name": "components_common_images",
-    "seq": 8
+    "seq": 11
   },
   {
     "name": "components_common_text_blocks",
@@ -109,7 +109,7 @@
   },
   {
     "name": "files",
-    "seq": 97
+    "seq": 105
   },
   {
     "name": "home_contents",
@@ -125,15 +125,19 @@
   },
   {
     "name": "project_types",
-    "seq": 4
+    "seq": 5
   },
   {
     "name": "project_types_components",
-    "seq": 10
+    "seq": 40
   },
   {
     "name": "resources",
-    "seq": 2
+    "seq": 5
+  },
+  {
+    "name": "resources_components",
+    "seq": 6
   },
   {
     "name": "upload_folders",
@@ -145,7 +149,7 @@
   },
   {
     "name": "volunteer_contents_components",
-    "seq": 34
+    "seq": 38
   },
   {
     "name": "volunteer_contents_faqs_links",
