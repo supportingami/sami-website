@@ -4,7 +4,7 @@
   "info": {
     "singularName": "resource",
     "pluralName": "resources",
-    "displayName": "Resource Page",
+    "displayName": "Resources",
     "description": ""
   },
   "options": {
@@ -29,6 +29,11 @@
       "multiple": false,
       "required": false,
       "allowedTypes": ["images", "files", "videos", "audios"]
+    },
+    "Links": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.action-button"
     }
   }
 }

@@ -5,8 +5,8 @@ import { serverQuery } from "lib/graphql";
 import type { IBlogPost } from "types/blogpost";
 import type { BlogPostsQuery, BlogPost } from "../graphql/generated";
 import { BlogPostsDocument } from "../graphql/generated";
-import { BlogPageComponent } from "components/pages/blog-post";
 import PageLayout from "components/layout/pageLayout";
+import { BlogCardComponent } from "components/pages/blog-post/blogCard";
 
 export const getStaticProps = async ({}: GetStaticPropsContext) => {
   let blogs: IBlogPost[] = [];
@@ -24,17 +24,22 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
   };
 };
 
-const VolunteerPage = ({ blogs }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const BlogPosts = ({ blogs }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
       <Head>
         <title>News Page</title>
       </Head>
       <PageLayout>
-        <BlogPageComponent blogs={blogs} />
+        <h1 className="font-semibold text-4xl">News</h1>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4">
+          {blogs.map((blog) => (
+            <BlogCardComponent key={blog.id} blog={blog} />
+          ))}
+        </div>
       </PageLayout>
     </>
   );
 };
 
-export default VolunteerPage;
+export default BlogPosts;

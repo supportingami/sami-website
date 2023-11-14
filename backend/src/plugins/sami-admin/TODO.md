@@ -5,5 +5,6 @@
 
 - Remove deprecated routes (if possible)
 - Add `--prod` deploy option (?)
+- Minor UI improvements
 - Progress bar?
 - Colored logs? (https://github.com/xpl/ansicolor) https://github.com/rburns/ansi-to-html

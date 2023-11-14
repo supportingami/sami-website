@@ -15,9 +15,6 @@
     "Name": {
       "type": "string"
     },
-    "Content": {
-      "type": "richtext"
-    },
     "Icon": {
       "type": "media",
       "multiple": false,
@@ -32,7 +29,7 @@
     },
     "PageContent": {
       "type": "dynamiczone",
-      "components": ["common.text-block"]
+      "components": ["common.text-block", "common.html", "common.image", "common.action-button"]
     },
     "FeatureImage": {
       "type": "media",
@@ -44,6 +41,10 @@
       "type": "string",
       "required": true,
       "unique": true
+    },
+    "Status": {
+      "type": "enumeration",
+      "enum": ["Ongoing", "Completed"]
     }
   }
 }

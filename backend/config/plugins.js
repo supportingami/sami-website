@@ -16,4 +16,8 @@ module.exports = ({ env }) => ({
   "import-export-entries": {
     enabled: true,
   },
+  "sami-admin": {
+    enabled: true,
+    resolve: "./src/plugins/sami-admin",
+  },
 });

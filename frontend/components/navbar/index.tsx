@@ -136,10 +136,10 @@ const Navbar = () => {
       <DesktopNavbar />
       <div className="navbar-end">
         <ThemeToggle btnclass="mr-1 hidden lg:block" />
-        <Link href="volunteer" className="btn rounded-none rounded-l-lg mr-1">
+        <Link href="/volunteer" className="btn rounded-none rounded-l-lg mr-1">
           Volunteer
         </Link>
-        <Link href="donate" className="btn rounded-none rounded-r-lg gap-2">
+        <Link href="/donate" className="btn rounded-none rounded-r-lg gap-2">
           Donate
           <MdFavorite />
         </Link>
