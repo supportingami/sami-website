@@ -29,6 +29,17 @@ export const ResourceCardComponent: React.FC<{
           <button className="btn btn-primary m-2">Download</button>
         </ExternalLink>
       )}
+      {(resource.Links || []).map(({ Link, Text }) => (
+        <ExternalLink key={Link} href={Link}>
+          <button className="btn btn-primary m-2">{Text}</button>
+        </ExternalLink>
+      ))}
     </div>
   </div>
 );
+
+{
+  /* <ExternalLink key={Link} href={getStrapiMedia(resource.Media)} download>
+<button className="btn btn-primary m-2">Download</button>
+</ExternalLink> */
+}

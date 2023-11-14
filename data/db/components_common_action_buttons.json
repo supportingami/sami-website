@@ -53,5 +53,35 @@
     "id": 11,
     "link": "/uploads/SAMI_info_f62cc828b3.pdf",
     "text": "SAMI Info"
+  },
+  {
+    "id": 12,
+    "link": "https://www.canva.com/design/DAE_Dnyt4oc/-0F0psQ1K5MmHcLvhMhk6A/view#7",
+    "text": "Project Presentation"
+  },
+  {
+    "id": 13,
+    "link": "https://mathsclub.samicharity.co.uk/",
+    "text": "Website"
+  },
+  {
+    "id": 14,
+    "link": "https://play.google.com/store/apps/details?id=io.c2dev.samimathsclub",
+    "text": "Android"
+  },
+  {
+    "id": 15,
+    "link": "https://apps.apple.com/ca/app/sami-maths-club/id1527293312?ign-mpt=uo%3D4",
+    "text": "IOS"
+  },
+  {
+    "id": 16,
+    "link": "https://cards.virtualmathscamp.com/en",
+    "text": "Website"
+  },
+  {
+    "id": 17,
+    "link": "https://virtualmathscamp.com/pause-and-go-videos.html",
+    "text": "Website"
   }
 ]

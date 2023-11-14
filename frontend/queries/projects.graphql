@@ -5,9 +5,36 @@ query projects($filters: ProjectTypeFiltersInput) {
       id
       attributes {
         Name
-        Content
         HomeSummary
         PageSummary
+        # If any new blocks added for authoring need to include here
+        PageContent {
+          __typename
+          ... on ComponentCommonHtml {
+            HTML
+          }
+          ... on ComponentCommonImage {
+            AltText
+            Caption
+            Media {
+              data {
+                id
+                attributes {
+                  name
+                  url
+                  size
+                }
+              }
+            }
+          }
+          ... on ComponentCommonTextBlock {
+            Text
+          }
+          ... on ComponentCommonActionButton {
+            Text
+            Link
+          }
+        }
         Icon {
           data {
             id
@@ -29,6 +56,7 @@ query projects($filters: ProjectTypeFiltersInput) {
           }
         }
         Slug
+        Status
       }
     }
     meta {

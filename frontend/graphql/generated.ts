@@ -599,6 +599,11 @@ export enum Enum_Member_Organisation {
   SamiTrustees = "SAMI_Trustees",
 }
 
+export enum Enum_Projecttype_Status {
+  Completed = "Completed",
+  Ongoing = "Ongoing",
+}
+
 export type Error = {
   __typename?: "Error";
   code: Scalars["String"];
@@ -1252,7 +1257,6 @@ export type PaginationArg = {
 
 export type ProjectType = {
   __typename?: "ProjectType";
-  Content?: Maybe<Scalars["String"]>;
   FeatureImage?: Maybe<UploadFileEntityResponse>;
   HomeSummary?: Maybe<Scalars["String"]>;
   Icon?: Maybe<UploadFileEntityResponse>;
@@ -1260,6 +1264,7 @@ export type ProjectType = {
   PageContent?: Maybe<Array<Maybe<ProjectTypePageContentDynamicZone>>>;
   PageSummary?: Maybe<Scalars["String"]>;
   Slug: Scalars["String"];
+  Status?: Maybe<Enum_Projecttype_Status>;
   createdAt?: Maybe<Scalars["DateTime"]>;
   publishedAt?: Maybe<Scalars["DateTime"]>;
   updatedAt?: Maybe<Scalars["DateTime"]>;
@@ -1283,11 +1288,11 @@ export type ProjectTypeEntityResponseCollection = {
 };
 
 export type ProjectTypeFiltersInput = {
-  Content?: InputMaybe<StringFilterInput>;
   HomeSummary?: InputMaybe<StringFilterInput>;
   Name?: InputMaybe<StringFilterInput>;
   PageSummary?: InputMaybe<StringFilterInput>;
   Slug?: InputMaybe<StringFilterInput>;
+  Status?: InputMaybe<StringFilterInput>;
   and?: InputMaybe<Array<InputMaybe<ProjectTypeFiltersInput>>>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
   id?: InputMaybe<IdFilterInput>;
@@ -1298,7 +1303,6 @@ export type ProjectTypeFiltersInput = {
 };
 
 export type ProjectTypeInput = {
-  Content?: InputMaybe<Scalars["String"]>;
   FeatureImage?: InputMaybe<Scalars["ID"]>;
   HomeSummary?: InputMaybe<Scalars["String"]>;
   Icon?: InputMaybe<Scalars["ID"]>;
@@ -1306,10 +1310,16 @@ export type ProjectTypeInput = {
   PageContent?: InputMaybe<Array<Scalars["ProjectTypePageContentDynamicZoneInput"]>>;
   PageSummary?: InputMaybe<Scalars["String"]>;
   Slug?: InputMaybe<Scalars["String"]>;
+  Status?: InputMaybe<Enum_Projecttype_Status>;
   publishedAt?: InputMaybe<Scalars["DateTime"]>;
 };
 
-export type ProjectTypePageContentDynamicZone = ComponentCommonTextBlock | Error;
+export type ProjectTypePageContentDynamicZone =
+  | ComponentCommonActionButton
+  | ComponentCommonHtml
+  | ComponentCommonImage
+  | ComponentCommonTextBlock
+  | Error;
 
 export enum PublicationState {
   Live = "LIVE",
@@ -1522,11 +1532,18 @@ export type Resource = {
   __typename?: "Resource";
   Description?: Maybe<Scalars["String"]>;
   Image?: Maybe<UploadFileEntityResponse>;
+  Links?: Maybe<Array<Maybe<ComponentCommonActionButton>>>;
   Media?: Maybe<UploadFileEntityResponse>;
   Title?: Maybe<Scalars["String"]>;
   createdAt?: Maybe<Scalars["DateTime"]>;
   publishedAt?: Maybe<Scalars["DateTime"]>;
   updatedAt?: Maybe<Scalars["DateTime"]>;
+};
+
+export type ResourceLinksArgs = {
+  filters?: InputMaybe<ComponentCommonActionButtonFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
 };
 
 export type ResourceEntity = {
@@ -1548,6 +1565,7 @@ export type ResourceEntityResponseCollection = {
 
 export type ResourceFiltersInput = {
   Description?: InputMaybe<StringFilterInput>;
+  Links?: InputMaybe<ComponentCommonActionButtonFiltersInput>;
   Title?: InputMaybe<StringFilterInput>;
   and?: InputMaybe<Array<InputMaybe<ResourceFiltersInput>>>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
@@ -1561,6 +1579,7 @@ export type ResourceFiltersInput = {
 export type ResourceInput = {
   Description?: InputMaybe<Scalars["String"]>;
   Image?: InputMaybe<Scalars["ID"]>;
+  Links?: InputMaybe<Array<InputMaybe<ComponentCommonActionButtonInput>>>;
   Media?: InputMaybe<Scalars["ID"]>;
   Title?: InputMaybe<Scalars["String"]>;
   publishedAt?: InputMaybe<Scalars["DateTime"]>;
@@ -2401,10 +2420,30 @@ export type ProjectsQuery = {
       attributes?: {
         __typename?: "ProjectType";
         Name?: string | null;
-        Content?: string | null;
         HomeSummary?: string | null;
         PageSummary?: string | null;
         Slug: string;
+        Status?: Enum_Projecttype_Status | null;
+        PageContent?: Array<
+          | { __typename: "ComponentCommonActionButton"; Text: string; Link: string }
+          | { __typename: "ComponentCommonHtml"; HTML: string }
+          | {
+              __typename: "ComponentCommonImage";
+              AltText?: string | null;
+              Caption?: string | null;
+              Media: {
+                __typename?: "UploadFileEntityResponse";
+                data?: {
+                  __typename?: "UploadFileEntity";
+                  id?: string | null;
+                  attributes?: { __typename?: "UploadFile"; name: string; url: string; size: number } | null;
+                } | null;
+              };
+            }
+          | { __typename: "ComponentCommonTextBlock"; Text: string }
+          | { __typename: "Error" }
+          | null
+        > | null;
         Icon?: {
           __typename?: "UploadFileEntityResponse";
           data?: {
@@ -2451,6 +2490,12 @@ export type ResourcesQuery = {
             attributes?: { __typename?: "UploadFile"; name: string; url: string; size: number } | null;
           } | null;
         } | null;
+        Links?: Array<{
+          __typename?: "ComponentCommonActionButton";
+          id: string;
+          Link: string;
+          Text: string;
+        } | null> | null;
         Media?: {
           __typename?: "UploadFileEntityResponse";
           data?: {
@@ -3754,9 +3799,99 @@ export const ProjectsDocument = {
                           kind: "SelectionSet",
                           selections: [
                             { kind: "Field", name: { kind: "Name", value: "Name" } },
-                            { kind: "Field", name: { kind: "Name", value: "Content" } },
                             { kind: "Field", name: { kind: "Name", value: "HomeSummary" } },
                             { kind: "Field", name: { kind: "Name", value: "PageSummary" } },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "PageContent" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  { kind: "Field", name: { kind: "Name", value: "__typename" } },
+                                  {
+                                    kind: "InlineFragment",
+                                    typeCondition: {
+                                      kind: "NamedType",
+                                      name: { kind: "Name", value: "ComponentCommonHtml" },
+                                    },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [{ kind: "Field", name: { kind: "Name", value: "HTML" } }],
+                                    },
+                                  },
+                                  {
+                                    kind: "InlineFragment",
+                                    typeCondition: {
+                                      kind: "NamedType",
+                                      name: { kind: "Name", value: "ComponentCommonImage" },
+                                    },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        { kind: "Field", name: { kind: "Name", value: "AltText" } },
+                                        { kind: "Field", name: { kind: "Name", value: "Caption" } },
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "Media" },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              {
+                                                kind: "Field",
+                                                name: { kind: "Name", value: "data" },
+                                                selectionSet: {
+                                                  kind: "SelectionSet",
+                                                  selections: [
+                                                    { kind: "Field", name: { kind: "Name", value: "id" } },
+                                                    {
+                                                      kind: "Field",
+                                                      name: { kind: "Name", value: "attributes" },
+                                                      selectionSet: {
+                                                        kind: "SelectionSet",
+                                                        selections: [
+                                                          { kind: "Field", name: { kind: "Name", value: "name" } },
+                                                          { kind: "Field", name: { kind: "Name", value: "url" } },
+                                                          { kind: "Field", name: { kind: "Name", value: "size" } },
+                                                        ],
+                                                      },
+                                                    },
+                                                  ],
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                  {
+                                    kind: "InlineFragment",
+                                    typeCondition: {
+                                      kind: "NamedType",
+                                      name: { kind: "Name", value: "ComponentCommonTextBlock" },
+                                    },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [{ kind: "Field", name: { kind: "Name", value: "Text" } }],
+                                    },
+                                  },
+                                  {
+                                    kind: "InlineFragment",
+                                    typeCondition: {
+                                      kind: "NamedType",
+                                      name: { kind: "Name", value: "ComponentCommonActionButton" },
+                                    },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        { kind: "Field", name: { kind: "Name", value: "Text" } },
+                                        { kind: "Field", name: { kind: "Name", value: "Link" } },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
                             {
                               kind: "Field",
                               name: { kind: "Name", value: "Icon" },
@@ -3820,6 +3955,7 @@ export const ProjectsDocument = {
                               },
                             },
                             { kind: "Field", name: { kind: "Name", value: "Slug" } },
+                            { kind: "Field", name: { kind: "Name", value: "Status" } },
                           ],
                         },
                       },
@@ -3918,6 +4054,18 @@ export const ResourcesDocument = {
                               },
                             },
                             { kind: "Field", name: { kind: "Name", value: "Description" } },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "Links" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  { kind: "Field", name: { kind: "Name", value: "id" } },
+                                  { kind: "Field", name: { kind: "Name", value: "Link" } },
+                                  { kind: "Field", name: { kind: "Name", value: "Text" } },
+                                ],
+                              },
+                            },
                             {
                               kind: "Field",
                               name: { kind: "Name", value: "Media" },

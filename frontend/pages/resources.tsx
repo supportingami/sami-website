@@ -8,6 +8,16 @@ import { ResourcesDocument } from "../graphql/generated";
 import { serverQuery } from "lib/graphql";
 import PageLayout from "components/layout/pageLayout";
 
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+  return array;
+}
+
 export const getStaticProps = async ({}: GetStaticPropsContext) => {
   let resources: IResource[] = [];
   const res = await serverQuery<ResourcesQuery>(ResourcesDocument);
@@ -19,7 +29,7 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
   }
   return {
     props: {
-      resources,
+      resources: shuffleArray(resources),
     },
   };
 };

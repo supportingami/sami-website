@@ -232,30 +232,6 @@
     "order": 3
   },
   {
-    "component_id": 28,
-    "component_type": "common.html",
-    "entity_id": 23,
-    "field": "ContentBlocks",
-    "id": 92,
-    "order": 1
-  },
-  {
-    "component_id": 8,
-    "component_type": "common.image",
-    "entity_id": 23,
-    "field": "ContentBlocks",
-    "id": 93,
-    "order": 2
-  },
-  {
-    "component_id": 29,
-    "component_type": "common.html",
-    "entity_id": 23,
-    "field": "ContentBlocks",
-    "id": 94,
-    "order": 3
-  },
-  {
     "component_id": 23,
     "component_type": "common.html",
     "entity_id": 5,
@@ -293,6 +269,30 @@
     "entity_id": 3,
     "field": "ContentBlocks",
     "id": 105,
+    "order": 3
+  },
+  {
+    "component_id": 28,
+    "component_type": "common.html",
+    "entity_id": 23,
+    "field": "ContentBlocks",
+    "id": 112,
+    "order": 1
+  },
+  {
+    "component_id": 8,
+    "component_type": "common.image",
+    "entity_id": 23,
+    "field": "ContentBlocks",
+    "id": 113,
+    "order": 2
+  },
+  {
+    "component_id": 29,
+    "component_type": "common.html",
+    "entity_id": 23,
+    "field": "ContentBlocks",
+    "id": 114,
     "order": 3
   }
 ]
