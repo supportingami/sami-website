@@ -13,7 +13,7 @@ interface IPm2WithPromises extends pm2Type {
  * Adapted from: https://github.com/3axap4eHko/pm2-promise/blob/master/index.js
  * Designed to match syntax of https://github.com/expo/pm2
  * */
-export const Pm2WithPromises = () => {
+const Pm2WithPromises = () => {
   const API = require("pm2").custom;
   const promises = {};
   const descriptors = Object.getOwnPropertyDescriptors(API.prototype);

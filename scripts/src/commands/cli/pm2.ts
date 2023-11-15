@@ -1,5 +1,4 @@
 import chalk from "chalk";
-import { spawnSync } from "child_process";
 import { Command } from "commander";
 import type { ConcurrentlyCommandInput } from "concurrently";
 import concurrently from "concurrently";
@@ -9,36 +8,39 @@ import pm2 from "pm2";
 import { PATHS } from "../../paths";
 import { loadEnv } from "../../utils";
 import type { IEnvLoaded } from "../../utils";
+import execa from "execa";
 
 const pm2Bin = resolve(PATHS.scriptsDir, "node_modules", ".bin", "pm2");
 
-/***************************************************************************************
+interface IProgramOptions {
+  environment?: string;
+  forceRestart?: boolean;
+}
+/**
+ * @deprecated (?) - easier to use pm2 config file approach
+ *
  * Production server management scripts
  * These are mostly wrappers around pm2 process management system
  *
  * CLI
  * @example yarn workspace scripts cli pm2 -e development --force-restart
- *************************************************************************************/
-
-interface IProgramOptions {
-  environment?: string;
-  only?: "frontend" | "backend";
-  forceRestart?: boolean;
-}
-
+ **/
 const program = new Command("pm2");
+
 export default program
   .description("PM2 server management")
   .option("-e --environment <string>", "Name of environment to use", "development")
-  .option("-f --force-restart", "Force restart of running applications")
+  .option("-f --force-restart", "Force restart of running applications", true)
+  .option("--no-force-restart")
   .argument("[subcommand]", "pm2Command", "start")
   .action(async (subcommand, options: IProgramOptions) => {
+    console.table({ ...options, subcommand });
     // if passing `pm2 start` run custom start command
     // Otherwise pass back default `pm2 [command]`
     if (subcommand === "start") {
       return new StartCmd(options).run().then(() => process.exit(0));
     } else {
-      spawnSync(`${pm2Bin} ${subcommand}`, { shell: true, stdio: "inherit" });
+      await execa(`${pm2Bin} ${subcommand}`, { shell: true, stdio: "inherit" });
     }
   });
 
@@ -51,22 +53,18 @@ class StartCmd {
   constructor(private options: IProgramOptions) {}
 
   public async run() {
-    const { environment, only } = this.options;
+    const { environment } = this.options;
     const envLoaded = await loadEnv(environment);
 
     await this.startPm2();
     await this.setupLogging();
-
-    if (only !== "frontend") {
-      const backendStart = this.getBackendStartCommand(envLoaded);
-      await this.startPm2Process(backendStart);
-    }
-    this.waitForServer(1337);
-    if (only !== "backend") {
-      // when running frontend always assume local config
-      const frontendStart = this.getFrontendCommand();
-      await this.startPm2Process(frontendStart);
-    }
+    const backendStart = this.getBackendStartCommand(envLoaded);
+    await this.startPm2Process(backendStart);
+    // await this.logOutputs();
+    await this.waitForServer(1337);
+    // when running frontend always assume local config
+    const frontendStart = this.getFrontendCommand();
+    await this.startPm2Process(frontendStart);
     await this.logOutputs();
   }
 
@@ -85,8 +83,8 @@ class StartCmd {
 
   private async startPm2Process(options: pm2.StartOptions) {
     const { name } = options;
-    const output = resolve(this.logsDir, `${name}.log`);
-    const error = resolve(this.logsDir, `${name}.log`);
+    const output = resolve(this.logsDir, `${name}.output.log`);
+    const error = resolve(this.logsDir, `${name}.error.log`);
     return new Promise<pm2.Proc>((resolve, reject) => {
       pm2.start(
         {
@@ -96,6 +94,7 @@ class StartCmd {
           force: this.options.forceRestart,
           autorestart: true,
           max_restarts: 5,
+          min_uptime: 10000,
           restart_delay: 5000,
         },
         (err, proc) => {
@@ -150,11 +149,11 @@ class StartCmd {
     };
   }
 
-  private waitForServer(port: number) {
+  private async waitForServer(port: number) {
     const waitOnBinPath = resolve(PATHS.scriptsDir, "node_modules", ".bin", "wait-on");
     const endpoint = `http://localhost:${port}`;
     console.log(`Waiting for ready: ${endpoint}...`);
-    return spawnSync(`${waitOnBinPath} ${endpoint}`, { stdio: "inherit", shell: true });
+    return execa(`${waitOnBinPath} ${endpoint}`, { stdio: "inherit", shell: true });
   }
 
   private getFrontendCommand(): pm2.StartOptions {
@@ -169,7 +168,7 @@ class StartCmd {
   }
 
   private async monitorPM2() {
-    return spawnSync(`${pm2Bin} monit`, { shell: true, stdio: "inherit" });
+    return execa(`${pm2Bin} monit`, { shell: true, stdio: "inherit" });
   }
 
   private async clearPM2Logs() {

@@ -6,6 +6,7 @@ import { resolve } from "path";
 import { PATHS } from "../../paths";
 import { loadEnv } from "../../utils";
 import type { IEnvLoaded } from "../../utils";
+import execa from "execa";
 
 /***************************************************************************************
  * CLI
@@ -15,13 +16,16 @@ import type { IEnvLoaded } from "../../utils";
 interface IProgramOptions {
   environment?: string;
   only?: "frontend" | "backend";
+  /** Build backend before starting - required if strapi dashboard or plugins updated */
+  build?: boolean;
 }
 
 const program = new Command("start");
 export default program
   .description("Start local development server")
-  .option("-e --environment <string>", "Name of environment to use")
+  .option("-e --environment <string>", "Name of environment to use", "development")
   .option("-o --only <string>", "Specify only 'frontend' or 'backend'")
+  .option("-b --build", "Build backend before starting server")
   .action(async (options: IProgramOptions) => {
     return new StartCmd().run(options).then(() => process.exit(0));
   });
@@ -41,6 +45,9 @@ class StartCmd {
     const envLoaded = await loadEnv(environment);
     const cmds: ConcurrentlyCommandInput[] = [];
     if (only !== "frontend") {
+      if (options.build) {
+        await this.buildBackend();
+      }
       const backendStart = this.getBackendStartCommand(envLoaded);
       cmds.push(backendStart);
     }
@@ -53,6 +60,11 @@ class StartCmd {
       ["killOthers" as any]: ["failure", "success"],
     });
     await result;
+  }
+
+  private async buildBackend() {
+    console.log(chalk.blue("Building backend..."));
+    await execa(`yarn build`, { stdio: "inherit", shell: true, cwd: PATHS.backendDir });
   }
 
   private getBackendStartCommand(envLoaded: IEnvLoaded): ConcurrentlyCommandInput {
@@ -70,6 +82,7 @@ class StartCmd {
   }
 
   private getFrontendCommand() {
+    console.log(chalk.blue("Starting frontend..."));
     // use wait-on to wait for backend server to be ready before starting frontend
     const waitOnBinPath = resolve(PATHS.scriptsDir, "node_modules", ".bin", "wait-on");
     return {
