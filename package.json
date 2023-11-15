@@ -21,6 +21,7 @@
     "lint:style": "prettier --check '**/*.{md,json,js,tsx,ts}'",
     "scripts": "yarn workspace scripts start",
     "start": "yarn scripts cli start",
+    "pm2": "yarn scripts cli pm2",
     "start:docker": "docker compose -p sami-website -f docker/docker-compose.yml up"
   },
   "devDependencies": {
