@@ -13,7 +13,7 @@
     "entity_id": 1,
     "field": "MissionStatement",
     "id": 34,
-    "order": 1
+    "order": 2
   },
   {
     "component_id": 1,
@@ -21,7 +21,7 @@
     "entity_id": 1,
     "field": "ProjectSummary",
     "id": 35,
-    "order": 1
+    "order": 3
   },
   {
     "component_id": 1,
@@ -29,7 +29,7 @@
     "entity_id": 1,
     "field": "GetInvolved",
     "id": 36,
-    "order": 1
+    "order": 4
   },
   {
     "component_id": 1,
@@ -37,6 +37,6 @@
     "entity_id": 1,
     "field": "ImpactSection",
     "id": 37,
-    "order": 1
+    "order": 5
   }
 ]
