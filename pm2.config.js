@@ -14,7 +14,7 @@ const apps = [
   {
     name: "sami_backend",
     script,
-    args: ["start", "--only", "backend", "--build"],
+    args: ["start", "--only", "backend", "--build", "--production"],
     restart_delay: 5000,
     ...getLogPaths("backend"),
   },
