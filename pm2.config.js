@@ -5,6 +5,7 @@ const { readdirSync, existsSync, mkdirSync } = require("fs");
 const script = getYarnScriptPath();
 
 // pm2 delete all; pm2 start pm2.config.js
+// pm2 monit;
 
 /**
  * Shared config used on both export and standalone builds
@@ -16,6 +17,7 @@ const apps = [
     script,
     args: ["start", "--only", "backend", "--build", "--production"],
     restart_delay: 5000,
+    node_args: "--max-old-space-size=2048",
     ...getLogPaths("backend"),
   },
   // watch not required as next server live-reloads
@@ -25,6 +27,7 @@ const apps = [
     script,
     args: ["start", "--only", "frontend"],
     restart_delay: 5000,
+    node_args: "--max-old-space-size=2048",
     ...getLogPaths("frontend"),
   },
 ];
