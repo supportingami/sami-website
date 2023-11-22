@@ -1,5 +1,5 @@
 ############# Run Via CLI #################
-# yarn scripts docker build -e docker
+# yarn scripts docker build
 # yarn scripts docker run
 
 # TODO - add common logging methods
