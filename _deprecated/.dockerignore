@@ -25,7 +25,7 @@ frontend/.vercel
 frontend/out
 frontend/.env
 
-scripts
+scripts/node_modules
 
 .dockerignore
 docker-compose.yml

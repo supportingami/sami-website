@@ -36,3 +36,26 @@
 
 @tailwind components;
 @tailwind utilities;
+
+// Custom page shape dividers
+// Generated from https://www.shapedivider.app/
+.shape-divider {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.shape-divider svg {
+  position: relative;
+  display: block;
+  width: calc(102% + 1.3px);
+  height: 81px;
+}
+
+.shape-divider .shape-fill {
+  fill: hsl(var(--b1));
+}

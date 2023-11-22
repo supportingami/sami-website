@@ -16,6 +16,8 @@ out
 !.yarn/sdks
 !.yarn/versions
 
+*.log
+
 # build
 backend/data
 backend/build

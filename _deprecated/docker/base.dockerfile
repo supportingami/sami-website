@@ -17,6 +17,7 @@ ENV YARN_CACHE_FOLDER=/app/.yarn/cache
 COPY ./package.json ./yarn.lock ./.yarnrc.yml ./
 COPY ./backend/package.json ./backend/package.json
 COPY ./frontend/package.json ./frontend/package.json
+COPY ./scripts/package.json ./scripts/package.json
 
 ENV PATH /app/node_modules/.bin:$PATH
 
@@ -25,4 +26,4 @@ RUN yarn install
 COPY . .
 
 
-
+# docker start

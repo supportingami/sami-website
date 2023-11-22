@@ -9,11 +9,11 @@
   },
   {
     "name": "blog_posts",
-    "seq": 23
+    "seq": 24
   },
   {
     "name": "blog_posts_components",
-    "seq": 114
+    "seq": 116
   },
   {
     "name": "blog_tags",
@@ -25,7 +25,7 @@
   },
   {
     "name": "components_common_htmls",
-    "seq": 36
+    "seq": 37
   },
   {
     "name": "components_common_images",
@@ -33,7 +33,7 @@
   },
   {
     "name": "components_common_text_blocks",
-    "seq": 3
+    "seq": 4
   },
   {
     "name": "components_home_get_involveds",
@@ -41,7 +41,7 @@
   },
   {
     "name": "components_home_get_involveds_components",
-    "seq": 9
+    "seq": 11
   },
   {
     "name": "components_home_hero_images",
@@ -49,7 +49,7 @@
   },
   {
     "name": "components_home_hero_images_components",
-    "seq": 21
+    "seq": 23
   },
   {
     "name": "components_home_impact_numbers",
@@ -61,7 +61,7 @@
   },
   {
     "name": "components_home_impact_sections_components",
-    "seq": 12
+    "seq": 15
   },
   {
     "name": "components_home_mission_statements",
@@ -69,7 +69,7 @@
   },
   {
     "name": "components_home_mission_statements_components",
-    "seq": 11
+    "seq": 12
   },
   {
     "name": "components_home_project_summaries",
@@ -77,7 +77,7 @@
   },
   {
     "name": "components_home_project_summaries_components",
-    "seq": 27
+    "seq": 28
   },
   {
     "name": "components_home_project_summary_items",
@@ -117,7 +117,7 @@
   },
   {
     "name": "home_contents_components",
-    "seq": 37
+    "seq": 42
   },
   {
     "name": "members",

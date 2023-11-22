@@ -20,7 +20,25 @@ yarn build
 
 A secondary staging site is setup to run a live strapi server and allow authors to add content and see live changes
 
-**TODO** - Link with docs below to explain how to deploy
+Frontend and backend servers are managed using [pm2](https://pm2.keymetrics.io/docs).
+
+```sh
+npm i -g pm2
+```
+
+The repo should be cloned to the server, and created/recreated as required via
+
+```sh
+pm2 delete all; pm2 start pm2.config.js
+```
+
+Processes can be monitored via `pm2 logs` or `pm2 monit` commands
+
+### Reverse Proxy
+
+**TODO**
+
+===
 
 # Old Docs (To Review)
 
