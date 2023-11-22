@@ -70,7 +70,13 @@ class StartCmd {
 
   private async buildBackend() {
     console.log(chalk.blue("Building backend..."));
-    await execa(`yarn build`, { stdio: "inherit", shell: true, cwd: PATHS.backendDir });
+    try {
+      await execa(`yarn build`, { stdio: "inherit", shell: true, cwd: PATHS.backendDir });
+    } catch (error) {
+      console.log("backend build error:");
+      console.error(error);
+      process.exit(1);
+    }
   }
 
   private getBackendStartCommand(envLoaded: IEnvLoaded): ConcurrentlyCommandInput {
