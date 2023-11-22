@@ -5,6 +5,7 @@ import execa from "execa";
 import { loadEnv } from "../../utils";
 import { PATHS } from "../../paths";
 import packageJson from "../../../../package.json";
+import { spawnSync } from "child_process";
 
 // version number to tag base image with
 export const BASE_TAG = packageJson.version;
@@ -50,12 +51,14 @@ class DockerBuildCmd {
       await this.buildBase();
     }
     if (buildTargets.includes("backend")) {
-      await execa(`yarn workspace backend build`, {
+      console.log(chalk.blue("Building strapi admin..."));
+      // prefer spawn over execa due to memory issues on server
+      spawnSync(`yarn workspace backend build`, {
         cwd: PATHS.rootDir,
         shell: true,
         stdio: "inherit",
         // ensure docker config files used
-        env: { NODE_ENV: "docker", DATABASE_URL: "will_populate_later" },
+        env: { NODE_ENV: "docker", DATABASE_URL: "will_populate_later", NODE_OPTIONS: "--max_old_space_size=2048" },
       });
       await this.buildBackend();
       // TODO - ensure backend bootstrapped and populate keys to docker/data .env
