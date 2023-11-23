@@ -62,8 +62,9 @@ services:
     volumes:
       - ./pm2.config.js:/app/pm2.config.js
       - ./config/docker.env:/app/config/docker.env
-      - ./docker/data/uploads:/app/public/uploads
+      - ./docker/data/uploads:/app/backend/public/uploads
       - ./docker/data/db:/app/db
+      # - ./backend/build:/app/backend/build
     env_file:
       - ./config/docker.env
       - ./config/docker.local.env

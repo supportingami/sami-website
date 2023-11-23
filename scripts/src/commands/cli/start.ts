@@ -6,7 +6,7 @@ import { resolve } from "path";
 import { PATHS } from "../../paths";
 import { loadEnv } from "../../utils";
 import type { IEnvLoaded } from "../../utils";
-import execa from "execa";
+import { spawnSync } from "child_process";
 
 /***************************************************************************************
  * CLI
@@ -70,13 +70,7 @@ class StartCmd {
 
   private async buildBackend() {
     console.log(chalk.blue("Building backend..."));
-    try {
-      await execa(`yarn build`, { stdio: "inherit", shell: true, cwd: PATHS.backendDir });
-    } catch (error) {
-      console.log("backend build error:");
-      console.error(error);
-      process.exit(1);
-    }
+    spawnSync(`yarn build`, { stdio: "inherit", shell: true, cwd: PATHS.backendDir });
   }
 
   private getBackendStartCommand(envLoaded: IEnvLoaded): ConcurrentlyCommandInput {
