@@ -89,7 +89,7 @@ class StrapiBootstrap {
    * https://github.dev/strapi/strapi/blob/7039c0d22836c94457130515b3a55eb93d2411f8/packages/core/admin/server/services/api-token.js#L64
    */
   private async addAdminToken(token: IAdminToken) {
-    const salt = this.app.config.get("admin.apiToken.salt");
+    const salt: string = this.app.config.get("admin.apiToken.salt");
     if (!salt) {
       console.error("no salt provided");
       process.exit(1);

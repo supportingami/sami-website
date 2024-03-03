@@ -16,7 +16,7 @@ WORKDIR /app
 COPY . .
 
 # Run app
-FROM node:18-alpine as frontend
+FROM node:20-alpine as frontend
 WORKDIR /app
 RUN yarn global add pm2 && yarn cache clean
 
