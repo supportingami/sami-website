@@ -1,4 +1,4 @@
-module.exports = ({ env }) => {
+export default ({ env }) => {
   // default allow script and images hosted on any https domain as well as
   // http self-hosted domains
   const srcs = ["'self'", "https:"];
@@ -11,7 +11,9 @@ module.exports = ({ env }) => {
     srcs.push(`${subDomain}.${hostDomain}`);
   }
   return [
+    "strapi::logger",
     "strapi::errors",
+
     // Required for https://github.com/Baboo7/strapi-plugin-import-export-entries
     {
       name: "strapi::security",
@@ -30,7 +32,6 @@ module.exports = ({ env }) => {
     },
     "strapi::cors",
     "strapi::poweredBy",
-    "strapi::logger",
     "strapi::query",
     "strapi::body",
     "strapi::session",
