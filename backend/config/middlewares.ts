@@ -1,7 +1,7 @@
 export default ({ env }) => {
   // default allow script and images hosted on any https domain as well as
   // http self-hosted domains
-  const srcs = ["'self'", "https:"];
+  const srcs = ["'self'", "https:", "googleusercontent.com", "storage.googleapis.com", "cdn.jsdelivr.net"];
   const hostDomain = env("STRAPI_DOMAIN");
   if (hostDomain) {
     srcs.push(hostDomain);
@@ -21,7 +21,7 @@ export default ({ env }) => {
         contentSecurityPolicy: {
           useDefaults: true,
           directives: {
-            "script-src": ["'self'", "cdn.jsdelivr.net", "blob:", "googleusercontent.com"],
+            "script-src": ["'self'", "blob:"],
             "connect-src": srcs,
             "img-src": [...srcs, "data:", "blob:"],
             "media-src": [...srcs, "data:", "blob:"],

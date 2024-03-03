@@ -20,8 +20,9 @@ COPY . .
 # Backend should already be built, so just copy over
 # https://docs.strapi.io/dev-docs/installation/docker
 
-FROM node:18-alpine
+FROM node:20-alpine
 RUN apk add --no-cache vips-dev
+
 RUN rm -rf /var/cache/apk/*
 
 
@@ -32,6 +33,7 @@ COPY --from=builder /app/backend/ ./
 ENV PATH /app/node_modules/.bin:$PATH
 ENV HOST 0.0.0.0
 EXPOSE 1337
+VOLUME /app/data
 CMD ["strapi","start"]
 
 

@@ -59,8 +59,8 @@ export async function createStrapiInstance(serveAdminPanel = false, autoReload =
   // ensure db uses same file as backend
   if (app.config.database.connection?.connection?.filename) {
     app.config.database.connection.connection.filename = path.resolve(
-      PATHS.backendDir,
-      process.env.DATABASE_FILENAME || ".tmp/data.db"
+      PATHS.dataDir,
+      process.env.DATABASE_FILENAME || "data.db"
     );
   }
 

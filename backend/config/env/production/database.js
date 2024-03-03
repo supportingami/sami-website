@@ -6,23 +6,16 @@ module.exports = ({ env }) => {
     process.exitCode = 1;
     throw new Error("DATABASE_URL not provided");
   }
-  const { host, port, database, user, password } = parse(env("DATABASE_URL"));
 
   return {
+    // neondb connection string
+    // https://github.com/knex/knex/issues/5161
     connection: {
       client: "postgres",
-      connection: {
-        host,
-        port,
-        database,
-        user,
-        password,
-      },
+      connection: env("DATABASE_URL"),
       pool: {
-        min: 1,
-        max: 2, // TODO - should expose/increase if using dedicated db instance
+        min: 0,
       },
-      debug: false,
     },
   };
 };

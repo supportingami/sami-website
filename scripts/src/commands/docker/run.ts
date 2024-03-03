@@ -10,12 +10,7 @@ import { ensureDirSync } from "fs-extra";
  * @example yarn
  *************************************************************************************/
 
-interface IProgramOptions {
-  environment?: string;
-  only?: "base" | "backend" | "frontend";
-  standalone?: boolean;
-  development?: boolean;
-}
+interface IProgramOptions {}
 
 const program = new Command("run");
 export default program.description("Run docker").action(async (options: IProgramOptions) => {
