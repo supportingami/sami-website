@@ -51,11 +51,8 @@
       "prettier --write"
     ]
   },
-  "packageManager": "yarn@3.6.3",
+  "packageManager": "yarn@4.1.0",
   "engines": {
     "node": ">=16.x <=20.x"
-  },
-  "dependencies": {
-    "sharp": "^0.30.7"
   }
 }
