@@ -56,7 +56,7 @@ services:
       - ./config/docker.local.env
     environment:
       # - DATABASE_URL=postgres://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@db:5432/${DATABASE_NAME}
-      - DATABASE_FILENAME=db/sami-docker.db
+      - DATABASE_FILENAME=app/data/sami-dev.db
       # Load docker configuration
       - NODE_ENV=docker
     healthcheck:
@@ -65,6 +65,14 @@ services:
       timeout: 30s
       retries: 3
       start_period: 30s
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 2GB
+        reservations:
+          cpus: "0.1"
+          memory: 500M
     networks:
       - webserver
 
@@ -74,14 +82,24 @@ services:
     image: samicharity/gcs_fuse:1.3.0
     # Mount local data folder to cloud storage gcs
     # Files added to this directory will be uploaded to storage (but not deleted)
+    # https://blog.konpat.me/dev/2017/02/26/docker-recipe-for-gcsfuse-google-cloud-storage-fuse-2.html
     volumes:
-      - ./docker/data:/data
+      - ./docker/data/db:/data/db
+      - ./docker/data/uploads:/data/uploads
       - ./backend/config/service-account.json:/service-account.json
     environment:
       - GCS_BUCKET_NAME=sami_website_uploads-18fd1f1
       - GCS_PROJECT=sami-website-365718
       - GOOGLE_APPLICATION_CREDENTIALS=/service-account.json
     privileged: true
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 500M
+        reservations:
+          cpus: "0.05"
+          memory: 50M
     # command: "/bin/ash -c 'while sleep 3600; do :; done'"
 
   frontend:
