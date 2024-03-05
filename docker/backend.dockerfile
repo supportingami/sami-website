@@ -21,9 +21,9 @@ COPY . .
 # https://docs.strapi.io/dev-docs/installation/docker
 
 FROM node:20-alpine
-RUN apk add --no-cache vips-dev
 
-RUN rm -rf /var/cache/apk/*
+RUN apk add --no-cache vips-dev \
+    && rm -rf /var/cache/apk/* && rm -rf /tmp/*
 
 
 ENV NODE_ENV=${ENV_NAME}

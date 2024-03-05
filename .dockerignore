@@ -16,7 +16,8 @@ ci
 config
 data/backups
 data/sqlite
-docker
+docker/
+!docker/gcs_fuse_run.sh
 docs
 
 # Frontend

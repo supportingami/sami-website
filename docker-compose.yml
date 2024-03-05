@@ -75,11 +75,12 @@ services:
     # Mount local data folder to cloud storage gcs
     # Files added to this directory will be uploaded to storage (but not deleted)
     volumes:
-      - ./data/gcs:/mnt/gcs
+      - ./docker/data:/data
+      - ./backend/config/service-account.json:/service-account.json
     environment:
       - GCS_BUCKET_NAME=sami_website_uploads-18fd1f1
       - GCS_PROJECT=sami-website-365718
-      # - GOOGLE_APPLICATION_CREDENTIALS=/tmp/creds.json
+      - GOOGLE_APPLICATION_CREDENTIALS=/service-account.json
     privileged: true
     # command: "/bin/ash -c 'while sleep 3600; do :; done'"
 
