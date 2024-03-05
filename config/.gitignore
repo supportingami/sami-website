@@ -1,5 +1,3 @@
 local.env
 production.env
 *.local.env
-
-service-account.json

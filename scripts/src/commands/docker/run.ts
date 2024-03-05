@@ -10,12 +10,17 @@ import { ensureDirSync } from "fs-extra";
  * @example yarn
  *************************************************************************************/
 
-interface IProgramOptions {}
+interface IProgramOptions {
+  only?: string;
+}
 
 const program = new Command("run");
-export default program.description("Run docker").action(async (options: IProgramOptions) => {
-  return new DockerRunCmd().run(options).then(() => process.exit(0));
-});
+export default program
+  .description("Run docker")
+  .option("-o --only <string>", "Only run single container'backend', 'frontend'")
+  .action(async (options: IProgramOptions) => {
+    return new DockerRunCmd().run(options).then(() => process.exit(0));
+  });
 
 /***************************************************************************************
  * Main Methods
@@ -39,6 +44,8 @@ class DockerRunCmd {
       env: {
         BASE_TAG,
         NODE_ENV: "development",
+        // https://docs.docker.com/compose/profiles/
+        COMPOSE_PROFILES: options.only || "backend,frontend",
       },
     });
   }

@@ -40,6 +40,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
 
   backend:
+    profiles: [backend]
     container_name: sami_backend
     image: samicharity/backend:1.3.0
     # command: "/bin/ash -c 'while sleep 3600; do :; done'"
@@ -67,7 +68,23 @@ services:
     networks:
       - webserver
 
+  gcs_fuse:
+    profiles: [gcs_fuse]
+    container_name: gcs_fuse
+    image: samicharity/gcs_fuse:1.3.0
+    # Mount local data folder to cloud storage gcs
+    # Files added to this directory will be uploaded to storage (but not deleted)
+    volumes:
+      - ./data/gcs:/mnt/gcs
+    environment:
+      - GCS_BUCKET_NAME=sami_website_uploads-18fd1f1
+      - GCS_PROJECT=sami-website-365718
+      # - GOOGLE_APPLICATION_CREDENTIALS=/tmp/creds.json
+    privileged: true
+    # command: "/bin/ash -c 'while sleep 3600; do :; done'"
+
   frontend:
+    profiles: [frontend]
     container_name: sami_frontend
     image: samicharity/frontend:1.3.0
     command: next dev

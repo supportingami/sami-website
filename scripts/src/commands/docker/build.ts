@@ -42,7 +42,7 @@ class DockerBuildCmd {
 
   public async run(options: IProgramOptions) {
     const { only } = options;
-    const buildTargets = ["base", "backend", "frontend"].filter((target) => only.includes(target));
+    const buildTargets = ["base", "backend", "frontend", "gcs_fuse"].filter((target) => only.includes(target));
 
     // TODO - create `.env` in docker file instead of loading global config
 
@@ -62,6 +62,9 @@ class DockerBuildCmd {
       });
       await this.buildBackend();
       // TODO - ensure backend bootstrapped and populate keys to docker/data .env
+    }
+    if (buildTargets.includes("gcs_fuse")) {
+      await this.buildGCSFuse();
     }
     if (buildTargets.includes("frontend")) {
       //  Build locally frontend and backend locally
@@ -88,6 +91,16 @@ class DockerBuildCmd {
     await execa(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
     console.log(chalk.green("Built backend"));
   }
+
+  private async buildGCSFuse() {
+    console.log(chalk.blue("Building gcs_fuse..."));
+    const args = `--tag samicharity/gcs_fuse:latest --tag samicharity/gcs_fuse:${BASE_TAG} --build-arg "ENV_NAME=development" --build-arg "BASE_TAG=${BASE_TAG}"`;
+    const cmd = `docker build --file docker/gcs_fuse.dockerfile ${args} .`;
+    console.log(chalk.gray(cmd));
+    await execa(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
+    console.log(chalk.green("Built gcs_fuse"));
+  }
+
   private async buildFrontend() {
     console.log(chalk.blue("Building frontend..."));
     const args = `--tag samicharity/frontend:latest --tag samicharity/frontend:${BASE_TAG} --build-arg "ENV_NAME=development" --build-arg "BASE_TAG=${BASE_TAG}"`;

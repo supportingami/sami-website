@@ -121,3 +121,4 @@ dist
 ############################
 *.db
 *.db.journal
+config/service-account.json
