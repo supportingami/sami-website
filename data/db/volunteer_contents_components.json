@@ -4,7 +4,7 @@
     "component_type": "common.html",
     "entity_id": 1,
     "field": "Content",
-    "id": 35,
+    "id": 87,
     "order": 1
   },
   {
@@ -12,23 +12,39 @@
     "component_type": "common.html",
     "entity_id": 1,
     "field": "Content",
-    "id": 36,
+    "id": 88,
     "order": 2
+  },
+  {
+    "component_id": 12,
+    "component_type": "common.image",
+    "entity_id": 1,
+    "field": "Content",
+    "id": 89,
+    "order": 3
+  },
+  {
+    "component_id": 37,
+    "component_type": "common.html",
+    "entity_id": 1,
+    "field": "Content",
+    "id": 90,
+    "order": 4
   },
   {
     "component_id": 3,
     "component_type": "common.html",
     "entity_id": 1,
     "field": "Content",
-    "id": 37,
-    "order": 3
+    "id": 91,
+    "order": 5
   },
   {
     "component_id": 8,
     "component_type": "common.action-button",
     "entity_id": 1,
     "field": "Content",
-    "id": 38,
-    "order": 4
+    "id": 92,
+    "order": 6
   }
 ]

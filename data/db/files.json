@@ -1648,5 +1648,27 @@
     "updated_by_id": 1,
     "url": "/uploads/hc_classroom_1e73998dff.png",
     "width": 3073
+  },
+  {
+    "alternative_text": null,
+    "caption": null,
+    "created_at": 1709702375341,
+    "created_by_id": 1,
+    "ext": ".webp",
+    "folder_path": "/10",
+    "formats": "{\"thumbnail\":{\"name\":\"thumbnail_sami-map.webp\",\"hash\":\"thumbnail_sami_map_0ba5185a63\",\"ext\":\".webp\",\"mime\":\"image/webp\",\"path\":null,\"width\":154,\"height\":156,\"size\":4.78,\"url\":\"/uploads/thumbnail_sami_map_0ba5185a63.webp\"}}",
+    "hash": "sami_map_0ba5185a63",
+    "height": 539,
+    "id": 107,
+    "mime": "image/webp",
+    "name": "sami-map.webp",
+    "preview_url": null,
+    "provider": "local",
+    "provider_metadata": null,
+    "size": 40.25,
+    "updated_at": 1709702375341,
+    "updated_by_id": 1,
+    "url": "/uploads/sami_map_0ba5185a63.webp",
+    "width": 532
   }
 ]

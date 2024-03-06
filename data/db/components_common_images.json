@@ -2,56 +2,73 @@
   {
     "alt_text": "The team in Togo hosted a maths camp",
     "caption": "The team in Togo hosted a maths camp",
+    "class_names": null,
     "id": 1
   },
   {
     "alt_text": null,
     "caption": null,
+    "class_names": null,
     "id": 2
   },
   {
     "alt_text": "Visit at St. Lawrence Ichina Primary for Happy Classroom project",
     "caption": "Visit at St. Lawrence Ichina Primary for Happy Classroom project",
+    "class_names": null,
     "id": 3
   },
   {
     "alt_text": "Running session on Fractional wall at Lenana girls High school for Math Club",
     "caption": "Running session on Fractional wall at Lenana girls High school for Math Club",
+    "class_names": null,
     "id": 4
   },
   {
     "alt_text": "Students interacting with Geogebra activities",
     "caption": "Students interacting with Geogebra activities",
+    "class_names": null,
     "id": 5
   },
   {
     "alt_text": "Learning how to fly Drone",
     "caption": "Learning how to fly Drone",
+    "class_names": null,
     "id": 6
   },
   {
     "alt_text": null,
     "caption": null,
+    "class_names": null,
     "id": 7
   },
   {
     "alt_text": null,
     "caption": "Maths Camp participants pose for a picture with their certificates",
+    "class_names": null,
     "id": 8
   },
   {
     "alt_text": "Before Painting",
     "caption": null,
+    "class_names": null,
     "id": 9
   },
   {
     "alt_text": "After Painting",
     "caption": null,
+    "class_names": null,
     "id": 10
   },
   {
     "alt_text": "Happy Classroom",
     "caption": null,
+    "class_names": null,
     "id": 11
+  },
+  {
+    "alt_text": "SAMI Map",
+    "caption": "\n",
+    "class_names": "max-w-lg",
+    "id": 12
   }
 ]
