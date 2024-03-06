@@ -5,7 +5,7 @@
   },
   {
     "name": "annual_reports",
-    "seq": 6
+    "seq": 8
   },
   {
     "name": "blog_posts",
@@ -109,7 +109,7 @@
   },
   {
     "name": "files",
-    "seq": 107
+    "seq": 109
   },
   {
     "name": "files_folder_links",
@@ -117,7 +117,7 @@
   },
   {
     "name": "files_related_morphs",
-    "seq": 221
+    "seq": 223
   },
   {
     "name": "home_contents",
