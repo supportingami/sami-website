@@ -214,12 +214,14 @@ input BooleanFilterInput {
 }
 
 type ComponentCommonActionButton {
+  ClassNames: String
   Link: String!
   Text: String!
   id: ID!
 }
 
 input ComponentCommonActionButtonFiltersInput {
+  ClassNames: StringFilterInput
   Link: StringFilterInput
   Text: StringFilterInput
   and: [ComponentCommonActionButtonFiltersInput]
@@ -228,6 +230,7 @@ input ComponentCommonActionButtonFiltersInput {
 }
 
 input ComponentCommonActionButtonInput {
+  ClassNames: String
   Link: String
   Text: String
   id: ID
@@ -241,6 +244,7 @@ type ComponentCommonHtml {
 type ComponentCommonImage {
   AltText: String
   Caption: String
+  ClassNames: String
   Media: UploadFileEntityResponse!
   id: ID!
 }
@@ -381,6 +385,104 @@ type ComponentHomeProjectSummaryItem {
   Icon: UploadFileEntityResponse
   Title: String
   id: ID!
+}
+
+type ContentReleasesRelease {
+  actions(
+    filters: ContentReleasesReleaseActionFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): ContentReleasesReleaseActionRelationResponseCollection
+  createdAt: DateTime
+  name: String!
+  releasedAt: DateTime
+  scheduledAt: DateTime
+  timezone: String
+  updatedAt: DateTime
+}
+
+type ContentReleasesReleaseAction {
+  contentType: String!
+  createdAt: DateTime
+  entry: GenericMorph
+  locale: String
+  release: ContentReleasesReleaseEntityResponse
+  type: ENUM_CONTENTRELEASESRELEASEACTION_TYPE!
+  updatedAt: DateTime
+}
+
+type ContentReleasesReleaseActionEntity {
+  attributes: ContentReleasesReleaseAction
+  id: ID
+}
+
+type ContentReleasesReleaseActionEntityResponse {
+  data: ContentReleasesReleaseActionEntity
+}
+
+type ContentReleasesReleaseActionEntityResponseCollection {
+  data: [ContentReleasesReleaseActionEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input ContentReleasesReleaseActionFiltersInput {
+  and: [ContentReleasesReleaseActionFiltersInput]
+  contentType: StringFilterInput
+  createdAt: DateTimeFilterInput
+  id: IDFilterInput
+  locale: StringFilterInput
+  not: ContentReleasesReleaseActionFiltersInput
+  or: [ContentReleasesReleaseActionFiltersInput]
+  release: ContentReleasesReleaseFiltersInput
+  type: StringFilterInput
+  updatedAt: DateTimeFilterInput
+}
+
+input ContentReleasesReleaseActionInput {
+  contentType: String
+  locale: String
+  release: ID
+  type: ENUM_CONTENTRELEASESRELEASEACTION_TYPE
+}
+
+type ContentReleasesReleaseActionRelationResponseCollection {
+  data: [ContentReleasesReleaseActionEntity!]!
+}
+
+type ContentReleasesReleaseEntity {
+  attributes: ContentReleasesRelease
+  id: ID
+}
+
+type ContentReleasesReleaseEntityResponse {
+  data: ContentReleasesReleaseEntity
+}
+
+type ContentReleasesReleaseEntityResponseCollection {
+  data: [ContentReleasesReleaseEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input ContentReleasesReleaseFiltersInput {
+  actions: ContentReleasesReleaseActionFiltersInput
+  and: [ContentReleasesReleaseFiltersInput]
+  createdAt: DateTimeFilterInput
+  id: IDFilterInput
+  name: StringFilterInput
+  not: ContentReleasesReleaseFiltersInput
+  or: [ContentReleasesReleaseFiltersInput]
+  releasedAt: DateTimeFilterInput
+  scheduledAt: DateTimeFilterInput
+  timezone: StringFilterInput
+  updatedAt: DateTimeFilterInput
+}
+
+input ContentReleasesReleaseInput {
+  actions: [ID]
+  name: String
+  releasedAt: DateTime
+  scheduledAt: DateTime
+  timezone: String
 }
 
 type Country {
@@ -534,6 +636,11 @@ input DynamicContentInput {
   publishedAt: DateTime
 }
 
+enum ENUM_CONTENTRELEASESRELEASEACTION_TYPE {
+  publish
+  unpublish
+}
+
 enum ENUM_MEMBER_ORGANISATION {
   AMI
   SAMI
@@ -641,6 +748,8 @@ union GenericMorph =
   | ComponentHomeMissionStatement
   | ComponentHomeProjectSummary
   | ComponentHomeProjectSummaryItem
+  | ContentReleasesRelease
+  | ContentReleasesReleaseAction
   | Country
   | DonateContent
   | DynamicContent
@@ -871,6 +980,10 @@ type Mutation {
   createAnnualReport(data: AnnualReportInput!): AnnualReportEntityResponse
   createBlogPost(data: BlogPostInput!): BlogPostEntityResponse
   createBlogTag(data: BlogTagInput!): BlogTagEntityResponse
+  createContentReleasesRelease(data: ContentReleasesReleaseInput!): ContentReleasesReleaseEntityResponse
+  createContentReleasesReleaseAction(
+    data: ContentReleasesReleaseActionInput!
+  ): ContentReleasesReleaseActionEntityResponse
   createCountry(data: CountryInput!): CountryEntityResponse
   createFaq(data: FaqInput!): FaqEntityResponse
   createMember(data: MemberInput!): MemberEntityResponse
@@ -892,6 +1005,8 @@ type Mutation {
   deleteAnnualReport(id: ID!): AnnualReportEntityResponse
   deleteBlogPost(id: ID!): BlogPostEntityResponse
   deleteBlogTag(id: ID!): BlogTagEntityResponse
+  deleteContentReleasesRelease(id: ID!): ContentReleasesReleaseEntityResponse
+  deleteContentReleasesReleaseAction(id: ID!): ContentReleasesReleaseActionEntityResponse
   deleteCountry(id: ID!): CountryEntityResponse
   deleteDonateContent: DonateContentEntityResponse
   deleteDynamicContent: DynamicContentEntityResponse
@@ -940,6 +1055,11 @@ type Mutation {
   updateAnnualReport(data: AnnualReportInput!, id: ID!): AnnualReportEntityResponse
   updateBlogPost(data: BlogPostInput!, id: ID!): BlogPostEntityResponse
   updateBlogTag(data: BlogTagInput!, id: ID!): BlogTagEntityResponse
+  updateContentReleasesRelease(data: ContentReleasesReleaseInput!, id: ID!): ContentReleasesReleaseEntityResponse
+  updateContentReleasesReleaseAction(
+    data: ContentReleasesReleaseActionInput!
+    id: ID!
+  ): ContentReleasesReleaseActionEntityResponse
   updateCountry(data: CountryInput!, id: ID!): CountryEntityResponse
   updateDonateContent(data: DonateContentInput!): DonateContentEntityResponse
   updateDynamicContent(data: DynamicContentInput!): DynamicContentEntityResponse
@@ -1077,6 +1197,18 @@ type Query {
     publicationState: PublicationState = LIVE
     sort: [String] = []
   ): BlogTagEntityResponseCollection
+  contentReleasesRelease(id: ID): ContentReleasesReleaseEntityResponse
+  contentReleasesReleaseAction(id: ID): ContentReleasesReleaseActionEntityResponse
+  contentReleasesReleaseActions(
+    filters: ContentReleasesReleaseActionFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): ContentReleasesReleaseActionEntityResponseCollection
+  contentReleasesReleases(
+    filters: ContentReleasesReleaseFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): ContentReleasesReleaseEntityResponseCollection
   countries(
     filters: CountryFiltersInput
     pagination: PaginationArg = {}
@@ -1582,6 +1714,7 @@ type VolunteerContent {
 union VolunteerContentContentDynamicZone =
     ComponentCommonActionButton
   | ComponentCommonHtml
+  | ComponentCommonImage
   | ComponentCommonTextBlock
   | Error
 

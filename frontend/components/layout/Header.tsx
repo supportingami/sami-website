@@ -19,7 +19,7 @@ export const SectionHeader = ({
 }) => (
   <div
     data-testid="sectionHeader"
-    className={`min-h-64 relative text-white text-center font-bold w-100 bg-primary ${className}`}
+    className={`relative text-white text-center font-bold w-100 bg-primary ${className}`}
   >
     <BackgroundImage {...background} />
     <div className="z-10 relative flex flex-col h-full">{children}</div>

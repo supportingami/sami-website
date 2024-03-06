@@ -10,6 +10,7 @@ export interface CommonActionButton extends Schema.Component {
   attributes: {
     Text: Attribute.String & Attribute.Required;
     Link: Attribute.String & Attribute.Required;
+    ClassNames: Attribute.String;
   };
 }
 
@@ -35,6 +36,7 @@ export interface CommonImage extends Schema.Component {
     Media: Attribute.Media & Attribute.Required;
     AltText: Attribute.String;
     Caption: Attribute.Text;
+    ClassNames: Attribute.String;
   };
 }
 

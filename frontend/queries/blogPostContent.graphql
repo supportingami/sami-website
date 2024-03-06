@@ -24,6 +24,7 @@ query blogPostContent($filters: BlogPostFiltersInput) {
           ... on ComponentCommonImage {
             AltText
             Caption
+            ClassNames
             Media {
               data {
                 id
@@ -39,8 +40,9 @@ query blogPostContent($filters: BlogPostFiltersInput) {
             Text
           }
           ... on ComponentCommonActionButton {
-            Text
+            ClassNames
             Link
+            Text
           }
         }
       }

@@ -16,6 +16,7 @@ query projects($filters: ProjectTypeFiltersInput) {
           ... on ComponentCommonImage {
             AltText
             Caption
+            ClassNames
             Media {
               data {
                 id
@@ -31,8 +32,9 @@ query projects($filters: ProjectTypeFiltersInput) {
             Text
           }
           ... on ComponentCommonActionButton {
-            Text
+            ClassNames
             Link
+            Text
           }
         }
         Icon {

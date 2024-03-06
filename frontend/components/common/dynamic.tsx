@@ -20,8 +20,10 @@ type IDynamicComponentType = NonNullable<IDynamicComponent["__typename"]>;
 
 const ComponentMapping: { [type in IDynamicComponentType]: (block: IDynamicComponent) => JSX.Element } = {
   ComponentCommonActionButton: (block) => {
-    const actionButtonBlock = block as ComponentCommonActionButton;
-    return <ActionButtonsComponent key={block.id} actionButtons={[{ ...actionButtonBlock }]} className="mb-8" />;
+    const { ClassNames, ...rest } = block as ComponentCommonActionButton;
+    return (
+      <ActionButtonsComponent key={block.id} actionButtons={[{ ...rest }]} className={`mb-8 ${ClassNames || ""}`} />
+    );
   },
   ComponentCommonHtml: (block) => {
     const htmlBlock = block as ComponentCommonHtml;
@@ -40,7 +42,7 @@ const ComponentMapping: { [type in IDynamicComponentType]: (block: IDynamicCompo
     );
   },
   ComponentCommonImage: (block) => {
-    const { Media, AltText, Caption } = block as ComponentCommonImage;
+    const { Media, AltText, Caption, ClassNames } = block as ComponentCommonImage;
     // Wrap image with figure/figcaption when caption provided. Simply return image when not
     return Caption ? (
       <figure className="mb-8">
@@ -49,7 +51,7 @@ const ComponentMapping: { [type in IDynamicComponentType]: (block: IDynamicCompo
           width={0}
           height={0}
           sizes="100vw"
-          className="object-cover object-center w-full h-auto"
+          className={`object-cover object-center m-auto w-full h-auto ${ClassNames || ""}`}
           alt={AltText || "image"}
         />
         <figcaption className="prose"> {Caption} </figcaption>
@@ -62,7 +64,7 @@ const ComponentMapping: { [type in IDynamicComponentType]: (block: IDynamicCompo
         width={0}
         height={0}
         sizes="100vw"
-        className="object-cover object-center w-full h-auto mb-8"
+        className={`object-cover object-center m-auto w-full h-auto ${ClassNames || ""}`}
         alt={AltText || "image"}
       />
     );

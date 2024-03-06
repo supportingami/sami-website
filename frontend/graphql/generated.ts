@@ -255,12 +255,14 @@ export type BooleanFilterInput = {
 
 export type ComponentCommonActionButton = {
   __typename?: "ComponentCommonActionButton";
+  ClassNames?: Maybe<Scalars["String"]>;
   Link: Scalars["String"];
   Text: Scalars["String"];
   id: Scalars["ID"];
 };
 
 export type ComponentCommonActionButtonFiltersInput = {
+  ClassNames?: InputMaybe<StringFilterInput>;
   Link?: InputMaybe<StringFilterInput>;
   Text?: InputMaybe<StringFilterInput>;
   and?: InputMaybe<Array<InputMaybe<ComponentCommonActionButtonFiltersInput>>>;
@@ -269,6 +271,7 @@ export type ComponentCommonActionButtonFiltersInput = {
 };
 
 export type ComponentCommonActionButtonInput = {
+  ClassNames?: InputMaybe<Scalars["String"]>;
   Link?: InputMaybe<Scalars["String"]>;
   Text?: InputMaybe<Scalars["String"]>;
   id?: InputMaybe<Scalars["ID"]>;
@@ -284,6 +287,7 @@ export type ComponentCommonImage = {
   __typename?: "ComponentCommonImage";
   AltText?: Maybe<Scalars["String"]>;
   Caption?: Maybe<Scalars["String"]>;
+  ClassNames?: Maybe<Scalars["String"]>;
   Media: UploadFileEntityResponse;
   id: Scalars["ID"];
 };
@@ -444,6 +448,115 @@ export type ComponentHomeProjectSummaryItem = {
   id: Scalars["ID"];
 };
 
+export type ContentReleasesRelease = {
+  __typename?: "ContentReleasesRelease";
+  actions?: Maybe<ContentReleasesReleaseActionRelationResponseCollection>;
+  createdAt?: Maybe<Scalars["DateTime"]>;
+  name: Scalars["String"];
+  releasedAt?: Maybe<Scalars["DateTime"]>;
+  scheduledAt?: Maybe<Scalars["DateTime"]>;
+  timezone?: Maybe<Scalars["String"]>;
+  updatedAt?: Maybe<Scalars["DateTime"]>;
+};
+
+export type ContentReleasesReleaseActionsArgs = {
+  filters?: InputMaybe<ContentReleasesReleaseActionFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+};
+
+export type ContentReleasesReleaseAction = {
+  __typename?: "ContentReleasesReleaseAction";
+  contentType: Scalars["String"];
+  createdAt?: Maybe<Scalars["DateTime"]>;
+  entry?: Maybe<GenericMorph>;
+  locale?: Maybe<Scalars["String"]>;
+  release?: Maybe<ContentReleasesReleaseEntityResponse>;
+  type: Enum_Contentreleasesreleaseaction_Type;
+  updatedAt?: Maybe<Scalars["DateTime"]>;
+};
+
+export type ContentReleasesReleaseActionEntity = {
+  __typename?: "ContentReleasesReleaseActionEntity";
+  attributes?: Maybe<ContentReleasesReleaseAction>;
+  id?: Maybe<Scalars["ID"]>;
+};
+
+export type ContentReleasesReleaseActionEntityResponse = {
+  __typename?: "ContentReleasesReleaseActionEntityResponse";
+  data?: Maybe<ContentReleasesReleaseActionEntity>;
+};
+
+export type ContentReleasesReleaseActionEntityResponseCollection = {
+  __typename?: "ContentReleasesReleaseActionEntityResponseCollection";
+  data: Array<ContentReleasesReleaseActionEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type ContentReleasesReleaseActionFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ContentReleasesReleaseActionFiltersInput>>>;
+  contentType?: InputMaybe<StringFilterInput>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  locale?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<ContentReleasesReleaseActionFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ContentReleasesReleaseActionFiltersInput>>>;
+  release?: InputMaybe<ContentReleasesReleaseFiltersInput>;
+  type?: InputMaybe<StringFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type ContentReleasesReleaseActionInput = {
+  contentType?: InputMaybe<Scalars["String"]>;
+  locale?: InputMaybe<Scalars["String"]>;
+  release?: InputMaybe<Scalars["ID"]>;
+  type?: InputMaybe<Enum_Contentreleasesreleaseaction_Type>;
+};
+
+export type ContentReleasesReleaseActionRelationResponseCollection = {
+  __typename?: "ContentReleasesReleaseActionRelationResponseCollection";
+  data: Array<ContentReleasesReleaseActionEntity>;
+};
+
+export type ContentReleasesReleaseEntity = {
+  __typename?: "ContentReleasesReleaseEntity";
+  attributes?: Maybe<ContentReleasesRelease>;
+  id?: Maybe<Scalars["ID"]>;
+};
+
+export type ContentReleasesReleaseEntityResponse = {
+  __typename?: "ContentReleasesReleaseEntityResponse";
+  data?: Maybe<ContentReleasesReleaseEntity>;
+};
+
+export type ContentReleasesReleaseEntityResponseCollection = {
+  __typename?: "ContentReleasesReleaseEntityResponseCollection";
+  data: Array<ContentReleasesReleaseEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type ContentReleasesReleaseFiltersInput = {
+  actions?: InputMaybe<ContentReleasesReleaseActionFiltersInput>;
+  and?: InputMaybe<Array<InputMaybe<ContentReleasesReleaseFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  name?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<ContentReleasesReleaseFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ContentReleasesReleaseFiltersInput>>>;
+  releasedAt?: InputMaybe<DateTimeFilterInput>;
+  scheduledAt?: InputMaybe<DateTimeFilterInput>;
+  timezone?: InputMaybe<StringFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type ContentReleasesReleaseInput = {
+  actions?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  name?: InputMaybe<Scalars["String"]>;
+  releasedAt?: InputMaybe<Scalars["DateTime"]>;
+  scheduledAt?: InputMaybe<Scalars["DateTime"]>;
+  timezone?: InputMaybe<Scalars["String"]>;
+};
+
 export type Country = {
   __typename?: "Country";
   Content?: Maybe<Scalars["String"]>;
@@ -593,6 +706,11 @@ export type DynamicContentInput = {
   publishedAt?: InputMaybe<Scalars["DateTime"]>;
 };
 
+export enum Enum_Contentreleasesreleaseaction_Type {
+  Publish = "publish",
+  Unpublish = "unpublish",
+}
+
 export enum Enum_Member_Organisation {
   Ami = "AMI",
   Sami = "SAMI",
@@ -706,6 +824,8 @@ export type GenericMorph =
   | ComponentHomeMissionStatement
   | ComponentHomeProjectSummary
   | ComponentHomeProjectSummaryItem
+  | ContentReleasesRelease
+  | ContentReleasesReleaseAction
   | Country
   | DonateContent
   | DynamicContent
@@ -939,6 +1059,8 @@ export type Mutation = {
   createAnnualReport?: Maybe<AnnualReportEntityResponse>;
   createBlogPost?: Maybe<BlogPostEntityResponse>;
   createBlogTag?: Maybe<BlogTagEntityResponse>;
+  createContentReleasesRelease?: Maybe<ContentReleasesReleaseEntityResponse>;
+  createContentReleasesReleaseAction?: Maybe<ContentReleasesReleaseActionEntityResponse>;
   createCountry?: Maybe<CountryEntityResponse>;
   createFaq?: Maybe<FaqEntityResponse>;
   createMember?: Maybe<MemberEntityResponse>;
@@ -954,6 +1076,8 @@ export type Mutation = {
   deleteAnnualReport?: Maybe<AnnualReportEntityResponse>;
   deleteBlogPost?: Maybe<BlogPostEntityResponse>;
   deleteBlogTag?: Maybe<BlogTagEntityResponse>;
+  deleteContentReleasesRelease?: Maybe<ContentReleasesReleaseEntityResponse>;
+  deleteContentReleasesReleaseAction?: Maybe<ContentReleasesReleaseActionEntityResponse>;
   deleteCountry?: Maybe<CountryEntityResponse>;
   deleteDonateContent?: Maybe<DonateContentEntityResponse>;
   deleteDynamicContent?: Maybe<DynamicContentEntityResponse>;
@@ -984,6 +1108,8 @@ export type Mutation = {
   updateAnnualReport?: Maybe<AnnualReportEntityResponse>;
   updateBlogPost?: Maybe<BlogPostEntityResponse>;
   updateBlogTag?: Maybe<BlogTagEntityResponse>;
+  updateContentReleasesRelease?: Maybe<ContentReleasesReleaseEntityResponse>;
+  updateContentReleasesReleaseAction?: Maybe<ContentReleasesReleaseActionEntityResponse>;
   updateCountry?: Maybe<CountryEntityResponse>;
   updateDonateContent?: Maybe<DonateContentEntityResponse>;
   updateDynamicContent?: Maybe<DynamicContentEntityResponse>;
@@ -1023,6 +1149,14 @@ export type MutationCreateBlogPostArgs = {
 
 export type MutationCreateBlogTagArgs = {
   data: BlogTagInput;
+};
+
+export type MutationCreateContentReleasesReleaseArgs = {
+  data: ContentReleasesReleaseInput;
+};
+
+export type MutationCreateContentReleasesReleaseActionArgs = {
+  data: ContentReleasesReleaseActionInput;
 };
 
 export type MutationCreateCountryArgs = {
@@ -1074,6 +1208,14 @@ export type MutationDeleteBlogPostArgs = {
 };
 
 export type MutationDeleteBlogTagArgs = {
+  id: Scalars["ID"];
+};
+
+export type MutationDeleteContentReleasesReleaseArgs = {
+  id: Scalars["ID"];
+};
+
+export type MutationDeleteContentReleasesReleaseActionArgs = {
   id: Scalars["ID"];
 };
 
@@ -1163,6 +1305,16 @@ export type MutationUpdateBlogPostArgs = {
 
 export type MutationUpdateBlogTagArgs = {
   data: BlogTagInput;
+  id: Scalars["ID"];
+};
+
+export type MutationUpdateContentReleasesReleaseArgs = {
+  data: ContentReleasesReleaseInput;
+  id: Scalars["ID"];
+};
+
+export type MutationUpdateContentReleasesReleaseActionArgs = {
+  data: ContentReleasesReleaseActionInput;
   id: Scalars["ID"];
 };
 
@@ -1336,6 +1488,10 @@ export type Query = {
   blogPosts?: Maybe<BlogPostEntityResponseCollection>;
   blogTag?: Maybe<BlogTagEntityResponse>;
   blogTags?: Maybe<BlogTagEntityResponseCollection>;
+  contentReleasesRelease?: Maybe<ContentReleasesReleaseEntityResponse>;
+  contentReleasesReleaseAction?: Maybe<ContentReleasesReleaseActionEntityResponse>;
+  contentReleasesReleaseActions?: Maybe<ContentReleasesReleaseActionEntityResponseCollection>;
+  contentReleasesReleases?: Maybe<ContentReleasesReleaseEntityResponseCollection>;
   countries?: Maybe<CountryEntityResponseCollection>;
   country?: Maybe<CountryEntityResponse>;
   donateContent?: Maybe<DonateContentEntityResponse>;
@@ -1404,6 +1560,26 @@ export type QueryBlogTagsArgs = {
   filters?: InputMaybe<BlogTagFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+};
+
+export type QueryContentReleasesReleaseArgs = {
+  id?: InputMaybe<Scalars["ID"]>;
+};
+
+export type QueryContentReleasesReleaseActionArgs = {
+  id?: InputMaybe<Scalars["ID"]>;
+};
+
+export type QueryContentReleasesReleaseActionsArgs = {
+  filters?: InputMaybe<ContentReleasesReleaseActionFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+};
+
+export type QueryContentReleasesReleasesArgs = {
+  filters?: InputMaybe<ContentReleasesReleaseFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
 };
 
@@ -2003,6 +2179,7 @@ export type VolunteerContentFaqsArgs = {
 export type VolunteerContentContentDynamicZone =
   | ComponentCommonActionButton
   | ComponentCommonHtml
+  | ComponentCommonImage
   | ComponentCommonTextBlock
   | Error;
 
@@ -2095,12 +2272,13 @@ export type BlogPostContentQuery = {
           }>;
         } | null;
         ContentBlocks?: Array<
-          | { __typename: "ComponentCommonActionButton"; Text: string; Link: string }
+          | { __typename: "ComponentCommonActionButton"; ClassNames?: string | null; Link: string; Text: string }
           | { __typename: "ComponentCommonHtml"; HTML: string }
           | {
               __typename: "ComponentCommonImage";
               AltText?: string | null;
               Caption?: string | null;
+              ClassNames?: string | null;
               Media: {
                 __typename?: "UploadFileEntityResponse";
                 data?: {
@@ -2425,12 +2603,13 @@ export type ProjectsQuery = {
         Slug: string;
         Status?: Enum_Projecttype_Status | null;
         PageContent?: Array<
-          | { __typename: "ComponentCommonActionButton"; Text: string; Link: string }
+          | { __typename: "ComponentCommonActionButton"; ClassNames?: string | null; Link: string; Text: string }
           | { __typename: "ComponentCommonHtml"; HTML: string }
           | {
               __typename: "ComponentCommonImage";
               AltText?: string | null;
               Caption?: string | null;
+              ClassNames?: string | null;
               Media: {
                 __typename?: "UploadFileEntityResponse";
                 data?: {
@@ -2525,9 +2704,29 @@ export type VolunteerContentQuery = {
       attributes?: {
         __typename: "VolunteerContent";
         Content?: Array<
-          | { __typename: "ComponentCommonActionButton"; id: string; Link: string; Text: string }
+          | {
+              __typename: "ComponentCommonActionButton";
+              id: string;
+              ClassNames?: string | null;
+              Link: string;
+              Text: string;
+            }
           | { __typename: "ComponentCommonHtml"; id: string; HTML: string }
-          | { __typename?: "ComponentCommonTextBlock" }
+          | {
+              __typename?: "ComponentCommonImage";
+              AltText?: string | null;
+              Caption?: string | null;
+              ClassNames?: string | null;
+              Media: {
+                __typename?: "UploadFileEntityResponse";
+                data?: {
+                  __typename?: "UploadFileEntity";
+                  id?: string | null;
+                  attributes?: { __typename?: "UploadFile"; name: string; url: string; size: number } | null;
+                } | null;
+              };
+            }
+          | { __typename: "ComponentCommonTextBlock"; id: string; Text: string }
           | { __typename?: "Error" }
           | null
         > | null;
@@ -2814,6 +3013,7 @@ export const BlogPostContentDocument = {
                                       selections: [
                                         { kind: "Field", name: { kind: "Name", value: "AltText" } },
                                         { kind: "Field", name: { kind: "Name", value: "Caption" } },
+                                        { kind: "Field", name: { kind: "Name", value: "ClassNames" } },
                                         {
                                           kind: "Field",
                                           name: { kind: "Name", value: "Media" },
@@ -2868,8 +3068,9 @@ export const BlogPostContentDocument = {
                                     selectionSet: {
                                       kind: "SelectionSet",
                                       selections: [
-                                        { kind: "Field", name: { kind: "Name", value: "Text" } },
+                                        { kind: "Field", name: { kind: "Name", value: "ClassNames" } },
                                         { kind: "Field", name: { kind: "Name", value: "Link" } },
+                                        { kind: "Field", name: { kind: "Name", value: "Text" } },
                                       ],
                                     },
                                   },
@@ -3830,6 +4031,7 @@ export const ProjectsDocument = {
                                       selections: [
                                         { kind: "Field", name: { kind: "Name", value: "AltText" } },
                                         { kind: "Field", name: { kind: "Name", value: "Caption" } },
+                                        { kind: "Field", name: { kind: "Name", value: "ClassNames" } },
                                         {
                                           kind: "Field",
                                           name: { kind: "Name", value: "Media" },
@@ -3884,8 +4086,9 @@ export const ProjectsDocument = {
                                     selectionSet: {
                                       kind: "SelectionSet",
                                       selections: [
-                                        { kind: "Field", name: { kind: "Name", value: "Text" } },
+                                        { kind: "Field", name: { kind: "Name", value: "ClassNames" } },
                                         { kind: "Field", name: { kind: "Name", value: "Link" } },
+                                        { kind: "Field", name: { kind: "Name", value: "Text" } },
                                       ],
                                     },
                                   },
@@ -4196,8 +4399,70 @@ export const VolunteerContentDocument = {
                                       selections: [
                                         { kind: "Field", name: { kind: "Name", value: "__typename" } },
                                         { kind: "Field", name: { kind: "Name", value: "id" } },
+                                        { kind: "Field", name: { kind: "Name", value: "ClassNames" } },
                                         { kind: "Field", name: { kind: "Name", value: "Link" } },
                                         { kind: "Field", name: { kind: "Name", value: "Text" } },
+                                      ],
+                                    },
+                                  },
+                                  {
+                                    kind: "InlineFragment",
+                                    typeCondition: {
+                                      kind: "NamedType",
+                                      name: { kind: "Name", value: "ComponentCommonTextBlock" },
+                                    },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        { kind: "Field", name: { kind: "Name", value: "__typename" } },
+                                        { kind: "Field", name: { kind: "Name", value: "id" } },
+                                        { kind: "Field", name: { kind: "Name", value: "Text" } },
+                                      ],
+                                    },
+                                  },
+                                  {
+                                    kind: "InlineFragment",
+                                    typeCondition: {
+                                      kind: "NamedType",
+                                      name: { kind: "Name", value: "ComponentCommonImage" },
+                                    },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        { kind: "Field", name: { kind: "Name", value: "AltText" } },
+                                        { kind: "Field", name: { kind: "Name", value: "Caption" } },
+                                        { kind: "Field", name: { kind: "Name", value: "ClassNames" } },
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "Media" },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              {
+                                                kind: "Field",
+                                                name: { kind: "Name", value: "data" },
+                                                selectionSet: {
+                                                  kind: "SelectionSet",
+                                                  selections: [
+                                                    { kind: "Field", name: { kind: "Name", value: "id" } },
+                                                    {
+                                                      kind: "Field",
+                                                      name: { kind: "Name", value: "attributes" },
+                                                      selectionSet: {
+                                                        kind: "SelectionSet",
+                                                        selections: [
+                                                          { kind: "Field", name: { kind: "Name", value: "name" } },
+                                                          { kind: "Field", name: { kind: "Name", value: "url" } },
+                                                          { kind: "Field", name: { kind: "Name", value: "size" } },
+                                                        ],
+                                                      },
+                                                    },
+                                                  ],
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
                                       ],
                                     },
                                   },

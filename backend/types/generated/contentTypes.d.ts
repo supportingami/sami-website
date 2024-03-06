@@ -891,7 +891,7 @@ export interface ApiVolunteerContentVolunteerContent extends Schema.SingleType {
     draftAndPublish: true;
   };
   attributes: {
-    Content: Attribute.DynamicZone<["common.html", "common.action-button", "common.text-block"]>;
+    Content: Attribute.DynamicZone<["common.html", "common.action-button", "common.text-block", "common.image"]>;
     faqs: Attribute.Relation<"api::volunteer-content.volunteer-content", "oneToMany", "api::faq.faq">;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;

@@ -18,7 +18,7 @@ export function getStrapiMedia(media: Partial<UploadFileEntityResponse> = {}): s
     const imageUrl = url.startsWith("/") ? getStrapiURL(url) : url;
     return imageUrl;
   } else {
-    console.error("Media missing");
+    console.error("Media missing", media);
     return "";
   }
 }
