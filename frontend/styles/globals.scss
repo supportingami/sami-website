@@ -42,6 +42,11 @@ html {
   scroll-behavior: smooth;
 }
 
+// dark theme modifiers
+[data-theme="dark"] img {
+  filter: grayscale(0.25);
+}
+
 // Custom page shape dividers
 // Generated from https://www.shapedivider.app/
 .shape-divider {
