@@ -37,6 +37,11 @@
 @tailwind components;
 @tailwind utilities;
 
+// smooth-scroll when using section links
+html {
+  scroll-behavior: smooth;
+}
+
 // Custom page shape dividers
 // Generated from https://www.shapedivider.app/
 .shape-divider {
