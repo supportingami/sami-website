@@ -24,6 +24,11 @@ export default function ThemeProvider(props: CustomProps) {
     else setTheme("light");
   }
 
+  function handleThemeChange(theme: string) {
+    document.documentElement.setAttribute("data-theme", theme);
+    setTheme(theme);
+  }
+
   useEffect(() => {
     const storedTheme = localStorage.getItem("daisyUI-theme");
     if (storedTheme) {
@@ -32,7 +37,7 @@ export default function ThemeProvider(props: CustomProps) {
       if ((temp === "light" || temp === "dark") && props.useSystem === true) {
         systemCheck();
       } else {
-        setTheme(temp);
+        handleThemeChange(temp);
       }
     } else if (props.useSystem) {
       systemCheck();
@@ -46,17 +51,13 @@ export default function ThemeProvider(props: CustomProps) {
 
   const updateTheme = (newTheme: string) => {
     if (newTheme) {
-      setTheme(newTheme);
+      handleThemeChange(newTheme);
     }
   };
 
   return (
     <ThemeContext.Provider value={{ theme, updateTheme }}>
-      {loading ? null : (
-        <div className="contents" data-theme={theme}>
-          {props.children}
-        </div>
-      )}
+      {loading ? null : <>{props.children}</>}
     </ThemeContext.Provider>
   );
 }
