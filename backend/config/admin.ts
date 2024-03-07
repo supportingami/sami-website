@@ -11,7 +11,7 @@ export default ({ env }) => {
         salt: env("TRANSFER_TOKEN_SALT"),
       },
     },
-    url: "/admin",
+    url: env("STRAPI_ADMIN_SUFFIX", "/admin"),
   };
   const adminSuffix = env("STRAPI_ADMIN_SUFFIX");
   if (adminSuffix) {

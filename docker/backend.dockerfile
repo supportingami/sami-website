@@ -25,7 +25,6 @@ FROM node:20-alpine
 RUN apk add --no-cache vips-dev \
     && rm -rf /var/cache/apk/* && rm -rf /tmp/*
 
-
 ENV NODE_ENV=${ENV_NAME}
 
 WORKDIR /app

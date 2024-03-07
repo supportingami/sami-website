@@ -17,7 +17,7 @@ config
 data/backups
 data/sqlite
 docker/
-!docker/gcs_fuse_run.sh
+!docker/gcsfuse
 docs
 
 # Frontend
@@ -30,4 +30,4 @@ scripts/node_modules
 
 .dockerignore
 docker-compose.yml
-
+service-account.json
