@@ -58,7 +58,7 @@ class DockerBuildCmd {
         shell: true,
         stdio: "inherit",
         // ensure docker config files used
-        env: { NODE_ENV: "docker", DATABASE_URL: "will_populate_later", NODE_OPTIONS: "--max_old_space_size=2048" },
+        env: { NODE_ENV: "docker", NODE_OPTIONS: "--max_old_space_size=2048" },
       });
       await this.buildBackend();
       // TODO - ensure backend bootstrapped and populate keys to docker/data .env
@@ -76,7 +76,8 @@ class DockerBuildCmd {
 
   private async buildBase() {
     console.log(chalk.blue("Building base..."));
-    const args = `--tag samicharity/base:latest --tag samicharity/base:${BASE_TAG} --build-arg "ENV_NAME=development"`;
+    const tags = this.getTags("base");
+    const args = `${tags} --build-arg "ENV_NAME=development"`;
     const cmd = `docker build --file docker/base.dockerfile ${args} .`;
     console.log(chalk.gray(cmd));
     await execa(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
@@ -85,7 +86,8 @@ class DockerBuildCmd {
 
   private async buildBackend() {
     console.log(chalk.blue("Building backend..."));
-    const args = `--tag samicharity/backend:latest --tag samicharity/backend:${BASE_TAG} --build-arg "ENV_NAME=development" --build-arg "BASE_TAG=${BASE_TAG}"`;
+    const tags = this.getTags("backend", true);
+    const args = `${tags} --build-arg "ENV_NAME=development" --build-arg "BASE_TAG=${BASE_TAG}"`;
     const cmd = `docker build --file docker/backend.dockerfile ${args} .`;
     console.log(chalk.gray(cmd));
     await execa(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
@@ -94,7 +96,8 @@ class DockerBuildCmd {
 
   private async buildGCSFuse() {
     console.log(chalk.blue("Building gcs_fuse..."));
-    const args = `--tag samicharity/gcs_fuse:latest --tag samicharity/gcs_fuse:${BASE_TAG} --build-arg "ENV_NAME=development" --build-arg "BASE_TAG=${BASE_TAG}"`;
+    const tags = this.getTags("gcs_fuse");
+    const args = `${tags} --build-arg "ENV_NAME=development" --build-arg "BASE_TAG=${BASE_TAG}"`;
     const cmd = `docker build --file docker/gcs_fuse.dockerfile ${args} .`;
     console.log(chalk.gray(cmd));
     await execa(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
@@ -103,10 +106,22 @@ class DockerBuildCmd {
 
   private async buildFrontend() {
     console.log(chalk.blue("Building frontend..."));
-    const args = `--tag samicharity/frontend:latest --tag samicharity/frontend:${BASE_TAG} --build-arg "ENV_NAME=development" --build-arg "BASE_TAG=${BASE_TAG}"`;
+    const tags = this.getTags("frontend", true);
+    const args = `${tags} --build-arg "ENV_NAME=development" --build-arg "BASE_TAG=${BASE_TAG}"`;
     const cmd = `docker build --file docker/frontend.dockerfile ${args} .`;
     console.log(chalk.gray(cmd));
     await execa(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
     console.log(chalk.green("Built frontend"));
+  }
+
+  private getTags(imageName: string, includeGCR = false) {
+    const dockerRepo = `samicharity`;
+    const tags = [`${dockerRepo}/${imageName}:latest`, `${dockerRepo}/${imageName}:${BASE_TAG}`];
+    if (includeGCR) {
+      const gcrRepo = `europe-west2-docker.pkg.dev/sami-website-365718/sami-website-staging`;
+      tags.push(`${gcrRepo}/${imageName}:latest`);
+      tags.push(`${gcrRepo}/${imageName}:${BASE_TAG}`);
+    }
+    return `--tag ${tags.join(" --tag ")}`;
   }
 }
