@@ -13,10 +13,5 @@ export default ({ env }) => {
     },
     url: env("STRAPI_ADMIN_SUFFIX", "/admin"),
   };
-  const adminSuffix = env("STRAPI_ADMIN_SUFFIX");
-  if (adminSuffix) {
-    adminConfig.url = adminSuffix;
-  }
-  console.log({ adminConfig });
   return adminConfig;
 };

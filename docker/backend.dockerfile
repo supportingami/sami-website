@@ -38,6 +38,7 @@ RUN apk add --no-cache vips-dev \
 
 # TODO - strapi build size reductions (possible partial node_modules trim)
 # https://forum.strapi.io/t/reducing-strapi-docker-image-size/2971/8
+# Notably monaco-editor 100+mb only used for import-export-entries plugin
 
 ENV NODE_ENV=${ENV_NAME}
 

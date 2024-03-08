@@ -42,8 +42,7 @@ services:
   backend:
     profiles: [backend]
     container_name: sami_backend
-    image: samicharity/backend:1.3.0
-    # command: "/bin/ash -c 'while sleep 3600; do :; done'"
+    image: samicharity/backend:latest
     restart: unless-stopped
     ports:
       - "1337:1337"
@@ -81,7 +80,7 @@ services:
   frontend:
     profiles: [frontend]
     container_name: sami_frontend
-    image: samicharity/frontend:1.3.0
+    image: samicharity/frontend:latest
     command: next dev
     # command: "/bin/ash -c 'while sleep 3600; do :; done'"
     restart: unless-stopped
@@ -118,7 +117,7 @@ services:
   gcs_fuse:
     profiles: [gcs_fuse]
     container_name: gcs_fuse
-    image: samicharity/gcs_fuse:1.3.0
+    image: samicharity/gcs_fuse:latest
     volumes:
       - ./docker/data/db:/data/db
       - ./docker/data/uploads:/data/uploads
