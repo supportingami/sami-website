@@ -59,7 +59,8 @@ Instead it is better to include GCSFuse support directly within the container im
 
 **TODO**
 
-===
+- Consider using https://github.com/strapi-community/strapi-tool-dockerize
+- # Consider modifying and pushing to https://github.com/strapi-community/strapi-tool-deployify
 
 # Old Docs (To Review)
 

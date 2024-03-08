@@ -1,5 +1,3 @@
-**/node_modules
-
 .github
 .vscode
 .yarn/install-state.gz
@@ -7,7 +5,6 @@
 # Backend
 backend/.cache
 backend/.tmp
-backend/node_modules
 backend/sami-dev.db
 backend/.env
 backend/public/uploads
@@ -26,8 +23,15 @@ frontend/.vercel
 frontend/out
 frontend/.env
 
-scripts/node_modules
-
 .dockerignore
 docker-compose.yml
 service-account.json
+
+
+# Ignore all node_modules
+# NOTE - implies all images will install own node_modules
+**/node_modules
+node_modules
+backend/node_modules
+frontend/node_modules
+scripts/node_modules

@@ -52,14 +52,6 @@ class DockerBuildCmd {
     }
     if (buildTargets.includes("backend")) {
       console.log(chalk.blue("Building strapi admin..."));
-      // prefer spawn over execa due to memory issues on server
-      spawnSync(`yarn workspace backend build`, {
-        cwd: PATHS.rootDir,
-        shell: true,
-        stdio: "inherit",
-        // ensure docker config files used
-        env: { NODE_ENV: "docker", NODE_OPTIONS: "--max_old_space_size=2048" },
-      });
       await this.buildBackend();
       // TODO - ensure backend bootstrapped and populate keys to docker/data .env
     }
@@ -87,7 +79,8 @@ class DockerBuildCmd {
   private async buildBackend() {
     console.log(chalk.blue("Building backend..."));
     const tags = this.getTags("backend", true);
-    const args = `${tags} --build-arg "ENV_NAME=development" --build-arg "BASE_TAG=${BASE_TAG}"`;
+    const secrets = this.getSecrets();
+    const args = `${tags} --build-arg "ENV_NAME=development" --build-arg "BASE_TAG=${BASE_TAG}" ${secrets}`;
     const cmd = `docker build --file docker/backend.dockerfile ${args} .`;
     console.log(chalk.gray(cmd));
     await execa(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
@@ -123,5 +116,10 @@ class DockerBuildCmd {
       tags.push(`${gcrRepo}/${imageName}:${BASE_TAG}`);
     }
     return `--tag ${tags.join(" --tag ")}`;
+  }
+
+  // Pass .env files as build secrets to use as required
+  private getSecrets() {
+    return `--secret id=_env,src=config/docker.env`;
   }
 }

@@ -58,6 +58,8 @@ services:
       # Load docker configuration
       - NODE_ENV=docker
       - DATA_DIR=/app/data/db
+      # Local config (required if deploying to cloud run)
+      # - STRAPI_READONLY_TOKEN=
 
     healthcheck:
       test: "wget --no-verbose --tries=1 --spider http://localhost:1337 || exit 1"
@@ -122,8 +124,9 @@ services:
       - ./docker/data/uploads:/data/uploads
       - ./backend/config/service-account.json:/service-account.json
     environment:
-      - GCS_BUCKET_NAME=sami_website
       - GCS_PROJECT=sami-website-365718
+      - GCS_BUCKET_NAME=sami_website_db
+      - GCS_PUBLIC_BUCKET_NAME=sami_website_public
       - GCSFUSE_MNT=/mnt/gcs
       - UNISON_MNT=/data
       - GOOGLE_APPLICATION_CREDENTIALS=/service-account.json

@@ -1,3 +1,4 @@
+# syntax = docker/dockerfile:1.2
 # yarn build --only frontend
 
 # Global args (available to FROM statement also when defined this way)
@@ -9,14 +10,20 @@ FROM docker
 COPY --from=docker/buildx-bin /buildx /usr/libexec/docker/cli-plugins/docker-buildx
 RUN docker buildx version
 
+
 # Use extra step just to copy base image files as cannot pass variable to `COPY --from` statement
 FROM samicharity/base:${BASE_TAG} as builder
-WORKDIR /app
+# Copy minimal files to allow backend workspace to be accessed using yarn
+COPY ./.yarn ./.yarn
+ENV YARN_CACHE_FOLDER=/app/.yarn/cache
+COPY ./package.json ./yarn.lock ./.yarnrc.yml ./
+COPY ./fronend/package.json ./fronend/package.json
+RUN yarn workspaces focus --production fronend 
 # TODO - prune node_modules if not required at runtime
-COPY . .
+
 
 # Run app
-FROM node:20-alpine as frontend
+FROM node:20.7.0-alpine as frontend
 WORKDIR /app
 RUN yarn global add pm2 && yarn cache clean
 
@@ -24,7 +31,7 @@ RUN yarn global add pm2 && yarn cache clean
 # RUN adduser -S nextjs -u 1001
 
 ENV PATH /app/node_modules/.bin:$PATH
-COPY --from=builder /app/frontend/ ./
+COPY --from=builder /app/frontend .
 
 # TODO - copy env and get nextjs package json script and trim
 # https://nextjs.org/docs/deployment

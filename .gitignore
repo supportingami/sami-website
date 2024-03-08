@@ -31,3 +31,5 @@ data/*
 scripts/input
 scripts/output
 .vercel
+
+service.yaml
