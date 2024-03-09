@@ -1,3 +1,9 @@
+import { resolve } from "path";
+import { BACKEND_DIR } from "./paths";
+
+const dashboardRedirectPath = resolve(BACKEND_DIR, "src/middlewares/dashboard-redirect.ts");
+console.log(dashboardRedirectPath);
+
 export default ({ env }) => {
   // default allow script and images hosted on any https domain as well as
   // http self-hosted domains
@@ -29,6 +35,10 @@ export default ({ env }) => {
           },
         },
       },
+    },
+    // Custom redirect middleware
+    {
+      name: "global::dashboard-redirect",
     },
     "strapi::cors",
     "strapi::poweredBy",

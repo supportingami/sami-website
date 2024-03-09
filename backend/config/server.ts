@@ -11,8 +11,6 @@ export default ({ env }) => {
   if (url) {
     serverConfig.url = url;
   }
-
-  console.log({ serverConfig });
   return serverConfig;
 };
 
