@@ -1,3 +1,6 @@
+import { resolve } from "path";
+import { ROOT_DIR } from "./paths";
+
 // NOTE - rebuild required after any config changes
 export default ({ env }) => {
   const serverConfig: any = {
@@ -5,6 +8,9 @@ export default ({ env }) => {
     port: env.int("STRAPI_PORT", 1337),
     app: {
       keys: env.array("APP_KEYS"),
+    },
+    dirs: {
+      public: env("STRAPI_PUBLIC_DIR", resolve(ROOT_DIR, "data", "public")),
     },
   };
   const url = getServerUrl(env);

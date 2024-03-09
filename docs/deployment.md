@@ -32,6 +32,32 @@ A standalone deployment is made to enable the use of strapi dashboard online, an
 - file uploads persisted by writing to folder on GCS
 - GCS files bound to server using GCS Fuse, configured within `server.yaml`
 
+  NOTE - GCS volume binding not currently available from cloud run service page. Instead must export service yaml and update accordingly. E.g.
+
+```yaml
+volumeMounts:
+  - name: db
+    mountPath: /app/data/db
+  - name: uploads
+    mountPath: /app/public/uploads
+```
+
+```yaml
+volumes:
+  - name: db
+    csi:
+      driver: gcsfuse.run.googleapis.com
+      volumeAttributes:
+        bucketName: sami_website_db
+  - name: uploads
+    csi:
+      driver: gcsfuse.run.googleapis.com
+      volumeAttributes:
+        bucketName: sami_website_uploads
+```
+
+(TODO - pulumi config to automate process)
+
 **Write Conflicts**
 SQLite has support for concurrent writes, implementing file-locking and a write-ahead-log to prevent conflicts in cases where multiple users are interacting with the same db file
 https://www.reddit.com/r/sqlite/comments/ztzbki/sharing_a_db_file_with_separate_docker_containers/
@@ -56,6 +82,11 @@ This is managed using GCSFuse, which is natively available within the GCR enviro
 Local support is only available for linux, so if running on Windows it is technically possible to use a docker container to create shared volumes accessible to the backend and local, and replicated to GCS, however this loses some of the file-locking mechanisms that prevents simultaneous writes (and so not fit for production environment).
 
 Instead it is better to include GCSFuse support directly within the container image
+
+**Debugging Deployment**
+If container starts up there should be relevant info stored in cloud logging.
+If container cannot start then should first confirm everything running locally and that provided environment matches local docker-compose environment. It might be possible to debug via ssh (although not really recommended).
+https://www.varstack.com/2022/06/04/Cloud-Run-SSH/
 
 **TODO**
 
