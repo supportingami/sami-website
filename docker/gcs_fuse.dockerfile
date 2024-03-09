@@ -31,15 +31,18 @@ RUN apk update add --no-cache git \
 FROM python:3.12-alpine
 
 # id of gcs project
-ENV GCS_PROJECT=
-# name of gcs bucket
-ENV GCS_BUCKET_NAME=
+ENV GCP_PROJECT=
+# name of gcs buckets
+ENV GCS_DB_BUCKET_NAME=
+ENV GCS_UPLOADS_BUCKET_NAME=
 # path to google application credential json file
 ENV GOOGLE_APPLICATION_CREDENTIALS=
-# path to mount gcs fuse files, e.g. /mnt/gcs
-ENV GCSFUSE_MNT=
+# path to mount gcs fuse files, e.g. /mnt/gcs/db /mnt/gcs/public
+ENV GCSFUSE_DB_MNT=
+ENV GCSFUSE_PUBLIC_MNT=
 # path to sync gcs_fuse files with (forces dl from gcs)
-ENV UNISON_MNT=
+ENV UNISON_DB_MNT=
+ENV UNISON_PUBLIC_MNT=
 # poll interval used by unison when checking for new files
 ENV POLL_INTERVAL=10
 

@@ -123,9 +123,9 @@ services:
       - ./docker/data/uploads:/data/uploads
       - ./backend/config/service-account.json:/service-account.json
     environment:
-      - GCS_PROJECT=sami-website-365718
-      - GCS_BUCKET_NAME=sami_website_db
-      - GCS_PUBLIC_BUCKET_NAME=sami_website_public
+      - GCP_PROJECT=sami-website-365718
+      - GCS_DB_BUCKET_NAME=sami_website_db
+      - GCS_UPLOADS_BUCKET_NAME=sami_website_public
       - GCSFUSE_MNT=/mnt/gcs
       - UNISON_MNT=/data
       - GOOGLE_APPLICATION_CREDENTIALS=/service-account.json
