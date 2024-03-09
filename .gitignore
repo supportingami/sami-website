@@ -25,8 +25,8 @@ tsconfig.tsbuildinfo
 
 docker/data
 data/*
-!data/db
-!data/uploads
+!data/db-json
+!data/public
 
 scripts/input
 scripts/output
