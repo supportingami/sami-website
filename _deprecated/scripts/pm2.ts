@@ -5,9 +5,9 @@ import concurrently from "concurrently";
 import { readdirSync, ensureDirSync, emptyDirSync } from "fs-extra";
 import { resolve } from "path";
 import pm2 from "pm2";
-import { PATHS } from "../../paths";
-import { loadEnv } from "../../utils";
-import type { IEnvLoaded } from "../../utils";
+import { PATHS } from "../../scripts/src/paths";
+import { loadEnv } from "../../scripts/src/utils";
+import type { IEnvLoaded } from "../../scripts/src/utils";
 import execa from "execa";
 
 const pm2Bin = resolve(PATHS.scriptsDir, "node_modules", ".bin", "pm2");
