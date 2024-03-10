@@ -1,29 +1,24 @@
 import { resolve } from "path";
 import { existsSync } from "fs";
-
-let ROOT_DIR = resolve(__dirname, "../../");
-// HACK - compiled code sits in dist dir one level further down
-if (__dirname.includes("dist")) {
-  ROOT_DIR = resolve(ROOT_DIR, "../");
-}
+import { ROOT_DIR } from "./paths";
 
 export default ({ env }) => {
   const client: "sqlite" | "postgres" = env("DATABASE_CLIENT", "sqlite");
   // SQLITE
   const dbFilename = env("DATABASE_FILENAME", "data.db");
-  const dataDir = env("DATA_DIR", resolve(ROOT_DIR, "data"));
-  const filename = resolve(dataDir, dbFilename);
-  console.log("SQLITE DB", filename);
+  const dbDir = env("DB_DIR", resolve(ROOT_DIR, "data", "db"));
+  const filename = resolve(dbDir, dbFilename);
   // Avoid creating new sqlite files in production
   // in case waiting for filesystem to initialise (e.g. gcsfuse)
   if (process.env.NODE_ENV !== "development") {
     if (!existsSync(filename)) {
+      console.error("Sqlite db not found\n" + filename);
       throw new Error("Sqlite db not found\n" + filename);
     }
   }
 
   if (client === "sqlite") {
-    console.log("\n\n", "SQLITE DB:", filename, "\n");
+    const useWal = env.bool("DATABASE_WAL", true);
     return {
       connection: {
         client,
@@ -35,12 +30,18 @@ export default ({ env }) => {
           // docker kills idle connections so set min 0
           // https://docs.strapi.io/dev-docs/configurations/database#database-pooling-options
           min: 0,
-          max: 10,
+          // HACK - when deploying to GCP init will fail due to write-lock if multiple processes
+          // so for now avoid pooling (less of an issue once db running)
+          // https://serverfault.com/questions/823532/sqlite-on-google-cloud-persistent-disk
+          max: 1,
           // NOTE: sqliteConn is the native connection, either sqlite3 or better-sqlite3 depending on your project
           // But exec should work for both afaik
           afterCreate: async (sqliteConn, cb) => {
-            await sqliteConn.exec("pragma journal_mode = WAL");
-            await sqliteConn.exec("pragma synchronous = normal");
+            if (useWal) {
+              const walMode = useWal ? "WAL" : "DELETE";
+              await sqliteConn.exec(`pragma journal_mode = ${walMode}`);
+              await sqliteConn.exec("pragma synchronous = normal");
+            }
             cb();
           },
         },

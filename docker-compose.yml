@@ -56,7 +56,7 @@ services:
     environment:
       # Load docker configuration
       - NODE_ENV=docker
-      - DATA_DIR=/app/data/db
+      - DB_DIR=/app/data/db
       # Local config (required if deploying to cloud run)
       # - STRAPI_READONLY_TOKEN=
 

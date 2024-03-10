@@ -24,9 +24,10 @@ backend/build
 tsconfig.tsbuildinfo
 
 docker/data
-data/*
-!data/db-json
-!data/public
+
+data/backups
+data/public
+data/db
 
 scripts/input
 scripts/output
