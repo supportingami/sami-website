@@ -29,7 +29,7 @@ export class DBImport {
    **/
   public async run(envName: string, table?: string) {
     // setup folders
-    const importDir = path.resolve(PATHS.dataDir, "db");
+    const importDir = path.resolve(PATHS.dataDir, "db-json");
     ensureDirSync(importDir);
 
     // query list of local and remote data tables
