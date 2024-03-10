@@ -34,7 +34,7 @@ FROM python:3.12-alpine
 ENV GCP_PROJECT=
 # name of gcs buckets
 ENV GCS_DB_BUCKET_NAME=
-ENV GCS_UPLOADS_BUCKET_NAME=
+ENV GCS_PUBLIC_BUCKET_NAME=
 # path to google application credential json file
 ENV GOOGLE_APPLICATION_CREDENTIALS=
 # path to mount gcs fuse files, e.g. /mnt/gcs/db /mnt/gcs/public

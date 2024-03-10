@@ -48,7 +48,7 @@ services:
       - "1337:1337"
     volumes:
       # Uploads folder shared between frontend and backend for easier access
-      - ./docker/data/uploads:/app/public/uploads
+      - ./docker/data/public:/app/public
       - ./docker/data/db:/app/data/db
     env_file:
       - ./config/docker.env
@@ -90,8 +90,8 @@ services:
       - ./config/docker.env
       - ./config/docker.local.env
     volumes:
-      # Uploads folder shared between frontend and backend for easier access
-      - ./docker/data/uploads:/app/public/uploads
+      # Public folder shared between frontend and backend for easier access
+      - ./docker/data/public:/app/public
     environment:
       VIRTUAL_HOST: ${PUBLIC_DOMAIN}
       VIRTUAL_PORT: "3000"
@@ -120,12 +120,12 @@ services:
     image: samicharity/gcs_fuse:latest
     volumes:
       - ./docker/data/db:/data/db
-      - ./docker/data/uploads:/data/uploads
+      - ./docker/data/public:/data/public
       - ./backend/config/service-account.json:/service-account.json
     environment:
       - GCP_PROJECT=sami-website-365718
       - GCS_DB_BUCKET_NAME=sami_website_db
-      - GCS_UPLOADS_BUCKET_NAME=sami_website_public
+      - GCS_PUBLIC_BUCKET_NAME=sami_website_public
       - GCSFUSE_MNT=/mnt/gcs
       - UNISON_MNT=/data
       - GOOGLE_APPLICATION_CREDENTIALS=/service-account.json

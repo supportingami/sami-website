@@ -38,8 +38,8 @@ A standalone deployment is made to enable the use of strapi dashboard online, an
 volumeMounts:
   - name: db
     mountPath: /app/data/db
-  - name: uploads
-    mountPath: /app/public/uploads
+  - name: public
+    mountPath: /app/public
 ```
 
 ```yaml
@@ -49,11 +49,17 @@ volumes:
       driver: gcsfuse.run.googleapis.com
       volumeAttributes:
         bucketName: sami_website_db
-  - name: uploads
+  - name: public
     csi:
       driver: gcsfuse.run.googleapis.com
       volumeAttributes:
-        bucketName: sami_website_uploads
+        bucketName: sami_website_public
+```
+
+Deploy via
+
+```sh
+ gcloud run services replace service.yaml
 ```
 
 (TODO - pulumi config to automate process)
