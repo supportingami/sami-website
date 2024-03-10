@@ -7,12 +7,16 @@ import chalk from "chalk";
 
 export class StorageImport {
   public async run(parsedEnv?: any) {
-    const { GCS_BUCKET_NAME, GOOGLE_APPLICATION_CREDENTIALS } = parsedEnv;
-    if (GCS_BUCKET_NAME) {
+    const { GCS_UPLOADS_BUCKET_NAME, GOOGLE_APPLICATION_CREDENTIALS } = parsedEnv;
+    if (GCS_UPLOADS_BUCKET_NAME) {
+      // Untested recently, ideally production updates should be made on server itself
+      // Could be potentially destructive on live server
+      throw new Error("TODO - review methods");
+
       // Ensure GOOGLE_APPLICATION_CREDENTIALS point to absolute path (not just relative config)
       // This will be loaded by default when performing operations using gcloud sdks
       process.env.GOOGLE_APPLICATION_CREDENTIALS = resolve(PATHS.configDir, GOOGLE_APPLICATION_CREDENTIALS);
-      return this.importGoogleStorage(GCS_BUCKET_NAME);
+      return this.importGoogleStorage(GCS_UPLOADS_BUCKET_NAME);
     }
     return this.importLocalStorage();
   }
