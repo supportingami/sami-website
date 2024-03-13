@@ -40,6 +40,10 @@ RUN apk add --no-cache vips-dev \
 # https://forum.strapi.io/t/reducing-strapi-docker-image-size/2971/8
 # Notably monaco-editor 100+mb only used for import-export-entries plugin
 
+# Could also examine using vercel node-file-trace or ncc compiler
+# https://github.com/vercel/nft
+# https://www.npmjs.com/package/@vercel/ncc
+
 ENV NODE_ENV=${ENV_NAME}
 
 WORKDIR /app

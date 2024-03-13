@@ -39,7 +39,7 @@ volumeMounts:
   - name: db
     mountPath: /app/data/db
   - name: public
-    mountPath: /app/public
+    mountPath: /app/data/public
 ```
 
 ```yaml
@@ -59,7 +59,7 @@ volumes:
 Deploy via
 
 ```sh
- gcloud run services replace service.yaml
+gcloud run services replace service.yaml
 ```
 
 (TODO - pulumi config to automate process)

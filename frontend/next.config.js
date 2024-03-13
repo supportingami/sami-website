@@ -1,10 +1,5 @@
 const path = require("path");
 
-const withBundleAnalyzer = require("@next/bundle-analyzer")({
-  enabled: process.env.ANALYZE === "true",
-});
-const withExportImages = require("next-export-optimize-images");
-
 const { NEXT_PUBLIC_API_URL, NEXT_PUBLIC_IMAGE_URL } = process.env;
 
 // default fallback image to api url
@@ -57,14 +52,17 @@ const commonConfig = {
  * (config loaded using local export-images.config.js)
  * Redirects managed at server level (e.g. vercel.json)
  * */
-const exportConfig = withExportImages({
-  ...commonConfig,
-  output: "export",
-  publicRuntimeConfig: {
-    // All images will be loaded from set of local folders
-    NEXT_PUBLIC_IMAGE_URL: "",
-  },
-});
+const exportConfig = () => {
+  const withExportImages = require("next-export-optimize-images");
+  return withExportImages({
+    ...commonConfig,
+    output: "export",
+    publicRuntimeConfig: {
+      // All images will be loaded from set of local folders
+      NEXT_PUBLIC_IMAGE_URL: "",
+    },
+  });
+};
 
 // TODO - could also add NEXT_PUBLIC_API_DOMAIN
 const domains = ["localhost", "storage.googleapis.com", "backend"];
@@ -84,35 +82,40 @@ if (NEXT_PUBLIC_IMAGE_URL && NEXT_PUBLIC_IMAGE_URL.startsWith("http")) {
  * Full NextJS functionality supported
  ***********************************************************************************/
 
-const standaloneConfig = withBundleAnalyzer({
-  ...commonConfig,
-  output: "standalone",
-  images: {
-    loader: "default",
-    domains,
-  },
-  async redirects() {
-    return [
-      {
-        source: "/",
-        destination: "/home",
-        permanent: true,
-      },
-    ];
-  },
-  //  NOTE - when running standalone process environment variables not included. Custom postbuild script
-  // will replace any stringified process variables with container at runtime
-  // https://github.com/vercel/next.js/issues/12269
-  // https://github.com/vercel/next.js/issues/27865
-  // https://raphaelpralat.medium.com/system-environment-variables-in-next-js-with-docker-1f0754e04cde
-  publicRuntimeConfig: {
-    NEXT_PUBLIC_API_URL,
-    NEXT_PUBLIC_IMAGE_URL,
-  },
-});
+const standaloneConfig = () => {
+  const withBundleAnalyzer = require("@next/bundle-analyzer")({
+    enabled: process.env.ANALYZE === "true",
+  });
+  return withBundleAnalyzer({
+    ...commonConfig,
+    output: "standalone",
+    images: {
+      loader: "default",
+      domains,
+    },
+    async redirects() {
+      return [
+        {
+          source: "/",
+          destination: "/home",
+          permanent: true,
+        },
+      ];
+    },
+    //  NOTE - when running standalone process environment variables not included. Custom postbuild script
+    // will replace any stringified process variables with container at runtime
+    // https://github.com/vercel/next.js/issues/12269
+    // https://github.com/vercel/next.js/issues/27865
+    // https://raphaelpralat.medium.com/system-environment-variables-in-next-js-with-docker-1f0754e04cde
+    publicRuntimeConfig: {
+      NEXT_PUBLIC_API_URL,
+      NEXT_PUBLIC_IMAGE_URL,
+    },
+  });
+};
 
 /** Use a custom NEXT_CONFIG_MODE environment variable to specify 'export' or 'standalone' */
-const config = process.env.NEXT_CONFIG_MODE === "export" ? exportConfig : standaloneConfig;
+const config = process.env.NEXT_CONFIG_MODE === "export" ? exportConfig() : standaloneConfig();
 console.log(`NextJS will run in ${config.output} mode`);
 
 module.exports = config;

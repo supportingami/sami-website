@@ -88,7 +88,7 @@ class BuildCmd {
     this.preBuild();
 
     // Start backend server and call build script once running
-    const buildCmd = this.getBuildCommand();
+    const buildCmd = this.getFrontendBuildCommand();
     const commands = [buildCmd];
     if (this.options.backend) {
       const backendCmd = this.getBackendStartCommand();
@@ -135,7 +135,7 @@ class BuildCmd {
   /**
    * Depending on nextjs build mode (standalone or export) prepare different scripts
    */
-  private getBuildCommand(): ConcurrentlyCommandInput {
+  private getFrontendBuildCommand(): ConcurrentlyCommandInput {
     const { config: NEXT_CONFIG_MODE } = this.options;
     // use wait-on to wait for backend server to be ready before building
     const waitOnBin = resolve(PATHS.scriptsDir, "node_modules", ".bin", "wait-on");
