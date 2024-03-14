@@ -757,6 +757,7 @@ union GenericMorph =
   | HomeContent
   | I18NLocale
   | Member
+  | Partner
   | ProjectType
   | Resource
   | UploadFile
@@ -987,6 +988,7 @@ type Mutation {
   createCountry(data: CountryInput!): CountryEntityResponse
   createFaq(data: FaqInput!): FaqEntityResponse
   createMember(data: MemberInput!): MemberEntityResponse
+  createPartner(data: PartnerInput!): PartnerEntityResponse
   createProjectType(data: ProjectTypeInput!): ProjectTypeEntityResponse
   createResource(data: ResourceInput!): ResourceEntityResponse
   createUploadFile(data: UploadFileInput!): UploadFileEntityResponse
@@ -1013,6 +1015,7 @@ type Mutation {
   deleteFaq(id: ID!): FaqEntityResponse
   deleteHomeContent: HomeContentEntityResponse
   deleteMember(id: ID!): MemberEntityResponse
+  deletePartner(id: ID!): PartnerEntityResponse
   deleteProjectType(id: ID!): ProjectTypeEntityResponse
   deleteResource(id: ID!): ResourceEntityResponse
   deleteUploadFile(id: ID!): UploadFileEntityResponse
@@ -1067,6 +1070,7 @@ type Mutation {
   updateFileInfo(id: ID!, info: FileInfoInput): UploadFileEntityResponse!
   updateHomeContent(data: HomeContentInput!): HomeContentEntityResponse
   updateMember(data: MemberInput!, id: ID!): MemberEntityResponse
+  updatePartner(data: PartnerInput!, id: ID!): PartnerEntityResponse
   updateProjectType(data: ProjectTypeInput!, id: ID!): ProjectTypeEntityResponse
   updateResource(data: ResourceInput!, id: ID!): ResourceEntityResponse
   updateUploadFile(data: UploadFileInput!, id: ID!): UploadFileEntityResponse
@@ -1097,6 +1101,48 @@ input PaginationArg {
   page: Int
   pageSize: Int
   start: Int
+}
+
+type Partner {
+  Logo: UploadFileEntityResponse!
+  Name: String!
+  SortOrder: Float
+  createdAt: DateTime
+  publishedAt: DateTime
+  updatedAt: DateTime
+}
+
+type PartnerEntity {
+  attributes: Partner
+  id: ID
+}
+
+type PartnerEntityResponse {
+  data: PartnerEntity
+}
+
+type PartnerEntityResponseCollection {
+  data: [PartnerEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input PartnerFiltersInput {
+  Name: StringFilterInput
+  SortOrder: FloatFilterInput
+  and: [PartnerFiltersInput]
+  createdAt: DateTimeFilterInput
+  id: IDFilterInput
+  not: PartnerFiltersInput
+  or: [PartnerFiltersInput]
+  publishedAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+}
+
+input PartnerInput {
+  Logo: ID
+  Name: String
+  SortOrder: Float
+  publishedAt: DateTime
 }
 
 type ProjectType {
@@ -1240,6 +1286,13 @@ type Query {
     publicationState: PublicationState = LIVE
     sort: [String] = []
   ): MemberEntityResponseCollection
+  partner(id: ID): PartnerEntityResponse
+  partners(
+    filters: PartnerFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): PartnerEntityResponseCollection
   projectType(id: ID): ProjectTypeEntityResponse
   projectTypes(
     filters: ProjectTypeFiltersInput

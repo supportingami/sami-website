@@ -833,6 +833,7 @@ export type GenericMorph =
   | HomeContent
   | I18NLocale
   | Member
+  | Partner
   | ProjectType
   | Resource
   | UploadFile
@@ -1064,6 +1065,7 @@ export type Mutation = {
   createCountry?: Maybe<CountryEntityResponse>;
   createFaq?: Maybe<FaqEntityResponse>;
   createMember?: Maybe<MemberEntityResponse>;
+  createPartner?: Maybe<PartnerEntityResponse>;
   createProjectType?: Maybe<ProjectTypeEntityResponse>;
   createResource?: Maybe<ResourceEntityResponse>;
   createUploadFile?: Maybe<UploadFileEntityResponse>;
@@ -1084,6 +1086,7 @@ export type Mutation = {
   deleteFaq?: Maybe<FaqEntityResponse>;
   deleteHomeContent?: Maybe<HomeContentEntityResponse>;
   deleteMember?: Maybe<MemberEntityResponse>;
+  deletePartner?: Maybe<PartnerEntityResponse>;
   deleteProjectType?: Maybe<ProjectTypeEntityResponse>;
   deleteResource?: Maybe<ResourceEntityResponse>;
   deleteUploadFile?: Maybe<UploadFileEntityResponse>;
@@ -1117,6 +1120,7 @@ export type Mutation = {
   updateFileInfo: UploadFileEntityResponse;
   updateHomeContent?: Maybe<HomeContentEntityResponse>;
   updateMember?: Maybe<MemberEntityResponse>;
+  updatePartner?: Maybe<PartnerEntityResponse>;
   updateProjectType?: Maybe<ProjectTypeEntityResponse>;
   updateResource?: Maybe<ResourceEntityResponse>;
   updateUploadFile?: Maybe<UploadFileEntityResponse>;
@@ -1169,6 +1173,10 @@ export type MutationCreateFaqArgs = {
 
 export type MutationCreateMemberArgs = {
   data: MemberInput;
+};
+
+export type MutationCreatePartnerArgs = {
+  data: PartnerInput;
 };
 
 export type MutationCreateProjectTypeArgs = {
@@ -1228,6 +1236,10 @@ export type MutationDeleteFaqArgs = {
 };
 
 export type MutationDeleteMemberArgs = {
+  id: Scalars["ID"];
+};
+
+export type MutationDeletePartnerArgs = {
   id: Scalars["ID"];
 };
 
@@ -1350,6 +1362,11 @@ export type MutationUpdateMemberArgs = {
   id: Scalars["ID"];
 };
 
+export type MutationUpdatePartnerArgs = {
+  data: PartnerInput;
+  id: Scalars["ID"];
+};
+
 export type MutationUpdateProjectTypeArgs = {
   data: ProjectTypeInput;
   id: Scalars["ID"];
@@ -1405,6 +1422,52 @@ export type PaginationArg = {
   page?: InputMaybe<Scalars["Int"]>;
   pageSize?: InputMaybe<Scalars["Int"]>;
   start?: InputMaybe<Scalars["Int"]>;
+};
+
+export type Partner = {
+  __typename?: "Partner";
+  Logo: UploadFileEntityResponse;
+  Name: Scalars["String"];
+  SortOrder?: Maybe<Scalars["Float"]>;
+  createdAt?: Maybe<Scalars["DateTime"]>;
+  publishedAt?: Maybe<Scalars["DateTime"]>;
+  updatedAt?: Maybe<Scalars["DateTime"]>;
+};
+
+export type PartnerEntity = {
+  __typename?: "PartnerEntity";
+  attributes?: Maybe<Partner>;
+  id?: Maybe<Scalars["ID"]>;
+};
+
+export type PartnerEntityResponse = {
+  __typename?: "PartnerEntityResponse";
+  data?: Maybe<PartnerEntity>;
+};
+
+export type PartnerEntityResponseCollection = {
+  __typename?: "PartnerEntityResponseCollection";
+  data: Array<PartnerEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type PartnerFiltersInput = {
+  Name?: InputMaybe<StringFilterInput>;
+  SortOrder?: InputMaybe<FloatFilterInput>;
+  and?: InputMaybe<Array<InputMaybe<PartnerFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  not?: InputMaybe<PartnerFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<PartnerFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type PartnerInput = {
+  Logo?: InputMaybe<Scalars["ID"]>;
+  Name?: InputMaybe<Scalars["String"]>;
+  SortOrder?: InputMaybe<Scalars["Float"]>;
+  publishedAt?: InputMaybe<Scalars["DateTime"]>;
 };
 
 export type ProjectType = {
@@ -1504,6 +1567,8 @@ export type Query = {
   me?: Maybe<UsersPermissionsMe>;
   member?: Maybe<MemberEntityResponse>;
   members?: Maybe<MemberEntityResponseCollection>;
+  partner?: Maybe<PartnerEntityResponse>;
+  partners?: Maybe<PartnerEntityResponseCollection>;
   projectType?: Maybe<ProjectTypeEntityResponse>;
   projectTypes?: Maybe<ProjectTypeEntityResponseCollection>;
   resource?: Maybe<ResourceEntityResponse>;
@@ -1633,6 +1698,17 @@ export type QueryMemberArgs = {
 
 export type QueryMembersArgs = {
   filters?: InputMaybe<MemberFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+};
+
+export type QueryPartnerArgs = {
+  id?: InputMaybe<Scalars["ID"]>;
+};
+
+export type QueryPartnersArgs = {
+  filters?: InputMaybe<PartnerFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
@@ -2581,6 +2657,31 @@ export type MembersQuery = {
       __typename?: "ResponseCollectionMeta";
       pagination: { __typename?: "Pagination"; page: number; pageSize: number; total: number; pageCount: number };
     };
+  } | null;
+};
+
+export type PartnersQueryVariables = Exact<{ [key: string]: never }>;
+
+export type PartnersQuery = {
+  __typename?: "Query";
+  partners?: {
+    __typename?: "PartnerEntityResponseCollection";
+    data: Array<{
+      __typename?: "PartnerEntity";
+      id?: string | null;
+      attributes?: {
+        __typename?: "Partner";
+        Name: string;
+        Logo: {
+          __typename?: "UploadFileEntityResponse";
+          data?: {
+            __typename?: "UploadFileEntity";
+            id?: string | null;
+            attributes?: { __typename?: "UploadFile"; name: string; url: string; size: number } | null;
+          } | null;
+        };
+      } | null;
+    }>;
   } | null;
 };
 
@@ -3956,6 +4057,88 @@ export const MembersDocument = {
     },
   ],
 } as unknown as DocumentNode<MembersQuery, MembersQueryVariables>;
+export const PartnersDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "partners" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "partners" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "sort" },
+                value: { kind: "StringValue", value: "SortOrder:ASC", block: false },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "data" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "attributes" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "Name" } },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "Logo" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "data" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        { kind: "Field", name: { kind: "Name", value: "id" } },
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "attributes" },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              { kind: "Field", name: { kind: "Name", value: "name" } },
+                                              { kind: "Field", name: { kind: "Name", value: "url" } },
+                                              { kind: "Field", name: { kind: "Name", value: "size" } },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<PartnersQuery, PartnersQueryVariables>;
 export const ProjectsDocument = {
   kind: "Document",
   definitions: [

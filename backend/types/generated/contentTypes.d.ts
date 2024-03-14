@@ -826,6 +826,29 @@ export interface ApiMemberMember extends Schema.CollectionType {
   };
 }
 
+export interface ApiPartnerPartner extends Schema.CollectionType {
+  collectionName: "partners";
+  info: {
+    singularName: "partner";
+    pluralName: "partners";
+    displayName: "Partners";
+    description: "";
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Logo: Attribute.Media & Attribute.Required;
+    Name: Attribute.String & Attribute.Required & Attribute.Unique;
+    SortOrder: Attribute.Decimal & Attribute.DefaultTo<1>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<"api::partner.partner", "oneToOne", "admin::user"> & Attribute.Private;
+    updatedBy: Attribute.Relation<"api::partner.partner", "oneToOne", "admin::user"> & Attribute.Private;
+  };
+}
+
 export interface ApiProjectTypeProjectType extends Schema.CollectionType {
   collectionName: "project_types";
   info: {
@@ -931,6 +954,7 @@ declare module "@strapi/types" {
       "api::faq.faq": ApiFaqFaq;
       "api::home-content.home-content": ApiHomeContentHomeContent;
       "api::member.member": ApiMemberMember;
+      "api::partner.partner": ApiPartnerPartner;
       "api::project-type.project-type": ApiProjectTypeProjectType;
       "api::resource.resource": ApiResourceResource;
       "api::volunteer-content.volunteer-content": ApiVolunteerContentVolunteerContent;

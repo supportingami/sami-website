@@ -3,24 +3,26 @@ import Head from "next/head";
 import { AboutPageComponent } from "components/pages/about";
 import { AnnualReportPageComponent } from "components/pages/about/annual-reports";
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
-import type { IAnnualReport } from "types/annualreport";
-import type { IMember } from "types/member";
+import Image from "next/image";
 
-import type { AboutQuery, MembersQuery, AnnualReportsQuery } from "../graphql/generated";
-import { AboutDocument, MembersDocument, AnnualReportsDocument } from "../graphql/generated";
+import type { AboutQuery, MembersQuery, AnnualReportsQuery, Partner, PartnersQuery } from "../graphql/generated";
+import { AboutDocument, MembersDocument, AnnualReportsDocument, PartnersDocument } from "../graphql/generated";
 import { serverQuery } from "lib/graphql";
 import type { IAbout } from "types/about";
+import type { IAnnualReport } from "types/annualreport";
+import type { IMember } from "types/member";
 import { MembersComponent } from "components/pages/about/members";
 import ToC from "components/pages/about/ToC";
 import Testimonials from "components/pages/about/testmonials/Testmonials";
-import Partners from "components/pages/about/partners";
 import PageSection from "components/layout/pageSection";
 import { SectionHeader } from "components/layout/Header";
+import { getStrapiMedia } from "lib/media";
 
 export const getStaticProps = async ({}: GetStaticPropsContext) => {
   let about: IAbout[] = [];
   let members: IMember[] = [];
   let reports: IAnnualReport[] = [];
+  let partners: Partner[] = [];
 
   const aboutRes = await serverQuery<AboutQuery>(AboutDocument);
 
@@ -38,11 +40,17 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
     reports = areportsRes.data.annualReports.data.map((m) => ({ ...m.attributes, id: m.id } as IAnnualReport)) || [];
   }
 
+  const partnersRes = await serverQuery<PartnersQuery>(PartnersDocument);
+  if (partners) {
+    partners = partnersRes.data.partners.data.map((m) => ({ ...(m.attributes as Partner) }));
+  }
+
   return {
     props: {
       about,
       members,
       reports,
+      partners,
     },
   };
 };
@@ -62,7 +70,7 @@ const headerButtons = [
   },
 ];
 
-const AboutPage = ({ about, members, reports }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const AboutPage = ({ about, members, reports, partners }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
       <Head>
@@ -92,10 +100,25 @@ const AboutPage = ({ about, members, reports }: InferGetStaticPropsType<typeof g
         <PageSection fullwidth className="bg-base-200 py-16">
           <Testimonials />
         </PageSection>
-        <Partners />
+        <PageSection fullwidth className="bg-primary-focus text-white py-0">
+          <h2 className="text-center">Our Partners</h2>
+        </PageSection>
+        <PageSection fullwidth className="mb-36">
+          <div className="grid auto-rows-[100px] gap-16 grid-cols-2 md:grid-cols-4 my-10 md:my-20 items-center justify-items-center">
+            {partners.map((partner) => (
+              <PartnerImage key={partner.Name} partner={partner} />
+            ))}
+          </div>
+        </PageSection>
       </div>
     </>
   );
 };
+
+const PartnerImage = ({ partner }: { partner: Partner }) => (
+  <div className="relative h-full w-full">
+    <Image className="object-contain" src={getStrapiMedia(partner.Logo)} alt={partner.Name} fill sizes="100" />
+  </div>
+);
 
 export default AboutPage;
