@@ -646,5 +646,45 @@
     "order": 1,
     "related_id": 8,
     "related_type": "api::annual-report.annual-report"
+  },
+  {
+    "field": "File",
+    "file_id": 110,
+    "id": 224,
+    "order": 1,
+    "related_id": 9,
+    "related_type": "api::annual-report.annual-report"
+  },
+  {
+    "field": "Logo",
+    "file_id": 111,
+    "id": 236,
+    "order": 1,
+    "related_id": 1,
+    "related_type": "api::partner.partner"
+  },
+  {
+    "field": "Logo",
+    "file_id": 112,
+    "id": 235,
+    "order": 1,
+    "related_id": 2,
+    "related_type": "api::partner.partner"
+  },
+  {
+    "field": "Logo",
+    "file_id": 114,
+    "id": 231,
+    "order": 1,
+    "related_id": 4,
+    "related_type": "api::partner.partner"
+  },
+  {
+    "field": "Logo",
+    "file_id": 115,
+    "id": 234,
+    "order": 1,
+    "related_id": 3,
+    "related_type": "api::partner.partner"
   }
 ]

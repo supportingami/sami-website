@@ -1,0 +1,42 @@
+[
+  {
+    "created_at": 1710387503903,
+    "created_by_id": 1,
+    "id": 1,
+    "name": "AIMS Rwanda",
+    "published_at": 1710387508080,
+    "sort_order": 2,
+    "updated_at": 1710391606593,
+    "updated_by_id": 1
+  },
+  {
+    "created_at": 1710387545653,
+    "created_by_id": 1,
+    "id": 2,
+    "name": "AMI Ghana",
+    "published_at": 1710387547349,
+    "sort_order": 4,
+    "updated_at": 1710391599455,
+    "updated_by_id": 1
+  },
+  {
+    "created_at": 1710387558693,
+    "created_by_id": 1,
+    "id": 3,
+    "name": "AMI",
+    "published_at": 1710387584715,
+    "sort_order": 1,
+    "updated_at": 1710391594096,
+    "updated_by_id": 1
+  },
+  {
+    "created_at": 1710387577076,
+    "created_by_id": 1,
+    "id": 4,
+    "name": "IM Togo",
+    "published_at": 1710387579910,
+    "sort_order": 3,
+    "updated_at": 1710387823574,
+    "updated_by_id": 1
+  }
+]

@@ -5,7 +5,7 @@
   },
   {
     "name": "annual_reports",
-    "seq": 8
+    "seq": 9
   },
   {
     "name": "blog_posts",
@@ -109,15 +109,15 @@
   },
   {
     "name": "files",
-    "seq": 109
+    "seq": 115
   },
   {
     "name": "files_folder_links",
-    "seq": 58
+    "seq": 66
   },
   {
     "name": "files_related_morphs",
-    "seq": 223
+    "seq": 236
   },
   {
     "name": "home_contents",
@@ -130,6 +130,10 @@
   {
     "name": "members",
     "seq": 15
+  },
+  {
+    "name": "partners",
+    "seq": 4
   },
   {
     "name": "project_types",
@@ -149,7 +153,7 @@
   },
   {
     "name": "upload_folders",
-    "seq": 11
+    "seq": 12
   },
   {
     "name": "upload_folders_parent_links",
