@@ -1,0 +1,74 @@
+[
+  {
+    "created_at": 1661956693415,
+    "created_by_id": 1,
+    "id": 1,
+    "published_at": 1661956694845,
+    "updated_at": 1665273724708,
+    "updated_by_id": 1,
+    "year": 2019
+  },
+  {
+    "created_at": 1662319359571,
+    "created_by_id": 1,
+    "id": 2,
+    "published_at": 1662384783333,
+    "updated_at": 1662384794159,
+    "updated_by_id": 1,
+    "year": 2020
+  },
+  {
+    "created_at": 1666598690743,
+    "created_by_id": 1,
+    "id": 3,
+    "published_at": 1666598691667,
+    "updated_at": 1666598691668,
+    "updated_by_id": 1,
+    "year": 2021
+  },
+  {
+    "created_at": 1666598739801,
+    "created_by_id": 1,
+    "id": 4,
+    "published_at": 1666598741588,
+    "updated_at": 1666598741589,
+    "updated_by_id": 1,
+    "year": 2018
+  },
+  {
+    "created_at": 1666598787992,
+    "created_by_id": 1,
+    "id": 5,
+    "published_at": 1666598788949,
+    "updated_at": 1666598788951,
+    "updated_by_id": 1,
+    "year": 2017
+  },
+  {
+    "created_at": 1666598832404,
+    "created_by_id": 1,
+    "id": 6,
+    "published_at": 1666598833372,
+    "updated_at": 1666598833372,
+    "updated_by_id": 1,
+    "year": 2016
+  },
+  {
+    "created_at": 1709705783777,
+    "created_by_id": 1,
+    "id": 7,
+    "published_at": 1709705875968,
+    "updated_at": 1709705875970,
+    "updated_by_id": 1,
+    "year": 2023
+  },
+  {
+    "created_at": 1709705855436,
+    "created_by_id": 1,
+    "id": 8,
+    "published_at": 1709705878515,
+    "updated_at": 1709705878516,
+    "updated_by_id": 1,
+    "year": 2022
+  }
+]

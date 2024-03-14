@@ -1,23 +1,24 @@
 import { resolve } from "path";
-import { logError } from "../../../utils";
 import { PATHS } from "../../../paths";
-import { replicateDir } from "../../../utils/file.utils";
+import { ensureDirSync } from "fs-extra";
+import { spawnSync } from "child_process";
 
 export class StorageExport {
   public async run(gcsBucketName?: string) {
     if (gcsBucketName) {
-      return this.exportGoogleStorage();
+      return this.exportGoogleStorage(gcsBucketName);
     }
-    return this.exportLocalStorage();
+    // local strapi already writes storage to data dir
   }
-  private exportGoogleStorage() {
-    // TODO
-    logError({ msg1: "Google storage export not currently implemented" });
-  }
-
-  private exportLocalStorage() {
-    const source = resolve(PATHS.backendDir, "public", "uploads");
-    const target = resolve(PATHS.dataDir, "uploads");
-    replicateDir(source, target);
+  private exportGoogleStorage(bucketName: string) {
+    const outputDir = resolve(PATHS.dataDir, "public", "uploads");
+    ensureDirSync(outputDir);
+    spawnSync(`gcloud storage rsync gs://${bucketName} "${outputDir}"`, {
+      shell: true,
+      stdio: "inherit",
+      cwd: PATHS.rootDir,
+    });
+    // TODO - consider using gcs sdk (not sure if supports rsync)
+    // TODO - delete from local files that don't exist on server
   }
 }

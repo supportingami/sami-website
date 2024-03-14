@@ -2,7 +2,7 @@ import axios from "axios";
 import chalk from "chalk";
 import crypto from "crypto";
 import schemaInspector from "knex-schema-inspector";
-import path from "path";
+import { resolve } from "path";
 
 import { loadDb } from "backend/scripts/db";
 
@@ -51,16 +51,19 @@ export async function createStrapiInstance(serveAdminPanel = false, autoReload =
   console.log(chalk.green("Starting Strapi..."));
   // create instance
   const app: IStrapi = await strapi({
-    appDir: PATHS.backendDir,
-    distDir: PATHS.backendDir, // non-ts so no compiled folder
+    appDir: resolve(PATHS.backendDir),
+    distDir: resolve(PATHS.backendDir, "dist"),
     autoReload,
     serveAdminPanel,
-  });
+  }).load();
   // ensure db uses same file as backend
-  app.config.database.connection.connection.filename = path.resolve(
-    PATHS.backendDir,
-    process.env.DATABASE_FILENAME || ".tmp/data.db"
-  );
+  if ((app.db?.config?.connection?.connection as any)?.filename) {
+    app.config.database.connection.connection.filename = resolve(
+      PATHS.dataDir,
+      process.env.DATABASE_FILENAME || "data.db"
+    );
+  }
+
   return app;
 }
 
@@ -71,12 +74,9 @@ export async function createStrapiInstance(serveAdminPanel = false, autoReload =
 /**
  * Connect to the same db as strapi for a given environment
  *
- * TODO - schema inspector doesn't support better-sqlite3 so using sqlite3
- * https://github.com/knex/knex-schema-inspector/issues/94
- *
  */
 export async function getDB(envName: string) {
-  const dbConfigPath = path.resolve(PATHS.backendDir, "config", "env", envName, "database.js");
+  const dbConfigPath = resolve(PATHS.backendDir, "config", "env", envName, "database.ts");
   const db = await loadDb(dbConfigPath);
   return db;
 }

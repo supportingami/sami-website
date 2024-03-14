@@ -113,11 +113,12 @@ exports
 build
 .strapi-updater.json
 data
+dist
+.strapi
 
 ############################
 # SAMI
 ############################
 *.db
 *.db.journal
-
-service-account.json
+config/service-account.json

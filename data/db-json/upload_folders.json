@@ -1,0 +1,102 @@
+[
+  {
+    "created_at": 1662375247824,
+    "created_by_id": 1,
+    "id": 1,
+    "name": "Members",
+    "path": "/1",
+    "path_id": 1,
+    "updated_at": 1662375303201,
+    "updated_by_id": 1
+  },
+  {
+    "created_at": 1662385096181,
+    "created_by_id": 1,
+    "id": 2,
+    "name": "Annual Reports",
+    "path": "/2",
+    "path_id": 2,
+    "updated_at": 1662385096181,
+    "updated_by_id": 1
+  },
+  {
+    "created_at": 1665273276245,
+    "created_by_id": 1,
+    "id": 4,
+    "name": "Resources",
+    "path": "/3",
+    "path_id": 3,
+    "updated_at": 1665273276245,
+    "updated_by_id": 1
+  },
+  {
+    "created_at": 1665323271316,
+    "created_by_id": 1,
+    "id": 5,
+    "name": "Cover Images",
+    "path": "/4",
+    "path_id": 4,
+    "updated_at": 1665323271316,
+    "updated_by_id": 1
+  },
+  {
+    "created_at": 1666080929556,
+    "created_by_id": 1,
+    "id": 6,
+    "name": "Blog Posts",
+    "path": "/5",
+    "path_id": 5,
+    "updated_at": 1666080929556,
+    "updated_by_id": 1
+  },
+  {
+    "created_at": 1668455107219,
+    "created_by_id": 1,
+    "id": 7,
+    "name": "Home",
+    "path": "/6",
+    "path_id": 6,
+    "updated_at": 1668455107219,
+    "updated_by_id": 1
+  },
+  {
+    "created_at": 1670036257627,
+    "created_by_id": 1,
+    "id": 8,
+    "name": "Projects",
+    "path": "/7",
+    "path_id": 7,
+    "updated_at": 1670036257627,
+    "updated_by_id": 1
+  },
+  {
+    "created_at": 1675636756847,
+    "created_by_id": 1,
+    "id": 9,
+    "name": "Donate",
+    "path": "/8",
+    "path_id": 8,
+    "updated_at": 1675636756847,
+    "updated_by_id": 1
+  },
+  {
+    "created_at": 1694210918880,
+    "created_by_id": 1,
+    "id": 10,
+    "name": "SAMI Intern Stories",
+    "path": "/5/9",
+    "path_id": 9,
+    "updated_at": 1694210918880,
+    "updated_by_id": 1
+  },
+  {
+    "created_at": 1709701946980,
+    "created_by_id": 1,
+    "id": 11,
+    "name": "volunteer",
+    "path": "/10",
+    "path_id": 10,
+    "updated_at": 1709701946980,
+    "updated_by_id": 1
+  }
+]

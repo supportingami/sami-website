@@ -40,37 +40,47 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
 
   backend:
+    profiles: [backend]
     container_name: sami_backend
-    image: samicharity/backend:1.3.0
-    # command: "/bin/ash -c 'while sleep 3600; do :; done'"
+    image: samicharity/backend:latest
     restart: unless-stopped
     ports:
       - "1337:1337"
     volumes:
       # Uploads folder shared between frontend and backend for easier access
-      - ./docker/data/uploads:/app/public/uploads
-      - ./docker/data/db:/app/db
+      - ./docker/data/public:/app/public
+      - ./docker/data/db:/app/data/db
     env_file:
       - ./config/docker.env
       - ./config/docker.local.env
     environment:
-      # - DATABASE_URL=postgres://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@db:5432/${DATABASE_NAME}
-      - DATABASE_FILENAME=db/sami-docker.db
       # Load docker configuration
       - NODE_ENV=docker
+      - DB_DIR=/app/data/db
+      # Local config (required if deploying to cloud run)
+      # - STRAPI_READONLY_TOKEN=
+
     healthcheck:
       test: "wget --no-verbose --tries=1 --spider http://localhost:1337 || exit 1"
       interval: 30s
       timeout: 30s
       retries: 3
       start_period: 30s
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 2GB
+        reservations:
+          cpus: "0.1"
+          memory: 500M
     networks:
       - webserver
 
   frontend:
+    profiles: [frontend]
     container_name: sami_frontend
-    image: samicharity/frontend:1.3.0
-    command: next dev
+    image: samicharity/frontend:latest
     # command: "/bin/ash -c 'while sleep 3600; do :; done'"
     restart: unless-stopped
     # Env inlined during build however when running `next dev` can use on start
@@ -79,8 +89,8 @@ services:
       - ./config/docker.env
       - ./config/docker.local.env
     volumes:
-      # Uploads folder shared between frontend and backend for easier access
-      - ./docker/data/uploads:/app/public/uploads
+      # Public folder shared between frontend and backend for easier access
+      - ./docker/data/public:/app/public
     environment:
       VIRTUAL_HOST: ${PUBLIC_DOMAIN}
       VIRTUAL_PORT: "3000"
@@ -98,6 +108,36 @@ services:
     networks:
       - webserver
 
+  # #####################################################################################
+  # Local development (windows)
+  # Sync local ./docker/data folders with Google Cloud Storage via gcsfuse and unison
+  # https://blog.konpat.me/dev/2017/02/26/docker-recipe-for-gcsfuse-google-cloud-storage-fuse-2.html
+  # #####################################################################################
+  gcs_fuse:
+    profiles: [gcs_fuse]
+    container_name: gcs_fuse
+    image: samicharity/gcs_fuse:latest
+    volumes:
+      - ./docker/data/db:/data/db
+      - ./docker/data/public:/data/public
+      - ./backend/config/service-account.json:/service-account.json
+    environment:
+      - GCP_PROJECT=sami-website-365718
+      - GCS_DB_BUCKET_NAME=sami_website_db
+      - GCS_PUBLIC_BUCKET_NAME=sami_website_public
+      - GCSFUSE_MNT=/mnt/gcs
+      - UNISON_MNT=/data
+      - GOOGLE_APPLICATION_CREDENTIALS=/service-account.json
+    privileged: true
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 500M
+        reservations:
+          cpus: "0.05"
+          memory: 50M
+    # command: "/bin/ash -c 'while sleep 3600; do :; done'"
 # If using Postgres
 
 # db:

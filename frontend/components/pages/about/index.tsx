@@ -1,22 +1,6 @@
 import React from "react";
 import type { IAbout } from "types/about";
-import { SectionHeader } from "components/layout/Header";
 import PageSection from "components/layout/pageSection";
-
-const headerButtons = [
-  {
-    id: 0,
-    text: "Theory of Change",
-  },
-  {
-    id: 1,
-    text: "Members & Volunteers",
-  },
-  {
-    id: 2,
-    text: "Annual Reports",
-  },
-];
 
 const principles = [
   {
@@ -48,16 +32,6 @@ const principles = [
 export const AboutPageComponent: React.FC<{ aboutPageContent: IAbout[] }> = () => {
   return (
     <>
-      <SectionHeader background={{ imageName: "bg-tiling-1", size: "1660px 480px", position: "-150px -58px" }}>
-        <h1 className="text-white">Our Work</h1>
-        <div className="flex gap-2 justify-center flex-1 flex-wrap mb-8">
-          {headerButtons.map(({ text, id }) => (
-            <a key={id} className="btn btn-outline btn-primary bg-white">
-              {text}
-            </a>
-          ))}
-        </div>
-      </SectionHeader>
       <PageSection className="prose max-w-screen-lg py-8">
         <h3 className="text-center">
           There are huge divides in terms of access and quality of education across Africa
@@ -74,7 +48,7 @@ export const AboutPageComponent: React.FC<{ aboutPageContent: IAbout[] }> = () =
           education, SAMI is well positioned to help deliver high impact solutions where they are needed most.
         </p>
       </PageSection>
-      <PageSection fullwidth className="bg-base-200 py-16">
+      <PageSection fullwidth className="bg-base-200 py-16" id="principles">
         <h3 className="text-center">All projects live by the following principles</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-10">
           {principles.map(({ title, text }, i) => (

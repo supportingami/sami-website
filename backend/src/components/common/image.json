@@ -19,6 +19,9 @@
     },
     "Caption": {
       "type": "text"
+    },
+    "ClassNames": {
+      "type": "string"
     }
   }
 }

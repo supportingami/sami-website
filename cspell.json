@@ -3,7 +3,7 @@
   "ignorePaths": ["**/*.ts"],
   "dictionaryDefinitions": [],
   "dictionaries": [],
-  "words": [],
+  "words": ["strapi"],
   "ignoreWords": [],
   "import": []
 }

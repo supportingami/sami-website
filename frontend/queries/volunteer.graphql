@@ -14,8 +14,29 @@ query volunteerContent {
           ... on ComponentCommonActionButton {
             __typename
             id
+            ClassNames
             Link
             Text
+          }
+          ... on ComponentCommonTextBlock {
+            __typename
+            id
+            Text
+          }
+          ... on ComponentCommonImage {
+            AltText
+            Caption
+            ClassNames
+            Media {
+              data {
+                id
+                attributes {
+                  name
+                  url
+                  size
+                }
+              }
+            }
           }
         }
       }

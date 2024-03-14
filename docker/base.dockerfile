@@ -6,7 +6,7 @@ FROM docker
 COPY --from=docker/buildx-bin /buildx /usr/libexec/docker/cli-plugins/docker-buildx
 RUN docker buildx version
 
-FROM node:18-alpine as base
+FROM node:20.7.0-alpine as base
 
 WORKDIR /app
 
@@ -21,9 +21,10 @@ COPY ./scripts/package.json ./scripts/package.json
 
 ENV PATH /app/node_modules/.bin:$PATH
 
-RUN yarn install
+# RUN yarn install --immutable
 
 COPY . .
 
+# Debug
 
-# docker start
+# docker run --rm -it samicharity/base:latest /bin/sh          

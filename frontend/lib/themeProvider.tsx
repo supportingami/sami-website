@@ -12,51 +12,39 @@ type ThemeValue = {
 const ThemeContext = createContext<ThemeValue | undefined>(undefined);
 
 /**
- *
+ * Provide access to current theme and update function
  * Adapted from https://github.com/a-smiggle/DaisyUI-ThemeProvider
+ * and https://github.com/saadeghi/theme-change
  */
 export default function ThemeProvider(props: CustomProps) {
   const [theme, setTheme] = useState("light");
   const [loading, setLoading] = useState(true);
 
-  function systemCheck() {
-    if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) setTheme("dark");
-    else setTheme("light");
+  function handleThemeChange(newTheme: string) {
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("daisyUI-theme", newTheme);
+    setTheme(newTheme);
   }
 
+  // On initial load try to load theme from storage
   useEffect(() => {
     const storedTheme = localStorage.getItem("daisyUI-theme");
     if (storedTheme) {
-      const temp: string = storedTheme;
-      // Only check system theme if light or dark used.
-      if ((temp === "light" || temp === "dark") && props.useSystem === true) {
-        systemCheck();
-      } else {
-        setTheme(temp);
-      }
-    } else if (props.useSystem) {
-      systemCheck();
+      handleThemeChange(storedTheme);
     }
+    setLoading(false);
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("daisyUI-theme", theme);
-    setLoading(false);
-  }, [theme]);
-
+  // Public method to allow setting theme from components
   const updateTheme = (newTheme: string) => {
     if (newTheme) {
-      setTheme(newTheme);
+      handleThemeChange(newTheme);
     }
   };
 
   return (
     <ThemeContext.Provider value={{ theme, updateTheme }}>
-      {loading ? null : (
-        <div className="contents" data-theme={theme}>
-          {props.children}
-        </div>
-      )}
+      {loading ? null : <>{props.children}</>}
     </ThemeContext.Provider>
   );
 }
@@ -70,3 +58,13 @@ export function useThemeContext() {
 
   return context;
 }
+
+/**
+ * Legacy function to check user system preferred theme
+ * Prefer promoting light theme for now (as dark still has some poor UI for icons/images)
+ * but may use again in future
+ */
+// function checkSystemTheme() {
+//   if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) setTheme("dark");
+//   else setTheme("light");
+// }

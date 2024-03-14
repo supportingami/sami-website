@@ -15,6 +15,7 @@ import ToC from "components/pages/about/ToC";
 import Testimonials from "components/pages/about/testmonials/Testmonials";
 import Partners from "components/pages/about/partners";
 import PageSection from "components/layout/pageSection";
+import { SectionHeader } from "components/layout/Header";
 
 export const getStaticProps = async ({}: GetStaticPropsContext) => {
   let about: IAbout[] = [];
@@ -46,26 +47,53 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
   };
 };
 
+const headerButtons = [
+  {
+    id: "toc",
+    text: "Theory of Change",
+  },
+  {
+    id: "members",
+    text: "Members & Volunteers",
+  },
+  {
+    id: "reports",
+    text: "Annual Reports",
+  },
+];
+
 const AboutPage = ({ about, members, reports }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
       <Head>
         <title>About Us</title>
       </Head>
-      <AboutPageComponent aboutPageContent={about} />
-      <PageSection className="text-center mt-16">
-        <MembersComponent members={members} />
-      </PageSection>
-      <PageSection fullwidth className="bg-base-200 py-16">
-        <ToC />
-      </PageSection>
-      <PageSection className="text-center py-16">
-        <AnnualReportPageComponent reports={reports} />
-      </PageSection>
-      <PageSection fullwidth className="bg-base-200 py-16">
-        <Testimonials />
-      </PageSection>
-      <Partners />
+      <SectionHeader background={{ imageName: "bg-tiling-1", size: "1660px 480px", position: "-150px -58px" }}>
+        <h1 className="text-white">Our Work</h1>
+        <div className="flex gap-2 justify-center flex-1 flex-wrap mb-8">
+          {headerButtons.map(({ text, id }) => (
+            <a key={id} className="btn btn-outline btn-primary bg-white" href={`#${id}`}>
+              {text}
+            </a>
+          ))}
+        </div>
+      </SectionHeader>
+      <div style={{ scrollBehavior: "smooth", display: "contents" }}>
+        <AboutPageComponent aboutPageContent={about} />
+        <PageSection className="text-center mt-16" sectionId="members">
+          <MembersComponent members={members} />
+        </PageSection>
+        <PageSection fullwidth className="bg-base-200 py-16" sectionId="toc">
+          <ToC />
+        </PageSection>
+        <PageSection className="text-center py-16" sectionId="reports">
+          <AnnualReportPageComponent reports={reports} />
+        </PageSection>
+        <PageSection fullwidth className="bg-base-200 py-16">
+          <Testimonials />
+        </PageSection>
+        <Partners />
+      </div>
     </>
   );
 };

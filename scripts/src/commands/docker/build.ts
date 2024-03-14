@@ -42,7 +42,7 @@ class DockerBuildCmd {
 
   public async run(options: IProgramOptions) {
     const { only } = options;
-    const buildTargets = ["base", "backend", "frontend"].filter((target) => only.includes(target));
+    const buildTargets = ["base", "backend", "frontend", "gcs_fuse"].filter((target) => only.includes(target));
 
     // TODO - create `.env` in docker file instead of loading global config
 
@@ -52,16 +52,11 @@ class DockerBuildCmd {
     }
     if (buildTargets.includes("backend")) {
       console.log(chalk.blue("Building strapi admin..."));
-      // prefer spawn over execa due to memory issues on server
-      spawnSync(`yarn workspace backend build`, {
-        cwd: PATHS.rootDir,
-        shell: true,
-        stdio: "inherit",
-        // ensure docker config files used
-        env: { NODE_ENV: "docker", DATABASE_URL: "will_populate_later", NODE_OPTIONS: "--max_old_space_size=2048" },
-      });
       await this.buildBackend();
       // TODO - ensure backend bootstrapped and populate keys to docker/data .env
+    }
+    if (buildTargets.includes("gcs_fuse")) {
+      await this.buildGCSFuse();
     }
     if (buildTargets.includes("frontend")) {
       //  Build locally frontend and backend locally
@@ -73,7 +68,8 @@ class DockerBuildCmd {
 
   private async buildBase() {
     console.log(chalk.blue("Building base..."));
-    const args = `--tag samicharity/base:latest --tag samicharity/base:${BASE_TAG} --build-arg "ENV_NAME=development"`;
+    const tags = this.getTags("base");
+    const args = `${tags} --build-arg "ENV_NAME=development"`;
     const cmd = `docker build --file docker/base.dockerfile ${args} .`;
     console.log(chalk.gray(cmd));
     await execa(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
@@ -82,18 +78,48 @@ class DockerBuildCmd {
 
   private async buildBackend() {
     console.log(chalk.blue("Building backend..."));
-    const args = `--tag samicharity/backend:latest --tag samicharity/backend:${BASE_TAG} --build-arg "ENV_NAME=development" --build-arg "BASE_TAG=${BASE_TAG}"`;
+    const tags = this.getTags("backend", true);
+    const secrets = this.getSecrets();
+    const args = `${tags} --build-arg "ENV_NAME=development" --build-arg "BASE_TAG=${BASE_TAG}" ${secrets}`;
     const cmd = `docker build --file docker/backend.dockerfile ${args} .`;
     console.log(chalk.gray(cmd));
     await execa(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
     console.log(chalk.green("Built backend"));
   }
+
+  private async buildGCSFuse() {
+    console.log(chalk.blue("Building gcs_fuse..."));
+    const tags = this.getTags("gcs_fuse");
+    const args = `${tags} --build-arg "ENV_NAME=development" --build-arg "BASE_TAG=${BASE_TAG}"`;
+    const cmd = `docker build --file docker/gcs_fuse.dockerfile ${args} .`;
+    console.log(chalk.gray(cmd));
+    await execa(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
+    console.log(chalk.green("Built gcs_fuse"));
+  }
+
   private async buildFrontend() {
     console.log(chalk.blue("Building frontend..."));
-    const args = `--tag samicharity/frontend:latest --tag samicharity/frontend:${BASE_TAG} --build-arg "ENV_NAME=development" --build-arg "BASE_TAG=${BASE_TAG}"`;
+    const tags = this.getTags("frontend", true);
+    const args = `${tags} --build-arg "ENV_NAME=development" --build-arg "BASE_TAG=${BASE_TAG}"`;
     const cmd = `docker build --file docker/frontend.dockerfile ${args} .`;
     console.log(chalk.gray(cmd));
     await execa(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
     console.log(chalk.green("Built frontend"));
+  }
+
+  private getTags(imageName: string, includeGCR = false) {
+    const dockerRepo = `samicharity`;
+    const tags = [`${dockerRepo}/${imageName}:latest`, `${dockerRepo}/${imageName}:${BASE_TAG}`];
+    if (includeGCR) {
+      const gcrRepo = `europe-west2-docker.pkg.dev/sami-website-365718/sami-website-staging`;
+      tags.push(`${gcrRepo}/${imageName}:latest`);
+      tags.push(`${gcrRepo}/${imageName}:${BASE_TAG}`);
+    }
+    return `--tag ${tags.join(" --tag ")}`;
+  }
+
+  // Pass .env files as build secrets to use as required
+  private getSecrets() {
+    return `--secret id=_env,src=config/docker.env`;
   }
 }

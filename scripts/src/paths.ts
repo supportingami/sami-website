@@ -6,6 +6,7 @@ const configDir = path.resolve(rootDir, "config");
 const dockerDataDir = path.resolve(rootDir, "docker", "data");
 const docsDir = path.resolve(rootDir, "docs");
 const dataDir = path.resolve(rootDir, "data");
+const logsDir = path.resolve(rootDir, "logs");
 const frontendDir = path.resolve(rootDir, "frontend");
 const sharedDir = path.resolve(rootDir, "shared");
 const scriptsDir = path.resolve(rootDir, "scripts");
@@ -18,6 +19,7 @@ export const PATHS = {
   dataDir,
   dockerDataDir,
   docsDir,
+  logsDir,
   frontendDir,
   scriptsDir,
   rootDir,

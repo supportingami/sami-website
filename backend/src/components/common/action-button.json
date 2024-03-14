@@ -14,6 +14,9 @@
     "Link": {
       "type": "string",
       "required": true
+    },
+    "ClassNames": {
+      "type": "string"
     }
   }
 }

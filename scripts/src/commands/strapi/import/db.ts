@@ -1,6 +1,6 @@
 import { existsSync, writeFileSync } from "fs";
 import { readdirSync, ensureDirSync, readJSONSync } from "fs-extra";
-import path from "path";
+import path, { resolve } from "path";
 import prompts from "prompts";
 import { PATHS } from "../../../paths";
 import { areDBObjectsEqual, arrayToHashmap, getLoadedEnv, logError } from "../../../utils";
@@ -29,17 +29,17 @@ export class DBImport {
    **/
   public async run(envName: string, table?: string) {
     // setup folders
-    const importDir = path.resolve(PATHS.dataDir, "db");
+    const importDir = path.resolve(PATHS.dataDir, "db-json");
     ensureDirSync(importDir);
 
     // query list of local and remote data tables
     this.db = await getDB(envName);
     const dbTables = await listDBTables(this.db);
-    const localDataTables = this.listLocalDataTables(importDir, table);
+    const exportDataTables = this.listLocalDataTables(importDir, table);
 
     // get summary of local and import data
     const data: ImportSummary[] = [];
-    for (const { filePath, table } of localDataTables) {
+    for (const { filePath, table } of exportDataTables) {
       const localDataRaw = readJSONSync(filePath);
       const localData = this.normaliseLocalData(table, localDataRaw);
       let remoteData = [];
@@ -123,6 +123,9 @@ export class DBImport {
     return confirmed;
   }
 
+  /**
+   * @param data Data to import
+   */
   private async handleImport(data: ImportSummary[]) {
     let sequenceData: ImportSummary;
     const errors: { table: string; msg: string }[] = [];
@@ -132,6 +135,7 @@ export class DBImport {
         if (table === "sqlite_sequence") {
           sequenceData = { table, summary, localData } as any;
         } else {
+          // delete existing data (should exist from bootstrap process)
           await this.truncateTable(table);
           if (localData.length > 0) {
             try {
@@ -148,8 +152,10 @@ export class DBImport {
     }
     // Log all import errors
     if (errors.length > 0) {
-      console.table(errors);
+      const logPath = resolve(PATHS.logsDir, "db-import.error.log");
+      writeFileSync(logPath, JSON.stringify(errors, null, 2));
       const failedTables = errors.map((t) => t.table).join(", ");
+      console.log("\n", chalk.gray(logPath));
       logError({ msg1: "Import complete with errors", msg2: failedTables });
     }
   }
@@ -168,24 +174,24 @@ export class DBImport {
 
     for (const [index, remoteEntry] of Object.entries(remoteHashmap)) {
       const localEntry = localHashmap[index];
-      // new rows
+      // DELETE remote entries that do not appear locally
       if (!localEntry) {
-        ops.INSERT++;
-      }
-      // existing rows (conflict or same)
-      else {
+        ops.DELETE++;
+      } else {
         const isSame = areDBObjectsEqual(localEntry, remoteEntry);
         if (isSame) {
           ops.SKIP++;
         } else {
+          // REPLACE remote entries where local differs
           ops.REPLACE++;
         }
       }
     }
     for (const [index] of localData.entries()) {
-      const importEntry = remoteData[index];
-      if (!importEntry) {
-        ops.DELETE++;
+      const remoteEntry = remoteData[index];
+      // INSERT remote entry does not exist
+      if (!remoteEntry) {
+        ops.INSERT++;
       }
     }
     let totalOps = ops.INSERT + ops.DELETE + ops.REPLACE;

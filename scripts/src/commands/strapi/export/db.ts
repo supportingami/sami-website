@@ -1,10 +1,12 @@
 import { spawnSync } from "child_process";
 
-import { emptyDirSync, ensureDirSync, writeFileSync } from "fs-extra";
-import path from "path";
+import { emptyDirSync, ensureDirSync, existsSync, rmSync, writeFileSync } from "fs-extra";
+import path, { resolve } from "path";
 import { PATHS } from "../../../paths";
 import { sortJSONObjectByKey } from "../../../utils/object.utils";
 import { getDB, listDBTables, mapDBData } from "../common";
+import { replicateDir } from "../../../utils/file.utils";
+import { tmpdir } from "os";
 
 /***************************************************************************************
  * Main Methods
@@ -15,7 +17,22 @@ export class DBExport {
     return this.db.client.config.client;
   }
 
-  public async run(envName: string) {
+  public async run(envName: string, envParsed: any) {
+    const gcsBucket = envParsed.GCS_DB_BUCKET_NAME;
+    if (gcsBucket) {
+      const dbFilename = envParsed.DATABASE_FILENAME;
+      const dbDir = resolve(PATHS.dataDir, "db");
+      const targetDB = resolve(dbDir, dbFilename);
+      // TODO - consider using sdk methods
+      spawnSync(`gsutil cp -r gs://${gcsBucket}/* ${dbDir}`, {
+        shell: true,
+        stdio: "inherit",
+        cwd: PATHS.rootDir,
+      });
+      if (!existsSync(targetDB)) {
+        throw new Error("DB not exported:\n" + targetDB);
+      }
+    }
     // query list of all tables
     this.db = await getDB(envName);
     const allTables = await listDBTables(this.db);
@@ -23,18 +40,28 @@ export class DBExport {
     // filter only to include content-generated tables
     const exportedTables = allTables.filter((name) => shouldIncludeTableInExport(name)).sort();
 
-    // setup folders
-    const outputDir = path.resolve(PATHS.dataDir, "db");
+    // setup folders - will first export to tmp location and then replicate to output
+    const stagingDir = resolve(tmpdir(), "dbExport");
+    const outputDir = path.resolve(PATHS.dataDir, "db-json");
+    ensureDirSync(stagingDir);
     ensureDirSync(outputDir);
-    emptyDirSync(outputDir);
+    emptyDirSync(stagingDir);
 
     // export
     for (const name of exportedTables) {
-      await this.exportTableData(name, outputDir);
+      await this.exportTableData(name, stagingDir);
     }
+    // destroy knex connection to also clear WAL files
+    await this.db.destroy();
+    // run prettier on exports to match formatting on output
+    spawnSync(`prettier ${stagingDir} --loglevel silent --write`, {
+      shell: true,
+      stdio: "inherit",
+      cwd: PATHS.rootDir,
+    });
 
-    console.log("export complete, cleaning outputs");
-    spawnSync(`yarn format:style`, { shell: true, stdio: "inherit", cwd: PATHS.rootDir });
+    replicateDir(stagingDir, outputDir);
+    rmSync(stagingDir, { recursive: true });
   }
 
   private async exportTableData(name: string, outputDir: string) {

@@ -35,6 +35,8 @@ class StrapiBootstrap {
   public async run() {
     await loadEnv(this.options.environment, { skipHealthcheck: true });
     await this.buildStrapiAdminUI();
+    // ensure strapi env matches passed
+    process.env.NODE_ENV = this.options.environment || "development";
     this.app = await createStrapiInstance();
     await this.app.start();
     await this.checkAccessTokens();
@@ -46,11 +48,13 @@ class StrapiBootstrap {
    * TODO - incremental/caching build (possibly via nx) - for now will just always build full
    */
   private async buildStrapiAdminUI() {
-    console.log(chalk.gray("\nBuilding Strapi Dashboard\n"));
+    const NODE_ENV = this.options.environment || "development";
+    console.log(chalk.gray(`\nBuilding Strapi Dashboard [${NODE_ENV}]\n`));
     const { exitCode } = await execa("yarn build", {
       cwd: PATHS.backendDir,
       shell: true,
       stdio: "inherit",
+      env: { NODE_ENV },
     });
     if (exitCode !== 0) process.exit(exitCode);
   }
@@ -85,7 +89,7 @@ class StrapiBootstrap {
    * https://github.dev/strapi/strapi/blob/7039c0d22836c94457130515b3a55eb93d2411f8/packages/core/admin/server/services/api-token.js#L64
    */
   private async addAdminToken(token: IAdminToken) {
-    const salt = this.app.config.get("admin.apiToken.salt");
+    const salt: string = this.app.config.get("admin.apiToken.salt");
     if (!salt) {
       console.error("no salt provided");
       process.exit(1);

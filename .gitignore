@@ -25,6 +25,12 @@ tsconfig.tsbuildinfo
 
 docker/data
 
+data/backups
+data/public
+data/db
+
 scripts/input
 scripts/output
 .vercel
+
+service.yaml
