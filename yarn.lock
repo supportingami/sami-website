@@ -7566,6 +7566,7 @@ __metadata:
     sqlite3: "npm:5.1.7"
     strapi-connector-bookshelf: "npm:^3.6.11"
     strapi-plugin-import-export-entries: "npm:^1.23.1"
+    strapi-plugin-multi-select: "npm:^1.2.3"
     styled-components: "npm:5.3.3"
     util: "npm:^0.12.5"
   languageName: unknown
@@ -20952,6 +20953,15 @@ __metadata:
   peerDependencies:
     "@strapi/strapi": ^4.10.5
   checksum: 10/86adeb385e6be334e140ec00e67f345d912cb4c663bfb86813a8426d554b3107098ab3c35bb808794f81692038d2370f01994083b4a13734abad961c7bdaaef8
+  languageName: node
+  linkType: hard
+
+"strapi-plugin-multi-select@npm:^1.2.3":
+  version: 1.2.3
+  resolution: "strapi-plugin-multi-select@npm:1.2.3"
+  peerDependencies:
+    "@strapi/strapi": ^4.4.0
+  checksum: 10/a9e19ba75439b0215d6d8fbfdf577604fa24853da6bdfd7392887ce970b6e5a33e357e41037ede84ca74a2e7f4daa74b91695d35b74a949edfa7d16cb51dc695
   languageName: node
   linkType: hard
 
