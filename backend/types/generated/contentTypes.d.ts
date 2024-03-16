@@ -609,7 +609,6 @@ export interface ApiAboutContentAboutContent extends Schema.SingleType {
   };
   attributes: {
     Intro: Attribute.RichText;
-    members: Attribute.Relation<"api::about-content.about-content", "oneToMany", "api::member.member">;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

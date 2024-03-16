@@ -1,6 +1,6 @@
 export default function VectorTriangle() {
   return (
-    <div className="left-0 top-0 absolute w-[52px] right-[75.24%] bottom-[79.06%]">
+    <div className="left-0 top-0 absolute w-6 z-10">
       <svg
         width="100%"
         height="100%"

@@ -25,16 +25,8 @@ export type AboutContent = {
   __typename?: "AboutContent";
   Intro?: Maybe<Scalars["String"]>;
   createdAt?: Maybe<Scalars["DateTime"]>;
-  members?: Maybe<MemberRelationResponseCollection>;
   publishedAt?: Maybe<Scalars["DateTime"]>;
   updatedAt?: Maybe<Scalars["DateTime"]>;
-};
-
-export type AboutContentMembersArgs = {
-  filters?: InputMaybe<MemberFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<PublicationState>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
 };
 
 export type AboutContentEntity = {
@@ -50,7 +42,6 @@ export type AboutContentEntityResponse = {
 
 export type AboutContentInput = {
   Intro?: InputMaybe<Scalars["String"]>;
-  members?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
   publishedAt?: InputMaybe<Scalars["DateTime"]>;
 };
 
@@ -1035,11 +1026,6 @@ export type MemberInput = {
   SortOrder?: InputMaybe<Scalars["Float"]>;
   Tags?: InputMaybe<Scalars["JSON"]>;
   publishedAt?: InputMaybe<Scalars["DateTime"]>;
-};
-
-export type MemberRelationResponseCollection = {
-  __typename?: "MemberRelationResponseCollection";
-  data: Array<MemberEntity>;
 };
 
 export type Mutation = {
@@ -2608,6 +2594,7 @@ export type MembersQuery = {
         Email?: string | null;
         Bio?: string | null;
         LinkedIn?: string | null;
+        Tags?: any | null;
         Photo?: {
           __typename?: "UploadFileEntityResponse";
           data?: {
@@ -4004,6 +3991,7 @@ export const MembersDocument = {
                                 ],
                               },
                             },
+                            { kind: "Field", name: { kind: "Name", value: "Tags" } },
                           ],
                         },
                       },
