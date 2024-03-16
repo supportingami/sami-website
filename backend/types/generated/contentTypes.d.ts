@@ -624,13 +624,15 @@ export interface ApiAnnualReportAnnualReport extends Schema.CollectionType {
     singularName: "annual-report";
     pluralName: "annual-reports";
     displayName: "Annual Report";
+    description: "";
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    Year: Attribute.Integer;
-    File: Attribute.Media;
+    Year: Attribute.Integer & Attribute.Required & Attribute.Unique;
+    File: Attribute.Media & Attribute.Required;
+    CoverImage: Attribute.Media & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

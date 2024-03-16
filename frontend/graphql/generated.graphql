@@ -39,8 +39,9 @@ input AboutInput {
 }
 
 type AnnualReport {
-  File: UploadFileEntityResponse
-  Year: Int
+  CoverImage: UploadFileEntityResponse!
+  File: UploadFileEntityResponse!
+  Year: Int!
   createdAt: DateTime
   publishedAt: DateTime
   updatedAt: DateTime
@@ -72,6 +73,7 @@ input AnnualReportFiltersInput {
 }
 
 input AnnualReportInput {
+  CoverImage: ID
   File: ID
   Year: Int
   publishedAt: DateTime

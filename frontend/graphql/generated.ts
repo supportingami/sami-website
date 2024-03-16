@@ -67,8 +67,9 @@ export type AboutInput = {
 
 export type AnnualReport = {
   __typename?: "AnnualReport";
-  File?: Maybe<UploadFileEntityResponse>;
-  Year?: Maybe<Scalars["Int"]>;
+  CoverImage: UploadFileEntityResponse;
+  File: UploadFileEntityResponse;
+  Year: Scalars["Int"];
   createdAt?: Maybe<Scalars["DateTime"]>;
   publishedAt?: Maybe<Scalars["DateTime"]>;
   updatedAt?: Maybe<Scalars["DateTime"]>;
@@ -103,6 +104,7 @@ export type AnnualReportFiltersInput = {
 };
 
 export type AnnualReportInput = {
+  CoverImage?: InputMaybe<Scalars["ID"]>;
   File?: InputMaybe<Scalars["ID"]>;
   Year?: InputMaybe<Scalars["Int"]>;
   publishedAt?: InputMaybe<Scalars["DateTime"]>;
@@ -2305,15 +2307,23 @@ export type AnnualReportsQuery = {
       id?: string | null;
       attributes?: {
         __typename?: "AnnualReport";
-        Year?: number | null;
-        File?: {
+        Year: number;
+        File: {
           __typename?: "UploadFileEntityResponse";
           data?: {
             __typename?: "UploadFileEntity";
             id?: string | null;
             attributes?: { __typename?: "UploadFile"; name: string; url: string; size: number } | null;
           } | null;
-        } | null;
+        };
+        CoverImage: {
+          __typename?: "UploadFileEntityResponse";
+          data?: {
+            __typename?: "UploadFileEntity";
+            id?: string | null;
+            attributes?: { __typename?: "UploadFile"; name: string; url: string; size: number } | null;
+          } | null;
+        };
       } | null;
     }>;
     meta: {
@@ -2943,6 +2953,37 @@ export const AnnualReportsDocument = {
                             {
                               kind: "Field",
                               name: { kind: "Name", value: "File" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "data" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        { kind: "Field", name: { kind: "Name", value: "id" } },
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "attributes" },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              { kind: "Field", name: { kind: "Name", value: "name" } },
+                                              { kind: "Field", name: { kind: "Name", value: "url" } },
+                                              { kind: "Field", name: { kind: "Name", value: "size" } },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "CoverImage" },
                               selectionSet: {
                                 kind: "SelectionSet",
                                 selections: [

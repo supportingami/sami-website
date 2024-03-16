@@ -1,7 +1,6 @@
 import React from "react";
 import Head from "next/head";
 import { AboutPageComponent } from "components/pages/about";
-import { AnnualReportPageComponent } from "components/pages/about/annual-reports";
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import Image from "next/image";
 
@@ -17,6 +16,7 @@ import Testimonials from "components/pages/about/testmonials/Testmonials";
 import PageSection from "components/layout/pageSection";
 import { SectionHeader } from "components/layout/Header";
 import { getStrapiMedia } from "lib/media";
+import { AnnualReportComponent } from "components/content/AnnualReport";
 
 export const getStaticProps = async ({}: GetStaticPropsContext) => {
   let about: IAbout[] = [];
@@ -95,7 +95,13 @@ const AboutPage = ({ about, members, reports, partners }: InferGetStaticPropsTyp
           <ToC />
         </PageSection>
         <PageSection className="text-center py-16" sectionId="reports">
-          <AnnualReportPageComponent reports={reports} />
+          <h2>Annual Reports</h2>
+          <p className="mb-10">Find below links to our annual report and other relevant documents</p>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5 px-5 lg:px-24">
+            {reports.map((report) => (
+              <AnnualReportComponent key={report.id} report={report} />
+            ))}
+          </div>
         </PageSection>
         <PageSection fullwidth className="bg-base-200 py-16">
           <Testimonials />
