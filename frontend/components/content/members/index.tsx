@@ -1,4 +1,4 @@
-import { Enum_Member_Organisation as Org } from "../../../../graphql/generated";
+import { Enum_Member_Organisation as Org } from "../../../graphql/generated";
 import React, { useState } from "react";
 import type { IMember } from "types/member";
 import { MembersListItemComponent } from "./ListItem";

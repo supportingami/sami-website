@@ -29,7 +29,7 @@ const principles = [
   },
 ];
 
-export const AboutPageComponent: React.FC<{ aboutPageContent: IAbout[] }> = () => {
+export const AboutPageComponent: React.FC<any> = () => {
   return (
     <>
       <PageSection className="prose max-w-screen-lg py-8">

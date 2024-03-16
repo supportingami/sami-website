@@ -1,40 +1,28 @@
-type About {
-  Content: String
-  Title: String
+type AboutContent {
+  Intro: String
   createdAt: DateTime
+  members(
+    filters: MemberFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): MemberRelationResponseCollection
   publishedAt: DateTime
   updatedAt: DateTime
 }
 
-type AboutEntity {
-  attributes: About
+type AboutContentEntity {
+  attributes: AboutContent
   id: ID
 }
 
-type AboutEntityResponse {
-  data: AboutEntity
+type AboutContentEntityResponse {
+  data: AboutContentEntity
 }
 
-type AboutEntityResponseCollection {
-  data: [AboutEntity!]!
-  meta: ResponseCollectionMeta!
-}
-
-input AboutFiltersInput {
-  Content: StringFilterInput
-  Title: StringFilterInput
-  and: [AboutFiltersInput]
-  createdAt: DateTimeFilterInput
-  id: IDFilterInput
-  not: AboutFiltersInput
-  or: [AboutFiltersInput]
-  publishedAt: DateTimeFilterInput
-  updatedAt: DateTimeFilterInput
-}
-
-input AboutInput {
-  Content: String
-  Title: String
+input AboutContentInput {
+  Intro: String
+  members: [ID]
   publishedAt: DateTime
 }
 
@@ -643,12 +631,6 @@ enum ENUM_CONTENTRELEASESRELEASEACTION_TYPE {
   unpublish
 }
 
-enum ENUM_MEMBER_ORGANISATION {
-  AMI
-  SAMI
-  SAMI_Trustees
-}
-
 enum ENUM_PROJECTTYPE_STATUS {
   Completed
   Ongoing
@@ -735,7 +717,7 @@ input FloatFilterInput {
 }
 
 union GenericMorph =
-    About
+    AboutContent
   | AnnualReport
   | BlogPost
   | BlogTag
@@ -920,9 +902,9 @@ type Member {
   Email: String
   LinkedIn: String
   Name: String
-  Order: Int
-  Organisation: ENUM_MEMBER_ORGANISATION
   Photo: UploadFileEntityResponse
+  SortOrder: Float
+  Tags: JSON
   createdAt: DateTime
   publishedAt: DateTime
   updatedAt: DateTime
@@ -947,8 +929,8 @@ input MemberFiltersInput {
   Email: StringFilterInput
   LinkedIn: StringFilterInput
   Name: StringFilterInput
-  Order: IntFilterInput
-  Organisation: StringFilterInput
+  SortOrder: FloatFilterInput
+  Tags: JSONFilterInput
   and: [MemberFiltersInput]
   createdAt: DateTimeFilterInput
   id: IDFilterInput
@@ -964,10 +946,14 @@ input MemberInput {
   Email: String
   LinkedIn: String
   Name: String
-  Order: Int
-  Organisation: ENUM_MEMBER_ORGANISATION
   Photo: ID
+  SortOrder: Float
+  Tags: JSON
   publishedAt: DateTime
+}
+
+type MemberRelationResponseCollection {
+  data: [MemberEntity!]!
 }
 
 type Mutation {
@@ -979,7 +965,6 @@ type Mutation {
     password: String!
     passwordConfirmation: String!
   ): UsersPermissionsLoginPayload
-  createAbout(data: AboutInput!): AboutEntityResponse
   createAnnualReport(data: AnnualReportInput!): AnnualReportEntityResponse
   createBlogPost(data: BlogPostInput!): BlogPostEntityResponse
   createBlogTag(data: BlogTagInput!): BlogTagEntityResponse
@@ -1005,7 +990,7 @@ type Mutation {
   Create a new user
   """
   createUsersPermissionsUser(data: UsersPermissionsUserInput!): UsersPermissionsUserEntityResponse!
-  deleteAbout(id: ID!): AboutEntityResponse
+  deleteAboutContent: AboutContentEntityResponse
   deleteAnnualReport(id: ID!): AnnualReportEntityResponse
   deleteBlogPost(id: ID!): BlogPostEntityResponse
   deleteBlogTag(id: ID!): BlogTagEntityResponse
@@ -1056,7 +1041,7 @@ type Mutation {
   Reset user password. Confirm with a code (resetToken from forgotPassword)
   """
   resetPassword(code: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
-  updateAbout(data: AboutInput!, id: ID!): AboutEntityResponse
+  updateAboutContent(data: AboutContentInput!): AboutContentEntityResponse
   updateAnnualReport(data: AnnualReportInput!, id: ID!): AnnualReportEntityResponse
   updateBlogPost(data: BlogPostInput!, id: ID!): BlogPostEntityResponse
   updateBlogTag(data: BlogTagInput!, id: ID!): BlogTagEntityResponse
@@ -1217,13 +1202,7 @@ enum PublicationState {
 }
 
 type Query {
-  about(id: ID): AboutEntityResponse
-  abouts(
-    filters: AboutFiltersInput
-    pagination: PaginationArg = {}
-    publicationState: PublicationState = LIVE
-    sort: [String] = []
-  ): AboutEntityResponseCollection
+  aboutContent(publicationState: PublicationState = LIVE): AboutContentEntityResponse
   annualReport(id: ID): AnnualReportEntityResponse
   annualReports(
     filters: AnnualReportFiltersInput
