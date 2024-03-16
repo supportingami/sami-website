@@ -34,7 +34,7 @@
   {
     "field": "File",
     "file_id": 31,
-    "id": 5,
+    "id": 249,
     "order": 1,
     "related_id": 1,
     "related_type": "api::annual-report.annual-report"
@@ -42,7 +42,7 @@
   {
     "field": "File",
     "file_id": 32,
-    "id": 6,
+    "id": 247,
     "order": 1,
     "related_id": 2,
     "related_type": "api::annual-report.annual-report"
@@ -306,7 +306,7 @@
   {
     "field": "File",
     "file_id": 64,
-    "id": 41,
+    "id": 245,
     "order": 1,
     "related_id": 3,
     "related_type": "api::annual-report.annual-report"
@@ -314,7 +314,7 @@
   {
     "field": "File",
     "file_id": 65,
-    "id": 42,
+    "id": 251,
     "order": 1,
     "related_id": 4,
     "related_type": "api::annual-report.annual-report"
@@ -322,7 +322,7 @@
   {
     "field": "File",
     "file_id": 66,
-    "id": 43,
+    "id": 253,
     "order": 1,
     "related_id": 5,
     "related_type": "api::annual-report.annual-report"
@@ -330,7 +330,7 @@
   {
     "field": "File",
     "file_id": 67,
-    "id": 44,
+    "id": 255,
     "order": 1,
     "related_id": 6,
     "related_type": "api::annual-report.annual-report"
@@ -634,7 +634,7 @@
   {
     "field": "File",
     "file_id": 108,
-    "id": 222,
+    "id": 241,
     "order": 1,
     "related_id": 7,
     "related_type": "api::annual-report.annual-report"
@@ -642,7 +642,7 @@
   {
     "field": "File",
     "file_id": 109,
-    "id": 223,
+    "id": 243,
     "order": 1,
     "related_id": 8,
     "related_type": "api::annual-report.annual-report"
@@ -686,5 +686,69 @@
     "order": 1,
     "related_id": 3,
     "related_type": "api::partner.partner"
+  },
+  {
+    "field": "CoverImage",
+    "file_id": 116,
+    "id": 250,
+    "order": 1,
+    "related_id": 1,
+    "related_type": "api::annual-report.annual-report"
+  },
+  {
+    "field": "CoverImage",
+    "file_id": 116,
+    "id": 248,
+    "order": 1,
+    "related_id": 2,
+    "related_type": "api::annual-report.annual-report"
+  },
+  {
+    "field": "CoverImage",
+    "file_id": 116,
+    "id": 246,
+    "order": 1,
+    "related_id": 3,
+    "related_type": "api::annual-report.annual-report"
+  },
+  {
+    "field": "CoverImage",
+    "file_id": 116,
+    "id": 252,
+    "order": 1,
+    "related_id": 4,
+    "related_type": "api::annual-report.annual-report"
+  },
+  {
+    "field": "CoverImage",
+    "file_id": 116,
+    "id": 254,
+    "order": 1,
+    "related_id": 5,
+    "related_type": "api::annual-report.annual-report"
+  },
+  {
+    "field": "CoverImage",
+    "file_id": 116,
+    "id": 256,
+    "order": 1,
+    "related_id": 6,
+    "related_type": "api::annual-report.annual-report"
+  },
+  {
+    "field": "CoverImage",
+    "file_id": 116,
+    "id": 242,
+    "order": 1,
+    "related_id": 7,
+    "related_type": "api::annual-report.annual-report"
+  },
+  {
+    "field": "CoverImage",
+    "file_id": 116,
+    "id": 244,
+    "order": 1,
+    "related_id": 8,
+    "related_type": "api::annual-report.annual-report"
   }
 ]

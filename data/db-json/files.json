@@ -1824,5 +1824,27 @@
     "updated_by_id": 1,
     "url": "/uploads/ami_logo_ed8c934999.svg",
     "width": 323
+  },
+  {
+    "alternative_text": null,
+    "caption": null,
+    "created_at": 1710561889941,
+    "created_by_id": 1,
+    "ext": ".svg",
+    "folder_path": "/2",
+    "formats": null,
+    "hash": "pdf_icon_aa3579873d",
+    "height": 56,
+    "id": 116,
+    "mime": "image/svg+xml",
+    "name": "pdf-icon.svg",
+    "preview_url": null,
+    "provider": "local",
+    "provider_metadata": null,
+    "size": 2.55,
+    "updated_at": 1710561986619,
+    "updated_by_id": 1,
+    "url": "/uploads/pdf_icon_aa3579873d.svg",
+    "width": 56
   }
 ]

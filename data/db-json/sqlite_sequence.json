@@ -109,15 +109,15 @@
   },
   {
     "name": "files",
-    "seq": 115
+    "seq": 116
   },
   {
     "name": "files_folder_links",
-    "seq": 66
+    "seq": 69
   },
   {
     "name": "files_related_morphs",
-    "seq": 240
+    "seq": 256
   },
   {
     "name": "home_contents",
