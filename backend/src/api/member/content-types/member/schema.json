@@ -21,10 +21,6 @@
       "required": false,
       "allowedTypes": ["images", "files", "videos", "audios"]
     },
-    "Organisation": {
-      "type": "enumeration",
-      "enum": ["AMI", "SAMI", "SAMI Trustees"]
-    },
     "Bio": {
       "type": "richtext"
     },
@@ -40,8 +36,13 @@
       "required": false,
       "allowedTypes": ["images", "files", "videos", "audios"]
     },
-    "Order": {
-      "type": "integer"
+    "SortOrder": {
+      "type": "decimal"
+    },
+    "Tags": {
+      "type": "customField",
+      "options": ["SAMI", "AMI", "Trustee"],
+      "customField": "plugin::multi-select.multi-select"
     }
   }
 }

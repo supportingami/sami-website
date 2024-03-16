@@ -596,25 +596,25 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface ApiAboutAbout extends Schema.CollectionType {
-  collectionName: "abouts";
+export interface ApiAboutContentAboutContent extends Schema.SingleType {
+  collectionName: "about_contents";
   info: {
-    singularName: "about";
-    pluralName: "abouts";
-    displayName: "About Page";
+    singularName: "about-content";
+    pluralName: "about-contents";
+    displayName: "AboutContent";
     description: "";
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    Title: Attribute.String;
-    Content: Attribute.RichText;
+    Intro: Attribute.RichText;
+    members: Attribute.Relation<"api::about-content.about-content", "oneToMany", "api::member.member">;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<"api::about.about", "oneToOne", "admin::user"> & Attribute.Private;
-    updatedBy: Attribute.Relation<"api::about.about", "oneToOne", "admin::user"> & Attribute.Private;
+    createdBy: Attribute.Relation<"api::about-content.about-content", "oneToOne", "admin::user"> & Attribute.Private;
+    updatedBy: Attribute.Relation<"api::about-content.about-content", "oneToOne", "admin::user"> & Attribute.Private;
   };
 }
 
@@ -814,12 +814,12 @@ export interface ApiMemberMember extends Schema.CollectionType {
   attributes: {
     Name: Attribute.String;
     Photo: Attribute.Media;
-    Organisation: Attribute.Enumeration<["AMI", "SAMI", "SAMI Trustees"]>;
     Bio: Attribute.RichText;
     Email: Attribute.Email;
     LinkedIn: Attribute.String;
     BioImage: Attribute.Media;
-    Order: Attribute.Integer;
+    SortOrder: Attribute.Decimal;
+    Tags: Attribute.JSON & Attribute.CustomField<"plugin::multi-select.multi-select", ["SAMI", "AMI", "Trustee"]>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -946,7 +946,7 @@ declare module "@strapi/types" {
       "plugin::users-permissions.permission": PluginUsersPermissionsPermission;
       "plugin::users-permissions.role": PluginUsersPermissionsRole;
       "plugin::users-permissions.user": PluginUsersPermissionsUser;
-      "api::about.about": ApiAboutAbout;
+      "api::about-content.about-content": ApiAboutContentAboutContent;
       "api::annual-report.annual-report": ApiAnnualReportAnnualReport;
       "api::blog-post.blog-post": ApiBlogPostBlogPost;
       "api::blog-tag.blog-tag": ApiBlogTagBlogTag;

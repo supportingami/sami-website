@@ -1,23 +1,9 @@
-query about {
+query aboutContent {
   # table to query
-  abouts {
-    # return from query data
+  aboutContent {
     data {
-      # primary key to use
-      id
-      # what fields to return
       attributes {
-        Title
-        Content
-      }
-    }
-    # return from query meta
-    meta {
-      pagination {
-        page
-        pageSize
-        total
-        pageCount
+        Intro
       }
     }
   }
