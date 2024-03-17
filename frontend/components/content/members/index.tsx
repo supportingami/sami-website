@@ -62,7 +62,7 @@ export const MembersComponent: React.FC<{ members: IMember[] }> = ({ members }) 
         })}
       </div>
       <div>
-        <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(150px,200px))] justify-center max-w-screen-lg ">
+        <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(150px,200px))] justify-center max-w-screen-lg m-auto">
           {filteredMembers.map((member) => (
             <MembersListItemComponent key={member.id} member={member} />
           ))}

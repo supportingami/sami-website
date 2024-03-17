@@ -1,68 +1,62 @@
 import React from "react";
 import Head from "next/head";
-import { AboutPageComponent } from "components/pages/about";
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import Image from "next/image";
 
-import type { AboutQuery, MembersQuery, AnnualReportsQuery, Partner, PartnersQuery } from "../graphql/generated";
-import { AboutDocument, MembersDocument, AnnualReportsDocument, PartnersDocument } from "../graphql/generated";
+import type {
+  AboutContent,
+  MembersQuery,
+  AnnualReportsQuery,
+  Partner,
+  PartnersQuery,
+  AboutContentQuery,
+} from "../graphql/generated";
+import { MembersDocument, AnnualReportsDocument, PartnersDocument, AboutContentDocument } from "../graphql/generated";
 import { serverQuery } from "lib/graphql";
-import type { IAbout } from "types/about";
 import type { IAnnualReport } from "types/annualreport";
 import type { IMember } from "types/member";
-import { MembersComponent } from "components/pages/about/members";
+import { MembersComponent } from "components/content/members";
 import ToC from "components/pages/about/ToC";
 import Testimonials from "components/pages/about/testmonials/Testmonials";
 import PageSection from "components/layout/pageSection";
 import { SectionHeader } from "components/layout/Header";
 import { getStrapiMedia } from "lib/media";
 import { AnnualReportComponent } from "components/content/AnnualReport";
+import { HTMLContent } from "components/common/htmlContent";
+
+interface IAboutProps {
+  content: AboutContent;
+  members: IMember[];
+  reports: IAnnualReport[];
+  partners: Partner[];
+}
 
 export const getStaticProps = async ({}: GetStaticPropsContext) => {
-  let about: IAbout[] = [];
-  let members: IMember[] = [];
-  let reports: IAnnualReport[] = [];
-  let partners: Partner[] = [];
-
-  const aboutRes = await serverQuery<AboutQuery>(AboutDocument);
-
-  if (aboutRes) {
-    about = aboutRes.data.abouts.data.map((m) => ({ ...m.attributes, id: m.id })) || [];
-  }
-
+  const contentRes = await serverQuery<AboutContentQuery>(AboutContentDocument);
   const membersRes = await serverQuery<MembersQuery>(MembersDocument);
-  if (membersRes) {
-    members = membersRes.data.members.data.map((m) => ({ ...m.attributes, id: m.id } as IMember)) || [];
-  }
-
-  const areportsRes = await serverQuery<AnnualReportsQuery>(AnnualReportsDocument);
-  if (areportsRes) {
-    reports = areportsRes.data.annualReports.data.map((m) => ({ ...m.attributes, id: m.id } as IAnnualReport)) || [];
-  }
-
+  const reportsRes = await serverQuery<AnnualReportsQuery>(AnnualReportsDocument);
   const partnersRes = await serverQuery<PartnersQuery>(PartnersDocument);
-  if (partners) {
-    partners = partnersRes.data.partners.data.map((m) => ({ ...(m.attributes as Partner) }));
-  }
+
+  const props: IAboutProps = {
+    content: contentRes.data?.aboutContent?.data?.attributes || {},
+    members: membersRes.data?.members.data.map((m) => ({ ...m.attributes, id: m.id } as IMember)) || [],
+    partners: partnersRes.data.partners.data.map((m) => ({ ...(m.attributes as Partner) })) || [],
+    reports: reportsRes.data.annualReports.data.map((m) => ({ ...m.attributes, id: m.id } as IAnnualReport)) || [],
+  };
 
   return {
-    props: {
-      about,
-      members,
-      reports,
-      partners,
-    },
+    props,
   };
 };
 
 const headerButtons = [
   {
-    id: "toc",
-    text: "Theory of Change",
-  },
-  {
     id: "members",
     text: "Members & Volunteers",
+  },
+  {
+    id: "toc",
+    text: "Theory of Change",
   },
   {
     id: "reports",
@@ -70,7 +64,7 @@ const headerButtons = [
   },
 ];
 
-const AboutPage = ({ about, members, reports, partners }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const AboutPage = ({ content, members, reports, partners }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
       <Head>
@@ -87,7 +81,9 @@ const AboutPage = ({ about, members, reports, partners }: InferGetStaticPropsTyp
         </div>
       </SectionHeader>
       <div style={{ scrollBehavior: "smooth", display: "contents" }}>
-        <AboutPageComponent aboutPageContent={about} />
+        <PageSection className="mt-8 max-w-screen-lg" sectionId="intro">
+          <HTMLContent>{content.Intro}</HTMLContent>
+        </PageSection>
         <PageSection className="text-center mt-16" sectionId="members">
           <MembersComponent members={members} />
         </PageSection>

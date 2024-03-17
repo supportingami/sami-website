@@ -1,12 +1,6 @@
 type AboutContent {
   Intro: String
   createdAt: DateTime
-  members(
-    filters: MemberFiltersInput
-    pagination: PaginationArg = {}
-    publicationState: PublicationState = LIVE
-    sort: [String] = []
-  ): MemberRelationResponseCollection
   publishedAt: DateTime
   updatedAt: DateTime
 }
@@ -22,7 +16,6 @@ type AboutContentEntityResponse {
 
 input AboutContentInput {
   Intro: String
-  members: [ID]
   publishedAt: DateTime
 }
 
@@ -950,10 +943,6 @@ input MemberInput {
   SortOrder: Float
   Tags: JSON
   publishedAt: DateTime
-}
-
-type MemberRelationResponseCollection {
-  data: [MemberEntity!]!
 }
 
 type Mutation {
