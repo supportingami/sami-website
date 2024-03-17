@@ -657,6 +657,52 @@ export type DonateContentInput = {
   publishedAt?: InputMaybe<Scalars["DateTime"]>;
 };
 
+export type Donor = {
+  __typename?: "Donor";
+  Logo: UploadFileEntityResponse;
+  Name: Scalars["String"];
+  SortOrder?: Maybe<Scalars["Float"]>;
+  createdAt?: Maybe<Scalars["DateTime"]>;
+  publishedAt?: Maybe<Scalars["DateTime"]>;
+  updatedAt?: Maybe<Scalars["DateTime"]>;
+};
+
+export type DonorEntity = {
+  __typename?: "DonorEntity";
+  attributes?: Maybe<Donor>;
+  id?: Maybe<Scalars["ID"]>;
+};
+
+export type DonorEntityResponse = {
+  __typename?: "DonorEntityResponse";
+  data?: Maybe<DonorEntity>;
+};
+
+export type DonorEntityResponseCollection = {
+  __typename?: "DonorEntityResponseCollection";
+  data: Array<DonorEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type DonorFiltersInput = {
+  Name?: InputMaybe<StringFilterInput>;
+  SortOrder?: InputMaybe<FloatFilterInput>;
+  and?: InputMaybe<Array<InputMaybe<DonorFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  not?: InputMaybe<DonorFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<DonorFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type DonorInput = {
+  Logo?: InputMaybe<Scalars["ID"]>;
+  Name?: InputMaybe<Scalars["String"]>;
+  SortOrder?: InputMaybe<Scalars["Float"]>;
+  publishedAt?: InputMaybe<Scalars["DateTime"]>;
+};
+
 export type DynamicContent = {
   __typename?: "DynamicContent";
   Content?: Maybe<Array<Maybe<DynamicContentContentDynamicZone>>>;
@@ -804,6 +850,7 @@ export type GenericMorph =
   | ContentReleasesReleaseAction
   | Country
   | DonateContent
+  | Donor
   | DynamicContent
   | Faq
   | HomeContent
@@ -1038,6 +1085,7 @@ export type Mutation = {
   createContentReleasesRelease?: Maybe<ContentReleasesReleaseEntityResponse>;
   createContentReleasesReleaseAction?: Maybe<ContentReleasesReleaseActionEntityResponse>;
   createCountry?: Maybe<CountryEntityResponse>;
+  createDonor?: Maybe<DonorEntityResponse>;
   createFaq?: Maybe<FaqEntityResponse>;
   createMember?: Maybe<MemberEntityResponse>;
   createPartner?: Maybe<PartnerEntityResponse>;
@@ -1057,6 +1105,7 @@ export type Mutation = {
   deleteContentReleasesReleaseAction?: Maybe<ContentReleasesReleaseActionEntityResponse>;
   deleteCountry?: Maybe<CountryEntityResponse>;
   deleteDonateContent?: Maybe<DonateContentEntityResponse>;
+  deleteDonor?: Maybe<DonorEntityResponse>;
   deleteDynamicContent?: Maybe<DynamicContentEntityResponse>;
   deleteFaq?: Maybe<FaqEntityResponse>;
   deleteHomeContent?: Maybe<HomeContentEntityResponse>;
@@ -1090,6 +1139,7 @@ export type Mutation = {
   updateContentReleasesReleaseAction?: Maybe<ContentReleasesReleaseActionEntityResponse>;
   updateCountry?: Maybe<CountryEntityResponse>;
   updateDonateContent?: Maybe<DonateContentEntityResponse>;
+  updateDonor?: Maybe<DonorEntityResponse>;
   updateDynamicContent?: Maybe<DynamicContentEntityResponse>;
   updateFaq?: Maybe<FaqEntityResponse>;
   updateFileInfo: UploadFileEntityResponse;
@@ -1136,6 +1186,10 @@ export type MutationCreateContentReleasesReleaseActionArgs = {
 
 export type MutationCreateCountryArgs = {
   data: CountryInput;
+};
+
+export type MutationCreateDonorArgs = {
+  data: DonorInput;
 };
 
 export type MutationCreateFaqArgs = {
@@ -1195,6 +1249,10 @@ export type MutationDeleteContentReleasesReleaseActionArgs = {
 };
 
 export type MutationDeleteCountryArgs = {
+  id: Scalars["ID"];
+};
+
+export type MutationDeleteDonorArgs = {
   id: Scalars["ID"];
 };
 
@@ -1303,6 +1361,11 @@ export type MutationUpdateCountryArgs = {
 
 export type MutationUpdateDonateContentArgs = {
   data: DonateContentInput;
+};
+
+export type MutationUpdateDonorArgs = {
+  data: DonorInput;
+  id: Scalars["ID"];
 };
 
 export type MutationUpdateDynamicContentArgs = {
@@ -1523,6 +1586,8 @@ export type Query = {
   countries?: Maybe<CountryEntityResponseCollection>;
   country?: Maybe<CountryEntityResponse>;
   donateContent?: Maybe<DonateContentEntityResponse>;
+  donor?: Maybe<DonorEntityResponse>;
+  donors?: Maybe<DonorEntityResponseCollection>;
   dynamicContent?: Maybe<DynamicContentEntityResponse>;
   faq?: Maybe<FaqEntityResponse>;
   faqs?: Maybe<FaqEntityResponseCollection>;
@@ -1619,6 +1684,17 @@ export type QueryCountryArgs = {
 
 export type QueryDonateContentArgs = {
   publicationState?: InputMaybe<PublicationState>;
+};
+
+export type QueryDonorArgs = {
+  id?: InputMaybe<Scalars["ID"]>;
+};
+
+export type QueryDonorsArgs = {
+  filters?: InputMaybe<DonorFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
 };
 
 export type QueryDynamicContentArgs = {
@@ -2404,6 +2480,35 @@ export type DonateContentQuery = {
         } | null;
       } | null;
     } | null;
+  } | null;
+};
+
+export type DonorsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type DonorsQuery = {
+  __typename?: "Query";
+  donors?: {
+    __typename?: "DonorEntityResponseCollection";
+    data: Array<{
+      __typename?: "DonorEntity";
+      id?: string | null;
+      attributes?: {
+        __typename?: "Donor";
+        Name: string;
+        Logo: {
+          __typename?: "UploadFileEntityResponse";
+          data?: {
+            __typename?: "UploadFileEntity";
+            id?: string | null;
+            attributes?: { __typename?: "UploadFile"; url: string; name: string; size: number } | null;
+          } | null;
+        };
+      } | null;
+    }>;
+    meta: {
+      __typename?: "ResponseCollectionMeta";
+      pagination: { __typename?: "Pagination"; page: number; pageSize: number; total: number; pageCount: number };
+    };
   } | null;
 };
 
@@ -3368,6 +3473,110 @@ export const DonateContentDocument = {
     },
   ],
 } as unknown as DocumentNode<DonateContentQuery, DonateContentQueryVariables>;
+export const DonorsDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "donors" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "donors" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "sort" },
+                value: { kind: "StringValue", value: "SortOrder:ASC", block: false },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "data" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "attributes" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "Name" } },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "Logo" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "data" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        { kind: "Field", name: { kind: "Name", value: "id" } },
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "attributes" },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              { kind: "Field", name: { kind: "Name", value: "url" } },
+                                              { kind: "Field", name: { kind: "Name", value: "name" } },
+                                              { kind: "Field", name: { kind: "Name", value: "size" } },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "meta" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "pagination" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "page" } },
+                            { kind: "Field", name: { kind: "Name", value: "pageSize" } },
+                            { kind: "Field", name: { kind: "Name", value: "total" } },
+                            { kind: "Field", name: { kind: "Name", value: "pageCount" } },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<DonorsQuery, DonorsQueryVariables>;
 export const FaqsDocument = {
   kind: "Document",
   definitions: [

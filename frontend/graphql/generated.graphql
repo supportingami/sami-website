@@ -589,6 +589,48 @@ input DonateContentInput {
   publishedAt: DateTime
 }
 
+type Donor {
+  Logo: UploadFileEntityResponse!
+  Name: String!
+  SortOrder: Float
+  createdAt: DateTime
+  publishedAt: DateTime
+  updatedAt: DateTime
+}
+
+type DonorEntity {
+  attributes: Donor
+  id: ID
+}
+
+type DonorEntityResponse {
+  data: DonorEntity
+}
+
+type DonorEntityResponseCollection {
+  data: [DonorEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input DonorFiltersInput {
+  Name: StringFilterInput
+  SortOrder: FloatFilterInput
+  and: [DonorFiltersInput]
+  createdAt: DateTimeFilterInput
+  id: IDFilterInput
+  not: DonorFiltersInput
+  or: [DonorFiltersInput]
+  publishedAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+}
+
+input DonorInput {
+  Logo: ID
+  Name: String
+  SortOrder: Float
+  publishedAt: DateTime
+}
+
 type DynamicContent {
   Content: [DynamicContentContentDynamicZone]
   createdAt: DateTime
@@ -729,6 +771,7 @@ union GenericMorph =
   | ContentReleasesReleaseAction
   | Country
   | DonateContent
+  | Donor
   | DynamicContent
   | Faq
   | HomeContent
@@ -962,6 +1005,7 @@ type Mutation {
     data: ContentReleasesReleaseActionInput!
   ): ContentReleasesReleaseActionEntityResponse
   createCountry(data: CountryInput!): CountryEntityResponse
+  createDonor(data: DonorInput!): DonorEntityResponse
   createFaq(data: FaqInput!): FaqEntityResponse
   createMember(data: MemberInput!): MemberEntityResponse
   createPartner(data: PartnerInput!): PartnerEntityResponse
@@ -987,6 +1031,7 @@ type Mutation {
   deleteContentReleasesReleaseAction(id: ID!): ContentReleasesReleaseActionEntityResponse
   deleteCountry(id: ID!): CountryEntityResponse
   deleteDonateContent: DonateContentEntityResponse
+  deleteDonor(id: ID!): DonorEntityResponse
   deleteDynamicContent: DynamicContentEntityResponse
   deleteFaq(id: ID!): FaqEntityResponse
   deleteHomeContent: HomeContentEntityResponse
@@ -1041,6 +1086,7 @@ type Mutation {
   ): ContentReleasesReleaseActionEntityResponse
   updateCountry(data: CountryInput!, id: ID!): CountryEntityResponse
   updateDonateContent(data: DonateContentInput!): DonateContentEntityResponse
+  updateDonor(data: DonorInput!, id: ID!): DonorEntityResponse
   updateDynamicContent(data: DynamicContentInput!): DynamicContentEntityResponse
   updateFaq(data: FaqInput!, id: ID!): FaqEntityResponse
   updateFileInfo(id: ID!, info: FileInfoInput): UploadFileEntityResponse!
@@ -1233,6 +1279,13 @@ type Query {
   ): CountryEntityResponseCollection
   country(id: ID): CountryEntityResponse
   donateContent(publicationState: PublicationState = LIVE): DonateContentEntityResponse
+  donor(id: ID): DonorEntityResponse
+  donors(
+    filters: DonorFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): DonorEntityResponseCollection
   dynamicContent(publicationState: PublicationState = LIVE): DynamicContentEntityResponse
   faq(id: ID): FaqEntityResponse
   faqs(

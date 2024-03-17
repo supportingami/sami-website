@@ -730,6 +730,29 @@ export interface ApiDonateContentDonateContent extends Schema.SingleType {
   };
 }
 
+export interface ApiDonorDonor extends Schema.CollectionType {
+  collectionName: "donors";
+  info: {
+    singularName: "donor";
+    pluralName: "donors";
+    displayName: "Donors";
+    description: "";
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String & Attribute.Required & Attribute.Unique;
+    Logo: Attribute.Media & Attribute.Required;
+    SortOrder: Attribute.Decimal;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<"api::donor.donor", "oneToOne", "admin::user"> & Attribute.Private;
+    updatedBy: Attribute.Relation<"api::donor.donor", "oneToOne", "admin::user"> & Attribute.Private;
+  };
+}
+
 export interface ApiDynamicContentDynamicContent extends Schema.SingleType {
   collectionName: "dynamic_contents";
   info: {
@@ -951,6 +974,7 @@ declare module "@strapi/types" {
       "api::blog-tag.blog-tag": ApiBlogTagBlogTag;
       "api::country.country": ApiCountryCountry;
       "api::donate-content.donate-content": ApiDonateContentDonateContent;
+      "api::donor.donor": ApiDonorDonor;
       "api::dynamic-content.dynamic-content": ApiDynamicContentDynamicContent;
       "api::faq.faq": ApiFaqFaq;
       "api::home-content.home-content": ApiHomeContentHomeContent;
