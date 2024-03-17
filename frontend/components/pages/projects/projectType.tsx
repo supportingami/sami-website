@@ -1,7 +1,7 @@
 import React from "react";
 import { SectionHeader } from "components/layout/Header";
 import PageSection from "components/layout/pageSection";
-import Testimonials from "components/pages/about/testmonials/Testmonials";
+import Testimonials from "components/content/Testmonials";
 import Link from "next/link";
 import type { IProject } from "types/project";
 import { DynamicComponents } from "components/common/dynamic";

@@ -1,5 +1,4 @@
 import React from "react";
-import type { IAbout } from "types/about";
 import PageSection from "components/layout/pageSection";
 
 const principles = [
