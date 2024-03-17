@@ -1,7 +1,7 @@
 import React from "react";
 import type { IFaq } from "types/faq";
 
-export const FAQS: React.FC<{
+export const VolunteerFAQs: React.FC<{
   faq: IFaq;
 }> = ({ faq }) => {
   return (
