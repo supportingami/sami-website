@@ -657,7 +657,6 @@ export interface ApiBlogPostBlogPost extends Schema.CollectionType {
     Title: Attribute.String & Attribute.Required & Attribute.Unique;
     Summary: Attribute.Text;
     DateWritten: Attribute.Date;
-    Tags: Attribute.Relation<"api::blog-post.blog-post", "oneToMany", "api::blog-tag.blog-tag">;
     Slug: Attribute.UID<"api::blog-post.blog-post", "Title">;
     ContentBlocks: Attribute.DynamicZone<["common.action-button", "common.html", "common.text-block", "common.image"]>;
     createdAt: Attribute.DateTime;
@@ -665,49 +664,6 @@ export interface ApiBlogPostBlogPost extends Schema.CollectionType {
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<"api::blog-post.blog-post", "oneToOne", "admin::user"> & Attribute.Private;
     updatedBy: Attribute.Relation<"api::blog-post.blog-post", "oneToOne", "admin::user"> & Attribute.Private;
-  };
-}
-
-export interface ApiBlogTagBlogTag extends Schema.CollectionType {
-  collectionName: "blog_tags";
-  info: {
-    singularName: "blog-tag";
-    pluralName: "blog-tags";
-    displayName: "Blog Tags";
-    description: "";
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Tag: Attribute.String;
-    BlogPost: Attribute.Relation<"api::blog-tag.blog-tag", "manyToOne", "api::blog-post.blog-post">;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<"api::blog-tag.blog-tag", "oneToOne", "admin::user"> & Attribute.Private;
-    updatedBy: Attribute.Relation<"api::blog-tag.blog-tag", "oneToOne", "admin::user"> & Attribute.Private;
-  };
-}
-
-export interface ApiCountryCountry extends Schema.CollectionType {
-  collectionName: "countries";
-  info: {
-    singularName: "country";
-    pluralName: "countries";
-    displayName: "Country";
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Name: Attribute.String;
-    Content: Attribute.RichText;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<"api::country.country", "oneToOne", "admin::user"> & Attribute.Private;
-    updatedBy: Attribute.Relation<"api::country.country", "oneToOne", "admin::user"> & Attribute.Private;
   };
 }
 
@@ -996,8 +952,6 @@ declare module "@strapi/types" {
       "api::about-content.about-content": ApiAboutContentAboutContent;
       "api::annual-report.annual-report": ApiAnnualReportAnnualReport;
       "api::blog-post.blog-post": ApiBlogPostBlogPost;
-      "api::blog-tag.blog-tag": ApiBlogTagBlogTag;
-      "api::country.country": ApiCountryCountry;
       "api::donate-content.donate-content": ApiDonateContentDonateContent;
       "api::donor.donor": ApiDonorDonor;
       "api::dynamic-content.dynamic-content": ApiDynamicContentDynamicContent;

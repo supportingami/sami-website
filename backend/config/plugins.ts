@@ -17,7 +17,7 @@ export default ({ env }) => ({
     enabled: true,
   },
   "sami-admin": {
-    enabled: true,
+    enabled: false,
     resolve: "./src/plugins/sami-admin",
   },
 });
