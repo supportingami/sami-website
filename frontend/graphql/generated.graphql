@@ -1,5 +1,11 @@
 type AboutContent {
   Intro: String
+  Testimonials(
+    filters: TestimonialFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): TestimonialRelationResponseCollection
   createdAt: DateTime
   publishedAt: DateTime
   updatedAt: DateTime
@@ -16,6 +22,7 @@ type AboutContentEntityResponse {
 
 input AboutContentInput {
   Intro: String
+  Testimonials: [ID]
   publishedAt: DateTime
 }
 
@@ -780,6 +787,7 @@ union GenericMorph =
   | Partner
   | ProjectType
   | Resource
+  | Testimonial
   | UploadFile
   | UploadFolder
   | UsersPermissionsPermission
@@ -1011,6 +1019,7 @@ type Mutation {
   createPartner(data: PartnerInput!): PartnerEntityResponse
   createProjectType(data: ProjectTypeInput!): ProjectTypeEntityResponse
   createResource(data: ResourceInput!): ResourceEntityResponse
+  createTestimonial(data: TestimonialInput!): TestimonialEntityResponse
   createUploadFile(data: UploadFileInput!): UploadFileEntityResponse
   createUploadFolder(data: UploadFolderInput!): UploadFolderEntityResponse
 
@@ -1039,6 +1048,7 @@ type Mutation {
   deletePartner(id: ID!): PartnerEntityResponse
   deleteProjectType(id: ID!): ProjectTypeEntityResponse
   deleteResource(id: ID!): ResourceEntityResponse
+  deleteTestimonial(id: ID!): TestimonialEntityResponse
   deleteUploadFile(id: ID!): UploadFileEntityResponse
   deleteUploadFolder(id: ID!): UploadFolderEntityResponse
 
@@ -1095,6 +1105,7 @@ type Mutation {
   updatePartner(data: PartnerInput!, id: ID!): PartnerEntityResponse
   updateProjectType(data: ProjectTypeInput!, id: ID!): ProjectTypeEntityResponse
   updateResource(data: ResourceInput!, id: ID!): ResourceEntityResponse
+  updateTestimonial(data: TestimonialInput!, id: ID!): TestimonialEntityResponse
   updateUploadFile(data: UploadFileInput!, id: ID!): UploadFileEntityResponse
   updateUploadFolder(data: UploadFolderInput!, id: ID!): UploadFolderEntityResponse
 
@@ -1330,6 +1341,13 @@ type Query {
     publicationState: PublicationState = LIVE
     sort: [String] = []
   ): ResourceEntityResponseCollection
+  testimonial(id: ID): TestimonialEntityResponse
+  testimonials(
+    filters: TestimonialFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): TestimonialEntityResponseCollection
   uploadFile(id: ID): UploadFileEntityResponse
   uploadFiles(
     filters: UploadFileFiltersInput
@@ -1435,6 +1453,55 @@ input StringFilterInput {
   null: Boolean
   or: [String]
   startsWith: String
+}
+
+type Testimonial {
+  Bio: String!
+  Content: String!
+  Name: String!
+  Photo: UploadFileEntityResponse!
+  createdAt: DateTime
+  publishedAt: DateTime
+  updatedAt: DateTime
+}
+
+type TestimonialEntity {
+  attributes: Testimonial
+  id: ID
+}
+
+type TestimonialEntityResponse {
+  data: TestimonialEntity
+}
+
+type TestimonialEntityResponseCollection {
+  data: [TestimonialEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input TestimonialFiltersInput {
+  Bio: StringFilterInput
+  Content: StringFilterInput
+  Name: StringFilterInput
+  and: [TestimonialFiltersInput]
+  createdAt: DateTimeFilterInput
+  id: IDFilterInput
+  not: TestimonialFiltersInput
+  or: [TestimonialFiltersInput]
+  publishedAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+}
+
+input TestimonialInput {
+  Bio: String
+  Content: String
+  Name: String
+  Photo: ID
+  publishedAt: DateTime
+}
+
+type TestimonialRelationResponseCollection {
+  data: [TestimonialEntity!]!
 }
 
 """

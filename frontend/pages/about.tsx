@@ -17,12 +17,13 @@ import type { IAnnualReport } from "types/annualreport";
 import type { IMember } from "types/member";
 import { MembersComponent } from "components/content/members";
 import ToC from "components/pages/about/ToC";
-import Testimonials from "components/pages/about/testmonials/Testmonials";
+import Testimonials from "components/content/Testmonials";
 import PageSection from "components/layout/pageSection";
 import { SectionHeader } from "components/layout/Header";
 import { getStrapiMedia } from "lib/media";
 import { AnnualReportComponent } from "components/content/AnnualReport";
 import { HTMLContent } from "components/common/htmlContent";
+import SamiPrinciples from "components/content/SamiPrinciples";
 
 interface IAboutProps {
   content: AboutContent;
@@ -38,7 +39,7 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
   const partnersRes = await serverQuery<PartnersQuery>(PartnersDocument);
 
   const props: IAboutProps = {
-    content: contentRes.data?.aboutContent?.data?.attributes || {},
+    content: (contentRes.data?.aboutContent?.data?.attributes as AboutContent) || {},
     members: membersRes.data?.members.data.map((m) => ({ ...m.attributes, id: m.id } as IMember)) || [],
     partners: partnersRes.data.partners.data.map((m) => ({ ...(m.attributes as Partner) })) || [],
     reports: reportsRes.data.annualReports.data.map((m) => ({ ...m.attributes, id: m.id } as IAnnualReport)) || [],
@@ -80,18 +81,23 @@ const AboutPage = ({ content, members, reports, partners }: InferGetStaticPropsT
           ))}
         </div>
       </SectionHeader>
-      <div style={{ scrollBehavior: "smooth", display: "contents" }}>
-        <PageSection className="mt-8 max-w-screen-lg" sectionId="intro">
+      <div className="prose" style={{ scrollBehavior: "smooth", display: "contents" }}>
+        <PageSection className="py-16 max-w-screen-lg" sectionId="intro">
           <HTMLContent>{content.Intro}</HTMLContent>
         </PageSection>
-        <PageSection className="text-center mt-16" sectionId="members">
+        <PageSection fullwidth className="bg-base-200 py-8" id="principles">
+          <h1 className="text-center">All projects live by the following principles</h1>
+          <SamiPrinciples />
+        </PageSection>
+        <PageSection className="text-center my-16" sectionId="members">
           <MembersComponent members={members} />
         </PageSection>
-        <PageSection fullwidth className="bg-base-200 py-16" sectionId="toc">
+        <PageSection fullwidth className="bg-base-200 py-16 text-center md:px-5" sectionId="toc">
+          <h1>SAMI Theory of Change</h1>
           <ToC />
         </PageSection>
         <PageSection className="text-center py-16" sectionId="reports">
-          <h2>Annual Reports</h2>
+          <h1>Annual Reports</h1>
           <p className="mb-10">Find below links to our annual report and other relevant documents</p>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5 px-5 lg:px-24">
             {reports.map((report) => (
@@ -100,13 +106,14 @@ const AboutPage = ({ content, members, reports, partners }: InferGetStaticPropsT
           </div>
         </PageSection>
         <PageSection fullwidth className="bg-base-200 py-16">
-          <Testimonials />
+          <h1 className="text-center">Improving Lives</h1>
+          <Testimonials testimonials={content.Testimonials.data.map((el) => el.attributes)} />
         </PageSection>
         <PageSection fullwidth className="bg-primary-focus text-white py-0">
-          <h2 className="text-center">Our Partners</h2>
+          <h1 className="text-center text-white">Our Partners</h1>
         </PageSection>
         <PageSection fullwidth className="mb-36">
-          <div className="grid auto-rows-[100px] gap-16 grid-cols-2 md:grid-cols-4 my-10 md:my-20 items-center justify-items-center">
+          <div className="grid auto-rows-[120px] gap-16 grid-cols-2 md:grid-cols-4 my-10 md:my-20 items-center justify-items-center">
             {partners.map((partner) => (
               <PartnerImage key={partner.Name} partner={partner} />
             ))}

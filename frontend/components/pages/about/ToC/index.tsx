@@ -1,7 +1,6 @@
 export default function ToC() {
   return (
     <>
-      <h2>SAMI Theory of Change</h2>
       <p>
         At SAMI we’ve been working to build our thoughts on how everything we do can fit into a larger picture to create
         real change across Africa.

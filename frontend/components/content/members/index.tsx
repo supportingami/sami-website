@@ -42,7 +42,7 @@ export const MembersComponent: React.FC<{ members: IMember[] }> = ({ members }) 
 
   return (
     <>
-      <h2 className="font-bold">Members & Volunteers</h2>
+      <h1>Members & Volunteers</h1>
       <p className="mt-3 mb-10 lg:px-12 px-5">
         SAMI is extremely thankful to have a fantastic team of members and volunteers that support in the UK and Africa.
         <br />
