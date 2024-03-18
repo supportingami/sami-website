@@ -1,0 +1,72 @@
+[
+  {
+    "created_at": 1710387503903,
+    "created_by_id": 1,
+    "id": 1,
+    "name": "AIMS Rwanda",
+    "published_at": 1710387508080,
+    "sort_order": 2,
+    "updated_at": 1710391606593,
+    "updated_by_id": 1
+  },
+  {
+    "created_at": 1710387545653,
+    "created_by_id": 1,
+    "id": 2,
+    "name": "AMI Ghana",
+    "published_at": 1710387547349,
+    "sort_order": 4,
+    "updated_at": 1710391599455,
+    "updated_by_id": 1
+  },
+  {
+    "created_at": 1710387558693,
+    "created_by_id": 1,
+    "id": 3,
+    "name": "AMI",
+    "published_at": 1710387584715,
+    "sort_order": 1,
+    "updated_at": 1710391594096,
+    "updated_by_id": 1
+  },
+  {
+    "created_at": 1710387577076,
+    "created_by_id": 1,
+    "id": 4,
+    "name": "IM Togo",
+    "published_at": 1710387579910,
+    "sort_order": 3,
+    "updated_at": 1710387823574,
+    "updated_by_id": 1
+  },
+  {
+    "created_at": 1710712226120,
+    "created_by_id": 1,
+    "id": 5,
+    "name": "INNODEMS",
+    "published_at": 1710712230370,
+    "sort_order": 5,
+    "updated_at": 1710712230371,
+    "updated_by_id": 1
+  },
+  {
+    "created_at": 1710785636465,
+    "created_by_id": 1,
+    "id": 6,
+    "name": "Bahir Dar University",
+    "published_at": 1710785644856,
+    "sort_order": 6,
+    "updated_at": 1710785644858,
+    "updated_by_id": 1
+  },
+  {
+    "created_at": 1710785839616,
+    "created_by_id": 1,
+    "id": 7,
+    "name": "Panafrican Hub",
+    "published_at": 1710785841702,
+    "sort_order": 7,
+    "updated_at": 1710785841703,
+    "updated_by_id": 1
+  }
+]

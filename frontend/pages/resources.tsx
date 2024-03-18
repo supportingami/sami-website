@@ -2,7 +2,7 @@ import React from "react";
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import type { IResource } from "types/resource";
 import Head from "next/head";
-import { ResourcesPageComponent } from "components/pages/resources";
+import { ResourcesPageComponent } from "components/content/resources";
 import type { ResourcesQuery, Resource } from "../graphql/generated";
 import { ResourcesDocument } from "../graphql/generated";
 import { serverQuery } from "lib/graphql";

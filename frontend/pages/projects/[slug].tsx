@@ -3,7 +3,7 @@ import type { GetStaticPaths, GetStaticPropsContext, InferGetStaticPropsType } f
 import Head from "next/head";
 import { serverQuery } from "lib/graphql";
 import type { IProject } from "types/project";
-import { ProjectTypeComponent } from "components/pages/projects/projectType";
+import { ProjectTypeComponent } from "components/content/projects/projectType";
 import type { ProjectsQuery, ProjectTypeFiltersInput } from "../../graphql/generated";
 import { ProjectsDocument } from "../../graphql/generated";
 

@@ -3,7 +3,7 @@
 # `SELECT Name, Email from members`
 query members {
   # table to query
-  members {
+  members(sort: "SortOrder:ASC") {
     # return from query data
     data {
       # primary key to use
@@ -12,7 +12,6 @@ query members {
       attributes {
         Name
         Email
-        Organisation
         Bio
         LinkedIn
         Photo {
@@ -35,7 +34,7 @@ query members {
             }
           }
         }
-        Order
+        Tags
       }
     }
     # return from query meta

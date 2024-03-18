@@ -5,7 +5,7 @@ import { serverQuery } from "lib/graphql";
 import type { IBlogPost } from "types/blogpost";
 import type { BlogPost, BlogPostFiltersInput, BlogPostContentQuery } from "../../graphql/generated";
 import { BlogPostContentDocument } from "../../graphql/generated";
-import { BlogPostComponent } from "components/pages/blog-post/post";
+import { BlogPostComponent } from "components/content/blog-post/post";
 import PageLayout from "components/layout/pageLayout";
 
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {

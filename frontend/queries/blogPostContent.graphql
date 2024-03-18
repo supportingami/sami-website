@@ -6,14 +6,6 @@ query blogPostContent($filters: BlogPostFiltersInput) {
       attributes {
         Title
         DateWritten
-        Tags {
-          data {
-            id
-            attributes {
-              Tag
-            }
-          }
-        }
         Slug
         # If any new blocks added for authoring need to include here
         ContentBlocks {

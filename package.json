@@ -17,7 +17,7 @@
     "generate": "yarn workspace frontend generate && yarn pretty-quick",
     "lint": "yarn lint:code && yarn lint:style",
     "lint:code": "eslint . --ext .js,.jsx,.ts,.tsx --color",
-    "lint:spell:TODO": "npx cspell \"**/*.md\" --config ./.cspell.json",
+    "lint:spell:TODO": "npx cspell \"**/*.md\" --config ./cspell.json",
     "lint:style": "prettier --check '**/*.{md,json,js,tsx,ts}'",
     "scripts": "yarn workspace scripts start",
     "start": "yarn scripts cli start",

@@ -4,7 +4,7 @@
     "created_by_id": 1,
     "id": 1,
     "published_at": 1661956694845,
-    "updated_at": 1665273724708,
+    "updated_at": 1710561968963,
     "updated_by_id": 1,
     "year": 2019
   },
@@ -13,7 +13,7 @@
     "created_by_id": 1,
     "id": 2,
     "published_at": 1662384783333,
-    "updated_at": 1662384794159,
+    "updated_at": 1710561958870,
     "updated_by_id": 1,
     "year": 2020
   },
@@ -22,7 +22,7 @@
     "created_by_id": 1,
     "id": 3,
     "published_at": 1666598691667,
-    "updated_at": 1666598691668,
+    "updated_at": 1710561948967,
     "updated_by_id": 1,
     "year": 2021
   },
@@ -31,7 +31,7 @@
     "created_by_id": 1,
     "id": 4,
     "published_at": 1666598741588,
-    "updated_at": 1666598741589,
+    "updated_at": 1710561976997,
     "updated_by_id": 1,
     "year": 2018
   },
@@ -40,7 +40,7 @@
     "created_by_id": 1,
     "id": 5,
     "published_at": 1666598788949,
-    "updated_at": 1666598788951,
+    "updated_at": 1710561990374,
     "updated_by_id": 1,
     "year": 2017
   },
@@ -49,7 +49,7 @@
     "created_by_id": 1,
     "id": 6,
     "published_at": 1666598833372,
-    "updated_at": 1666598833372,
+    "updated_at": 1710561998359,
     "updated_by_id": 1,
     "year": 2016
   },
@@ -58,7 +58,7 @@
     "created_by_id": 1,
     "id": 7,
     "published_at": 1709705875968,
-    "updated_at": 1709705875970,
+    "updated_at": 1710561894038,
     "updated_by_id": 1,
     "year": 2023
   },
@@ -67,7 +67,7 @@
     "created_by_id": 1,
     "id": 8,
     "published_at": 1709705878515,
-    "updated_at": 1709705878516,
+    "updated_at": 1710561926342,
     "updated_by_id": 1,
     "year": 2022
   }

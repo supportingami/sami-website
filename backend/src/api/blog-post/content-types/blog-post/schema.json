@@ -29,12 +29,6 @@
     "DateWritten": {
       "type": "date"
     },
-    "Tags": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::blog-tag.blog-tag",
-      "mappedBy": "BlogPost"
-    },
     "Slug": {
       "type": "uid",
       "targetField": "Title",

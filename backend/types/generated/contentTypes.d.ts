@@ -596,25 +596,25 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface ApiAboutAbout extends Schema.CollectionType {
-  collectionName: "abouts";
+export interface ApiAboutContentAboutContent extends Schema.SingleType {
+  collectionName: "about_contents";
   info: {
-    singularName: "about";
-    pluralName: "abouts";
-    displayName: "About Page";
+    singularName: "about-content";
+    pluralName: "about-contents";
+    displayName: "AboutContent";
     description: "";
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    Title: Attribute.String;
-    Content: Attribute.RichText;
+    Intro: Attribute.RichText;
+    Testimonials: Attribute.Relation<"api::about-content.about-content", "oneToMany", "api::testimonial.testimonial">;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<"api::about.about", "oneToOne", "admin::user"> & Attribute.Private;
-    updatedBy: Attribute.Relation<"api::about.about", "oneToOne", "admin::user"> & Attribute.Private;
+    createdBy: Attribute.Relation<"api::about-content.about-content", "oneToOne", "admin::user"> & Attribute.Private;
+    updatedBy: Attribute.Relation<"api::about-content.about-content", "oneToOne", "admin::user"> & Attribute.Private;
   };
 }
 
@@ -624,13 +624,15 @@ export interface ApiAnnualReportAnnualReport extends Schema.CollectionType {
     singularName: "annual-report";
     pluralName: "annual-reports";
     displayName: "Annual Report";
+    description: "";
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    Year: Attribute.Integer;
-    File: Attribute.Media;
+    Year: Attribute.Integer & Attribute.Required & Attribute.Unique;
+    File: Attribute.Media & Attribute.Required;
+    CoverImage: Attribute.Media & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -655,7 +657,6 @@ export interface ApiBlogPostBlogPost extends Schema.CollectionType {
     Title: Attribute.String & Attribute.Required & Attribute.Unique;
     Summary: Attribute.Text;
     DateWritten: Attribute.Date;
-    Tags: Attribute.Relation<"api::blog-post.blog-post", "oneToMany", "api::blog-tag.blog-tag">;
     Slug: Attribute.UID<"api::blog-post.blog-post", "Title">;
     ContentBlocks: Attribute.DynamicZone<["common.action-button", "common.html", "common.text-block", "common.image"]>;
     createdAt: Attribute.DateTime;
@@ -663,49 +664,6 @@ export interface ApiBlogPostBlogPost extends Schema.CollectionType {
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<"api::blog-post.blog-post", "oneToOne", "admin::user"> & Attribute.Private;
     updatedBy: Attribute.Relation<"api::blog-post.blog-post", "oneToOne", "admin::user"> & Attribute.Private;
-  };
-}
-
-export interface ApiBlogTagBlogTag extends Schema.CollectionType {
-  collectionName: "blog_tags";
-  info: {
-    singularName: "blog-tag";
-    pluralName: "blog-tags";
-    displayName: "Blog Tags";
-    description: "";
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Tag: Attribute.String;
-    BlogPost: Attribute.Relation<"api::blog-tag.blog-tag", "manyToOne", "api::blog-post.blog-post">;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<"api::blog-tag.blog-tag", "oneToOne", "admin::user"> & Attribute.Private;
-    updatedBy: Attribute.Relation<"api::blog-tag.blog-tag", "oneToOne", "admin::user"> & Attribute.Private;
-  };
-}
-
-export interface ApiCountryCountry extends Schema.CollectionType {
-  collectionName: "countries";
-  info: {
-    singularName: "country";
-    pluralName: "countries";
-    displayName: "Country";
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Name: Attribute.String;
-    Content: Attribute.RichText;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<"api::country.country", "oneToOne", "admin::user"> & Attribute.Private;
-    updatedBy: Attribute.Relation<"api::country.country", "oneToOne", "admin::user"> & Attribute.Private;
   };
 }
 
@@ -726,6 +684,29 @@ export interface ApiDonateContentDonateContent extends Schema.SingleType {
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<"api::donate-content.donate-content", "oneToOne", "admin::user"> & Attribute.Private;
     updatedBy: Attribute.Relation<"api::donate-content.donate-content", "oneToOne", "admin::user"> & Attribute.Private;
+  };
+}
+
+export interface ApiDonorDonor extends Schema.CollectionType {
+  collectionName: "donors";
+  info: {
+    singularName: "donor";
+    pluralName: "donors";
+    displayName: "Donors";
+    description: "";
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String & Attribute.Required & Attribute.Unique;
+    Logo: Attribute.Media & Attribute.Required;
+    SortOrder: Attribute.Decimal;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<"api::donor.donor", "oneToOne", "admin::user"> & Attribute.Private;
+    updatedBy: Attribute.Relation<"api::donor.donor", "oneToOne", "admin::user"> & Attribute.Private;
   };
 }
 
@@ -812,17 +793,40 @@ export interface ApiMemberMember extends Schema.CollectionType {
   attributes: {
     Name: Attribute.String;
     Photo: Attribute.Media;
-    Organisation: Attribute.Enumeration<["AMI", "SAMI", "SAMI Trustees"]>;
     Bio: Attribute.RichText;
     Email: Attribute.Email;
     LinkedIn: Attribute.String;
     BioImage: Attribute.Media;
-    Order: Attribute.Integer;
+    SortOrder: Attribute.Decimal;
+    Tags: Attribute.JSON & Attribute.CustomField<"plugin::multi-select.multi-select", ["SAMI", "AMI", "Trustee"]>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<"api::member.member", "oneToOne", "admin::user"> & Attribute.Private;
     updatedBy: Attribute.Relation<"api::member.member", "oneToOne", "admin::user"> & Attribute.Private;
+  };
+}
+
+export interface ApiPartnerPartner extends Schema.CollectionType {
+  collectionName: "partners";
+  info: {
+    singularName: "partner";
+    pluralName: "partners";
+    displayName: "Partners";
+    description: "";
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Logo: Attribute.Media & Attribute.Required;
+    Name: Attribute.String & Attribute.Required & Attribute.Unique;
+    SortOrder: Attribute.Decimal & Attribute.DefaultTo<1>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<"api::partner.partner", "oneToOne", "admin::user"> & Attribute.Private;
+    updatedBy: Attribute.Relation<"api::partner.partner", "oneToOne", "admin::user"> & Attribute.Private;
   };
 }
 
@@ -879,6 +883,30 @@ export interface ApiResourceResource extends Schema.CollectionType {
   };
 }
 
+export interface ApiTestimonialTestimonial extends Schema.CollectionType {
+  collectionName: "testimonials";
+  info: {
+    singularName: "testimonial";
+    pluralName: "testimonials";
+    displayName: "Testimonials";
+    description: "";
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String & Attribute.Required;
+    Photo: Attribute.Media & Attribute.Required;
+    Content: Attribute.Text & Attribute.Required;
+    Bio: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<"api::testimonial.testimonial", "oneToOne", "admin::user"> & Attribute.Private;
+    updatedBy: Attribute.Relation<"api::testimonial.testimonial", "oneToOne", "admin::user"> & Attribute.Private;
+  };
+}
+
 export interface ApiVolunteerContentVolunteerContent extends Schema.SingleType {
   collectionName: "volunteer_contents";
   info: {
@@ -921,18 +949,19 @@ declare module "@strapi/types" {
       "plugin::users-permissions.permission": PluginUsersPermissionsPermission;
       "plugin::users-permissions.role": PluginUsersPermissionsRole;
       "plugin::users-permissions.user": PluginUsersPermissionsUser;
-      "api::about.about": ApiAboutAbout;
+      "api::about-content.about-content": ApiAboutContentAboutContent;
       "api::annual-report.annual-report": ApiAnnualReportAnnualReport;
       "api::blog-post.blog-post": ApiBlogPostBlogPost;
-      "api::blog-tag.blog-tag": ApiBlogTagBlogTag;
-      "api::country.country": ApiCountryCountry;
       "api::donate-content.donate-content": ApiDonateContentDonateContent;
+      "api::donor.donor": ApiDonorDonor;
       "api::dynamic-content.dynamic-content": ApiDynamicContentDynamicContent;
       "api::faq.faq": ApiFaqFaq;
       "api::home-content.home-content": ApiHomeContentHomeContent;
       "api::member.member": ApiMemberMember;
+      "api::partner.partner": ApiPartnerPartner;
       "api::project-type.project-type": ApiProjectTypeProjectType;
       "api::resource.resource": ApiResourceResource;
+      "api::testimonial.testimonial": ApiTestimonialTestimonial;
       "api::volunteer-content.volunteer-content": ApiVolunteerContentVolunteerContent;
     }
   }

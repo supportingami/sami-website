@@ -1,46 +1,35 @@
-type About {
-  Content: String
-  Title: String
+type AboutContent {
+  Intro: String
+  Testimonials(
+    filters: TestimonialFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): TestimonialRelationResponseCollection
   createdAt: DateTime
   publishedAt: DateTime
   updatedAt: DateTime
 }
 
-type AboutEntity {
-  attributes: About
+type AboutContentEntity {
+  attributes: AboutContent
   id: ID
 }
 
-type AboutEntityResponse {
-  data: AboutEntity
+type AboutContentEntityResponse {
+  data: AboutContentEntity
 }
 
-type AboutEntityResponseCollection {
-  data: [AboutEntity!]!
-  meta: ResponseCollectionMeta!
-}
-
-input AboutFiltersInput {
-  Content: StringFilterInput
-  Title: StringFilterInput
-  and: [AboutFiltersInput]
-  createdAt: DateTimeFilterInput
-  id: IDFilterInput
-  not: AboutFiltersInput
-  or: [AboutFiltersInput]
-  publishedAt: DateTimeFilterInput
-  updatedAt: DateTimeFilterInput
-}
-
-input AboutInput {
-  Content: String
-  Title: String
+input AboutContentInput {
+  Intro: String
+  Testimonials: [ID]
   publishedAt: DateTime
 }
 
 type AnnualReport {
-  File: UploadFileEntityResponse
-  Year: Int
+  CoverImage: UploadFileEntityResponse!
+  File: UploadFileEntityResponse!
+  Year: Int!
   createdAt: DateTime
   publishedAt: DateTime
   updatedAt: DateTime
@@ -72,6 +61,7 @@ input AnnualReportFiltersInput {
 }
 
 input AnnualReportInput {
+  CoverImage: ID
   File: ID
   Year: Int
   publishedAt: DateTime
@@ -83,12 +73,6 @@ type BlogPost {
   FeatureImage: UploadFileEntityResponse
   Slug: String
   Summary: String
-  Tags(
-    filters: BlogTagFiltersInput
-    pagination: PaginationArg = {}
-    publicationState: PublicationState = LIVE
-    sort: [String] = []
-  ): BlogTagRelationResponseCollection
   Title: String!
   createdAt: DateTime
   publishedAt: DateTime
@@ -122,7 +106,6 @@ input BlogPostFiltersInput {
   DateWritten: DateFilterInput
   Slug: StringFilterInput
   Summary: StringFilterInput
-  Tags: BlogTagFiltersInput
   Title: StringFilterInput
   and: [BlogPostFiltersInput]
   createdAt: DateTimeFilterInput
@@ -139,53 +122,8 @@ input BlogPostInput {
   FeatureImage: ID
   Slug: String
   Summary: String
-  Tags: [ID]
   Title: String
   publishedAt: DateTime
-}
-
-type BlogTag {
-  BlogPost: BlogPostEntityResponse
-  Tag: String
-  createdAt: DateTime
-  publishedAt: DateTime
-  updatedAt: DateTime
-}
-
-type BlogTagEntity {
-  attributes: BlogTag
-  id: ID
-}
-
-type BlogTagEntityResponse {
-  data: BlogTagEntity
-}
-
-type BlogTagEntityResponseCollection {
-  data: [BlogTagEntity!]!
-  meta: ResponseCollectionMeta!
-}
-
-input BlogTagFiltersInput {
-  BlogPost: BlogPostFiltersInput
-  Tag: StringFilterInput
-  and: [BlogTagFiltersInput]
-  createdAt: DateTimeFilterInput
-  id: IDFilterInput
-  not: BlogTagFiltersInput
-  or: [BlogTagFiltersInput]
-  publishedAt: DateTimeFilterInput
-  updatedAt: DateTimeFilterInput
-}
-
-input BlogTagInput {
-  BlogPost: ID
-  Tag: String
-  publishedAt: DateTime
-}
-
-type BlogTagRelationResponseCollection {
-  data: [BlogTagEntity!]!
 }
 
 input BooleanFilterInput {
@@ -485,46 +423,6 @@ input ContentReleasesReleaseInput {
   timezone: String
 }
 
-type Country {
-  Content: String
-  Name: String
-  createdAt: DateTime
-  publishedAt: DateTime
-  updatedAt: DateTime
-}
-
-type CountryEntity {
-  attributes: Country
-  id: ID
-}
-
-type CountryEntityResponse {
-  data: CountryEntity
-}
-
-type CountryEntityResponseCollection {
-  data: [CountryEntity!]!
-  meta: ResponseCollectionMeta!
-}
-
-input CountryFiltersInput {
-  Content: StringFilterInput
-  Name: StringFilterInput
-  and: [CountryFiltersInput]
-  createdAt: DateTimeFilterInput
-  id: IDFilterInput
-  not: CountryFiltersInput
-  or: [CountryFiltersInput]
-  publishedAt: DateTimeFilterInput
-  updatedAt: DateTimeFilterInput
-}
-
-input CountryInput {
-  Content: String
-  Name: String
-  publishedAt: DateTime
-}
-
 """
 A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
 """
@@ -606,6 +504,48 @@ input DonateContentInput {
   publishedAt: DateTime
 }
 
+type Donor {
+  Logo: UploadFileEntityResponse!
+  Name: String!
+  SortOrder: Float
+  createdAt: DateTime
+  publishedAt: DateTime
+  updatedAt: DateTime
+}
+
+type DonorEntity {
+  attributes: Donor
+  id: ID
+}
+
+type DonorEntityResponse {
+  data: DonorEntity
+}
+
+type DonorEntityResponseCollection {
+  data: [DonorEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input DonorFiltersInput {
+  Name: StringFilterInput
+  SortOrder: FloatFilterInput
+  and: [DonorFiltersInput]
+  createdAt: DateTimeFilterInput
+  id: IDFilterInput
+  not: DonorFiltersInput
+  or: [DonorFiltersInput]
+  publishedAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+}
+
+input DonorInput {
+  Logo: ID
+  Name: String
+  SortOrder: Float
+  publishedAt: DateTime
+}
+
 type DynamicContent {
   Content: [DynamicContentContentDynamicZone]
   createdAt: DateTime
@@ -639,12 +579,6 @@ input DynamicContentInput {
 enum ENUM_CONTENTRELEASESRELEASEACTION_TYPE {
   publish
   unpublish
-}
-
-enum ENUM_MEMBER_ORGANISATION {
-  AMI
-  SAMI
-  SAMI_Trustees
 }
 
 enum ENUM_PROJECTTYPE_STATUS {
@@ -733,10 +667,9 @@ input FloatFilterInput {
 }
 
 union GenericMorph =
-    About
+    AboutContent
   | AnnualReport
   | BlogPost
-  | BlogTag
   | ComponentCommonActionButton
   | ComponentCommonHtml
   | ComponentCommonImage
@@ -750,15 +683,17 @@ union GenericMorph =
   | ComponentHomeProjectSummaryItem
   | ContentReleasesRelease
   | ContentReleasesReleaseAction
-  | Country
   | DonateContent
+  | Donor
   | DynamicContent
   | Faq
   | HomeContent
   | I18NLocale
   | Member
+  | Partner
   | ProjectType
   | Resource
+  | Testimonial
   | UploadFile
   | UploadFolder
   | UsersPermissionsPermission
@@ -917,9 +852,9 @@ type Member {
   Email: String
   LinkedIn: String
   Name: String
-  Order: Int
-  Organisation: ENUM_MEMBER_ORGANISATION
   Photo: UploadFileEntityResponse
+  SortOrder: Float
+  Tags: JSON
   createdAt: DateTime
   publishedAt: DateTime
   updatedAt: DateTime
@@ -944,8 +879,8 @@ input MemberFiltersInput {
   Email: StringFilterInput
   LinkedIn: StringFilterInput
   Name: StringFilterInput
-  Order: IntFilterInput
-  Organisation: StringFilterInput
+  SortOrder: FloatFilterInput
+  Tags: JSONFilterInput
   and: [MemberFiltersInput]
   createdAt: DateTimeFilterInput
   id: IDFilterInput
@@ -961,9 +896,9 @@ input MemberInput {
   Email: String
   LinkedIn: String
   Name: String
-  Order: Int
-  Organisation: ENUM_MEMBER_ORGANISATION
   Photo: ID
+  SortOrder: Float
+  Tags: JSON
   publishedAt: DateTime
 }
 
@@ -976,19 +911,19 @@ type Mutation {
     password: String!
     passwordConfirmation: String!
   ): UsersPermissionsLoginPayload
-  createAbout(data: AboutInput!): AboutEntityResponse
   createAnnualReport(data: AnnualReportInput!): AnnualReportEntityResponse
   createBlogPost(data: BlogPostInput!): BlogPostEntityResponse
-  createBlogTag(data: BlogTagInput!): BlogTagEntityResponse
   createContentReleasesRelease(data: ContentReleasesReleaseInput!): ContentReleasesReleaseEntityResponse
   createContentReleasesReleaseAction(
     data: ContentReleasesReleaseActionInput!
   ): ContentReleasesReleaseActionEntityResponse
-  createCountry(data: CountryInput!): CountryEntityResponse
+  createDonor(data: DonorInput!): DonorEntityResponse
   createFaq(data: FaqInput!): FaqEntityResponse
   createMember(data: MemberInput!): MemberEntityResponse
+  createPartner(data: PartnerInput!): PartnerEntityResponse
   createProjectType(data: ProjectTypeInput!): ProjectTypeEntityResponse
   createResource(data: ResourceInput!): ResourceEntityResponse
+  createTestimonial(data: TestimonialInput!): TestimonialEntityResponse
   createUploadFile(data: UploadFileInput!): UploadFileEntityResponse
   createUploadFolder(data: UploadFolderInput!): UploadFolderEntityResponse
 
@@ -1001,20 +936,21 @@ type Mutation {
   Create a new user
   """
   createUsersPermissionsUser(data: UsersPermissionsUserInput!): UsersPermissionsUserEntityResponse!
-  deleteAbout(id: ID!): AboutEntityResponse
+  deleteAboutContent: AboutContentEntityResponse
   deleteAnnualReport(id: ID!): AnnualReportEntityResponse
   deleteBlogPost(id: ID!): BlogPostEntityResponse
-  deleteBlogTag(id: ID!): BlogTagEntityResponse
   deleteContentReleasesRelease(id: ID!): ContentReleasesReleaseEntityResponse
   deleteContentReleasesReleaseAction(id: ID!): ContentReleasesReleaseActionEntityResponse
-  deleteCountry(id: ID!): CountryEntityResponse
   deleteDonateContent: DonateContentEntityResponse
+  deleteDonor(id: ID!): DonorEntityResponse
   deleteDynamicContent: DynamicContentEntityResponse
   deleteFaq(id: ID!): FaqEntityResponse
   deleteHomeContent: HomeContentEntityResponse
   deleteMember(id: ID!): MemberEntityResponse
+  deletePartner(id: ID!): PartnerEntityResponse
   deleteProjectType(id: ID!): ProjectTypeEntityResponse
   deleteResource(id: ID!): ResourceEntityResponse
+  deleteTestimonial(id: ID!): TestimonialEntityResponse
   deleteUploadFile(id: ID!): UploadFileEntityResponse
   deleteUploadFolder(id: ID!): UploadFolderEntityResponse
 
@@ -1051,24 +987,25 @@ type Mutation {
   Reset user password. Confirm with a code (resetToken from forgotPassword)
   """
   resetPassword(code: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
-  updateAbout(data: AboutInput!, id: ID!): AboutEntityResponse
+  updateAboutContent(data: AboutContentInput!): AboutContentEntityResponse
   updateAnnualReport(data: AnnualReportInput!, id: ID!): AnnualReportEntityResponse
   updateBlogPost(data: BlogPostInput!, id: ID!): BlogPostEntityResponse
-  updateBlogTag(data: BlogTagInput!, id: ID!): BlogTagEntityResponse
   updateContentReleasesRelease(data: ContentReleasesReleaseInput!, id: ID!): ContentReleasesReleaseEntityResponse
   updateContentReleasesReleaseAction(
     data: ContentReleasesReleaseActionInput!
     id: ID!
   ): ContentReleasesReleaseActionEntityResponse
-  updateCountry(data: CountryInput!, id: ID!): CountryEntityResponse
   updateDonateContent(data: DonateContentInput!): DonateContentEntityResponse
+  updateDonor(data: DonorInput!, id: ID!): DonorEntityResponse
   updateDynamicContent(data: DynamicContentInput!): DynamicContentEntityResponse
   updateFaq(data: FaqInput!, id: ID!): FaqEntityResponse
   updateFileInfo(id: ID!, info: FileInfoInput): UploadFileEntityResponse!
   updateHomeContent(data: HomeContentInput!): HomeContentEntityResponse
   updateMember(data: MemberInput!, id: ID!): MemberEntityResponse
+  updatePartner(data: PartnerInput!, id: ID!): PartnerEntityResponse
   updateProjectType(data: ProjectTypeInput!, id: ID!): ProjectTypeEntityResponse
   updateResource(data: ResourceInput!, id: ID!): ResourceEntityResponse
+  updateTestimonial(data: TestimonialInput!, id: ID!): TestimonialEntityResponse
   updateUploadFile(data: UploadFileInput!, id: ID!): UploadFileEntityResponse
   updateUploadFolder(data: UploadFolderInput!, id: ID!): UploadFolderEntityResponse
 
@@ -1097,6 +1034,48 @@ input PaginationArg {
   page: Int
   pageSize: Int
   start: Int
+}
+
+type Partner {
+  Logo: UploadFileEntityResponse!
+  Name: String!
+  SortOrder: Float
+  createdAt: DateTime
+  publishedAt: DateTime
+  updatedAt: DateTime
+}
+
+type PartnerEntity {
+  attributes: Partner
+  id: ID
+}
+
+type PartnerEntityResponse {
+  data: PartnerEntity
+}
+
+type PartnerEntityResponseCollection {
+  data: [PartnerEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input PartnerFiltersInput {
+  Name: StringFilterInput
+  SortOrder: FloatFilterInput
+  and: [PartnerFiltersInput]
+  createdAt: DateTimeFilterInput
+  id: IDFilterInput
+  not: PartnerFiltersInput
+  or: [PartnerFiltersInput]
+  publishedAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+}
+
+input PartnerInput {
+  Logo: ID
+  Name: String
+  SortOrder: Float
+  publishedAt: DateTime
 }
 
 type ProjectType {
@@ -1169,13 +1148,7 @@ enum PublicationState {
 }
 
 type Query {
-  about(id: ID): AboutEntityResponse
-  abouts(
-    filters: AboutFiltersInput
-    pagination: PaginationArg = {}
-    publicationState: PublicationState = LIVE
-    sort: [String] = []
-  ): AboutEntityResponseCollection
+  aboutContent(publicationState: PublicationState = LIVE): AboutContentEntityResponse
   annualReport(id: ID): AnnualReportEntityResponse
   annualReports(
     filters: AnnualReportFiltersInput
@@ -1190,13 +1163,6 @@ type Query {
     publicationState: PublicationState = LIVE
     sort: [String] = []
   ): BlogPostEntityResponseCollection
-  blogTag(id: ID): BlogTagEntityResponse
-  blogTags(
-    filters: BlogTagFiltersInput
-    pagination: PaginationArg = {}
-    publicationState: PublicationState = LIVE
-    sort: [String] = []
-  ): BlogTagEntityResponseCollection
   contentReleasesRelease(id: ID): ContentReleasesReleaseEntityResponse
   contentReleasesReleaseAction(id: ID): ContentReleasesReleaseActionEntityResponse
   contentReleasesReleaseActions(
@@ -1209,14 +1175,14 @@ type Query {
     pagination: PaginationArg = {}
     sort: [String] = []
   ): ContentReleasesReleaseEntityResponseCollection
-  countries(
-    filters: CountryFiltersInput
+  donateContent(publicationState: PublicationState = LIVE): DonateContentEntityResponse
+  donor(id: ID): DonorEntityResponse
+  donors(
+    filters: DonorFiltersInput
     pagination: PaginationArg = {}
     publicationState: PublicationState = LIVE
     sort: [String] = []
-  ): CountryEntityResponseCollection
-  country(id: ID): CountryEntityResponse
-  donateContent(publicationState: PublicationState = LIVE): DonateContentEntityResponse
+  ): DonorEntityResponseCollection
   dynamicContent(publicationState: PublicationState = LIVE): DynamicContentEntityResponse
   faq(id: ID): FaqEntityResponse
   faqs(
@@ -1240,6 +1206,13 @@ type Query {
     publicationState: PublicationState = LIVE
     sort: [String] = []
   ): MemberEntityResponseCollection
+  partner(id: ID): PartnerEntityResponse
+  partners(
+    filters: PartnerFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): PartnerEntityResponseCollection
   projectType(id: ID): ProjectTypeEntityResponse
   projectTypes(
     filters: ProjectTypeFiltersInput
@@ -1254,6 +1227,13 @@ type Query {
     publicationState: PublicationState = LIVE
     sort: [String] = []
   ): ResourceEntityResponseCollection
+  testimonial(id: ID): TestimonialEntityResponse
+  testimonials(
+    filters: TestimonialFiltersInput
+    pagination: PaginationArg = {}
+    publicationState: PublicationState = LIVE
+    sort: [String] = []
+  ): TestimonialEntityResponseCollection
   uploadFile(id: ID): UploadFileEntityResponse
   uploadFiles(
     filters: UploadFileFiltersInput
@@ -1359,6 +1339,55 @@ input StringFilterInput {
   null: Boolean
   or: [String]
   startsWith: String
+}
+
+type Testimonial {
+  Bio: String!
+  Content: String!
+  Name: String!
+  Photo: UploadFileEntityResponse!
+  createdAt: DateTime
+  publishedAt: DateTime
+  updatedAt: DateTime
+}
+
+type TestimonialEntity {
+  attributes: Testimonial
+  id: ID
+}
+
+type TestimonialEntityResponse {
+  data: TestimonialEntity
+}
+
+type TestimonialEntityResponseCollection {
+  data: [TestimonialEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input TestimonialFiltersInput {
+  Bio: StringFilterInput
+  Content: StringFilterInput
+  Name: StringFilterInput
+  and: [TestimonialFiltersInput]
+  createdAt: DateTimeFilterInput
+  id: IDFilterInput
+  not: TestimonialFiltersInput
+  or: [TestimonialFiltersInput]
+  publishedAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+}
+
+input TestimonialInput {
+  Bio: String
+  Content: String
+  Name: String
+  Photo: ID
+  publishedAt: DateTime
+}
+
+type TestimonialRelationResponseCollection {
+  data: [TestimonialEntity!]!
 }
 
 """

@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "donors",
+  "info": {
+    "singularName": "donor",
+    "pluralName": "donors",
+    "displayName": "Donors",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "Logo": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "SortOrder": {
+      "type": "decimal"
+    }
+  }
+}

@@ -1,60 +1,63 @@
 import React from "react";
 import Head from "next/head";
-import { AboutPageComponent } from "components/pages/about";
-import { AnnualReportPageComponent } from "components/pages/about/annual-reports";
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
+import Image from "next/image";
+
+import type {
+  AboutContent,
+  MembersQuery,
+  AnnualReportsQuery,
+  Partner,
+  PartnersQuery,
+  AboutContentQuery,
+} from "../graphql/generated";
+import { MembersDocument, AnnualReportsDocument, PartnersDocument, AboutContentDocument } from "../graphql/generated";
+import { serverQuery } from "lib/graphql";
 import type { IAnnualReport } from "types/annualreport";
 import type { IMember } from "types/member";
-
-import type { AboutQuery, MembersQuery, AnnualReportsQuery } from "../graphql/generated";
-import { AboutDocument, MembersDocument, AnnualReportsDocument } from "../graphql/generated";
-import { serverQuery } from "lib/graphql";
-import type { IAbout } from "types/about";
-import { MembersComponent } from "components/pages/about/members";
-import ToC from "components/pages/about/ToC";
-import Testimonials from "components/pages/about/testmonials/Testmonials";
-import Partners from "components/pages/about/partners";
+import { MembersComponent } from "components/content/members";
+import TheoryOfChange from "components/content/TheoryOfChange";
+import Testimonials from "components/content/Testmonials";
 import PageSection from "components/layout/pageSection";
 import { SectionHeader } from "components/layout/Header";
+import { getStrapiMedia } from "lib/media";
+import { AnnualReportComponent } from "components/content/AnnualReport";
+import { HTMLContent } from "components/common/htmlContent";
+import SamiPrinciples from "components/content/SamiPrinciples";
+
+interface IAboutProps {
+  content: AboutContent;
+  members: IMember[];
+  reports: IAnnualReport[];
+  partners: Partner[];
+}
 
 export const getStaticProps = async ({}: GetStaticPropsContext) => {
-  let about: IAbout[] = [];
-  let members: IMember[] = [];
-  let reports: IAnnualReport[] = [];
-
-  const aboutRes = await serverQuery<AboutQuery>(AboutDocument);
-
-  if (aboutRes) {
-    about = aboutRes.data.abouts.data.map((m) => ({ ...m.attributes, id: m.id })) || [];
-  }
-
+  const contentRes = await serverQuery<AboutContentQuery>(AboutContentDocument);
   const membersRes = await serverQuery<MembersQuery>(MembersDocument);
-  if (membersRes) {
-    members = membersRes.data.members.data.map((m) => ({ ...m.attributes, id: m.id } as IMember)) || [];
-  }
+  const reportsRes = await serverQuery<AnnualReportsQuery>(AnnualReportsDocument);
+  const partnersRes = await serverQuery<PartnersQuery>(PartnersDocument);
 
-  const areportsRes = await serverQuery<AnnualReportsQuery>(AnnualReportsDocument);
-  if (areportsRes) {
-    reports = areportsRes.data.annualReports.data.map((m) => ({ ...m.attributes, id: m.id } as IAnnualReport)) || [];
-  }
+  const props: IAboutProps = {
+    content: (contentRes.data?.aboutContent?.data?.attributes as AboutContent) || {},
+    members: membersRes.data?.members.data.map((m) => ({ ...m.attributes, id: m.id } as IMember)) || [],
+    partners: partnersRes.data.partners.data.map((m) => ({ ...(m.attributes as Partner) })) || [],
+    reports: reportsRes.data.annualReports.data.map((m) => ({ ...m.attributes, id: m.id } as IAnnualReport)) || [],
+  };
 
   return {
-    props: {
-      about,
-      members,
-      reports,
-    },
+    props,
   };
 };
 
 const headerButtons = [
   {
-    id: "toc",
-    text: "Theory of Change",
-  },
-  {
     id: "members",
     text: "Members & Volunteers",
+  },
+  {
+    id: "toc",
+    text: "Theory of Change",
   },
   {
     id: "reports",
@@ -62,7 +65,7 @@ const headerButtons = [
   },
 ];
 
-const AboutPage = ({ about, members, reports }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const AboutPage = ({ content, members, reports, partners }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
       <Head>
@@ -79,23 +82,59 @@ const AboutPage = ({ about, members, reports }: InferGetStaticPropsType<typeof g
         </div>
       </SectionHeader>
       <div style={{ scrollBehavior: "smooth", display: "contents" }}>
-        <AboutPageComponent aboutPageContent={about} />
-        <PageSection className="text-center mt-16" sectionId="members">
+        <PageSection className="py-16 max-w-screen-lg" sectionId="intro">
+          <HTMLContent>{content.Intro}</HTMLContent>
+        </PageSection>
+        <PageSection fullwidth className="bg-base-200 py-8" id="principles">
+          <h2 className="text-center">All projects live by the following principles</h2>
+          <SamiPrinciples />
+        </PageSection>
+        <PageSection className="text-center my-16" sectionId="members">
+          <h2>Members & Volunteers</h2>
+          <p className="mt-3 mb-10 lg:px-12 px-5">
+            SAMI is extremely thankful to have a fantastic team of members and volunteers that support in the UK and
+            Africa.
+            <br />
+            Here are a few of the people that make everything possible day-to-day:
+          </p>
           <MembersComponent members={members} />
         </PageSection>
-        <PageSection fullwidth className="bg-base-200 py-16" sectionId="toc">
-          <ToC />
+        <PageSection fullwidth className="bg-base-200 py-16 text-center md:px-5" sectionId="toc">
+          <h2>SAMI Theory of Change</h2>
+          <TheoryOfChange />
         </PageSection>
         <PageSection className="text-center py-16" sectionId="reports">
-          <AnnualReportPageComponent reports={reports} />
+          <h2>Annual Reports</h2>
+          <p className="mb-10">Find below links to our annual report and other relevant documents</p>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5 px-5 lg:px-24">
+            {reports.map((report) => (
+              <AnnualReportComponent key={report.id} report={report} />
+            ))}
+          </div>
         </PageSection>
         <PageSection fullwidth className="bg-base-200 py-16">
-          <Testimonials />
+          <h2 className="text-center">Improving Lives</h2>
+          <Testimonials testimonials={content.Testimonials.data.map((el) => el.attributes)} />
         </PageSection>
-        <Partners />
+        <PageSection fullwidth className="bg-primary-focus text-white py-0">
+          <h2 className="text-center text-white">Our Partners</h2>
+        </PageSection>
+        <PageSection fullwidth className="mb-36">
+          <div className="grid auto-rows-[120px] gap-16 grid-cols-2 md:grid-cols-4 my-10 md:my-20 items-center justify-items-center">
+            {partners.map((partner) => (
+              <PartnerImage key={partner.Name} partner={partner} />
+            ))}
+          </div>
+        </PageSection>
       </div>
     </>
   );
 };
+
+const PartnerImage = ({ partner }: { partner: Partner }) => (
+  <div className="relative h-full w-full">
+    <Image className="object-contain" src={getStrapiMedia(partner.Logo)} alt={partner.Name} fill sizes="100" />
+  </div>
+);
 
 export default AboutPage;

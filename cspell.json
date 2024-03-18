@@ -1,9 +1,9 @@
 {
   "version": "0.2",
-  "ignorePaths": ["**/*.ts"],
+  "ignorePaths": ["**/*.ts", "**/*.js", "**/dist"],
   "dictionaryDefinitions": [],
   "dictionaries": [],
-  "words": ["strapi"],
+  "words": ["strapi", "sami", "ami"],
   "ignoreWords": [],
   "import": []
 }

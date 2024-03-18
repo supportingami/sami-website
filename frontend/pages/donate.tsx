@@ -2,27 +2,23 @@ import Head from "next/head";
 import React from "react";
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import { serverQuery } from "lib/graphql";
-import { DonateContentDocument } from "../graphql/generated";
-import type { ComponentHomeMissionStatement, DonateContentQuery } from "../graphql/generated";
+import { DonateContentDocument, DonorsDocument } from "../graphql/generated";
+import type { ComponentHomeMissionStatement, DonateContentQuery, Donor, DonorsQuery } from "../graphql/generated";
 import PageSection from "components/layout/pageSection";
 import Image from "next/image";
 
-import PAHLogo from "public/images/Donate/panafricanhub.png";
-import BDULogo from "public/images/Donate/BDU.png";
-import InnodemsLogo from "public/images/Donate/innodems.png";
-import LWFLogo from "public/images/Donate/LWF.png";
-import HausdorffLogo from "public/images/Donate/hausdorff.png";
-import IDEMSLogo from "public/images/Donate/idems-international.png";
 import { ImageHeadingContentLayout } from "components/layout/columns";
 import { HTMLContent } from "components/common/htmlContent";
 import { ActionButtonsComponent } from "components/common/actionButtons";
 import { getStrapiMedia } from "lib/media";
 
 export const getStaticProps = async ({}: GetStaticPropsContext) => {
-  const res = await serverQuery<DonateContentQuery>(DonateContentDocument);
+  const donateContentRes = await serverQuery<DonateContentQuery>(DonateContentDocument);
+  const donorsRes = await serverQuery<DonorsQuery>(DonorsDocument);
   return {
     props: {
-      content: res.data.donateContent.data.attributes,
+      content: donateContentRes.data.donateContent.data.attributes,
+      donors: donorsRes.data.donors.data.map(({ attributes }) => attributes as Donor) || [],
     },
   };
 };
@@ -52,7 +48,7 @@ export const DonateContentComponent: React.FC<ComponentHomeMissionStatement> = (
   </>
 );
 
-const DonatePage = ({ content }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const DonatePage = ({ content, donors }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
       <Head>
@@ -73,19 +69,18 @@ const DonatePage = ({ content }: InferGetStaticPropsType<typeof getStaticProps>)
             <div>
               <h3 className="text-lg font-normal">OUR DONORS INCLUDE</h3>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-3 justify-items-center my-10 items-center">
-              <Image src={PAHLogo} alt="" objectFit="contain" />
-              <div className="grid grid-cols-1 my-10">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center items-center mb-10">
-                  <Image src={IDEMSLogo} alt="" objectFit="contain" />
-                  <Image src={LWFLogo} alt="" objectFit="contain" />
+            <div className="grid auto-rows-[100px] gap-20 grid-cols-2 md:grid-cols-3 my-10 mx-auto md:my-20 items-center justify-center max-w-3xl">
+              {donors.map((donor) => (
+                <div className="relative h-full w-full" key={donor.Name}>
+                  <Image
+                    className="object-contain"
+                    src={getStrapiMedia(donor.Logo)}
+                    alt={donor.Name}
+                    fill
+                    sizes="100"
+                  />
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center items-center my-10">
-                  <Image src={HausdorffLogo} alt="" objectFit="contain" />
-                  <Image src={InnodemsLogo} alt="" objectFit="contain" />
-                </div>
-              </div>
-              <Image src={BDULogo} alt="" objectFit="contain" />
+              ))}
             </div>
           </div>
         </PageSection>

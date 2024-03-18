@@ -1,0 +1,21 @@
+# Write your query or mutation here
+query partners {
+  partners(sort: "SortOrder:ASC") {
+    data {
+      id
+      attributes {
+        Name
+        Logo {
+          data {
+            id
+            attributes {
+              name
+              url
+              size
+            }
+          }
+        }
+      }
+    }
+  }
+}

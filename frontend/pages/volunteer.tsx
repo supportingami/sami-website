@@ -8,7 +8,7 @@ import type { IFaq } from "types/faq";
 import { SectionHeader } from "components/layout/Header";
 import PageSection from "components/layout/pageSection";
 import { DynamicComponents } from "components/common/dynamic";
-import { FAQS } from "components/pages/volunteer/faq";
+import { VolunteerFAQs } from "components/content/VounteerFAQs";
 
 export const getStaticProps = async ({}: GetStaticPropsContext) => {
   let volunteerPageContent: DynamicContentContentDynamicZone[];
@@ -50,7 +50,7 @@ const VolunteerPage = ({ volunteerPageContent, faqs }: InferGetStaticPropsType<t
       </PageSection>
       <PageSection className="py-8">
         {faqs.map((f) => (
-          <FAQS key={f.id} faq={f} />
+          <VolunteerFAQs key={f.id} faq={f} />
         ))}
       </PageSection>
     </>
