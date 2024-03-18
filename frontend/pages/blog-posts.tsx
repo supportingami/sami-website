@@ -6,7 +6,7 @@ import type { IBlogPost } from "types/blogpost";
 import type { BlogPostsQuery, BlogPost } from "../graphql/generated";
 import { BlogPostsDocument } from "../graphql/generated";
 import PageLayout from "components/layout/pageLayout";
-import { BlogCardComponent } from "components/pages/blog-post/blogCard";
+import { BlogCardComponent } from "components/content/blog-post/blogCard";
 
 export const getStaticProps = async ({}: GetStaticPropsContext) => {
   let blogs: IBlogPost[] = [];

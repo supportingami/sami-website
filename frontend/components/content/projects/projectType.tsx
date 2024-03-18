@@ -1,7 +1,6 @@
 import React from "react";
 import { SectionHeader } from "components/layout/Header";
 import PageSection from "components/layout/pageSection";
-import Testimonials from "components/content/Testmonials";
 import Link from "next/link";
 import type { IProject } from "types/project";
 import { DynamicComponents } from "components/common/dynamic";
@@ -30,11 +29,6 @@ export const ProjectTypeComponent = ({ project }: { project: IProject }) => {
 
       <PageSection className="prose max-w-screen-lg py-8">
         <DynamicComponents blocks={PageContent || []} />
-      </PageSection>
-
-      {/* TODO - move */}
-      <PageSection fullwidth className="bg-base-200 py-16">
-        <Testimonials />
       </PageSection>
     </>
   );

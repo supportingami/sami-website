@@ -10,7 +10,7 @@ import type { ProjectType, ProjectsQuery, UploadFileEntityResponse } from "../gr
 import { ProjectsDocument } from "../graphql/generated";
 import { SectionHeader } from "components/layout/Header";
 import PageSection from "components/layout/pageSection";
-import { ProjectSummaryItemAlt } from "components/pages/projects/projectSummaryItem";
+import { ProjectSummaryItemAlt } from "components/content/projects/projectSummaryItem";
 import { HTMLContent } from "components/common/htmlContent";
 import { ImageHeadingContentLayout } from "components/layout/columns";
 

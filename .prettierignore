@@ -3,3 +3,8 @@
 **/.next
 **/*.d.ts
 backend/.strapi-updater.json
+**/out
+**/.vercel
+**/_deprecated
+**/plugins
+**/dist

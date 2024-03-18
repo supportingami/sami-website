@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import type { IMember } from "types/member";
 import { MembersListItemComponent } from "./ListItem";
 
+interface ITag {
+  title: string;
+  tag: string;
+  getClass: (isActive: boolean) => string;
+}
+
 export const MembersComponent: React.FC<{ members: IMember[] }> = ({ members }) => {
   const [filteredMembers, setFilteredMembers] = useState(members);
   const [filter, setFilter] = useState("");
@@ -17,11 +23,11 @@ export const MembersComponent: React.FC<{ members: IMember[] }> = ({ members }) 
     }
   };
 
-  const Tags = [
+  const Tags: ITag[] = [
     {
       title: "All",
       tag: "",
-      getClass: (isActive) => `btn-outline`,
+      getClass: () => `btn-outline`,
     },
     {
       title: "SAMI",

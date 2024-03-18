@@ -16,7 +16,7 @@ import { serverQuery } from "lib/graphql";
 import type { IAnnualReport } from "types/annualreport";
 import type { IMember } from "types/member";
 import { MembersComponent } from "components/content/members";
-import ToC from "components/pages/about/ToC";
+import TheoryOfChange from "components/content/TheoryOfChange";
 import Testimonials from "components/content/Testmonials";
 import PageSection from "components/layout/pageSection";
 import { SectionHeader } from "components/layout/Header";
@@ -101,7 +101,7 @@ const AboutPage = ({ content, members, reports, partners }: InferGetStaticPropsT
         </PageSection>
         <PageSection fullwidth className="bg-base-200 py-16 text-center md:px-5" sectionId="toc">
           <h2>SAMI Theory of Change</h2>
-          <ToC />
+          <TheoryOfChange />
         </PageSection>
         <PageSection className="text-center py-16" sectionId="reports">
           <h2>Annual Reports</h2>
