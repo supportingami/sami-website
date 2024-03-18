@@ -73,12 +73,6 @@ type BlogPost {
   FeatureImage: UploadFileEntityResponse
   Slug: String
   Summary: String
-  Tags(
-    filters: BlogTagFiltersInput
-    pagination: PaginationArg = {}
-    publicationState: PublicationState = LIVE
-    sort: [String] = []
-  ): BlogTagRelationResponseCollection
   Title: String!
   createdAt: DateTime
   publishedAt: DateTime
@@ -112,7 +106,6 @@ input BlogPostFiltersInput {
   DateWritten: DateFilterInput
   Slug: StringFilterInput
   Summary: StringFilterInput
-  Tags: BlogTagFiltersInput
   Title: StringFilterInput
   and: [BlogPostFiltersInput]
   createdAt: DateTimeFilterInput
@@ -129,53 +122,8 @@ input BlogPostInput {
   FeatureImage: ID
   Slug: String
   Summary: String
-  Tags: [ID]
   Title: String
   publishedAt: DateTime
-}
-
-type BlogTag {
-  BlogPost: BlogPostEntityResponse
-  Tag: String
-  createdAt: DateTime
-  publishedAt: DateTime
-  updatedAt: DateTime
-}
-
-type BlogTagEntity {
-  attributes: BlogTag
-  id: ID
-}
-
-type BlogTagEntityResponse {
-  data: BlogTagEntity
-}
-
-type BlogTagEntityResponseCollection {
-  data: [BlogTagEntity!]!
-  meta: ResponseCollectionMeta!
-}
-
-input BlogTagFiltersInput {
-  BlogPost: BlogPostFiltersInput
-  Tag: StringFilterInput
-  and: [BlogTagFiltersInput]
-  createdAt: DateTimeFilterInput
-  id: IDFilterInput
-  not: BlogTagFiltersInput
-  or: [BlogTagFiltersInput]
-  publishedAt: DateTimeFilterInput
-  updatedAt: DateTimeFilterInput
-}
-
-input BlogTagInput {
-  BlogPost: ID
-  Tag: String
-  publishedAt: DateTime
-}
-
-type BlogTagRelationResponseCollection {
-  data: [BlogTagEntity!]!
 }
 
 input BooleanFilterInput {
@@ -475,46 +423,6 @@ input ContentReleasesReleaseInput {
   timezone: String
 }
 
-type Country {
-  Content: String
-  Name: String
-  createdAt: DateTime
-  publishedAt: DateTime
-  updatedAt: DateTime
-}
-
-type CountryEntity {
-  attributes: Country
-  id: ID
-}
-
-type CountryEntityResponse {
-  data: CountryEntity
-}
-
-type CountryEntityResponseCollection {
-  data: [CountryEntity!]!
-  meta: ResponseCollectionMeta!
-}
-
-input CountryFiltersInput {
-  Content: StringFilterInput
-  Name: StringFilterInput
-  and: [CountryFiltersInput]
-  createdAt: DateTimeFilterInput
-  id: IDFilterInput
-  not: CountryFiltersInput
-  or: [CountryFiltersInput]
-  publishedAt: DateTimeFilterInput
-  updatedAt: DateTimeFilterInput
-}
-
-input CountryInput {
-  Content: String
-  Name: String
-  publishedAt: DateTime
-}
-
 """
 A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
 """
@@ -762,7 +670,6 @@ union GenericMorph =
     AboutContent
   | AnnualReport
   | BlogPost
-  | BlogTag
   | ComponentCommonActionButton
   | ComponentCommonHtml
   | ComponentCommonImage
@@ -776,7 +683,6 @@ union GenericMorph =
   | ComponentHomeProjectSummaryItem
   | ContentReleasesRelease
   | ContentReleasesReleaseAction
-  | Country
   | DonateContent
   | Donor
   | DynamicContent
@@ -1007,12 +913,10 @@ type Mutation {
   ): UsersPermissionsLoginPayload
   createAnnualReport(data: AnnualReportInput!): AnnualReportEntityResponse
   createBlogPost(data: BlogPostInput!): BlogPostEntityResponse
-  createBlogTag(data: BlogTagInput!): BlogTagEntityResponse
   createContentReleasesRelease(data: ContentReleasesReleaseInput!): ContentReleasesReleaseEntityResponse
   createContentReleasesReleaseAction(
     data: ContentReleasesReleaseActionInput!
   ): ContentReleasesReleaseActionEntityResponse
-  createCountry(data: CountryInput!): CountryEntityResponse
   createDonor(data: DonorInput!): DonorEntityResponse
   createFaq(data: FaqInput!): FaqEntityResponse
   createMember(data: MemberInput!): MemberEntityResponse
@@ -1035,10 +939,8 @@ type Mutation {
   deleteAboutContent: AboutContentEntityResponse
   deleteAnnualReport(id: ID!): AnnualReportEntityResponse
   deleteBlogPost(id: ID!): BlogPostEntityResponse
-  deleteBlogTag(id: ID!): BlogTagEntityResponse
   deleteContentReleasesRelease(id: ID!): ContentReleasesReleaseEntityResponse
   deleteContentReleasesReleaseAction(id: ID!): ContentReleasesReleaseActionEntityResponse
-  deleteCountry(id: ID!): CountryEntityResponse
   deleteDonateContent: DonateContentEntityResponse
   deleteDonor(id: ID!): DonorEntityResponse
   deleteDynamicContent: DynamicContentEntityResponse
@@ -1088,13 +990,11 @@ type Mutation {
   updateAboutContent(data: AboutContentInput!): AboutContentEntityResponse
   updateAnnualReport(data: AnnualReportInput!, id: ID!): AnnualReportEntityResponse
   updateBlogPost(data: BlogPostInput!, id: ID!): BlogPostEntityResponse
-  updateBlogTag(data: BlogTagInput!, id: ID!): BlogTagEntityResponse
   updateContentReleasesRelease(data: ContentReleasesReleaseInput!, id: ID!): ContentReleasesReleaseEntityResponse
   updateContentReleasesReleaseAction(
     data: ContentReleasesReleaseActionInput!
     id: ID!
   ): ContentReleasesReleaseActionEntityResponse
-  updateCountry(data: CountryInput!, id: ID!): CountryEntityResponse
   updateDonateContent(data: DonateContentInput!): DonateContentEntityResponse
   updateDonor(data: DonorInput!, id: ID!): DonorEntityResponse
   updateDynamicContent(data: DynamicContentInput!): DynamicContentEntityResponse
@@ -1263,13 +1163,6 @@ type Query {
     publicationState: PublicationState = LIVE
     sort: [String] = []
   ): BlogPostEntityResponseCollection
-  blogTag(id: ID): BlogTagEntityResponse
-  blogTags(
-    filters: BlogTagFiltersInput
-    pagination: PaginationArg = {}
-    publicationState: PublicationState = LIVE
-    sort: [String] = []
-  ): BlogTagEntityResponseCollection
   contentReleasesRelease(id: ID): ContentReleasesReleaseEntityResponse
   contentReleasesReleaseAction(id: ID): ContentReleasesReleaseActionEntityResponse
   contentReleasesReleaseActions(
@@ -1282,13 +1175,6 @@ type Query {
     pagination: PaginationArg = {}
     sort: [String] = []
   ): ContentReleasesReleaseEntityResponseCollection
-  countries(
-    filters: CountryFiltersInput
-    pagination: PaginationArg = {}
-    publicationState: PublicationState = LIVE
-    sort: [String] = []
-  ): CountryEntityResponseCollection
-  country(id: ID): CountryEntityResponse
   donateContent(publicationState: PublicationState = LIVE): DonateContentEntityResponse
   donor(id: ID): DonorEntityResponse
   donors(

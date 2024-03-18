@@ -106,18 +106,10 @@ export type BlogPost = {
   FeatureImage?: Maybe<UploadFileEntityResponse>;
   Slug?: Maybe<Scalars["String"]>;
   Summary?: Maybe<Scalars["String"]>;
-  Tags?: Maybe<BlogTagRelationResponseCollection>;
   Title: Scalars["String"];
   createdAt?: Maybe<Scalars["DateTime"]>;
   publishedAt?: Maybe<Scalars["DateTime"]>;
   updatedAt?: Maybe<Scalars["DateTime"]>;
-};
-
-export type BlogPostTagsArgs = {
-  filters?: InputMaybe<BlogTagFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<PublicationState>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
 };
 
 export type BlogPostContentBlocksDynamicZone =
@@ -148,7 +140,6 @@ export type BlogPostFiltersInput = {
   DateWritten?: InputMaybe<DateFilterInput>;
   Slug?: InputMaybe<StringFilterInput>;
   Summary?: InputMaybe<StringFilterInput>;
-  Tags?: InputMaybe<BlogTagFiltersInput>;
   Title?: InputMaybe<StringFilterInput>;
   and?: InputMaybe<Array<InputMaybe<BlogPostFiltersInput>>>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
@@ -165,58 +156,8 @@ export type BlogPostInput = {
   FeatureImage?: InputMaybe<Scalars["ID"]>;
   Slug?: InputMaybe<Scalars["String"]>;
   Summary?: InputMaybe<Scalars["String"]>;
-  Tags?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
   Title?: InputMaybe<Scalars["String"]>;
   publishedAt?: InputMaybe<Scalars["DateTime"]>;
-};
-
-export type BlogTag = {
-  __typename?: "BlogTag";
-  BlogPost?: Maybe<BlogPostEntityResponse>;
-  Tag?: Maybe<Scalars["String"]>;
-  createdAt?: Maybe<Scalars["DateTime"]>;
-  publishedAt?: Maybe<Scalars["DateTime"]>;
-  updatedAt?: Maybe<Scalars["DateTime"]>;
-};
-
-export type BlogTagEntity = {
-  __typename?: "BlogTagEntity";
-  attributes?: Maybe<BlogTag>;
-  id?: Maybe<Scalars["ID"]>;
-};
-
-export type BlogTagEntityResponse = {
-  __typename?: "BlogTagEntityResponse";
-  data?: Maybe<BlogTagEntity>;
-};
-
-export type BlogTagEntityResponseCollection = {
-  __typename?: "BlogTagEntityResponseCollection";
-  data: Array<BlogTagEntity>;
-  meta: ResponseCollectionMeta;
-};
-
-export type BlogTagFiltersInput = {
-  BlogPost?: InputMaybe<BlogPostFiltersInput>;
-  Tag?: InputMaybe<StringFilterInput>;
-  and?: InputMaybe<Array<InputMaybe<BlogTagFiltersInput>>>;
-  createdAt?: InputMaybe<DateTimeFilterInput>;
-  id?: InputMaybe<IdFilterInput>;
-  not?: InputMaybe<BlogTagFiltersInput>;
-  or?: InputMaybe<Array<InputMaybe<BlogTagFiltersInput>>>;
-  publishedAt?: InputMaybe<DateTimeFilterInput>;
-  updatedAt?: InputMaybe<DateTimeFilterInput>;
-};
-
-export type BlogTagInput = {
-  BlogPost?: InputMaybe<Scalars["ID"]>;
-  Tag?: InputMaybe<Scalars["String"]>;
-  publishedAt?: InputMaybe<Scalars["DateTime"]>;
-};
-
-export type BlogTagRelationResponseCollection = {
-  __typename?: "BlogTagRelationResponseCollection";
-  data: Array<BlogTagEntity>;
 };
 
 export type BooleanFilterInput = {
@@ -548,50 +489,6 @@ export type ContentReleasesReleaseInput = {
   timezone?: InputMaybe<Scalars["String"]>;
 };
 
-export type Country = {
-  __typename?: "Country";
-  Content?: Maybe<Scalars["String"]>;
-  Name?: Maybe<Scalars["String"]>;
-  createdAt?: Maybe<Scalars["DateTime"]>;
-  publishedAt?: Maybe<Scalars["DateTime"]>;
-  updatedAt?: Maybe<Scalars["DateTime"]>;
-};
-
-export type CountryEntity = {
-  __typename?: "CountryEntity";
-  attributes?: Maybe<Country>;
-  id?: Maybe<Scalars["ID"]>;
-};
-
-export type CountryEntityResponse = {
-  __typename?: "CountryEntityResponse";
-  data?: Maybe<CountryEntity>;
-};
-
-export type CountryEntityResponseCollection = {
-  __typename?: "CountryEntityResponseCollection";
-  data: Array<CountryEntity>;
-  meta: ResponseCollectionMeta;
-};
-
-export type CountryFiltersInput = {
-  Content?: InputMaybe<StringFilterInput>;
-  Name?: InputMaybe<StringFilterInput>;
-  and?: InputMaybe<Array<InputMaybe<CountryFiltersInput>>>;
-  createdAt?: InputMaybe<DateTimeFilterInput>;
-  id?: InputMaybe<IdFilterInput>;
-  not?: InputMaybe<CountryFiltersInput>;
-  or?: InputMaybe<Array<InputMaybe<CountryFiltersInput>>>;
-  publishedAt?: InputMaybe<DateTimeFilterInput>;
-  updatedAt?: InputMaybe<DateTimeFilterInput>;
-};
-
-export type CountryInput = {
-  Content?: InputMaybe<Scalars["String"]>;
-  Name?: InputMaybe<Scalars["String"]>;
-  publishedAt?: InputMaybe<Scalars["DateTime"]>;
-};
-
 export type DateFilterInput = {
   and?: InputMaybe<Array<InputMaybe<Scalars["Date"]>>>;
   between?: InputMaybe<Array<InputMaybe<Scalars["Date"]>>>;
@@ -843,7 +740,6 @@ export type GenericMorph =
   | AboutContent
   | AnnualReport
   | BlogPost
-  | BlogTag
   | ComponentCommonActionButton
   | ComponentCommonHtml
   | ComponentCommonImage
@@ -857,7 +753,6 @@ export type GenericMorph =
   | ComponentHomeProjectSummaryItem
   | ContentReleasesRelease
   | ContentReleasesReleaseAction
-  | Country
   | DonateContent
   | Donor
   | DynamicContent
@@ -1091,10 +986,8 @@ export type Mutation = {
   changePassword?: Maybe<UsersPermissionsLoginPayload>;
   createAnnualReport?: Maybe<AnnualReportEntityResponse>;
   createBlogPost?: Maybe<BlogPostEntityResponse>;
-  createBlogTag?: Maybe<BlogTagEntityResponse>;
   createContentReleasesRelease?: Maybe<ContentReleasesReleaseEntityResponse>;
   createContentReleasesReleaseAction?: Maybe<ContentReleasesReleaseActionEntityResponse>;
-  createCountry?: Maybe<CountryEntityResponse>;
   createDonor?: Maybe<DonorEntityResponse>;
   createFaq?: Maybe<FaqEntityResponse>;
   createMember?: Maybe<MemberEntityResponse>;
@@ -1111,10 +1004,8 @@ export type Mutation = {
   deleteAboutContent?: Maybe<AboutContentEntityResponse>;
   deleteAnnualReport?: Maybe<AnnualReportEntityResponse>;
   deleteBlogPost?: Maybe<BlogPostEntityResponse>;
-  deleteBlogTag?: Maybe<BlogTagEntityResponse>;
   deleteContentReleasesRelease?: Maybe<ContentReleasesReleaseEntityResponse>;
   deleteContentReleasesReleaseAction?: Maybe<ContentReleasesReleaseActionEntityResponse>;
-  deleteCountry?: Maybe<CountryEntityResponse>;
   deleteDonateContent?: Maybe<DonateContentEntityResponse>;
   deleteDonor?: Maybe<DonorEntityResponse>;
   deleteDynamicContent?: Maybe<DynamicContentEntityResponse>;
@@ -1146,10 +1037,8 @@ export type Mutation = {
   updateAboutContent?: Maybe<AboutContentEntityResponse>;
   updateAnnualReport?: Maybe<AnnualReportEntityResponse>;
   updateBlogPost?: Maybe<BlogPostEntityResponse>;
-  updateBlogTag?: Maybe<BlogTagEntityResponse>;
   updateContentReleasesRelease?: Maybe<ContentReleasesReleaseEntityResponse>;
   updateContentReleasesReleaseAction?: Maybe<ContentReleasesReleaseActionEntityResponse>;
-  updateCountry?: Maybe<CountryEntityResponse>;
   updateDonateContent?: Maybe<DonateContentEntityResponse>;
   updateDonor?: Maybe<DonorEntityResponse>;
   updateDynamicContent?: Maybe<DynamicContentEntityResponse>;
@@ -1185,20 +1074,12 @@ export type MutationCreateBlogPostArgs = {
   data: BlogPostInput;
 };
 
-export type MutationCreateBlogTagArgs = {
-  data: BlogTagInput;
-};
-
 export type MutationCreateContentReleasesReleaseArgs = {
   data: ContentReleasesReleaseInput;
 };
 
 export type MutationCreateContentReleasesReleaseActionArgs = {
   data: ContentReleasesReleaseActionInput;
-};
-
-export type MutationCreateCountryArgs = {
-  data: CountryInput;
 };
 
 export type MutationCreateDonorArgs = {
@@ -1253,19 +1134,11 @@ export type MutationDeleteBlogPostArgs = {
   id: Scalars["ID"];
 };
 
-export type MutationDeleteBlogTagArgs = {
-  id: Scalars["ID"];
-};
-
 export type MutationDeleteContentReleasesReleaseArgs = {
   id: Scalars["ID"];
 };
 
 export type MutationDeleteContentReleasesReleaseActionArgs = {
-  id: Scalars["ID"];
-};
-
-export type MutationDeleteCountryArgs = {
   id: Scalars["ID"];
 };
 
@@ -1360,11 +1233,6 @@ export type MutationUpdateBlogPostArgs = {
   id: Scalars["ID"];
 };
 
-export type MutationUpdateBlogTagArgs = {
-  data: BlogTagInput;
-  id: Scalars["ID"];
-};
-
 export type MutationUpdateContentReleasesReleaseArgs = {
   data: ContentReleasesReleaseInput;
   id: Scalars["ID"];
@@ -1372,11 +1240,6 @@ export type MutationUpdateContentReleasesReleaseArgs = {
 
 export type MutationUpdateContentReleasesReleaseActionArgs = {
   data: ContentReleasesReleaseActionInput;
-  id: Scalars["ID"];
-};
-
-export type MutationUpdateCountryArgs = {
-  data: CountryInput;
   id: Scalars["ID"];
 };
 
@@ -1603,14 +1466,10 @@ export type Query = {
   annualReports?: Maybe<AnnualReportEntityResponseCollection>;
   blogPost?: Maybe<BlogPostEntityResponse>;
   blogPosts?: Maybe<BlogPostEntityResponseCollection>;
-  blogTag?: Maybe<BlogTagEntityResponse>;
-  blogTags?: Maybe<BlogTagEntityResponseCollection>;
   contentReleasesRelease?: Maybe<ContentReleasesReleaseEntityResponse>;
   contentReleasesReleaseAction?: Maybe<ContentReleasesReleaseActionEntityResponse>;
   contentReleasesReleaseActions?: Maybe<ContentReleasesReleaseActionEntityResponseCollection>;
   contentReleasesReleases?: Maybe<ContentReleasesReleaseEntityResponseCollection>;
-  countries?: Maybe<CountryEntityResponseCollection>;
-  country?: Maybe<CountryEntityResponse>;
   donateContent?: Maybe<DonateContentEntityResponse>;
   donor?: Maybe<DonorEntityResponse>;
   donors?: Maybe<DonorEntityResponseCollection>;
@@ -1668,17 +1527,6 @@ export type QueryBlogPostsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
 };
 
-export type QueryBlogTagArgs = {
-  id?: InputMaybe<Scalars["ID"]>;
-};
-
-export type QueryBlogTagsArgs = {
-  filters?: InputMaybe<BlogTagFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<PublicationState>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
-};
-
 export type QueryContentReleasesReleaseArgs = {
   id?: InputMaybe<Scalars["ID"]>;
 };
@@ -1697,17 +1545,6 @@ export type QueryContentReleasesReleasesArgs = {
   filters?: InputMaybe<ContentReleasesReleaseFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
-};
-
-export type QueryCountriesArgs = {
-  filters?: InputMaybe<CountryFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<PublicationState>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
-};
-
-export type QueryCountryArgs = {
-  id?: InputMaybe<Scalars["ID"]>;
 };
 
 export type QueryDonateContentArgs = {
@@ -2491,14 +2328,6 @@ export type BlogPostContentQuery = {
         Title: string;
         DateWritten?: any | null;
         Slug?: string | null;
-        Tags?: {
-          __typename?: "BlogTagRelationResponseCollection";
-          data: Array<{
-            __typename?: "BlogTagEntity";
-            id?: string | null;
-            attributes?: { __typename?: "BlogTag"; Tag?: string | null } | null;
-          }>;
-        } | null;
         ContentBlocks?: Array<
           | { __typename: "ComponentCommonActionButton"; ClassNames?: string | null; Link: string; Text: string }
           | { __typename: "ComponentCommonHtml"; HTML: string }
@@ -2547,14 +2376,6 @@ export type BlogPostsQuery = {
             id?: string | null;
             attributes?: { __typename?: "UploadFile"; name: string; url: string; size: number } | null;
           } | null;
-        } | null;
-        Tags?: {
-          __typename?: "BlogTagRelationResponseCollection";
-          data: Array<{
-            __typename?: "BlogTagEntity";
-            id?: string | null;
-            attributes?: { __typename?: "BlogTag"; Tag?: string | null } | null;
-          }>;
         } | null;
       } | null;
     }>;
@@ -3310,33 +3131,6 @@ export const BlogPostContentDocument = {
                           selections: [
                             { kind: "Field", name: { kind: "Name", value: "Title" } },
                             { kind: "Field", name: { kind: "Name", value: "DateWritten" } },
-                            {
-                              kind: "Field",
-                              name: { kind: "Name", value: "Tags" },
-                              selectionSet: {
-                                kind: "SelectionSet",
-                                selections: [
-                                  {
-                                    kind: "Field",
-                                    name: { kind: "Name", value: "data" },
-                                    selectionSet: {
-                                      kind: "SelectionSet",
-                                      selections: [
-                                        { kind: "Field", name: { kind: "Name", value: "id" } },
-                                        {
-                                          kind: "Field",
-                                          name: { kind: "Name", value: "attributes" },
-                                          selectionSet: {
-                                            kind: "SelectionSet",
-                                            selections: [{ kind: "Field", name: { kind: "Name", value: "Tag" } }],
-                                          },
-                                        },
-                                      ],
-                                    },
-                                  },
-                                ],
-                              },
-                            },
                             { kind: "Field", name: { kind: "Name", value: "Slug" } },
                             {
                               kind: "Field",
@@ -3507,33 +3301,6 @@ export const BlogPostsDocument = {
                                               { kind: "Field", name: { kind: "Name", value: "url" } },
                                               { kind: "Field", name: { kind: "Name", value: "size" } },
                                             ],
-                                          },
-                                        },
-                                      ],
-                                    },
-                                  },
-                                ],
-                              },
-                            },
-                            {
-                              kind: "Field",
-                              name: { kind: "Name", value: "Tags" },
-                              selectionSet: {
-                                kind: "SelectionSet",
-                                selections: [
-                                  {
-                                    kind: "Field",
-                                    name: { kind: "Name", value: "data" },
-                                    selectionSet: {
-                                      kind: "SelectionSet",
-                                      selections: [
-                                        { kind: "Field", name: { kind: "Name", value: "id" } },
-                                        {
-                                          kind: "Field",
-                                          name: { kind: "Name", value: "attributes" },
-                                          selectionSet: {
-                                            kind: "SelectionSet",
-                                            selections: [{ kind: "Field", name: { kind: "Name", value: "Tag" } }],
                                           },
                                         },
                                       ],
