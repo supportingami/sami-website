@@ -609,6 +609,7 @@ export interface ApiAboutContentAboutContent extends Schema.SingleType {
   };
   attributes: {
     Intro: Attribute.RichText;
+    Testimonials: Attribute.Relation<"api::about-content.about-content", "oneToMany", "api::testimonial.testimonial">;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -926,6 +927,30 @@ export interface ApiResourceResource extends Schema.CollectionType {
   };
 }
 
+export interface ApiTestimonialTestimonial extends Schema.CollectionType {
+  collectionName: "testimonials";
+  info: {
+    singularName: "testimonial";
+    pluralName: "testimonials";
+    displayName: "Testimonials";
+    description: "";
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String & Attribute.Required;
+    Photo: Attribute.Media & Attribute.Required;
+    Content: Attribute.Text & Attribute.Required;
+    Bio: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<"api::testimonial.testimonial", "oneToOne", "admin::user"> & Attribute.Private;
+    updatedBy: Attribute.Relation<"api::testimonial.testimonial", "oneToOne", "admin::user"> & Attribute.Private;
+  };
+}
+
 export interface ApiVolunteerContentVolunteerContent extends Schema.SingleType {
   collectionName: "volunteer_contents";
   info: {
@@ -982,6 +1007,7 @@ declare module "@strapi/types" {
       "api::partner.partner": ApiPartnerPartner;
       "api::project-type.project-type": ApiProjectTypeProjectType;
       "api::resource.resource": ApiResourceResource;
+      "api::testimonial.testimonial": ApiTestimonialTestimonial;
       "api::volunteer-content.volunteer-content": ApiVolunteerContentVolunteerContent;
     }
   }
