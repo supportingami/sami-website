@@ -2,15 +2,7 @@
   {
     "field": "Photo",
     "file_id": 3,
-    "id": 2,
-    "order": 1,
-    "related_id": 1,
-    "related_type": "api::member.member"
-  },
-  {
-    "field": "Photo",
-    "file_id": 3,
-    "id": 1,
+    "id": 284,
     "order": 1,
     "related_id": 1,
     "related_type": "api::member.member"
@@ -18,15 +10,7 @@
   {
     "field": "Photo",
     "file_id": 4,
-    "id": 4,
-    "order": 1,
-    "related_id": 2,
-    "related_type": "api::member.member"
-  },
-  {
-    "field": "Photo",
-    "file_id": 4,
-    "id": 3,
+    "id": 286,
     "order": 1,
     "related_id": 2,
     "related_type": "api::member.member"
@@ -202,7 +186,7 @@
   {
     "field": "Photo",
     "file_id": 51,
-    "id": 28,
+    "id": 293,
     "order": 1,
     "related_id": 5,
     "related_type": "api::member.member"
@@ -210,7 +194,7 @@
   {
     "field": "Photo",
     "file_id": 52,
-    "id": 29,
+    "id": 291,
     "order": 1,
     "related_id": 3,
     "related_type": "api::member.member"
@@ -218,7 +202,7 @@
   {
     "field": "Photo",
     "file_id": 53,
-    "id": 30,
+    "id": 292,
     "order": 1,
     "related_id": 4,
     "related_type": "api::member.member"
@@ -226,7 +210,7 @@
   {
     "field": "Photo",
     "file_id": 54,
-    "id": 31,
+    "id": 295,
     "order": 1,
     "related_id": 15,
     "related_type": "api::member.member"
@@ -234,7 +218,7 @@
   {
     "field": "Photo",
     "file_id": 55,
-    "id": 32,
+    "id": 288,
     "order": 1,
     "related_id": 9,
     "related_type": "api::member.member"
@@ -242,7 +226,7 @@
   {
     "field": "Photo",
     "file_id": 56,
-    "id": 33,
+    "id": 289,
     "order": 1,
     "related_id": 10,
     "related_type": "api::member.member"
@@ -250,7 +234,7 @@
   {
     "field": "Photo",
     "file_id": 57,
-    "id": 34,
+    "id": 287,
     "order": 1,
     "related_id": 6,
     "related_type": "api::member.member"
@@ -258,7 +242,7 @@
   {
     "field": "Photo",
     "file_id": 58,
-    "id": 35,
+    "id": 290,
     "order": 1,
     "related_id": 11,
     "related_type": "api::member.member"
@@ -266,7 +250,7 @@
   {
     "field": "Photo",
     "file_id": 59,
-    "id": 36,
+    "id": 285,
     "order": 1,
     "related_id": 7,
     "related_type": "api::member.member"
@@ -274,7 +258,7 @@
   {
     "field": "Photo",
     "file_id": 60,
-    "id": 37,
+    "id": 296,
     "order": 1,
     "related_id": 14,
     "related_type": "api::member.member"
@@ -282,7 +266,7 @@
   {
     "field": "Photo",
     "file_id": 61,
-    "id": 38,
+    "id": 298,
     "order": 1,
     "related_id": 8,
     "related_type": "api::member.member"
@@ -290,7 +274,7 @@
   {
     "field": "Photo",
     "file_id": 62,
-    "id": 39,
+    "id": 297,
     "order": 1,
     "related_id": 12,
     "related_type": "api::member.member"
@@ -298,7 +282,7 @@
   {
     "field": "Photo",
     "file_id": 63,
-    "id": 40,
+    "id": 294,
     "order": 1,
     "related_id": 13,
     "related_type": "api::member.member"
@@ -750,5 +734,85 @@
     "order": 1,
     "related_id": 8,
     "related_type": "api::annual-report.annual-report"
+  },
+  {
+    "field": "Logo",
+    "file_id": 117,
+    "id": 299,
+    "order": 1,
+    "related_id": 1,
+    "related_type": "api::donor.donor"
+  },
+  {
+    "field": "Logo",
+    "file_id": 119,
+    "id": 301,
+    "order": 1,
+    "related_id": 3,
+    "related_type": "api::donor.donor"
+  },
+  {
+    "field": "Logo",
+    "file_id": 120,
+    "id": 302,
+    "order": 1,
+    "related_id": 2,
+    "related_type": "api::donor.donor"
+  },
+  {
+    "field": "Logo",
+    "file_id": 121,
+    "id": 303,
+    "order": 1,
+    "related_id": 5,
+    "related_type": "api::partner.partner"
+  },
+  {
+    "field": "Logo",
+    "file_id": 122,
+    "id": 304,
+    "order": 1,
+    "related_id": 6,
+    "related_type": "api::partner.partner"
+  },
+  {
+    "field": "Logo",
+    "file_id": 123,
+    "id": 305,
+    "order": 1,
+    "related_id": 7,
+    "related_type": "api::partner.partner"
+  },
+  {
+    "field": "Photo",
+    "file_id": 124,
+    "id": 307,
+    "order": 1,
+    "related_id": 2,
+    "related_type": "api::testamonial.testamonial"
+  },
+  {
+    "field": "Photo",
+    "file_id": 124,
+    "id": 309,
+    "order": 1,
+    "related_id": 2,
+    "related_type": "api::testimonial.testimonial"
+  },
+  {
+    "field": "Photo",
+    "file_id": 125,
+    "id": 306,
+    "order": 1,
+    "related_id": 1,
+    "related_type": "api::testamonial.testamonial"
+  },
+  {
+    "field": "Photo",
+    "file_id": 125,
+    "id": 308,
+    "order": 1,
+    "related_id": 1,
+    "related_type": "api::testimonial.testimonial"
   }
 ]

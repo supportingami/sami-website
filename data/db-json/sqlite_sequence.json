@@ -1,7 +1,11 @@
 [
   {
-    "name": "abouts",
+    "name": "about_contents",
     "seq": 1
+  },
+  {
+    "name": "about_contents_testimonials_links",
+    "seq": 4
   },
   {
     "name": "annual_reports",
@@ -96,6 +100,10 @@
     "seq": 6
   },
   {
+    "name": "donors",
+    "seq": 3
+  },
+  {
     "name": "dynamic_contents",
     "seq": 0
   },
@@ -109,15 +117,15 @@
   },
   {
     "name": "files",
-    "seq": 116
+    "seq": 125
   },
   {
     "name": "files_folder_links",
-    "seq": 69
+    "seq": 103
   },
   {
     "name": "files_related_morphs",
-    "seq": 256
+    "seq": 309
   },
   {
     "name": "home_contents",
@@ -133,7 +141,7 @@
   },
   {
     "name": "partners",
-    "seq": 4
+    "seq": 7
   },
   {
     "name": "project_types",
@@ -152,8 +160,12 @@
     "seq": 5
   },
   {
+    "name": "testimonials",
+    "seq": 2
+  },
+  {
     "name": "upload_folders",
-    "seq": 12
+    "seq": 14
   },
   {
     "name": "upload_folders_parent_links",

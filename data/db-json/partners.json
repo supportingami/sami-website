@@ -38,5 +38,35 @@
     "sort_order": 3,
     "updated_at": 1710387823574,
     "updated_by_id": 1
+  },
+  {
+    "created_at": 1710712226120,
+    "created_by_id": 1,
+    "id": 5,
+    "name": "INNODEMS",
+    "published_at": 1710712230370,
+    "sort_order": 5,
+    "updated_at": 1710712230371,
+    "updated_by_id": 1
+  },
+  {
+    "created_at": 1710785636465,
+    "created_by_id": 1,
+    "id": 6,
+    "name": "Bahir Dar University",
+    "published_at": 1710785644856,
+    "sort_order": 6,
+    "updated_at": 1710785644858,
+    "updated_by_id": 1
+  },
+  {
+    "created_at": 1710785839616,
+    "created_by_id": 1,
+    "id": 7,
+    "name": "Panafrican Hub",
+    "published_at": 1710785841702,
+    "sort_order": 7,
+    "updated_at": 1710785841703,
+    "updated_by_id": 1
   }
 ]
