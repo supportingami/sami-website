@@ -20,14 +20,6 @@
     "seq": 114
   },
   {
-    "name": "blog_tags",
-    "seq": 3
-  },
-  {
-    "name": "blog_tags_blog_post_links",
-    "seq": 0
-  },
-  {
     "name": "components_common_action_buttons",
     "seq": 17
   },
@@ -86,10 +78,6 @@
   {
     "name": "components_home_project_summaries_components",
     "seq": 28
-  },
-  {
-    "name": "countries",
-    "seq": 0
   },
   {
     "name": "donate_contents",
