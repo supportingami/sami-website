@@ -81,23 +81,30 @@ const AboutPage = ({ content, members, reports, partners }: InferGetStaticPropsT
           ))}
         </div>
       </SectionHeader>
-      <div className="prose" style={{ scrollBehavior: "smooth", display: "contents" }}>
+      <div style={{ scrollBehavior: "smooth", display: "contents" }}>
         <PageSection className="py-16 max-w-screen-lg" sectionId="intro">
           <HTMLContent>{content.Intro}</HTMLContent>
         </PageSection>
         <PageSection fullwidth className="bg-base-200 py-8" id="principles">
-          <h1 className="text-center">All projects live by the following principles</h1>
+          <h2 className="text-center">All projects live by the following principles</h2>
           <SamiPrinciples />
         </PageSection>
         <PageSection className="text-center my-16" sectionId="members">
+          <h2>Members & Volunteers</h2>
+          <p className="mt-3 mb-10 lg:px-12 px-5">
+            SAMI is extremely thankful to have a fantastic team of members and volunteers that support in the UK and
+            Africa.
+            <br />
+            Here are a few of the people that make everything possible day-to-day:
+          </p>
           <MembersComponent members={members} />
         </PageSection>
         <PageSection fullwidth className="bg-base-200 py-16 text-center md:px-5" sectionId="toc">
-          <h1>SAMI Theory of Change</h1>
+          <h2>SAMI Theory of Change</h2>
           <ToC />
         </PageSection>
         <PageSection className="text-center py-16" sectionId="reports">
-          <h1>Annual Reports</h1>
+          <h2>Annual Reports</h2>
           <p className="mb-10">Find below links to our annual report and other relevant documents</p>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5 px-5 lg:px-24">
             {reports.map((report) => (
@@ -106,11 +113,11 @@ const AboutPage = ({ content, members, reports, partners }: InferGetStaticPropsT
           </div>
         </PageSection>
         <PageSection fullwidth className="bg-base-200 py-16">
-          <h1 className="text-center">Improving Lives</h1>
+          <h2 className="text-center">Improving Lives</h2>
           <Testimonials testimonials={content.Testimonials.data.map((el) => el.attributes)} />
         </PageSection>
         <PageSection fullwidth className="bg-primary-focus text-white py-0">
-          <h1 className="text-center text-white">Our Partners</h1>
+          <h2 className="text-center text-white">Our Partners</h2>
         </PageSection>
         <PageSection fullwidth className="mb-36">
           <div className="grid auto-rows-[120px] gap-16 grid-cols-2 md:grid-cols-4 my-10 md:my-20 items-center justify-items-center">

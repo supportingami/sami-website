@@ -42,12 +42,6 @@ export const MembersComponent: React.FC<{ members: IMember[] }> = ({ members }) 
 
   return (
     <>
-      <h1>Members & Volunteers</h1>
-      <p className="mt-3 mb-10 lg:px-12 px-5">
-        SAMI is extremely thankful to have a fantastic team of members and volunteers that support in the UK and Africa.
-        <br />
-        Here are a few of the people that make everything possible day-to-day:
-      </p>
       {/* <nav className="mb-10 grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 col-start-2 col-end-3 gap-2 md:gap-3 px-5 text-sm lg:text-base"> */}
       <div className="flex justify-center flex-wrap gap-4 my-8">
         {Tags.map(({ title, tag, getClass }, i) => {
