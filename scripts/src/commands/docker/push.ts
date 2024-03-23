@@ -44,7 +44,7 @@ class DockerRunCmd {
     for (const image of images) {
       for (const tag of ["latest", BASE_TAG]) {
         const imageName = useGCR
-          ? `europe-west2-docker.pkg.dev/sami-website-365718/sami-website-staging/${image}:${tag}`
+          ? `europe-west1-docker.pkg.dev/sami-website-365718/sami-website/${image}:${tag}`
           : `samicharity/${image}:${tag}`;
         const cmd = `docker push ${imageName}`;
         console.log(chalk.gray(cmd));

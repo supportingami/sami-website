@@ -15,7 +15,7 @@ export function GCPCloudRunDeploy(image: docker.Image, envName: string, envVars:
   });
 
   // Location to deploy Cloud Run services
-  const location = gcp.config.region || "europe-west2";
+  const location = gcp.config.region || "europe-west1";
   const fullImageName = image.imageName;
 
   // Environment variables

@@ -56,6 +56,10 @@ volumes:
         bucketName: sami_website_public
 ```
 
+```yaml
+run.googleapis.com/launch-stage: BETA
+```
+
 Deploy via
 
 ```sh
