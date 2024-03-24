@@ -167,12 +167,12 @@ class BuildCmd {
   }
 
   /**
-   * Copy all public uploads from backend to build directory to include in static site
+   * Copy all public uploads from data to build directory to include in static site
    */
   private preBuild() {
-    // Copy all public uploads from backend to build directory to include in static site
-    const srcDir = resolve(PATHS.dataDir, "public", "uploads");
-    const targetDir = resolve(PATHS.frontendDir, "public", "uploads");
+    // Copy all public uploads from data to build directory to include in static site
+    const srcDir = resolve(PATHS.dataDir, "public");
+    const targetDir = resolve(PATHS.frontendDir, "public");
     // TODO - ideally want to rsync for better caching
     ensureDirSync(targetDir);
     emptyDirSync(targetDir);
