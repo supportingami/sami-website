@@ -3,7 +3,7 @@
   "ignorePaths": ["**/*.ts", "**/*.js", "**/dist"],
   "dictionaryDefinitions": [],
   "dictionaries": [],
-  "words": ["strapi", "sami", "ami"],
+  "words": ["strapi", "sami", "ami", "vercel"],
   "ignoreWords": [],
   "import": []
 }

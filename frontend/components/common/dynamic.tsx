@@ -18,6 +18,11 @@ import { getStrapiMedia } from "lib/media";
 type IDynamicComponent = Exclude<DynamicContentContentDynamicZone, Error>;
 type IDynamicComponentType = NonNullable<IDynamicComponent["__typename"]>;
 
+// HACK - force tailwind to compile sizes for classnames provided to images dynamically
+export const ComponentCommonImageSizes = () => {
+  <Image alt="" src="" className="max-w-sm max-w-md max-w-lg max-w-xl max-h-sm max-h-md max-h-lg max-h-xl" />;
+};
+
 const ComponentMapping: { [type in IDynamicComponentType]: (block: IDynamicComponent) => JSX.Element } = {
   ComponentCommonActionButton: (block) => {
     const { ClassNames, ...rest } = block as ComponentCommonActionButton;
@@ -41,17 +46,18 @@ const ComponentMapping: { [type in IDynamicComponentType]: (block: IDynamicCompo
       </p>
     );
   },
+
   ComponentCommonImage: (block) => {
     const { Media, AltText, Caption, ClassNames } = block as ComponentCommonImage;
     // Wrap image with figure/figcaption when caption provided. Simply return image when not
     return Caption ? (
-      <figure className="mb-8">
+      <figure className={`mb-8 mx-auto ${ClassNames || ""}`}>
         <Image
           src={getStrapiMedia(Media)}
           width={0}
           height={0}
           sizes="100vw"
-          className={`object-cover object-center m-auto w-full h-auto ${ClassNames || ""}`}
+          className={`object-cover object-center m-auto w-full h-auto`}
           alt={AltText || "image"}
         />
         <figcaption className="prose"> {Caption} </figcaption>

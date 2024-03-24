@@ -110,7 +110,7 @@ class DockerBuildCmd {
     const dockerRepo = `samicharity`;
     const tags = [`${dockerRepo}/${imageName}:latest`, `${dockerRepo}/${imageName}:${BASE_TAG}`];
     if (includeGCR) {
-      const gcrRepo = `europe-west2-docker.pkg.dev/sami-website-365718/sami-website-staging`;
+      const gcrRepo = `europe-west1-docker.pkg.dev/sami-website-365718/sami-website`;
       tags.push(`${gcrRepo}/${imageName}:latest`);
       tags.push(`${gcrRepo}/${imageName}:${BASE_TAG}`);
     }

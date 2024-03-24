@@ -70,5 +70,23 @@
     "caption": "\n",
     "class_names": "max-w-lg",
     "id": 12
+  },
+  {
+    "alt_text": null,
+    "caption": "Danny presents the software at a conference in Kenya",
+    "class_names": null,
+    "id": 13
+  },
+  {
+    "alt_text": null,
+    "caption": "The ADI team working together in Tanzania",
+    "class_names": null,
+    "id": 14
+  },
+  {
+    "alt_text": null,
+    "caption": "The Digital Communities Initiative uses technology to support across diverse areas including schools, agriculture and women in enterprise.",
+    "class_names": "max-w-md mx-auto",
+    "id": 15
   }
 ]

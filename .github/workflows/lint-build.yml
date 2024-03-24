@@ -4,6 +4,9 @@ on:
   pull_request:
     branches:
       - main
+concurrency:
+  group: lint-build-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   build:
     if: "!contains(github.event.pull_request.labels.*.name, 'Test - preview')"

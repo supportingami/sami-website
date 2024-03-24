@@ -33,4 +33,4 @@ scripts/input
 scripts/output
 .vercel
 
-service.yaml
+service*.yaml

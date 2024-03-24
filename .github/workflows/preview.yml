@@ -1,0 +1,91 @@
+# Generate static site preview for production site
+name: Production Preview
+on:
+  workflow_call:
+  push:
+    branches: main
+# Only keep one active build per ref (e.g. pr branch, push branch, triggering workflow ref)
+concurrency:
+  group: preview-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          lfs: true
+      - name: Setup Node 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      #############################################################################
+      #         Node Modules
+      # Manually restore any previous cache to speed install
+      # As immutable install will not change cache only save new cache if not hit
+      # Uses fine-grained methods from https://github.com/actions/cache
+      #############################################################################
+
+      - uses: actions/cache/restore@v3
+        id: cache
+        with:
+          path: ./.yarn/cache
+          key: ${{ runner.os }}-node-modules-yarn-v1-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-yarn-v1-
+      - name: Install node modules
+        run: yarn install --immutable && npm i -g vercel
+      - uses: actions/cache/save@v3
+        if: steps.cache.outputs.cache-hit != 'true'
+        with:
+          path: ./.yarn/cache
+          key: ${{ runner.os }}-node-modules-yarn-v1-${{ hashFiles('yarn.lock') }}
+
+      #############################################################################
+      #         Gcloud Setup
+      # Populate service account credentials to file
+      # Authenticate to google servers
+      # Initialize gcloud cli
+      #############################################################################
+      - name: Setup Credentials
+        id: service-account
+        run: |
+          echo ${{secrets.GCP_SA_KEY_B64}} | base64 --decode  > ./service-account.json
+      - name: GCP Auth
+        uses: "google-github-actions/auth@v2"
+        with:
+          project_id: "sami-website-365718"
+          credentials_json: ${{secrets.GCP_SA_KEY_B64}}
+          token_format: "access_token"
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v2"
+        with:
+          version: ">= 363.0.0"
+
+      #############################################################################
+      #         Export production
+      #############################################################################
+      # TODO - refactor actions - reusable build, export, deploy, hooks, pr generate etc.
+
+      # Export production and rename to match dev configuration (production-local)
+      - name: Import production data locally
+        run: |
+          echo "STRAPI_READONLY_TOKEN=${{secrets.STRAPI_READONLY_TOKEN}}" > config/docker.local.env
+          yarn scripts strapi export --environment docker --ci
+          cp config/docker.local.env config/development.local.env
+          cp data/db/sami-production.db data/db/sami-dev.db
+
+      - name: Build
+        run: yarn scripts cli build --environment=development --no-export --no-preview --no-deploy
+      # HACK - split build-deploy above for easier debugging
+      - name: Deploy
+        run: |
+          cd frontend
+          vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+          vercel build --token=${{ secrets.VERCEL_TOKEN }}
+          vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+
+      # NOTE - also possible to do without intermediate but requires interaction with live cloud-run api
+      # - name: Generate preview
+      #   run: yarn scripts cli build --environment=docker --export --no-backend --no-preview --deploy

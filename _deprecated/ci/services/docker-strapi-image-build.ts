@@ -8,13 +8,13 @@ import { PATHS } from "../utils";
  * Prerequisites
  * ```
  * gcloud auth ... application-default (TO CONFIRM FROM GUIDE)
- * gcloud auth configure-docker europe-west2-docker.pkg.dev
+ * gcloud auth configure-docker europe-west1-docker.pkg.dev
  * ```
  *
  * https://github.com/pulumi/pulumi-docker/blob/master/examples/container-registries/gcp/ts/index.ts
  */
 export function DockerStrapiImageBuild(envName: string) {
-  const location = gcp.config.region || "europe-west2";
+  const location = gcp.config.region || "europe-west1";
   const repositoryId = `sami-website-${envName}`;
   const project = gcp.config.project;
 

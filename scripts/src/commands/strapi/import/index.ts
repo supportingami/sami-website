@@ -13,6 +13,7 @@ interface IProgramOptions {
   environment?: string;
   /** specify to only import assets or db */
   only?: "storage" | "db";
+  ci?: boolean;
 }
 const program = new Command("import");
 export default program
@@ -20,7 +21,12 @@ export default program
   .option("-e --environment <string>", "Name of environment to use)")
   .option("-o --only <string>", "Specify 'assets' or 'db' to only import")
   .option("-t --table <string>", "Single table to import (omit to include all)")
+  .option("-ci --ci", "Disable prompts for CI mode")
   .action(async (options: IProgramOptions) => {
+    // force ci environment variable if specified
+    if (options.ci) {
+      process.env.CI = "true";
+    }
     const { name, parsed } = await loadEnv(options.environment);
     // Import storage first as db references will be dropped if assets do not exist
     if (options.only !== "db") {

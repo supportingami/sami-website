@@ -2,18 +2,22 @@ import { resolve } from "path";
 import { PATHS } from "../../../paths";
 import { ensureDirSync } from "fs-extra";
 import { spawnSync } from "child_process";
+import chalk from "chalk";
 
 export class StorageExport {
   public async run(gcsBucketName?: string) {
     if (gcsBucketName) {
       return this.exportGoogleStorage(gcsBucketName);
     }
+    console.log("Skipped - no gcsBucketName");
     // local strapi already writes storage to data dir
   }
   private exportGoogleStorage(bucketName: string) {
-    const outputDir = resolve(PATHS.dataDir, "public", "uploads");
+    const outputDir = resolve(PATHS.dataDir, "public");
+    const cmd = `gcloud storage rsync gs://${bucketName} "${outputDir}" --recursive`;
+    console.log(chalk.gray(cmd));
     ensureDirSync(outputDir);
-    spawnSync(`gcloud storage rsync gs://${bucketName} "${outputDir}"`, {
+    spawnSync(cmd, {
       shell: true,
       stdio: "inherit",
       cwd: PATHS.rootDir,
