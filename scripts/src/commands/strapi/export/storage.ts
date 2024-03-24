@@ -13,7 +13,7 @@ export class StorageExport {
   private exportGoogleStorage(bucketName: string) {
     const outputDir = resolve(PATHS.dataDir, "public", "uploads");
     ensureDirSync(outputDir);
-    spawnSync(`gcloud storage rsync gs://${bucketName} "${outputDir}"`, {
+    spawnSync(`gcloud storage rsync gs://${bucketName} "${outputDir}" --recursive`, {
       shell: true,
       stdio: "inherit",
       cwd: PATHS.rootDir,
