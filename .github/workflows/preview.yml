@@ -55,12 +55,17 @@ jobs:
           project_id: "sami-website-365718"
           credentials_json: ${{secrets.GCP_SA_KEY_B64}}
           token_format: "access_token"
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v2"
+        with:
+          version: ">= 363.0.0"
       # TODO - refactor actions - 1 to create pr, then preview based on pr
 
       # Export production and rename to match dev configuration (production-local)
       - name: Import production data locally
         run: |
           echo "STRAPI_READONLY_TOKEN=${{secrets.STRAPI_READONLY_TOKEN}}" > config/docker.local.env
+          gcloud login
           yarn scripts strapi export --environment docker --ci
           cp config/docker.local.env config/development.local.env
           cp data/db/sami-production.db data/db/sami-dev.db
