@@ -78,7 +78,7 @@ class BuildCmd {
     const { environment } = this.options;
     // Deployments will always read data from local development server
     // If wanting to use other data it must first be imported locally
-    await loadEnv(environment);
+    await loadEnv(environment, { skipHealthcheck: true });
 
     // Ensure data exported
     if (shouldExport === undefined) {
