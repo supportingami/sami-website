@@ -159,6 +159,9 @@ class BuildCmd {
       //   use local folder for image hosting which will also use optimised folders
       env: {
         NEXT_CONFIG_MODE,
+        // HACK - when building export need to ensure not dev environment
+        // https://github.com/vercel/next.js/issues/56481
+        NODE_ENV: "production",
       },
     };
   }
