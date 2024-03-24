@@ -1,6 +1,7 @@
 {
+  "framework": "nextjs",
   "buildCommand": "echo skipping build",
-  "outputDirectory": "out",
+  "outputDirectory": ".next",
   "installCommand": "echo skipping install",
   "cleanUrls": true,
   "redirects": [{ "source": "/", "destination": "/home", "permanent": true }],
