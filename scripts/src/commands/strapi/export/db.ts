@@ -7,6 +7,7 @@ import { sortJSONObjectByKey } from "../../../utils/object.utils";
 import { getDB, listDBTables, mapDBData } from "../common";
 import { replicateDir } from "../../../utils/file.utils";
 import { tmpdir } from "os";
+import chalk from "chalk";
 
 /***************************************************************************************
  * Main Methods
@@ -20,17 +21,19 @@ export class DBExport {
   public async run(envName: string, envParsed: any) {
     const gcsBucket = envParsed.GCS_DB_BUCKET_NAME;
     if (gcsBucket) {
-      const dbFilename = envParsed.DATABASE_FILENAME;
       const dbDir = resolve(PATHS.dataDir, "db");
-      const targetDB = resolve(dbDir, dbFilename);
-      // TODO - consider using sdk methods
-      spawnSync(`gsutil cp -r gs://${gcsBucket}/* ${dbDir}`, {
+      const cmd = `gcloud storage rsync gs://${gcsBucket} ${dbDir}`;
+      console.log(chalk.gray(cmd));
+      spawnSync(cmd, {
         shell: true,
         stdio: "inherit",
         cwd: PATHS.rootDir,
       });
+      const dbFilename = envParsed.DATABASE_FILENAME;
+      const targetDB = resolve(dbDir, dbFilename);
       if (!existsSync(targetDB)) {
-        throw new Error("DB not exported:\n" + targetDB);
+        console.warn(`Exported db not found:`, `${dbDir}/${dbFilename}`);
+        // throw new Error("DB not exported:\n" + `${dbDir}/${dbFilename}`);
       }
     }
     // query list of all tables
