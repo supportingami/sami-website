@@ -1,9 +1,9 @@
 # Generate static site preview for production site
-name: Preview Content
+name: Production Preview
 on:
-  workflow_dispatch:
+  workflow_call:
   push:
-    branches: feat/eu-west1-deployment
+    branches: main
 # Only keep one active build per ref (e.g. pr branch, push branch, triggering workflow ref)
 concurrency:
   group: preview-${{ github.workflow }}-${{ github.ref }}
@@ -62,10 +62,11 @@ jobs:
         uses: "google-github-actions/setup-gcloud@v2"
         with:
           version: ">= 363.0.0"
-      # TODO - refactor actions - 1 to create pr, then preview based on pr
+
       #############################################################################
       #         Export production
       #############################################################################
+      # TODO - refactor actions - reusable build, export, deploy, hooks, pr generate etc.
 
       # Export production and rename to match dev configuration (production-local)
       - name: Import production data locally

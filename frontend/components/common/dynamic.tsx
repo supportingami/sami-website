@@ -51,7 +51,7 @@ const ComponentMapping: { [type in IDynamicComponentType]: (block: IDynamicCompo
     const { Media, AltText, Caption, ClassNames } = block as ComponentCommonImage;
     // Wrap image with figure/figcaption when caption provided. Simply return image when not
     return Caption ? (
-      <figure className={`mb-8 ${ClassNames || ""}`}>
+      <figure className={`mb-8 mx-auto ${ClassNames || ""}`}>
         <Image
           src={getStrapiMedia(Media)}
           width={0}

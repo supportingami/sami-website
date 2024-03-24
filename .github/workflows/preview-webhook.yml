@@ -1,0 +1,14 @@
+# Generate static site preview for production site
+name: Production Preview
+on:
+  repository_dispatch:
+    types: [production_preview]
+jobs:
+  run_if_failure:
+    if: ${{ !github.event.client_payload.passed }}
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          MESSAGE: ${{ github.event.client_payload.message }}
+        run: echo $MESSAGE
+# TODO - trigger preview build
