@@ -43,7 +43,10 @@ jobs:
           key: ${{ runner.os }}-node-modules-yarn-v1-${{ hashFiles('yarn.lock') }}
 
       #############################################################################
-      #         Export production
+      #         Gcloud Setup
+      # Populate service account credentials to file
+      # Authenticate to google servers
+      # Initialize gcloud cli
       #############################################################################
       - name: Setup Credentials
         id: service-account
@@ -60,12 +63,14 @@ jobs:
         with:
           version: ">= 363.0.0"
       # TODO - refactor actions - 1 to create pr, then preview based on pr
+      #############################################################################
+      #         Export production
+      #############################################################################
 
       # Export production and rename to match dev configuration (production-local)
       - name: Import production data locally
         run: |
           echo "STRAPI_READONLY_TOKEN=${{secrets.STRAPI_READONLY_TOKEN}}" > config/docker.local.env
-          gcloud login
           yarn scripts strapi export --environment docker --ci
           cp config/docker.local.env config/development.local.env
           cp data/db/sami-production.db data/db/sami-dev.db
