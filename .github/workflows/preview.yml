@@ -74,10 +74,17 @@ jobs:
           yarn scripts strapi export --environment docker --ci
           cp config/docker.local.env config/development.local.env
           cp data/db/sami-production.db data/db/sami-dev.db
-      - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Build and deploy
-        run: yarn scripts cli build --environment=development --no-export --no-preview --deploy
+
+      - name: Build
+        run: yarn scripts cli build --environment=development --no-export --no-preview --no-deploy
+      # HACK - split build-deploy above for easier debugging
+      - name: Deploy
+        run: |
+          cd frontend
+          vercel login --token=${{ secrets.VERCEL_TOKEN }}
+          vercel pull --yes --environment=production
+          vercel build 
+          vercel deploy --prebuilt
 
       # NOTE - also possible to do without intermediate but requires interaction with live cloud-run api
       # - name: Generate preview
