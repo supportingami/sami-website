@@ -4,6 +4,10 @@ on:
   workflow_dispatch:
   push:
     branches: feat/eu-west1-deployment
+# Only keep one active build per ref (e.g. pr branch, push branch, triggering workflow ref)
+concurrency:
+  group: preview-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   preview:
     runs-on: ubuntu-latest
