@@ -78,6 +78,8 @@ export async function loadEnv(envName?: string, options: { skipHealthcheck?: boo
       ...parsed,
       ...dotenv.config({ path: envLocalOverridesPath, override: true }).parsed,
     };
+  } else {
+    console.log("No local overrides for env detected", envLocalOverridesPath);
   }
 
   //ensure loaded env configured correctly
@@ -172,7 +174,7 @@ async function healthcheck(options: { envParsed?; envName?: string } = {}) {
       logError({ msg1: "Failed to boostrap Strapi, retry manually", msg2: "yarn scripts strapi boostrap" });
     }
     const bootstrapCmd = `yarn scripts strapi bootstrap -e ${envName}`;
-    console.log(envName, "STRAPI_READONLY_TOKEN not detected, attempting bootstrap", envParsed);
+    console.log(envName, "STRAPI_READONLY_TOKEN not detected, attempting bootstrap");
     console.log(chalk.gray(bootstrapCmd));
     await execa(bootstrapCmd, { shell: true, cwd: PATHS.rootDir, stdio: "inherit" });
     isHealthcheckRetry = true;
