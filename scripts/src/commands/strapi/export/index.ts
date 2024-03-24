@@ -15,6 +15,7 @@ interface IProgramOptions {
   environment?: string;
   /** specify to only import assets or db */
   only: (typeof allTargets)[number];
+  ci?: boolean;
 }
 const allTargets = ["storage", "db"] as const;
 
@@ -23,7 +24,12 @@ export default program
   .description("Export strapi data")
   .option("-e --environment <string>", "Name of environment to use")
   .option("-o --only <string>", "List of targets to include", allTargets.join(","))
+  .option("-ci --ci", "Disable prompts for CI mode")
   .action(async (options: IProgramOptions) => {
+    // force ci environment variable if specified
+    if (options.ci) {
+      process.env.CI = "true";
+    }
     const { name, parsed } = await loadEnv(options.environment);
     const targets = allTargets.filter((t) => options.only.includes(t));
     if (targets.includes("db")) {
