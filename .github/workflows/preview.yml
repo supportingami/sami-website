@@ -82,8 +82,8 @@ jobs:
         run: |
           cd frontend
           vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-          vercel build 
-          vercel deploy --prebuilt
+          vercel build --token=${{ secrets.VERCEL_TOKEN }}
+          vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
 
       # NOTE - also possible to do without intermediate but requires interaction with live cloud-run api
       # - name: Generate preview
