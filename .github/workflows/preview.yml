@@ -1,0 +1,67 @@
+# Generate static site preview for production site
+name: Preview Content
+on:
+  workflow_dispatch:
+  push:
+    branches: feat/eu-west1-deployment
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          lfs: true
+      - name: Setup Node 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      #############################################################################
+      #         Node Modules
+      # Manually restore any previous cache to speed install
+      # As immutable install will not change cache only save new cache if not hit
+      # Uses fine-grained methods from https://github.com/actions/cache
+      #############################################################################
+
+      - uses: actions/cache/restore@v3
+        id: cache
+        with:
+          path: ./.yarn/cache
+          key: ${{ runner.os }}-node-modules-yarn-v1-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-yarn-v1-
+      - name: Install node modules
+        run: yarn install --immutable && npm i -g vercel
+      - uses: actions/cache/save@v3
+        if: steps.cache.outputs.cache-hit != 'true'
+        with:
+          path: ./.yarn/cache
+          key: ${{ runner.os }}-node-modules-yarn-v1-${{ hashFiles('yarn.lock') }}
+
+      #############################################################################
+      #         Export production
+      #############################################################################
+      # TODO - populate vercel env
+      - name: Write data service account JSON
+        id: service-account
+        run: |
+          echo ${{secrets.GCP_SA_KEY_B64}} | base64 --decode  > ./service-account.json
+
+      - name: GCP Auth
+        uses: "google-github-actions/auth@v2"
+        with:
+          project_id: "sami-website-365718"
+          credentials_json: ${{secrets.GCP_SA_KEY_B64}}
+          token_format: "access_token"
+
+      - name: Export Staging
+        run: yarn scripts strapi export --environment docker --ci
+      # TODO - create PR for content updates
+      - name: Import local
+        run: |
+          yarn scripts strapi bootstrap --environment development --ci
+          yarn scripts strapi import --environment development --ci
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Generate preview
+        run: yarn scripts cli build --no-export --no-preview --deploy
