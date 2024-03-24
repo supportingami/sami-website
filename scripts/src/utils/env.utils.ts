@@ -172,7 +172,7 @@ async function healthcheck(options: { envParsed?; envName?: string } = {}) {
       logError({ msg1: "Failed to boostrap Strapi, retry manually", msg2: "yarn scripts strapi boostrap" });
     }
     const bootstrapCmd = `yarn scripts strapi bootstrap -e ${envName}`;
-    console.log("STRAPI_READONLY_TOKEN not detecting, attempting bootstrap");
+    console.log(envName, "STRAPI_READONLY_TOKEN not detected, attempting bootstrap", envParsed);
     console.log(chalk.gray(bootstrapCmd));
     await execa(bootstrapCmd, { shell: true, cwd: PATHS.rootDir, stdio: "inherit" });
     isHealthcheckRetry = true;

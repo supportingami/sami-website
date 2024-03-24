@@ -57,7 +57,6 @@ jobs:
       - name: Import production data locally
         run: |
           echo "STRAPI_READONLY_TOKEN=${{secrets.STRAPI_READONLY_TOKEN}}" > config.docker.local.env
-          cat config.docker.local.env
           yarn scripts strapi export --environment docker --ci
           cp config/docker.local.env config/development.local.env
           cp data/db/sami-production.db data/db/sami-dev.db
