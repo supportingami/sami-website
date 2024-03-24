@@ -29,11 +29,14 @@ interface IProgramOptions {
   config: "standalone" | "export";
   /** Specify whether to start the backend server during build (default: True)*/
   backend?: boolean;
+  /** Specify environment */
+  environment: "string";
 }
 
 const program = new Command("build");
 export default program
   .description("Build deployment images")
+  .option("-e --environment <string>", "Specify environment", "development")
   .option("-p --preview", "Preview build locally")
   .option("--no-preview", "Do not preview build locally")
   .option("-d --deploy", "Deploy build")
@@ -72,9 +75,10 @@ class BuildCmd {
   constructor(private options: IProgramOptions) {}
   public async run() {
     let { export: shouldExport, preview: shouldPreview, deploy: shouldDeploy } = this.options;
+    const { environment } = this.options;
     // Deployments will always read data from local development server
     // If wanting to use other data it must first be imported locally
-    await loadEnv("development");
+    await loadEnv(environment);
 
     // Ensure data exported
     if (shouldExport === undefined) {
@@ -82,7 +86,11 @@ class BuildCmd {
     }
     if (shouldExport) {
       console.log(chalk.gray("Ensuring data exported"));
-      await execa("yarn scripts strapi export -e development", { cwd: PATHS.rootDir, shell: true, stdio: "inherit" });
+      await execa(`yarn scripts strapi export -e ${environment}`, {
+        cwd: PATHS.rootDir,
+        shell: true,
+        stdio: "inherit",
+      });
     }
 
     this.preBuild();

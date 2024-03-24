@@ -41,27 +41,30 @@ jobs:
       #############################################################################
       #         Export production
       #############################################################################
-      # TODO - populate vercel env
-      - name: Write data service account JSON
+      - name: Setup Credentials
         id: service-account
         run: |
           echo ${{secrets.GCP_SA_KEY_B64}} | base64 --decode  > ./service-account.json
-
+          echo STRAPI_READONLY_TOKEN=${{secrets.STRAPI_READONLY_TOKEN}} > config.docker.local.env
       - name: GCP Auth
         uses: "google-github-actions/auth@v2"
         with:
           project_id: "sami-website-365718"
           credentials_json: ${{secrets.GCP_SA_KEY_B64}}
           token_format: "access_token"
+      # TODO - refactor actions - 1 to create pr, then preview based on pr
 
-      - name: Export Staging
-        run: yarn scripts strapi export --environment docker --ci
-      # TODO - create PR for content updates
-      - name: Import local
+      # Export production and rename to match dev configuration (production-local)
+      - name: Import production data locally
         run: |
-          yarn scripts strapi bootstrap --environment development --ci
-          yarn scripts strapi import --environment development --ci
+          yarn scripts strapi export --environment docker --ci
+          cp config/docker.local.env config/development.local.env
+          cp data/db/sami-production.db data/db/sami-dev.db
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Generate preview
-        run: yarn scripts cli build --no-export --no-preview --deploy
+      - name: Build and deploy
+        run: yarn scripts cli build --environment=development --no-export --no-preview --deploy
+
+      # NOTE - also possible to do without intermediate but requires interaction with live cloud-run api
+      # - name: Generate preview
+      #   run: yarn scripts cli build --environment=docker --export --no-backend --no-preview --deploy
