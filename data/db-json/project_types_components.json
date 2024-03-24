@@ -1,13 +1,5 @@
 [
   {
-    "component_id": 31,
-    "component_type": "common.html",
-    "entity_id": 4,
-    "field": "PageContent",
-    "id": 14,
-    "order": 1
-  },
-  {
     "component_id": 32,
     "component_type": "common.html",
     "entity_id": 2,
@@ -110,5 +102,29 @@
     "field": "PageContent",
     "id": 44,
     "order": 4
+  },
+  {
+    "component_id": 31,
+    "component_type": "common.html",
+    "entity_id": 4,
+    "field": "PageContent",
+    "id": 60,
+    "order": 1
+  },
+  {
+    "component_id": 15,
+    "component_type": "common.image",
+    "entity_id": 4,
+    "field": "PageContent",
+    "id": 61,
+    "order": 2
+  },
+  {
+    "component_id": 39,
+    "component_type": "common.html",
+    "entity_id": 4,
+    "field": "PageContent",
+    "id": 62,
+    "order": 3
   }
 ]

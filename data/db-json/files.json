@@ -2044,5 +2044,27 @@
     "updated_by_id": 1,
     "url": "/uploads/ADI_dev_tanzania_5b4f7c165e.webp",
     "width": 944
+  },
+  {
+    "alternative_text": null,
+    "caption": null,
+    "created_at": 1711246276379,
+    "created_by_id": 1,
+    "ext": ".webp",
+    "folder_path": "/7/15",
+    "formats": "{\"thumbnail\":{\"name\":\"thumbnail_DCI.webp\",\"hash\":\"thumbnail_DCI_c29bc1b654\",\"ext\":\".webp\",\"mime\":\"image/webp\",\"path\":null,\"width\":216,\"height\":156,\"size\":8.96,\"url\":\"/uploads/thumbnail_DCI_c29bc1b654.webp\"}}",
+    "hash": "DCI_c29bc1b654",
+    "height": 632,
+    "id": 127,
+    "mime": "image/webp",
+    "name": "DCI.webp",
+    "preview_url": null,
+    "provider": "local",
+    "provider_metadata": null,
+    "size": 101.75,
+    "updated_at": 1711246276379,
+    "updated_by_id": 1,
+    "url": "/uploads/DCI_c29bc1b654.webp",
+    "width": 874
   }
 ]

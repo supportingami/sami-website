@@ -39,7 +39,7 @@ export default program
     }
     if (targets.includes("storage")) {
       console.log(chalk.blue("Exporting Storage..."));
-      await new StorageExport().run(parsed.GCS_STORAGE_BUCKET_NAME);
+      await new StorageExport().run(parsed.GCS_PUBLIC_BUCKET_NAME);
       console.log(chalk.blue("Storage exported successfully"));
     }
 
