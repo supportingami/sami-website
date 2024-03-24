@@ -25,11 +25,11 @@
   },
   {
     "name": "components_common_htmls",
-    "seq": 37
+    "seq": 38
   },
   {
     "name": "components_common_images",
-    "seq": 12
+    "seq": 14
   },
   {
     "name": "components_common_text_blocks",
@@ -105,15 +105,15 @@
   },
   {
     "name": "files",
-    "seq": 125
+    "seq": 126
   },
   {
     "name": "files_folder_links",
-    "seq": 103
+    "seq": 105
   },
   {
     "name": "files_related_morphs",
-    "seq": 309
+    "seq": 317
   },
   {
     "name": "home_contents",
@@ -137,11 +137,11 @@
   },
   {
     "name": "project_types_components",
-    "seq": 40
+    "seq": 44
   },
   {
     "name": "resources",
-    "seq": 5
+    "seq": 6
   },
   {
     "name": "resources_components",
@@ -153,11 +153,11 @@
   },
   {
     "name": "upload_folders",
-    "seq": 14
+    "seq": 15
   },
   {
     "name": "upload_folders_parent_links",
-    "seq": 1
+    "seq": 2
   },
   {
     "name": "volunteer_contents",

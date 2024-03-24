@@ -1578,7 +1578,7 @@
     "provider": "local",
     "provider_metadata": null,
     "size": 136.07,
-    "updated_at": 1699899304689,
+    "updated_at": 1711170925539,
     "updated_by_id": 1,
     "url": "/uploads/sami_maths_club_2f3a69af37.jpg",
     "width": 900
@@ -2022,5 +2022,27 @@
     "updated_by_id": 1,
     "url": "/uploads/cabrine_4e57fc058c.png",
     "width": 129
+  },
+  {
+    "alternative_text": null,
+    "caption": null,
+    "created_at": 1711170050526,
+    "created_by_id": 1,
+    "ext": ".webp",
+    "folder_path": "/7/14",
+    "formats": "{\"thumbnail\":{\"name\":\"thumbnail_ADI-dev-tanzania.webp\",\"hash\":\"thumbnail_ADI_dev_tanzania_5b4f7c165e\",\"ext\":\".webp\",\"mime\":\"image/webp\",\"path\":null,\"width\":245,\"height\":138,\"size\":7.45,\"url\":\"/uploads/thumbnail_ADI_dev_tanzania_5b4f7c165e.webp\"}}",
+    "hash": "ADI_dev_tanzania_5b4f7c165e",
+    "height": 531,
+    "id": 126,
+    "mime": "image/webp",
+    "name": "ADI-dev-tanzania.webp",
+    "preview_url": null,
+    "provider": "local",
+    "provider_metadata": null,
+    "size": 470.64,
+    "updated_at": 1711170050526,
+    "updated_by_id": 1,
+    "url": "/uploads/ADI_dev_tanzania_5b4f7c165e.webp",
+    "width": 944
   }
 ]

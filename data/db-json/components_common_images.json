@@ -70,5 +70,17 @@
     "caption": "\n",
     "class_names": "max-w-lg",
     "id": 12
+  },
+  {
+    "alt_text": null,
+    "caption": "Danny presents the software at a conference in Kenya",
+    "class_names": null,
+    "id": 13
+  },
+  {
+    "alt_text": null,
+    "caption": "The ADI team working together in Tanzania",
+    "class_names": null,
+    "id": 14
   }
 ]
