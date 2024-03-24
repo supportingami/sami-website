@@ -81,8 +81,7 @@ jobs:
       - name: Deploy
         run: |
           cd frontend
-          vercel login --token=${{ secrets.VERCEL_TOKEN }}
-          vercel pull --yes --environment=production
+          vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
           vercel build 
           vercel deploy --prebuilt
 
