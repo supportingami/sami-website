@@ -16,5 +16,11 @@
     "folder_order": 2,
     "id": 3,
     "inv_folder_id": 8
+  },
+  {
+    "folder_id": 17,
+    "folder_order": 2,
+    "id": 4,
+    "inv_folder_id": 6
   }
 ]
