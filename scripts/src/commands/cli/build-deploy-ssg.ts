@@ -153,11 +153,9 @@ class BuildCmd {
     if (NEXT_CONFIG_MODE === "export") {
       buildScript = `yarn next build && yarn next-export-optimize-images`;
     }
-    // Standalone builder calls vercel
-    // NOTE - this will require vercel.json having correct `nextJS` framework assigned
-    // It also produces files with symlinks that fail to upload on windows
+    // If building for standalone deployment will still need to call `yarn vercel build` later
     if (NEXT_CONFIG_MODE === "standalone") {
-      buildScript = `yarn next build && yarn vercel build`;
+      buildScript = `yarn next build`;
     }
     return {
       name: "nextjs",
