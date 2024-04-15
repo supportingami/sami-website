@@ -4,16 +4,20 @@
 
 The main website is setup to build and export as a static site, so that it can be hosted on any hosting platform without need for additional server infrastructure (e.g. Database, Cloud Functions)
 
-First, any content from the staging site should be imported locally
-
-```sh
-yarn scripts strapi import
-```
-
 Then there is e a single script that handles the process of generating static content, (optionally) preview locally, and upload to Vercel hosting platform
 
+First you may wish to replicate current production data into local environment
+
 ```sh
-yarn build
+yarn scripts strapi export --environment docker
+yarn scripts strapi import --environment development
+
+```
+
+Then build can be initiated by
+
+```sh
+yarn scripts cli build --environment development --no-export
 ```
 
 ## Staging Site

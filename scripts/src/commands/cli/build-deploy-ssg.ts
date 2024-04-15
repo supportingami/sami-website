@@ -82,7 +82,7 @@ class BuildCmd {
 
     // Ensure data exported
     if (shouldExport === undefined) {
-      shouldExport = await promptConfirm("Would you like to export local data first?", false);
+      shouldExport = await promptConfirm("Would you like to export data first?", false);
     }
     if (shouldExport) {
       console.log(chalk.gray("Ensuring data exported"));
