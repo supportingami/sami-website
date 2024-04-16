@@ -13,7 +13,7 @@
     "entity_id": 1,
     "field": "ImpactNumbers",
     "id": 11,
-    "order": 2
+    "order": 3
   },
   {
     "component_id": 4,
@@ -21,6 +21,14 @@
     "entity_id": 1,
     "field": "ImpactNumbers",
     "id": 12,
-    "order": 3
+    "order": 4
+  },
+  {
+    "component_id": 5,
+    "component_type": "home.impact-numbers",
+    "entity_id": 1,
+    "field": "ImpactNumbers",
+    "id": 23,
+    "order": 2
   }
 ]

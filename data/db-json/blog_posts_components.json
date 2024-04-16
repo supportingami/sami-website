@@ -294,5 +294,29 @@
     "field": "ContentBlocks",
     "id": 114,
     "order": 3
+  },
+  {
+    "component_id": 40,
+    "component_type": "common.html",
+    "entity_id": 24,
+    "field": "ContentBlocks",
+    "id": 121,
+    "order": 1
+  },
+  {
+    "component_id": 16,
+    "component_type": "common.image",
+    "entity_id": 24,
+    "field": "ContentBlocks",
+    "id": 122,
+    "order": 2
+  },
+  {
+    "component_id": 41,
+    "component_type": "common.html",
+    "entity_id": 24,
+    "field": "ContentBlocks",
+    "id": 123,
+    "order": 3
   }
 ]
