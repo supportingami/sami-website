@@ -842,7 +842,7 @@
   {
     "field": "FeatureImage",
     "file_id": 130,
-    "id": 345,
+    "id": 380,
     "order": 1,
     "related_id": 24,
     "related_type": "api::blog-post.blog-post"
@@ -850,9 +850,41 @@
   {
     "field": "Media",
     "file_id": 131,
-    "id": 344,
+    "id": 379,
     "order": 1,
     "related_id": 16,
     "related_type": "common.image"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 134,
+    "id": 374,
+    "order": 1,
+    "related_id": 25,
+    "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 135,
+    "id": 373,
+    "order": 1,
+    "related_id": 26,
+    "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 136,
+    "id": 376,
+    "order": 1,
+    "related_id": 27,
+    "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "FeatureImage",
+    "file_id": 137,
+    "id": 378,
+    "order": 1,
+    "related_id": 28,
+    "related_type": "api::blog-post.blog-post"
   }
 ]
