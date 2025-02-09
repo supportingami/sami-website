@@ -1,24 +1,18 @@
 # Write your query or mutation here
 query blogPosts {
-  blogPosts(sort: "DateWritten:DESC") {
-    data {
-      id
-      attributes {
-        Title
-        Summary
-        DateWritten
-        FeatureImage {
-          data {
-            id
-            attributes {
-              name
-              url
-              size
-            }
-          }
-        }
-        Slug
+  blogPosts_connection(sort: "DateWritten:DESC") {
+    nodes {
+      documentId
+      Title
+      Summary
+      DateWritten
+      FeatureImage {
+        documentId
+        name
+        url
+        size
       }
+      Slug
     }
   }
 }

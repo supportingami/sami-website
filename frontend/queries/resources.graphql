@@ -1,44 +1,32 @@
 query resources {
-  resources {
-    data {
-      id
-      attributes {
-        Title
-        Image {
-          data {
-            id
-            attributes {
-              name
-              url
-              size
-            }
-          }
-        }
-        Description
-        Links {
-          id
-          Link
-          Text
-        }
-        Media {
-          data {
-            id
-            attributes {
-              name
-              url
-              size
-            }
-          }
-        }
+  resources_connection {
+    nodes {
+      documentId
+      Title
+      Image {
+        documentId
+        name
+        url
+        size
+      }
+      Description
+      Links {
+        id
+        Link
+        Text
+      }
+      Media {
+        documentId
+        name
+        url
+        size
       }
     }
-    meta {
-      pagination {
-        page
-        pageSize
-        total
-        pageCount
-      }
+    pageInfo {
+      page
+      pageSize
+      total
+      pageCount
     }
   }
 }

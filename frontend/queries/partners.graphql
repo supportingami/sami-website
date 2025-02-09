@@ -1,20 +1,14 @@
 # Write your query or mutation here
 query partners {
-  partners(sort: "SortOrder:ASC") {
-    data {
-      id
-      attributes {
-        Name
-        Logo {
-          data {
-            id
-            attributes {
-              name
-              url
-              size
-            }
-          }
-        }
+  partners_connection(sort: "SortOrder:ASC") {
+    nodes {
+      documentId
+      Name
+      Logo {
+        documentId
+        name
+        url
+        size
       }
     }
   }

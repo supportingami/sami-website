@@ -1,43 +1,35 @@
 query volunteerContent {
   volunteerContent {
-    data {
-      id
-      __typename
-      attributes {
+    documentId
+    __typename
+    __typename
+    Content {
+      ... on ComponentCommonHtml {
         __typename
-        Content {
-          ... on ComponentCommonHtml {
-            __typename
-            id
-            HTML
-          }
-          ... on ComponentCommonActionButton {
-            __typename
-            id
-            ClassNames
-            Link
-            Text
-          }
-          ... on ComponentCommonTextBlock {
-            __typename
-            id
-            Text
-          }
-          ... on ComponentCommonImage {
-            AltText
-            Caption
-            ClassNames
-            Media {
-              data {
-                id
-                attributes {
-                  name
-                  url
-                  size
-                }
-              }
-            }
-          }
+        id
+        HTML
+      }
+      ... on ComponentCommonActionButton {
+        __typename
+        id
+        ClassNames
+        Link
+        Text
+      }
+      ... on ComponentCommonTextBlock {
+        __typename
+        id
+        Text
+      }
+      ... on ComponentCommonImage {
+        AltText
+        Caption
+        ClassNames
+        Media {
+          documentId
+          name
+          url
+          size
         }
       }
     }

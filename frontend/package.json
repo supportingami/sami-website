@@ -11,7 +11,7 @@
     "lint": "tsc",
     "generate:schema": "graphql-codegen --require dotenv/config --config codegen.schema.yml dotenv_config_path=./.env",
     "generate:queries": "graphql-codegen --require dotenv/config --config codegen.queries.yml dotenv_config_path=./.env",
-    "generate": "yarn generate:schema && yarn generate:types"
+    "generate": "yarn generate:schema && yarn generate:queries"
   },
   "dependencies": {
     "@apollo/client": "^3.8.1",
