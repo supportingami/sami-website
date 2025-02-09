@@ -1,5 +1,4 @@
 export default ({ env }) => ({
-  ckeditor: true,
   graphql: {
     config: {
       endpoint: "/graphql",
@@ -13,9 +12,7 @@ export default ({ env }) => ({
       },
     },
   },
-  "import-export-entries": {
-    enabled: true,
-  },
+
   "sami-admin": {
     enabled: false,
     resolve: "./src/plugins/sami-admin",

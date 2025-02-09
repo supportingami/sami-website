@@ -19,23 +19,8 @@ export default ({ env }) => {
   return [
     "strapi::logger",
     "strapi::errors",
+    "strapi::security",
 
-    // Required for https://github.com/Baboo7/strapi-plugin-import-export-entries
-    {
-      name: "strapi::security",
-      config: {
-        contentSecurityPolicy: {
-          useDefaults: true,
-          directives: {
-            "script-src": ["'self'", "blob:"],
-            "connect-src": srcs,
-            "img-src": [...srcs, "data:", "blob:"],
-            "media-src": [...srcs, "data:", "blob:"],
-            upgradeInsecureRequests: null,
-          },
-        },
-      },
-    },
     // Custom redirect middleware
     {
       name: "global::dashboard-redirect",
