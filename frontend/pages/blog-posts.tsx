@@ -12,9 +12,9 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
   let blogs: IBlogPost[] = [];
   const blogPostRes = await serverQuery<BlogPostsQuery>(BlogPostsDocument);
   if (blogPostRes) {
-    blogs = blogPostRes.data.blogPosts.data.map((b) => ({
-      ...(b.attributes as BlogPost),
-      id: b.id,
+    blogs = blogPostRes.data.blogPosts_connection.nodes.map((b) => ({
+      ...(b as BlogPost),
+      id: b.documentId,
     }));
   }
   return {

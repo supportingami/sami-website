@@ -39,10 +39,11 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
   const partnersRes = await serverQuery<PartnersQuery>(PartnersDocument);
 
   const props: IAboutProps = {
-    content: (contentRes.data?.aboutContent?.data?.attributes as AboutContent) || {},
-    members: membersRes.data?.members.data.map((m) => ({ ...m.attributes, id: m.id } as IMember)) || [],
-    partners: partnersRes.data.partners.data.map((m) => ({ ...(m.attributes as Partner) })) || [],
-    reports: reportsRes.data.annualReports.data.map((m) => ({ ...m.attributes, id: m.id } as IAnnualReport)) || [],
+    content: contentRes.data?.aboutContent as AboutContent,
+    members: membersRes.data?.members_connection.nodes.map((m) => ({ ...m, id: m.documentId } as IMember)) || [],
+    partners: partnersRes.data.partners_connection.nodes.map((m) => m as Partner) || [],
+    reports:
+      reportsRes.data.annualReports_connection.nodes.map((m) => ({ ...m, id: m.documentId } as IAnnualReport)) || [],
   };
 
   return {
@@ -114,7 +115,7 @@ const AboutPage = ({ content, members, reports, partners }: InferGetStaticPropsT
         </PageSection>
         <PageSection fullwidth className="bg-base-200 py-16">
           <h2 className="text-center">Improving Lives</h2>
-          <Testimonials testimonials={content.Testimonials.data.map((el) => el.attributes)} />
+          <Testimonials testimonials={content.Testimonials_connection.nodes || []} />
         </PageSection>
         <PageSection fullwidth className="bg-primary-focus text-white py-0">
           <h2 className="text-center text-white">Our Partners</h2>

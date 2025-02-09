@@ -1,4 +1,4 @@
-import type { ComponentHomeMissionStatement, UploadFileEntityResponse } from "../../../graphql/generated";
+import type { ComponentHomeMissionStatement, UploadFile } from "../../../graphql/generated";
 import Image from "next/image";
 import { ActionButtonsComponent } from "components/common/actionButtons";
 import { HTMLContent } from "components/common/htmlContent";
@@ -27,6 +27,6 @@ export const MissionStatementComponent: React.FC<ComponentHomeMissionStatement> 
     />
   </>
 );
-const MissionStatementImage = (ImageData: Partial<UploadFileEntityResponse>) => (
+const MissionStatementImage = (ImageData: Partial<UploadFile>) => (
   <Image src={getStrapiMedia(ImageData)} alt={"image"} fill placeholder="empty" className="object-cover" />
 );

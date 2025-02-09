@@ -1,5 +1,5 @@
 import getConfig from "next/config";
-import type { UploadFileEntityResponse } from "../graphql/generated";
+import type { UploadFile } from "../graphql/generated";
 
 /**
  * Depending on environment use a different base url for images
@@ -12,13 +12,13 @@ function getStrapiURL(path = "") {
   return `${NEXT_PUBLIC_IMAGE_URL}${path}`;
 }
 
-export function getStrapiMedia(media: Partial<UploadFileEntityResponse> = {}): string {
-  if (media.data?.attributes) {
-    const { url } = media.data.attributes;
+export function getStrapiMedia(media: Partial<UploadFile> = {}): string {
+  if (media) {
+    const { url } = media;
     const imageUrl = url.startsWith("/") ? getStrapiURL(url) : url;
     return imageUrl;
   } else {
-    console.error("Media missing", media);
+    console.trace("Media missing", media);
     return "";
   }
 }

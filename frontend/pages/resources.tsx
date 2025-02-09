@@ -22,9 +22,9 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
   let resources: IResource[] = [];
   const res = await serverQuery<ResourcesQuery>(ResourcesDocument);
   if (res) {
-    resources = res.data.resources.data.map((r) => ({
-      ...(r.attributes as Resource),
-      id: r.id,
+    resources = res.data.resources_connection.nodes.map((r) => ({
+      ...(r as Resource),
+      id: r.documentId,
     }));
   }
   return {

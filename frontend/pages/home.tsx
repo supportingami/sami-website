@@ -20,11 +20,11 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
   const res = await serverQuery<HomeContentQuery>(HomeContentDocument);
   return {
     props: {
-      blogs: res.data.blogPosts?.data || [],
-      content: res.data.homeContent.data.attributes,
-      projects: (res.data.projectTypes?.data || []).map((p) => ({
-        ...(p.attributes as ProjectType),
-        id: p.id,
+      blogs: res.data.blogPosts_connection?.nodes || [],
+      content: res.data.homeContent,
+      projects: (res.data.projectTypes_connection?.nodes || []).map((p) => ({
+        ...(p as ProjectType),
+        id: p.documentId,
       })),
     },
   };
@@ -87,7 +87,7 @@ const HomePage = ({ content, blogs, projects }: InferGetStaticPropsType<typeof g
         <PageSection className="py-16">
           <div className="grid grid-cols-1 gap-5 2xl:grid-cols-3 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2">
             {blogs.map((blog) => (
-              <BlogCardComponent key={blog.id} blog={blog.attributes as any} />
+              <BlogCardComponent key={blog.documentId} blog={blog as any} />
             ))}
           </div>
         </PageSection>

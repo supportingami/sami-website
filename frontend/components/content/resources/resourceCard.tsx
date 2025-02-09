@@ -15,7 +15,7 @@ export const ResourceCardComponent: React.FC<{
   border-neutral-content border shadow-md hover:scale-105 transition-all duration-200 ease-in-out`}
     >
       <div className="relative h-48 max-h-40 lg:max-h-48 w-full flex justify-center">
-        {resource.Image?.data && (
+        {resource.Image && (
           <Image src={getStrapiMedia(resource.Image)} alt={"image"} placeholder="empty" className="object-cover" fill />
         )}
       </div>
@@ -26,7 +26,7 @@ export const ResourceCardComponent: React.FC<{
         <div className="pt-0 text-sm overflow-ellipsis overflow-hidden max-h-20 relative">{resource.Description}</div>
       </div>
       <div>
-        {resource.Media?.data && (
+        {resource.Media && (
           <ExternalLink href={getStrapiMedia(resource.Media)} download>
             <button className="btn btn-primary m-2">Download</button>
           </ExternalLink>

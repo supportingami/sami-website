@@ -1,4 +1,4 @@
-import type { ComponentHomeProjectSummary, UploadFileEntityResponse } from "../../../graphql/generated";
+import type { ComponentHomeProjectSummary, UploadFile } from "../../../graphql/generated";
 import Image from "next/image";
 import { ActionButtonsComponent } from "components/common/actionButtons";
 import { getStrapiMedia } from "lib/media";
@@ -17,14 +17,14 @@ export const ProjectSummaryComponent: React.FC<ComponentHomeProjectSummary & { P
     Image={<ProjectSummaryImage {...Image} />}
     Content={
       <>
-        {Projects && Projects.map((project) => <ProjectSummaryItem key={project.id} {...project} />)}
+        {Projects && Projects.map((project) => <ProjectSummaryItem key={project.documentId} {...project} />)}
         <ActionButtonsComponent actionButtons={ActionButtons} className="mt-8" />
       </>
     }
   />
 );
 
-const ProjectSummaryImage = (ImageData: Partial<UploadFileEntityResponse>) =>
-  ImageData?.data?.attributes ? (
+const ProjectSummaryImage = (ImageData: Partial<UploadFile>) =>
+  ImageData ? (
     <Image src={getStrapiMedia(ImageData)} alt={"image"} fill placeholder="empty" className="object-cover" />
   ) : null;

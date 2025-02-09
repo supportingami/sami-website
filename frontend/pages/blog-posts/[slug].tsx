@@ -13,9 +13,9 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   const blogPostRes = await serverQuery<BlogPostContentQuery>(BlogPostContentDocument, {
     filters,
   });
-  const matchedBlogPost = blogPostRes.data.blogPosts.data[0];
+  const matchedBlogPost = blogPostRes.data.blogPosts_connection.nodes[0];
   if (matchedBlogPost) {
-    return { props: { blogPost: matchedBlogPost.attributes as IBlogPost } };
+    return { props: { blogPost: matchedBlogPost as IBlogPost } };
   }
   return {
     notFound: true,
@@ -26,9 +26,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const blogPostRes = await serverQuery<BlogPostContentQuery>(BlogPostContentDocument);
   let blogs: IBlogPost[] = [];
   if (blogPostRes) {
-    blogs = blogPostRes.data.blogPosts.data.map((b) => ({
-      ...(b.attributes as BlogPost),
-      id: b.id,
+    blogs = blogPostRes.data.blogPosts_connection.nodes.map((b) => ({
+      ...(b as BlogPost),
+      id: b.documentId,
     }));
   }
   return {
