@@ -1,8 +1,8 @@
-import { Strapi } from "@strapi/strapi";
+import type { Core } from "@strapi/types";
 import { Server } from "socket.io";
 import { DeployWebsocketService } from "./services/deploy-websocket";
 
-export default ({ strapi }: { strapi: Strapi }) => {
+export default ({ strapi }: { strapi: Core.Strapi }) => {
   // bootstrap phase
 
   // https://strapi.io/blog/real-time-chat-application-using-strapi-next-socket-io-and-postgre-sql

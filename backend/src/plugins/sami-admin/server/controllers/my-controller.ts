@@ -1,6 +1,6 @@
-import { Strapi } from "@strapi/strapi";
+import type { Core } from "@strapi/types";
 
-export default ({ strapi }: { strapi: Strapi }) => ({
+export default ({ strapi }: { strapi: Core.Strapi }) => ({
   index(ctx) {
     ctx.body = "Plugin Loaded";
     // ctx.body = strapi.plugin("sami-admin").service("myService").getWelcomeMessage();

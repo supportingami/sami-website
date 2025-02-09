@@ -1,151 +1,169 @@
-import type { Schema, Attribute } from "@strapi/strapi";
+import type { Schema, Struct } from "@strapi/strapi";
 
-export interface CommonActionButton extends Schema.Component {
+export interface CommonActionButton extends Struct.ComponentSchema {
   collectionName: "components_common_action_buttons";
   info: {
-    displayName: "ActionButton";
     description: "";
+    displayName: "ActionButton";
     icon: "ad";
   };
   attributes: {
-    Text: Attribute.String & Attribute.Required;
-    Link: Attribute.String & Attribute.Required;
-    ClassNames: Attribute.String;
+    ClassNames: Schema.Attribute.String;
+    Link: Schema.Attribute.String & Schema.Attribute.Required;
+    Text: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
-export interface CommonHtml extends Schema.Component {
+export interface CommonHtml extends Struct.ComponentSchema {
   collectionName: "components_common_htmls";
   info: {
-    displayName: "HTML";
     description: "";
+    displayName: "HTML";
   };
   attributes: {
-    HTML: Attribute.RichText & Attribute.Required;
+    HTML: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        "plugin::ckeditor5.CKEditor",
+        {
+          preset: "defaultHtml";
+        }
+      >;
   };
 }
 
-export interface CommonImage extends Schema.Component {
+export interface CommonImage extends Struct.ComponentSchema {
   collectionName: "components_common_images";
   info: {
+    description: "";
     displayName: "Image";
     icon: "landscape";
-    description: "";
   };
   attributes: {
-    Media: Attribute.Media & Attribute.Required;
-    AltText: Attribute.String;
-    Caption: Attribute.Text;
-    ClassNames: Attribute.String;
+    AltText: Schema.Attribute.String;
+    Caption: Schema.Attribute.Text;
+    ClassNames: Schema.Attribute.String;
+    Media: Schema.Attribute.Media<"images"> & Schema.Attribute.Required;
   };
 }
 
-export interface CommonTextBlock extends Schema.Component {
+export interface CommonTextBlock extends Struct.ComponentSchema {
   collectionName: "components_common_text_blocks";
   info: {
-    displayName: "TextBlock";
     description: "";
+    displayName: "TextBlock";
   };
   attributes: {
-    Text: Attribute.Text & Attribute.Required;
+    Text: Schema.Attribute.Text & Schema.Attribute.Required;
   };
 }
 
-export interface HomeGetInvolved extends Schema.Component {
+export interface HomeGetInvolved extends Struct.ComponentSchema {
   collectionName: "components_home_get_involveds";
   info: {
-    displayName: "GetInvolved";
     description: "";
+    displayName: "GetInvolved";
   };
   attributes: {
-    Title: Attribute.String;
-    Text: Attribute.Text;
-    Description: Attribute.RichText;
-    Image: Attribute.Media;
-    ActionButtons: Attribute.Component<"common.action-button", true>;
+    ActionButtons: Schema.Attribute.Component<"common.action-button", true>;
+    Description: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        "plugin::ckeditor5.CKEditor",
+        {
+          preset: "defaultHtml";
+        }
+      >;
+    Image: Schema.Attribute.Media<"images" | "files" | "videos" | "audios">;
+    Text: Schema.Attribute.Text;
+    Title: Schema.Attribute.String;
   };
 }
 
-export interface HomeHeroImage extends Schema.Component {
+export interface HomeHeroImage extends Struct.ComponentSchema {
   collectionName: "components_home_hero_images";
   info: {
-    displayName: "HeroImage";
     description: "";
+    displayName: "HeroImage";
   };
   attributes: {
-    Image: Attribute.Media & Attribute.Required;
-    Text: Attribute.String & Attribute.Required;
-    ActionButtons: Attribute.Component<"common.action-button", true>;
+    ActionButtons: Schema.Attribute.Component<"common.action-button", true>;
+    Image: Schema.Attribute.Media<"images" | "files" | "videos" | "audios"> & Schema.Attribute.Required;
+    Text: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
-export interface HomeImpactNumbers extends Schema.Component {
+export interface HomeImpactNumbers extends Struct.ComponentSchema {
   collectionName: "components_home_impact_numbers";
   info: {
     displayName: "ImpactNumbers";
   };
   attributes: {
-    Number: Attribute.String;
-    Title: Attribute.String;
+    Number: Schema.Attribute.String;
+    Title: Schema.Attribute.String;
   };
 }
 
-export interface HomeImpactSection extends Schema.Component {
+export interface HomeImpactSection extends Struct.ComponentSchema {
   collectionName: "components_home_impact_sections";
   info: {
     displayName: "ImpactSection";
     icon: "medal";
   };
   attributes: {
-    Statement: Attribute.Text;
-    ImpactNumbers: Attribute.Component<"home.impact-numbers", true>;
+    ImpactNumbers: Schema.Attribute.Component<"home.impact-numbers", true>;
+    Statement: Schema.Attribute.Text;
   };
 }
 
-export interface HomeMissionStatement extends Schema.Component {
+export interface HomeMissionStatement extends Struct.ComponentSchema {
   collectionName: "components_home_mission_statements";
   info: {
-    displayName: "MissionStatement";
     description: "";
+    displayName: "MissionStatement";
   };
   attributes: {
-    Image: Attribute.Media;
-    Text: Attribute.Text;
-    Heading: Attribute.String;
-    ActionButtons: Attribute.Component<"common.action-button", true>;
-    Description: Attribute.RichText;
+    ActionButtons: Schema.Attribute.Component<"common.action-button", true>;
+    Description: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        "plugin::ckeditor5.CKEditor",
+        {
+          preset: "defaultHtml";
+        }
+      >;
+    Heading: Schema.Attribute.String;
+    Image: Schema.Attribute.Media<"images" | "files" | "videos" | "audios">;
+    Text: Schema.Attribute.Text;
   };
 }
 
-export interface HomeProjectSummaryItem extends Schema.Component {
+export interface HomeProjectSummary extends Struct.ComponentSchema {
+  collectionName: "components_home_project_summaries";
+  info: {
+    description: "";
+    displayName: "ProjectSummary";
+  };
+  attributes: {
+    ActionButtons: Schema.Attribute.Component<"common.action-button", true>;
+    Image: Schema.Attribute.Media<"images" | "files" | "videos" | "audios">;
+    Text: Schema.Attribute.Text;
+    Title: Schema.Attribute.String;
+  };
+}
+
+export interface HomeProjectSummaryItem extends Struct.ComponentSchema {
   collectionName: "components_home_project_summary_items";
   info: {
     displayName: "ProjectSummaryItem";
   };
   attributes: {
-    Icon: Attribute.Media;
-    Title: Attribute.String;
-    Description: Attribute.Text;
+    Description: Schema.Attribute.Text;
+    Icon: Schema.Attribute.Media<"images" | "files" | "videos" | "audios">;
+    Title: Schema.Attribute.String;
   };
 }
 
-export interface HomeProjectSummary extends Schema.Component {
-  collectionName: "components_home_project_summaries";
-  info: {
-    displayName: "ProjectSummary";
-    description: "";
-  };
-  attributes: {
-    Title: Attribute.String;
-    Text: Attribute.Text;
-    ActionButtons: Attribute.Component<"common.action-button", true>;
-    Image: Attribute.Media;
-  };
-}
-
-declare module "@strapi/types" {
-  export module Shared {
-    export interface Components {
+declare module "@strapi/strapi" {
+  export module Public {
+    export interface ComponentSchemas {
       "common.action-button": CommonActionButton;
       "common.html": CommonHtml;
       "common.image": CommonImage;
@@ -155,8 +173,8 @@ declare module "@strapi/types" {
       "home.impact-numbers": HomeImpactNumbers;
       "home.impact-section": HomeImpactSection;
       "home.mission-statement": HomeMissionStatement;
-      "home.project-summary-item": HomeProjectSummaryItem;
       "home.project-summary": HomeProjectSummary;
+      "home.project-summary-item": HomeProjectSummaryItem;
     }
   }
 }
