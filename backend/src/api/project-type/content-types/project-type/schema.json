@@ -25,7 +25,11 @@
       "type": "text"
     },
     "PageSummary": {
-      "type": "richtext"
+      "type": "customField",
+      "options": {
+        "preset": "defaultHtml"
+      },
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "PageContent": {
       "type": "dynamiczone",
