@@ -260,7 +260,91 @@
     "slug": "transforming-learning-environments",
     "summary": "Reflections from Happy Classrooms Initiative Project in Kenya",
     "title": "Transforming Learning Environments",
-    "updated_at": 1711382641337,
+    "updated_at": 1721816706350,
+    "updated_by_id": 2
+  },
+  {
+    "created_at": 1720435265669,
+    "created_by_id": 2,
+    "date_written": "2024-04-22",
+    "id": 25,
+    "published_at": 1720435439255,
+    "slug": "launching-uganda-s-first-official-international-day-of-mathematics",
+    "summary": "For years, the Association of Women Mathematicians Uganda (AWoM) has been championing mathematics education in the country. But despite their efforts, the IDM had never been officially launched in Uganda. That all changed in 2024.",
+    "title": "Launching Uganda's First Official International Day of Mathematics",
+    "updated_at": 1720508778996,
+    "updated_by_id": 2
+  },
+  {
+    "created_at": 1720508621732,
+    "created_by_id": 2,
+    "date_written": "2024-03-27",
+    "id": 26,
+    "published_at": 1720508629090,
+    "slug": "how-do-you-know-if-you-are-good-at-maths",
+    "summary": "This is a reflection of the half-day and full day mini maths camp that took place at Grace of Mariata Primary and Junior School in Kisumu in the months of February and March 2024, engaging different sets of students from ages 7 to 14. This initiative drew inspiration from the African Maths Initiative Maths Camp programs on Happy Classroom, Maths Game Envoys, Maths Camps and Maths Clubs as well as the Nrich's program on Becoming a Better Mathematician. The objective was to engage young learners in stimulating mathematical activities, present the happy classroom model lessons and foster a love for the subject and promote problem-solving skills.",
+    "title": "How do you know if you are good at Maths?",
+    "updated_at": 1720508629093,
+    "updated_by_id": 2
+  },
+  {
+    "created_at": 1721750298328,
+    "created_by_id": 2,
+    "date_written": "2023-11-01",
+    "id": 27,
+    "published_at": 1721750464431,
+    "slug": "unlocking-the-world-of-mathematics-a-journey-of-discovery-at-nyahera-girls-math-camp",
+    "summary": "The purpose of this three-day maths camp was clear: to ignite a passion for mathematics in the hearts of young girls. It aimed to turn these young minds into math game ambassadors, learning through play, problem-solving, and exploration.",
+    "title": "A Passion for Mathematics in the Hearts of Young Girls",
+    "updated_at": 1721750464435,
+    "updated_by_id": 2
+  },
+  {
+    "created_at": 1721751001500,
+    "created_by_id": 2,
+    "date_written": "2023-07-20",
+    "id": 28,
+    "published_at": 1721751049927,
+    "slug": "from-student-to-educator-a-journey-of-love-for-mathematics-and-stem",
+    "summary": "\"For what feels like ages, I've been itching to share the incredible tale of my journey to becoming a math and science educator. From my earliest days in primary school, I had the privilege of being guided by the most amazing teachers and mentors who not only opened my eyes to the wonders of Mathematics but also nurtured a deep love for the subject, leading me to my ultimate dream of becoming a math teacher.\" - Samuel Okoth",
+    "title": "From Student to Educator: A Journey of Love for Mathematics and STEM",
+    "updated_at": 1721751049930,
+    "updated_by_id": 2
+  },
+  {
+    "created_at": 1736790945958,
+    "created_by_id": 4,
+    "date_written": "2025-01-13",
+    "id": 29,
+    "published_at": 1736792369410,
+    "slug": "our-intern-diera-s-reflections",
+    "summary": "My name is Esther Diera, and I am a trained Mathematics and Chemistry teacher from Kisii University, Kenya. I had the privilege of teaching for almost three years before embarking on this internship.",
+    "title": "Our Intern Diera's Reflections",
+    "updated_at": 1736792489275,
+    "updated_by_id": 4
+  },
+  {
+    "created_at": 1738222262421,
+    "created_by_id": 2,
+    "date_written": "2025-01-28",
+    "id": 30,
+    "published_at": 1738223698420,
+    "slug": "my-journey-as-a-sami-volunteer",
+    "summary": "The story of Geoffrey Deperle, a mathematics teacher and research fellow based in Paris.",
+    "title": "My Journey as a SAMI Volunteer",
+    "updated_at": 1738223698422,
+    "updated_by_id": 2
+  },
+  {
+    "created_at": 1738224756609,
+    "created_by_id": 2,
+    "date_written": "2025-01-21",
+    "id": 31,
+    "published_at": 1738225001185,
+    "slug": "my-first-international-assignment-lessons-beyond-borders",
+    "summary": "Recollections of Esther Mmbai Diera, an intern at African Maths Initiative from the 8th STEM Youth Boot Camp in Arusha, Tanzania.",
+    "title": "My First International Assignment: Lessons Beyond Borders",
+    "updated_at": 1738225233313,
     "updated_by_id": 2
   }
 ]
