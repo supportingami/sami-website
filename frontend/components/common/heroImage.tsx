@@ -1,10 +1,9 @@
 import { getStrapiMedia } from "lib/media";
 import Image from "next/image";
 import type { ComponentHomeHeroImage } from "../../graphql/generated";
-import { ActionButtonsComponent } from "./actionButtons";
 
 export const HeroImageComponent: React.FC<{ heroImage: ComponentHomeHeroImage }> = ({ heroImage }) => {
-  const { Image: ImageData, Text, ActionButtons } = heroImage;
+  const { Image: ImageData, Text } = heroImage;
 
   /**
    * Generate style code to allow text to have background colour split across lines
