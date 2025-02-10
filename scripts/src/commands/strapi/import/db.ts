@@ -102,15 +102,15 @@ export class DBImport {
 
   /** Process imports so that sqlite sequenc and linked tables last */
   private sortImports(a: { table: string }, b: { table: string }) {
-    if (a.table === "sqlite_sequence") return 1;
-    if (b.table === "sqlite_sequence") return -1;
-    if (a.table === "files_related_morphs") return 1;
-    if (b.table === "files_related_morphs") return -1;
-    if (a.table.endsWith("components")) return 1;
-    if (b.table.endsWith("components")) return -1;
-    if (a.table.endsWith("links")) return 1;
-    if (b.table.endsWith("links")) return -1;
-    return a.table > b.table ? 1 : -1;
+    // if (a.table === "sqlite_sequence") return 1;
+    // if (b.table === "sqlite_sequence") return -1;
+    // if (a.table === "files_related_morphs") return 1;
+    // if (b.table === "files_related_morphs") return -1;
+    // if (a.table.endsWith("components")) return 1;
+    // if (b.table.endsWith("components")) return -1;
+    // if (a.table.endsWith("links")) return 1;
+    // if (b.table.endsWith("links")) return -1;
+    return a.table.length - b.table.length;
   }
 
   private async confirmImport(data: ImportSummary[]) {
