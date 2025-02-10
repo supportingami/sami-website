@@ -16,7 +16,12 @@
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": ["images", "files", "videos", "audios"]
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "Title": {
       "type": "string",
@@ -32,11 +37,16 @@
     "Slug": {
       "type": "uid",
       "targetField": "Title",
-      "required": false
+      "required": true
     },
     "ContentBlocks": {
       "type": "dynamiczone",
-      "components": ["common.action-button", "common.html", "common.text-block", "common.image"]
+      "components": [
+        "common.action-button",
+        "common.html",
+        "common.text-block",
+        "common.image"
+      ]
     }
   }
 }

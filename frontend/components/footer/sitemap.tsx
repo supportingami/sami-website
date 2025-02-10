@@ -32,7 +32,7 @@ const pageLinks = [
   {
     id: "contact",
     label: "CONTACT US",
-    href: "mailto:admin@samicharity.co.uk",
+    href: "mailto:admin@supportingami.org",
   },
   {
     id: "donate",

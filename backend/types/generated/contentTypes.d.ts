@@ -407,7 +407,7 @@ export interface ApiBlogPostBlogPost extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<"oneToMany", "api::blog-post.blog-post"> & Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    Slug: Schema.Attribute.UID<"Title">;
+    Slug: Schema.Attribute.UID<"Title"> & Schema.Attribute.Required;
     Summary: Schema.Attribute.Text;
     Title: Schema.Attribute.String & Schema.Attribute.Required & Schema.Attribute.Unique;
     updatedAt: Schema.Attribute.DateTime;
