@@ -1,41 +1,35 @@
 # Write your query or mutation here
 query blogPostContent($filters: BlogPostFiltersInput) {
-  blogPosts(sort: "DateWritten:DESC", filters: $filters) {
-    data {
-      id
-      attributes {
-        Title
-        DateWritten
-        Slug
-        # If any new blocks added for authoring need to include here
-        ContentBlocks {
-          __typename
-          ... on ComponentCommonHtml {
-            HTML
+  blogPosts_connection(sort: "DateWritten:DESC", filters: $filters) {
+    nodes {
+      documentId
+      Title
+      DateWritten
+      Slug
+      # If any new blocks added for authoring need to include here
+      ContentBlocks {
+        __typename
+        ... on ComponentCommonHtml {
+          HTML
+        }
+        ... on ComponentCommonImage {
+          AltText
+          Caption
+          ClassNames
+          Media {
+            documentId
+            name
+            url
+            size
           }
-          ... on ComponentCommonImage {
-            AltText
-            Caption
-            ClassNames
-            Media {
-              data {
-                id
-                attributes {
-                  name
-                  url
-                  size
-                }
-              }
-            }
-          }
-          ... on ComponentCommonTextBlock {
-            Text
-          }
-          ... on ComponentCommonActionButton {
-            ClassNames
-            Link
-            Text
-          }
+        }
+        ... on ComponentCommonTextBlock {
+          Text
+        }
+        ... on ComponentCommonActionButton {
+          ClassNames
+          Link
+          Text
         }
       }
     }

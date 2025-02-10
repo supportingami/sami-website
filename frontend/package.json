@@ -9,7 +9,9 @@
     "build:analyze": "DEPRECATED - ANALYZE=true next build && tsc --project tsconfig.server.json",
     "build:standalone": "DEPRECATED - next build && node ./postbuild.js",
     "lint": "tsc",
-    "generate": "graphql-codegen --require dotenv/config --config codegen.yml dotenv_config_path=./.env"
+    "generate:schema": "graphql-codegen --require dotenv/config --config codegen.schema.yml dotenv_config_path=./.env",
+    "generate:queries": "graphql-codegen --require dotenv/config --config codegen.queries.yml dotenv_config_path=./.env",
+    "generate": "yarn generate:schema && yarn generate:queries"
   },
   "dependencies": {
     "@apollo/client": "^3.8.1",
@@ -24,17 +26,18 @@
     "sharp": "^0.32.0"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^2.13.5",
-    "@graphql-codegen/schema-ast": "^2.5.1",
-    "@graphql-codegen/typed-document-node": "^2.3.3",
-    "@graphql-codegen/typescript": "^2.7.3",
-    "@graphql-codegen/typescript-operations": "^2.5.3",
+    "@graphql-codegen/cli": "^5.0.4",
+    "@graphql-codegen/schema-ast": "^4.1.0",
+    "@graphql-codegen/typed-document-node": "^5.0.13",
+    "@graphql-codegen/typescript": "^4.1.3",
+    "@graphql-codegen/typescript-operations": "^4.4.1",
     "@next/bundle-analyzer": "^12.3.1",
     "@tailwindcss/typography": "^0.5.4",
     "@types/node": "^20",
     "@types/react": "^18.0.18",
     "@types/react-dom": "^18.0.4",
     "autoprefixer": "^10.4.8",
+    "cross-env": "^7.0.3",
     "daisyui": "^2.24.0",
     "dotenv": "^16.0.1",
     "next-export-optimize-images": "^3.3.0",

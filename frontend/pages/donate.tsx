@@ -17,8 +17,8 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
   const donorsRes = await serverQuery<DonorsQuery>(DonorsDocument);
   return {
     props: {
-      content: donateContentRes.data.donateContent.data.attributes,
-      donors: donorsRes.data.donors.data.map(({ attributes }) => attributes as Donor) || [],
+      content: donateContentRes.data.donateContent,
+      donors: (donorsRes.data.donors_connection.nodes as Donor[]) || [],
     },
   };
 };

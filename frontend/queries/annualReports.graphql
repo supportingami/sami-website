@@ -1,38 +1,26 @@
 query annualReports {
-  annualReports(sort: "Year:DESC") {
-    data {
-      id
-      attributes {
-        Year
-        File {
-          data {
-            id
-            attributes {
-              name
-              url
-              size
-            }
-          }
-        }
-        CoverImage {
-          data {
-            id
-            attributes {
-              name
-              url
-              size
-            }
-          }
-        }
+  annualReports_connection(sort: "Year:DESC") {
+    nodes {
+      documentId
+      Year
+      File {
+        documentId
+        name
+        url
+        size
+      }
+      CoverImage {
+        documentId
+        name
+        url
+        size
       }
     }
-    meta {
-      pagination {
-        page
-        pageSize
-        total
-        pageCount
-      }
+    pageInfo {
+      page
+      pageSize
+      total
+      pageCount
     }
   }
 }

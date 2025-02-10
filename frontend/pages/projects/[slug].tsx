@@ -11,9 +11,9 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   // Find project with matching slug
   const filters: ProjectTypeFiltersInput = { Slug: { eq: params.slug as string } };
   const projectRes = await serverQuery<ProjectsQuery>(ProjectsDocument, { filters });
-  const matchedProject = projectRes.data.projectTypes.data[0];
+  const matchedProject = projectRes.data.projectTypes_connection.nodes[0];
   if (matchedProject) {
-    return { props: { project: matchedProject.attributes as IProject } };
+    return { props: { project: matchedProject as IProject } };
   }
   return {
     notFound: true,
@@ -34,9 +34,9 @@ async function fetchProjects() {
   let projects: IProject[] = [];
   const queryRes = await serverQuery<ProjectsQuery>(ProjectsDocument);
   if (queryRes) {
-    projects = queryRes.data.projectTypes.data.map((b) => ({
-      ...(b.attributes as IProject),
-      id: b.id,
+    projects = queryRes.data.projectTypes_connection.nodes.map((b) => ({
+      ...(b as IProject),
+      id: b.documentId,
     }));
   }
   return projects;

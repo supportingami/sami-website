@@ -1,8 +1,9 @@
 import { spawn } from "child_process";
 import { resolve } from "path";
-import { Strapi } from "@strapi/strapi";
+import type { Core } from "@strapi/types";
+import type {ParameterizedContext } from 'koa'
 
-export default ({ strapi }: { strapi: Strapi }) => ({
+export default ({ strapi }: { strapi: Core.Strapi }) => ({
   /**
    * Trigger deployment via rest request
    * Runs locally and attempts to return final output at end
@@ -15,7 +16,7 @@ export default ({ strapi }: { strapi: Strapi }) => ({
     console.log("deploying...", 5);
     const rootDir = resolve(__dirname, "../../../../../../../");
     return new Promise((resolve, reject) => {
-      const ctx = strapi.requestContext.get();
+      const ctx = strapi.requestContext.get() as ParameterizedContext;
       const child = spawn(`yarn`, ["build --export --no-backend --no-preview --deploy"], {
         cwd: rootDir,
         env: process.env,

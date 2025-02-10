@@ -1,5 +1,16 @@
 export default ({ env }) => ({
-  ckeditor: true,
+  email: {
+    config: {
+      provider: "sendgrid",
+      providerOptions: {
+        apiKey: env("SENDGRID_API_KEY"),
+      },
+      settings: {
+        defaultFrom: "admin@samicharity.co.uk",
+        defaultReplyTo: "admin@samicharity.co.uk",
+      },
+    },
+  },
   graphql: {
     config: {
       endpoint: "/graphql",
@@ -13,9 +24,7 @@ export default ({ env }) => ({
       },
     },
   },
-  "import-export-entries": {
-    enabled: true,
-  },
+
   "sami-admin": {
     enabled: false,
     resolve: "./src/plugins/sami-admin",

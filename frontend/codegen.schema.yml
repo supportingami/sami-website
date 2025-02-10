@@ -1,0 +1,11 @@
+# Export graphql schema for vscode autocomplete
+
+# Connect to graphql server running on localhost, passing api token from env
+schema:
+  - http://localhost:1337/graphql:
+      headers:
+        Authorization: "Bearer ${STRAPI_READONLY_TOKEN}"
+generates:
+  ./graphql/generated.graphql:
+    plugins:
+      - schema-ast

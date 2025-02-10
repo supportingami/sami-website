@@ -1,19 +1,15 @@
 query faqs {
-  faqs {
-    data {
-      id
-      attributes {
-        Question
-        Response
-      }
+  faqs_connection {
+    nodes {
+      documentId
+      Question
+      Response
     }
-    meta {
-      pagination {
-        page
-        pageSize
-        total
-        pageCount
-      }
+    pageInfo {
+      page
+      pageSize
+      total
+      pageCount
     }
   }
 }

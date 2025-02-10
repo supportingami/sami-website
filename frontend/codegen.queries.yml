@@ -1,3 +1,5 @@
+# Export graphql queries to TS type definitions
+
 # Connect to graphql server running on localhost, passing api token from env
 schema:
   - http://localhost:1337/graphql:
@@ -13,7 +15,3 @@ generates:
       - typed-document-node
     config:
       fetcher: fetch
-  # Generate collated graphql file for autocomplete
-  ./graphql/generated.graphql:
-    plugins:
-      - schema-ast

@@ -1,50 +1,39 @@
-# Use GraphQL to extract data from the database
+# Use GraphQL to extract nodes from the nodesbase
 # This is comparable to SQL
 # `SELECT Name, Email from members`
 query members {
   # table to query
-  members(sort: "SortOrder:ASC") {
-    # return from query data
-    data {
+  members_connection(sort: "SortOrder:ASC") {
+    # return from query nodes
+    nodes {
       # primary key to use
-      id
+      documentId
       # what fields to return
-      attributes {
-        Name
-        Email
-        Bio
-        LinkedIn
-        Photo {
-          data {
-            id
-            attributes {
-              url
-              name
-              size
-            }
-          }
-        }
-        BioImage {
-          data {
-            id
-            attributes {
-              url
-              name
-              size
-            }
-          }
-        }
-        Tags
+      Name
+      Email
+      Bio
+      LinkedIn
+      Photo {
+        documentId
+        url
+        name
+        size
       }
+
+      BioImage {
+        documentId
+        url
+        name
+        size
+      }
+      Tags
     }
     # return from query meta
-    meta {
-      pagination {
-        page
-        pageSize
-        total
-        pageCount
-      }
+    pageInfo {
+      page
+      pageSize
+      total
+      pageCount
     }
   }
 }

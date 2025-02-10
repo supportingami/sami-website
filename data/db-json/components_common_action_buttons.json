@@ -100,5 +100,107 @@
     "id": 17,
     "link": "https://virtualmathscamp.com/pause-and-go-videos.html",
     "text": "Website"
+  },
+  {
+    "class_names": null,
+    "id": 18,
+    "link": "/uploads/Oxford_presentation_pptx_e6978ea3a5.pdf",
+    "text": "Presentation Slides"
+  },
+  {
+    "class_names": null,
+    "id": 19,
+    "link": "/uploads/SAMI_info_f62cc828b3.pdf",
+    "text": "SAMI Info"
+  },
+  {
+    "class_names": null,
+    "id": 20,
+    "link": "/uploads/2022_08_togo_camp_report_4d689adf61.pdf",
+    "text": "Camp Report"
+  },
+  {
+    "class_names": null,
+    "id": 21,
+    "link": "https://cafdonate.cafonline.org/19346",
+    "text": "Donate Now"
+  },
+  {
+    "class_names": null,
+    "id": 22,
+    "link": "/projects",
+    "text": "Projects"
+  },
+  {
+    "class_names": null,
+    "id": 23,
+    "link": "/volunteer",
+    "text": "Ways To Help"
+  },
+  {
+    "class_names": null,
+    "id": 24,
+    "link": "#",
+    "text": "Learn More"
+  },
+  {
+    "class_names": null,
+    "id": 25,
+    "link": "/projects",
+    "text": "Learn More"
+  },
+  {
+    "class_names": null,
+    "id": 26,
+    "link": "/volunteer",
+    "text": "Learn More"
+  },
+  {
+    "class_names": null,
+    "id": 27,
+    "link": "/donate",
+    "text": "Donate"
+  },
+  {
+    "class_names": null,
+    "id": 28,
+    "link": "https://www.canva.com/design/DAE_Dnyt4oc/-0F0psQ1K5MmHcLvhMhk6A/view#7",
+    "text": "Project Presentation"
+  },
+  {
+    "class_names": null,
+    "id": 29,
+    "link": "https://cards.virtualmathscamp.com/en",
+    "text": "Website"
+  },
+  {
+    "class_names": null,
+    "id": 30,
+    "link": "https://virtualmathscamp.com/pause-and-go-videos.html",
+    "text": "Website"
+  },
+  {
+    "class_names": null,
+    "id": 31,
+    "link": "https://mathsclub.samicharity.co.uk/",
+    "text": "Website"
+  },
+  {
+    "class_names": null,
+    "id": 32,
+    "link": "https://play.google.com/store/apps/details?id=io.c2dev.samimathsclub",
+    "text": "Android"
+  },
+  {
+    "class_names": null,
+    "id": 33,
+    "link": "https://apps.apple.com/ca/app/sami-maths-club/id1527293312?ign-mpt=uo%3D4",
+    "text": "IOS"
+  },
+  {
+    "class_names": "justify-center",
+    "id": 34,
+    "link": "https://docs.google.com/forms/d/e/1FAIpQLSdfyNymfN9xqJCfgBLKpwQqniJTd2mACY93wjmEP8y8TRZGXw/viewform",
+    "text": "Apply Now"
   }
 ]

@@ -32,7 +32,7 @@ const pageLinks = [
   {
     id: "contact",
     label: "CONTACT US",
-    href: "/contact-us",
+    href: "mailto:admin@supportingami.org",
   },
   {
     id: "donate",

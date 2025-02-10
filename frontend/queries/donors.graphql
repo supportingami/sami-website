@@ -1,36 +1,28 @@
-# Use GraphQL to extract data from the database
+# Use GraphQL to extract nodes from the database
 # This is comparable to SQL
 # `SELECT Name, Email from members`
 query donors {
   # table to query
-  donors(sort: "SortOrder:ASC") {
-    # return from query data
-    data {
+  donors_connection(sort: "SortOrder:ASC") {
+    # return from query nodes
+    nodes {
       # primary key to use
-      id
+      documentId
       # what fields to return
-      attributes {
-        Name
-        Logo {
-          data {
-            id
-            attributes {
-              url
-              name
-              size
-            }
-          }
-        }
+      Name
+      Logo {
+        documentId
+        url
+        name
+        size
       }
     }
     # return from query meta
-    meta {
-      pagination {
-        page
-        pageSize
-        total
-        pageCount
-      }
+    pageInfo {
+      page
+      pageSize
+      total
+      pageCount
     }
   }
 }

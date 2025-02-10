@@ -37,16 +37,3 @@ function generateQueryTypes() {
   console.log(chalk.gray(cmd));
   spawnSync(cmd, { cwd: PATHS.frontendDir, shell: true, stdio: "inherit" });
 }
-
-/**
- * Use the strapi cli method to generate typescript types
- * NOTE - Deprecated in favour of graphql gen methods
- * **/
-function generateSchemaTypes(options: IProgramOptions) {
-  const { outDir } = options;
-  const relativeOutDir = relative(outDir, PATHS.backendDir);
-  console.log({ relativeOutDir });
-  const cmd = `yarn strapi ts:generate-types --out-dir ../backend/generated`;
-  console.log(chalk.gray(cmd));
-  spawnSync(cmd, { cwd: PATHS.backendDir, shell: true, stdio: "inherit" });
-}

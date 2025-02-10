@@ -2,7 +2,9 @@
   {
     "created_at": 1661956693415,
     "created_by_id": 1,
+    "document_id": "adzamksiiqyqcxyvuhs2qumc",
     "id": 1,
+    "locale": null,
     "published_at": 1661956694845,
     "updated_at": 1710561968963,
     "updated_by_id": 1,
@@ -11,7 +13,9 @@
   {
     "created_at": 1662319359571,
     "created_by_id": 1,
+    "document_id": "pqp7zruwpqg5wmaxx7qo1qg2",
     "id": 2,
+    "locale": null,
     "published_at": 1662384783333,
     "updated_at": 1710561958870,
     "updated_by_id": 1,
@@ -20,7 +24,9 @@
   {
     "created_at": 1666598690743,
     "created_by_id": 1,
+    "document_id": "h3v1ptgdj884gt0z9qfgu27j",
     "id": 3,
+    "locale": null,
     "published_at": 1666598691667,
     "updated_at": 1710561948967,
     "updated_by_id": 1,
@@ -29,7 +35,9 @@
   {
     "created_at": 1666598739801,
     "created_by_id": 1,
+    "document_id": "fmrxkzonflngzs7oi2eizq3v",
     "id": 4,
+    "locale": null,
     "published_at": 1666598741588,
     "updated_at": 1710561976997,
     "updated_by_id": 1,
@@ -38,7 +46,9 @@
   {
     "created_at": 1666598787992,
     "created_by_id": 1,
+    "document_id": "yy89mk9v4htwzile9qlzr9et",
     "id": 5,
+    "locale": null,
     "published_at": 1666598788949,
     "updated_at": 1710561990374,
     "updated_by_id": 1,
@@ -47,7 +57,9 @@
   {
     "created_at": 1666598832404,
     "created_by_id": 1,
+    "document_id": "l8u3v54u4sr3rzt24g3dt39d",
     "id": 6,
+    "locale": null,
     "published_at": 1666598833372,
     "updated_at": 1710561998359,
     "updated_by_id": 1,
@@ -56,7 +68,9 @@
   {
     "created_at": 1709705783777,
     "created_by_id": 1,
+    "document_id": "rniu91r0wayedkgy5j4ltsi6",
     "id": 7,
+    "locale": null,
     "published_at": 1709705875968,
     "updated_at": 1710561894038,
     "updated_by_id": 1,
@@ -65,8 +79,98 @@
   {
     "created_at": 1709705855436,
     "created_by_id": 1,
+    "document_id": "es3t0d9114wecukhidyhsp4f",
     "id": 8,
+    "locale": null,
     "published_at": 1709705878515,
+    "updated_at": 1710561926342,
+    "updated_by_id": 1,
+    "year": 2022
+  },
+  {
+    "created_at": 1661956693415,
+    "created_by_id": 1,
+    "document_id": "adzamksiiqyqcxyvuhs2qumc",
+    "id": 18,
+    "locale": null,
+    "published_at": null,
+    "updated_at": 1710561968963,
+    "updated_by_id": 1,
+    "year": 2019
+  },
+  {
+    "created_at": 1662319359571,
+    "created_by_id": 1,
+    "document_id": "pqp7zruwpqg5wmaxx7qo1qg2",
+    "id": 19,
+    "locale": null,
+    "published_at": null,
+    "updated_at": 1710561958870,
+    "updated_by_id": 1,
+    "year": 2020
+  },
+  {
+    "created_at": 1666598690743,
+    "created_by_id": 1,
+    "document_id": "h3v1ptgdj884gt0z9qfgu27j",
+    "id": 20,
+    "locale": null,
+    "published_at": null,
+    "updated_at": 1710561948967,
+    "updated_by_id": 1,
+    "year": 2021
+  },
+  {
+    "created_at": 1666598739801,
+    "created_by_id": 1,
+    "document_id": "fmrxkzonflngzs7oi2eizq3v",
+    "id": 21,
+    "locale": null,
+    "published_at": null,
+    "updated_at": 1710561976997,
+    "updated_by_id": 1,
+    "year": 2018
+  },
+  {
+    "created_at": 1666598787992,
+    "created_by_id": 1,
+    "document_id": "yy89mk9v4htwzile9qlzr9et",
+    "id": 22,
+    "locale": null,
+    "published_at": null,
+    "updated_at": 1710561990374,
+    "updated_by_id": 1,
+    "year": 2017
+  },
+  {
+    "created_at": 1666598832404,
+    "created_by_id": 1,
+    "document_id": "l8u3v54u4sr3rzt24g3dt39d",
+    "id": 23,
+    "locale": null,
+    "published_at": null,
+    "updated_at": 1710561998359,
+    "updated_by_id": 1,
+    "year": 2016
+  },
+  {
+    "created_at": 1709705783777,
+    "created_by_id": 1,
+    "document_id": "rniu91r0wayedkgy5j4ltsi6",
+    "id": 24,
+    "locale": null,
+    "published_at": null,
+    "updated_at": 1710561894038,
+    "updated_by_id": 1,
+    "year": 2023
+  },
+  {
+    "created_at": 1709705855436,
+    "created_by_id": 1,
+    "document_id": "es3t0d9114wecukhidyhsp4f",
+    "id": 25,
+    "locale": null,
+    "published_at": null,
     "updated_at": 1710561926342,
     "updated_by_id": 1,
     "year": 2022

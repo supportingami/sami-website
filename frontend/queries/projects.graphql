@@ -1,73 +1,57 @@
 # Write your query or mutation here
 query projects($filters: ProjectTypeFiltersInput) {
-  projectTypes(filters: $filters) {
-    data {
-      id
-      attributes {
-        Name
-        HomeSummary
-        PageSummary
-        # If any new blocks added for authoring need to include here
-        PageContent {
-          __typename
-          ... on ComponentCommonHtml {
-            HTML
-          }
-          ... on ComponentCommonImage {
-            AltText
-            Caption
-            ClassNames
-            Media {
-              data {
-                id
-                attributes {
-                  name
-                  url
-                  size
-                }
-              }
-            }
-          }
-          ... on ComponentCommonTextBlock {
-            Text
-          }
-          ... on ComponentCommonActionButton {
-            ClassNames
-            Link
-            Text
+  projectTypes_connection(filters: $filters) {
+    nodes {
+      documentId
+      Name
+      HomeSummary
+      PageSummary
+      # If any new blocks added for authoring need to include here
+      PageContent {
+        __typename
+        ... on ComponentCommonHtml {
+          HTML
+        }
+        ... on ComponentCommonImage {
+          AltText
+          Caption
+          ClassNames
+          Media {
+            documentId
+            name
+            url
+            size
           }
         }
-        Icon {
-          data {
-            id
-            attributes {
-              url
-              name
-              size
-            }
-          }
+        ... on ComponentCommonTextBlock {
+          Text
         }
-        FeatureImage {
-          data {
-            id
-            attributes {
-              url
-              name
-              size
-            }
-          }
+        ... on ComponentCommonActionButton {
+          ClassNames
+          Link
+          Text
         }
-        Slug
-        Status
       }
+      Icon {
+        documentId
+        url
+        name
+        size
+      }
+      FeatureImage {
+        documentId
+        url
+        name
+        size
+      }
+      Slug
+      Status
     }
-    meta {
-      pagination {
-        page
-        pageSize
-        total
-        pageCount
-      }
+    pageInfo {
+      page
+      pageSize
+      total
+      pageCount
     }
   }
 }

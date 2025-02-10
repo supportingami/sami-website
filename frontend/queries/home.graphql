@@ -1,146 +1,112 @@
 query homeContent {
   homeContent {
-    data {
+    documentId
+    HeroImages {
       id
-      attributes {
-        HeroImages {
-          id
-          Image {
-            data {
-              id
-              attributes {
-                url
-                name
-                size
-              }
-            }
-          }
-          Text
-          ActionButtons {
-            id
-            Text
-            Link
-          }
-        }
-        MissionStatement {
-          id
-          Image {
-            data {
-              id
-              attributes {
-                url
-                name
-                size
-              }
-            }
-          }
-          Heading
-          Text
-          Description
-          ActionButtons {
-            id
-            Text
-            Link
-          }
-        }
-        ProjectSummary {
-          id
-          Title
-          Text
-          Image {
-            data {
-              id
-              attributes {
-                url
-                name
-                size
-              }
-            }
-          }
-          ActionButtons {
-            id
-            Text
-            Link
-          }
-        }
-        GetInvolved {
-          id
-          Title
-          Text
-          Image {
-            data {
-              id
-              attributes {
-                url
-                name
-                size
-              }
-            }
-          }
-          Description
-          ActionButtons {
-            id
-            Text
-            Link
-          }
-        }
-        ImpactSection {
-          id
-          Statement
-          ImpactNumbers {
-            id
-            Number
-            Title
-          }
-        }
+      Image {
+        documentId
+        url
+        name
+        size
+      }
+      Text
+      ActionButtons {
+        id
+        Text
+        Link
       }
     }
-  }
-  projectTypes {
-    data {
+    MissionStatement {
       id
-      attributes {
-        Name
-        HomeSummary
-        Icon {
-          data {
-            id
-            attributes {
-              url
-              name
-              size
-            }
-          }
-        }
+      Image {
+        documentId
+        url
+        name
+        size
+      }
+      Heading
+      Text
+      Description
+      ActionButtons {
+        id
+        Text
+        Link
       }
     }
-    meta {
-      pagination {
-        page
-        pageSize
-        total
-        pageCount
+    ProjectSummary {
+      id
+      Title
+      Text
+      Image {
+        documentId
+        url
+        name
+        size
+      }
+      ActionButtons {
+        id
+        Text
+        Link
       }
     }
-  }
-  blogPosts(sort: "DateWritten:DESC", pagination: { limit: 3 }) {
-    data {
+    GetInvolved {
       id
-      attributes {
+      Title
+      Text
+      Image {
+        documentId
+        url
+        name
+        size
+      }
+      Description
+      ActionButtons {
+        id
+        Text
+        Link
+      }
+    }
+    ImpactSection {
+      id
+      Statement
+      ImpactNumbers {
+        id
+        Number
         Title
-        Summary
-        DateWritten
-        Slug
-        FeatureImage {
-          data {
-            id
-            attributes {
-              name
-              url
-              size
-            }
-          }
-        }
+      }
+    }
+  }
+  projectTypes_connection {
+    nodes {
+      documentId
+      Name
+      HomeSummary
+      Icon {
+        documentId
+        url
+        name
+        size
+      }
+    }
+    pageInfo {
+      page
+      pageSize
+      total
+      pageCount
+    }
+  }
+  blogPosts_connection(sort: "DateWritten:DESC", pagination: { limit: 3 }) {
+    nodes {
+      documentId
+      Title
+      Summary
+      DateWritten
+      Slug
+      FeatureImage {
+        documentId
+        name
+        url
+        size
       }
     }
   }

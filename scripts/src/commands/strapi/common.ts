@@ -8,12 +8,11 @@ import { loadDb } from "backend/scripts/db";
 
 // Import from backend folders to ensure plugins resolved correctly
 import strapi from "../../../../backend/node_modules/@strapi/strapi";
-import type { Strapi } from "../../../../backend/node_modules/@strapi/strapi";
 
 import { PATHS } from "../../paths";
 import { loadEnv } from "../../utils";
 
-export type IStrapi = Strapi;
+export type IStrapi = strapi.Core.Strapi;
 
 export interface IAdminToken {
   name: string;
@@ -50,12 +49,14 @@ export const ADMIN_TOKENS: { [key in "fullaccess" | "readonly"]: IAdminToken } =
 export async function createStrapiInstance(serveAdminPanel = false, autoReload = false) {
   console.log(chalk.green("Starting Strapi..."));
   // create instance
-  const app: IStrapi = await strapi({
-    appDir: resolve(PATHS.backendDir),
-    distDir: resolve(PATHS.backendDir, "dist"),
-    autoReload,
-    serveAdminPanel,
-  }).load();
+  const app: IStrapi = await strapi
+    .createStrapi({
+      appDir: resolve(PATHS.backendDir),
+      distDir: resolve(PATHS.backendDir, "dist"),
+      autoReload,
+      serveAdminPanel,
+    })
+    .load();
   // ensure db uses same file as backend
   if ((app.db?.config?.connection?.connection as any)?.filename) {
     app.config.database.connection.connection.filename = resolve(
@@ -91,7 +92,7 @@ export async function listDBTables(db: Awaited<ReturnType<typeof getDB>>) {
   const inspector = getDBInspector(db);
   const allTables = await inspector.tables();
   // manually add sqlite_sequence as not included by knex
-  if (db.client.config.client === "sqlite") {
+  if (db.client.config.client === "sqlite" && allTables.length > 0) {
     allTables.push("sqlite_sequence");
   }
   return allTables;

@@ -100,15 +100,15 @@ export class DBImport {
     return backupPath;
   }
 
-  /** Process imports so that sqlite sequenc and linked tables last */
+  /** Sort table import order to ensure child linked tables are created after parent */
   private sortImports(a: { table: string }, b: { table: string }) {
+    // process sequence table last
     if (a.table === "sqlite_sequence") return 1;
     if (b.table === "sqlite_sequence") return -1;
-    if (a.table === "files_related_morphs") return 1;
-    if (b.table === "files_related_morphs") return -1;
-    if (a.table.endsWith("links")) return 1;
-    if (b.table.endsWith("links")) return -1;
-    return a.table > b.table ? 1 : -1;
+
+    // NOTE - child table will be suffixed, so sorting by length should ensure
+    // dependencies created in order, e.g. `about_contents` -> `about_contents_testimonials_links`
+    return a.table.length - b.table.length;
   }
 
   private async confirmImport(data: ImportSummary[]) {
@@ -135,10 +135,10 @@ export class DBImport {
         if (table === "sqlite_sequence") {
           sequenceData = { table, summary, localData } as any;
         } else {
-          // delete existing data (should exist from bootstrap process)
-          await this.truncateTable(table);
           if (localData.length > 0) {
             try {
+              // delete existing data (should exist from bootstrap process)
+              await this.truncateTable(table);
               await this.insertRows(table, localData);
             } catch (error) {
               errors.push({ table, msg: error.message });

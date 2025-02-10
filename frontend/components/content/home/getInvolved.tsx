@@ -1,4 +1,4 @@
-import type { ComponentHomeGetInvolved, UploadFileEntityResponse } from "../../../graphql/generated";
+import type { ComponentHomeGetInvolved, UploadFile } from "../../../graphql/generated";
 import Image from "next/image";
 import { ActionButtonsComponent } from "components/common/actionButtons";
 import { HTMLContent } from "components/common/htmlContent";
@@ -27,6 +27,6 @@ export const GetInvolvedComponent: React.FC<ComponentHomeGetInvolved> = ({
     />
   </>
 );
-const ProjectSummaryImage = (ImageData: Partial<UploadFileEntityResponse>) => (
+const ProjectSummaryImage = (ImageData: Partial<UploadFile>) => (
   <Image src={getStrapiMedia(ImageData)} alt={"image"} fill placeholder="empty" className="object-contain" />
 );

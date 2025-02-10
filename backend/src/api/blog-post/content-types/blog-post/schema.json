@@ -32,7 +32,7 @@
     "Slug": {
       "type": "uid",
       "targetField": "Title",
-      "required": false
+      "required": true
     },
     "ContentBlocks": {
       "type": "dynamiczone",

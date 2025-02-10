@@ -7,8 +7,11 @@
   "options": {},
   "attributes": {
     "HTML": {
-      "type": "richtext",
-      "required": true
+      "type": "customField",
+      "options": {
+        "preset": "defaultHtml"
+      },
+      "customField": "plugin::ckeditor5.CKEditor"
     }
   }
 }

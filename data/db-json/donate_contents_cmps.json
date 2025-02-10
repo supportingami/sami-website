@@ -1,0 +1,18 @@
+[
+  {
+    "cmp_id": 2,
+    "component_type": "home.mission-statement",
+    "entity_id": 1,
+    "field": "DonateStatement",
+    "id": 6,
+    "order": 1
+  },
+  {
+    "cmp_id": 3,
+    "component_type": "home.mission-statement",
+    "entity_id": 3,
+    "field": "DonateStatement",
+    "id": 7,
+    "order": null
+  }
+]

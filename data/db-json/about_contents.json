@@ -2,9 +2,22 @@
   {
     "created_at": 1710563140875,
     "created_by_id": 1,
+    "document_id": "ntlxuehs0dddkk5awru5ldm9",
     "id": 1,
     "intro": "<h1 style=\"text-align:center;\">There are huge divides in terms of access and quality of education across Africa</h1><p>Mathematics in particular proves problematic for students and teachers alike, falling far short of global standards. There is however no shortage of passionate, enthusiastic and talented individuals in these countries with powerful ideas to improve the current state of education. SAMI was founded in 2013 as a means to support these local initiatives, and provide the expertise and funding necessary to implement, sustain and scale these ideas.</p><p><strong>By working directly with local people and organisations that have support and contacts within mathematics education, SAMI is well positioned to help deliver high impact solutions where they are needed most.</strong></p>",
+    "locale": null,
     "published_at": 1710563412239,
+    "updated_at": 1710789589752,
+    "updated_by_id": 1
+  },
+  {
+    "created_at": 1710563140875,
+    "created_by_id": 1,
+    "document_id": "ntlxuehs0dddkk5awru5ldm9",
+    "id": 3,
+    "intro": "<h1 style=\"text-align:center;\">There are huge divides in terms of access and quality of education across Africa</h1><p>Mathematics in particular proves problematic for students and teachers alike, falling far short of global standards. There is however no shortage of passionate, enthusiastic and talented individuals in these countries with powerful ideas to improve the current state of education. SAMI was founded in 2013 as a means to support these local initiatives, and provide the expertise and funding necessary to implement, sustain and scale these ideas.</p><p><strong>By working directly with local people and organisations that have support and contacts within mathematics education, SAMI is well positioned to help deliver high impact solutions where they are needed most.</strong></p>",
+    "locale": null,
+    "published_at": null,
     "updated_at": 1710789589752,
     "updated_by_id": 1
   }

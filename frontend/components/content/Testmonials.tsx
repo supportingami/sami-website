@@ -2,7 +2,7 @@ import type { Testimonial } from "../../graphql/generated";
 import { getStrapiMedia } from "lib/media";
 import Image from "next/image";
 
-export default function Testimonials({ testimonials }: { testimonials: Testimonial[] }) {
+export default function Testimonials({ testimonials = [] }: { testimonials: Testimonial[] }) {
   const TestimonialAvatar = ({ src }: { src: string }) => (
     <div className="avatar basis-full lg:basis-0">
       <div className="w-[128px] h-[128px] mask mask-hexagon-2">

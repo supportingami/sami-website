@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { serverQuery } from "lib/graphql";
 import { getStrapiMedia } from "lib/media";
-import type { ProjectType, ProjectsQuery, UploadFileEntityResponse } from "../graphql/generated";
+import type { ProjectType, ProjectsQuery, UploadFile } from "../graphql/generated";
 import { ProjectsDocument } from "../graphql/generated";
 import { SectionHeader } from "components/layout/Header";
 import PageSection from "components/layout/pageSection";
@@ -16,9 +16,9 @@ import { ImageHeadingContentLayout } from "components/layout/columns";
 
 export const getStaticProps = async ({}: GetStaticPropsContext) => {
   const projectRes = await serverQuery<ProjectsQuery>(ProjectsDocument);
-  const projectData = (projectRes?.data?.projectTypes?.data || []).map((p) => ({
-    ...(p.attributes as ProjectType),
-    id: p.id,
+  const projectData = (projectRes?.data?.projectTypes_connection?.nodes || []).map((p) => ({
+    ...(p as ProjectType),
+    id: p.documentId,
   }));
   const projects = projectData.sort((a, b) => {
     if (a.Status === "Completed") return 1;
@@ -74,18 +74,25 @@ const ProjectEntry = (props: { index: number; project: Props["projects"][0] }) =
       <ImageHeadingContentLayout
         Heading={
           <div className="prose m-auto">
-            <ProjectSummaryItemAlt HomeSummary={HomeSummary} id={id} Name={Name} Icon={Icon} Slug={Slug} />
+            <ProjectSummaryItemAlt HomeSummary={HomeSummary} documentId={id} Name={Name} Icon={Icon} Slug={Slug} />
           </div>
         }
-        Content={<HTMLContent className="m-auto mt-8">{PageSummary}</HTMLContent>}
-        Image={FeatureImage?.data?.attributes ? <ProjectFeatureImage {...FeatureImage} /> : null}
+        Content={
+          <>
+            <HTMLContent className="m-auto mt-8">{PageSummary}</HTMLContent>
+            <Link href={`/projects/${Slug}`}>
+              <button className="mt-4 btn btn-primary">Read More</button>
+            </Link>
+          </>
+        }
+        Image={FeatureImage ? <ProjectFeatureImage {...FeatureImage} /> : null}
         imageSide={index % 2 ? "left" : "right"}
       />
     </PageSection>
   );
 };
 
-const ProjectFeatureImage = (ImageData: Partial<UploadFileEntityResponse>) => (
+const ProjectFeatureImage = (ImageData: Partial<UploadFile>) => (
   <Image src={getStrapiMedia(ImageData)} alt={"image"} fill placeholder="empty" className="object-contain" />
 );
 

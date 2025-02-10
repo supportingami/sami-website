@@ -31,7 +31,7 @@ export class GcloudStorage {
   }
 
   private async deleteFiles(localEntries: IContentsEntry[]) {
-    console.log("TODO");
+    console.log("TODO", localEntries);
   }
 
   /**

@@ -16,7 +16,7 @@ export const BlogCardComponent: React.FC<{
   border-gray-200 shadow-md cursor-pointer hover:scale-105 transition-all duration-200 ease-in-out"
     >
       <div className="relative h-48 w-full">
-        {blog.FeatureImage?.data && (
+        {blog.FeatureImage && (
           <Image
             src={getStrapiMedia(blog.FeatureImage)}
             alt={"image"}

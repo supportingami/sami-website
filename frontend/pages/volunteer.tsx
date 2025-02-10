@@ -15,14 +15,13 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
   let faqs: IFaq[] = [];
   const volunteerRes = await serverQuery<VolunteerContentQuery>(VolunteerContentDocument);
   if (volunteerRes) {
-    volunteerPageContent = volunteerRes.data.volunteerContent.data.attributes
-      .Content as DynamicContentContentDynamicZone[];
+    volunteerPageContent = volunteerRes.data.volunteerContent.Content as DynamicContentContentDynamicZone[];
   }
   const faqRes = await serverQuery<FaqsQuery>(FaqsDocument);
   if (faqRes) {
-    faqs = faqRes.data.faqs.data.map((faq) => ({
-      ...(faq.attributes as Faq),
-      id: faq.id,
+    faqs = faqRes.data.faqs_connection.nodes.map((faq) => ({
+      ...(faq as Faq),
+      id: faq.documentId,
     }));
   }
   return {

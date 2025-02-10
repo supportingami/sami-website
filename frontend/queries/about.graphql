@@ -1,26 +1,16 @@
 query aboutContent {
   # table to query
   aboutContent {
-    data {
-      attributes {
-        Intro
-        Testimonials {
-          data {
-            attributes {
-              Bio
-              Content
-              Name
-              Photo {
-                data {
-                  attributes {
-                    name
-                    url
-                    size
-                  }
-                }
-              }
-            }
-          }
+    Intro
+    Testimonials_connection {
+      nodes {
+        Bio
+        Content
+        Name
+        Photo {
+          name
+          url
+          size
         }
       }
     }

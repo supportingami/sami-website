@@ -1,18 +1,18 @@
 [
   {
-    "component_id": 3,
+    "cmp_id": 4,
     "component_type": "common.action-button",
     "entity_id": 1,
     "field": "ActionButtons",
-    "id": 8,
+    "id": 27,
     "order": 1
   },
   {
-    "component_id": 7,
+    "cmp_id": 25,
     "component_type": "common.action-button",
     "entity_id": 2,
     "field": "ActionButtons",
-    "id": 10,
+    "id": 34,
     "order": 1
   }
 ]
