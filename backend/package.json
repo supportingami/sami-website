@@ -15,6 +15,7 @@
     "@_sh/strapi-plugin-ckeditor": "^5.0.1",
     "@strapi/plugin-graphql": "5.9.0",
     "@strapi/plugin-users-permissions": "5.9.0",
+    "@strapi/provider-email-sendgrid": "^5.9.0",
     "@strapi/strapi": "5.9.0",
     "@strapi/typescript-utils": "^5.9.0",
     "@strapi/typings": "^4.13.3",

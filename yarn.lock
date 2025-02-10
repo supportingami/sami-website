@@ -5743,6 +5743,35 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sendgrid/client@npm:^8.1.3":
+  version: 8.1.4
+  resolution: "@sendgrid/client@npm:8.1.4"
+  dependencies:
+    "@sendgrid/helpers": "npm:^8.0.0"
+    axios: "npm:^1.7.4"
+  checksum: 10/99a3b30b9258a08ab73bc956126a0abe04308821b41a7260e6e30c3164af28cb96f6c43f7c0b3e090bd5fbb31483d31c7847ac4aec6fc00f4059d64c6e3900a2
+  languageName: node
+  linkType: hard
+
+"@sendgrid/helpers@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "@sendgrid/helpers@npm:8.0.0"
+  dependencies:
+    deepmerge: "npm:^4.2.2"
+  checksum: 10/23ff86dd7dcdcc6aec45a387978f9dcb31a7c2ec6f8450ca89542ecb63b6f7df7a2ce3ff6e5c9b003d9c6a7923fb74b00d8c58e70e6737ba0810360f0a074592
+  languageName: node
+  linkType: hard
+
+"@sendgrid/mail@npm:8.1.3":
+  version: 8.1.3
+  resolution: "@sendgrid/mail@npm:8.1.3"
+  dependencies:
+    "@sendgrid/client": "npm:^8.1.3"
+    "@sendgrid/helpers": "npm:^8.0.0"
+  checksum: 10/33fd81011ff973e05cff1bc6b901542bce6b0af0a55774ad5ffee974aeb9eaff231e5a8c28b11c5d9304ef2778f894c8a63cca8ac868e6962607dcdfa0dc0870
+  languageName: node
+  linkType: hard
+
 "@sideway/address@npm:^4.1.5":
   version: 4.1.5
   resolution: "@sideway/address@npm:4.1.5"
@@ -6448,6 +6477,16 @@ __metadata:
     react-router-dom: ^6.0.0
     styled-components: ^6.0.0
   checksum: 10/4f37cdf54c5968b48d2764bba1f5e7acaaed728176461133faa6dadb0b9e3fefec41cfd58fe4615b89cd9d8904537a07c620393984ca9b06b4dc50344bd2dda2
+  languageName: node
+  linkType: hard
+
+"@strapi/provider-email-sendgrid@npm:^5.9.0":
+  version: 5.9.0
+  resolution: "@strapi/provider-email-sendgrid@npm:5.9.0"
+  dependencies:
+    "@sendgrid/mail": "npm:8.1.3"
+    "@strapi/utils": "npm:5.9.0"
+  checksum: 10/41b10c2a6be84129e109a8a36bd9ab70be9079dfe18696e4cf6ac979c6bca0f678827627c8c6671393aaedbc8862f12a812e3ebd8240750272e3dfa752e2d734
   languageName: node
   linkType: hard
 
@@ -9137,6 +9176,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"axios@npm:^1.7.4":
+  version: 1.7.9
+  resolution: "axios@npm:1.7.9"
+  dependencies:
+    follow-redirects: "npm:^1.15.6"
+    form-data: "npm:^4.0.0"
+    proxy-from-env: "npm:^1.1.0"
+  checksum: 10/b7a5f660ea53ba9c2a745bf5ad77ad8bf4f1338e13ccc3f9f09f810267d6c638c03dac88b55dae8dc98b79c57d2d6835be651d58d2af97c174f43d289a9fd007
+  languageName: node
+  linkType: hard
+
 "b4a@npm:^1.6.4":
   version: 1.6.6
   resolution: "b4a@npm:1.6.6"
@@ -9206,6 +9256,7 @@ __metadata:
     "@_sh/strapi-plugin-ckeditor": "npm:^5.0.1"
     "@strapi/plugin-graphql": "npm:5.9.0"
     "@strapi/plugin-users-permissions": "npm:5.9.0"
+    "@strapi/provider-email-sendgrid": "npm:^5.9.0"
     "@strapi/strapi": "npm:5.9.0"
     "@strapi/typescript-utils": "npm:^5.9.0"
     "@strapi/typings": "npm:^4.13.3"
