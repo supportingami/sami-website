@@ -100,5 +100,131 @@
     "caption": null,
     "class_names": null,
     "id": 17
+  },
+  {
+    "alt_text": null,
+    "caption": null,
+    "class_names": null,
+    "id": 18
+  },
+  {
+    "alt_text": "The team in Togo hosted a maths camp",
+    "caption": "The team in Togo hosted a maths camp",
+    "class_names": null,
+    "id": 19
+  },
+  {
+    "alt_text": null,
+    "caption": null,
+    "class_names": null,
+    "id": 20
+  },
+  {
+    "alt_text": "Students interacting with Geogebra activities",
+    "caption": "Students interacting with Geogebra activities",
+    "class_names": null,
+    "id": 21
+  },
+  {
+    "alt_text": "Learning how to fly Drone",
+    "caption": "Learning how to fly Drone",
+    "class_names": null,
+    "id": 22
+  },
+  {
+    "alt_text": "Running session on Fractional wall at Lenana girls High school for Math Club",
+    "caption": "Running session on Fractional wall at Lenana girls High school for Math Club",
+    "class_names": null,
+    "id": 23
+  },
+  {
+    "alt_text": "Visit at St. Lawrence Ichina Primary for Happy Classroom project",
+    "caption": "Visit at St. Lawrence Ichina Primary for Happy Classroom project",
+    "class_names": null,
+    "id": 24
+  },
+  {
+    "alt_text": null,
+    "caption": "Maths Camp participants pose for a picture with their certificates",
+    "class_names": null,
+    "id": 25
+  },
+  {
+    "alt_text": null,
+    "caption": "Grade 2 classroom before and after with students in Happy Classroom at St. John Sibembe Primary School - Busia County.",
+    "class_names": null,
+    "id": 26
+  },
+  {
+    "alt_text": "Diera on a computer at the workshop",
+    "caption": null,
+    "class_names": null,
+    "id": 27
+  },
+  {
+    "alt_text": null,
+    "caption": "Danny presents the software at a conference in Kenya",
+    "class_names": null,
+    "id": 28
+  },
+  {
+    "alt_text": null,
+    "caption": "The ADI team working together in Tanzania",
+    "class_names": null,
+    "id": 29
+  },
+  {
+    "alt_text": null,
+    "caption": "The Digital Communities Initiative uses technology to support across diverse areas including schools, agriculture and women in enterprise.",
+    "class_names": "max-w-md mx-auto",
+    "id": 30
+  },
+  {
+    "alt_text": "Happy Classroom",
+    "caption": null,
+    "class_names": null,
+    "id": 31
+  },
+  {
+    "alt_text": "Before Painting",
+    "caption": null,
+    "class_names": null,
+    "id": 32
+  },
+  {
+    "alt_text": "After Painting",
+    "caption": null,
+    "class_names": null,
+    "id": 33
+  },
+  {
+    "alt_text": "SAMI Map",
+    "caption": "\n",
+    "class_names": "max-w-lg",
+    "id": 34
+  },
+  {
+    "alt_text": "Maths Club at Shivanga Primary School",
+    "caption": "Standard two pupils from Shivanga Primary school take part in a maths club session on Geometrical shapes, talking in a group helped them realise what was needed.",
+    "class_names": null,
+    "id": 35
+  },
+  {
+    "alt_text": "Maths Club at Tande Secondary School",
+    "caption": "A group of five maths club members from Tande secondary school discussing the triangle puzzle.",
+    "class_names": null,
+    "id": 36
+  },
+  {
+    "alt_text": "Maths Club at Shivanga Primary School",
+    "caption": "Standard two pupils from Shivanga Primary school take part in a maths club session on Geometrical shapes, talking in a group helped them realise what was needed.",
+    "class_names": null,
+    "id": 37
+  },
+  {
+    "alt_text": "Maths Club at Tande Secondary School",
+    "caption": "A group of five maths club members from Tande secondary school discussing the triangle puzzle.",
+    "class_names": null,
+    "id": 38
   }
 ]

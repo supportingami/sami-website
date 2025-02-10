@@ -1,0 +1,34 @@
+[
+  {
+    "cmp_id": 26,
+    "component_type": "common.action-button",
+    "entity_id": 2,
+    "field": "ActionButtons",
+    "id": 22,
+    "order": 1
+  },
+  {
+    "cmp_id": 27,
+    "component_type": "common.action-button",
+    "entity_id": 2,
+    "field": "ActionButtons",
+    "id": 23,
+    "order": 2
+  },
+  {
+    "cmp_id": 39,
+    "component_type": "common.action-button",
+    "entity_id": 3,
+    "field": "ActionButtons",
+    "id": 26,
+    "order": 1
+  },
+  {
+    "cmp_id": 40,
+    "component_type": "common.action-button",
+    "entity_id": 3,
+    "field": "ActionButtons",
+    "id": 27,
+    "order": 2
+  }
+]

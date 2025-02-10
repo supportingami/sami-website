@@ -1,14 +1,26 @@
 [
   {
-    "description": "<p>SAMI is a UK-based charity dedicated to improving access to and quality of mathematics education in Africa. We support initiatives such as maths camps and clubs at school and university level, as well as technological developments in mathematics and statistics.</p><p>We work with passionate individuals and organisations locally, to provide the expertise and funding necessary to implement sustainable, high impact solutions where they are needed the most.&nbsp;</p>",
-    "heading": "Our Mission",
-    "id": 1,
-    "text": "We help students to extend their understanding of maths"
-  },
-  {
     "description": "<p>SAMI works hard to ensure all money raised is used in the best ways to support projects that make a real difference. Any contributions are greatly appreciated.</p>",
     "heading": "Donate",
     "id": 2,
     "text": "\nMake a donation  for African Maths"
+  },
+  {
+    "description": "<p>SAMI works hard to ensure all money raised is used in the best ways to support projects that make a real difference. Any contributions are greatly appreciated.</p>",
+    "heading": "Donate",
+    "id": 3,
+    "text": "\nMake a donation  for African Maths"
+  },
+  {
+    "description": "<p>SAMI is a UK-based charity dedicated to improving access to and quality of mathematics education in Africa. We support initiatives such as maths camps and clubs at school and university level, as well as technological developments in mathematics and statistics.</p><p>We work with passionate individuals and organisations locally, to provide the expertise and funding necessary to implement sustainable, high impact solutions where they are needed the most.&nbsp;</p>",
+    "heading": "Our Mission",
+    "id": 4,
+    "text": "We help students to extend their understanding of maths"
+  },
+  {
+    "description": "<p>SAMI is a UK-based charity dedicated to improving access to and quality of mathematics education in Africa. We support initiatives such as maths camps and clubs at school and university level, as well as technological developments in mathematics and statistics.</p><p>We work with passionate individuals and organisations locally, to provide the expertise and funding necessary to implement sustainable, high impact solutions where they are needed the most.&nbsp;</p>",
+    "heading": "Our Mission",
+    "id": 5,
+    "text": "We help students to extend their understanding of maths"
   }
 ]

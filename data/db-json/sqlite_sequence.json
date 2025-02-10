@@ -1,174 +1,174 @@
 [
   {
     "name": "about_contents",
-    "seq": 1
-  },
-  {
-    "name": "about_contents_testimonials_links",
-    "seq": 4
-  },
-  {
-    "name": "annual_reports",
-    "seq": 9
-  },
-  {
-    "name": "blog_posts",
-    "seq": 31
-  },
-  {
-    "name": "blog_posts_components",
-    "seq": 146
-  },
-  {
-    "name": "components_common_action_buttons",
-    "seq": 17
-  },
-  {
-    "name": "components_common_htmls",
-    "seq": 48
-  },
-  {
-    "name": "components_common_images",
-    "seq": 17
-  },
-  {
-    "name": "components_common_text_blocks",
     "seq": 3
   },
   {
-    "name": "components_home_get_involveds",
-    "seq": 1
-  },
-  {
-    "name": "components_home_get_involveds_components",
-    "seq": 21
-  },
-  {
-    "name": "components_home_hero_images",
-    "seq": 1
-  },
-  {
-    "name": "components_home_hero_images_components",
-    "seq": 33
-  },
-  {
-    "name": "components_home_impact_numbers",
-    "seq": 5
-  },
-  {
-    "name": "components_home_impact_sections",
-    "seq": 1
-  },
-  {
-    "name": "components_home_impact_sections_components",
-    "seq": 33
-  },
-  {
-    "name": "components_home_mission_statements",
-    "seq": 2
-  },
-  {
-    "name": "components_home_mission_statements_components",
-    "seq": 16
-  },
-  {
-    "name": "components_home_project_summaries",
-    "seq": 1
-  },
-  {
-    "name": "components_home_project_summaries_components",
-    "seq": 33
-  },
-  {
-    "name": "donate_contents",
-    "seq": 1
-  },
-  {
-    "name": "donate_contents_components",
+    "name": "about_contents_testimonials_lnk",
     "seq": 6
   },
   {
-    "name": "donors",
+    "name": "annual_reports",
+    "seq": 25
+  },
+  {
+    "name": "blog_posts",
+    "seq": 89
+  },
+  {
+    "name": "blog_posts_cmps",
+    "seq": 194
+  },
+  {
+    "name": "components_common_action_buttons",
+    "seq": 40
+  },
+  {
+    "name": "components_common_htmls",
+    "seq": 100
+  },
+  {
+    "name": "components_common_images",
+    "seq": 38
+  },
+  {
+    "name": "components_common_text_blocks",
+    "seq": 4
+  },
+  {
+    "name": "components_home_get_involveds",
     "seq": 3
+  },
+  {
+    "name": "components_home_get_involveds_cmps",
+    "seq": 27
+  },
+  {
+    "name": "components_home_hero_images",
+    "seq": 3
+  },
+  {
+    "name": "components_home_hero_images_cmps",
+    "seq": 39
+  },
+  {
+    "name": "components_home_impact_numbers",
+    "seq": 13
+  },
+  {
+    "name": "components_home_impact_sections",
+    "seq": 3
+  },
+  {
+    "name": "components_home_impact_sections_cmps",
+    "seq": 45
+  },
+  {
+    "name": "components_home_mission_statements",
+    "seq": 5
+  },
+  {
+    "name": "components_home_mission_statements_cmps",
+    "seq": 20
+  },
+  {
+    "name": "components_home_project_summaries",
+    "seq": 3
+  },
+  {
+    "name": "components_home_project_summaries_cmps",
+    "seq": 36
+  },
+  {
+    "name": "donate_contents",
+    "seq": 3
+  },
+  {
+    "name": "donate_contents_cmps",
+    "seq": 7
+  },
+  {
+    "name": "donors",
+    "seq": 9
   },
   {
     "name": "dynamic_contents",
     "seq": 0
   },
   {
-    "name": "dynamic_contents_components",
+    "name": "dynamic_contents_cmps",
     "seq": 0
   },
   {
     "name": "faqs",
-    "seq": 17
+    "seq": 51
   },
   {
     "name": "files",
-    "seq": 150
+    "seq": 151
   },
   {
-    "name": "files_folder_links",
-    "seq": 119
+    "name": "files_folder_lnk",
+    "seq": 122
   },
   {
-    "name": "files_related_morphs",
-    "seq": 395
+    "name": "files_related_mph",
+    "seq": 521
   },
   {
     "name": "home_contents",
-    "seq": 1
+    "seq": 4
   },
   {
-    "name": "home_contents_components",
-    "seq": 67
+    "name": "home_contents_cmps",
+    "seq": 82
   },
   {
     "name": "members",
-    "seq": 15
+    "seq": 45
   },
   {
     "name": "partners",
-    "seq": 7
+    "seq": 21
   },
   {
     "name": "project_types",
-    "seq": 5
+    "seq": 16
   },
   {
-    "name": "project_types_components",
-    "seq": 62
+    "name": "project_types_cmps",
+    "seq": 88
   },
   {
     "name": "resources",
-    "seq": 7
+    "seq": 17
   },
   {
-    "name": "resources_components",
-    "seq": 5
+    "name": "resources_cmps",
+    "seq": 10
   },
   {
     "name": "testimonials",
-    "seq": 2
+    "seq": 6
   },
   {
     "name": "upload_folders",
     "seq": 17
   },
   {
-    "name": "upload_folders_parent_links",
+    "name": "upload_folders_parent_lnk",
     "seq": 4
   },
   {
     "name": "volunteer_contents",
-    "seq": 1
+    "seq": 3
   },
   {
-    "name": "volunteer_contents_components",
-    "seq": 122
+    "name": "volunteer_contents_cmps",
+    "seq": 128
   },
   {
-    "name": "volunteer_contents_faqs_links",
-    "seq": 17
+    "name": "volunteer_contents_faqs_lnk",
+    "seq": 34
   }
 ]

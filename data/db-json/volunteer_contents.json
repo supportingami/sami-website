@@ -2,9 +2,21 @@
   {
     "created_at": 1675739910344,
     "created_by_id": 1,
+    "document_id": "e8jw2ztyl4u3f7nze78pthic",
     "id": 1,
+    "locale": null,
     "published_at": 1675740333721,
     "updated_at": 1738668323027,
     "updated_by_id": 5
+  },
+  {
+    "created_at": 1675739910344,
+    "created_by_id": 1,
+    "document_id": "e8jw2ztyl4u3f7nze78pthic",
+    "id": 3,
+    "locale": null,
+    "published_at": null,
+    "updated_at": 1738668323027,
+    "updated_by_id": null
   }
 ]

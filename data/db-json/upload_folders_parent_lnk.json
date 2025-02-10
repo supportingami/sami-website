@@ -1,25 +1,25 @@
 [
   {
     "folder_id": 10,
-    "folder_order": 1,
+    "folder_ord": 1,
     "id": 1,
     "inv_folder_id": 6
   },
   {
     "folder_id": 15,
-    "folder_order": 1,
+    "folder_ord": 1,
     "id": 2,
     "inv_folder_id": 8
   },
   {
     "folder_id": 16,
-    "folder_order": 2,
+    "folder_ord": 2,
     "id": 3,
     "inv_folder_id": 8
   },
   {
     "folder_id": 17,
-    "folder_order": 2,
+    "folder_ord": 2,
     "id": 4,
     "inv_folder_id": 6
   }
