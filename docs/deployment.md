@@ -28,7 +28,10 @@ The frontend and backend are built as docker images and hosted in Google Cloud R
 
 ```sh
 yarn scripts docker build
+yarn scripts docker push
 ```
+
+Should then manually update on Google Cloud run to create a new deployment with the latest image
 
 **Backend**
 
