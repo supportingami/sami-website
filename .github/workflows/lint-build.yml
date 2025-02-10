@@ -30,8 +30,8 @@ jobs:
       - name: Lint Code
         run: yarn lint
       - name: Bootstrap Strapi
-        run: |
-          yarn scripts strapi bootstrap --environment development
-          yarn scripts strapi import --environment development
+        run: yarn scripts strapi bootstrap --environment development
+      - name: Setup dev environment
+        run: yarn scripts strapi import --environment development
       - name: Build
         run: yarn build --no-export --no-preview --no-deploy
