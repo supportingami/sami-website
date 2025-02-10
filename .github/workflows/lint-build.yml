@@ -9,7 +9,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   build:
-    if: '!contains(fromJSON(github.event.pull_request.labels.*.name), "Test - preview")'
+    if: "!contains(github.event.pull_request.labels.*.name, 'Test - preview')"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
