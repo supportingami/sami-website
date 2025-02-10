@@ -1,6 +1,6 @@
 import type { Testimonial } from "../../graphql/generated";
 import { getStrapiMedia } from "lib/media";
-import Image from "next/image";
+import Image from "next-export-optimize-images/image";
 
 export default function Testimonials({ testimonials = [] }: { testimonials: Testimonial[] }) {
   const TestimonialAvatar = ({ src }: { src: string }) => (

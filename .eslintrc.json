@@ -113,7 +113,12 @@
     "no-restricted-imports": [
       "error",
       {
-        "paths": []
+        "paths": [
+          {
+            "name": "next/image",
+            "message": "Please use next-export-optimize-images/image instead"
+          }
+        ]
       }
     ]
   }

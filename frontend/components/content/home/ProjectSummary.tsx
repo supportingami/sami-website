@@ -1,5 +1,5 @@
 import type { ComponentHomeProjectSummary, UploadFile } from "../../../graphql/generated";
-import Image from "next/image";
+import Image from "next-export-optimize-images/image";
 import { ActionButtonsComponent } from "components/common/actionButtons";
 import { getStrapiMedia } from "lib/media";
 import { ProjectSummaryItem } from "../projects/projectSummaryItem";

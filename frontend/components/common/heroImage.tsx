@@ -1,5 +1,5 @@
 import { getStrapiMedia } from "lib/media";
-import Image from "next/image";
+import Image from "next-export-optimize-images/image";
 import type { ComponentHomeHeroImage } from "../../graphql/generated";
 
 export const HeroImageComponent: React.FC<{ heroImage: ComponentHomeHeroImage }> = ({ heroImage }) => {

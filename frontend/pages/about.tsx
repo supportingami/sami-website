@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
-import Image from "next/image";
+import Image from "next-export-optimize-images/image";
 
 import type {
   AboutContent,

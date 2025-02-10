@@ -2,7 +2,7 @@ import Link from "next/link";
 import { MdFavorite } from "react-icons/md";
 
 import ThemeToggle from "./themeToggle";
-import Image from "next/image";
+import Image from "next-export-optimize-images/image";
 import { useRouter } from "next/router";
 
 interface ILink {

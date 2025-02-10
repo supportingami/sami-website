@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next-export-optimize-images/image";
 import { getStrapiMedia } from "lib/media";
 import React from "react";
 import type { IResource } from "types/resource";

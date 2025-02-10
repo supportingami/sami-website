@@ -115,7 +115,7 @@ const standaloneConfig = () => {
 };
 
 /** Use a custom NEXT_CONFIG_MODE environment variable to specify 'export' or 'standalone' */
-const config = process.env.NEXT_CONFIG_MODE === "export" ? exportConfig() : standaloneConfig();
-console.log(`NextJS will run in ${config.output} mode`);
+// const config = process.env.NEXT_CONFIG_MODE === "export" ? exportConfig() : standaloneConfig();
+// console.log(`NextJS will run in ${config.output} mode`);
 
-module.exports = config;
+module.exports = exportConfig();
