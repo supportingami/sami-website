@@ -8,6 +8,14 @@
     "order": 1
   },
   {
+    "cmp_id": 33,
+    "component_type": "common.html",
+    "entity_id": 1,
+    "field": "PageContent",
+    "id": 16,
+    "order": 1
+  },
+  {
     "cmp_id": 34,
     "component_type": "common.html",
     "entity_id": 5,
@@ -118,6 +126,14 @@
     "field": "PageContent",
     "id": 62,
     "order": 3
+  },
+  {
+    "cmp_id": 83,
+    "component_type": "common.html",
+    "entity_id": 11,
+    "field": "PageContent",
+    "id": 63,
+    "order": 1
   },
   {
     "cmp_id": 84,
@@ -238,85 +254,5 @@
     "field": "PageContent",
     "id": 78,
     "order": 7
-  },
-  {
-    "cmp_id": 83,
-    "component_type": "common.html",
-    "entity_id": 11,
-    "field": "PageContent",
-    "id": 79,
-    "order": 1
-  },
-  {
-    "cmp_id": 35,
-    "component_type": "common.image",
-    "entity_id": 11,
-    "field": "PageContent",
-    "id": 80,
-    "order": 2
-  },
-  {
-    "cmp_id": 96,
-    "component_type": "common.html",
-    "entity_id": 11,
-    "field": "PageContent",
-    "id": 81,
-    "order": 3
-  },
-  {
-    "cmp_id": 36,
-    "component_type": "common.image",
-    "entity_id": 11,
-    "field": "PageContent",
-    "id": 82,
-    "order": 4
-  },
-  {
-    "cmp_id": 97,
-    "component_type": "common.html",
-    "entity_id": 11,
-    "field": "PageContent",
-    "id": 83,
-    "order": 5
-  },
-  {
-    "cmp_id": 98,
-    "component_type": "common.html",
-    "entity_id": 16,
-    "field": "PageContent",
-    "id": 84,
-    "order": 1
-  },
-  {
-    "cmp_id": 37,
-    "component_type": "common.image",
-    "entity_id": 16,
-    "field": "PageContent",
-    "id": 85,
-    "order": 2
-  },
-  {
-    "cmp_id": 99,
-    "component_type": "common.html",
-    "entity_id": 16,
-    "field": "PageContent",
-    "id": 86,
-    "order": 3
-  },
-  {
-    "cmp_id": 38,
-    "component_type": "common.image",
-    "entity_id": 16,
-    "field": "PageContent",
-    "id": 87,
-    "order": 4
-  },
-  {
-    "cmp_id": 100,
-    "component_type": "common.html",
-    "entity_id": 16,
-    "field": "PageContent",
-    "id": 88,
-    "order": 5
   }
 ]

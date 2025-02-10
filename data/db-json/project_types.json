@@ -1,8 +1,23 @@
 [
   {
+    "created_at": 1661671786724,
+    "created_by_id": null,
+    "document_id": "fguuab0uzspyxuqyhnmp18wt",
+    "home_summary": "Student-led activities run in schools to promote a joy of maths throughout the year",
+    "id": 1,
+    "locale": null,
+    "name": "Maths Clubs",
+    "page_summary": "<p style=\"margin-left:0px;\">The Maths Clubs initiative was founded in Kenya and has been implemented over the last year. At the end of the maths camp, alongside all the software used, students are given a year’s worth of resources for a weekly maths club. All students who attend the maths camp are encouraged to set up or improve maths clubs in the schools on their return, using these resources. Organisers of the camp undertake follow up visits to students in their schools and support the students until they are able to run the clubs in an effective way.</p><p style=\"margin-left:0px;\">This initiative is not limited to students who have attended one of the camps; many schools have been visited and benefitted from “mini maths camps”, half or full day sessions that replicate the Maseno Maths camp, and then received resources and training to start maths clubs.</p><p style=\"margin-left:0px;\">This initiative is building a large community of maths educators, maths enthusiasts and mathematicians, and is an opportunity to empower students to take responsibility for their own learning process inside and outside of school. It is however still in its infancy, when compared to the established maths camps which have been running for five years, and different ideas and implementations are being experimented with. It is hoped that it will develop into a sustainable, established programme which helps students not just across Kenya but more globally.</p><p style=\"margin-left:0px;\">The Maths Clubs initiative is already being tested in Tanzania and Ghana and the resources are currently being translated to put to use in schools in Costa Rica. It shows early signs of being a highly scalable low cost model that can be used in different environments.</p>",
+    "published_at": 1661671790775,
+    "slug": "maths-clubs",
+    "status": "Ongoing",
+    "updated_at": 1699915783800,
+    "updated_by_id": 1
+  },
+  {
     "created_at": 1661671804743,
     "created_by_id": null,
-    "document_id": "h0n87h56y2p53nxw4ire1whk",
+    "document_id": "p96imhqxadl6w2cnaulmdk6g",
     "home_summary": "Week-long camps of games, puzzles and activities to inspire students outside the curriculum",
     "id": 2,
     "locale": null,
@@ -17,7 +32,7 @@
   {
     "created_at": 1661671825006,
     "created_by_id": null,
-    "document_id": "iqmsgkqiow32l9nxwqrazbv2",
+    "document_id": "ckt5whp4u5kk6cei44q6fox4",
     "home_summary": "Using technology to improve livelihoods throughout entire communities",
     "id": 3,
     "locale": null,
@@ -32,7 +47,7 @@
   {
     "created_at": 1661671841839,
     "created_by_id": null,
-    "document_id": "pmlk9pb2puo715nntzzdf4pb",
+    "document_id": "mvpa1lju883ytdb62ubi7kun",
     "home_summary": "Open software being made in Africa to help people make better use of data",
     "id": 4,
     "locale": null,
@@ -47,7 +62,7 @@
   {
     "created_at": 1699897044924,
     "created_by_id": 1,
-    "document_id": "v04c7f28365761w04bu1zx3p",
+    "document_id": "xtmllynebtm77zouh2d7nr6w",
     "home_summary": "Providing classrooms with rich learning resources and supporting teachers to use",
     "id": 5,
     "locale": null,
@@ -62,7 +77,7 @@
   {
     "created_at": 1661671786724,
     "created_by_id": null,
-    "document_id": "o4nqb57vd8rse93wegd7fto0",
+    "document_id": "fguuab0uzspyxuqyhnmp18wt",
     "home_summary": "Student-led activities run in schools to promote a joy of maths throughout the year",
     "id": 11,
     "locale": null,
@@ -71,13 +86,13 @@
     "published_at": null,
     "slug": "maths-clubs",
     "status": "Ongoing",
-    "updated_at": 1739141917271,
+    "updated_at": 1699915783800,
     "updated_by_id": 1
   },
   {
     "created_at": 1661671804743,
     "created_by_id": null,
-    "document_id": "h0n87h56y2p53nxw4ire1whk",
+    "document_id": "p96imhqxadl6w2cnaulmdk6g",
     "home_summary": "Week-long camps of games, puzzles and activities to inspire students outside the curriculum",
     "id": 12,
     "locale": null,
@@ -92,7 +107,7 @@
   {
     "created_at": 1661671825006,
     "created_by_id": null,
-    "document_id": "iqmsgkqiow32l9nxwqrazbv2",
+    "document_id": "ckt5whp4u5kk6cei44q6fox4",
     "home_summary": "Using technology to improve livelihoods throughout entire communities",
     "id": 13,
     "locale": null,
@@ -107,7 +122,7 @@
   {
     "created_at": 1661671841839,
     "created_by_id": null,
-    "document_id": "pmlk9pb2puo715nntzzdf4pb",
+    "document_id": "mvpa1lju883ytdb62ubi7kun",
     "home_summary": "Open software being made in Africa to help people make better use of data",
     "id": 14,
     "locale": null,
@@ -122,7 +137,7 @@
   {
     "created_at": 1699897044924,
     "created_by_id": 1,
-    "document_id": "v04c7f28365761w04bu1zx3p",
+    "document_id": "xtmllynebtm77zouh2d7nr6w",
     "home_summary": "Providing classrooms with rich learning resources and supporting teachers to use",
     "id": 15,
     "locale": null,
@@ -132,21 +147,6 @@
     "slug": "happy-classrooms",
     "status": "Ongoing",
     "updated_at": 1699916725974,
-    "updated_by_id": 1
-  },
-  {
-    "created_at": 1661671786724,
-    "created_by_id": null,
-    "document_id": "o4nqb57vd8rse93wegd7fto0",
-    "home_summary": "Student-led activities run in schools to promote a joy of maths throughout the year",
-    "id": 16,
-    "locale": null,
-    "name": "Maths Clubs",
-    "page_summary": "<p style=\"margin-left:0px;\">The Maths Clubs initiative was founded in Kenya and has been implemented over the last year. At the end of the maths camp, alongside all the software used, students are given a year’s worth of resources for a weekly maths club. All students who attend the maths camp are encouraged to set up or improve maths clubs in the schools on their return, using these resources. Organisers of the camp undertake follow up visits to students in their schools and support the students until they are able to run the clubs in an effective way.</p><p style=\"margin-left:0px;\">This initiative is not limited to students who have attended one of the camps; many schools have been visited and benefitted from “mini maths camps”, half or full day sessions that replicate the Maseno Maths camp, and then received resources and training to start maths clubs.</p><p style=\"margin-left:0px;\">This initiative is building a large community of maths educators, maths enthusiasts and mathematicians, and is an opportunity to empower students to take responsibility for their own learning process inside and outside of school. It is however still in its infancy, when compared to the established maths camps which have been running for five years, and different ideas and implementations are being experimented with. It is hoped that it will develop into a sustainable, established programme which helps students not just across Kenya but more globally.</p><p style=\"margin-left:0px;\">The Maths Clubs initiative is already being tested in Tanzania and Ghana and the resources are currently being translated to put to use in schools in Costa Rica. It shows early signs of being a highly scalable low cost model that can be used in different environments.</p>",
-    "published_at": 1739141917285,
-    "slug": "maths-clubs",
-    "status": "Ongoing",
-    "updated_at": 1739141917271,
     "updated_by_id": 1
   }
 ]

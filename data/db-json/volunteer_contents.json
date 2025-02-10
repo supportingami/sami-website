@@ -2,7 +2,7 @@
   {
     "created_at": 1675739910344,
     "created_by_id": 1,
-    "document_id": "e8jw2ztyl4u3f7nze78pthic",
+    "document_id": "swy5tl7c2flywewb21e4hmla",
     "id": 1,
     "locale": null,
     "published_at": 1675740333721,
@@ -12,11 +12,11 @@
   {
     "created_at": 1675739910344,
     "created_by_id": 1,
-    "document_id": "e8jw2ztyl4u3f7nze78pthic",
+    "document_id": "swy5tl7c2flywewb21e4hmla",
     "id": 3,
     "locale": null,
     "published_at": null,
     "updated_at": 1738668323027,
-    "updated_by_id": null
+    "updated_by_id": 5
   }
 ]

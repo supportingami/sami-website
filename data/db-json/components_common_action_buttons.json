@@ -1,6 +1,42 @@
 [
   {
     "class_names": null,
+    "id": 1,
+    "link": "/projects",
+    "text": "Projects"
+  },
+  {
+    "class_names": null,
+    "id": 2,
+    "link": "/volunteer",
+    "text": "Ways To Help"
+  },
+  {
+    "class_names": null,
+    "id": 3,
+    "link": "#",
+    "text": "Learn More"
+  },
+  {
+    "class_names": null,
+    "id": 4,
+    "link": "/projects",
+    "text": "Learn More"
+  },
+  {
+    "class_names": null,
+    "id": 5,
+    "link": "/volunteer",
+    "text": "Learn More"
+  },
+  {
+    "class_names": null,
+    "id": 6,
+    "link": "/donate",
+    "text": "Donate"
+  },
+  {
+    "class_names": null,
     "id": 7,
     "link": "https://cafdonate.cafonline.org/19346",
     "text": "Donate Now"
@@ -104,7 +140,7 @@
   {
     "class_names": null,
     "id": 24,
-    "link": "about",
+    "link": "#",
     "text": "Learn More"
   },
   {
@@ -166,41 +202,5 @@
     "id": 34,
     "link": "https://docs.google.com/forms/d/e/1FAIpQLSdfyNymfN9xqJCfgBLKpwQqniJTd2mACY93wjmEP8y8TRZGXw/viewform",
     "text": "Apply Now"
-  },
-  {
-    "class_names": null,
-    "id": 35,
-    "link": "/projects",
-    "text": "Projects"
-  },
-  {
-    "class_names": null,
-    "id": 36,
-    "link": "/volunteer",
-    "text": "Ways To Help"
-  },
-  {
-    "class_names": null,
-    "id": 37,
-    "link": "about",
-    "text": "Learn More"
-  },
-  {
-    "class_names": null,
-    "id": 38,
-    "link": "/projects",
-    "text": "Learn More"
-  },
-  {
-    "class_names": null,
-    "id": 39,
-    "link": "/volunteer",
-    "text": "Learn More"
-  },
-  {
-    "class_names": null,
-    "id": 40,
-    "link": "/donate",
-    "text": "Donate"
   }
 ]
