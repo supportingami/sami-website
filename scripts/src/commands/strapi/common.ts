@@ -92,7 +92,7 @@ export async function listDBTables(db: Awaited<ReturnType<typeof getDB>>) {
   const inspector = getDBInspector(db);
   const allTables = await inspector.tables();
   // manually add sqlite_sequence as not included by knex
-  if (db.client.config.client === "sqlite") {
+  if (db.client.config.client === "sqlite" && allTables.length > 0) {
     allTables.push("sqlite_sequence");
   }
   return allTables;
