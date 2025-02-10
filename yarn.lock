@@ -7468,7 +7468,7 @@ __metadata:
     "@strapi/typescript-utils": "npm:^4.20.3"
     "@strapi/typings": "npm:^4.13.3"
     "@strapi/utils": "npm:^4.20.3"
-    better-sqlite3: "npm:9.4.3"
+    better-sqlite3: "npm:9.6.0"
     knex: "npm:^3.1.0"
     pg: "npm:^8.11.3"
     pg-connection-string: "npm:^2.6.2"
@@ -7564,14 +7564,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"better-sqlite3@npm:9.4.3":
-  version: 9.4.3
-  resolution: "better-sqlite3@npm:9.4.3"
+"better-sqlite3@npm:9.6.0":
+  version: 9.6.0
+  resolution: "better-sqlite3@npm:9.6.0"
   dependencies:
     bindings: "npm:^1.5.0"
     node-gyp: "npm:latest"
     prebuild-install: "npm:^7.1.1"
-  checksum: 10/a6d68f5c079b52b86815ce4a98dedd941da4da2db2f611cf8f1bf85473f0ac53a84858732152b68b5a36406bd5ad4f3d07caca60f9f8a2a654115173da8cba01
+  checksum: 10/06b3d95221071a06c2e22a9746d9b7049c0bce7962e5e3290ccf088fffbf4d4d52868f0d98b8ae2565fe33b1adab89823145f23c6f6eb63ecc4fc1b883f9082c
   languageName: node
   linkType: hard
 
