@@ -37,7 +37,7 @@ RUN --mount=type=secret,id=_env,dst=/backend/.env yarn workspace backend build
 # Final Image
 #####################################################################################
 
-FROM node:20.7.0-alpine
+FROM node:22.6.0-alpine
 
 RUN apk add --no-cache vips-dev \
     && rm -rf /var/cache/apk/* && rm -rf /tmp/*

@@ -26,7 +26,7 @@ RUN yarn workspaces focus frontend
 # https://www.npmjs.com/package/@vercel/ncc
 
 # Run app
-FROM node:20.7.0-alpine as frontend
+FROM node:22.6.0-alpine as frontend
 WORKDIR /app
 # RUN yarn global add pm2 && yarn cache clean
 

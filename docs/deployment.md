@@ -24,10 +24,11 @@ yarn scripts cli build --environment development --no-export
 
 A standalone deployment is made to enable the use of strapi dashboard online, and preview the results in a next server also running online.
 
-**Frontend**
+The frontend and backend are built as docker images and hosted in Google Cloud Run containers
 
-- nextJS server running on vercel
-- deployed via script `TODO`
+```sh
+yarn scripts docker build
+```
 
 **Backend**
 
