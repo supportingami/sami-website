@@ -1,5 +1,5 @@
 import { getStrapiMedia } from "lib/media";
-import Image from "next/image";
+import Image from "next-export-optimize-images/image";
 import React from "react";
 import type { IMember } from "types/member";
 import VectorTriangle from "./assets/VectorTriangle";

@@ -13,7 +13,7 @@ import { GetInvolvedComponent } from "components/content/home/getInvolved";
 import { ImpactSectionComponent } from "components/content/home/ImpactSection";
 import { BlogCardComponent } from "components/content/blog-post/blogCard";
 import { DonateSummary } from "components/content/home/donateSummary";
-import Image from "next/image";
+import Image from "next-export-optimize-images/image";
 import { useBreakpointQuery } from "lib/breakpoints";
 
 export const getStaticProps = async ({}: GetStaticPropsContext) => {

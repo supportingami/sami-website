@@ -1,5 +1,5 @@
 import type { ComponentHomeGetInvolved, UploadFile } from "../../../graphql/generated";
-import Image from "next/image";
+import Image from "next-export-optimize-images/image";
 import { ActionButtonsComponent } from "components/common/actionButtons";
 import { HTMLContent } from "components/common/htmlContent";
 import { getStrapiMedia } from "lib/media";

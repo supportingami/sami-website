@@ -5,7 +5,7 @@ import { serverQuery } from "lib/graphql";
 import { DonateContentDocument, DonorsDocument } from "../graphql/generated";
 import type { ComponentHomeMissionStatement, DonateContentQuery, Donor, DonorsQuery } from "../graphql/generated";
 import PageSection from "components/layout/pageSection";
-import Image from "next/image";
+import Image from "next-export-optimize-images/image";
 
 import { ImageHeadingContentLayout } from "components/layout/columns";
 import { HTMLContent } from "components/common/htmlContent";

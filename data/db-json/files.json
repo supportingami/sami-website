@@ -2848,5 +2848,30 @@
     "updated_by_id": 1,
     "url": "/uploads/Maths_Club_Shivanga_Primary_5a9cca09e2_027235e830.jpg",
     "width": 1600
+  },
+  {
+    "alternative_text": null,
+    "caption": null,
+    "created_at": 1739222366463,
+    "created_by_id": 1,
+    "document_id": "skzg375ggczne4kakewimoyd",
+    "ext": ".pdf",
+    "folder_path": "/2",
+    "formats": null,
+    "hash": "Feb_2024_Annual_report_SAMI_b853adbfd1",
+    "height": null,
+    "id": 152,
+    "locale": null,
+    "mime": "application/pdf",
+    "name": "Feb 2024 Annual report SAMI.pdf",
+    "preview_url": null,
+    "provider": "local",
+    "provider_metadata": null,
+    "published_at": 1739222366463,
+    "size": 415.37,
+    "updated_at": 1739222366463,
+    "updated_by_id": 1,
+    "url": "/uploads/Feb_2024_Annual_report_SAMI_b853adbfd1.pdf",
+    "width": null
   }
 ]
