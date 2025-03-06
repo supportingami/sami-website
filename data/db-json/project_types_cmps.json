@@ -1,13 +1,5 @@
 [
   {
-    "cmp_id": 32,
-    "component_type": "common.html",
-    "entity_id": 2,
-    "field": "PageContent",
-    "id": 15,
-    "order": 1
-  },
-  {
     "cmp_id": 34,
     "component_type": "common.html",
     "entity_id": 5,
@@ -118,14 +110,6 @@
     "field": "PageContent",
     "id": 62,
     "order": 3
-  },
-  {
-    "cmp_id": 84,
-    "component_type": "common.html",
-    "entity_id": 12,
-    "field": "PageContent",
-    "id": 64,
-    "order": 1
   },
   {
     "cmp_id": 85,
@@ -318,5 +302,21 @@
     "field": "PageContent",
     "id": 88,
     "order": 5
+  },
+  {
+    "cmp_id": 84,
+    "component_type": "common.html",
+    "entity_id": 12,
+    "field": "PageContent",
+    "id": 92,
+    "order": 1
+  },
+  {
+    "cmp_id": 102,
+    "component_type": "common.html",
+    "entity_id": 18,
+    "field": "PageContent",
+    "id": 93,
+    "order": 1
   }
 ]

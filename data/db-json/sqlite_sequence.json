@@ -25,7 +25,7 @@
   },
   {
     "name": "components_common_htmls",
-    "seq": 100
+    "seq": 102
   },
   {
     "name": "components_common_images",
@@ -113,7 +113,7 @@
   },
   {
     "name": "files_related_mph",
-    "seq": 517
+    "seq": 527
   },
   {
     "name": "home_contents",
@@ -133,11 +133,11 @@
   },
   {
     "name": "project_types",
-    "seq": 16
+    "seq": 18
   },
   {
     "name": "project_types_cmps",
-    "seq": 88
+    "seq": 93
   },
   {
     "name": "resources",
