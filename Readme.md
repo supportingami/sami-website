@@ -18,7 +18,7 @@ git clone https://github.com/supportingami/sami-website
 
 Checkout files stored with git large file system
 
-```
+```sh
 git lfs checkout
 ```
 

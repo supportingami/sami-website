@@ -9,6 +9,7 @@ Then there is e a single script that handles the process of generating static co
 First you may wish to replicate current production data into local environment
 
 ```sh
+gcloud init
 yarn scripts strapi export --environment docker
 yarn scripts strapi import --environment development
 

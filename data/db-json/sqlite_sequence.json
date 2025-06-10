@@ -13,11 +13,11 @@
   },
   {
     "name": "blog_posts",
-    "seq": 89
+    "seq": 114
   },
   {
     "name": "blog_posts_cmps",
-    "seq": 194
+    "seq": 676
   },
   {
     "name": "components_common_action_buttons",
@@ -25,7 +25,7 @@
   },
   {
     "name": "components_common_htmls",
-    "seq": 102
+    "seq": 299
   },
   {
     "name": "components_common_images",
@@ -33,7 +33,7 @@
   },
   {
     "name": "components_common_text_blocks",
-    "seq": 4
+    "seq": 10
   },
   {
     "name": "components_home_get_involveds",
@@ -105,7 +105,7 @@
   },
   {
     "name": "files",
-    "seq": 152
+    "seq": 157
   },
   {
     "name": "files_folder_lnk",
@@ -113,7 +113,7 @@
   },
   {
     "name": "files_related_mph",
-    "seq": 527
+    "seq": 548
   },
   {
     "name": "home_contents",

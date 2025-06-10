@@ -32,7 +32,8 @@ export class DBExport {
       const dbFilename = envParsed.DATABASE_FILENAME;
       const targetDB = resolve(dbDir, dbFilename);
       if (!existsSync(targetDB)) {
-        console.warn(`Exported db not found:`, `${dbDir}/${dbFilename}`);
+        console.log(`Create new db for export:`, `${dbDir}/${dbFilename}`);
+        writeFileSync(`${dbDir}/${dbFilename}`, "");
         // throw new Error("DB not exported:\n" + `${dbDir}/${dbFilename}`);
       }
     }
