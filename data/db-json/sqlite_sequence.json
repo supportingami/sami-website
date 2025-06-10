@@ -13,11 +13,11 @@
   },
   {
     "name": "blog_posts",
-    "seq": 114
+    "seq": 115
   },
   {
     "name": "blog_posts_cmps",
-    "seq": 676
+    "seq": 694
   },
   {
     "name": "components_common_action_buttons",
@@ -25,7 +25,7 @@
   },
   {
     "name": "components_common_htmls",
-    "seq": 299
+    "seq": 305
   },
   {
     "name": "components_common_images",
@@ -105,7 +105,7 @@
   },
   {
     "name": "files",
-    "seq": 157
+    "seq": 158
   },
   {
     "name": "files_folder_lnk",
@@ -113,7 +113,7 @@
   },
   {
     "name": "files_related_mph",
-    "seq": 548
+    "seq": 551
   },
   {
     "name": "home_contents",

@@ -2998,5 +2998,30 @@
     "updated_by_id": 4,
     "url": "/uploads/Camp_photo_a5f4dc8adc.jpeg",
     "width": 1024
+  },
+  {
+    "alternative_text": null,
+    "caption": null,
+    "created_at": 1749552828061,
+    "created_by_id": 4,
+    "document_id": "hz18sebyaq96wqw30hdjnfiy",
+    "ext": ".png",
+    "folder_path": "/",
+    "formats": "{\"thumbnail\":{\"name\":\"thumbnail_Screenshot from 2025-06-10 09-44-43.png\",\"hash\":\"thumbnail_Screenshot_from_2025_06_10_09_44_43_b173e1daa7\",\"ext\":\".png\",\"mime\":\"image/png\",\"path\":null,\"width\":245,\"height\":114,\"size\":74.21,\"sizeInBytes\":74214,\"url\":\"/uploads/thumbnail_Screenshot_from_2025_06_10_09_44_43_b173e1daa7.png\"}}",
+    "hash": "Screenshot_from_2025_06_10_09_44_43_b173e1daa7",
+    "height": 304,
+    "id": 158,
+    "locale": null,
+    "mime": "image/png",
+    "name": "Screenshot from 2025-06-10 09-44-43.png",
+    "preview_url": null,
+    "provider": "local",
+    "provider_metadata": null,
+    "published_at": 1749552828062,
+    "size": 342.93,
+    "updated_at": 1749552828061,
+    "updated_by_id": 4,
+    "url": "/uploads/Screenshot_from_2025_06_10_09_44_43_b173e1daa7.png",
+    "width": 655
   }
 ]
