@@ -20,7 +20,7 @@
     "@strapi/typescript-utils": "^5.9.0",
     "@strapi/typings": "^4.13.3",
     "@strapi/utils": "^5.9.0",
-    "better-sqlite3": "11.8.1",
+    "better-sqlite3": "12.6.2",
     "knex": "^3.1.0",
     "pg": "^8.13.1",
     "pg-connection-string": "^2.7.0",
@@ -41,7 +41,7 @@
     "uuid": "38bf5467-b827-407b-a353-257b69083b33"
   },
   "engines": {
-    "node": ">=20.x.x <=22.x.x"
+    "node": ">=20 <=24"
   },
   "license": "MIT",
   "devDependencies": {
