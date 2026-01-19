@@ -22,7 +22,9 @@ export default tseslint.config(
     rules: {
       ...reactHooks.configs.recommended.rules,
       "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
-      // Add other rules from original config if needed, but starting clean is safer for migration
+      "@typescript-eslint/no-explicit-any": ["warn"],
+      "no-empty-pattern": ["warn"],
+      "no-prototype-builtins": ["warn"],
     },
   },
 );
