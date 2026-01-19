@@ -4,10 +4,8 @@
   "license": "see license.md",
   "workspaces": [
     "backend",
-    "ci",
     "frontend",
-    "scripts",
-    "shared"
+    "scripts"
   ],
   "scripts": {
     "build": "yarn scripts cli build",
