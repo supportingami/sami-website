@@ -18,16 +18,7 @@ const commonConfig = {
   env: {
     example: "env",
   },
-  // Config available to frontend components via `getConfig().publicRuntimeConfig`
-  publicRuntimeConfig: {
-    example: "publicRuntimeConfig",
-    NEXT_PUBLIC_API_URL,
-    NEXT_PUBLIC_IMAGE_URL,
-  },
-  // Config available to frontend components via `getConfig().serverRuntimeConfig`
-  serverRuntimeConfig: {
-    example: "serverRuntimeConfig",
-  },
+
   experimental: {
     scrollRestoration: true,
   },
@@ -57,10 +48,6 @@ const exportConfig = () => {
   return withExportImages({
     ...commonConfig,
     output: "export",
-    publicRuntimeConfig: {
-      // All images will be loaded from set of local folders
-      NEXT_PUBLIC_IMAGE_URL: "",
-    },
   });
 };
 
@@ -107,10 +94,6 @@ const standaloneConfig = () => {
     // https://github.com/vercel/next.js/issues/12269
     // https://github.com/vercel/next.js/issues/27865
     // https://raphaelpralat.medium.com/system-environment-variables-in-next-js-with-docker-1f0754e04cde
-    publicRuntimeConfig: {
-      NEXT_PUBLIC_API_URL,
-      NEXT_PUBLIC_IMAGE_URL,
-    },
   });
 };
 
