@@ -8,15 +8,15 @@ const PageSection = ({
 }) => {
   if (fullwidth) {
     return (
-      <div data-testid={props["data-testid"]} className={`${className}`} id={sectionId}>
-        <div data-testid="pageSection" className={`container mx-auto ${childClassName}`}>
+      <div data-test-id={props["data-test-id"]} className={`${className}`} id={sectionId}>
+        <div data-test-id="pageSection" className={`container mx-auto ${childClassName}`}>
           {children}
         </div>
       </div>
     );
   }
   return (
-    <div data-testid="pageSection" className={`container mx-auto ${className}`} id={sectionId}>
+    <div data-test-id="pageSection" className={`container mx-auto ${className}`} id={sectionId}>
       {children}
     </div>
   );

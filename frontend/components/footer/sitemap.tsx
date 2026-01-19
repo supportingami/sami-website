@@ -44,7 +44,7 @@ const pageLinks = [
 const Sitemap = () => {
   return (
     <>
-      <PageSection fullwidth className="bg-base-300 py-16" data-testid="sitemap">
+      <PageSection fullwidth className="bg-base-300 py-16" data-test-id="sitemap">
         <div className="flex flex-wrap justify-between gap-x-24 gap-y-8">
           <Image src="/images/sami-logo-no-text.svg" alt="sitemap-logo" width={100} height={100}></Image>
 
