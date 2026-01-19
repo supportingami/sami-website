@@ -5,8 +5,8 @@ This will be the repo to support the new SAMI website
 
 ## Requirements
 
-1. [Node.js](https://nodejs.org/) v18+
-2. [yarn](https://yarnpkg.com/getting-started/install) v2
+1. [Node.js](https://nodejs.org/) v22+
+2. [yarn](https://yarnpkg.com/getting-started/install)
 
 ## Installation
 
