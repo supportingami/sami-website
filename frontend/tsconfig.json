@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2015",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "noEmit": true,
@@ -10,14 +14,24 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "*": ["/*"],
-      "components/*": ["components/*"],
-      "lib/*": ["lib/*"],
-      "pages/*": ["pages/*"],
-      "types/*": ["types/*"]
+      "*": [
+        "/*"
+      ],
+      "components/*": [
+        "components/*"
+      ],
+      "lib/*": [
+        "lib/*"
+      ],
+      "pages/*": [
+        "pages/*"
+      ],
+      "types/*": [
+        "types/*"
+      ]
     },
     "strict": false,
     "forceConsistentCasingInFileNames": true,
@@ -29,6 +43,15 @@
     ],
     "strictNullChecks": false
   },
-  "exclude": ["node_modules"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "api/newsletter-signup.mjs"]
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "api/newsletter-signup.mjs",
+    ".next/dev/types/**/*.ts"
+  ]
 }

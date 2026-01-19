@@ -61,7 +61,7 @@ export async function createStrapiInstance(serveAdminPanel = false, autoReload =
   if ((app.db?.config?.connection?.connection as any)?.filename) {
     app.config.database.connection.connection.filename = resolve(
       PATHS.dataDir,
-      process.env.DATABASE_FILENAME || "data.db"
+      process.env.DATABASE_FILENAME || "data.db",
     );
   }
 
@@ -143,12 +143,12 @@ async function getAxiosInstance() {
         Authorization: `Bearer ${STRAPI_READONLY_TOKEN}`,
         Accept: "application/json",
         "Content-Type": "application/json",
-      };
+      } as any;
       return config;
     },
     (error) => {
       Promise.reject(error);
-    }
+    },
   );
   return instance;
 }

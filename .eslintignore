@@ -1,7 +1,0 @@
-node_modules
-.cache
-build
-**/*.d.ts
-**/generated.ts
-backend
-frontend/out
