@@ -21,6 +21,18 @@ Then build can be initiated by
 yarn scripts cli build --environment development --no-export
 ```
 
+## Production Deployment
+
+Vercel does not currently allow preview builds to be upgraded to production so workaround via:
+
+```sh
+yarn workspace frontend vercel build --prod
+yarn workspace frontend next-export-optimize-images
+yarn workspace frontend vercel deploy --prod --skip-domain
+```
+
+This will upload a staged version that can be manually reviewed and promoted
+
 ## Staging Site
 
 A standalone deployment is made to enable the use of strapi dashboard online, and preview the results in a next server also running online.
