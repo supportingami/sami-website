@@ -24,7 +24,7 @@ export function replicateDir(
   options: {
     filterFn?: (entry: IContentsEntry) => boolean;
     dryRun?: boolean;
-  } = {}
+  } = {},
 ) {
   ensureDirSync(src);
   ensureDirSync(target);
@@ -72,7 +72,7 @@ export function replicateDir(
 /** Compare generated flatmaps of two directories to check differences */
 export function compareFolderContents(
   srcFiles: { [relativePath: string]: IContentsEntry },
-  targetFiles: { [relativePath: string]: IContentsEntry }
+  targetFiles: { [relativePath: string]: IContentsEntry },
 ) {
   const ops: IReplicateOps = { create: [], update: [], delete: [], ignore: [] };
   // remove target files that no longer exist in src
@@ -125,7 +125,7 @@ export function generateFolderFlatMap(
     filterFn?: (relativePath: string) => boolean;
     includeLocalPath?: boolean;
     md5Encoding?: BinaryToTextEncoding;
-  } = {}
+  } = {},
 ) {
   const allFiles = recursiveFindByExtension(folderPath);
   const flatMap: { [relativePath: string]: IContentsEntry } = {};

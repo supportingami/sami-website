@@ -1,3 +1,4 @@
+import React from "react";
 import Image from "next-export-optimize-images/image";
 import type {
   Error,
@@ -23,7 +24,7 @@ export const ComponentCommonImageSizes = () => {
   <Image alt="" src="" className="max-w-sm max-w-md max-w-lg max-w-xl max-h-sm max-h-md max-h-lg max-h-xl" />;
 };
 
-const ComponentMapping: { [type in IDynamicComponentType]: (block: IDynamicComponent) => JSX.Element } = {
+const ComponentMapping: { [type in IDynamicComponentType]: (block: IDynamicComponent) => React.JSX.Element } = {
   ComponentCommonActionButton: (block) => {
     const { ClassNames, ...rest } = block as ComponentCommonActionButton;
     return (
@@ -100,7 +101,7 @@ export const DynamicComponents = (props: { blocks: DynamicContentContentDynamicZ
         .filter((b) => b.__typename !== "Error")
         .map((block, i) => {
           const { props: ComponentProps, type: Component } = generateBlockComponent(
-            block as unknown as IDynamicComponent
+            block as unknown as IDynamicComponent,
           );
           // TODO - would be better to get unique id from block instead of counter
           const key = `${block.__typename}_${i}`;

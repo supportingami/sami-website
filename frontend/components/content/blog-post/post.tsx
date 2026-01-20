@@ -33,7 +33,6 @@ export const BlogPostComponent: React.FC<{ blogPost: IBlogPost }> = ({ blogPost 
         <hr />
         <div style={{ margin: "10px 0" }}>
           <FacebookShareButton
-            quote={`${blogPost.Summary}`}
             hashtag={`${blogPost.Title}`}
             title={`${blogPost.Title}`}
             url={url}

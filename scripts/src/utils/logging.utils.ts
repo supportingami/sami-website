@@ -13,8 +13,8 @@ export function logError(opts: Partial<ILogOptions> = {}) {
     ${chalk.yellow(msg2)}
           
           `,
-      { padding: 1, borderColor: "red" }
-    )
+      { padding: 1, borderColor: "red" },
+    ),
   );
   if (error) {
     console.error(error);
@@ -34,8 +34,8 @@ ${chalk.blueBright(msg1)}
             
 ${chalk.cyanBright(msg2)}
             `,
-      { padding: 1, borderColor: "blueBright" }
-    )
+      { padding: 1, borderColor: "blueBright" },
+    ),
   );
 }
 
@@ -49,8 +49,8 @@ export function logWarning(opts: Partial<ILogOptions> = {}) {
               
       ${chalk.yellow(msg2)}
               `,
-      { padding: 1, borderColor: "yellowBright" }
-    )
+      { padding: 1, borderColor: "yellowBright" },
+    ),
   );
 }
 

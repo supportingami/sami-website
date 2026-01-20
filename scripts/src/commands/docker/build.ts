@@ -24,7 +24,7 @@ export default program
   .option(
     "-o --only <string>",
     "Only build single step, allowed comma-separated 'base', 'backend', 'frontend'",
-    "base,backend,frontend"
+    "base,backend,frontend",
   )
   .action(async (options: IProgramOptions) => {
     return new DockerBuildCmd().run(options).then(() => process.exit(0));

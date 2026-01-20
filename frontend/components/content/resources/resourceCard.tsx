@@ -9,7 +9,7 @@ export const ResourceCardComponent: React.FC<{
 }> = ({ resource }) => {
   return (
     <div
-      data-testId="resource-card"
+      data-test-id="resource-card"
       className={`
   relative flex flex-col justify-start items-start min-h-full max-h-full font-sans rounded 
   border-neutral-content border shadow-md hover:scale-105 transition-all duration-200 ease-in-out`}

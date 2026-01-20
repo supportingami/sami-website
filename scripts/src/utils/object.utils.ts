@@ -31,7 +31,7 @@ type DBComparisonTypes = string | number | Date | null | Record<string, any>;
  * */
 export function areDBObjectsEqual(
   a: Record<string, DBComparisonTypes> = {},
-  b: Record<string, DBComparisonTypes> = {}
+  b: Record<string, DBComparisonTypes> = {},
 ) {
   // Inner value comparison
   function areDBValuesEqual(valA: DBComparisonTypes, valB: DBComparisonTypes) {

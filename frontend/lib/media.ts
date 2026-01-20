@@ -1,12 +1,10 @@
-import getConfig from "next/config";
 import type { UploadFile } from "../graphql/generated";
 
 /**
  * Depending on environment use a different base url for images
  * If a specific `NEXT_PUBLIC_IMAGE_URL` defined use that
  */
-const { publicRuntimeConfig } = getConfig();
-const { NEXT_PUBLIC_IMAGE_URL } = publicRuntimeConfig;
+const NEXT_PUBLIC_IMAGE_URL = process.env.NEXT_PUBLIC_IMAGE_URL || "";
 
 function getStrapiURL(path = "") {
   return `${NEXT_PUBLIC_IMAGE_URL}${path}`;

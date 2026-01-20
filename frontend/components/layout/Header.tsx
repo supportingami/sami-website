@@ -1,3 +1,5 @@
+import React from "react";
+
 interface IBackgroundImageProps {
   /** name of image to display as defined in `tailwind.config.ts` */
   imageName: string;
@@ -13,12 +15,12 @@ export const SectionHeader = ({
   children,
   className = "",
 }: {
-  children: JSX.Element | JSX.Element[];
+  children: React.JSX.Element | React.JSX.Element[];
   background: IBackgroundImageProps;
   className?: string;
 }) => (
   <div
-    data-testid="sectionHeader"
+    data-test-id="sectionHeader"
     className={`relative text-white text-center font-bold w-100 bg-primary ${className}`}
   >
     <BackgroundImage {...background} />
