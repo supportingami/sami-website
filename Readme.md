@@ -53,7 +53,7 @@ Frontend: http://localhost:3000
 
 ### 6. Authorize data
 
-Any endpoints that are not publically accessible will not be available to the frontend unless a api token is generated and populated.
+Any endpoints that are not publicly accessible will not be available to the frontend unless a api token is generated and populated.
 
 See instructions in [docs/api-queries.md](docs\api-queries.md)
 

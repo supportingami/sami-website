@@ -40,10 +40,10 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
 
   const props: IAboutProps = {
     content: contentRes.data?.aboutContent as AboutContent,
-    members: membersRes.data?.members_connection.nodes.map((m) => ({ ...m, id: m.documentId } as IMember)) || [],
+    members: membersRes.data?.members_connection.nodes.map((m) => ({ ...m, id: m.documentId }) as IMember) || [],
     partners: partnersRes.data.partners_connection.nodes.map((m) => m as Partner) || [],
     reports:
-      reportsRes.data.annualReports_connection.nodes.map((m) => ({ ...m, id: m.documentId } as IAnnualReport)) || [],
+      reportsRes.data.annualReports_connection.nodes.map((m) => ({ ...m, id: m.documentId }) as IAnnualReport) || [],
   };
 
   return {

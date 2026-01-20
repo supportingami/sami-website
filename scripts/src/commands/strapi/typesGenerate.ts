@@ -24,7 +24,7 @@ export default program
       // };
       generateQueryTypes();
       // generateSchemaTypes(optionsWithDefaults);
-    }
+    },
   );
 
 /***************************************************************************************
