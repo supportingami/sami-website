@@ -27,6 +27,7 @@ export default tseslint.config(
       "no-empty-pattern": "warn",
       "no-prototype-builtins": "warn",
       "@typescript-eslint/no-unused-vars": "warn",
+      "@typescript-eslint/prefer-namespace-keyword": "off",
     },
   },
 );

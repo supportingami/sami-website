@@ -162,7 +162,7 @@ export interface HomeProjectSummaryItem extends Struct.ComponentSchema {
 }
 
 declare module "@strapi/strapi" {
-  export namespace Public {
+  export module Public {
     export interface ComponentSchemas {
       "common.action-button": CommonActionButton;
       "common.html": CommonHtml;
