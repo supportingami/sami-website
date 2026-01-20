@@ -30,7 +30,9 @@ export default function ThemeProvider(props: CustomProps) {
   useEffect(() => {
     const storedTheme = localStorage.getItem("daisyUI-theme");
     if (storedTheme) {
-      handleThemeChange(storedTheme);
+      document.documentElement.setAttribute("data-theme", storedTheme);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setTheme(storedTheme);
     }
     setLoading(false);
   }, []);

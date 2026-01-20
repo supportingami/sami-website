@@ -23,7 +23,7 @@ export default ({ strapi }: { strapi: Core.Strapi }) => ({
         stdio: ["inherit", "inherit", "pipe"],
         shell: true,
       });
-      let output = "";
+      const output = "";
       let err = "";
 
       child.stderr.setEncoding("utf-8");
@@ -53,7 +53,4 @@ export default ({ strapi }: { strapi: Core.Strapi }) => ({
   },
 });
 
-function removeColorsFromConsoleLogs(s: string) {
-  const regex = /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g;
-  return s.replace(regex, "");
-}
+

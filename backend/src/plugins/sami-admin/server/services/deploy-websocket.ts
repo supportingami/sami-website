@@ -38,8 +38,7 @@ export class DeployWebsocketService {
       stdio: ["inherit", "pipe", "pipe"],
       shell: true,
     });
-    let output = "";
-    let err = "";
+
 
     process.stdout.write.bind(process.stdout);
 
@@ -48,14 +47,14 @@ export class DeployWebsocketService {
       data = data.toString();
       console.log(data);
       this.sendMessage(removeAnsiStyles(data));
-      err += data;
+
     });
     child.stdout.setEncoding("utf-8");
     child.stdout.on("data", (data) => {
       data = data.toString();
       console.log(data);
       this.sendMessage(removeAnsiStyles(data));
-      output += data;
+
     });
     child.on("error", (e) => {
       console.log("child error", e);
@@ -70,6 +69,7 @@ export class DeployWebsocketService {
 }
 
 function removeAnsiStyles(s: string) {
+  // eslint-disable-next-line no-control-regex
   const regex = /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g;
   return s.replace(regex, "");
 }

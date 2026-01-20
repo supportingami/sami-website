@@ -6,12 +6,9 @@ export const HTMLContent = ({ children, className = "" }) => (
 );
 
 function cleanHTML(html: string) {
-  try {
-    html = stripStyles(html);
-    html = replaceEmptyLines(html);
-  } finally {
-    return html;
-  }
+  html = stripStyles(html);
+  html = replaceEmptyLines(html);
+  return html;
 }
 
 /**
