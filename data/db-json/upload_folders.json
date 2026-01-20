@@ -206,5 +206,18 @@
     "published_at": 1739221304713,
     "updated_at": 1711382028811,
     "updated_by_id": 2
+  },
+  {
+    "created_at": 1764668154289,
+    "created_by_id": 2,
+    "document_id": "j5022jzgb1k3ilg6ard95g3a",
+    "id": 18,
+    "locale": null,
+    "name": "2023 Blogs",
+    "path": "/5/17",
+    "path_id": 17,
+    "published_at": 1764668154290,
+    "updated_at": 1764668154289,
+    "updated_by_id": 2
   }
 ]
