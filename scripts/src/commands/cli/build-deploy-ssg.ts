@@ -125,7 +125,7 @@ class BuildCmd {
     }
     if (shouldDeploy) {
       // Use vercel build locally to copy next build and package functions, then deploy prebuilt
-      const cmd = `yarn vercel build && yarn vercel deploy --prebuilt`;
+      const cmd = `yarn vercel build --prod && yarn vercel deploy --prebuilt --prod --skip-domain`;
       await execa(cmd, { stdio: "inherit", cwd: PATHS.frontendDir });
     }
     // Wait for key press to terminate running preview server
