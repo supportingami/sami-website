@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "private": true,
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Sami website strapi backend",
   "scripts": {
     "start": "strapi develop",
@@ -15,7 +15,6 @@
     "@_sh/strapi-plugin-ckeditor": "^5.0.1",
     "@strapi/plugin-graphql": "5.33.3",
     "@strapi/plugin-users-permissions": "5.33.3",
-    "@strapi/provider-email-sendgrid": "^5.33.3",
     "@strapi/strapi": "5.33.3",
     "@strapi/typescript-utils": "^5.33.3",
     "@strapi/utils": "^5.33.3",
@@ -31,6 +30,7 @@
     "sqlite3": "^5.1.7",
     "strapi-connector-bookshelf": "^3.6.11",
     "strapi-plugin-multi-select": "^2.1.1",
+    "strapi-provider-email-resend": "^1.0.4",
     "styled-components": "^6.1.8"
   },
   "author": {

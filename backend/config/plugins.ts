@@ -1,9 +1,9 @@
 export default ({ env }) => ({
   email: {
     config: {
-      provider: "sendgrid",
+      provider: "strapi-provider-email-resend",
       providerOptions: {
-        apiKey: env("SENDGRID_API_KEY"),
+        apiKey: env("RESEND_API_KEY"),
       },
       settings: {
         defaultFrom: "admin@samicharity.co.uk",
