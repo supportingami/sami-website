@@ -66,12 +66,6 @@
     "id": 11
   },
   {
-    "alt_text": "SAMI Map",
-    "caption": "\n",
-    "class_names": "max-w-lg",
-    "id": 12
-  },
-  {
     "alt_text": null,
     "caption": "Danny presents the software at a conference in Kenya",
     "class_names": null,
@@ -550,5 +544,11 @@
     "caption": "When maths respects students’ culture, their confidence grows.",
     "class_names": null,
     "id": 109
+  },
+  {
+    "alt_text": "SAMI Map",
+    "caption": "\n",
+    "class_names": "max-w-lg",
+    "id": 110
   }
 ]

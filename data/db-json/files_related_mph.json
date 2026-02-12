@@ -880,14 +880,6 @@
     "related_type": "api::blog-post.blog-post"
   },
   {
-    "field": "Media",
-    "file_id": 107,
-    "id": 395,
-    "order": 1,
-    "related_id": 12,
-    "related_type": "common.image"
-  },
-  {
     "field": "File",
     "file_id": 31,
     "id": 396,
@@ -1729,14 +1721,6 @@
   },
   {
     "field": "Media",
-    "file_id": 107,
-    "id": 505,
-    "order": 1,
-    "related_id": 34,
-    "related_type": "common.image"
-  },
-  {
-    "field": "Media",
     "file_id": 151,
     "id": 506,
     "order": 1,
@@ -2486,5 +2470,21 @@
     "order": 1,
     "related_id": 146,
     "related_type": "api::blog-post.blog-post"
+  },
+  {
+    "field": "Media",
+    "file_id": 107,
+    "id": 714,
+    "order": 1,
+    "related_id": 34,
+    "related_type": "common.image"
+  },
+  {
+    "field": "Media",
+    "file_id": 107,
+    "id": 715,
+    "order": 1,
+    "related_id": 110,
+    "related_type": "common.image"
   }
 ]

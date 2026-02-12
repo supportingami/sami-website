@@ -21,15 +21,15 @@
   },
   {
     "name": "components_common_action_buttons",
-    "seq": 34
+    "seq": 35
   },
   {
     "name": "components_common_htmls",
-    "seq": 406
+    "seq": 410
   },
   {
     "name": "components_common_images",
-    "seq": 109
+    "seq": 110
   },
   {
     "name": "components_common_text_blocks",
@@ -113,7 +113,7 @@
   },
   {
     "name": "files_related_mph",
-    "seq": 713
+    "seq": 715
   },
   {
     "name": "home_contents",
@@ -161,14 +161,14 @@
   },
   {
     "name": "volunteer_contents",
-    "seq": 3
+    "seq": 4
   },
   {
     "name": "volunteer_contents_cmps",
-    "seq": 128
+    "seq": 140
   },
   {
     "name": "volunteer_contents_faqs_lnk",
-    "seq": 34
+    "seq": 51
   }
 ]
