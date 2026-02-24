@@ -340,7 +340,7 @@
     "id": 92
   },
   {
-    "html": "<h1 style=\"margin-left:0px;\"><span style=\"background-color:transparent;color:var(--wp--preset--color--vivid-cyan-blue)!important;\"><strong>Summer 2026 Update</strong></span></h1><p>This summer, camps are currently being planned in:</p><p>Rwanda, Kenya, Ghana, Togo (French-speaking) and Benin (French-speaking) &nbsp;(Ethiopia, Tanzania, Uganda, to be confirmed).</p>",
+    "html": "<h2 style=\"margin-left:0px;\"><span style=\"background-color:transparent;color:var(--wp--preset--color--vivid-cyan-blue)!important;\"><strong>Summer 2026 Update</strong></span></h2><p>Camps are currently being planned in:</p><ul><li>Kenya</li><li>Ghana</li><li>Togo (French-speaking)</li><li>Benin (French-speaking)</li><li>Ethiopia</li></ul><p>We have also previously supported camps in Tanzania and Uganda, however we are not aware of any camps being organised for this year.</p>",
     "id": 93
   },
   {
@@ -920,19 +920,27 @@
     "id": 406
   },
   {
-    "html": "<p>We have ongoing projects such as Happy Classrooms and Maths Club Initiative to improve the infrastructure of maths education. Have your own idea for a project? We aim to support innovative projects and connect like-minded individuals. Please&nbsp;<a href=\"mailto:admin@supportingami.org\">email</a> us if you are interested in volunteering abroad or at home</p>",
-    "id": 407
+    "html": "<div class=\"raw-html-embed\"><iframe title=\"SAMI Maths Camps - 2026\" aria-label=\"Choropleth map\" id=\"datawrapper-chart-ixLeL\" src=\"https://datawrapper.dwcdn.net/ixLeL/2/\" scrolling=\"no\" frameborder=\"0\" style=\"width: 0; min-width: 100% !important; border: none; max-height:100vw;\" height=\"579\" data-external=\"1\"></iframe><script type=\"text/javascript\">window.addEventListener(\"message\",function(a){if(void 0!==a.data[\"datawrapper-height\"]){var e=document.querySelectorAll(\"iframe\");for(var t in a.data[\"datawrapper-height\"])for(var r,i=0;r=e[i];i++)if(r.contentWindow===a.source){var d=a.data[\"datawrapper-height\"][t]+\"px\";r.style.height=d}}});</script></div>",
+    "id": 419
   },
   {
-    "html": "<h1 style=\"margin-left:0px;\"><span style=\"background-color:transparent;color:var(--wp--preset--color--vivid-cyan-blue)!important;\"><strong>Summer 2026 Update</strong></span></h1><p>This summer, camps are currently being planned in:</p><p>Rwanda, Kenya, Ghana, Togo (French-speaking) and Benin (French-speaking) &nbsp;(Ethiopia, Tanzania, Uganda, to be confirmed).</p>",
-    "id": 408
+    "html": "<p>We have ongoing projects such as Happy Classrooms and Maths Club Initiative to improve the infrastructure of maths education. Have your own idea for a project? We aim to support innovative projects and connect like-minded individuals. Please&nbsp;<a href=\"mailto:admin@supportingami.org\">email</a> us if you are interested in volunteering abroad or at home</p>",
+    "id": 445
+  },
+  {
+    "html": "<h2 style=\"margin-left:0px;\"><span style=\"background-color:transparent;color:var(--wp--preset--color--vivid-cyan-blue)!important;\"><strong>Summer 2026 Update</strong></span></h2><p>Camps are currently being planned in:</p><ul><li>Kenya</li><li>Ghana</li><li>Togo (French-speaking)</li><li>Benin (French-speaking)</li><li>Ethiopia</li></ul><p>We have also previously supported camps in Tanzania and Uganda, however we are not aware of any camps being organised for this year.</p>",
+    "id": 446
+  },
+  {
+    "html": "<div class=\"raw-html-embed\"><iframe title=\"SAMI Maths Camps - 2026\" aria-label=\"Choropleth map\" id=\"datawrapper-chart-ixLeL\" src=\"https://datawrapper.dwcdn.net/ixLeL/2/\" scrolling=\"no\" frameborder=\"0\" style=\"width: 0; min-width: 100% !important; border: none; max-height:100vw;\" height=\"579\" data-external=\"1\"></iframe><script type=\"text/javascript\">window.addEventListener(\"message\",function(a){if(void 0!==a.data[\"datawrapper-height\"]){var e=document.querySelectorAll(\"iframe\");for(var t in a.data[\"datawrapper-height\"])for(var r,i=0;r=e[i];i++)if(r.contentWindow===a.source){var d=a.data[\"datawrapper-height\"][t]+\"px\";r.style.height=d}}});</script></div>",
+    "id": 447
   },
   {
     "html": "<p style=\"margin-left:0px;\">For each camp we aim to have at least one experienced volunteer. Further, we aim to have at least one international teacher at each camp, either a current teacher or a retired teacher. We aim to also have two to three student international volunteers participate in each of the AMI camps, with the volunteers being a mixture of undergrads and postgrads/researchers. We would be happy to hear from people in other walks of life who feel they have something to contribute, and we would consider recommending high school students for this experience.</p><p style=\"margin-left:0px;\">The recruitment of international volunteers has begun and we will be considering applications on a rolling basis until the start of the camps.&nbsp;You can mention a preference for a camp in your application, but you don’t have to.&nbsp;Decisions on applications will be made by the SAMI Trustees, who then recommend suitable candidates to the local organisers of the respective camps. Note: all camps are run through local partners. As such, dates and venues are subject to change.&nbsp;</p><p style=\"margin-left:0px;\"><strong>Do not make any flight or accommodation booking until you have confirmed the camp dates with the local organiser</strong>.&nbsp;</p><p style=\"margin-left:0px;\">SAMI cannot accept responsibility for any financial loss occurred due to the changes in dates or venues for any of the camps.</p><p style=\"margin-left:0px;\">FAQs can&nbsp;be found below.&nbsp;If you would like to know more&nbsp;please write to&nbsp;<a href=\"mailto:admin@supportingami.org\">admin@supportingami.org</a>. We’re happy to give you more information by email and would be happy to meet you&nbsp;in person.</p>",
-    "id": 409
+    "id": 448
   },
   {
     "html": "<h3 style=\"margin-left:0px;\"><i>Application Process:</i></h3><p style=\"margin-left:0px;\"><i>1. Attend SAMI recruitment event/speak with a previous camp’s volunteer/discuss with a SAMI member</i></p><p style=\"margin-left:0px;\"><i>2. Complete online application</i></p><p style=\"margin-left:0px;\"><i>3. Attend interview</i></p><p style=\"margin-left:0px;\"><i>4. SAMI directors meet to make final decisions</i></p><h3 style=\"margin-left:0px;\"><i>Timeline:</i></h3><p style=\"margin-left:0px;\"><i>February – Applications open</i></p><p style=\"margin-left:0px;\"><i>March – May – Interviews take place</i></p><p style=\"margin-left:0px;\"><i>May – June – Accepted volunteers are put in touch with local organisers</i></p><p style=\"margin-left:0px;\"><i>July – August – Camps take place</i></p>",
-    "id": 410
+    "id": 449
   }
 ]

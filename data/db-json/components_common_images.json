@@ -192,12 +192,6 @@
     "id": 33
   },
   {
-    "alt_text": "SAMI Map",
-    "caption": "\n",
-    "class_names": "max-w-lg",
-    "id": 34
-  },
-  {
     "alt_text": "Shivanga Primary school Maths Club",
     "caption": "Standard two pupils from Shivanga Primary school take part in a maths club session on Geometrical shapes, talking in a group helped them realise what was needed.",
     "class_names": null,
@@ -544,11 +538,5 @@
     "caption": "When maths respects students’ culture, their confidence grows.",
     "class_names": null,
     "id": 109
-  },
-  {
-    "alt_text": "SAMI Map",
-    "caption": "\n",
-    "class_names": "max-w-lg",
-    "id": 110
   }
 ]

@@ -2094,7 +2094,7 @@
     "provider_metadata": null,
     "published_at": 1739221304710,
     "size": 2.55,
-    "updated_at": 1710561986619,
+    "updated_at": 1771895563994,
     "updated_by_id": 1,
     "url": "/uploads/pdf_icon_aa3579873d.svg",
     "width": 56
@@ -4623,5 +4623,30 @@
     "updated_by_id": 2,
     "url": "/uploads/image_cb2f9097f6.png",
     "width": 1002
+  },
+  {
+    "alternative_text": null,
+    "caption": null,
+    "created_at": 1771895551630,
+    "created_by_id": 1,
+    "document_id": "pg3hl5cq2dxw1j72jjpu5dc4",
+    "ext": ".pdf",
+    "folder_path": "/2",
+    "formats": null,
+    "hash": "Feb_2025_Annual_report_SAMI_32a9f698af",
+    "height": null,
+    "id": 223,
+    "locale": null,
+    "mime": "application/pdf",
+    "name": "Feb 2025 Annual report SAMI.pdf",
+    "preview_url": null,
+    "provider": "local",
+    "provider_metadata": null,
+    "published_at": 1771895551631,
+    "size": 1535.79,
+    "updated_at": 1771895551630,
+    "updated_by_id": 1,
+    "url": "/uploads/Feb_2025_Annual_report_SAMI_32a9f698af.pdf",
+    "width": null
   }
 ]
