@@ -28,6 +28,8 @@ export interface CommonHtml extends Struct.ComponentSchema {
           preset: "defaultHtml";
         }
       >;
+    Label: Schema.Attribute.String;
+    Notes: Schema.Attribute.Text;
   };
 }
 

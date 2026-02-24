@@ -8,10 +8,16 @@
   "attributes": {
     "HTML": {
       "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
       "options": {
         "preset": "defaultHtml"
-      },
-      "customField": "plugin::ckeditor5.CKEditor"
+      }
+    },
+    "Label": {
+      "type": "string"
+    },
+    "Notes": {
+      "type": "text"
     }
   }
 }
