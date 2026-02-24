@@ -13,6 +13,11 @@ function getStrapiURL(path = "") {
 export function getStrapiMedia(media: Partial<UploadFile> = {}): string {
   if (media) {
     const { url } = media;
+    // SVGs are skipped by next-export-optimize-images, meaning they won't be downloaded and replaced.
+    // However, since uploads are synced to the frontend's public directory, they can be served with a relative URL.
+    if (url.startsWith("/") && url.endsWith(".svg")) {
+      return url;
+    }
     const imageUrl = url.startsWith("/") ? getStrapiURL(url) : url;
     return imageUrl;
   } else {
