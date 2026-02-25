@@ -68,17 +68,18 @@ jobs:
           cp data/db/sami-production.db data/db/sami-dev.db
 
       - name: Build
-        run: yarn scripts cli build --environment=development --no-export --no-preview --no-deploy
+        run: yarn scripts cli build --no-export --no-preview --no-deploy
       # HACK - split build-deploy above for easier debugging
       - name: Deploy
         run: |
           cd frontend
-          vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-          vercel build --token=${{ secrets.VERCEL_TOKEN }}
-          vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+          vercel pull --yes --environment=production
+          vercel build --prod 
+          vercel deploy --prebuilt --prod --skip-domain
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 
       # NOTE - also possible to do without intermediate but requires interaction with live cloud-run api
       # - name: Generate preview
