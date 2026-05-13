@@ -14,7 +14,7 @@
   "dependencies": {
     "@_sh/strapi-plugin-ckeditor": "^5.0.1",
     "@strapi/plugin-graphql": "5.33.3",
-    "@strapi/plugin-users-permissions": "5.33.3",
+    "@strapi/plugin-users-permissions": "5.45.0",
     "@strapi/strapi": "5.33.3",
     "@strapi/typescript-utils": "^5.33.3",
     "@strapi/utils": "^5.33.3",
