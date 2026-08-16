@@ -40,6 +40,8 @@ class StrapiBootstrap {
     await loadEnv(this.options.environment, { skipHealthcheck: true });
     if (this.options.adminBuild !== false) {
       await this.buildStrapiAdminUI();
+    } else {
+      await this.buildStrapiServerTS();
     }
     // ensure strapi env matches passed
     process.env.NODE_ENV = this.options.environment || "development";
@@ -47,6 +49,19 @@ class StrapiBootstrap {
     await this.app.start();
     await this.checkAccessTokens();
     this.app.stop(0);
+  }
+
+  /**
+   * Run `tsc` to compile backend TypeScript server code to dist without bundling Admin UI
+   */
+  private async buildStrapiServerTS() {
+    console.log(chalk.gray(`\nCompiling Strapi Server TS to dist\n`));
+    const { exitCode } = await execa("yarn tsc", {
+      cwd: PATHS.backendDir,
+      shell: true,
+      stdio: "inherit",
+    });
+    if (exitCode !== 0) process.exit(exitCode);
   }
 
   /**
