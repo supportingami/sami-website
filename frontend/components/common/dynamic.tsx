@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next-export-optimize-images/image";
+import ResponsiveImage from "./ResponsiveImage";
 import type {
   Error,
   DynamicContentContentDynamicZone,
@@ -10,7 +10,6 @@ import type {
 } from "../../graphql/generated";
 import { ActionButtonsComponent } from "./actionButtons";
 import { HTMLContent } from "./htmlContent";
-import { getStrapiMedia } from "lib/media";
 
 /**
  * Author blocks include those defined AuthorBlock content type of
@@ -21,7 +20,7 @@ type IDynamicComponentType = NonNullable<IDynamicComponent["__typename"]>;
 
 // HACK - force tailwind to compile sizes for classnames provided to images dynamically
 export const ComponentCommonImageSizes = () => {
-  <Image alt="" src="" className="max-w-sm max-w-md max-w-lg max-w-xl max-h-sm max-h-md max-h-lg max-h-xl" />;
+  <ResponsiveImage alt="" src="" className="max-w-sm max-w-md max-w-lg max-w-xl max-h-sm max-h-md max-h-lg max-h-xl" />;
 };
 
 const ComponentMapping: { [type in IDynamicComponentType]: (block: IDynamicComponent) => React.JSX.Element } = {
@@ -50,29 +49,30 @@ const ComponentMapping: { [type in IDynamicComponentType]: (block: IDynamicCompo
 
   ComponentCommonImage: (block) => {
     const { Media, AltText, Caption, ClassNames } = block as ComponentCommonImage;
+    const width = (Media as any)?.width || 1200;
+    const height = (Media as any)?.height || 800;
+    const alt = AltText || Caption || "SAMI Image";
     // Wrap image with figure/figcaption when caption provided. Simply return image when not
     return Caption ? (
       <figure className={`mb-8 mx-auto ${ClassNames || ""}`}>
-        <Image
-          src={getStrapiMedia(Media)}
-          width={0}
-          height={0}
-          sizes="100vw"
-          className={`object-cover object-center m-auto w-full h-auto`}
-          alt={AltText || "image"}
+        <ResponsiveImage
+          media={Media}
+          width={width}
+          height={height}
+          preset="articleContent"
+          className="object-cover object-center m-auto w-full h-auto"
+          alt={alt}
         />
         <figcaption className="prose"> {Caption} </figcaption>
       </figure>
     ) : (
-      // HACK - ensure 100vw image available and try to responsively size to fit available width
-      // https://youtu.be/IU_qq_c_lKA?si=JUybvi70ikvFAZtN&t=461
-      <Image
-        src={getStrapiMedia(Media)}
-        width={0}
-        height={0}
-        sizes="100vw"
+      <ResponsiveImage
+        media={Media}
+        width={width}
+        height={height}
+        preset="articleContent"
         className={`object-cover object-center m-auto w-full h-auto ${ClassNames || ""}`}
-        alt={AltText || "image"}
+        alt={alt}
       />
     );
   },

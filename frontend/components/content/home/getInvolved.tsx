@@ -1,8 +1,7 @@
 import type { ComponentHomeGetInvolved, UploadFile } from "../../../graphql/generated";
-import Image from "next-export-optimize-images/image";
+import ResponsiveImage from "components/common/ResponsiveImage";
 import { ActionButtonsComponent } from "components/common/actionButtons";
 import { HTMLContent } from "components/common/htmlContent";
-import { getStrapiMedia } from "lib/media";
 import { ImageHeadingContentLayout } from "components/layout/columns";
 
 export const GetInvolvedComponent: React.FC<ComponentHomeGetInvolved> = ({
@@ -28,5 +27,12 @@ export const GetInvolvedComponent: React.FC<ComponentHomeGetInvolved> = ({
   </>
 );
 const ProjectSummaryImage = (ImageData: Partial<UploadFile>) => (
-  <Image src={getStrapiMedia(ImageData)} alt={"image"} fill placeholder="empty" className="object-contain" />
+  <ResponsiveImage
+    media={ImageData}
+    alt="Get Involved with SAMI"
+    fill
+    preset="twoColumn"
+    placeholder="empty"
+    className="object-contain"
+  />
 );

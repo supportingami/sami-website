@@ -1,9 +1,9 @@
-import { useBreakpointQuery } from "lib/breakpoints";
+import React from "react";
 
 /**
- * Layout designed to image alongside heading and content.
+ * Layout designed to display image alongside heading and content.
  * Responsive, so that on smaller screens a single column is shown
- * ```
+ *  * ```
  *
  *  // large
  * ------------------
@@ -25,22 +25,22 @@ export const ImageHeadingContentLayout: React.FC<{
   Content: React.ReactNode;
   imageSide?: "left" | "right";
 }> = ({ Image, Content, Heading, imageSide = "left" }) => {
-  const isLargeScreen = useBreakpointQuery("lg");
-  return isLargeScreen ? (
-    <>
-      <div className={`flex align-center gap-32 ${imageSide === "right" && "flex-row-reverse"}`}>
-        <div className="flex-1 relative rounded-md overflow-hidden">{Image}</div>
-        <div className="flex-1">
-          {Heading}
-          {Content}
+  return (
+    <div
+      className={`flex flex-col lg:flex-row items-center lg:gap-32 ${
+        imageSide === "right" ? "lg:flex-row-reverse" : ""
+      }`}
+    >
+      <div className="w-full lg:hidden">{Heading}</div>
+      {Image && (
+        <div className="flex-1 relative rounded-md overflow-hidden w-full max-w-md lg:max-w-none h-[300px] lg:h-auto min-h-[300px] lg:min-h-[400px] my-6 lg:my-0">
+          {Image}
         </div>
+      )}
+      <div className="flex-1 w-full">
+        <div className="hidden lg:block">{Heading}</div>
+        {Content}
       </div>
-    </>
-  ) : (
-    <>
-      {Heading}
-      <div className="relative mb-6 h-[300px] mx-auto max-w-md rounded-md">{Image}</div>
-      {Content}
-    </>
+    </div>
   );
 };

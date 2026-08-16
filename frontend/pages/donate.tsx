@@ -5,12 +5,11 @@ import { serverQuery } from "lib/graphql";
 import { DonateContentDocument, DonorsDocument } from "../graphql/generated";
 import type { ComponentHomeMissionStatement, DonateContentQuery, Donor, DonorsQuery } from "../graphql/generated";
 import PageSection from "components/layout/pageSection";
-import Image from "next-export-optimize-images/image";
+import ResponsiveImage from "components/common/ResponsiveImage";
 
 import { ImageHeadingContentLayout } from "components/layout/columns";
 import { HTMLContent } from "components/common/htmlContent";
 import { ActionButtonsComponent } from "components/common/actionButtons";
-import { getStrapiMedia } from "lib/media";
 
 export const getStaticProps = async ({}: GetStaticPropsContext) => {
   const donateContentRes = await serverQuery<DonateContentQuery>(DonateContentDocument);
@@ -35,7 +34,14 @@ export const DonateContentComponent: React.FC<ComponentHomeMissionStatement> = (
       imageSide="right"
       Heading={<h2 className="subtitle">{Heading}</h2>}
       Image={
-        <Image src={getStrapiMedia(UploadedImage)} alt={"image"} fill placeholder="empty" className="object-cover" />
+        <ResponsiveImage
+          media={UploadedImage}
+          alt="Support SAMI"
+          fill
+          preset="twoColumn"
+          placeholder="empty"
+          className="object-cover"
+        />
       }
       Content={
         <>
@@ -52,7 +58,11 @@ const DonatePage = ({ content, donors }: InferGetStaticPropsType<typeof getStati
   return (
     <>
       <Head>
-        <title>SAMI Donate</title>
+        <title>Donate - SAMI</title>
+        <meta
+          name="description"
+          content="Support SAMI to empower communities and advance mathematics education across Africa. Learn how you can donate and help make a difference."
+        />
       </Head>
       <>
         {content.DonateStatement && (
@@ -72,12 +82,12 @@ const DonatePage = ({ content, donors }: InferGetStaticPropsType<typeof getStati
             <div className="grid auto-rows-[100px] gap-20 grid-cols-2 md:grid-cols-3 my-10 mx-auto md:my-20 items-center justify-center max-w-3xl">
               {donors.map((donor) => (
                 <div className="relative h-full w-full" key={donor.Name}>
-                  <Image
+                  <ResponsiveImage
                     className="object-contain"
-                    src={getStrapiMedia(donor.Logo)}
-                    alt={donor.Name}
+                    media={donor.Logo}
+                    alt={donor.Name || "Donor Logo"}
                     fill
-                    sizes="100"
+                    preset="avatarGrid"
                   />
                 </div>
               ))}

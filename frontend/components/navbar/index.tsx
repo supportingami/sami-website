@@ -2,7 +2,7 @@ import Link from "next/link";
 import { MdFavorite } from "react-icons/md";
 
 import ThemeToggle from "./themeToggle";
-import Image from "next-export-optimize-images/image";
+import ResponsiveImage from "components/common/ResponsiveImage";
 import { useRouter } from "next/router";
 
 interface ILink {
@@ -80,9 +80,15 @@ const Navbar = () => {
             )
           }
         </div>
-        <Link href="/home">
+        <Link href="/home" aria-label="SAMI Home">
           <div className={`btn btn-link absolute inset-0 m-2  ${logoSizeClass}`}>
-            <Image sizes="200px, 100px" src="/images/sami-logo-no-text.svg" fill alt="home-logo"></Image>
+            <ResponsiveImage
+              preset="navLogo"
+              src="/images/sami-logo-no-text.svg"
+              fill
+              priority
+              alt="SAMI Logo"
+            />
           </div>
         </Link>
       </div>
@@ -91,7 +97,7 @@ const Navbar = () => {
 
   const MobileNavbar = () => (
     <div className="dropdown">
-      <label tabIndex={0} className="btn btn-ghost lg:hidden">
+      <label tabIndex={0} className="btn btn-ghost lg:hidden" aria-label="Toggle navigation menu">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-5 w-5"

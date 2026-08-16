@@ -13,8 +13,7 @@ import { GetInvolvedComponent } from "components/content/home/getInvolved";
 import { ImpactSectionComponent } from "components/content/home/ImpactSection";
 import { BlogCardComponent } from "components/content/blog-post/blogCard";
 import { DonateSummary } from "components/content/home/donateSummary";
-import Image from "next-export-optimize-images/image";
-import { useBreakpointQuery } from "lib/breakpoints";
+import { ResponsiveImage } from "components/common/ResponsiveImage";
 
 export const getStaticProps = async ({}: GetStaticPropsContext) => {
   const res = await serverQuery<HomeContentQuery>(HomeContentDocument);
@@ -47,23 +46,34 @@ const ShapeDivider = () => (
 const SamiIntroLogo = () => {
   return (
     <div className={`relative h-16 mt-2 -mb-16`}>
-      <Image sizes="200px, 100px" src="/images/sami-logo-no-text.svg" fill alt="home-logo"></Image>
+      <ResponsiveImage
+        preset="navLogo"
+        src="/images/sami-logo-no-text.svg"
+        fill
+        priority
+        alt="SAMI Logo"
+      />
     </div>
   );
 };
 const HomePage = ({ content, blogs, projects }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const isLargeScreen = useBreakpointQuery("lg");
   return (
     <>
       <Head>
-        <title>SAMI</title>
+        <title>SAMI - Supporting African Maths Initiatives</title>
+        <meta
+          name="description"
+          content="Supporting African Maths Initiatives (SAMI) is a UK charity supporting innovative, sustainable mathematics projects in Africa."
+        />
       </Head>
       <>
         <div className="relative">
           {content.HeroImages?.[0] && <HeroImageComponent heroImage={content.HeroImages[0] as any} />}
           <ShapeDivider />
         </div>
-        {!isLargeScreen && <SamiIntroLogo />}
+        <div className="lg:hidden">
+          <SamiIntroLogo />
+        </div>
 
         {content.MissionStatement && (
           <PageSection className="py-16">

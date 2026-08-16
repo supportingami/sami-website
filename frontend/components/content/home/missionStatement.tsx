@@ -1,8 +1,7 @@
 import type { ComponentHomeMissionStatement, UploadFile } from "../../../graphql/generated";
-import Image from "next-export-optimize-images/image";
+import ResponsiveImage from "components/common/ResponsiveImage";
 import { ActionButtonsComponent } from "components/common/actionButtons";
 import { HTMLContent } from "components/common/htmlContent";
-import { getStrapiMedia } from "lib/media";
 import { ImageHeadingContentLayout } from "components/layout/columns";
 
 export const MissionStatementComponent: React.FC<ComponentHomeMissionStatement> = ({
@@ -28,5 +27,12 @@ export const MissionStatementComponent: React.FC<ComponentHomeMissionStatement> 
   </>
 );
 const MissionStatementImage = (ImageData: Partial<UploadFile>) => (
-  <Image src={getStrapiMedia(ImageData)} alt={"image"} fill placeholder="empty" className="object-cover" />
+  <ResponsiveImage
+    media={ImageData}
+    alt="SAMI Mission"
+    fill
+    preset="twoColumn"
+    placeholder="empty"
+    className="object-cover"
+  />
 );

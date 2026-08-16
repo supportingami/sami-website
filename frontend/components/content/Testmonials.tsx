@@ -1,12 +1,17 @@
-import type { Testimonial } from "../../graphql/generated";
-import { getStrapiMedia } from "lib/media";
-import Image from "next-export-optimize-images/image";
+import type { Testimonial, UploadFile } from "../../graphql/generated";
+import ResponsiveImage from "components/common/ResponsiveImage";
 
 export default function Testimonials({ testimonials = [] }: { testimonials: Testimonial[] }) {
-  const TestimonialAvatar = ({ src }: { src: string }) => (
+  const TestimonialAvatar = ({ media, alt }: { media?: Partial<UploadFile>; alt: string }) => (
     <div className="avatar basis-full lg:basis-0">
       <div className="w-[128px] h-[128px] mask mask-hexagon-2">
-        <Image src={src} alt="" className="object-contain m-auto" width={128} height={128} />
+        <ResponsiveImage
+          media={media}
+          alt={alt}
+          className="object-contain m-auto"
+          width={128}
+          height={128}
+        />
       </div>
     </div>
   );
@@ -28,9 +33,13 @@ export default function Testimonials({ testimonials = [] }: { testimonials: Test
           <div key={index}>
             <div className="card bg-base-100 shadow-xl mx-auto w-3/4 mb-8">
               <div className="flex items-center p-8 gap-4 flex-wrap">
-                {avatarPosition === "start" && <TestimonialAvatar src={getStrapiMedia(item.Photo)} />}
+                {avatarPosition === "start" && (
+                  <TestimonialAvatar media={item.Photo} alt={item.Name || "Testimonial"} />
+                )}
                 <TestimonialText testimonial={item} />
-                {avatarPosition === "end" && <TestimonialAvatar src={getStrapiMedia(item.Photo)} />}
+                {avatarPosition === "end" && (
+                  <TestimonialAvatar media={item.Photo} alt={item.Name || "Testimonial"} />
+                )}
               </div>
             </div>
           </div>

@@ -1,4 +1,4 @@
-import Image from "next-export-optimize-images/image";
+import ResponsiveImage from "components/common/ResponsiveImage";
 import { getStrapiMedia } from "lib/media";
 import React from "react";
 import type { IResource } from "types/resource";
@@ -16,7 +16,14 @@ export const ResourceCardComponent: React.FC<{
     >
       <div className="relative h-48 max-h-40 lg:max-h-48 w-full flex justify-center">
         {resource.Image && (
-          <Image src={getStrapiMedia(resource.Image)} alt={"image"} placeholder="empty" className="object-cover" fill />
+          <ResponsiveImage
+            media={resource.Image}
+            alt={resource.Title || "Resource Image"}
+            placeholder="empty"
+            className="object-cover"
+            fill
+            preset="cardGrid"
+          />
         )}
       </div>
       <div className="capitalize text-left font-semibold p-2 pt-3 leading-4">
