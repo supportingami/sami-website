@@ -4,7 +4,7 @@
   "outputDirectory": ".next",
   "installCommand": "echo skipping install",
   "cleanUrls": true,
-  "redirects": [{ "source": "/", "destination": "/home", "permanent": true }],
+  "redirects": [{ "source": "/home", "destination": "/", "permanent": true }],
   "functions": {
     "api/**/*.mjs": {
       "memory": 1024,

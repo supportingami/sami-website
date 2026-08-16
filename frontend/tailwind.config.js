@@ -12,7 +12,7 @@ module.exports = {
         "tiling-2": "url('/images/bg-tiling-2.svg')",
       },
       fontFamily: {
-        sans: ["var(--font-roboto)", ...fontFamily.sans],
+        sans: ["Roboto", ...fontFamily.sans],
       },
       colors: {
         blue: {

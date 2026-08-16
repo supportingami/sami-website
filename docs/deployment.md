@@ -28,6 +28,13 @@ Then build can be initiated by
 yarn scripts cli build --environment development --no-export
 ```
 
+If hitting file-based rate limits (max 5,000 per 24h) then upload single archive
+
+```sh
+yarn scripts cli build --environment development --no-export --archive
+
+```
+
 ## Staging Site
 
 A standalone deployment is made to enable the use of strapi dashboard online, and preview the results in a next server also running online.

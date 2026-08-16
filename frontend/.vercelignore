@@ -21,3 +21,15 @@ out/uploads/*.PNG
 out/uploads/*.WEBP
 out/uploads/*.gif
 out/uploads/*.GIF
+
+.vercel/output/static/uploads/*.jpg
+.vercel/output/static/uploads/*.jpeg
+.vercel/output/static/uploads/*.png
+.vercel/output/static/uploads/*.webp
+.vercel/output/static/uploads/*.JPG
+.vercel/output/static/uploads/*.JPEG
+.vercel/output/static/uploads/*.PNG
+.vercel/output/static/uploads/*.WEBP
+.vercel/output/static/uploads/*.gif
+.vercel/output/static/uploads/*.GIF
+

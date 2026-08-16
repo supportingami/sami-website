@@ -17,7 +17,7 @@ const Navbar = () => {
     {
       id: "home",
       label: "Home",
-      href: "/home",
+      href: "/",
     },
     {
       id: "projects",
@@ -58,7 +58,7 @@ const Navbar = () => {
     const navbarOffset = "calc(2 * var(--navbar-padding, 0.5rem) - 2px)";
     const svgFill = "hsl(var(--b1) / var(--tw-bg-opacity))";
     const router = useRouter();
-    const isHomePage = router.asPath === "/home";
+    const isHomePage = router.asPath === "/" || router.asPath === "/home" || router.pathname === "/";
     // make logo larger on home screen
     const logoSizeClass = isHomePage ? "w-[200px] h-[70px] mt-0" : "w-[100px] h-[35px] -mt-2 no-animation";
     return (
@@ -80,7 +80,7 @@ const Navbar = () => {
             )
           }
         </div>
-        <Link href="/home" aria-label="SAMI Home">
+        <Link href="/" aria-label="SAMI Home">
           <div className={`btn btn-link absolute inset-0 m-2  ${logoSizeClass}`}>
             <ResponsiveImage preset="navLogo" src="/images/sami-logo-no-text.svg" fill priority alt="SAMI Logo" />
           </div>
