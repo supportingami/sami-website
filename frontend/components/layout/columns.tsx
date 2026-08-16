@@ -27,13 +27,13 @@ export const ImageHeadingContentLayout: React.FC<{
 }> = ({ Image, Content, Heading, imageSide = "left" }) => {
   return (
     <div
-      className={`flex flex-col lg:flex-row items-center lg:gap-32 ${
+      className={`flex flex-col lg:flex-row lg:items-center lg:gap-32 ${
         imageSide === "right" ? "lg:flex-row-reverse" : ""
       }`}
     >
       <div className="w-full lg:hidden">{Heading}</div>
       {Image && (
-        <div className="flex-1 relative rounded-md overflow-hidden w-full max-w-md lg:max-w-none h-[300px] lg:h-auto min-h-[300px] lg:min-h-[400px] my-6 lg:my-0">
+        <div className="flex-1 relative rounded-md overflow-hidden w-full max-w-md lg:max-w-none h-[300px] lg:h-auto min-h-[300px] lg:min-h-[360px] lg:self-stretch mb-6 lg:mb-0 mx-auto">
           {Image}
         </div>
       )}
