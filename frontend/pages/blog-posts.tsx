@@ -1,6 +1,6 @@
 import React from "react";
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
-import Head from "next/head";
+import { SEO } from "components/common/seo";
 import { serverQuery } from "lib/graphql";
 import type { IBlogPost } from "types/blogpost";
 import type { BlogPostsQuery, BlogPost } from "../graphql/generated";
@@ -25,11 +25,15 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
 };
 
 const BlogPosts = ({ blogs }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const latestImage = blogs.find((b) => b.FeatureImage)?.FeatureImage;
   return (
     <>
-      <Head>
-        <title>News Page</title>
-      </Head>
+      <SEO
+        title="News & Updates - SAMI"
+        description="Stay up to date with the latest news, stories, and developments from Supporting African Maths Initiatives (SAMI)."
+        canonicalPath="/blog-posts"
+        image={latestImage}
+      />
       <PageLayout>
         <h1 className="font-semibold text-4xl">News</h1>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4">

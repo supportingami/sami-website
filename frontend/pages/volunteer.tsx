@@ -1,7 +1,14 @@
 import React from "react";
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
-import Head from "next/head";
-import type { VolunteerContentQuery, FaqsQuery, Faq, DynamicContentContentDynamicZone } from "../graphql/generated";
+import { SEO } from "components/common/seo";
+import { buildFAQSchema } from "lib/schemaOrg";
+import type {
+  VolunteerContentQuery,
+  FaqsQuery,
+  Faq,
+  DynamicContentContentDynamicZone,
+  ComponentCommonImage,
+} from "../graphql/generated";
 import { VolunteerContentDocument, FaqsDocument } from "../graphql/generated";
 import { serverQuery } from "lib/graphql";
 import type { IFaq } from "types/faq";
@@ -33,11 +40,20 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
 };
 
 const VolunteerPage = ({ volunteerPageContent, faqs }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const firstImageBlock = volunteerPageContent?.find(
+    (b) => (b as ComponentCommonImage).__typename === "ComponentCommonImage" && (b as ComponentCommonImage).Media,
+  ) as ComponentCommonImage | undefined;
+  const volunteerImage = firstImageBlock?.Media;
+
   return (
     <>
-      <Head>
-        <title>Volunteer</title>
-      </Head>
+      <SEO
+        title="Volunteer with SAMI"
+        description="Volunteer with SAMI and support maths initiatives across Africa through in-person maths camps, remote volunteering, and community projects."
+        canonicalPath="/volunteer"
+        image={volunteerImage}
+        schemaData={buildFAQSchema(faqs)}
+      />
       <SectionHeader background={{ imageName: "bg-tiling-2", size: "1500px 1500px", position: "70px -640px" }}>
         <h1 className="text-white">Volunteer</h1>
       </SectionHeader>

@@ -4,8 +4,15 @@ query blogPostContent($filters: BlogPostFiltersInput) {
     nodes {
       documentId
       Title
+      Summary
       DateWritten
       Slug
+      FeatureImage {
+        documentId
+        name
+        url
+        size
+      }
       # If any new blocks added for authoring need to include here
       ContentBlocks {
         __typename

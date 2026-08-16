@@ -1,5 +1,5 @@
 import type { DocumentNode, OperationVariables } from "@apollo/client";
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { ApolloClient, ApolloProvider, HttpLink, InMemoryCache } from "@apollo/client";
 import type { ReactNode } from "react";
 import type session from "types/session";
 
@@ -33,6 +33,7 @@ export async function serverQuery<T>(graphqlQuery: DocumentNode, variables: Oper
     .query<T>({
       query: graphqlQuery,
       variables,
+      fetchPolicy: "no-cache",
     })
     .catch((err) => {
       // Network errors such as graphql schema errors are nested within
@@ -73,8 +74,10 @@ export const graphQLServerClient = () => {
 /** Common method used to generate graphQL client either on server or browser */
 const getClient = (headers: any) =>
   new ApolloClient({
-    uri: `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337"}/graphql`,
-    credentials: "same-origin",
+    link: new HttpLink({
+      uri: `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337"}/graphql`,
+      credentials: "same-origin",
+      headers,
+    }),
     cache: new InMemoryCache(),
-    headers,
   });

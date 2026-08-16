@@ -91,7 +91,7 @@ export type BlogPost = {
   ContentBlocks?: Maybe<Array<Maybe<BlogPostContentBlocksDynamicZone>>>;
   DateWritten?: Maybe<Scalars["Date"]["output"]>;
   FeatureImage?: Maybe<UploadFile>;
-  Slug?: Maybe<Scalars["String"]["output"]>;
+  Slug: Scalars["String"]["output"];
   Summary?: Maybe<Scalars["String"]["output"]>;
   Title: Scalars["String"]["output"];
   createdAt?: Maybe<Scalars["DateTime"]["output"]>;
@@ -189,6 +189,8 @@ export type ComponentCommonActionButtonInput = {
 export type ComponentCommonHtml = {
   __typename?: "ComponentCommonHtml";
   HTML?: Maybe<Scalars["String"]["output"]>;
+  Label?: Maybe<Scalars["String"]["output"]>;
+  Notes?: Maybe<Scalars["String"]["output"]>;
   id: Scalars["ID"]["output"];
 };
 
@@ -2135,8 +2137,10 @@ export type BlogPostContentQuery = {
       __typename?: "BlogPost";
       documentId: string;
       Title: string;
+      Summary?: string | null;
       DateWritten?: any | null;
-      Slug?: string | null;
+      Slug: string;
+      FeatureImage?: { __typename?: "UploadFile"; documentId: string; name: string; url: string; size: number } | null;
       ContentBlocks?: Array<
         | { __typename: "ComponentCommonActionButton"; ClassNames?: string | null; Link: string; Text: string }
         | { __typename: "ComponentCommonHtml"; HTML?: string | null }
@@ -2167,7 +2171,7 @@ export type BlogPostsQuery = {
       Title: string;
       Summary?: string | null;
       DateWritten?: any | null;
-      Slug?: string | null;
+      Slug: string;
       FeatureImage?: { __typename?: "UploadFile"; documentId: string; name: string; url: string; size: number } | null;
     }>;
   } | null;
@@ -2315,7 +2319,7 @@ export type HomeContentQuery = {
       Title: string;
       Summary?: string | null;
       DateWritten?: any | null;
-      Slug?: string | null;
+      Slug: string;
       FeatureImage?: { __typename?: "UploadFile"; documentId: string; name: string; url: string; size: number } | null;
     }>;
   } | null;
@@ -2630,8 +2634,22 @@ export const BlogPostContentDocument = {
                     selections: [
                       { kind: "Field", name: { kind: "Name", value: "documentId" } },
                       { kind: "Field", name: { kind: "Name", value: "Title" } },
+                      { kind: "Field", name: { kind: "Name", value: "Summary" } },
                       { kind: "Field", name: { kind: "Name", value: "DateWritten" } },
                       { kind: "Field", name: { kind: "Name", value: "Slug" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "FeatureImage" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "documentId" } },
+                            { kind: "Field", name: { kind: "Name", value: "name" } },
+                            { kind: "Field", name: { kind: "Name", value: "url" } },
+                            { kind: "Field", name: { kind: "Name", value: "size" } },
+                          ],
+                        },
+                      },
                       {
                         kind: "Field",
                         name: { kind: "Name", value: "ContentBlocks" },

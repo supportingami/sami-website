@@ -8,7 +8,12 @@ import DaisyThemeProvider from "lib/themeProvider";
 import { PageFooter } from "components/footer";
 
 import { Roboto } from "next/font/google";
-const roboto = Roboto({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-roboto" });
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-roboto",
+  display: "swap",
+});
 
 const App = ({ Component, pageProps }: AppProps) => {
   // const { session } = pageProps;

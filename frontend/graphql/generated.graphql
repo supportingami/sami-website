@@ -1,8 +1,3 @@
-"""
-Indicates exactly one field must be supplied and this field must not be `null`.
-"""
-directive @oneOf on INPUT_OBJECT
-
 type AboutContent {
   Intro: String
   Testimonials(filters: TestimonialFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [Testimonial]!
@@ -60,7 +55,7 @@ type BlogPost {
   ContentBlocks: [BlogPostContentBlocksDynamicZone]
   DateWritten: Date
   FeatureImage: UploadFile
-  Slug: String
+  Slug: String!
   Summary: String
   Title: String!
   createdAt: DateTime
@@ -70,7 +65,7 @@ type BlogPost {
 }
 
 union BlogPostContentBlocksDynamicZone =
-    ComponentCommonActionButton
+  | ComponentCommonActionButton
   | ComponentCommonHtml
   | ComponentCommonImage
   | ComponentCommonTextBlock
@@ -157,6 +152,8 @@ input ComponentCommonActionButtonInput {
 
 type ComponentCommonHtml {
   HTML: String
+  Label: String
+  Notes: String
   id: ID!
 }
 
@@ -426,7 +423,7 @@ type DynamicContent {
 }
 
 union DynamicContentContentDynamicZone =
-    ComponentCommonActionButton
+  | ComponentCommonActionButton
   | ComponentCommonHtml
   | ComponentCommonImage
   | ComponentCommonTextBlock
@@ -517,7 +514,7 @@ input FloatFilterInput {
 }
 
 union GenericMorph =
-    AboutContent
+  | AboutContent
   | AnnualReport
   | BlogPost
   | ComponentCommonActionButton
@@ -946,7 +943,7 @@ input ProjectTypeInput {
 }
 
 union ProjectTypePageContentDynamicZone =
-    ComponentCommonActionButton
+  | ComponentCommonActionButton
   | ComponentCommonHtml
   | ComponentCommonImage
   | ComponentCommonTextBlock
@@ -1611,7 +1608,7 @@ type VolunteerContent {
 }
 
 union VolunteerContentContentDynamicZone =
-    ComponentCommonActionButton
+  | ComponentCommonActionButton
   | ComponentCommonHtml
   | ComponentCommonImage
   | ComponentCommonTextBlock

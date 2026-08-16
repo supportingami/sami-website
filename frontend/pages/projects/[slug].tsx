@@ -1,6 +1,8 @@
 import React from "react";
 import type { GetStaticPaths, GetStaticPropsContext, InferGetStaticPropsType } from "next";
-import Head from "next/head";
+import { SEO } from "components/common/seo";
+import { buildProjectSchema, buildBreadcrumbSchema } from "lib/schemaOrg";
+import { SITE_URL } from "lib/media";
 import { serverQuery } from "lib/graphql";
 import type { IProject } from "types/project";
 import { ProjectTypeComponent } from "components/content/projects/projectType";
@@ -43,11 +45,29 @@ async function fetchProjects() {
 }
 
 const ProjectTypePage = ({ project }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const canonicalUrl = `${SITE_URL}/projects/${project.Slug}`;
+  const description =
+    project.HomeSummary || `Learn about SAMI's ${project.Name} project and our educational initiatives across Africa.`;
+
+  const schemaData = [
+    buildProjectSchema(project, canonicalUrl),
+    buildBreadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "Projects", url: "/projects" },
+      { name: project.Name, url: `/projects/${project.Slug}` },
+    ]),
+  ];
+
   return (
     <>
-      <Head>
-        <title>{project.Name}</title>
-      </Head>
+      <SEO
+        title={project.Name}
+        description={description}
+        canonicalPath={`/projects/${project.Slug}`}
+        image={project.FeatureImage || project.Icon}
+        imageAlt={project.Name}
+        schemaData={schemaData}
+      />
       <ProjectTypeComponent project={project} />
     </>
   );

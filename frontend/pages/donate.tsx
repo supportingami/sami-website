@@ -1,4 +1,4 @@
-import Head from "next/head";
+import { SEO } from "components/common/seo";
 import React from "react";
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import { serverQuery } from "lib/graphql";
@@ -55,15 +55,14 @@ export const DonateContentComponent: React.FC<ComponentHomeMissionStatement> = (
 );
 
 const DonatePage = ({ content, donors }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const donateImage = content.DonateStatement?.Image;
+  const description =
+    content.DonateStatement?.Text ||
+    "Support SAMI to empower communities and advance mathematics education across Africa. Learn how you can donate and help make a difference.";
+
   return (
     <>
-      <Head>
-        <title>Donate - SAMI</title>
-        <meta
-          name="description"
-          content="Support SAMI to empower communities and advance mathematics education across Africa. Learn how you can donate and help make a difference."
-        />
-      </Head>
+      <SEO title="Donate - SAMI" description={description} canonicalPath="/donate" image={donateImage} />
       <>
         {content.DonateStatement && (
           <PageSection fullwidth className="py-16 bg-blue-50">
