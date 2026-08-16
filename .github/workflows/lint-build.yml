@@ -47,18 +47,6 @@ jobs:
         run: yarn install --immutable
 
       #############################################################################
-      #         Next.js Build Cache
-      #############################################################################
-      - name: Restore Next.js Build Cache
-        uses: actions/cache@v6
-        with:
-          path: |
-            frontend/.next/cache
-          key: nextjs-${{ runner.os }}-${{ hashFiles('frontend/**/*', '**/yarn.lock') }}
-          restore-keys: |
-            nextjs-${{ runner.os }}-
-
-      #############################################################################
       #         Lint, Setup and Build
       #############################################################################
       - name: Lint Code
