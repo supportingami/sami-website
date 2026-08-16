@@ -59,8 +59,8 @@ export async function deployToVercel(options: IVercelDeployOptions): Promise<voi
   } catch (error) {
     console.warn(
       chalk.yellow(
-        "\nStandard Vercel deployment failed (e.g. API upload limit). Retrying with --archive=tgz fallback...\n"
-      )
+        "\nStandard Vercel deployment failed (e.g. API upload limit). Retrying with --archive=tgz fallback...\n",
+      ),
     );
     if (options.beforeRetry) {
       await options.beforeRetry();

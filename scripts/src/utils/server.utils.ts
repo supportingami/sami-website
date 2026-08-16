@@ -13,10 +13,7 @@ export interface IStaticServeOptions {
 /**
  * Run a local web server to serve static assets with clean URLs and custom redirects
  */
-export async function serveStaticDirectory(
-  publicDir: string,
-  options: IStaticServeOptions = {}
-): Promise<void> {
+export async function serveStaticDirectory(publicDir: string, options: IStaticServeOptions = {}): Promise<void> {
   const port = options.port || 3000;
   const shouldOpen = options.openBrowser !== false;
 

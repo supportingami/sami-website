@@ -212,16 +212,7 @@ export interface IContentsEntry {
   localPath?: string;
 }
 
-const RASTER_IMAGE_EXTENSIONS = new Set([
-  ".jpg",
-  ".jpeg",
-  ".png",
-  ".webp",
-  ".gif",
-  ".bmp",
-  ".tiff",
-  ".avif",
-]);
+const RASTER_IMAGE_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp", ".gif", ".bmp", ".tiff", ".avif"]);
 
 /**
  * Remove duplicate un-optimized raster images from directories (such as static upload outputs).
@@ -243,4 +234,3 @@ export function pruneUnoptimizedUploads(targetDirs: string[]): number {
   }
   return totalPruned;
 }
-
