@@ -202,7 +202,7 @@ class BuildCmd {
         // Serve config to replicate similar to root vercel.json
         return handler(request, response, {
           cleanUrls: true,
-          rewrites: [{ source: "/", destination: "/home.html" }],
+          redirects: [{ source: "/home", destination: "/", type: 301 }],
           public: resolve(PATHS.frontendDir, "out"),
           directoryListing: false,
         });
