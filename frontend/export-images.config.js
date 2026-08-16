@@ -8,7 +8,11 @@ const imageOptimisationConfig = {
     ["jpeg", "webp"],
     ["png", "webp"],
   ],
-  // populate optimized images to custom folder
   imageDir: "_optimized",
+  quality: 65,
+  cacheDir: ".next/cache/next-export-optimize-images",
+  sharpOptions: {
+    webp: { effort: 6 },
+  },
 };
 module.exports = imageOptimisationConfig;

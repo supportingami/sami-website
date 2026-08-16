@@ -15,6 +15,13 @@ yarn scripts strapi import --environment development
 
 ```
 
+Setup vercel (if not done previously)
+
+```sh
+cd frontend
+yarn vercel login
+```
+
 Then build can be initiated by
 
 ```sh
