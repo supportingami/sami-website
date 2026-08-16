@@ -223,7 +223,8 @@ export class DBImport {
   }
 
   private async insertRows(table: string, rows: any[]) {
-    return this.db.batchInsert(table, rows);
+    // Specify a chunk size (e.g. 100) to avoid exceeding SQLite's 500 compound SELECT term limit
+    return this.db.batchInsert(table, rows, 100);
   }
 
   /** Update local sqlite sequence to match latest seq ids applied to data tables */
