@@ -7,6 +7,7 @@ import { PATHS } from "../../paths";
 import { loadEnv } from "../../utils";
 import type { IEnvLoaded } from "../../utils";
 import { spawnSync } from "child_process";
+import { copySync, ensureDirSync } from "fs-extra";
 
 /***************************************************************************************
  * CLI
@@ -48,6 +49,7 @@ class StartCmd {
   public async run() {
     const { environment, only, build } = this.options;
     const envLoaded = await loadEnv(environment);
+    this.syncPublicUploads();
     const cmds: ConcurrentlyCommandInput[] = [];
     const targets = ["frontend", "backend"].filter((target) => !only || only.includes(target));
     if (targets.includes("backend")) {
@@ -66,6 +68,14 @@ class StartCmd {
       ["killOthers" as any]: ["failure", "success"],
     });
     await result;
+  }
+
+  private syncPublicUploads() {
+    const srcDir = resolve(PATHS.dataDir, "public");
+    const targetDir = resolve(PATHS.frontendDir, "public");
+    console.log(chalk.blue("Syncing public assets to frontend..."));
+    ensureDirSync(targetDir);
+    copySync(srcDir, targetDir);
   }
 
   private async buildBackend() {
