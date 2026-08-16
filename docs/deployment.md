@@ -41,6 +41,16 @@ A standalone deployment is made to enable the use of strapi dashboard online, an
 
 The frontend and backend are built as docker images and hosted in Google Cloud Run containers
 
+Authorize gcloud
+
+```sh
+gcloud auth login
+gcloud auth configure-docker europe-west1-docker.pkg.dev
+gcloud config set project sami-website-365718
+```
+
+Build and push images
+
 ```sh
 yarn scripts docker build
 yarn scripts docker push
