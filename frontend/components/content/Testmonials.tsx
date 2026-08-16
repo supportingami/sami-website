@@ -5,13 +5,7 @@ export default function Testimonials({ testimonials = [] }: { testimonials: Test
   const TestimonialAvatar = ({ media, alt }: { media?: Partial<UploadFile>; alt: string }) => (
     <div className="avatar basis-full lg:basis-0">
       <div className="w-[128px] h-[128px] mask mask-hexagon-2">
-        <ResponsiveImage
-          media={media}
-          alt={alt}
-          className="object-contain m-auto"
-          width={128}
-          height={128}
-        />
+        <ResponsiveImage media={media} alt={alt} className="object-contain m-auto" width={128} height={128} />
       </div>
     </div>
   );
@@ -37,9 +31,7 @@ export default function Testimonials({ testimonials = [] }: { testimonials: Test
                   <TestimonialAvatar media={item.Photo} alt={item.Name || "Testimonial"} />
                 )}
                 <TestimonialText testimonial={item} />
-                {avatarPosition === "end" && (
-                  <TestimonialAvatar media={item.Photo} alt={item.Name || "Testimonial"} />
-                )}
+                {avatarPosition === "end" && <TestimonialAvatar media={item.Photo} alt={item.Name || "Testimonial"} />}
               </div>
             </div>
           </div>

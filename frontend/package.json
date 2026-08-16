@@ -6,9 +6,7 @@
   "scripts": {
     "start": "next dev",
     "build": "next build",
-    "start:prod": "DEPRECATED - next start",
-    "build:analyze": "DEPRECATED - ANALYZE=true next build && tsc --project tsconfig.server.json",
-    "build:standalone": "DEPRECATED - next build && node ./postbuild.js",
+    "analyze": "DEPRECATED - ANALYZE=true next build && tsc --project tsconfig.server.json",
     "lint": "tsc",
     "generate:schema": "graphql-codegen --require dotenv/config --config codegen.schema.yml dotenv_config_path=./.env",
     "generate:queries": "graphql-codegen --require dotenv/config --config codegen.queries.yml dotenv_config_path=./.env",

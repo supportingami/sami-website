@@ -13,13 +13,7 @@ export const MembersListItemComponent: React.FC<{
       {member.Tags.includes("Trustee") ? <VectorTriangle /> : null}
       <div className="relative h-48 w-full">
         {member.Photo && (
-          <ResponsiveImage
-            media={member.Photo}
-            alt={member.Name}
-            fill
-            preset="avatarGrid"
-            className="object-cover"
-          />
+          <ResponsiveImage media={member.Photo} alt={member.Name} fill preset="avatarGrid" className="object-cover" />
         )}
       </div>
       {member.Tags.includes("SAMI") ? <div className="bg-blue-350 h-2 rounded-b-lg" /> : <div className="h-2" />}

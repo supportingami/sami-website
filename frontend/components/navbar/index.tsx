@@ -82,13 +82,7 @@ const Navbar = () => {
         </div>
         <Link href="/home" aria-label="SAMI Home">
           <div className={`btn btn-link absolute inset-0 m-2  ${logoSizeClass}`}>
-            <ResponsiveImage
-              preset="navLogo"
-              src="/images/sami-logo-no-text.svg"
-              fill
-              priority
-              alt="SAMI Logo"
-            />
+            <ResponsiveImage preset="navLogo" src="/images/sami-logo-no-text.svg" fill priority alt="SAMI Logo" />
           </div>
         </Link>
       </div>

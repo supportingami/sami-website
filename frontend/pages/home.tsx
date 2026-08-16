@@ -46,13 +46,7 @@ const ShapeDivider = () => (
 const SamiIntroLogo = () => {
   return (
     <div className={`relative h-16 mt-2 -mb-16`}>
-      <ResponsiveImage
-        preset="navLogo"
-        src="/images/sami-logo-no-text.svg"
-        fill
-        priority
-        alt="SAMI Logo"
-      />
+      <ResponsiveImage preset="navLogo" src="/images/sami-logo-no-text.svg" fill priority alt="SAMI Logo" />
     </div>
   );
 };
