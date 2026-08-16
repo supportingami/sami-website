@@ -1,13 +1,11 @@
 import React from "react";
-import Head from "next/head";
+import { SEO } from "components/common/seo";
 import type { NextPage } from "next";
 
 const IndexPage: NextPage = () => {
   return (
     <>
-      <Head>
-        <title>SAMI</title>
-      </Head>
+      <SEO title="SAMI - Supporting African Maths Initiatives" canonicalPath="/" />
     </>
   );
 };

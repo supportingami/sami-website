@@ -9,10 +9,11 @@ import {
 } from "react-share";
 import dayjs from "dayjs";
 import { DynamicComponents } from "components/common/dynamic";
+import { SITE_URL } from "lib/media";
 
 export const BlogPostComponent: React.FC<{ blogPost: IBlogPost }> = ({ blogPost }) => {
   const shareIconSize = "48px";
-  const url = window.location.href;
+  const url = typeof window !== "undefined" ? window.location.href : `${SITE_URL}/blog-posts/${blogPost.Slug}`;
   const contentBlocks = blogPost.ContentBlocks || [];
   return (
     <div className="max-w-screen-lg m-auto">

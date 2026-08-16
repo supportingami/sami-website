@@ -8,16 +8,16 @@ export const HeroImageComponent: React.FC<{ heroImage: ComponentHomeHeroImage }>
    * Generate style code to allow text to have background colour split across lines
    * Adapted from http://jsfiddle.net/9BTYQ/1/
    */
-  const getTextStyles = () => {
-    // Retrieve primary colour and modify to be slightly darker for use with text
-    const primaryColorVar = window.getComputedStyle(document.documentElement).getPropertyValue("--p");
-    const [h, s] = primaryColorVar.trim().split(" ");
-    const bgColor = `hsla(${h} ${s} 40% / 80%)`;
-    const boxShadow = `0.5em 0 0 ${bgColor},-0.5em 0 0 ${bgColor}`;
-    return { boxShadow, bgColor };
-  };
+  // const getTextStyles = () => {
+  //   // Retrieve primary colour and modify to be slightly darker for use with text
+  //   const primaryColorVar = window.getComputedStyle(document.documentElement).getPropertyValue("--p");
+  //   const [h, s] = primaryColorVar.trim().split(" ");
+  //   const bgColor = `hsla(${h} ${s} 40% / 80%)`;
+  //   const boxShadow = `0.5em 0 0 ${bgColor},-0.5em 0 0 ${bgColor}`;
+  //   return { boxShadow, bgColor };
+  // };
 
-  const { bgColor, boxShadow } = getTextStyles();
+  // const { bgColor, boxShadow } = getTextStyles();
 
   return (
     <div className="hero min-h-[75vh] relative">

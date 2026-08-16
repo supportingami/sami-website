@@ -1,6 +1,6 @@
 import React from "react";
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
-import Head from "next/head";
+import { SEO } from "components/common/seo";
 import ResponsiveImage from "components/common/ResponsiveImage";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -35,16 +35,16 @@ type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 const ProjectsPage = ({ projects }: Props) => {
   const router = useRouter();
+  const featuredImage = projects.find((p) => p.FeatureImage)?.FeatureImage;
 
   return (
     <>
-      <Head>
-        <title>Projects - SAMI</title>
-        <meta
-          name="description"
-          content="Discover SAMI mathematics initiatives, active projects, and past educational programs across Africa."
-        />
-      </Head>
+      <SEO
+        title="Projects - SAMI"
+        description="Discover SAMI mathematics initiatives, active projects, and past educational programs across Africa."
+        canonicalPath="/projects"
+        image={featuredImage}
+      />
       <SectionHeader background={{ imageName: "bg-tiling-2", size: "1500px 1500px", position: "70px -640px" }}>
         <h1 className="text-white">SAMI Projects</h1>
         <div className="flex gap-2 justify-center flex-1 flex-wrap mb-8">

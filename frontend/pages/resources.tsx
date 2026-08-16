@@ -1,7 +1,7 @@
 import React from "react";
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import type { IResource } from "types/resource";
-import Head from "next/head";
+import { SEO } from "components/common/seo";
 import { ResourcesPageComponent } from "components/content/resources";
 import type { ResourcesQuery, Resource } from "../graphql/generated";
 import { ResourcesDocument } from "../graphql/generated";
@@ -35,11 +35,16 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
 };
 
 const ResourcesPage = ({ resources }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const resourceImage = resources.find((r) => r.Image)?.Image;
+
   return (
     <>
-      <Head>
-        <title>Resources Page</title>
-      </Head>
+      <SEO
+        title="Educational Resources - SAMI"
+        description="Explore mathematics resources, learning materials, and tools developed and curated by SAMI."
+        canonicalPath="/resources"
+        image={resourceImage}
+      />
       <PageLayout>
         <ResourcesPageComponent resources={resources} />
       </PageLayout>

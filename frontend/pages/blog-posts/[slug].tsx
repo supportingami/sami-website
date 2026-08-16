@@ -1,6 +1,8 @@
 import React from "react";
 import type { GetStaticPaths, GetStaticPropsContext, InferGetStaticPropsType } from "next";
-import Head from "next/head";
+import { SEO } from "components/common/seo";
+import { buildBlogPostingSchema, buildBreadcrumbSchema } from "lib/schemaOrg";
+import { SITE_URL } from "lib/media";
 import { serverQuery } from "lib/graphql";
 import type { IBlogPost } from "types/blogpost";
 import type { BlogPost, BlogPostFiltersInput, BlogPostContentQuery } from "../../graphql/generated";
@@ -40,11 +42,33 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 const BlogPostPage = ({ blogPost }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const canonicalUrl = `${SITE_URL}/blog-posts/${blogPost.Slug}`;
+  const description = blogPost.Summary || `Read ${blogPost.Title} from Supporting African Maths Initiatives.`;
+
+  const schemaData = [
+    buildBlogPostingSchema(blogPost, canonicalUrl),
+    buildBreadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "News", url: "/blog-posts" },
+      { name: blogPost.Title, url: `/blog-posts/${blogPost.Slug}` },
+    ]),
+  ];
+
   return (
     <>
-      <Head>
-        <title>{blogPost.Title}</title>
-      </Head>
+      <SEO
+        title={blogPost.Title}
+        description={description}
+        canonicalPath={`/blog-posts/${blogPost.Slug}`}
+        image={blogPost.FeatureImage}
+        imageAlt={blogPost.Title}
+        type="article"
+        article={{
+          publishedTime: blogPost.DateWritten || undefined,
+          modifiedTime: blogPost.DateWritten || undefined,
+        }}
+        schemaData={schemaData}
+      />
       <PageLayout>
         <BlogPostComponent blogPost={blogPost} />
       </PageLayout>

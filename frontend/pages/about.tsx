@@ -1,5 +1,6 @@
 import React from "react";
-import Head from "next/head";
+import { SEO } from "components/common/seo";
+import { buildOrganizationSchema } from "lib/schemaOrg";
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import ResponsiveImage from "components/common/ResponsiveImage";
 
@@ -69,13 +70,12 @@ const headerButtons = [
 const AboutPage = ({ content, members, reports, partners }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
-      <Head>
-        <title>About Us - SAMI</title>
-        <meta
-          name="description"
-          content="Learn about Supporting African Maths Initiatives (SAMI), our team, theory of change, annual reports, and partners."
-        />
-      </Head>
+      <SEO
+        title="About Us - SAMI"
+        description="Learn about Supporting African Maths Initiatives (SAMI), our team, theory of change, annual reports, and partners."
+        canonicalPath="/about"
+        schemaData={buildOrganizationSchema(members, partners)}
+      />
       <SectionHeader background={{ imageName: "bg-tiling-1", size: "1660px 480px", position: "-150px -58px" }}>
         <h1 className="text-white">Our Work</h1>
         <div className="flex gap-2 justify-center flex-1 flex-wrap mb-8">

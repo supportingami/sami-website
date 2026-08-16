@@ -1,6 +1,7 @@
 import React from "react";
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
-import Head from "next/head";
+import { SEO } from "components/common/seo";
+import { buildOrganizationSchema } from "lib/schemaOrg";
 
 import { serverQuery } from "lib/graphql";
 import type { HomeContentQuery, ProjectType } from "../graphql/generated";
@@ -51,15 +52,20 @@ const SamiIntroLogo = () => {
   );
 };
 const HomePage = ({ content, blogs, projects }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const heroImage = content.HeroImages?.[0]?.Image || content.MissionStatement?.Image;
+  const description =
+    content.MissionStatement?.Text ||
+    "Supporting African Maths Initiatives (SAMI) is a UK charity supporting innovative, sustainable mathematics projects in Africa.";
+
   return (
     <>
-      <Head>
-        <title>SAMI - Supporting African Maths Initiatives</title>
-        <meta
-          name="description"
-          content="Supporting African Maths Initiatives (SAMI) is a UK charity supporting innovative, sustainable mathematics projects in Africa."
-        />
-      </Head>
+      <SEO
+        title="SAMI - Supporting African Maths Initiatives"
+        description={description}
+        canonicalPath="/"
+        image={heroImage}
+        schemaData={buildOrganizationSchema()}
+      />
       <>
         <div className="relative">
           {content.HeroImages?.[0] && <HeroImageComponent heroImage={content.HeroImages[0] as any} />}
