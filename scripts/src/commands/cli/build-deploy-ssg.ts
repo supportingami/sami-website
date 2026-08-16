@@ -30,7 +30,9 @@ interface IProgramOptions {
   /** Specify whether to start the backend server during build (default: True)*/
   backend?: boolean;
   /** Specify environment */
-  environment: "string";
+  environment: string;
+  /** Specify whether to run next-export-optimize-images (default: True) */
+  optimizeImages?: boolean;
 }
 
 const program = new Command("build");
@@ -46,6 +48,8 @@ export default program
   .option("-e --export", "Export local data")
   .option("--no-export", "Do not export local data")
   .option("-c --config <string>", "Next config mode, 'standalone' or 'export'", "export")
+  .option("--optimize-images", "Optimize images after static export (default: true)", true)
+  .option("--no-optimize-images", "Skip image optimization after static export")
   .action(async (options: IProgramOptions) => {
     console.log(`Generate ${options.config} build`);
     return new BuildCmd(options).run().then(() => process.exit(0));
@@ -151,7 +155,8 @@ class BuildCmd {
 
     // When building static export create nextJS build and optimize images
     if (NEXT_CONFIG_MODE === "export") {
-      buildScript = `yarn next build && yarn next-export-optimize-images`;
+      const optimize = this.options.optimizeImages !== false;
+      buildScript = optimize ? `yarn next build && yarn next-export-optimize-images` : `yarn next build`;
     }
     // If building for standalone deployment will still need to call `yarn vercel build` later
     if (NEXT_CONFIG_MODE === "standalone") {
