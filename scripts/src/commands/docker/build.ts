@@ -69,7 +69,7 @@ class DockerBuildCmd {
     console.log(chalk.blue("Building base..."));
     const tags = this.getTags("base");
     const args = `${tags} --build-arg "ENV_NAME=development"`;
-    const cmd = `docker build --file docker/base.dockerfile ${args} .`;
+    const cmd = `docker build --platform linux/amd64 --file docker/base.dockerfile ${args} .`;
     console.log(chalk.gray(cmd));
     await execa(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
     console.log(chalk.green("Built base"));
@@ -80,7 +80,7 @@ class DockerBuildCmd {
     const tags = this.getTags("backend", true);
     const secrets = this.getSecrets();
     const args = `${tags} --build-arg "ENV_NAME=development" --build-arg "BASE_TAG=${BASE_TAG}" ${secrets}`;
-    const cmd = `docker build --file docker/backend.dockerfile ${args} .`;
+    const cmd = `docker build --platform linux/amd64 --file docker/backend.dockerfile ${args} .`;
     console.log(chalk.gray(cmd));
     await execa(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
     console.log(chalk.green("Built backend"));
@@ -90,7 +90,7 @@ class DockerBuildCmd {
     console.log(chalk.blue("Building gcs_fuse..."));
     const tags = this.getTags("gcs_fuse");
     const args = `${tags} --build-arg "ENV_NAME=development" --build-arg "BASE_TAG=${BASE_TAG}"`;
-    const cmd = `docker build --file docker/gcs_fuse.dockerfile ${args} .`;
+    const cmd = `docker build --platform linux/amd64 --file docker/gcs_fuse.dockerfile ${args} .`;
     console.log(chalk.gray(cmd));
     await execa(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
     console.log(chalk.green("Built gcs_fuse"));
@@ -100,7 +100,7 @@ class DockerBuildCmd {
     console.log(chalk.blue("Building frontend..."));
     const tags = this.getTags("frontend", true);
     const args = `${tags} --build-arg "ENV_NAME=development" --build-arg "BASE_TAG=${BASE_TAG}"`;
-    const cmd = `docker build --file docker/frontend.dockerfile ${args} .`;
+    const cmd = `docker build --platform linux/amd64 --file docker/frontend.dockerfile ${args} .`;
     console.log(chalk.gray(cmd));
     await execa(cmd, { stdio: "inherit", shell: true, cwd: PATHS.rootDir });
     console.log(chalk.green("Built frontend"));
