@@ -199,8 +199,20 @@
   },
   {
     "class_names": "justify-center",
-    "id": 43,
+    "id": 46,
     "link": "https://docs.google.com/forms/d/e/1FAIpQLSdfyNymfN9xqJCfgBLKpwQqniJTd2mACY93wjmEP8y8TRZGXw/viewform",
     "text": "Apply Now"
+  },
+  {
+    "class_names": null,
+    "id": 47,
+    "link": "https://web.facebook.com/share/v/1Ad2kAqgsk/",
+    "text": "Kapiyo Impact Week Documentation by Strathmore University"
+  },
+  {
+    "class_names": null,
+    "id": 49,
+    "link": "https://web.facebook.com/share/v/1Ad2kAqgsk/",
+    "text": "Kapiyo Impact Week Documentation by Strathmore University"
   }
 ]

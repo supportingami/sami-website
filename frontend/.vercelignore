@@ -1,10 +1,23 @@
 # Ignore everything (folders and files) on root only
 /*
 
-
 !.vercel
 !vercel.json
 
 # Keep static output and api
 !out
 !api
+
+# Ignore duplicate un-optimized images in static output
+# (Next.js serves responsive WebP versions from out/_optimized)
+# Keep non-image files (e.g. PDFs, SVGs, documents) in out/uploads
+out/uploads/*.jpg
+out/uploads/*.jpeg
+out/uploads/*.png
+out/uploads/*.webp
+out/uploads/*.JPG
+out/uploads/*.JPEG
+out/uploads/*.PNG
+out/uploads/*.WEBP
+out/uploads/*.gif
+out/uploads/*.GIF

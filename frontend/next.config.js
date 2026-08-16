@@ -23,9 +23,11 @@ const commonConfig = {
     scrollRestoration: true,
   },
   images: {
-    // avoid optimising images for larger hd devices (bandwidth intense)
-    // and add more smaller width options
-    deviceSizes: [375, 480, 640, 750, 828, 1080, 1200, 1920],
+    // small devices typically upscale, so avoid too low
+    deviceSizes: [640, 828, 1200, 1920],
+    //
+    imageSizes: [256, 384, 512],
+    formats: ["image/webp"],
   },
 };
 
