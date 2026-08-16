@@ -2,6 +2,7 @@ import { Command } from "commander";
 import { logProgramHelp } from "../../utils";
 import buildCmd from "./build-deploy-ssg";
 import setEnvCmd from "./setEnv";
+import sitemapCmd from "./generate-sitemap";
 import startCmd from "./start";
 
 /***************************************************************************************
@@ -13,6 +14,7 @@ const program = new Command("cli");
 program.description("Local command line scripts");
 program.addCommand(buildCmd);
 program.addCommand(setEnvCmd);
+program.addCommand(sitemapCmd);
 program.addCommand(startCmd);
 
 export default program;
