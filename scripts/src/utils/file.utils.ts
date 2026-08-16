@@ -211,3 +211,36 @@ export interface IContentsEntry {
   md5Checksum: string;
   localPath?: string;
 }
+
+const RASTER_IMAGE_EXTENSIONS = new Set([
+  ".jpg",
+  ".jpeg",
+  ".png",
+  ".webp",
+  ".gif",
+  ".bmp",
+  ".tiff",
+  ".avif",
+]);
+
+/**
+ * Remove duplicate un-optimized raster images from directories (such as static upload outputs).
+ * Preserves non-image files (e.g. PDFs, SVGs, documents).
+ * @returns Total number of files pruned across all target directories
+ */
+export function pruneUnoptimizedUploads(targetDirs: string[]): number {
+  let totalPruned = 0;
+  for (const dir of targetDirs) {
+    if (!existsSync(dir)) continue;
+    const files = readdirSync(dir);
+    for (const file of files) {
+      const ext = path.extname(file).toLowerCase();
+      if (RASTER_IMAGE_EXTENSIONS.has(ext)) {
+        removeSync(path.resolve(dir, file));
+        totalPruned++;
+      }
+    }
+  }
+  return totalPruned;
+}
+
