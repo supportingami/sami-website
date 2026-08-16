@@ -18,7 +18,6 @@ const ThemeContext = createContext<ThemeValue | undefined>(undefined);
  */
 export default function ThemeProvider(props: CustomProps) {
   const [theme, setTheme] = useState("light");
-  const [loading, setLoading] = useState(true);
 
   function handleThemeChange(newTheme: string) {
     document.documentElement.setAttribute("data-theme", newTheme);
@@ -34,7 +33,6 @@ export default function ThemeProvider(props: CustomProps) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setTheme(storedTheme);
     }
-    setLoading(false);
   }, []);
 
   // Public method to allow setting theme from components
@@ -44,11 +42,7 @@ export default function ThemeProvider(props: CustomProps) {
     }
   };
 
-  return (
-    <ThemeContext.Provider value={{ theme, updateTheme }}>
-      {loading ? null : <>{props.children}</>}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={{ theme, updateTheme }}>{props.children}</ThemeContext.Provider>;
 }
 
 export function useThemeContext() {
