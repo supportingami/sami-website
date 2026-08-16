@@ -10,6 +10,8 @@ import * as path from "path";
  * Next.js Metadata Route for generating sitemap.xml
  * Supports both live GraphQL queries during export and local JSON fallback when offline.
  */
+export const dynamic = "force-static";
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = (SITE_URL || "https://samicharity.co.uk").replace(/\/$/, "");
 
