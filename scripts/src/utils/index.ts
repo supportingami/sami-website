@@ -5,6 +5,6 @@ export * from "./gcloud.utils";
 export * from "./logging.utils";
 export * from "./object.utils";
 export * from "./server.utils";
+export * from "./sitemap.utils";
 export * from "./string.utils";
 export * from "./vercel.utils";
-

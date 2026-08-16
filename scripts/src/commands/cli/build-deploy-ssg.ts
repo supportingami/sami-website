@@ -10,6 +10,7 @@ import { PATHS } from "../../paths";
 import {
   buildWithVercel,
   deployToVercel,
+  generateAndSaveSitemap,
   loadEnv,
   promptConfirm,
   pruneUnoptimizedUploads,
@@ -103,11 +104,18 @@ class BuildDeploySSGCommand {
     // 2. Synchronize upload assets into frontend public directory
     this.syncPublicAssets();
 
-    // 3. Run build processes
+    // 3. Generate XML sitemap
+    console.log(chalk.gray("Generating sitemap.xml..."));
+    const { entriesCount } = generateAndSaveSitemap();
+    console.log(chalk.gray(`Generated sitemap.xml with ${entriesCount} URLs`));
+
+    // 4. Run build processes
     await this.exportStaticSite();
 
-    // 4. Clean duplicate unoptimized raster images from export directory
+    // 5. Clean duplicate unoptimized raster images from export directory
     this.pruneRedundantImages();
+    // Ensure sitemap is present in static export output
+    generateAndSaveSitemap();
 
     // 5. Optional local preview server
     if (shouldPreview === undefined) {
