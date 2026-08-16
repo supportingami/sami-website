@@ -14,21 +14,30 @@ jobs:
   preview:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           lfs: true
       - name: Setup Node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: 24.13.0
-          cache: "yarn"
 
       #############################################################################
       #         Node Modules
-      # Manually restore any previous cache to speed install
-      # As immutable install will not change cache only save new cache if not hit
-      # Uses fine-grained methods from https://github.com/actions/cache
+      # Restore .yarn/cache and workspace node_modules for fast install
       #############################################################################
+      - name: Restore Yarn & Node Modules Cache
+        uses: actions/cache@v6
+        with:
+          path: |
+            .yarn/cache
+            node_modules
+            frontend/node_modules
+            backend/node_modules
+            scripts/node_modules
+          key: yarn-nm-${{ runner.os }}-${{ hashFiles('**/yarn.lock', '.yarnrc.yml') }}
+          restore-keys: |
+            yarn-nm-${{ runner.os }}-
 
       - name: Install node modules
         run: yarn install --immutable && npm i -g vercel
@@ -44,13 +53,13 @@ jobs:
         run: |
           echo ${{secrets.GCP_SA_KEY_B64}} | base64 --decode  > ./service-account.json
       - name: GCP Auth
-        uses: "google-github-actions/auth@v2"
+        uses: "google-github-actions/auth@v3"
         with:
           project_id: "sami-website-365718"
           credentials_json: ${{secrets.GCP_SA_KEY_B64}}
           token_format: "access_token"
       - name: "Set up Cloud SDK"
-        uses: "google-github-actions/setup-gcloud@v2"
+        uses: "google-github-actions/setup-gcloud@v3"
         with:
           version: ">= 363.0.0"
 

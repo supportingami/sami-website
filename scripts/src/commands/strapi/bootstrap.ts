@@ -15,11 +15,15 @@ import execa from "execa";
 interface IProgramOptions {
   /** Name of environment to use */
   environment?: string;
+  /** Whether to build the Strapi admin UI dashboard (default: true) */
+  adminBuild?: boolean;
 }
 const program = new Command("bootstrap");
 export default program
   .description("Bootstrap strapi for development")
   .option("-e --environment <string>", "Name of environment to use")
+  .option("--admin-build", "Build Strapi admin UI dashboard (default: true)", true)
+  .option("--no-admin-build", "Skip building Strapi admin UI dashboard")
   .action(async (options: IProgramOptions) => {
     await new StrapiBootstrap(options).run();
   });
@@ -34,7 +38,9 @@ class StrapiBootstrap {
 
   public async run() {
     await loadEnv(this.options.environment, { skipHealthcheck: true });
-    await this.buildStrapiAdminUI();
+    if (this.options.adminBuild !== false) {
+      await this.buildStrapiAdminUI();
+    }
     // ensure strapi env matches passed
     process.env.NODE_ENV = this.options.environment || "development";
     this.app = await createStrapiInstance();

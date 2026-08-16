@@ -4,6 +4,11 @@ on:
   pull_request:
     branches:
       - main
+    paths-ignore:
+      - "**.md"
+      - "docs/**"
+      - ".vscode/**"
+      - "LICENSE*"
 concurrency:
   group: lint-build-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -12,26 +17,58 @@ jobs:
     if: "!contains(github.event.pull_request.labels.*.name, 'Test - preview')"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
-          lfs: true
+          lfs: false
+
       - name: Setup Node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: 24.13.0
-          cache: "yarn"
+
+      #############################################################################
+      #         Node Modules & Dependency Cache
+      # Caches .yarn/cache AND all workspace node_modules for near-instant install
+      #############################################################################
+      - name: Restore Yarn & Node Modules Cache
+        uses: actions/cache@v6
+        with:
+          path: |
+            .yarn/cache
+            node_modules
+            frontend/node_modules
+            backend/node_modules
+            scripts/node_modules
+          key: yarn-nm-${{ runner.os }}-${{ hashFiles('**/yarn.lock', '.yarnrc.yml') }}
+          restore-keys: |
+            yarn-nm-${{ runner.os }}-
 
       - name: Install node modules
         run: yarn install --immutable
+
+      #############################################################################
+      #         Next.js Build Cache
+      #############################################################################
+      - name: Restore Next.js Build Cache
+        uses: actions/cache@v6
+        with:
+          path: |
+            frontend/.next/cache
+          key: nextjs-${{ runner.os }}-${{ hashFiles('frontend/**/*', '**/yarn.lock') }}
+          restore-keys: |
+            nextjs-${{ runner.os }}-
 
       #############################################################################
       #         Lint, Setup and Build
       #############################################################################
       - name: Lint Code
         run: yarn lint
+
       - name: Bootstrap Strapi
-        run: yarn scripts strapi bootstrap --environment development
+        run: yarn scripts strapi bootstrap --environment development --no-admin-build
+
       - name: Setup dev environment
         run: yarn scripts strapi import --environment development
+
       - name: Build
-        run: yarn build --no-export --no-preview --no-deploy
+        run: yarn build --no-export --no-preview --no-deploy --no-optimize-images
