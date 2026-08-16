@@ -1,5 +1,4 @@
-import { getStrapiMedia } from "lib/media";
-import Image from "next-export-optimize-images/image";
+import ResponsiveImage from "./ResponsiveImage";
 import type { ComponentHomeHeroImage } from "../../graphql/generated";
 
 export const HeroImageComponent: React.FC<{ heroImage: ComponentHomeHeroImage }> = ({ heroImage }) => {
@@ -23,7 +22,14 @@ export const HeroImageComponent: React.FC<{ heroImage: ComponentHomeHeroImage }>
   return (
     <div className="hero min-h-[75vh] relative">
       <div className="hero-overlay bg-opacity-60"></div>
-      <Image src={getStrapiMedia(ImageData)} className="object-cover object-center" fill alt={Text} priority />
+      <ResponsiveImage
+        media={ImageData}
+        preset="hero"
+        className="object-cover object-center"
+        fill
+        alt={Text || "SAMI Hero"}
+        priority
+      />
       {/* TODO - hiding hero image text pending SAMI feedback whether want included or not */}
       {/* <div className="hero-content text-center text-neutral-content">
         <div className="max-w-lg">

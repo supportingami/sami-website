@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next-export-optimize-images/image";
+import ResponsiveImage from "components/common/ResponsiveImage";
 import Link from "next/link";
 import { FacebookIcon } from "react-share";
 
@@ -46,7 +46,7 @@ const Sitemap = () => {
     <>
       <PageSection fullwidth className="bg-base-300 py-16" data-test-id="sitemap">
         <div className="flex flex-wrap justify-between gap-x-24 gap-y-8">
-          <Image src="/images/sami-logo-no-text.svg" alt="sitemap-logo" width={100} height={100}></Image>
+          <ResponsiveImage src="/images/sami-logo-no-text.svg" alt="SAMI Logo" width={100} height={100} />
 
           <div className="flex-1 m-auto">
             <div className="flex flex-wrap gap-6 justify-between">
@@ -60,7 +60,7 @@ const Sitemap = () => {
 
           <div className="flex flex-wrap md:place-self-center md:justify-self-end gap-1">
             Follow us
-            <ExternalLink href="https://www.facebook.com/supportingami">
+            <ExternalLink href="https://www.facebook.com/supportingami" aria-label="Visit SAMI Facebook page">
               <FacebookIcon size={size} />
             </ExternalLink>
           </div>

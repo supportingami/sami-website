@@ -1,5 +1,4 @@
-import { getStrapiMedia } from "lib/media";
-import Image from "next-export-optimize-images/image";
+import ResponsiveImage from "components/common/ResponsiveImage";
 import React from "react";
 import type { IMember } from "types/member";
 import VectorTriangle from "./assets/VectorTriangle";
@@ -14,7 +13,7 @@ export const MembersListItemComponent: React.FC<{
       {member.Tags.includes("Trustee") ? <VectorTriangle /> : null}
       <div className="relative h-48 w-full">
         {member.Photo && (
-          <Image src={getStrapiMedia(member.Photo)} alt={`${member.Name}`} fill sizes="200" className="object-cover" />
+          <ResponsiveImage media={member.Photo} alt={member.Name} fill preset="avatarGrid" className="object-cover" />
         )}
       </div>
       {member.Tags.includes("SAMI") ? <div className="bg-blue-350 h-2 rounded-b-lg" /> : <div className="h-2" />}

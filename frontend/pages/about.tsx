@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
-import Image from "next-export-optimize-images/image";
+import ResponsiveImage from "components/common/ResponsiveImage";
 
 import type {
   AboutContent,
@@ -70,7 +70,11 @@ const AboutPage = ({ content, members, reports, partners }: InferGetStaticPropsT
   return (
     <>
       <Head>
-        <title>About Us</title>
+        <title>About Us - SAMI</title>
+        <meta
+          name="description"
+          content="Learn about Supporting African Maths Initiatives (SAMI), our team, theory of change, annual reports, and partners."
+        />
       </Head>
       <SectionHeader background={{ imageName: "bg-tiling-1", size: "1660px 480px", position: "-150px -58px" }}>
         <h1 className="text-white">Our Work</h1>
@@ -134,7 +138,13 @@ const AboutPage = ({ content, members, reports, partners }: InferGetStaticPropsT
 
 const PartnerImage = ({ partner }: { partner: Partner }) => (
   <div className="relative h-full w-full">
-    <Image className="object-contain" src={getStrapiMedia(partner.Logo)} alt={partner.Name} fill sizes="100" />
+    <ResponsiveImage
+      className="object-contain"
+      media={partner.Logo}
+      alt={partner.Name || "Partner Logo"}
+      fill
+      preset="avatarGrid"
+    />
   </div>
 );
 

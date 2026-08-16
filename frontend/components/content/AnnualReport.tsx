@@ -2,7 +2,7 @@ import React from "react";
 import type { IAnnualReport } from "types/annualreport";
 import { getStrapiMedia } from "lib/media";
 import { ExternalLink } from "components/common/externalLink";
-import Image from "next-export-optimize-images/image";
+import ResponsiveImage from "components/common/ResponsiveImage";
 
 export const AnnualReportComponent: React.FC<{
   report: IAnnualReport;
@@ -13,11 +13,12 @@ export const AnnualReportComponent: React.FC<{
         <div className="flex flex-col items-center">
           <div className="relative" style={{ width: 100, height: 100 }}>
             {report.CoverImage && (
-              <Image
-                src={getStrapiMedia(report.CoverImage)}
+              <ResponsiveImage
+                media={report.CoverImage}
                 alt={`${report.Year} Annual Report`}
                 className="object-contain"
                 fill
+                preset="thumbnail"
               />
             )}
           </div>

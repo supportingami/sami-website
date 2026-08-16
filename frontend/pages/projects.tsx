@@ -1,11 +1,10 @@
 import React from "react";
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import Head from "next/head";
-import Image from "next-export-optimize-images/image";
+import ResponsiveImage from "components/common/ResponsiveImage";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { serverQuery } from "lib/graphql";
-import { getStrapiMedia } from "lib/media";
 import type { ProjectType, ProjectsQuery, UploadFile } from "../graphql/generated";
 import { ProjectsDocument } from "../graphql/generated";
 import { SectionHeader } from "components/layout/Header";
@@ -40,7 +39,11 @@ const ProjectsPage = ({ projects }: Props) => {
   return (
     <>
       <Head>
-        <title>Projects Page</title>
+        <title>Projects - SAMI</title>
+        <meta
+          name="description"
+          content="Discover SAMI mathematics initiatives, active projects, and past educational programs across Africa."
+        />
       </Head>
       <SectionHeader background={{ imageName: "bg-tiling-2", size: "1500px 1500px", position: "70px -640px" }}>
         <h1 className="text-white">SAMI Projects</h1>
@@ -80,7 +83,7 @@ const ProjectEntry = (props: { index: number; project: Props["projects"][0] }) =
         Content={
           <>
             <HTMLContent className="m-auto mt-8">{PageSummary}</HTMLContent>
-            <Link href={`/projects/${Slug}`}>
+            <Link href={`/projects/${Slug}`} aria-label={`Read more about ${Name}`}>
               <button className="mt-4 btn btn-primary">Read More</button>
             </Link>
           </>
@@ -93,7 +96,14 @@ const ProjectEntry = (props: { index: number; project: Props["projects"][0] }) =
 };
 
 const ProjectFeatureImage = (ImageData: Partial<UploadFile>) => (
-  <Image src={getStrapiMedia(ImageData)} alt={"image"} fill placeholder="empty" className="object-contain" />
+  <ResponsiveImage
+    media={ImageData}
+    alt="Project Feature"
+    fill
+    preset="twoColumn"
+    placeholder="empty"
+    className="object-contain"
+  />
 );
 
 export default ProjectsPage;

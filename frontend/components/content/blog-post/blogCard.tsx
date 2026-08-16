@@ -1,5 +1,4 @@
-import Image from "next-export-optimize-images/image";
-import { getStrapiMedia } from "lib/media";
+import ResponsiveImage from "components/common/ResponsiveImage";
 import React from "react";
 import type { IBlogPost } from "types/blogpost";
 import { BiCalendar } from "react-icons/bi";
@@ -9,7 +8,7 @@ import Link from "next/link";
 export const BlogCardComponent: React.FC<{
   blog: IBlogPost;
 }> = ({ blog }) => (
-  <Link href={`/blog-posts/${blog.Slug}`}>
+  <Link href={`/blog-posts/${blog.Slug}`} aria-label={blog.Title}>
     <div
       className="
   relative flex flex-col justify-start items-start min-h-full max-h-full font-sans rounded 
@@ -17,11 +16,11 @@ export const BlogCardComponent: React.FC<{
     >
       <div className="relative h-48 w-full">
         {blog.FeatureImage && (
-          <Image
-            src={getStrapiMedia(blog.FeatureImage)}
-            alt={"image"}
+          <ResponsiveImage
+            media={blog.FeatureImage}
+            alt={blog.Title || "Blog Image"}
             fill
-            sizes="320"
+            preset="cardGrid"
             placeholder="empty"
             className="object-cover"
           />

@@ -9,7 +9,7 @@ const imageOptimisationConfig = {
     ["png", "webp"],
   ],
   imageDir: "_optimized",
-  quality: 65,
+  quality: 60,
   cacheDir: ".next/cache/next-export-optimize-images",
   sharpOptions: {
     webp: { effort: 6 },

@@ -28,6 +28,29 @@ export default tseslint.config(
       "no-prototype-builtins": "warn",
       "@typescript-eslint/no-unused-vars": "warn",
       "@typescript-eslint/prefer-namespace-keyword": "off",
+      "no-restricted-imports": [
+        "error",
+        {
+          paths: [
+            {
+              name: "next/image",
+              message:
+                "Please use ResponsiveImage from 'components/common/ResponsiveImage' instead of importing next/image directly.",
+            },
+            {
+              name: "next-export-optimize-images/image",
+              message:
+                "Please use ResponsiveImage from 'components/common/ResponsiveImage' instead of importing next-export-optimize-images/image directly.",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    files: ["**/components/common/ResponsiveImage.tsx"],
+    rules: {
+      "no-restricted-imports": "off",
     },
   },
 );

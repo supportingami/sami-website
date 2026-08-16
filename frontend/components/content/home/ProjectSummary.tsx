@@ -1,7 +1,6 @@
 import type { ComponentHomeProjectSummary, UploadFile } from "../../../graphql/generated";
-import Image from "next-export-optimize-images/image";
+import ResponsiveImage from "components/common/ResponsiveImage";
 import { ActionButtonsComponent } from "components/common/actionButtons";
-import { getStrapiMedia } from "lib/media";
 import { ProjectSummaryItem } from "../projects/projectSummaryItem";
 import type { IProject } from "types/project";
 import { ImageHeadingContentLayout } from "components/layout/columns";
@@ -26,5 +25,12 @@ export const ProjectSummaryComponent: React.FC<ComponentHomeProjectSummary & { P
 
 const ProjectSummaryImage = (ImageData: Partial<UploadFile>) =>
   ImageData ? (
-    <Image src={getStrapiMedia(ImageData)} alt={"image"} fill placeholder="empty" className="object-cover" />
+    <ResponsiveImage
+      media={ImageData}
+      alt="SAMI Projects"
+      fill
+      preset="twoColumn"
+      placeholder="empty"
+      className="object-cover"
+    />
   ) : null;
