@@ -104,13 +104,11 @@ export class UploadsOptimizer {
 
     for (const item of filesToProcess) {
       const sizeMbBefore = (item.size / (1024 * 1024)).toFixed(2);
-      const newFilename = item.filename.slice(0, -item.ext.length) + item.lowerExt;
-      const finalPath = path.join(this.uploadsDir, newFilename);
+      const finalPath = item.fullPath;
 
       console.log(
         chalk.white(`• ${item.filename} `) +
           chalk.gray(`(${item.width}x${item.height}, ${sizeMbBefore} MB)`) +
-          (item.needsRename ? chalk.magenta(` -> rename to ${item.lowerExt}`) : "") +
           (item.needsResize ? chalk.blue(` -> downscale to max ${this.options.maxDimension}px`) : "") +
           (item.needsCompress ? chalk.yellow(` -> recompress`) : ""),
       );
@@ -138,12 +136,11 @@ export class UploadsOptimizer {
           pipeline = pipeline.webp({ quality: 82 });
         }
 
-        const tempOutPath = path.join(this.uploadsDir, `__temp_${newFilename}`);
+        const tempOutPath = path.join(this.uploadsDir, `__temp_${item.filename}`);
         const result = await pipeline.toFile(tempOutPath);
 
-        // Only keep optimized file if smaller or if resize/rename was required
-        if (result.size < item.size || item.needsResize || item.needsRename) {
-          // Remove original (handling case sensitivity on case-insensitive filesystems)
+        // Only keep optimized file if smaller or if resize was required
+        if (result.size < item.size || item.needsResize) {
           if (existsSync(item.fullPath)) {
             unlinkSync(item.fullPath);
           }
@@ -159,10 +156,6 @@ export class UploadsOptimizer {
               `  ✓ Saved: ${sizeMbBefore} MB -> ${sizeMbAfter} MB (${result.width}x${result.height})`,
             ),
           );
-
-          if (item.filename !== newFilename) {
-            renamedMap.set(item.filename, newFilename);
-          }
         } else {
           unlinkSync(tempOutPath);
           console.log(chalk.gray(`  (No size benefit from recompression; skipped)`));
