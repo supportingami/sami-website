@@ -3,7 +3,7 @@ import { Command } from "commander";
 import type { ConcurrentlyCommandInput } from "concurrently";
 import concurrently from "concurrently";
 import { copySync, emptyDirSync, ensureDirSync } from "fs-extra";
-import { resolve } from "path";
+import { basename, resolve } from "path";
 import execa from "execa";
 
 import { PATHS } from "../../paths";
@@ -149,7 +149,10 @@ class BuildDeploySSGCommand {
     const targetDir = resolve(PATHS.frontendDir, "public");
     ensureDirSync(targetDir);
     emptyDirSync(targetDir);
-    copySync(srcDir, targetDir);
+    // Exclude Strapi admin media library thumbnails from frontend public directory
+    copySync(srcDir, targetDir, {
+      filter: (src) => !basename(src).startsWith("thumbnail_"),
+    });
   }
 
   /** Run backend server and frontend build script concurrently */

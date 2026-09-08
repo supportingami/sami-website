@@ -4,6 +4,7 @@ import bootstrapCmd from "./bootstrap";
 import configExportCmd from "./configExport";
 import exportCmd from "./export";
 import importCmd from "./import";
+import optimizeUploadsCmd from "./optimize-uploads";
 import typesGenerateCmd from "./typesGenerate";
 
 /***************************************************************************************
@@ -17,6 +18,7 @@ program.addCommand(bootstrapCmd);
 program.addCommand(configExportCmd);
 program.addCommand(exportCmd);
 program.addCommand(importCmd);
+program.addCommand(optimizeUploadsCmd);
 program.addCommand(typesGenerateCmd);
 
 // error on unknown commands
