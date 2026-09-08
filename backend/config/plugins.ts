@@ -24,6 +24,12 @@ export default ({ env }) => ({
       },
     },
   },
+  upload: {
+    config: {
+      provider: "local",
+      sizeLimit: 10 * 1024 * 1024, // 10MB max file upload limit
+    },
+  },
 
   "sami-admin": {
     enabled: false,
