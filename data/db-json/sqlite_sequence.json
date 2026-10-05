@@ -9,15 +9,15 @@
   },
   {
     "name": "annual_reports",
-    "seq": 29
+    "seq": 31
   },
   {
     "name": "blog_posts",
-    "seq": 189
+    "seq": 192
   },
   {
     "name": "blog_posts_cmps",
-    "seq": 1800
+    "seq": 1848
   },
   {
     "name": "components_common_action_buttons",
@@ -25,11 +25,11 @@
   },
   {
     "name": "components_common_htmls",
-    "seq": 762
+    "seq": 779
   },
   {
     "name": "components_common_images",
-    "seq": 402
+    "seq": 414
   },
   {
     "name": "components_common_text_blocks",
@@ -105,15 +105,15 @@
   },
   {
     "name": "files",
-    "seq": 329
+    "seq": 335
   },
   {
     "name": "files_folder_lnk",
-    "seq": 162
+    "seq": 163
   },
   {
     "name": "files_related_mph",
-    "seq": 1185
+    "seq": 1214
   },
   {
     "name": "home_contents",

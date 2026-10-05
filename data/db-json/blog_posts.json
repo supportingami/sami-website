@@ -1510,5 +1510,33 @@
     "title": "How a Church is Rewriting the Future of Math in Kenya",
     "updated_at": 1777392538681,
     "updated_by_id": 2
+  },
+  {
+    "created_at": 1789975311007,
+    "created_by_id": 2,
+    "date_written": "2026-09-04",
+    "document_id": "ffx8mtnsibuun0iz330w3hlt",
+    "id": 190,
+    "locale": null,
+    "published_at": null,
+    "slug": "the-holiday-that-decides-who-gets-ahead-and-who-gets-left-behind",
+    "summary": "Term 3 is two weeks old. Eight more weeks stand between now and the long November–December break. When that break arrives, over ten million learners across Kenya will walk out of their classrooms, and into very different worlds.",
+    "title": "The Holiday That Decides Who Gets Ahead, And Who Gets Left Behind",
+    "updated_at": 1789975598492,
+    "updated_by_id": 2
+  },
+  {
+    "created_at": 1789975311007,
+    "created_by_id": 2,
+    "date_written": "2026-09-04",
+    "document_id": "ffx8mtnsibuun0iz330w3hlt",
+    "id": 192,
+    "locale": null,
+    "published_at": 1789975598523,
+    "slug": "the-holiday-that-decides-who-gets-ahead-and-who-gets-left-behind",
+    "summary": "Term 3 is two weeks old. Eight more weeks stand between now and the long November–December break. When that break arrives, over ten million learners across Kenya will walk out of their classrooms, and into very different worlds.",
+    "title": "The Holiday That Decides Who Gets Ahead, And Who Gets Left Behind",
+    "updated_at": 1789975598492,
+    "updated_by_id": 2
   }
 ]
