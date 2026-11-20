@@ -93,7 +93,10 @@ const standaloneConfig = async () => {
       ...commonConfig.images,
       loader: "default",
       // NOTE - `domains` deprecated in Next.js 16 in favour of `remotePatterns`
-      remotePatterns: domains.flatMap((hostname) => [{ protocol: "http", hostname }, { protocol: "https", hostname }]),
+      remotePatterns: domains.flatMap((hostname) => [
+        { protocol: "http", hostname },
+        { protocol: "https", hostname },
+      ]),
     },
     async redirects() {
       return [
