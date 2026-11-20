@@ -44,8 +44,10 @@ const commonConfig = {
  * (config loaded using local export-images.config.js)
  * Redirects managed at server level (e.g. vercel.json)
  * */
-const exportConfig = () => {
+const exportConfig = async () => {
   const withExportImages = require("next-export-optimize-images");
+  // NOTE - withExportImages v4 is async so must be awaited to resolve
+  // (async function config supported since Next.js 12.1)
   return withExportImages({
     ...commonConfig,
     output: "export",
@@ -78,6 +80,7 @@ const standaloneConfig = () => {
     ...commonConfig,
     output: "standalone",
     images: {
+      ...commonConfig.images,
       loader: "default",
       domains,
     },
@@ -98,8 +101,21 @@ const standaloneConfig = () => {
   });
 };
 
-/** Use a custom NEXT_CONFIG_MODE environment variable to specify 'export' or 'standalone' */
-// const config = process.env.NEXT_CONFIG_MODE === "export" ? exportConfig() : standaloneConfig();
-// console.log(`NextJS will run in ${config.output} mode`);
-
-module.exports = exportConfig();
+/**
+ * Use a custom NEXT_CONFIG_MODE environment variable to specify 'export' or 'standalone'
+ * - `export` (default): static-site export, images optimised at build time via
+ *   next-export-optimize-images (used for production builds and CI)
+ * - `standalone`: run on a NextJS server with on-demand image optimisation
+ *   (used for local development and the staging/preview server, where the
+ *   export-image optimiser CLI never runs so `/_optimized` urls would 404)
+ * Exported as an async function (supported since Next.js 12.1) to ensure the
+ * async withExportImages wrapper is fully resolved before use
+ **/
+module.exports = async () => {
+  if (process.env.NEXT_CONFIG_MODE === "standalone") {
+    console.log("NextJS will run in standalone mode");
+    return standaloneConfig();
+  }
+  console.log("NextJS will run in export mode");
+  return exportConfig();
+};

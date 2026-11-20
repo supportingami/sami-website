@@ -1,5 +1,4 @@
 import chalk from "chalk";
-import { execSync } from "child_process";
 import { Command } from "commander";
 import { existsSync, readdirSync, readFileSync, statSync, unlinkSync, writeFileSync } from "fs-extra";
 import path, { resolve } from "path";
@@ -19,11 +18,6 @@ interface IOptimizeUploadsOptions {
 
 export class UploadsOptimizer {
   private uploadsDir = resolve(PATHS.dataDir, "public", "uploads");
-  private dbJsonPath = resolve(PATHS.dataDir, "db-json", "files.json");
-  private sqliteDbs = [
-    resolve(PATHS.dataDir, "db", "sami-dev.db"),
-    resolve(PATHS.dataDir, "db", "sami-production.db"),
-  ];
 
   constructor(private options: IOptimizeUploadsOptions) {}
 
@@ -100,7 +94,6 @@ export class UploadsOptimizer {
     }
 
     let totalSavedBytes = 0;
-    const renamedMap: Map<string, string> = new Map();
 
     for (const item of filesToProcess) {
       const sizeMbBefore = (item.size / (1024 * 1024)).toFixed(2);
@@ -165,58 +158,8 @@ export class UploadsOptimizer {
       }
     }
 
-    if (!this.options.dryRun && renamedMap.size > 0) {
-      console.log(chalk.cyan(`\nUpdating database records for ${renamedMap.size} renamed files...`));
-      this.updateDbReferences(renamedMap);
-    }
-
     const totalSavedMb = (totalSavedBytes / (1024 * 1024)).toFixed(2);
     console.log(chalk.green(`\nDone! Total disk space saved: ${totalSavedMb} MB\n`));
-  }
-
-  /**
-   * Update file extension references in data/db-json/files.json and SQLite databases
-   */
-  private updateDbReferences(renamedMap: Map<string, string>) {
-    // 1. Update data/db-json/files.json
-    if (existsSync(this.dbJsonPath)) {
-      try {
-        let jsonStr = readFileSync(this.dbJsonPath, "utf-8");
-        for (const [oldName, newName] of renamedMap.entries()) {
-          // Replace references to old upload filename
-          jsonStr = jsonStr.split(oldName).join(newName);
-        }
-        // Also ensure any leftover uppercase extensions in ext fields are normalized
-        const parsed = JSON.parse(jsonStr);
-        for (const item of parsed) {
-          if (item.ext && typeof item.ext === "string") {
-            item.ext = item.ext.toLowerCase();
-          }
-        }
-        writeFileSync(this.dbJsonPath, JSON.stringify(parsed, null, 2) + "\n");
-        console.log(chalk.green(`✓ Updated ${this.dbJsonPath}`));
-      } catch (err) {
-        console.log(chalk.red(`Error updating db-json/files.json: ${err}`));
-      }
-    }
-
-    // 2. Update SQLite DBs if present
-    for (const dbPath of this.sqliteDbs) {
-      if (!existsSync(dbPath)) continue;
-      try {
-        for (const [oldName, newName] of renamedMap.entries()) {
-          const oldUrl = `/uploads/${oldName}`;
-          const newUrl = `/uploads/${newName}`;
-          const sql = `
-            UPDATE files SET url = REPLACE(url, '${oldUrl}', '${newUrl}'), name = REPLACE(name, '${oldName}', '${newName}'), ext = LOWER(ext), formats = REPLACE(formats, '${oldName}', '${newName}') WHERE url LIKE '%${oldName}%' OR name LIKE '%${oldName}%' OR formats LIKE '%${oldName}%';
-          `;
-          execSync(`sqlite3 "${dbPath}" "${sql.replace(/\n/g, " ")}"`);
-        }
-        console.log(chalk.green(`✓ Updated SQLite database: ${dbPath}`));
-      } catch (err) {
-        console.log(chalk.yellow(`Could not update SQLite DB ${dbPath}: ${err}`));
-      }
-    }
   }
 }
 
