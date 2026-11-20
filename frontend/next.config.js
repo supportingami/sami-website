@@ -92,7 +92,8 @@ const standaloneConfig = async () => {
     images: {
       ...commonConfig.images,
       loader: "default",
-      domains,
+      // NOTE - `domains` deprecated in Next.js 16 in favour of `remotePatterns`
+      remotePatterns: domains.flatMap((hostname) => [{ protocol: "http", hostname }, { protocol: "https", hostname }]),
     },
     async redirects() {
       return [
@@ -102,6 +103,21 @@ const standaloneConfig = async () => {
           permanent: true,
         },
       ];
+    },
+    /**
+     * Proxy upload requests to the backend instead of serving them from a
+     * shared volume. The backend is the single writer (read-write) while the
+     * frontend needs no upload files of its own (effectively read-only), so
+     * baked frontend assets (fonts, images, robots.txt) can never be shadowed
+     * by an overlay mount, and newly uploaded media resolves immediately with
+     * no local copy step. Standalone/dev only; static export bakes uploads.
+     */
+    async rewrites() {
+      // Explicit backend origin for server-to-server requests (e.g. docker
+      // compose service name), otherwise reuse the public API url
+      const backendUrl = (process.env.BACKEND_URL || NEXT_PUBLIC_API_URL || "").replace(/\/$/, "");
+      if (!backendUrl) return [];
+      return [{ source: "/uploads/:path*", destination: `${backendUrl}/uploads/:path*` }];
     },
     //  NOTE - when running standalone process environment variables not included. Custom postbuild script
     // will replace any stringified process variables with container at runtime

@@ -88,15 +88,18 @@ services:
     env_file:
       - ./config/docker.env
       - ./config/docker.local.env
-    volumes:
-      # Public folder shared between frontend and backend for easier access
-      - ./docker/data/public:/app/public
+    # No upload volume mounted: the frontend proxies /uploads/* to the backend
+    # via rewrites (see standalone next.config), so it needs no upload files
+    # of its own. This also prevents an overlay mount from shadowing baked
+    # frontend assets (images, fonts, robots.txt, sitemap).
     environment:
       # Staging/preview server must run in standalone mode with dev image handling
       # (see docker/frontend.dockerfile). Explicit values here take precedence
       # over config/docker.env (which sets NODE_ENV=docker for the backend)
       NEXT_CONFIG_MODE: standalone
       NODE_ENV: development
+      # Server-to-server backend origin used for /uploads rewrites
+      BACKEND_URL: http://backend:1337
       VIRTUAL_HOST: ${PUBLIC_DOMAIN}
       VIRTUAL_PORT: "3000"
       # TODO - configure for production and env vars
