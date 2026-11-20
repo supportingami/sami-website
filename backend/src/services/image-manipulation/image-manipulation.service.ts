@@ -97,10 +97,7 @@ export async function downscaleAndOptimizeImage(
 /**
  * Register image downscaling and extension normalization into Strapi upload plugin
  */
-export function registerImageManipulation(
-  strapi: any,
-  config: ImageOptimizationConfig = DEFAULT_OPTIMIZATION_CONFIG,
-) {
+export function registerImageManipulation(strapi: any, config: ImageOptimizationConfig = DEFAULT_OPTIMIZATION_CONFIG) {
   const uploadPlugin = strapi.plugin("upload");
   if (!uploadPlugin) return;
 
