@@ -51,6 +51,14 @@ COPY --from=builder /app/frontend .
 # USER nextjs
 ENV PORT 3000
 ENV HOST 0.0.0.0
+# Staging/preview server: run `next dev` with on-demand image optimisation.
+# - standalone mode uses the default NextJS image loader (originals served from /uploads)
+# - NODE_ENV=development keeps next-export-optimize-images on its dev fallback
+#   (`?width=` originals). Any other value makes it emit `/_optimized` urls which
+#   404 here as the export-image optimiser CLI never runs in this container.
+#   (Overridden by explicit service env vars when set, e.g. in Cloud Run console)
+ENV NEXT_CONFIG_MODE standalone
+ENV NODE_ENV development
 
 EXPOSE 3000
 

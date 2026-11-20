@@ -44,8 +44,10 @@ const commonConfig = {
  * (config loaded using local export-images.config.js)
  * Redirects managed at server level (e.g. vercel.json)
  * */
-const exportConfig = () => {
+const exportConfig = async () => {
   const withExportImages = require("next-export-optimize-images");
+  // NOTE - withExportImages v4 is async so must be awaited to resolve
+  // (async function config supported since Next.js 12.1)
   return withExportImages({
     ...commonConfig,
     output: "export",
@@ -70,7 +72,17 @@ if (NEXT_PUBLIC_IMAGE_URL && NEXT_PUBLIC_IMAGE_URL.startsWith("http")) {
  * Full NextJS functionality supported
  ***********************************************************************************/
 
-const standaloneConfig = () => {
+const standaloneConfig = async () => {
+  // The image component runtime (`next-export-optimize-images/image`, used by
+  // ResponsiveImage) requires a resolved copy of export-images.config.js inside
+  // node_modules. That copy is written as a side effect of withExportImages()
+  // when next.config loads, so invoke it here (discarding the wrapped export
+  // config) to keep the runtime working in standalone mode.
+  const withExportImages = require("next-export-optimize-images");
+  await withExportImages({
+    ...commonConfig,
+    output: "export",
+  });
   const withBundleAnalyzer = require("@next/bundle-analyzer")({
     enabled: process.env.ANALYZE === "true",
   });
@@ -78,8 +90,13 @@ const standaloneConfig = () => {
     ...commonConfig,
     output: "standalone",
     images: {
+      ...commonConfig.images,
       loader: "default",
-      domains,
+      // NOTE - `domains` deprecated in Next.js 16 in favour of `remotePatterns`
+      remotePatterns: domains.flatMap((hostname) => [
+        { protocol: "http", hostname },
+        { protocol: "https", hostname },
+      ]),
     },
     async redirects() {
       return [
@@ -90,6 +107,21 @@ const standaloneConfig = () => {
         },
       ];
     },
+    /**
+     * Proxy upload requests to the backend instead of serving them from a
+     * shared volume. The backend is the single writer (read-write) while the
+     * frontend needs no upload files of its own (effectively read-only), so
+     * baked frontend assets (fonts, images, robots.txt) can never be shadowed
+     * by an overlay mount, and newly uploaded media resolves immediately with
+     * no local copy step. Standalone/dev only; static export bakes uploads.
+     */
+    async rewrites() {
+      // Explicit backend origin for server-to-server requests (e.g. docker
+      // compose service name), otherwise reuse the public API url
+      const backendUrl = (process.env.BACKEND_URL || NEXT_PUBLIC_API_URL || "").replace(/\/$/, "");
+      if (!backendUrl) return [];
+      return [{ source: "/uploads/:path*", destination: `${backendUrl}/uploads/:path*` }];
+    },
     //  NOTE - when running standalone process environment variables not included. Custom postbuild script
     // will replace any stringified process variables with container at runtime
     // https://github.com/vercel/next.js/issues/12269
@@ -98,8 +130,21 @@ const standaloneConfig = () => {
   });
 };
 
-/** Use a custom NEXT_CONFIG_MODE environment variable to specify 'export' or 'standalone' */
-// const config = process.env.NEXT_CONFIG_MODE === "export" ? exportConfig() : standaloneConfig();
-// console.log(`NextJS will run in ${config.output} mode`);
-
-module.exports = exportConfig();
+/**
+ * Use a custom NEXT_CONFIG_MODE environment variable to specify 'export' or 'standalone'
+ * - `export` (default): static-site export, images optimised at build time via
+ *   next-export-optimize-images (used for production builds and CI)
+ * - `standalone`: run on a NextJS server with on-demand image optimisation
+ *   (used for local development and the staging/preview server, where the
+ *   export-image optimiser CLI never runs so `/_optimized` urls would 404)
+ * Exported as an async function (supported since Next.js 12.1) to ensure the
+ * async withExportImages wrapper is fully resolved before use
+ **/
+module.exports = async () => {
+  if (process.env.NEXT_CONFIG_MODE === "standalone") {
+    console.log("NextJS will run in standalone mode");
+    return await standaloneConfig();
+  }
+  console.log("NextJS will run in export mode");
+  return exportConfig();
+};

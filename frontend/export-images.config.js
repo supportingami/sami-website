@@ -43,4 +43,3 @@ const imageOptimisationConfig = {
   },
 };
 module.exports = imageOptimisationConfig;
-
