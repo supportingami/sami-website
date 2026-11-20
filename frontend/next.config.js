@@ -72,7 +72,17 @@ if (NEXT_PUBLIC_IMAGE_URL && NEXT_PUBLIC_IMAGE_URL.startsWith("http")) {
  * Full NextJS functionality supported
  ***********************************************************************************/
 
-const standaloneConfig = () => {
+const standaloneConfig = async () => {
+  // The image component runtime (`next-export-optimize-images/image`, used by
+  // ResponsiveImage) requires a resolved copy of export-images.config.js inside
+  // node_modules. That copy is written as a side effect of withExportImages()
+  // when next.config loads, so invoke it here (discarding the wrapped export
+  // config) to keep the runtime working in standalone mode.
+  const withExportImages = require("next-export-optimize-images");
+  await withExportImages({
+    ...commonConfig,
+    output: "export",
+  });
   const withBundleAnalyzer = require("@next/bundle-analyzer")({
     enabled: process.env.ANALYZE === "true",
   });
@@ -114,7 +124,7 @@ const standaloneConfig = () => {
 module.exports = async () => {
   if (process.env.NEXT_CONFIG_MODE === "standalone") {
     console.log("NextJS will run in standalone mode");
-    return standaloneConfig();
+    return await standaloneConfig();
   }
   console.log("NextJS will run in export mode");
   return exportConfig();
