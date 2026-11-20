@@ -4,6 +4,9 @@ import { existsSync, readdirSync, readFileSync, statSync, unlinkSync, writeFileS
 import path, { resolve } from "path";
 import { PATHS } from "../../paths";
 
+// Dynamic require required: scripts workspace has no direct sharp dependency,
+// so resolve it from sibling workspaces at runtime
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const sharp = require(
   require.resolve("sharp", {
     paths: [PATHS.backendDir, PATHS.frontendDir, PATHS.rootDir],
@@ -145,9 +148,7 @@ export class UploadsOptimizer {
 
           const sizeMbAfter = (result.size / (1024 * 1024)).toFixed(2);
           console.log(
-            chalk.green(
-              `  ✓ Saved: ${sizeMbBefore} MB -> ${sizeMbAfter} MB (${result.width}x${result.height})`,
-            ),
+            chalk.green(`  ✓ Saved: ${sizeMbBefore} MB -> ${sizeMbAfter} MB (${result.width}x${result.height})`),
           );
         } else {
           unlinkSync(tempOutPath);
